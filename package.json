@@ -4,15 +4,15 @@
     "description": "Folienskript zur Vorlesung \"Verteilte Systeme\" (ab 2024) im Studiengang Wirtschaftsinformation an der DHBW Karlsruhe",
     "author": "Dennis Schulmeister-Zimolong, Prof. Dr. Michael Decker",
     "license": "CC-BY-4.0",
-    "homepage": "https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys2024-folien#readme",
+    "homepage": "https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2024-skript#readme",
     "bugs": {
-        "url": "https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys2024-folien/issues"
+        "url": "https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2024-skript/issues"
     },
     "main": "index.js",
     "type": "module",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys2024-folien.git"
+        "url": "git+https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2024-skript.git"
     },
     "keywords": [
         "slideshow",
