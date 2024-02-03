@@ -6,7 +6,7 @@ Kurzbeschreibung
 
 Bei diesen Dateien handelt es sich um das Online-Folienskript zur Vorlesung
 "Verteilte Systeme" ab 2024 im Studiengang Wirtschaftsinformatik an der DHBW Karlsruhe.
-Die fertigen Folien befinden sich online auf folgender Seite: https://www.wpvs.de/
+Die fertigen Folien befinden sich online auf folgender Seite: https://www.wpvs.de/repo/vertsys-2024/skript
 
 Die Folien basieren auf [lecture-slides.js](https://github.com/DennisSchulmeister/lecture-slides.js). <br/>
 Klicke hier für eine [Vorlage für eigene Präsentationen](https://github.com/DennisSchulmeister/ls-presentation-template). <br/>
