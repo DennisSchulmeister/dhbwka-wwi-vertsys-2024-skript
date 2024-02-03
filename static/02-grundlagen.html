@@ -1,0 +1,1670 @@
+<section data-chapter="h1" data-background-color="rgb(210,190,210)">
+    <h1>Grundlagen verteilter Systeme</h1>
+    <article class="markdown">
+        ### Nach Abschluss dieses Kapitels können Sie …
+        
+        * den Begriff verteiltes System erklären und von ähnlichen Begriffen abgrenzen.
+        * Beispiele für verteilte Anwendungen nennen und von normalen Anwendungen abgrenzen.
+        * die wichtigsten Gründe für die Entwicklung verteilter Systeme nennen. 💰
+        * die Begriffe Client, Server und Peer definieren und voneinander abgrenzen.
+        * die gängigsten Architekturmuster verteilter Anwendungen beschreiben.
+        * die Bedeutung des CAP-Theorem verstehen und seine Bedeutung wiedergeben.
+        * die Schwierigkeiten zeitlicher Wechselwirkungen verteilter Anwendungen erkennen.
+
+        <span style="font-size: 240px; color: white;" class="dhbw-text-shadow" >🏁</span>
+    </article>
+</section>
+
+<section data-background-color="rgb(210,190,210)">
+    <h1>Verteilte Anwendungen im Alltag</h1>
+    <article>
+        <lsx-grid-fluid>
+            <lsx-row>
+                <lsx-col size="md">
+                    <img src="02-grundlagen/motivation-internet.png" class="img-thumbnail d-block" style="width: 100%" />
+                    Sämtliche Internetdienste
+                    <p class="dhbw-fontsize-tiny">
+                        <small>
+                            Bildnachweis: <a href="https://pixabay.com/illustrations/email-newsletter-marketing-online-3249062/" target="_blank">Pixabay: ribkhan</a>
+                        </small>
+                    </p>
+                </lsx-col>
+                <lsx-col size="md">
+                    <img src="02-grundlagen/motivation-mobile.jpg" class="img-thumbnail d-block" style="width: 100%" />
+                    Mobile Kommunikation
+                    <p class="dhbw-fontsize-tiny">
+                        <small>
+                            Bildnachweis: <a href="https://pixabay.com/photos/communication-communicate-3095538/" target="_blank">Pixabay: Bru-nO</a>
+                        </small>
+                    </p>
+                </lsx-col>
+            </lsx-row>
+            <lsx-row>
+                <lsx-col size="md">
+                    <img src="02-grundlagen/motivation-forschung.jpg" class="img-thumbnail d-block" style="width: 100%" />
+                    Forschung und Wissenschaft
+                    <p class="dhbw-fontsize-tiny">
+                        <small>
+                            Bildnachweis: <a href="https://pixabay.com/photos/moon-landing-apollo-11-nasa-60582/" target="_blank">Pixabay: WikiImages</a>
+                        </small>
+                    </p>
+                </lsx-col>
+                <lsx-col size="md">
+                    <img src="02-grundlagen/motivation-vod.jpg" class="img-thumbnail d-block" style="width: 100%" />
+                    Video-on-Demand
+                    <p class="dhbw-fontsize-tiny">
+                        <small>
+                            Bildnachweis: <a href="https://unsplash.com/photos/ngMtsE5r9eI" target="_blank">Unsplash: jenskreuter</a>
+                        </small>
+                    </p>
+                </lsx-col>
+            </lsx-row>
+            <lsx-row>
+                <lsx-col size="md">
+                    <img src="02-grundlagen/motivation-autonomes-fahren.jpg" class="img-thumbnail d-block" style="width: 100%" />
+                    Autonomes Fahren
+                </lsx-col>
+                <lsx-col size="md">
+                    <img src="02-grundlagen/motivation-iot.jpg" class="img-thumbnail d-block" style="width: 100%" />
+                    Internet of Things
+                    <p class="dhbw-fontsize-tiny">
+                        <small>
+                            Bildnachweis: <a href="https://pixabay.com/photos/smarthome-smart-house-smart-4447520/" target="_blank">Pixabay: haus_automation</a>
+                        </small>
+                    </p>
+                </lsx-col>
+            </lsx-row>
+        </lsx-grid-fluid>
+    </article>
+    <aside>
+        <p>
+            Auch wenn wir es inzwischen kaum noch merken, begleiten verteilte Systeme und Anwendungen
+            schon seit langem unseren Alltag. Wie selbstverständlich surfen wir im Internet, teilen
+            Bilder online oder verschicken Kurznachrichten mit dem Smartphone. Abends streamen wir dann
+            die neuste Folge unserer Lieblingsserie ohne dabei auf feste Sendezeiten angewiesen zu sein. 🍿
+            Und geht es nach dem Willen der Hersteller, steuern wir schon bald sämtliche Haushaltsgeräte
+            ganz bequem per Sprachbefehl vom Sofa aus, 🛋️ optimieren den Straßenverkehr mit vernetzten
+            selbstfahrenden Fahrzeugen und überwachen unsere Umwelt mit immer mehr IoT-Devices.
+        </p>
+        <p>
+            Ohne Zweifel leben wir in einer vernetzten Welt, in der immer mehr Computer, Smartphones,
+            Smart TVs und viele andere Gegenstände miteinander verbunden sind. Neu ist diese Entwicklung
+            allerdings nicht, da die zugrunde liegenden Technologien oftmals schon seit Jahrzehnten
+            eingesetzt und weiterentwickelt werden. 📆 So waren bereits an der ersten Mondlandung 1969
+            mindestens vier miteinander verbundene Computersysteme beteiligt, wodurch der Mondflug
+            überhaupt nur durchgeführt werden konnte. 🚀 Seither wurden natürlich immer mehr Anwendungsfälle
+            gefunden, so dass verteilte Anwendungen heute nicht mehr die Ausnahme sondern in vielen
+            Bereichen sogar die Regel sind.
+        </p>
+        <p>
+            Technisch gesehen erfordern all diese Anwendungen in der Regel eine weit beachtlichere
+            Infrastruktur, als wir aus Anwendersicht zunächst vermuten würden. Ziel dieses Kapitels
+            soll daher sein, die ersten Geheimnisse über das Wesen und die Beschaffenheit verteilter
+            Systeme zu lüften, damit wir am Ende des Semesters wissen, wie all diese tollen Dinge
+            funktionieren. 🧙‍♂️
+        </p>
+    </aside>
+</section>
+
+<!-- ==================== -->
+<!-- Begriffsdefinitionen -->
+<!-- ==================== -->
+<section data-use-template="teilkapitel" data-titel="Begriffsdefinitionen"></section>
+
+<!-- TODO: Zu einer Folie zusammenfassen: Oben Tabs: Video, System, Tanenbaum, Unten: Kacheln mit Beispielen -->
+<section data-title="Was ist ein System? (1)">
+    <article class="centered-content">
+        <div class="markdown limited-width">
+            <lsx-youtube video="UWU14-EK9CE" aspect-ratio="16x9" style="width: 50em; max-width: 100%;"></lsx-youtube>
+
+            [Link zum Video](https://youtu.be/UWU14-EK9CE)
+        </div>
+    </article>
+</section>
+
+<section data-title="Was ist ein System? (2)">
+    <article class="centered-content">
+        <div class="limited-width">
+            <blockquote class="blockquote">
+                <p>
+                    Als System (altgriechisch sýstēma „aus mehreren Einzelteilen zusammengesetztes Ganzes“)
+                    wird im Allgemeinen ein abgrenzbares, natürliches oder künstliches „Gebilde“ bezeichnet,
+                    das aus verschiedenen Komponenten mit unterschiedlichen Eigenschaften besteht, die aufgrund
+                    bestimmter geordneter Beziehungen untereinander als gemeinsames Ganzes betrachtet werden
+                    (können).
+                </p>
+                <figcaption class="blockquote-footer">
+                    <cite>Wikipedia zum Begriff „System”</cite>
+                </figcaption>
+            </blockquote>
+        </div>
+    </article>
+</section>
+
+<section data-title="Definition nach Andrew Tanenbaum">
+    <article class="centered-content">
+        <div class="limited-width">
+            <div class="markdown mb-4">
+                Ein **verteiltes System** ist ein System, in dem sich Hardware-
+                und Softwarekomponenten auf **mehreren Computern** befinden (können)
+                und diese nur über den **Austausch von Nachrichten** untereinander
+                kommunizieren, um ihre Aktionen zu koordinieren.
+        
+                <!-- Eine **verteilte Anwendung** ist eine Anwendung, die ein verteiltes
+                System zur Lösung des Anwendungsproblems nutzt und aus mehreren
+                Komponenten besteht, die über definierte Schnittstellen mit anderen
+                Komponenten des Systems und dem Anwender kommunizieren. {.mb-0} -->
+            </div>
+        
+            <lsx-accordion>
+                <lsx-accordion-page title="ARPANET / Internet" bold>
+                    <img src="02-grundlagen/arpanet.png" class="d-block w-100"/>
+                </lsx-accordion-page>
+
+                <lsx-accordion-page title="Webanwendungen" bold>
+                    <img src="02-grundlagen/webapp.png" class="d-block w-100" />
+                </lsx-accordion-page>
+
+                <lsx-accordion-page title="Internet of Things" bold>
+                    <div class="container-fluid">
+                        <div class="row gap-3">
+                            <div class="col-md p-3">
+                                <img src="02-grundlagen/pubsub-iot.png" class="d-block w-100" />
+                            </div>
+                        </div>
+                        <div class="row gap-3">
+                            <div class="col-md p-3">
+                                <img src="02-grundlagen/iot.jpg" class="d-block w-100" />
+                            </div>
+                            <div class="col-md p-3">
+                                <img src="02-grundlagen/iot-cartoon.png" class="d-block w-100" />
+                            </div>
+                        </div>
+                    </div>
+                </lsx-accordion-page>
+
+                <lsx-accordion-page title="Blockchain" bold>
+                    <div class="container-fluid">
+                        <div class="row gap-3">
+                            <div class="col-md p-3">
+                                <img src="02-grundlagen/blockchain1.png" class="d-block w-100" />
+                            </div>
+                        </div>
+                        <div class="row gap-3">
+                            <div class="col-md p-3">
+                                <img src="02-grundlagen/blockchain2.png" class="d-block w-100" />
+                            </div>
+                        </div>
+                        <div class="row gap-3">
+                            <div class="col-md p-3">
+                                <img src="02-grundlagen/blockchain5.png" class="d-block w-100" />
+                            </div>
+                        </div>
+                    </div>
+                </lsx-accordion-page>
+
+                <lsx-accordion-page title="MIDI" bold>
+                    <lsx-youtube video="pzhh9_5iqB0" aspect-ratio="16x9" style="width: 100%;"></lsx-youtube>
+                    <a href="https://youtu.be/pzhh9_5iqB0" target="_blank">Link zum Video</a>
+                </lsx-accordion-page>
+            </lsx-accordion>
+        </div>    
+    </article>
+</section>
+<!-- Bis hier -->
+
+<section data-title="Von Clients, Servern und Peers">
+    <article class="centered-content">
+        <table class="m-auto mb-5">
+            <tr>
+                <td style="padding-right: 0.5em;">
+                    💿
+                </td>
+                <td style="padding-right: 0.5em;">
+                    <b>Server</b>
+                </td>
+                <td>
+                    Langlaufendes Programm, das einen Dienst zur Verfügung stellt.
+                    <span style="color: darkred;">
+                        Wartet darauf, bis sich ein Client mit ihm verbindet.
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-right: 0.33em;">
+                    💿
+                </td>
+                <td style="padding-right: 0.5em;">
+                    <b>Client</b>
+                </td>
+                <td>
+                    Kurzlebiges Programm, das den Dienst nutzt.
+                    <span style="color: darkred;">
+                        Stellt hierfür eine Verbindung zum Server her.
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-right: 0.5em; padding-bottom: 1em;">
+                    💿
+                </td>
+                <td style="padding-right: 0.5em; padding-bottom: 1em;">
+                    <b>Peer</b>
+                </td>
+                <td style="padding-bottom: 1em;">
+                    Spezielles Programm, das sowohl Client als auch Server ist.
+                </td>
+            </tr>
+            <tr style="border: 0px dashed black; border-top-width: 1px;">
+                <td style="padding-top: 1em; padding-right: 0.5em;">
+                    🖥
+                </td>
+                <td style="padding-top: 1em; padding-right: 0.5em;">
+                    <b>Host</b>
+                </td>
+                <td style="padding-top: 1em;">
+                    Der Rechner, auf dem die Software läuft.
+                    <span style="color: darkred;">
+                        Oft sagen die Leute „Server” und meinen damit den „Host”.
+                    </span>
+                </td>
+            </tr>
+        </table>
+
+        <lsx-tab-pages>
+            <lsx-tab-page title="Einfache Architekturmuster">
+                <div class="d-flex gap-3">
+                    <div class="card p-3">
+                        <h3 class="mb-4">Client/Server-Architektur</h3>
+                        <img src="02-grundlagen/client-server.svg" alt="Skizze mit vielen Clients und einem Server in der Mitte" class="d-block w-100" />
+                    </div>
+                    <div class="card p-3">
+                        <h3 class="mb-4">Peer-to-Peer-Architektur</h3>
+                        <img src="02-grundlagen/peer-to-peer.svg" alt="Skizze mit vielen untereinander verbundenen Peers" class="d-block w-100" />
+                    </div>
+                </div>
+            </lsx-tab-page>
+            <lsx-tab-page title="Fallbeispiel: Socketprogrammierung mit Node.js">
+                <lsx-github-edit url="https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes/tree/main/Socketprogrammierung%20mit%20Node.js"></lsx-github-edit>
+
+                <lsx-grid-fluid class="mt-3 p-0">
+                    <lsx-row>
+                        <lsx-col size="md">
+                            <img src="02-grundlagen/socket-server.png" class="img-thumbnail d-block w-100" />
+                        </lsx-col>
+                        <lsx-col size="md">
+                            <img src="02-grundlagen/socket-client.png" class="img-thumbnail d-block w-100" />
+                        </lsx-col>
+                        <lsx-col size="md">
+                            <img src="02-grundlagen/socket-netcat.png" class="img-thumbnail d-block w-100" />
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
+            </lsx-tab-page>
+        </lsx-tab-pages>
+    </article>
+</section>
+
+<section data-title="Grundlegende Architekturmodelle">
+    <article class="centered-content">
+        <div class="limited-width2">
+            <lsx-tab-pages class="w-100">
+                <lsx-tab-page title="Grundmodell">
+                    <h2>Beschreibung</h2>
+                    <p style="margin-bottom: 2em;">
+                        Dies ist die einfachste Architektur von allen. Sie besteht lediglich aus einem Server,
+                        der einen Dienst anbietet und den Clients, welche den Dienst konsumieren. Sehr oft kommt
+                        dabei ein synchrones, den Client blockierendes Request/Reply-Verfahren zum Einsatz, das
+                        besonders einfach zu programmieren ist. Technisch gesehen ist dies aber kein Muss, da
+                        Sockets prinzipiell jede Kommunikationsreihenfolge zulassen.
+                    </p>
+                    <div class="d-flex justify-content-center">
+                        <img src="02-grundlagen/architektur-client-server.svg" alt="Skizze eines Servers und dreier Clients" class="d-block m-auto" style="max-width: 45em;" />
+                    </div>
+                    
+                    <h2 class="mt-4">Fallbeispiele</h2>
+                    <lsx-ul emoji="✅">
+                        <li>
+                            Browser und Webserver im World Wide Web
+                        </li>
+                        <li>
+                            Browser App mit Zugriff auf den Server via Websockets
+                        </li>
+                        <li>
+                            Wartungszugang auf einen Rechner per Secure Shell
+                        </li>
+                        <li>
+                            Zugriff auf ein E-Mailpostfach mit IMAP
+                        </li>
+                        <li>
+                            Zentrale Quellcodeverwaltung mit Subversion
+                        </li>
+                        <li>
+                            WebDAV-Zugriff auf einen geteilten Onlineordner
+                        </li>
+                    </lsx-ul>
+                </lsx-tab-page>
+    
+                <lsx-tab-page title="Dreischichtenarchitektur">
+                    <h2>Beschreibung</h2>
+                    <p style="margin-bottom: 2em;">
+                        Hierbei handelt es sich ebenfalls um eine Client/Server-Architektur, jedoch greift der Server zusätzlich
+                        auf eine Datenbank zu. Client, Server und Datenbank werden daher den drei Schichten <b>Darstellung</b>,
+                        <b>Anwendungslogik</b> und <b>Datenhaltung</b> zugeordnet. Für die Darstellung wurden früher ausschließlich
+                        native Clients verwendet, die heute zunehmend von Webanwendungen und mobilen Apps verdrängt werden. Die
+                        Schichten für die Anwendungslogik und Datenhaltung können hingegen auch mehrere Server umfassen.
+                    </p>
+                    <div class="d-flex justify-content-center">
+                        <img src="02-grundlagen/architektur-3schichten.svg" alt="Skizze einer Dreischichtenarchitektur" class="d-block dhbw-limited-width m-auto" />
+                    </div>
+                    
+                    <h2 class="mt-4">Fallbeispiele</h2>
+                    <lsx-ul emoji="✅">
+                        <li>
+                            Jede Webanwendung mit einer Datenbank im Hintergrund
+                        </li>
+                        <li>
+                            Einfache Informationssysteme ohne eigenständigen Präsentationsserver
+                        </li>
+                        <li>
+                            Die meisten ERP- und CRM-Systeme (unter anderem SAP und Navision)
+                        </li>
+                        <li>
+                            Per Webservice erreichbare Microservices
+                        </li>
+                    </lsx-ul>
+                </lsx-tab-page>
+    
+                <lsx-tab-page title="Vierschichtenarchitektur">
+                    <h2>Beschreibung</h2>
+                    <p style="margin-bottom: 2em;">
+                        Hierbei handelt es sich um eine Variation der Dreischichtenarchitektur, bei der die mittlere Sicht
+                        in eine <b>Präsentations-</b> und eine <b>Anwendungsschicht</b> zerlegt wurde. Dieses Modell
+                        findet man häufig bei ERP-Systemen, die mehrere Clienttechnologien unterstützen müssen.
+                    </p>
+                    <div class="d-flex justify-content-center">
+                        <img src="02-grundlagen/architektur-4schichten.svg" alt="Skizze einer Dreischichtenarchitektur" class="d-block dhbw-limited-width m-auto" />
+                    </div>
+                    
+                    <h2 class="mt-4">Fallbeispiele</h2>
+                    <lsx-ul emoji="✅">
+                        <li>
+                            ERP- und CRM-Systeme mit einem eigenständigen Präsentationsserver
+                        </li>
+                        <li>
+                            Java-Webanwendung mit getrenntem Deployment von Servlets und EJBs
+                        </li>
+                    </lsx-ul>
+                </lsx-tab-page>
+    
+                <lsx-tab-page title="Microservices">
+                    <h2>Beschreibung</h2>
+                    <p>
+                        Microservices zerlegen eine große, monolithische Anwendung in viele kleine Teilanwendungen. Jeder Microservice hat
+                        ein klar umrissenes Aufgabengebiet, besitzt eine gut dokumentierte und versionierte Schnittstelle und wird in der
+                        Regel von einem eigenen Team entwickelt und betrieben. Entwicklung, Test und Betrieb sind sehr stark automatisiert.
+                        Microservices eignen sich daher oft für große Firmen mit mehreren, unabhängigen Entwicklungsmannschaften.
+                    </p>
+                    <div class="d-flex justify-content-center">
+                        <img src="02-grundlagen/microservices.png" alt="Skizze einer Microservice-Architektur" style="max-height: 26em; max-width: 100%;" />
+                    </div>
+                    
+                    <h2 class="mt-4">Fallbeispiele</h2>
+                    <lsx-ul emoji="✅">
+                        <li>
+                            Amazon gilt allgemein als Vorreiter, obwohl sie den Begriff selbst nicht verwenden
+                        </li>
+                        <li>
+                            Große Internetplattformen wie eBay, Netflix, SoundCloud, Spotify, …
+                        </li>
+                    </lsx-ul>
+                </lsx-tab-page>
+                
+                <lsx-tab-page title="Reverse Proxy / API-Gateway">
+                    <h2>Beschreibung</h2>
+                    <p style="margin-bottom: 2em;">
+                        Serverseitig kann ein Reverse Proxy als API-Gateway eingesetzt werden, um die eingehenden Anfragen
+                        zu bündeln. Dadurch wird es möglich, zusätzliche Sicherheitsprüfungen zu implementieren, häufig
+                        angefragte Inhalte zu cachen oder eine transparente Lastverteilung vorzunehmen.
+                    </p>
+                    <div class="d-flex justify-content-center">
+                        <img src="02-grundlagen/proxy-serverseitig.png" alt="Architekturskizze mit serverseitigem Proxy" style="max-height: 16em; max-width: 100%;" />
+                    </div>
+                    
+                    <h2 class="mt-4">Anwendungsbeispiele</h2>
+                    <lsx-ul emoji="✅">
+                        <li>
+                            Steigerung der Performance durch Caching häufig angefragter Daten
+                        </li>
+                        <li>
+                            Implementierung von Zugangsbeschränkungen und Upload Filtern
+                        </li>
+                        <li>
+                            Realisierung von Paywalls zum Ausfiltern kostenpflichtiger Inhalte
+                        </li>
+                        <li>
+                            Sicherstellen einer vorgelagerten, zentralen Authentifizierung
+                        </li>
+                        <li>
+                            Serverseitige Lastverteilung durch Weiterleitung an unterschiedliche Server
+                        </li>
+                    </lsx-ul>
+                </lsx-tab-page>
+                
+                <lsx-tab-page title="Proxy">
+                    <h2>Beschreibung</h2>
+                    <p style="margin-bottom: 2em;">
+                        Ein clientseitiger Proxy bildet die Schnittstelle eines entfernten Servers innerhalb
+                        des lokalen Netzwerks ab. Die Anfragen der Clients werden nicht direkt an den Server
+                        sondern an den lokalen Proxy gesendet, der daraufhin entscheiden kann, ob er die
+                        Anfragen weiterleitet oder selbst beantwortet.
+                    </p>
+                    <div class="d-flex justify-content-center">
+                        <img src="02-grundlagen/proxy-clientseitig.png" alt="Architekturskizze mit clientseitigem Proxy" style="max-height: 16em; max-width: 100%;" />
+                    </div>
+                    
+                    <h2 class="mt-4">Anwendungsbeispiele</h2>
+                    <lsx-ul emoji="✅">
+                        <li>
+                            Steigerung der Performance durch Caching häufig angefragter Daten
+                        </li>
+                        <li>
+                            Implementierung von Zugangsbeschränkungen und Content Filtern
+                        </li>
+                        <li>
+                            Clientseitige Lastverteilung durch Weiterleitung an unterschiedliche Server
+                        </li>
+                    </lsx-ul>
+                </lsx-tab-page>
+            </lsx-tab-pages>
+        </div>
+    </article>
+</section>
+
+<!-- ================== -->
+<!-- Entwurfsprinzipien -->
+<!-- ================== -->
+<section data-use-template="teilkapitel" data-titel="Entwurfsprinzipien"></section>
+
+<!-- TODO: Cards? -->
+<section data-title="Anforderungen an den Systementwurf">
+    <article>
+        <lsx-grid-fluid>
+            <lsx-row>
+                <lsx-col size="md">
+                    <h3>Optimale Ressourcennutzung</h3>
+                    <img src="02-grundlagen/anforderung-ressourcennutzung.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
+                    Das System muss effizient mit den Ressourcen umgehen und möglichst viele Ressourcen
+                    für die eigentliche Anwendung zur Verfügung stellen. Die Anwendung muss ebenfalls
+                    intelligent damit umgehen und sie gut nutzen.
+                </lsx-col>
+                <lsx-col size="md">
+                    <h3>Stabilität und Fehlertoleranz</h3>
+                    <img src="02-grundlagen/anforderung-stabilitaet.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
+                    Programmabstürze und unvorhersehbares Verhalten sind unbedingt zu vermeiden.
+                    Beim Programmieren muss man daher neben den fachlichen Fehlern auch die Fehler
+                    berücksichtigen, die sich aus der Verteilung ergeben.
+                </lsx-col>
+            </lsx-row>
+            <lsx-row>
+                <lsx-col size="md">
+                    <h3>Einfache Skalierbarkeit</h3>
+                    <img src="02-grundlagen/anforderung-skalierbarkeit.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
+                    Es muss einfach möglich sein, die Leistung des Systems zu erhöhen oder diese zu reduzieren,
+                    wenn sie nicht mehr benötigt wird. Dies kann je nach System automatisch oder manuell erfolgen.
+                </lsx-col>
+                <lsx-col size="md">
+                    <h3>Einfache Nutzung (Transparenz)</h3>
+                    <img src="02-grundlagen/anforderung-transparenz.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
+                    Zumindest für den Anwender sollte die inheränte Komplexität des Systems verborgen bleiben.
+                    Entwickler und Administratoren freuen sich aber auch, wenn sie sich nicht um jede Kleinigkeit
+                    kümmern müssen.
+                </lsx-col>
+            </lsx-row>
+            <lsx-row>
+                <lsx-col size="md">
+                    <h3>Einfache Erweiterbarkeit</h3>
+                    <img src="02-grundlagen/anforderung-erweiterbarkeit.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
+                    Die Architektur muss flexibel genug sein, um einzelne Teile jederzeit austauschen oder
+                    verbessern zu können.
+                </lsx-col>
+                <lsx-col size="md">
+                    <h3>Sicherheit</h3>
+                    <img src="02-grundlagen/anforderung-sicherheit.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
+                    Die Vertraulichkeit, Integrität und Authentizität des Systems und seiner Daten muss
+                    gewährleistet bleiben.
+                </lsx-col>
+            </lsx-row>
+            <lsx-row>
+                <lsx-col size="md">
+                    <small>
+                        <small>
+                            Bildnachweise:
+                            <a href="https://pixabay.com/en/wallet-tape-measure-economical-levy-2383496/" target="_blank">Pixabay: Myriams-Fotos</a>,
+                            <a href="https://pixabay.com/en/house-of-cards-fragile-patience-763246/" target="_blank">Pixabay: wilhei</a>,
+                            <a href="https://pixabay.com/en/mixer-fader-digital-console-1631398/" target="_blank">Pixabay: michaelmep</a>,
+                            <a href="https://pixabay.com/en/glass-water-napkin-sky-reflection-2875091/" target="_blank">Pixabay: Michael-T</a>,
+                            <a href="https://pixabay.com/en/floor-plan-blueprint-house-home-1474454/" target="_blank">Pixabay: ElasticComputerFarm</a>,
+                            <a href="https://pixabay.com/en/building-cctv-door-female-ladies-1839464/" target="_blank">Pixabay: Pexels</a>
+                        </small>
+                    </small>
+                </lsx-col>
+            </lsx-row>
+        </lsx-grid-fluid>
+    </article>
+    <aside class="markdown">
+        Hat man sich einmal zu einem verteilten System hinreisen lassen, will man natürlich, dass es die gewünschte
+        Aufgabe so gut wie möglich unterstützt. Und hierfür will man in den meisten Fällen, dass folgende Anforderungen
+        berücksichtigt werden, was uns beim Programmieren manchmal vor echte Herausforderungen stellen kann: 🤔
+
+        ##### Optimale Ressourcennutzung
+
+        Jeder einzelne Computer eines verteilten Systems stellt Ressourcen wie Rechenleistung oder Speicherkapazität
+        zur Verfügung. Diese sollen effizient genutzt werden, um somit die Gesamtleistung des Systems zu steigern.
+        Hardwareseitig muss das System daher möglichst wenig Ressourcen für sich beanspruchen und softwareseitig muss man
+        darauf achten, diese intelligent zu nutzen.
+
+        ##### Einfache Skalierbarkeit
+
+        Ein System, das mit kleinen Anforderungen heute beginnt, kann morgen schon riesengroß werden. Es muss daher einfach möglich
+        sein, die Leistung des Systems zu erhöhen oder diese zu reduzieren, wenn sie nicht mehr benötigt wird. Im einfachsten
+        Fall bedeutet das, dass man einen schwachen Rechner einfach durch ein leistungsfähigeres Modell ersetzen kann (vertikale
+        Skalierung). Viel wichtiger ist jedoch, dass man einfach einen weiteren Rechner hinzuzufügen kann, ohne an den anderen
+        etwas ändern zu müssen (horizontale Skalierung).
+
+        ##### Einfache Erweiterbarkeit
+
+        Veränderung ist die einzige Konstante in der Informatik! Anforderungen können sich jederzeit ändern und tun dies auch,
+        weshalb agile Entwicklungsmethoden heute in fast allen Bereichen bevorzugt werden. Doch wer wirklich agil sein will,
+        braucht eine Architektur, die Veränderungen zulässt und sie nicht erschwert. Hardware und Software müssen daher so
+        gestaltet sein, dass jeder Bestandteil jederzeit ausgetauscht oder weiterentwickelt werden kann, ohne gleich alles
+        auseinander nehmen zu müssen. Bezogen auf den Code sollte man also keinen Spaghetticode hinlegen und auch keine Lasagne
+        (Schichten über Schichten, die sich stapeln). Tortellini wären eher die Pasta der Wahl: 🍝 Viele kleine Module, die nur
+        lose miteinander verbunden sind.
+
+        ##### Stabilität und Fehlertoleranz
+
+        Das schlimmste was einem Programm passieren kann ist ein Absturz. 🗯️ Dieser GAU sollte daher immer vermieden werden, auch
+        wenn davon nur ein Teil einer verteilten Anwendung betroffen ist. Dummerweise bringen verteilte Anwendungen eine ganze
+        Reihe weiterer Fehlerquellen mit sich, die man ebenfalls berücksichtigen muss:
+        
+        * Manchmal streikt das Netzwerk.
+        * Ein anderes mal funktioniert es zwar, ist aber extrem langsam.
+        * Oder ein Programm auf einem anderen Rechner wurde vergessen zu starten.
+        * Oder die Putzfrau hat den Stecker gezogen, um den Serverraum zu saugen. 🤦
+        * Oder die Schnittstelle eines entfernten Programms hat sich verändert.
+
+        Fehlerquellen gibt es also mehr als genug! Und das sind nur die technischen Fehler, die sich aus der Verteilung ergeben
+        können. Hinzu kommen natürlich noch all die fachlichen Fehler wie Fehleingaben, ein nicht gedecktes Konto, fehlende Ware
+        im Lager und so weiter. Der Umgang mit Fehlern ist daher sehr wichtig, weshalb sich in der Praxis folgende Strategien
+        entwickelt haben:
+
+        <dl>
+            <dt>Fehler vermeiden</dt>
+            <dd>
+                Das ist der offensichtlichste Vorschlag und doch der nützlichste. Wenn immer es geht, sollte
+                man Fehler gar nicht erst entstehen lassen. Das System sollte daher möglichst selbsterklärend sein und dem Anwender
+                durch ein komfortables UI möglichst viel Hilfestellung bieten. Aber auch auf technischer Seite sollten Stolperfallen
+                vermieden werden und keine unsauberen Lösungen implementiert werden, weil „das ja eh so gut wie nie vorkommen kann”.
+            </dd>
+            <dt>Fehler erkennen</dt>
+            <dd>
+                Natürlich lassen sich Fehler nicht immer vermeiden. In diesem Fall müssen sie aber wenigstens erkannt werden, um darauf
+                reagieren zu können. Dass heißt zum Beispiel, dass Benutzereingaben auf Plausiblität geprüft oder empfangene Daten durch
+                Checksummen abgesichert werden.
+            </dd>
+            <dt>Fehler maskieren</dt>
+            <dd>
+                Nicht jeder Fehler ist es wert, dem Anwender damit auf den Keks zu gehen. Gerade kleine
+                Fehler lassen sich auch automatisch beheben, indem zum Beispiel nicht empfangene Daten erneut gesendet werden und
+                so weiter.
+            </dd>
+            <dt>Fehler tolerieren</dt>
+            <dd>
+                Manchmal ist Rückzug der beste Angriff. Wenn ein Fehler keine wirkliche Bedeutung hat, kann es auch ganz sinnvoll
+                sein, sich gar nicht erst darum zu kümmern. Das mag zunächst widersprüchlich klingen, ein Beispiel macht es aber
+                deutlich: NoSQL Document Stores wie <a href="http://couchdb.apache.org/" target="_blank"> CouchDB</a> besitzen aus
+                Performancegründen keinen Sperrmechanismus zur Vermeidung zeitgleicher Änderungen. Es kann also durchaus vorkommen,
+                dass ein Anwender die Änderung eines anderen überschreibt, wenn sich beide Aktionen überschneiden. Dieser Fehler wird
+                jedoch bewusst in Kauf genommen und es werden dann einfach zwei in Konflikt zueinander stehende Dokumentversionen
+                gespeichert, wobei die letzte im Zweifelsfall gewinnt.
+            </dd>
+            <dt>Fehler beheben</dt>
+            <dd>
+                Und last but not least: Wann immer ein Fehler festgestellt wird, sollte dieser möglichst ohne manuelle Eingriffe
+                automatisch behoben werden. Beispielsweise indem verlorene Daten aus einer Sicherungskopie wiederhergestellt werden,
+                oder ein abgestürzter Rechner durch ein Hot Standby ersetzt wird.
+            </dd>
+        </dl>
+
+        ##### Einfache Nutzung (Transparenz)
+
+        Dieser Begriff ist sehr wichtig. Die Welt ist schon kompliziert genug, dann müssen es nicht auch noch die IT-Systeme
+        sein. Zumindest für den Anwender aber gerne auch die Entwickler sollte die inheränte Komplexität einer verteilten Anwendung
+        verborgen bleiben. Denn merke: In der Informatik bedeutet Transparenz nicht, dass man alle Details sehen kann (wie das in
+        Politik und Wirtschaft oft gefordert wird, frag einfach mal deinen Chef 🙉), sondern dass man sich mit den Details gar nicht
+        erst auseinandersetzen muss.
+
+        ##### Sicherheit
+
+        Ein weiterer wichtiger Aspekt ist die Sicherheit verteilter Systeme. <a href="https://www.youtube.com/watch?v=rXUlmP5MvnE"
+        target="_blank">Denn das Böse ist immer und überall.</a> Folgende Dinge muss eine Anwendung daher sicherstellen:
+        
+        <dl>
+            <dt>Authentizität</dt>
+            <dd>
+                Aus Sicht der Anwendung muss es möglich sein, die Identitiät eines Benutzers überrpüfen und nachweisen
+                zu können. (Ist das wirklich der Benutzer, für den er sich ausgibt?) Aus Benutzersicht muss es umgekehrt
+                möglich sein, die Authentizität der Gegenseite zu überprfen.
+            </dd>
+            <dt>Vertraulichkeit</dt>
+            <dd>
+                Die Anwendung muss eine Benutzer- und Rechteverwaltung besitzen, so dass unbefugte Dritte keinen Zugriff auf
+                sensitive Informationen bekommen. Sensible Informationen sollten zustäzlich verschlüsselt werden.
+            </dd>
+            <dt>Integrität</dt>
+            <dd>
+                Die Anwendung muss sicherstellen, dass ihre Daten im Nachhinein nicht verfälscht werden können.
+                Oder falls sich dies nicht verhindern lässt (zum Beispiel während der Übertragung über das Internet),
+                muss es zumindest möglich sein, die Manipulation zu erkennen. Public-Key-Verfahren und Signaturen
+                können dies sicherstellen.
+            </dd>
+        </dl>
+    </aside>
+</section>
+
+<section data-title="Die neun Arten der Transparenz">
+    <article>
+        <lsx-grid-fluid>
+            <!-- Vergleich Wirtschaft vs. Informatik -->
+            <lsx-row style="margin-bottom: 0;">
+                <lsx-col size="md">
+                    <h2>Transparenz in der Wirtschaft</h2>
+                    <img src="02-grundlagen/transparenz1.jpg" alt="" class="img-thumbnail" style="width: 100%" />
+                    Alle Informationen liegen offen.
+                </lsx-col>
+                <lsx-col size="md">
+                    <h2>Transparenz in der Informatik</h2>
+                    <img src="02-grundlagen/transparenz2.jpg" alt="" class="img-thumbnail" style="width: 100%" />
+                    Ich muss nichts tun. Es läuft einfach.
+                </lsx-col>
+            </lsx-row>
+            <lsx-row style="margin-bottom: 2.5em;">
+                <lsx-col size="md">
+                    <small>
+                        <small>
+                            Bildnachweise:
+                            <a href="https://pixabay.com/en/tax-paperwork-accounting-business-739107/" target="_blank">Pixabay: stevepb</a>,
+                            <a href="https://pixabay.com/en/dogs-carnival-humor-pet-ernst-1190015/" target="_blank">Pixabay: Chiemsee2016</a>,
+                            <a href="https://pixabay.com/en/background-christmas-3009949/" target="_blank">Pixabay: monicore</a>
+                        </small>
+                    </small>
+                </lsx-col>
+            </lsx-row>
+    
+            <!-- Die neun Arten der Transparenz -->
+            <lsx-row>
+                <lsx-col size="md">
+                    <lsx-accordion>
+                        <lsx-accordion-page title="Zugriffstransparenz" bold>
+                            <lsx-grid-fluid class="p-0">
+                                <lsx-row>
+                                    <lsx-col size="md">
+                                        Falls eine Anwendung zwischen lokalen (auf dem eigenen Rechner befindlichen) und
+                                        entfernten Ressourcen unterscheidet, müssen beide auf dieselbe Art und Weise
+                                        nutzbar sein.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row class="dhbw-fontsize-small">
+                                    <lsx-col size="md-2">
+                                        <img src="02-grundlagen/transparenz-foto.jpg" class="img-thumbnail" style="width: 100%;" />
+                                    </lsx-col>
+                                    <lsx-col size="md">
+                                        <b>Beispiel:</b>
+                                        Eine Fotoverwaltung ermöglicht den Zugriff auf lokal gespeicherte Fotoalben.
+                                        Einzelne Bilder oder ganze Alben können aber auch auf einem entfernten Server
+                                        abgelegt sein, ohne dass sich die Bedienung hierdurch verändert.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row class="dhbw-fontsize-small">
+                                    <lsx-col size="md-2">
+                                        <img src="02-grundlagen/transparenz-video.jpg" class="img-thumbnail" style="width: 100%;" />
+                                    </lsx-col>
+                                    <lsx-col size="md">
+                                        <b>Beispiel:</b>
+                                        Eine Video-Streaming-App ermöglicht es, einzelne Videos vor dem Anschauen herunterzuladen,
+                                        damit diese auch bei langsamer Internetverbindung ruckelfrei abgespielt werden können.
+                                        Suche und Wiedergabe der Videos verändern sich aus Benutzersicht dadurch aber nicht, da
+                                        die Videos wie gewohnt aufgerufen und abgespielt werden können.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row class="dhbw-fontsize-small">
+                                    <lsx-col size="md-2">
+                                        <img src="02-grundlagen/transparenz-pwa.jpg" class="img-thumbnail" style="width: 100%;" />
+                                    </lsx-col>
+                                    <lsx-col size="md">
+                                        <b>Beispiel:</b>
+                                        Progressive Web Apps sind Webanwendungen, die nach dem ersten Aufruf im Browser auch lokal installiert
+                                        werden können. Sämtliche Dateien werden hierfür in einen lokalen Anwendungscache geladen, der auch offline
+                                        funktioniert. Die Entscheidung, ob eine Datei vom Server oder aus dem Cache geladen werden kann, erfolgt
+                                        dabei automatisch, ohne dass dies im Quellcode berücksichtigt werden muss.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row>
+                                    <lsx-col size="md">
+                                        <small>
+                                            <small>
+                                                Bildnachweise:
+                                                <a href="https://pixabay.com/photos/retro-photo-album-memory-family-1483781/" target="_blank">Pixabay: klimkin</a>,
+                                                <a href="https://pixabay.com/photos/camera-video-tv-video-realization-1598620/" target="_blank">Pixabay: JosepMonter</a>,
+                                                <a href="https://pixabay.com/photos/laptop-workstation-browsing-tablet-1483974/" target="_blank">Pixabay: Monoar</a>
+                                            </small>
+                                        </small>
+                                    </lsx-col>
+                                </lsx-row>
+                            </lsx-grid-fluid>
+                        </lsx-accordion-page>
+    
+                        <lsx-accordion-page title="Ortstransparenz" bold>
+                            <lsx-grid-fluid class="p-0">
+                                <lsx-row>
+                                    <lsx-col size="md">
+                                        Dienste und Ressourcen einer Anwendung können aufgerufen werden, ohne wissen zu müssen,
+                                        auf welchem Rechner sie sich befinden.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row class="dhbw-fontsize-small">
+                                    <lsx-col size="md-2">
+                                        <img src="02-grundlagen/transparenz-cdn.jpg" class="img-thumbnail" style="width: 100%;" />
+                                    </lsx-col>
+                                    <lsx-col size="md">
+                                        <b>Beispiel:</b>
+                                        Um die Ladezeit einer Webseite zu optimieren, werden häufig benötigte Dateien durch
+                                        Content Delivery Networks ausgeliefert. Hierfür betreiben die Content Delivery Networks
+                                        weltweit gespiegelte Rechenzentren, von denen automatisch das mit der kürzesten Zugriffszeit
+                                        ausgewählt wird. Auf dieselbe Weise spielen nebenbei auch Video-Streaming-Portale und andere
+                                        Onlinedienste ihre Inhalte aus.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row class="dhbw-fontsize-small">
+                                    <lsx-col size="md-2">
+                                        <img src="02-grundlagen/transparenz-dns.jpg" class="img-thumbnail" style="width: 100%;" />
+                                    </lsx-col>
+                                    <lsx-col size="md">
+                                        <b>Beispiel:</b>
+                                        Die Webseite der DHBW Karlsruhe ist immer unter der Domain
+                                        <a href="https://karlsruhe.dhbw.de" target="_blank">karlsruhe.dhbw.de</a> erreichbar.
+                                        Zwar muss die Domain zum Aufruf der Seite bekannt sein, diese enthält jedoch keine Informationen
+                                        darüber, auf welchen Rechner hierfür zugegriffen werden muss. Diese Information besorgt sich der
+                                        Browser stattdessen durch ein DNS-Lookup.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row class="dhbw-fontsize-small">
+                                    <lsx-col size="md-2">
+                                        <img src="02-grundlagen/transparenz-drucker.jpg" class="img-thumbnail" style="width: 100%;" />
+                                    </lsx-col>
+                                    <lsx-col size="md">
+                                        <b>Beispiel:</b>
+                                        <a href="https://en.wikipedia.org/wiki/Zero-configuration_networking" target="_blank">Zeroconf</a> ermöglicht die
+                                        automatische Konfiguration von Netzwerkgeräten, wodurch unter anderem auch netzwerkfähige Drucker und Scanner
+                                        vom Betriebssystem erkannt und eingerichtet werden können. Selbst wenn ein Gerät komplett ausgetauscht wird,
+                                        muss die Konfiguration auf dem Anwender-PC nicht angepasst werden.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row>
+                                    <lsx-col size="md">
+                                        <small>
+                                            <small>
+                                                Bildnachweise:
+                                                <a href="https://pixabay.com/photos/earth-planet-front-side-back-11593/" target="_blank">Pixabay: WikiImages</a>,
+                                                <a href="https://pixabay.com/illustrations/webdesign-design-web-website-3411373/" target="_blank">Pixabay: kreatikar</a>,
+                                                <a href="https://pixabay.com/photos/printer-desk-office-fax-scanner-790396/" target="_blank">Pixabay: stevepb</a>
+                                            </small>
+                                        </small>
+                                    </lsx-col>
+                                </lsx-row>
+                            </lsx-grid-fluid>
+                        </lsx-accordion-page>
+    
+                        <lsx-accordion-page title="Mobilitätstransparenz" bold>
+                            <lsx-grid-fluid class="p-0">
+                                <lsx-row>
+                                    <lsx-col size="md">
+                                        Die Ressourcen einer verteilten Anwendung können jederzeit auf andere Maschinen
+                                        umziehen, ohne dass sich dies auf die Anwendung auswirkt.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row class="dhbw-fontsize-small">
+                                    <lsx-col size="md-2">
+                                        <img src="02-grundlagen/transparenz-namensdienst.jpg" class="img-thumbnail" style="width: 100%;" />
+                                    </lsx-col>
+                                    <lsx-col size="md">
+                                        <b>Beispiel:</b>
+                                        Namensdienste wie das Domain Name System ermöglichen es, die damit verwalteten
+                                        Ressourcen jederzeit umzuziehen, da die exakte Adresse einer Ressource vor jedem
+                                        Zugriff darin nachgeschlagen werden muss. Aus diesem Grund kann sich zum Beispiel
+                                        die IP-Adresse einer Webseite jederzeit ändern, ohne dass die meisten Besucher*innen
+                                        dies merken.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row class="dhbw-fontsize-small">
+                                    <lsx-col size="md-2">
+                                        <img src="02-grundlagen/transparenz-backend.jpg" class="img-thumbnail" style="width: 100%;" />
+                                    </lsx-col>
+                                    <lsx-col size="md">
+                                        <b>Beispiel:</b>
+                                        Die Datenbank einer Webanwendung wurde bisher auf derselben Maschine wie der Webserver betrieben,
+                                        soll nun aber auf eigene Hardware umziehen. Die Anwendung läuft nach dem Umzug wie gewohnt weiter,
+                                        da lediglich ein Eintrag in einer Konfigurationsdatei geändert werden musste. Die Entscheidung
+                                        der Programmierer, die Adresse des Datenbankservers nicht hart-codiert im Quellcode zu hinterlegen,
+                                        hat sich an diesem Tag als sehr weitsichtig herausgestellt.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row class="dhbw-fontsize-small">
+                                    <lsx-col size="md-2">
+                                        <img src="02-grundlagen/transparenz-vm.jpg" class="img-thumbnail" style="width: 100%;" />
+                                    </lsx-col>
+                                    <lsx-col size="md">
+                                        <b>Beispiel:</b>
+                                        Der <a href="https://de.wikipedia.org/wiki/Hypervisor" target="_blank">Hypervisor</a> einer
+                                        Virtualisierungslösung entscheidet, eine virtuelle Maschine auf einen leistungsfähigeren
+                                        Rechenknoten umzuziehen. Hierfür wird die VM ohne Unterbrechung des laufenden Betriebs auf
+                                        den neuen Host kopiert und dort weiter ausgeführt.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row>
+                                    <lsx-col size="md">
+                                        <small>
+                                            <small>
+                                                Bildnachweise:
+                                                <a href="https://pixabay.com/photos/diary-appointment-address-pen-2080422/" target="_blank">Pixabay: jackmac34</a>,
+                                                <a href="https://pixabay.com/photos/server-cloud-development-business-1235959/" target="_blank">Pixabay: ColossusCloud</a>,
+                                                <a href="https://pixabay.com/illustrations/cloud-computing-network-internet-2001090/" target="_blank">Pixabay: wynpnt</a>
+                                            </small>
+                                        </small>
+                                    </lsx-col>
+                                </lsx-row>
+                            </lsx-grid-fluid>
+                        </lsx-accordion-page>
+    
+                        <lsx-accordion-page title="Persistenztransparenz" bold>
+                            <lsx-grid-fluid class="p-0">
+                                <lsx-row>
+                                    <lsx-col size="md">
+                                        Besonders benutzerfreundliche Anwendungen unterscheiden nicht zwischen gespeicherten und
+                                        und nicht gespeicherten Daten. Die Speicherung erfolgt automatisch im Hintergrund.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row class="dhbw-fontsize-small">
+                                    <lsx-col size="md-2">
+                                        <img src="02-grundlagen/transparenz-google.jpg" class="img-thumbnail" style="width: 100%;" />
+                                    </lsx-col>
+                                    <lsx-col size="md">
+                                        <b>Beispiel:</b>
+                                        Cloudbasierte Officepakete wie Google Docs besitzen keinen Menüeintrag zum Speichern
+                                        eines Dokuments. Jede Änderung wird mit einem kleinen Zeitversatz automatisch gespeichert,
+                                        so dass man nie wieder etwas verlieren kann, wenn man Abends zu schnell aus dem Büro flieht.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row>
+                                    <lsx-col size="md">
+                                        <small>
+                                            <small>
+                                                Bildnachweis:
+                                                <a href="https://pixabay.com/illustrations/google-search-engine-browser-search-76517/" target="_blank">Pixabay: Simon</a>
+                                            </small>
+                                        </small>
+                                    </lsx-col>
+                                </lsx-row>
+                            </lsx-grid-fluid>
+                        </lsx-accordion-page>
+    
+                        <lsx-accordion-page title="Replikationstransparenz" bold>
+                            <lsx-grid-fluid class="p-0">
+                                <lsx-row>
+                                    <lsx-col size="md">
+                                        Aus Performancegründen oder zur Erhöhung der Ausfallsicherheit werden wichtige Daten auf
+                                        mehrere Rechenknoten repliziert. Die Datenreplikation erfolgt vollautomatisch im Hintergrund,
+                                        wobei das System bei jeder Änderung die Aktualisierung aller Kopien sicherstellt.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row class="dhbw-fontsize-small">
+                                    <lsx-col size="md-2">
+                                        <img src="02-grundlagen/transparenz-weltkarte.jpg" class="img-thumbnail" style="width: 100%;" />
+                                    </lsx-col>
+                                    <lsx-col size="md">
+                                        <b>Beispiel:</b>
+                                        Weltweit genutzte Anwendungen wie die Googlesuche, Facebook oder Instagram werden in global
+                                        verteilten Rechenzentren betrieben, um die Ladezeiten zu verkürzen. Die innerhalb der Anwendung
+                                        anfallenden Daten werden deshalb automatisch zwischen den Rechenzentren repliziert, damit jede*r
+                                        Anwender*in möglichst dieselben Daten sieht.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row class="dhbw-fontsize-small">
+                                    <lsx-col size="md-2">
+                                        <img src="02-grundlagen/transparenz-datenbank.jpg" class="img-thumbnail" style="width: 100%;" />
+                                    </lsx-col>
+                                    <lsx-col size="md">
+                                        <b>Beispiel:</b>
+                                        Die meisten Datenbanken erlauben einen automatischen Cluster-Betrieb, wodurch alle Daten auf mehrere
+                                        Rechenknoten gespiegelt werden. Lesende Anfragen werden dann von irgend einem gerade verfügbaren Knoten
+                                        beantwortet, während ändernde Anfragen an alle Knoten weitergereicht werden.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row>
+                                    <lsx-col size="md">
+                                        <small>
+                                            <small>
+                                                Bildnachweise:
+                                                <a href="https://www.openstreetmap.org/#map=2/18.1/-20.7&layers=C" target="_blank">OpenStreetMap</a>,
+                                                <a href="https://pixabay.com/photos/info-data-disk-server-database-1641937/" target="_blank">pixabay: FreePhotosART</a>,
+                                            </small>
+                                        </small>
+                                    </lsx-col>
+                                </lsx-row>
+                            </lsx-grid-fluid>
+                        </lsx-accordion-page>
+    
+                        <lsx-accordion-page title="Fehlertransparenz" bold>
+                            <lsx-grid-fluid class="p-0">
+                                <lsx-row>
+                                    <lsx-col size="md">
+                                        Fehlersituationen werden nicht als Ausnahme sondern als Normalfall betrachtet.
+                                        Eine Anwendung sollte daher immer so entworfen werden, dass sie möglichst viele
+                                        Fehlersituationen abfangen und automatisch korrigieren kann. Keinesfalls darf
+                                        eine Anwendung einfach abstürzen, wenn ein Weiterbetrieb prinzipiell möglich ist.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row class="dhbw-fontsize-small">
+                                    <lsx-col size="md-2">
+                                        <img src="02-grundlagen/transparenz-email.jpg" class="img-thumbnail" style="width: 100%;" />
+                                    </lsx-col>
+                                    <lsx-col size="md">
+                                        <b>Beispiel:</b>
+                                        Eine E-Mail kann nicht sofort zugestellt werden, da das Postfach des Empfängers
+                                        voll ist. Der Mailserver des Senders teilt deshalb mit, die Zustellung innerhalb
+                                        der nächsten Tage zu wiederholen. Nur, wenn die Nachricht nach fünf Tagen immer
+                                        noch nicht zugestellt wurde, wird der Absender über das endgültige Scheitern
+                                        informiert.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row class="dhbw-fontsize-small">
+                                    <lsx-col size="md-2">
+                                        <img src="02-grundlagen/transparenz-wetterstation.jpg" class="img-thumbnail" style="width: 100%;" />
+                                    </lsx-col>
+                                    <lsx-col size="md">
+                                        <b>Beispiel:</b>
+                                        Eine Wetterstation sammelt kontinuierlich Daten und sendet diese via UMTS an einen zentralen
+                                        Server. Bei schlechtem Wetter besteht allerdings nur eine unzuverlässige Internetverbindung,
+                                        so dass die Daten nicht immer sofort verschickt werden können. Sämtliche Daten werden daher
+                                        in einem internen Ringbuffer gesammelt und so lange an den Server geschickt, bis dieser den
+                                        Empfang bestätigt.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row class="dhbw-fontsize-small">
+                                    <lsx-col size="md-2">
+                                        <img src="02-grundlagen/transparenz-apollo11.jpg" class="img-thumbnail" style="width: 100%;" />
+                                    </lsx-col>
+                                    <lsx-col size="md">
+                                        <b>Beispiel:</b>
+                                        Bereits bei den Apollo-Mondmissionen waren alle Computersysteme mehrfach redundant ausgelegt,
+                                        so dass bei Versagen eines Teilsystems dieses vollautomatisch ersetzt werden konnte. Der
+                                        <a href="https://en.wikipedia.org/wiki/Saturn_Launch_Vehicle_Digital_Computer" target="_blank">Saturn
+                                        Launch Vehicle Digial Computer</a> führte sogar jede Berechnung dreifach redundant aus und
+                                        arbeitete stets mit dem Mehrheitsergebnis weiter, um katastrophale Folgen aufgrund von
+                                        Hardwarefehlern zu vermeiden.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row>
+                                    <lsx-col size="md">
+                                        <small>
+                                            <small>
+                                                Bildnachweise:
+                                                <a href="https://unsplash.com/photos/oeDH20DVb2A" target="_blank">Unsplash: Liam Truong</a>,
+                                                <a href="https://pixabay.com/photos/anemometer-weather-station-3977718/" target="_blank">Pixabay: RitaE</a>,
+                                                <a href="https://de.wikipedia.org/wiki/Datei:Apollo_11_rollout.jpg" target="_blank">Wikipedia: NASA</a>
+                                            </small>
+                                        </small>
+                                    </lsx-col>
+                                </lsx-row>
+                            </lsx-grid-fluid>
+                        </lsx-accordion-page>
+    
+                        <lsx-accordion-page title="Nebenläufigkeitstransparenz" bold>
+                            <lsx-grid-fluid class="p-0">
+                                <lsx-row>
+                                    <lsx-col size="md">
+                                        Eine verteilte Anwendung sollte immer so entworfen werden, dass sie von vielen Benutzern
+                                        gleichzeitig genutzt werden kann. Hierfür notwendige Sperren und Synchronisationsmechanismen
+                                        sollten dabei vor den Anwender*innen verborgen im Hintergrund ablaufen.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row class="dhbw-fontsize-small">
+                                    <lsx-col size="md-2">
+                                        <img src="02-grundlagen/transparenz-wikipedia.svg" class="img-thumbnail" style="width: 100%;" />
+                                    </lsx-col>
+                                    <lsx-col size="md">
+                                        <b>Beispiel:</b>
+                                        Wikipedia verarbeitet pro Sekunde zwischen 25.000 und 60.000 Seitenzugriffe. Da die meisten
+                                        Zugriffe nur lesend erfolgen, kann jeder Artikel auch dann gelesen werden, wenn er gerade von
+                                        jemand anderem bearbeitet wird. Bearbeiten zwei Personen gleichzeitig denselben Artikel, wird
+                                        beim Speichern ein Bearbeitungskonflikt angezeigt, der manuell aufgelöst werden muss.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row class="dhbw-fontsize-small">
+                                    <lsx-col size="md-2">
+                                        <img src="02-grundlagen/transparenz-etherpad.png" class="img-thumbnail" style="width: 100%;" />
+                                    </lsx-col>
+                                    <lsx-col size="md">
+                                        <b>Beispiel:</b>
+                                        Kollaborative Anwendungen wie Etherpad erlauben es mehreren Personen, gleichzeitig am selben
+                                        Dokument zu arbeiten. Jede Person sieht dabei in Echtzeit die von den anderen vorgenommenen
+                                        Änderungen, weshalb auch niemand ein Dokument exklusiv sperren kann.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row class="dhbw-fontsize-small">
+                                    <lsx-col size="md-2">
+                                        <img src="02-grundlagen/transparenz-couchdb.svg" class="img-thumbnail" style="width: 100%;" />
+                                    </lsx-col>
+                                    <lsx-col size="md">
+                                        <b>Beispiel:</b>
+                                        CouchDB kennt keine Datenbanksperren, um gleichzeitige Änderungen an einem Datensatz zu vermeiden.
+                                        Tritt ein Konflikt auf, legt die Datenbank einfach zwei Versionen desselben Datensatzes an. Es obliegt
+                                        dem Anwendungscode die Versionen bei Bedarf wieder zusammenzuführen.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row>
+                                    <lsx-col size="md">
+                                        <small>
+                                            <small>
+                                                Bildnachweise:
+                                                <a href="https://commons.wikimedia.org/wiki/File:Wikipedia-logo-v2.svg" target="_blank">Wikimedia: Nohat</a>,
+                                                <a href="https://etherpad.org/" target="_blank">etherpad.org</a>,
+                                                <a href="https://commons.wikimedia.org/wiki/File:CouchDB.svg" target="_blank">Wikimedia: Apache Software Foundation</a>
+                                            </small>
+                                        </small>
+                                    </lsx-col>
+                                </lsx-row>
+                            </lsx-grid-fluid>
+                        </lsx-accordion-page>
+    
+                        <lsx-accordion-page title="Skalierbarkeitstransparenz" bold>
+                            <lsx-grid-fluid class="p-0">
+                                <lsx-row>
+                                    <lsx-col size="md">
+                                        Verteilte Systeme und Anwendungen sollten immer skalierbar sein. Im Idealfall könnnen im
+                                        laufenden Betrieb Ressourcen hinzugefügt oder entfernt werden, um die Leistung anzupassen.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row class="dhbw-fontsize-small">
+                                    <lsx-col size="md-2">
+                                        <img src="02-grundlagen/transparenz-linux.svg" class="img-thumbnail" style="width: 100%;" />
+                                    </lsx-col>
+                                    <lsx-col size="md">
+                                        <b>Beispiel:</b>
+                                        Unter Linux bildet der
+                                        <a href="https://de.wikipedia.org/wiki/Logical_Volume_Manager" target="_blank">Logical Volume Manager</a>
+                                        eine Abstraktionsschicht zwsichen den tatsächlich auf einem Datenträger vorhandenen Partitionen und den
+                                        für das Betriebssystem sichtbaren Dateisystemen. Dadurch wird es möglich, ein Dateisystem jederzeit durch
+                                        Hinzufügen weiterer Datenträger zu vergrößern.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row class="dhbw-fontsize-small">
+                                    <lsx-col size="md-2">
+                                        <img src="02-grundlagen/transparenz-lastverteilung.jpg" class="img-thumbnail" style="width: 100%;" />
+                                    </lsx-col>
+                                    <lsx-col size="md">
+                                        <b>Beispiel:</b>
+                                        Im einfachsten Fall befinden sich die Dateien einer Webseite auf einem zentralen Webserver, von
+                                        dem sie abgerufen werden können. Sollen jedoch sehr viele Anfragen gleichzeitig behandelt werden,
+                                        können diese über eine vorgeschaltete Lastverteilung auf mehrere Server verteilt werden. Die
+                                        Leistungsfähigkeit kann dabei jederzeit durch Starten und Stoppen weiterer Server angepasst werden.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row>
+                                    <lsx-col size="md">
+                                        <small>
+                                            <small>
+                                                Bildnachweise:
+                                                <a href="https://pixabay.com/vectors/avatar-beak-black-cute-emotion-1295404/" target="_blank">Pixabay: OpenClipart-Vectors</a>,
+                                                <a href="https://pixabay.com/illustrations/vpn-server-router-virtual-firewall-3406770/" target="_blank">Pixabay: kreatikar</a>
+                                            </small>
+                                        </small>
+                                    </lsx-col>
+                                </lsx-row>
+                            </lsx-grid-fluid>
+                        </lsx-accordion-page>
+    
+                        <lsx-accordion-page title="Leistungstransparenz" bold>
+                            <lsx-grid-fluid class="p-0">
+                                <lsx-row>
+                                    <lsx-col size="md">
+                                        Die Leistung eines verteilten Systems sollte nur von den verfügbaren Ressourcen begrenzt
+                                        sein. Innerhalb der gegebenen Grenzen sorgt das System dann selbstständig und ohne manuelle
+                                        Eingriffe dafür, die vorhandene Kapazität bedarfsgerecht anzupassen.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row class="dhbw-fontsize-small">
+                                    <lsx-col size="md-2">
+                                        <img src="02-grundlagen/transparenz-cloud.jpg" class="img-thumbnail" style="width: 100%;" />
+                                    </lsx-col>
+                                    <lsx-col size="md">
+                                        <b>Beispiel:</b>
+                                        Cloudangebote unterscheiden sich vom traditionallen Hosting insbesondere durch die automatische
+                                        Skalierbarkeit und nutzungsabhängige Abrechnung aller Dienste. Die meisten Anbieter erlauben daher,
+                                        Regeln zu definieren, bei welcher Auslastung weitere Kapazitäten hinzugefügt oder wieder entfernt
+                                        werden sollen. Einrichtung, Start und Stopp der notwendigen Rechenknoten laufen hierfür komplett
+                                        automatisiert.
+                                    </lsx-col>
+                                </lsx-row>
+                                <lsx-row class="dhbw-fontsize-small">
+                                    <lsx-col size="md-2">
+                                        <img src="02-grundlagen/transparenz-3dfilm.jpg" class="img-thumbnail" style="width: 100%;" />
+                                    </lsx-col>
+                                    <lsx-col size="md">
+                                        <b>Beispiel:</b>
+                                        Nicht nur in Forschung und Wissenschaft sondern auch in der Filmwirtschaft werden Clustersysteme
+                                        zur Bewerkstelligung der anfallenden Rechenaufgaben eingesetzt. Diese besitzen einen Job Scheduler
+                                        zum Einspiesen abzuarbeitender Aufgaben. Die zur Verfügung stehende Rechenleistung teilt der Scheduler
+                                        automatisch auf alle aktiven Jobs auf. Sind zu einem Zeitpunkt nur wenige Jobs aktiv, laufen diese daher
+                                        schneller durch, als wenn viele Jobs gleichzeitig laufen sollen.
+                                    </lsx-col>
+                                </lsx-row>
+                                <div class="row">
+                                    <div class="col">
+                                        <small>
+                                            <small>
+                                                Bildnachweise:
+                                                <a href="https://pixabay.com/photos/field-clouds-sky-agriculture-533541/" target="_blank">Pixabay: pcdazero</a>,
+                                                <a href="https://pixabay.com/illustrations/super-woman-flying-3d-figure-female-1885016/" target="_blank">Pixabay: perianjs</a>
+                                            </small>
+                                        </small>
+                                    </div>
+                                </div>
+                            </lsx-grid-fluid>
+                        </lsx-accordion-page>
+                    </lsx-accordion>
+                </lsx-col>
+            </lsx-row>
+        </lsx-grid-fluid>
+    </article>
+    <aside>
+        <blockquote cite="https://de.wikipedia.org/wiki/Clarkesche_Gesetze" class="text-end">
+            <i>
+                „Jede hinreichend komplexe Technologie ist von Magie nicht zu unterscheiden.”
+            </i>
+            <br />
+            – Arthur C. Clarke
+        </blockquote>
+        <div class="embed-responsive embed-responsive-16by9 w-100">
+            <video controls class="w-100">
+                <source src="https://upload.wikimedia.org/wikipedia/commons/6/69/ABC_Clarke_predicts_internet_and_PC.ogv" type="video/ogg" />
+                <source src="https://upload.wikimedia.org/wikipedia/commons/transcoded/6/69/ABC_Clarke_predicts_internet_and_PC.ogv/ABC_Clarke_predicts_internet_and_PC.ogv.240p.webm" type="video/webm" />
+            </video>
+        </div>
+        <p>
+            <small>
+                Interview mit Arthur C. Clarke, 1974, in dem er die universelle Verfügbarkeit des
+                Internets voraussagt, obwohl es ein solches System damals noch gar nicht gab.
+                Quelle: Australian Broadcasting Company auf Wikimedia Commons.
+            </small>
+        </p>
+        <p>
+            Auf der vorherigen Folie haben wir bereits den Begriff
+            „<a href="https://en.wikipedia.org/wiki/Transparency_(human%E2%80%93computer_interaction)" target="_blank">Transparenz</a>”
+            im Zusammenhang mit der Benutzerfreundlichkeit kennengelernt. Doch wie kommen wir überhaupt dazu, eine benutzerfreundliche
+            Anwendung als transparent zu bezeichnen und warum benötigen wir einen eigenen Begriff dafür? 🤔 Um dies zu verstehen, müssen
+            wir uns erst überlegen, was mit Transparenz tatsächlich gemeint ist. Verteter aus Wirtschaft und Politik, verstehen darunter
+            regelmäßig, dass alle Informationen über einen Sachverhalt offen liegen. Jedes kleine Detail ist bekannt und kann (oder muss)
+            nachgelesen werden. Denken wir daran, dass gute Dokumentation in der Informatik oftmals durch ihr Fehlen glänzt, ✨ ist dies
+            sicher erstrebenswert. Dennoch meinen wir etwas ganz anderes, nämlich dass die Komplexität, die heute in jeder Hard- und
+            Software ganz unweigerlich vorhanden ist, möglichst verborgen bleibt und somit im besten Fall gar nicht erst wahrgenommen,
+            auf jeden Fall aber nicht beachtet werden muss.
+        </p>
+        <p>
+            Doch wie stellen wir sicher, dass die Komplexität unserer Anwendungen verborgen bleibt? Und worum handelt es sich
+            dabei überhaupt? Welche Teile einer verteilten Anwendung sind eher muss-man-halt-haben-geht-nicht-anders und welche
+            sind es Wert, den Anwender*innen präsentiert zu werden? Schauen wir uns heute übliche Anwendungen an, die wir selbst
+            als besonders gelungen empfinden, bekommen wir sicher eine vage Vorstellung davon. 1996 wurde allerdings von ISO, IEC
+            und ITU-T mit dem <b>Reference Model of Open Distributed Processing (RM-ODP, ISO/IEC 10746)</b> eine gemeinsame Norm
+            verabschiedet, die genau diese und viele weitere Fragen beantwortet. Auch wenn sich die Technologie seit damals
+            grundlegend gewandelt hat, sind es heute immer noch dieselben Aspekte, die wir bei der Implementierung zwar beachten,
+            den Benutzer*innen aber doch eher sang- und klanglos abnehmen sollten. 🎵 Nebenstehend findest du daher eine Liste mit
+            den wichtigsten Punkten, in denen eine gute Anwendung transparent sein sollte, mitsamt einfachen Definitionen und
+            aktuellen Beispielen.
+        </p>
+    </aside>
+</section>
+
+<section data-title="Ausfallsicherheit und Skalierung in der Cloud">
+    <article>
+        <div class="d-flex justify-content-between flex-wrap gap-3">
+            <img src="02-grundlagen/cloud-betriebsmodell.png" class="d-block img-fluid" />
+            <div class="col markdown">
+                ## Cluster-Betrieb
+    
+                * Vollständige Virtualisierung von Rechenleistung und Speicherkapazität
+                * Kommunikation über ein abgeschirmte, virtuelle App-Netzwerke
+                * Automatische Replikation einzelner Komponenten je nach Bedarf
+                * Lastverteilung zwischen mehreren Instanzen einer Komponente
+    
+                ## Ausfallsichere Deployment-Strategien
+    
+                * Blue/Green-Deployment
+                * Rolling Deployment
+                * Canary Releases
+                * …
+            </div>
+        </div>
+    </article>
+</section>
+
+<section data-title="Die acht Irrtümer verteilter Systeme">
+    <article>
+        <lsx-grid-fluid>
+            <lsx-row>
+                <lsx-col size="lg-7">
+                    <div style="height: 100%; display: flex; align-items: center;">
+                        <div class="markdown">
+                            1. Das Netzwerk ist immer verfügbar.
+                            1. Es gibt keine Latenzzeiten.
+                            1. Der Datendurchsatz ist unendlich schnell.
+                            1. Die Kommunikation ist automatisch sicher.
+                            1. Die Netzwerktopologie ist unveränderlich.
+                            1. Es gibt nur einen Administrator.
+                            1. Datentransfer kostet nichts.
+                            1. Das Netzwerk ist homogen.
+                        </div>
+                    </div>
+                </lsx-col>
+                <lsx-col size="lg">
+                    <img src="02-grundlagen/dilbert-1997-01-28.gif" class="d-block w-100 mb-3" />
+                    <img src="02-grundlagen/dilbert-1997-01-29.gif" class="d-block w-100 mb-3" />
+                    <img src="02-grundlagen/dilbert-2018-03-22.gif" class="d-block w-100 mb-3" />
+    
+                    <small>
+                        <small>
+                            Bildnachweise:
+                            <a href="https://dilbert.com/strip/1997-01-28" target="_blank">Dilbert vom 28.01.1997</a>,
+                            <a href="https://dilbert.com/strip/1997-01-29" target="_blank">Dilbert vom 29.01.1997</a>,
+                            <a href="https://dilbert.com/strip/2018-03-22" target="_blank">Dilbert vom 22.03.2018</a>
+                        </small>
+                    </small>
+                </lsx-col>
+            </lsx-row>
+        </lsx-grid-fluid>
+    </article>
+</section>
+
+<section data-title="Fehlertoleranz in verteilten Systemen">
+    <article>
+        <lsx-tab-pages>
+            <lsx-tab-page title="Das CAP-Theorem">
+                <lsx-grid-fluid>
+                    <lsx-row>
+                        <lsx-col size="md-5">
+                            <img src="02-grundlagen/cap-theorem.png" alt="Visualisierung des CAP-Theorems" style="width: 100%;" />
+                        </lsx-col>
+                        <lsx-col size="md">
+                            <h4>Consistency (Konsistenz)</h4>
+                            <p>
+                                Alle Knoten sehen immer exakt dieselben, konsistenten Daten. Bei replizierten Datenbeständen
+                                werden die Änderungen daher erst sichtbar, wenn sie in allen Repliken nachgezogen wurden.
+                            </p>
+                
+                            <h4>Availability (Verfügbarkeit)</h4>
+                            <p>
+                                Das System ist jederzeit erreichbar und überschreitet niemals die maximal zulässige
+                                Antwortzeit.
+                            </p>
+                
+                            <h4>Partition Tolerance (Partitionstoleranz)</h4>
+                            <p>
+                                Die Anwendung funktioniert auch dann noch, wenn einzelne Teile ausgefallen sind.
+                            </p>
+                        </lsx-col>
+                    </lsx-row>
+                    <lsx-row>
+                        <lsx-col size="md">
+                            <p style="color: darkred;">
+                                Eine verteilte Anwendung kann immer nur zwei dieser Anforderungen gänzlich erfüllen!
+                            </p>
+                            <p>
+                                Moderne Anwendungen sind deshalb oft nur „eventuell-konsistent”. Beispielsweise kann es
+                                in Facebook vorkommen, dass ein Like in den ersten Sekunden nicht für alle Profilbesucher
+                                sichtbar wird, da nicht alle auf derselben Datenreplik arbeiten.
+                            </p>
+                            <p>
+                                eBay hingegen würde bei der Gebotsabgabe sicher lieber eine etwas längere Antwortzeit in
+                                Kauf nehmen, anstatt sich überschreibende Gebote zu riskieren.
+                            </p>
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
+            </lsx-tab-page>
+    
+            <lsx-tab-page title="Strategien zur Fehlerbehandlung">
+                <lsx-grid-fluid>
+                    <lsx-row>
+                        <lsx-col size="md-4">
+                            <h3>Fehler vermeiden</h3>
+                            <img src="02-grundlagen/fehler-vermeiden.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
+                            Zum Beispiel durch Eingabehilfen oder einen sauberen Programmierstil
+                        </lsx-col>
+                        <lsx-col size="md-4">
+                            <h3>Fehler erkennen</h3>
+                            <img src="02-grundlagen/fehler-erkennen.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
+                            Zum Beispiel durch Checksummen, Plausiprüfungen oder Monitoring
+                        </lsx-col>
+                        <lsx-col size="md-4">
+                            <h3>Fehler maskieren</h3>
+                            <img src="02-grundlagen/fehler-maskieren.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
+                            Zum Beispiel durch spätere Wiederholung des Vorgangs
+                        </lsx-col>
+                    </lsx-row>
+                    <lsx-row>
+                        <lsx-col size="md-4">
+                            <h3>Fehler tolerieren</h3>
+                            <img src="02-grundlagen/fehler-tolerieren.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
+                            href="https://de.wikipedia.org/wiki/Normalisierung_(Datenbank)" target="_blank">normalisierten Datenmodellen</a>
+                            und                                    <a href="https://pixabay.com/en/rappelling-rope-safety-security-755400/" target="_blank">Pixabay:
+                                        cegoh</a>,
+                                    <a href="https://pixabay.com/en/equipment-hospital-ecg-3089883/" target="_blank">Pixabay:
+                                        hioahelsefag</a>,
+                                    <a href="https://pixabay.com/en/redirect-shield-tree-attention-2257746/" target="_blank">Pixabay:
+                                        Digitalpfade</a>,
+                                    <a href="https://pixabay.com/en/home-single-family-home-on-the-head-2308799/"
+                                        target="_blank">Pixabay: ulleo</a>,
+                                    <a href="https://pixabay.com/en/first-aid-frog-medic-nurse-funny-1732708/" target="_blank">Pixabay:
+                                        Alexas_Fotos</a>
+                                </small>
+                            </small>
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
+            </lsx-tab-page>
+    
+            <lsx-tab-page title="Fallbeispiel: Coffe Shop">
+                <a href="https://ieeexplore.ieee.org/document/1407829" target="_blank">IEEE Software, Volume: 22, Issue: 2, Pages 64–66</a>
+                <div class="d-flex gap-3">
+                    <img src="02-grundlagen/coffeeshop1.png" class="img-thumbnail d-block w-100"/>
+                    <img src="02-grundlagen/coffeeshop2.png" class="img-thumbnail d-block w-100" />
+                    <img src="02-grundlagen/coffeeshop3.png" class="img-thumbnail d-block w-100" />
+                </div>
+            </lsx-tab-page>
+        </lsx-tab-pages>
+    </article>
+    <aside class="markdown">
+        Ein guter Datenbankentwurf beruht auf
+        <a href="https://de.wikipedia.org/wiki/Normalisierung_(Datenbank)" target="_blank">normalisierten Datenmodellen</a>
+        und <a href="https://de.wikipedia.org/wiki/Transaktion_(Informatik)" target="_blank">atomaren Transaktionen</a>,
+        um jederzeit konsistente und widerspruchsfreie Daten zu garantieren. <span style="color: darkgreen">✔️</span>
+        Diese Grundregel lernt jede*r Informatiker*in gleich in der ersten Datenbankvorlesung. Und in den meisten Fällen
+        ist sie auch völlig in Ordnung. Innerhalb einer verteilten Anwendung kann eine zu starke Fixierung auf konsistente
+        Daten allerdings auch deutliche Nachteile nach sich ziehen, wie das im Jahr 2000 formulierte und 2002 bewiesene
+        CAP-Theorem besagt. Denn aus ihm folgt, dass eine verteilte Anwendung niemals alle drei der folgenden Eigenschaften
+        gleichzeitig erfüllen kann:
+    
+        * <b>Consistency (Konsistenz):</b> Werden die Daten einer Anwendung auf mehrere Rechner repliziert, kann es für einen
+            kurzen Zeitpunkt zu lokalen Unterschieden kommen, so lange die neusten Änderungen noch nicht komplett verteilt
+            wurden. Will man das vermeiden, muss eine verteilte Transaktion genutzt werden, die erst als abgeschlossen gilt,
+            wenn alle Änderungen auf allen Rechnern nachgezogen wurden.
+        
+        * <b>Availability (Verfügbarkeit):</b> Hiermit sind sowohl die generelle Verfügbarkeit im Sinne, dass die Anwendung
+            überhaupt erreichbar ist, als auch die maximal zulässige Antwortzeit gemeint. Beispielsweise kann es vorkommen,
+            dass während einer aktiven, verteilten Transaktionen lesende Anfragen warten müssen. Dadurch kann es allerdings
+            zu unerwünschten Verzögerungen kommen, wenn einzelne Transaktionen die Anwendung zu lange blockieren oder aufgrund
+            von Deadlocks niemals zu Ende laufen.
+
+        * <b>Partition Tolerance (Partitionstoleranz):</b> Zunächst würde man denken, damit sei die horizontale oder
+            vertikale Partitionierung von Daten auf mehrere Rechner gemeint. Stattdessen geht es hier aber darum, dass
+            eine Anwendung auch dann noch weiter arbeiten kann, wenn ein Teil ihrer Komponenten ausgefallen ist. Es kann
+            nach einem teilweisen Systemausfall sozusagen auch ein kleinerer Teil der Anwendung (eine Partition) noch
+            weiter genutzt werden.
+
+        Das CAP-Theorem besagt, dass verteilte Systeme und Anwendungen immer nur zwei dieser Kriterien,
+        niemals aber alle drei, gänzlich erfüllen können. Eine Verbesserung in einem Bereich führt unweigerlich zu einer
+        Verschlechterung in einem der anderen. <span style="color: deepskyblue;">⬆️</span><span style="color: crimson;">⬇️</span>
+        Zwei einfache Beispiele sollen dies verdeutlichen:
+
+        1. <b>Eventuelle Konsistenz:</b> In Facebook kann es vorkommen, dass ein Like in den ersten Sekunden nicht für alle
+            Besucher sichtbar wird, da nicht alle auf derselben Datenreplik arbeiten. Daraus entsteht aber kein wirklicher
+            Schaden, weshalb hier die Konsistenz zugunsten der Verfügbarkeit aufgeweicht wird.
+            
+        1. <b>Verringerte Verfügbarkeit:</b> eBay hingegen würde bei der Gebotsabgabe sicher lieber eine etwas längere Antwortzeit
+            in Kauf nehmen, anstatt doppelte Gebote zu riskieren. Die Konsistenz ist hier also König. 👑 Dafür kann es vorkommen, dass
+            ein Gebot in letzter Sekunde nicht mehr rechtzeitig abgegeben werden kann.
+    </aside>
+</section>
+
+<section data-title="Zeitsynchronisation verteilter Anwendungen">
+    <article>
+        <lsx-tab-pages>
+            <lsx-tab-page title="Fallbeispiel">
+                <img src="02-grundlagen/zeitproblem-karte.jpg" class="d-block img-fluid img-thumbnail" />
+                <p>
+                    <small>
+                        <small>
+                            Bildnachweise:
+                            <a href="https://pixabay.com/illustrations/map-central-europe-europe-1804891/s"
+                                target="_blank">Pixabay: Hans</a>,
+                            <a href="https://pixabay.com/vectors/map-pin-illustrator-holder-place-42871/"
+                                target="_blank">Pixabay: Clker-Free-Vector-Images</a>
+                        </small>
+                    </small>
+                </p>
+                <lsx-ul>
+                    <li emoji="🌡️">
+                        Aufzeichnung von Umweltdaten zur Vorhersage von Unwettern und Naturkatastrophen
+                    </li>
+                    <li emoji="🗺️">
+                        Aktuell 19 Messstationen in verschiedenen Ländern und Zeitzonen
+                    </li>
+                    <li emoji="🕒">
+                        Messung und Übermittlung eines kompletten Datensatzes alle fünf Minuten
+                    </li>
+                    <li emoji="💽 ">
+                        Speicherung aller Messwerte im Rechenzentrum in Frankfurt am Main
+                    </li>
+                </lsx-ul>
+            </lsx-tab-page>
+        
+            <lsx-tab-page title="Fallstricke">
+                <lsx-grid-fluid class="p-0">
+                    <lsx-row>
+                        <lsx-col size="md-6">
+                            <img src="02-grundlagen/zeitproblem-latenz-deutschland.jpg" alt="" class="img-thumbnail" style="width: 100%" />
+                            <small>
+                                Latenz beim Zugriff auf wpvs.de aus Deutschland
+                            </small>
+                        </lsx-col>
+                        <lsx-col size="md-6">
+                            <img src="02-grundlagen/zeitproblem-latenz-spanien.jpg" alt="" class="img-thumbnail" style="width: 100%" />
+                            <small>
+                                Latenz beim Zugriff auf wpvs.de aus Südspanien
+                            </small>
+                        </lsx-col>
+                    </lsx-row>
+                    <lsx-row>
+                        <lsx-col size="md">
+                            <lsx-ul emoji="🗯️">
+                                <li>
+                                    Werden Datum und Uhrzeit der Messwerte vor Ort oder vom Server ermittelt?
+                                </li>
+                                <li>
+                                    Wie kann die zeitliche Reihenfolge aller Messwerte garantiert werden?
+                                </li>
+                                <li>
+                                    Wie können Latenzen in der Datenübertragung ausgeglichen werden?
+                                </li>
+                                <li>
+                                    Was passiert, wenn die Uhren der Messstationen nicht gleich gehen?
+                                </li>
+                                <li>
+                                    Wie kann verhindert werden, dass die Uhren auseinander driften?
+                                </li>
+                                <li>
+                                    Wie sollen die Zeitzonen oder die Sommer-/Winterzeit berücksichtigt werden?
+                                </li>
+                                <li>
+                                    Wie können verspätet eintreffende Messwerte korrekt gespeichert werden?
+                                </li>
+                                <li>
+                                    Wie sollen fehlende Messdaten (z.B. wegen dem Ausfall einer Station) behandelt werden?
+                                </li>
+                            </lsx-ul>
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
+            </lsx-tab-page>
+        
+            <lsx-tab-page title="Lösungsansätze">
+                <lsx-ul emoji="🌞">
+                    <li>
+                        Datum und Uhrzeit sowohl auf den Devices als auch dem Server ermitteln und vergleichen.
+                    </li>
+                    <li>
+                        Alle Uhren in regelmäßigen Abständen via
+                        <a href="https://de.wikipedia.org/wiki/Network_Time_Protocol" target="blank">NTP</a>
+                        synchronisieren.
+                    </li>
+                    <li>
+                        Sämtliche Messwerte zusätzlich zum Zeitstempel fortlaufend durchnummerieren.
+                    </li>
+                    <li>
+                        Die Messwerte immer inklusive Zeitzone und Abweichung zur Normalzeit speichern.
+                    </li>
+                    <li>
+                        Alternativ Datum und Uhrzeit immer in die Zeitzone des Servers umrechnen.
+                    </li>
+                    <li>
+                        Nachträgliches Einfügen von Messwerten innerhalb eines gegebenen Zeitfensters zulassen.
+                    </li>
+                </lsx-ul>
+        
+                <h3 class="dhbw-lightblue" style="margin-top: 1em;">Beginn der Zeitrechnung</h3>
+        
+                <lsx-grid-fluid class="p-0">
+                    <lsx-row>
+                        <lsx-col size="md">
+                            <img src="02-grundlagen/zeitproblem-beginn-wissenschaft.jpg" class="d-block img-fluid img-thumbnail" />
+                            <b>Wissenschaft:</b> Mit dem Urknall
+                        </lsx-col>
+                        <lsx-col size="md">
+                            <img src="02-grundlagen/zeitproblem-beginn-kirche.jpg" class="d-block img-fluid img-thumbnail" />
+                            <b>Kirche:</b> Als Gott die Erde erschuf
+                        </lsx-col>
+                    </lsx-row>
+                    <lsx-row>
+                        <lsx-col size="md">
+                            <img src="02-grundlagen/zeitproblem-beginn-sport.jpg" class="d-block img-fluid img-thumbnail" />
+                            <b>Wettläufer:</b> Ab dem Startschuss
+                        </lsx-col>
+                        <lsx-col size="md">
+                            <img src="02-grundlagen/zeitproblem-beginn-entwickler.jpg" class="d-block img-fluid img-thumbnail" />
+                            <b>Softwareentwickler:</b> <a href="https://de.wikipedia.org/wiki/Unixzeit"
+                                target="_blank">01.01.1970 0:00 Uhr</a> 🥴
+                            <br />
+                            <small>
+                                <b>Youtube:</b>
+                                <a href="https://www.youtube.com/watch?v=jNQXAC9IVRw" target="_blank">23.04.2005</a>
+                            </small>
+                        </lsx-col>
+                    </lsx-row>
+                    <lsx-row>
+                        <lsx-col size="md">
+                            <p>
+                                <small>
+                                    <small>
+                                        Bildnachweise:
+                                        <a href="https://pixabay.com/illustrations/universe-space-expansion-big-bang-11636/"
+                                            target="_blank">Pixabay: WikiImages</a>,
+                                        <a href="https://pixabay.com/photos/genesis-mosaic-iconography-2435989/"
+                                            target="_blank">Pixabay: dimitrisvetsikas1969</a>,
+                                        <a href="https://pixabay.com/photos/race-finish-line-athletes-695303/"
+                                            target="_blank">Pixabay: skeeze</a>,
+                                        <a href="https://commons.wikimedia.org/wiki/File:Vt100-adventure.jpg"
+                                            target="_blank">Wikimedia: Shieldforyoureyes</a>
+                                    </small>
+                                </small>
+                            </p>
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
+            </lsx-tab-page>
+        </lsx-tab-pages>
+    </article>
+    <aside class="markdown">
+        Verteilte Systeme erstecken sich, je nach Anwendungsfall, häufig über mehrere Länder und Kontinente.
+        Manchmal ergibt sich das einfach nur aus der weltweiten Nutzung einer Anwendung, selbst wenn sie nur
+        an einem Standort betrieben wird. Oftmals ist die geografische Verteilung aber auch wesenticher
+        Bestandteil der Systemarchitektur. 🗺️ Ein Problem, das in beiden Fällen gerne mal übersehen wird, ist
+        die zeitliche Synchronisierung aller Systemkomponenten. Zwar klingt es zunächst trivial, die zeitliche
+        Reihenfolge zweier oder mehr Ereignisse festzustellen. Werden die Ereignisse jedoch von unterschiedlichen
+        Rechnern erzeugt, genügt ein einfacher Datums- und Uhrzeitvergleich längst nicht aus, da hierfür erst
+        einmal ein einheitliches Verständnis über die aktuelle Zeit 🕑 in allen Knoten hergestellt werden muss.
+
+        Anhand eines einfachen Fallbeispiels lassen sich die auftretenden Probleme anschaulich erklären. Wir
+        gehen deshalb im Folgenden von einem Projekt zur Vorhersage von Unwettern und Naturkatastrophen aus,
+        für das in ganz Europa an 19 verschiedenen Standorten aktuelle Umweltdaten gemessen und an einen Server
+        in Frankfurt am Main geschickt werden. Jede Messstation schickt hierfür alle fünf Minuten aktuelle Messwerte
+        an den Server, um diese zu speichern, wobei das genaue Intervall an dieser Stelle gar nicht wichtig ist.
+        Die Karte auf der Folie ziegt die Standorte, an denen die Messwerte jeweils erhoben werden.
+
+        Klar ist, dass zu jeder Messung folgende Daten gespeichert werden müssen:
+
+        * Standort der Messung
+        * Datum und Uhrzeit der Messung
+        * Gemessene Werte
+        
+        Daraus ergeben sich allerdings mehrere Fallstricke, die beim Systementwurf beachtet werden müssen.
+        Zunächst ist da zum Beispiel die Frage zu klären, ob Datum und Uhrzeit einer Messung auf Seiten
+        der jeweiligen Messstation oder des Servers ermittelt werden und wie dabei die zeitliche Reihenfolge
+        der Messwerte sichergestellt werden kann. Denn immerhin kann es ja sein, dass die Uhr einer Station
+        etwas vor geht und ihre Messwerte somit fälschlich vor denen der anderen Stationen eingeordnet werden.
+        Werden die Zeitstempel vom Server ermittelt, müssen Verzögerungen während der Datenübertragung, die
+        so genannte Latenz, ausgeglichen werden, um die zeitliche Reihenfolge zu gewähren. Erfolgt die Ermittlung
+        durch die Stationen, müssen ihre Uhren regelmäßig synchronisiert werden. Außerdem müssen die Auswirkungen
+        unterschiedliche Zeitzonen sowie von Sommer- und Winterzeit berücksichtigt werden und es muss bedacht
+        werden, dass Messwerte möglicherweise verloren gehen oder erst mit Verspätung beim Server eintreffen. 😲
+
+        Die Beantwortung dieser Fragen hängt immer vom konkreten Anwendungsfall ab. Mögliche Lösungsansätze,
+        die hierbei in Erwägung gezogen werden können, sind folgende:
+    
+        * Datum und Uhrzeit könnten nicht einfach nur durch die Messstationen sondern zusätzlich auf dem Server
+            ermittelt werden. Durch einen Vergleich beider Werte ḱann, sofern die Uhren auf beiden Seiten richtig
+            gehen und die Daten sofort versendet werden, die Latenz der Datenübertragung abgeleitet werden.
+            Diese sollte dabei niemals größer als ein/zwei Sekunden sein. Andernfalls geht eine der Uhren falsch
+            oder es findet eine Replay-Attacke statt.
+        
+        * Die exakte Synchronisation aller Uhren kann mit dem
+            <a href="https://de.wikipedia.org/wiki/Network_Time_Protocol" target="blank">Network Time Protocol</a>
+            sichergestellt werden. Alle bekannten Betriebssysteme unterstützen dieses Verfahren, wodurch die
+            Abweichungen zwischen den Uhren auf wenige Millisekunden reduziert werden können.
+        
+        * Zusätzlich sollten alle Messwerte mit einer fortlaufenden Nummer versehen werden, um Vertauschungen
+            auch ohne korrekt eingestellte Uhren erkennen zu können.
+        
+        * Für die Weiterverarbeitung der Daten sehr wichtig ist das Format, in dem die Zeitstempel übertragen
+            und gespeichert werden.¹ Hier ist zu prüfen, ob das Format den erforderlichen Zeitraum überhaupt mit
+            einer ausreichenden Genauigkeit abdeckt. Außerdem sollten neben den Werten für Datum und Uhrzeit immer
+            auch der Name der Zeitzone und/oder die Abweichung zur Normalzeit enthalten sein, um die Werte
+            unterschiedlicher Standort miteinander vergleichen zu können.
+        
+        * Manche System konvertieren sämtliche Zeitstempel stattdessen in die Zeitzone des Servers, um somit
+            Probleme aufgrund unterschiedlicher Zeitzonen zu umgehen. Prominentestes Beispiel hierfür ist Youtube,
+            wo sich das Uploaddatum eines Videos immer auf die aktuelle Uhrzeit in Kalifornien bezieht.
+        
+        * Sollte ein nachträgliches Einfügen von Messwerten aufgrund der verwendeten Technologie nicht möglich
+            oder nicht praktikabel sein, kann es ganz hilfreich zu sein, zunächst mehrere Datensätze auf dem
+            Server zu sammeln, und diese zum Beispiel nur einmal je Minute zu sichern. Beispielsweise kann eine
+            Blockchain nur aufeinander folgende Werte beinhalten. Durch die Speicherung in Blöcken können aber
+            während eines kurzen Zeitraums nachträglich noch Werte eingefügt werden, solange diese noch nicht in
+            der Blockchain persistiert wurden.
+        
+        ¹
+        <small>
+            Diese Seite enthält hierfür ein paar mehr oder weniger ernst gemeinte Beispiele.
+        </small>
+    </aside>
+</section>

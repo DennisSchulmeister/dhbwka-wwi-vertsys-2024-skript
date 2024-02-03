@@ -1,0 +1,268 @@
+<section data-chapter="h1" data-background-color="rgb(210,190,210)">
+    <h1>Hinweise zur Vorlesung</h1>
+    <article class="markdown">
+        ### Dieses Kapitel beschreibt …
+        
+        * Welche Inhalte wir in der Vorlesung behandeln werden.
+        * Welche Kompetenzziele die Modulbeschreibung der DHBW hierfür vorgibt.
+        * Wie sich die Prüfungsleistung der Vorlesung zusammensetzt.
+        * Welche Software Sie für die Bearbeitung der Übungen benötigen.
+    </article>
+    <aside class="markdown">
+        Willkommen zur Vorlesung „Verteilte Systeme” im vierten Semester Wirtschaftsinformatik.
+        An dieser Stelle im Studium angelangt, haben Sie bereits viel Programmiererfahrung
+        gesammelt und können durchaus schon eigene Programme bis hin zu kleineren Webanwendungen
+        komplett eigenständig entwickeln. Diese Kenntnisse wollen wir nun vertiefen und dabei die
+        Architektur kennenlernen, die heute fast alle Anwendungen des Alltags definiert: Die
+        Architektur verteilter Systeme. Denn egal ob wir im Internet surfen, Musik oder Videos
+        streamen, E-Mails schreiben, Kurznachrichten versenden, soziale Medien checken, online
+        an Vorlesungen teilnehmen oder einfach nur dieses Vorlesungsskript bearbeiten: Immer
+        kommen dabei verteilte Systeme zum Einsatz, die meiste Zeit ohne, dass wir dies bemerken.
+
+        Smartphones, Tables, Arbeitscomputer, IoT-Devices, ja selbst Fahrzeuge sind heute wie
+        selbstverständlich unterneinder vernetzt und mit dem Internet verbunden. Und beinahe
+        täglich tun sich weitere Anwendungsgebiete auf. Hinter diesen Vorhang wollen wir daher
+        nun schauen und verstehen, wie solche Anwendungen funktionieren. Und natürlich wollen
+        wir sie auch selbst bauen können. Diese Vorlesung hilft Ihnen dabei. Und dieses Kapitel
+        zeigt, was Sie dabei erwartet.
+</section>
+
+<section data-title="Kompetenzziele der Vorlesung">
+    <article class="markdown dhbw-limited-width">
+        ## Fachkompetenz
+
+        Die Studierenden kennen die **grundlegenden Kernkonzepte der Nebenläufigkeit und
+        Internetkommunikation** sowie die darauf aufbauenden **aktuellen Technologien und
+        Werkzeuge** für den **Entwurf und für die Implementierung von Webanwendungen**.
+        Die Studierenden kennen die technischen Grundlagen, Konzepte, Architekturen und
+        Technologien verteilter Systeme und Anwendungen sowie die gängigen Methoden,
+        Werkzeuge, Frameworks und Entwurfsmuster für die Entwicklung verteilter Anwendungen.
+        Die Studierenden können die Konzepte, Werkzeuge und Methoden der Webprogrammierung
+        anwenden und autonom Webanwendungen entwerfen, implementieren und testen.
+
+        ## Methodenkompetenz
+
+        Die Studierenden können die **Konzepte, Werkzeuge und Methoden der verteilten Systementwicklung
+        anwenden** und unter Einsatz von Frameworks und Entwurfsmustern **einfache verteilte Anwendungen
+        entwerfen, implementieren und testen**.
+
+        ## Personale und soziale Kompetenz
+
+        Die Studierenden können **eigenständig verteilte Anwendungsarchitekturen erarbeiten**. Sie können
+        stichhaltig und sachangemessen über Konzepte, eigene Entwürfe und deren Implementierungen sowie
+        die damit verbundenen Probleme argumentieren, eigene Umsetzungen plausibel darstellen und
+        eventuelle Fehler nachvollziehbar gegenüber anderen begründen.
+
+        ## Übergreifende Handlungskompetenz
+
+        Die Studierenden können eigenständig aktuelle Methoden der Analyse, des Entwurfs und der
+        Implementierung verteilter Systeme und Anwendungen für betriebliche Problemstellungen
+        diskutieren, bewerten und anwenden.
+    </article>
+    <aside>
+        TODO: Wie in Webprog andersrum. Modulhandbuch links, Aufzählung rechts
+    </aside>
+</section>
+
+<section data-title="Inhalte der Vorlesung">
+    <article class="centered-content">
+        <lsx-grid>
+            <lsx-row>
+                <lsx-col>
+                    <div class="card p-3">
+                        <img src="01-intro/vorlesungsinhalte.png" alt="" class="img-responsive d-block w-100"/>
+                    </div>
+                </lsx-col>
+            </lsx-row>
+            <lsx-row>
+                <lsx-col size="md">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <b>3. Semester:</b>
+                            Webprogrammierung
+                        </div>
+                        <div class="card-body markdown">
+                            * Grundlagen des Webs
+                            * Einführung in HTML und CSS
+                            * Responsive Webdesign
+                            * Clientseitiges JavaScript
+                            * Entwicklung von Single Page Apps
+                        </div>
+                    </div>
+                </lsx-col>
+                <lsx-col size="md">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <b>4. Semester:</b>
+                            Verteilte Systeme
+                        </div>
+                        <div class="card-body markdown">
+                            * Grundlagen verteilter Systeme
+                            * Cloud-Konzepte und Architekturmuster
+                            * Technische Hintergründe zu REST-Webservices
+                            * Entwicklung von Microservices mit Node.js
+                            * Persistente Datenhaltung mit MongoDB 
+                        </div>
+                    </div>
+                </lsx-col>
+            </lsx-row>
+        </lsx-grid>
+    </article>
+</section>
+
+<section data-title="Ablauf der Vorlesung">
+    <article class="centered-content">
+        <div class="d-flex align-items-stretch" style="gap: 1em;">
+            <div class="card">
+                <div class="card-header fw-bold">
+                    Vorlesungsinhalte
+                </div>
+                <div class="card-body markdown">
+                    #### Grundlagen verteilter Systeme
+        
+                    1. Definition des Begriffs „Verteiltes System”
+                    1. Fallbeispiele für verteilte Systeme im Alltag
+                    1. Aspekte des Systementwurfs verteilter Anwendungen
+                    1. Allgemeine Anforderungen an verteilte Systeme
+                    1. Das CAP-Theorem und andere Probleme verteilter Systeme
+                    1. Transparenz für Anwender und Entwickler
+                    {.dhbw-list-spacious}
+                    
+                    #### Cloud-Architekturmuster
+                    
+                    1. Definition und Abgrenzung des Cloud-Begriffs
+                    1. Eigenschaften typischer Microservice-Architekturen
+                    1. Technische Grundlagen zur Skalierung in der Cloud
+                    1. Sicherheitskonzepte für Microservices in der Cloud
+                    1. Fehlertoleranz und andere Designkriterien
+                    {.dhbw-list-spacious}
+        
+                    #### Entwicklung von Cloud-Anwendungen
+                    
+                    1. Vorstellung der Beispielarchitektur und verwendeten Werkzeuge
+                    1. Wirtschaftliche und technische Bedeutung offener APIs
+                    1. Technische Hintergründe zu REST-Webservices und HTTP allgemein
+                    1. REST-Webservices mit OpenAPI beschreiben und mit Node.js implementieren
+                    1. Integration eines einfachen API-Gateways mit Load Balancing
+                    1. REST-Webservices als Backend einer Single Page App verwenden
+                    {.dhbw-list-spacious}
+                </div>
+            </div>
+            <div class="d-flex flex-column align-items-stretch" style="gap: 1em; max-width: 28em;">
+                <div class="flex-fill card">
+                    <div class="card-header fw-bold">
+                        Didaktisches Modell
+                    </div>
+                    <div class="card-body markdown">
+                        **Präsenzvorlesung mit semesterbegleitenden Prüfungsaufgaben**. Aufgrund
+                        der zeitlichen Belastung im vierten Semester müssen die Vorlesunstermine
+                        nicht vorbereitet jedoch anhand weiterführender Literatur selbstständig
+                        nachbereitet werden.
+                    </div>
+                </div>
+                <div class="flex-fill card">
+                    <div class="card-header fw-bold">
+                        Benötigte Software
+                    </div>
+                    <div class="card-body markdown">
+                        #### Kurzversion
+        
+                        Wir arbeiten mit <a href="https://gitpod.io/" target="_blank">Gitpod</a>
+                        komplett online. 😲
+        
+                        #### Langversion
+        
+                        Gitpod bietet eine Linux-Umgebung mit folgenden vorkonfigurierten Werkzeugen.
+                        Wer will, kann diese Werkzeuge auch auf dem eigenen Rechner zum Laufen bringen.
+                        um lokal zu arbeiten:
+        
+                        * Visual Studio Code
+                        * Docker
+                        * Git
+                        
+                        Zusätzlich bietet sich ein Programm zum Testen von HTTP-Aufrufen
+                        wie <a href="https://www.postman.com/downloads/?utm_source=postman-home" target="_blank">Postman</a> an.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</section>
+
+<section data-title="Prüfungsaufgabe" class="limited-width">
+    <article class="centered-content">
+        <div>
+            <div class="card mb-3">
+                <div class="card-header fw-bold">
+                    Rahmenbedingungen
+                </div>
+                <div class="card-body markdown">
+                    * **Aufgabe 1:** Architekturentwurf als Einzelleistung
+                    * **Aufgabe 2:** Programmierprojekt als Gruppenarbeit
+                    * Getrennte Abgabe beider Teile während dem Semester
+                    * Eigenverantwortliche Bearbeitung parallel zur Vorlesung
+                </div>
+            </div>
+        
+            <div class="card">
+                <div class="card-header fw-bold">
+                    Portfoliozusammensetzung
+                </div>
+                <div class="card-body">
+                    <table class="dhbw-table-border" style="width: 100%; margin-bottom: 1em; font-size: 90%;">
+                        <thead>
+                            <tr>
+                                <th>Semester</th>
+                                <th>I/G</th>
+                                <th>Artefakt</th>
+                                <th>Schwierigkeit</th>
+                                <th>Abgabefrist</th>
+                                <th>Gewichtung</th>
+                            </tr>
+                        </thead>
+            
+                        <!-- Drittes Semester -->
+                        <tr style="background-color: #eaeaea;">
+                            <td>3</td>
+                            <td>I</td>
+                            <td><b>Lernkontrollen zu „Webprogrammierung”</b></td>
+                            <td>Erinnern, Verstehen</td>
+                            <td>Vor der jeweiligen Vorlesung</td>
+                            <td>2</td>
+                        </tr>
+                        <tr style="background-color: #eaeaea;">
+                            <td>3</td>
+                            <td>I</td>
+                            <td><b>Vertiefende Aufgaben zu den einzelnen Kapiteln</b></td>
+                            <td>Anwenden, Analysieren, Beurteilen</td>
+                            <td>Ende des dritten Semesters</td>
+                            <td>4</td>
+                        </tr>
+            
+                        <!-- Viertes Semester -->
+                        <tr>
+                            <td>4</td>
+                            <td>I</td>
+                            <td><b>Architekturentwurf</b></td>
+                            <td>Anwenden, Analysieren, Beurteilen</td>
+                            <td>Mitte des vierten Semesters</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>G</td>
+                            <td><b>Programmierprojekt</b></td>
+                            <td>Verstehen, Anwenden, Analysieren, Beurteilen</td>
+                            <td>Vor Beginn der Klausurphase</td>
+                            <td>3</td>
+                        </tr>
+                    </table>
+                    <p>
+                        <b>I/G:</b> Individualleistung oder Gruppenleistung <br />
+                        <b>Schwierigkeit:</b> Erinnern &lt; Verstehen &lt; Anwenden &lt; Analysieren &lt; Beurteilen
+                    </p>
+                </div>
+            </div>
+        </div>
+    </article>
+</section>

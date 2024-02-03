@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Entwicklung verteilter Systeme – Verteilte Systeme</title>
+
+        <link rel="shortcut icon" href="shared/favicon.svg" />
+        <link rel="stylesheet" href="_bundle.css" />
+        <script src="_bundle.js"></script>
+
+        <!-- Umschaltbare Beispielbilder -->
+        <script>
+            function change_example(event) {
+                let label             = event.target.textContent       || "";
+                let dropdownSelector  = event.target.dataset.dropdown  || "";
+                let containerSelector = event.target.dataset.container || "";
+                let showSelector      = event.target.dataset.show      || "";
+                
+                if (dropdownSelector) {
+                    document.querySelectorAll(dropdownSelector).forEach(element => element.textContent = label);
+                }
+                if (containerSelector) {
+                    document.querySelectorAll(`${containerSelector} > *`).forEach(element => element.classList.add("hidden"));
+                }
+                
+                if (showSelector) {
+                    document.querySelectorAll(showSelector).forEach(element => element.classList.remove("hidden"));
+                }
+            }
+        </script>
+    </head>
+    <body class="slides invisible" data-title="Entwicklung verteilter Systeme – Verteilte Systeme" tabindex="0">
+        <header>
+            <h2>Inhaltsverzeichnis</h2>
+        </header>
+
+        <section data-chapter="h0" data-background-image="shared/deckblatt.jpg">
+            <h1>Verteilte Systeme</h1>
+            <article class="d-flex justify-content-center align-items-center">
+                <div style="max-width: 65em;">
+                    <div class="dhbw-lightbox dhbw-box-shadow p-4 mb-2" style="width: 100%">
+                        <p>
+                            Liebe Studierende,
+                        </p>
+                        <p>
+                            Sie sehen hier das interaktive Onlinelehrbuch zur Vorlesung „Verteilte Systeme” im
+                            Studiengang „Wirtschaftsinformatik” der DHBW Karlsruhe vor sich. Dieses bildet die
+                            Grundlage der gleichnamigen Vorlesung im vierten Semester, die seit einigen Jahren
+                            nach dem <i>Inverted Classroom Modell</i> gehalten wird. Dabei wurde größter Wert
+                            auf die didaktische Aufbereitung der Lerninhalte gelegt, um Ihnen den größtmöglichen
+                            Nutzen und Lerneffekt zu bieten.
+                        </p>
+                        <p>
+                            Dies funktioniert jedoch nicht ohne Ihre Mitarbeit! Nur, indem Sie die Inhalte
+                            vollständig durcharbeiten und alle Übungen bearbeiten, können Sie die Lernziele
+                            der Vorlesung vollständig erreichen. Widerstehen Sie daher bitte der Versuchung,
+                            einzelne Teile wie zum Beispiel die eingebetteten Videos zu überspringen, um
+                            nicht den Anschluss in den Präsenzvorlesungen zu verlieren. Obwohl dies einen
+                            erhöhten Zeiteinsatz erfordert, zahlt sich die Mühe schnell aus. Denn obwohl wir
+                            stets bestrebt sind, Ihnen die Inhalte bestmöglich zu vermitteln, müssen Sie sich
+                            diese immer noch selbst erarbeiten und mit eigenen Erfahrungen verknüpfen.
+                            Vorlesung ist eben kein Upload von Wissen, sondern ein Download. Sie werden
+                            aber bald sehen, dass dies durchaus Spaß machen kann.
+                        </p>
+                        <p>
+                            Wir wünschen Ihnen daher viel Erfolg und viel Spaß bei der Bearbeitung der folgenden
+                            Unterlagen. Gerne nehmen wir hierbei Ihre Anregungen und Verbesserungsvorschläge entgegen,
+                            die Sie entweder auf <a href="https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys2024-folien" target="_blank">GitHub</a>,
+                            per E-Mail an <a data-email-address>dhbw windows3.de</a>, <a data-email-address>michael.decker dhbw-karlsruhe.de</a>
+                            oder in der Vorlesung adressieren können. Auch bei Fragen können Sie uns natürlich jederzeit schreiben.
+                            Wir freuen uns über jede Nachricht und lassen keine Rückfrage unbeantwortet.
+                        </p>
+                        <p>
+                            Gruß,<br/>
+                            Prof. Dr. Michael Decker, <br/>
+                            Dennis Schulmeister-Zimolong
+                        </p>
+                    </div>
+                    <div class="dhbw-lightbox dhbw-box-shadow p-4" style="width: 100%">
+                        <h3 class="dhbw-lightblue">Hinweise zur Bedienung</h3>
+                        <p>
+                            Das Lehrbuch kann vollständig mit Tastatur, Maus oder Touchscreen bedient werden.
+                            Wechseln Sie einfach mit den Pfeiltasten oder einer Wischgeste zwischen den Seiten.
+                            Mit den Tasten <kbd>1</kbd> und <kbd>2</kbd> bzw. einem Long-Tap kann zwischen
+                            Inhaltsverzeichnis und Lehrbuch umgeschaltet werden. Alle Funktionen lassen sich
+                            auch oben rechts über das Menü aufrufen.
+                        </p>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <ls-include src="templates.html"></ls-include>
+        <ls-include src="01-intro.html"></ls-include>
+        <ls-include src="02-grundlagen.html"></ls-include>
+        <ls-include src="03-cloudarchitektur.html"></ls-include>
+        <ls-include src="04-rest-webservices.html"></ls-include>
+        <ls-include src="05-entwicklung.html"></ls-include>
+        
+        <section data-use-template="deckblatt" data-title="Anhang"></section>
+
+        <ls-include src="98-docker.html"></ls-include>
+        <ls-include src="99-anhang.html"></ls-include>
+    </body>
+</html>
