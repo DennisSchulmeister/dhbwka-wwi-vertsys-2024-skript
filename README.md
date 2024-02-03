@@ -15,7 +15,7 @@ Und hier für [ausführlichere Demos des Funktionsumfangs](https://github.com/De
 Copyright
 ---------
 
-Diese Folien sind lizenziert unter
+Diese Inhalte sind lizenziert unter
 [_Creative Commons Namensnennung 4.0 International_](http://creativecommons.org/licenses/by/4.0/)
 
 © 2024 Dennis Schulmeister-Zimolong und Prof. Dr. Michael Decker, DHBW Karlsruhe<br/>
