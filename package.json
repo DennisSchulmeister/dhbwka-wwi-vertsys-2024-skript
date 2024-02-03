@@ -1,7 +1,7 @@
 {
     "name": "dhbwka-wwi-vertsys2024-folien",
     "version": "1.0.0",
-    "description": "Folienskript zur Vorlesung \"Verteilte Systeme\" (ab 2024) im Studiengang Wirtschaftsinformation an der DHBW Karlsruhe",
+    "description": "Onlinelehrbuch zur Vorlesung \"Verteilte Systeme\" (ab 2024) im Studiengang Wirtschaftsinformation an der DHBW Karlsruhe",
     "author": "Dennis Schulmeister-Zimolong, Prof. Dr. Michael Decker",
     "license": "CC-BY-4.0",
     "homepage": "https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2024-skript#readme",
