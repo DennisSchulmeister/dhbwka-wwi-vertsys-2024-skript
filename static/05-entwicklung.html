@@ -21,7 +21,7 @@
         * Die Unterschiede zur Vorlageanwendung aus dem Vorsemester kennen
         * Der Single Page App eine neue Unterseite hinzufügen können
         * Die Grundlagen der Fetch API zum Auslösen von HTTP-Anfragen kennen
-        * Die in der Vorlage enthaltene Klasse <tt>Backend</tt> anwenden können
+        * Die in der Vorlage enthaltene Klasse <code>Backend</code> anwenden können
 
         <span style="font-size: 240px; color: white;" class="dhbw-text-shadow" >🏁</span>
     </article>
@@ -93,7 +93,7 @@
                     Mit <span class="cmd">npm add</span> hinzugefügte Bibliotheken werden in die
                     Datei <span class="fn">package.json</span> aufgenommen und anschließend in
                     das Unterverzeichnis <span class="fn">node_modules</span> installiert. Von
-                    dort können sie mit der ganz normalen <tt>import</tt>-Anweisung von JavaScript
+                    dort können sie mit der ganz normalen <code>import</code>-Anweisung von JavaScript
                     importiert werden:
                 </p>
                 <ul class"mb-0">
@@ -559,7 +559,7 @@
                     },{
                         name: "save-api-url.js",
                         type: FILE,
-                        desc: "Im Docker Container ausgeführtes Skript zum Übernehmen der API-URL in die Datei <tt>static/api.url</tt>",
+                        desc: "Im Docker Container ausgeführtes Skript zum Übernehmen der API-URL in die Datei <code>static/api.url</code>",
                         edit: false,
                     }],
                 },{
@@ -781,7 +781,7 @@
                         </lsx-tab-page>
                         <lsx-tab-page title="Erklärung">
                             <div class="markdown">
-                                Das <tt>server</tt>-Objekt besitzt für jedes HTTP-Verb eine Methode, mit der
+                                Das <code>server</code>-Objekt besitzt für jedes HTTP-Verb eine Methode, mit der
                                 Callback-Funktionen zur Verarbeitung eintreffender HTTP-Anfrage registriert
                                 werden können. Sie erwarten hierfür den URL-Pfad sowie die aufzurufende
                                 Funktion als Parameter. Das Framework prüft daraufhin bei jeder Anfrage das
@@ -790,11 +790,11 @@
                                 Die Handler (die im Falle mehrerer zutreffender Handler immer in der Reihenfolge
                                 ihrer Registrierung durchlaufen werden), bekommen hierfür drei Parameter übergeben:
     
-                                1. <tt>req</tt>: Ein Objekt mit den Daten der HTTP-Anfrage
-                                2. <tt>res</tt>: Ein Objekt zur Generierung der HTTP-Antwort
-                                3. <tt>next</tt>: Funktion, zur Bestätigung der Verarbeitung
+                                1. <code>req</code>: Ein Objekt mit den Daten der HTTP-Anfrage
+                                2. <code>res</code>: Ein Objekt zur Generierung der HTTP-Antwort
+                                3. <code>next</code>: Funktion, zur Bestätigung der Verarbeitung
     
-                                Eine besondere Bedeutung kommt dabei dem Parameter <tt>next</tt> zu. Es handelt
+                                Eine besondere Bedeutung kommt dabei dem Parameter <code>next</code> zu. Es handelt
                                 sich um eine als Objekt übergebene Methode, die explizit aufgerufen werden muss,
                                 um die Kontrolle an das Framework zurückzugeben und somit den Aufruf weiterer
                                 Handler-Funktionen und das Zurückschicken der Antwort an den Client zu ermöglichen.
@@ -900,30 +900,30 @@
                                 Die Registrierung einer Middleware erfolgt mit der  Methode <src-code language="javascript">server.use()</src-code>.
                                 Folgende Features werden dadurch nachgerüstet:
     
-                                1. <tt>acceptParser</tt>: Auswertung des <tt>Accept</tt> Header Fields, um andere
+                                1. <code>acceptParser</code>: Auswertung des <code>Accept</code> Header Fields, um andere
                                 Datenformate außer JSON zu ermöglichen.
     
-                                1. <tt>authorizationParser</tt>: Auswertung des <tt>Authorization</tt> Header Fields,
+                                1. <code>authorizationParser</code>: Auswertung des <code>Authorization</code> Header Fields,
                                 um personalisierte Anmeldedaten empfangen zu können.
     
-                                1. <tt>dateParser</tt>: Auswertung des <tt>Date</tt> Header Fields und Prüfung,
+                                1. <code>dateParser</code>: Auswertung des <code>Date</code> Header Fields und Prüfung,
                                 dass dieses nicht zu sehr von der Uhrzeit des Servers abweicht.
     
-                                1. <tt>queryParser</tt>: Auswertung von URL-Parametern, die als Teil der URL an den
+                                1. <code>queryParser</code>: Auswertung von URL-Parametern, die als Teil der URL an den
                                 Server geschickt werden.
     
-                                1. <tt>jsonp</tt>: Unterstützung für den alten JSONP-Standard zum Abruf von Daten.
+                                1. <code>jsonp</code>: Unterstützung für den alten JSONP-Standard zum Abruf von Daten.
     
-                                1. <tt>gzipResponse</tt>: Komprimierung der Antwort vor ihrem Versand, sofern
+                                1. <code>gzipResponse</code>: Komprimierung der Antwort vor ihrem Versand, sofern
                                 dies vom Client unterstützt wird.
     
-                                1. <tt>bodyParser</tt>: Parsen verschiedener Datenformate, die als Teil der
+                                1. <code>bodyParser</code>: Parsen verschiedener Datenformate, die als Teil der
                                 HTTP-Anfrage empfangen werden können.
     
-                                1. <tt>throttle</tt>: Maximale Anzahl von Verbindungen je IP begrenzen, um somit
+                                1. <code>throttle</code>: Maximale Anzahl von Verbindungen je IP begrenzen, um somit
                                 der Verwendung des Mail-Servers zum Versand von Span entgegenzuwirken.
     
-                                1. <tt>conditionalRequest</tt>: Auswertung des <tt>ETag</tt> Header Fields,
+                                1. <code>conditionalRequest</code>: Auswertung des <code>ETag</code> Header Fields,
                                 zur Vermeidung überflüssiger Abrufe unveränderter Daten.
                             </div>
                         </lsx-tab-page>
@@ -1220,8 +1220,8 @@
                                 Möglichkeit in Restify, weshalb sie hier im Konstruktor der Klasse einfach nachgebaut wird.
     
                                 Im Konstruktor werden zwei Methoden als HTTP-Handlerfunktion registriert, um unter der
-                                Wurzeladresse <tt>/</tt> des Webservices eine Übersicht zu seiner Struktur sowie unter
-                                der Adresse <tt>/openapi.yaml</tt> seine OpenAPI-Beschreibung zurückzuliefern.
+                                Wurzeladresse <code>/</code> des Webservices eine Übersicht zu seiner Struktur sowie unter
+                                der Adresse <code>/openapi.yaml</code> seine OpenAPI-Beschreibung zurückzuliefern.
                             </div>
                         </lsx-tab-page>
                     </lsx-tab-pages>
@@ -1566,7 +1566,7 @@
                 * Zwei Klassen für die Start- und Detailansicht der App
 
                 In der **neuen Version** fällt die selbstgestrickte Datenbank weg und wird stattdessen
-                durch eine Klasse namens <tt>Backend</tt> ersetzt. Diese bietet eine einfache Möglichkeit,
+                durch eine Klasse namens <code>Backend</code> ersetzt. Diese bietet eine einfache Möglichkeit,
                 die Webservices des Backends aufzurufen. Auf diese Weise können Datenhaltung und einzelne
                 Teile der Anwendungslogik auf die Serverseite verlagert werden, um beispielsweise mehreren
                 Benutzern Zugriff auf die Daten zu geben.
@@ -1667,7 +1667,7 @@
                 <lsx-accordion-page>
                     <lsx-accordion-title>
                         <div class="d-flex w-100 me-2">
-                            <span style="flex: 1;">Neue <tt>_goto()</tt>-Methode anlegen</span>
+                            <span style="flex: 1;">Neue <code>_goto()</code>-Methode anlegen</span>
                             <span class="fn">app.js</span>
                         </div>
                     </lsx-accordion-title>
@@ -1842,12 +1842,12 @@
         <div class="limited-width">
             <div class="markdown mb-3">
                 Obwohl die Fetch API des Browsers relativ einfach zu benutzen ist, bietet die Beispielanwendung
-                mit der darin enthaltenen Klasse <tt>Backend</tt> nochmal eine einfachere Möglichkeit. Diese
+                mit der darin enthaltenen Klasse <code>Backend</code> nochmal eine einfachere Möglichkeit. Diese
                 Klasse kapselt die Fetch API, stellt dabei aber sicher, dass die richtigen Header Fields gesetzt
                 und die Daten immer im JSON-Format ausgetauscht werden. Zusätzlich erkennt sie vom Backend
                 gelieferte Fehlermeldungen und wandelt diese in eine Exception um.
         
-                Über das globale <tt>App</tt>-Objekt steht eine Instanz der <tt>Backend</tt>-Klasse zur Verfügung.
+                Über das globale <code>App</code>-Objekt steht eine Instanz der <code>Backend</code>-Klasse zur Verfügung.
                 Diese besitzt eine Methode namens <src-code language="javascript">fetch()</src-code> zur Kommunikation
                 mit dem Backend. Folgende Parameter müssen hierfür mitgegeben werden:
         

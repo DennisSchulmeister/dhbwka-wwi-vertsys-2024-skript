@@ -446,27 +446,27 @@
                         </lsx-carousel-page>
                         <lsx-carousel-page>
                             <p>
-                                Mit <tt>telnet</tt> stellen wir eine <a href="https://de.wikipedia.org/wiki/Socket_(Software)"
+                                Mit <code>telnet</code> stellen wir eine <a href="https://de.wikipedia.org/wiki/Socket_(Software)"
                                 target="_blank">TCP/IP-Verbindung</a> zum Webserver her.
                             </p>
                             <img class="active d-block w-100" src="04-rest-webservices/http_demo_02.gif" />
                         </lsx-carousel-page>
                         <lsx-carousel-page>
                             <p>
-                                Daraufhin meldet <tt>telnet</tt>, dass die Verbindung erfolgreich aufgebaut wurde und der Server wartet
+                                Daraufhin meldet <code>telnet</code>, dass die Verbindung erfolgreich aufgebaut wurde und der Server wartet
                                 auf Eingaben.
                             </p>
                             <img class="active d-block w-100" src="04-rest-webservices/http_demo_03.gif" />
                         </lsx-carousel-page>
                         <lsx-carousel-page>
                             <p>
-                                Wir schicken eine <tt>GET</tt>-Anfrage zum Abruf der Datei <tt>/webprog/hallo-http.txt</tt>.
+                                Wir schicken eine <code>GET</code>-Anfrage zum Abruf der Datei <code>/webprog/hallo-http.txt</code>.
                             </p>
                             <img class="active d-block w-100" src="04-rest-webservices/http_demo_04.gif" />
                         </lsx-carousel-page>
                         <lsx-carousel-page>
                             <p>
-                                Als nächstes folgt das Header Field <tt>Host</tt>, da es mehrere Domains mit derselben IP-Adresse gibt.
+                                Als nächstes folgt das Header Field <code>Host</code>, da es mehrere Domains mit derselben IP-Adresse gibt.
                             </p>
                             r              <img class="active d-block w-100" src="04-rest-webservices/http_demo_05.gif" />
                         </lsx-carousel-page>
@@ -574,15 +574,28 @@
                     </ul>
 
                     <h2>DELETE</h2>
-                    r           <li>
-                            Der Server antwortet mit einer Bestätigung oder einer Fehlberbeschreibung
+                    <ul>
+                        <li>
+                            Inhalte vom Server löschen
+                        </li>
+                        <li>
+                            Der Server antwortet mit einer Bestätigung oder einer Fehlerbeschreibung
                         </li>
                     </ul>
 
                     <h2>Seltener verwendete Verben</h2>
                     <p>
-                        <tt>HEAD</tt>, <tt>OPTIONS</tt>, <tt>TRACE</tt>, <tt>PATCH</tt>
+                        <code>HEAD</code>, <code>OPTIONS</code>, <code>TRACE</code>, <code>PATCH</code>
                     </p>
+                    <lsx-info-box class="markdown">
+                        **CORS (Cross-Origin Ressource Sharing)**: Hierbei handelt es sich um einen Sicherheitsmechanismus
+                        der Browser. Bevor eine potentiell Daten verändernde Anfrage an einen anderen Server geschickt wird,
+                        als der, von dem die Seite geladen wurde, wird diese zunächst mit einer `OPTIONS`-Anfrage verprobt
+                        (sog. „Options Pre-Flight”). Nur, wenn der Server die Ausführung genehmigt, wird die eigentliche Anfrage
+                        hinterher gesendet.
+                        
+                        Für weitere Informationen [hier klicken](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS){target="_blank"}.
+                    </lsx-info-box>
                 </lsx-tab-page>
 
                 <lsx-tab-page title="Statuscodes">
@@ -602,16 +615,16 @@
                             Die Anfrage wurde erfolgreich bearbeitet
                         </li>
                         <li>
-                            <tt>200 OK</tt>: Alles roger! Der Response Body beinhaltet die gewünschten Daten 👌🏼
+                            <code>200 OK</code>: Alles roger! Der Response Body beinhaltet die gewünschten Daten 👌🏼
                         </li>
                         <li>
-                            <tt>201 Created</tt>: Der an den Server gesendete Datensatz wurde erfolgreich angelegt
+                            <code>201 Created</code>: Der an den Server gesendete Datensatz wurde erfolgreich angelegt
                         </li>
                         <li>
-                            <tt>202 Accepted</tt>: Die Anfrage wurde empfangen, wird aber erst später bearbeitet
+                            <code>202 Accepted</code>: Die Anfrage wurde empfangen, wird aber erst später bearbeitet
                         </li>
                         <li>
-                            <tt>204 No Content</tt>: Alles in Ordnung. Der Body enthält jedoch keine Daten
+                            <code>204 No Content</code>: Alles in Ordnung. Der Body enthält jedoch keine Daten
                         </li>
                         <li>
                             …
@@ -624,10 +637,10 @@
                             Es sind weitere Aktionen vom Client notwendig
                         </li>
                         <li>
-                            <tt>300 Multiple Choice</tt>: Die Anfrage war nicht eindeutig genug
+                            <code>300 Multiple Choice</code>: Die Anfrage war nicht eindeutig genug
                         </li>
                         <li>
-                            <tt>301 Moved Permanently</tt>: Umleitung des Clients auf eine andere URL
+                            <code>301 Moved Permanently</code>: Umleitung des Clients auf eine andere URL
                         </li>
                         <li>
                             …
@@ -640,19 +653,19 @@
                             Der Client hat etwas falsch gemacht; die Verarbeitung wird abgelehnt
                         </li>
                         <li>
-                            <tt>400 Bad Request</tt>: Ungültige bzw. fehlerhafte Anfrage
+                            <code>400 Bad Request</code>: Ungültige bzw. fehlerhafte Anfrage
                         </li>
                         <li>
-                            <tt>401 Unauthorized</tt>: Keine Berechtigung für diese Aktion
+                            <code>401 Unauthorized</code>: Keine Berechtigung für diese Aktion
                         </li>
                         <li>
-                            <tt>403 Forbidden</tt>: Die Aktion ist prinzipiell nicht erlaubt
+                            <code>403 Forbidden</code>: Die Aktion ist prinzipiell nicht erlaubt
                         </li>
                         <li>
-                            <tt>404 Not Found</tt>: Der gesuchte Inhalt wurde nicht gefunden
+                            <code>404 Not Found</code>: Der gesuchte Inhalt wurde nicht gefunden
                         </li>
                         <li>
-                            <tt>409 Conflict</tt>: Der übermittelte Inhalt wiederspricht anderen Daten
+                            <code>409 Conflict</code>: Der übermittelte Inhalt wiederspricht anderen Daten
                         </li>
                         <li>
                             …
@@ -665,13 +678,13 @@
                             Anfrage kann aufgrund eines Serverfehlers nicht bearbeitet werden
                         </li>
                         <li>
-                            <tt>500 Internal Server Error</tt>: Schwerer technischer Fehler, alles ist kaputt! 🗑️
+                            <code>500 Internal Server Error</code>: Schwerer technischer Fehler, alles ist kaputt! 🗑️
                         </li>
                         <li>
-                            <tt>501 Not Implemented</tt>: Die Funktion ist nicht verfügbar
+                            <code>501 Not Implemented</code>: Die Funktion ist nicht verfügbar
                         </li>
                         <li>
-                            <tt>503 Service Unavailable</tt>: Temporärer Fehler, bitte später nochmal versuchen
+                            <code>503 Service Unavailable</code>: Temporärer Fehler, bitte später nochmal versuchen
                         </li>
                         <li>
                             …
@@ -802,8 +815,8 @@
         einfach: Der Browser stellt eine Verbindung zum Server her, sendet eine Anfrage und erhält eine Antwort.
         Die Anfrage beinhaltet dabei stets folgende Daten:
 
-        * **Verb:** Kennzeichnet die Aktion, die der Server ausführen soll. Zum Beispiel <tt>GET</tt> für
-          den Abruf einer Seite, oder <tt>PUT</tt> zum Hochladen einer Datei.
+        * **Verb:** Kennzeichnet die Aktion, die der Server ausführen soll. Zum Beispiel <code>GET</code> für
+          den Abruf einer Seite, oder <code>PUT</code> zum Hochladen einer Datei.
         * **Pfad:</> Der Dateipfad, auf den sich die Anfrage bezieht. Oft handelt es sich einfach um eine
           Datei, die der Server zurückschicken soll. Das muss aber nicht so sein, wie wir später noch sehen
           werden.
@@ -890,8 +903,8 @@
                 in einer Datenbank. Aber auch IoT-Anwendungsfälle, bei denen jede Ressource für ein dingliches Objekt
                 der realen Welt steht, sind denkbar.
                 
-                Jede Ressource besitzt hierfür eine eindeutige URL, die mit den üblichen HTTP-Methoden (<tt>GET</tt>,
-                <tt>PUT</tt>, <tt>POST</tt>, <tt>DELETE</tt>, …) angesprochen wird. Die Abkürzung REST steht dabei für
+                Jede Ressource besitzt hierfür eine eindeutige URL, die mit den üblichen HTTP-Methoden (<code>GET</code>,
+                <code>PUT</code>, <code>POST</code>, <code>DELETE</code>, …) angesprochen wird. Die Abkürzung REST steht dabei für
                 **Representational State Transfer**, was wie folgt zu lesen ist:
         
                 * **Representational:** Grundsätzlich ist REST nicht auf ein bestimmtes Datenformat festgelegt.
@@ -1066,6 +1079,7 @@
     </article>
 </section>
 
+<!-- TODO: Aufteilen in zwei Folien bzw. Tabreiter: Collection vs. Ressource -->
 <section data-title="Typische HTTP-Nachrichten eines REST-Webservices" >
     <article class="centered-content">
         <div class="limited-width">
@@ -1112,12 +1126,12 @@
                 <!-- GET: Collection abrufen -->
                 <lsx-accordion-page>
                     <lsx-accordion-title>
-                        <b><tt>GET</tt>:</b> &nbsp;
+                        <b><code>GET</code>:</b> &nbsp;
                         Liste abrufen
                     </lsx-accordion-title>
                     <lsx-accordion-content>
                         <p>
-                            <tt>GET</tt>-Anfragen an einer Collection oder einen Store führen in der Regel dazu,
+                            <code>GET</code>-Anfragen an einer Collection oder einen Store führen in der Regel dazu,
                             dass eine Zusammenfassung aller enthaltenen Daten gesendet wird. Oftmals können Anzahl,
                             Umfang und Sortierung der Daten über URL-Parameter gesteuert werden.
                         </p>
@@ -1159,12 +1173,12 @@
                 <!-- GET: Ressource abrufen -->
                 <lsx-accordion-page>
                     <lsx-accordion-title>
-                        <b><tt>GET</tt>:</b> &nbsp;
+                        <b><code>GET</code>:</b> &nbsp;
                         Ressource abrufen
                     </lsx-accordion-title>
                     <lsx-accordion-content>
                         <p class="mb-4">
-                            <tt>GET</tt>-Anfragen an eine einzelne Ressourcen führen dazu, dass der komplette
+                            <code>GET</code>-Anfragen an eine einzelne Ressourcen führen dazu, dass der komplette
                             Datensatz übermittelt wird. Manche Webservices erlauben auch hier, über URL-Parameter
                             nudhbw-lightblue
                         <div class="container-fluid p-0">
@@ -1207,16 +1221,16 @@
                 <!-- POST: Ressource anlegen -->
                 <lsx-accordion-page>
                     <lsx-accordion-title>
-                        <b><tt>POST</tt>:</b> &nbsp;
+                        <b><code>POST</code>:</b> &nbsp;
                         Ressource anlegen
                     </lsx-accordion-title>
                     <lsx-accordion-content>
                         <p class="mb-4">
-                            <tt>POST</tt>-Anfragen werden in der Regel an eine Collection geschickt, um neue Daten
+                            <code>POST</code>-Anfragen werden in der Regel an eine Collection geschickt, um neue Daten
                             anzulegen. Der Server vergibt daraufhin eine neue URL und teilt diese zusammen mit einer
                             Kopie der gespeicherten Daten mit. Stellt der Server fest, dass der anzulegende Datensatz
                             bereits vorhanden ist, kann er diesen entweder überschreiben oder dies mit dem Statuscode
-                            <tt>409 Conflict</tt> ablehnen.
+                            <code>409 Conflict</code> ablehnen.
                         </p>
         
                         <div class="container-fluid p-0">
@@ -1261,16 +1275,16 @@
                 <!-- PUT: Ressource austauschen -->
                 <lsx-accordion-page>
                     <lsx-accordion-title>
-                        <b><tt>PUT</tt>:</b> &nbsp;
+                        <b><code>PUT</code>:</b> &nbsp;
                         Ressource aktualisieren
                     </lsx-accordion-title>
                     <lsx-accordion-content>
                         <p class="mb-4">
-                            Bei einer <tt>PUT</tt>-Anfrage kennt der Client die URL der abzuspeichernden Daten bereits, so dass
+                            Bei einer <code>PUT</code>-Anfrage kennt der Client die URL der abzuspeichernden Daten bereits, so dass
                             die Anfrage direkt an die Ressource geschickt werden kann. Meistens wird dies zum Überschreiben
                             vorhandener Datensätze genutzt. Es gibt aber auch Services, welche eine Neuanlage auf diese
                             Weise erlauben. Manche Webservices liefern auch hier als Antwort eine Kopie der gespeicherten
-                            Daten. Üblich ist aber auch, einfach mit Status <tt>204 No Content</tt> zu antworten und davon
+                            Daten. Üblich ist aber auch, einfach mit Status <code>204 No Content</code> zu antworten und davon
                             auszugehen, dass der Client due vollständigen Daten entweder bereits kennt oder mit einer
                             nachfolgenden GET-Anfrage abrufen kann.
                         </p>
@@ -1315,12 +1329,12 @@
                 <!-- PATCH: Einzelne Felder aktualisieren -->
                 <lsx-accordion-page>
                     <lsx-accordion-title>
-                        <b><tt>PATCH</tt>:</b> &nbsp;
+                        <b><code>PATCH</code>:</b> &nbsp;
                         Einzelne Felder aktualisieren
                     </lsx-accordion-title>
                     <lsx-accordion-content>
                         <p class="mb-4">
-                            Soll ein vorhandener Datensatz aktualisiert werden, kann häufig eine <tt>PATCH</tt>-Anfrage gesendet
+                            Soll ein vorhandener Datensatz aktualisiert werden, kann häufig eine <code>PATCH</code>-Anfrage gesendet
                             werden, in welcher nur die zu überschreibenden Felder enthalten sind. Auf diese Weise wird unnötiger
                             Traffic zwischen Client und Server vermieden.
                         </p>
@@ -1375,12 +1389,12 @@
                 <!-- DELETE: Ressource löschen -->
                 <lsx-accordion-page>
                     <lsx-accordion-title>
-                        <b><tt>DELETE</tt>:</b> &nbsp;
+                        <b><code>DELETE</code>:</b> &nbsp;
                         Ressource löschen
                     </lsx-accordion-title>
                     <lsx-accordion-content>
                         <p class="mb-4">
-                            Eine <tt>DELETE</tt>-Anfrage dient, wie der Name bereits sagt, dem Löschen von Daten.
+                            Eine <code>DELETE</code>-Anfrage dient, wie der Name bereits sagt, dem Löschen von Daten.
                             Sie wird daher in der Regel an eine einzelne Ressource geschickt, kann aber auch an
                             eine Collection oder einen Store geschickt werden, um alle Daten auf einmal zu löschen.
                             Als Antwort wird häufig nur eine Bestätigung ohne Dateninhalt geliefert.
@@ -1409,20 +1423,20 @@
                 <!-- PUT: Aktion ausführen -->
                 <lsx-accordion-page>
                     <lsx-accordion-title>
-                        <b><tt>PUT</tt>:</b> &nbsp;
+                        <b><code>PUT</code>:</b> &nbsp;
                         Aktion ausführen
                     </lsx-accordion-title>
                     <lsx-accordion-content>
                         <p class="mb-4">
-                            Prozedurale Aktionen werden durch eine <tt>PUT</tt>- oder <tt>POST</tt>-Anfrage ausgelöst,
-                            keinesfalls durch <tt>GET</tt>!¹ Viele Webservices verwenden <tt>POST</tt>, weil dies auch
-                            bei SOAP-Webservices (dem zweiten großen Standard neben REST) praktiziert wird, <tt>PUT</tt>
+                            Prozedurale Aktionen werden durch eine <code>PUT</code>- oder <code>POST</code>-Anfrage ausgelöst,
+                            keinesfalls durch <code>GET</code>!¹ Viele Webservices verwenden <code>POST</code>, weil dies auch
+                            bei SOAP-Webservices (dem zweiten großen Standard neben REST) praktiziert wird, <code>PUT</code>
                             wäre aber eigentlich logischer, da der Client die aufzurufende URL ja genau kennt.
                         </p>
                         <p>
                             ¹
                             <small>
-                                <tt>GET</tt> ist nur zum Abruf bereits vorhandener Daten gedacht und darf deshalb
+                                <code>GET</code> ist nur zum Abruf bereits vorhandener Daten gedacht und darf deshalb
                                 keine Seiteneffekte haben.
                             </small>
                         </p>
@@ -1623,7 +1637,7 @@
                     </p>
                     <ol>
                         <li>
-                            Senden Sie eine <tt>GET</tt>-Anfrage an die Startadresse des Webservices.
+                            Senden Sie eine <code>GET</code>-Anfrage an die Startadresse des Webservices.
                         </li>
                         <li>
                             Navigieren Sie von der Antwort zur Songliste und von dort zum ersten Song.
@@ -1636,7 +1650,7 @@
                         </li>
                         <li>
                             <p>
-                                Senden Sie eine <tt>POST</tt>-Anfrage an die Song-Collection, um folgenden Song anzulegen:
+                                Senden Sie eine <code>POST</code>-Anfrage an die Song-Collection, um folgenden Song anzulegen:
                             </p>
                             <source-code language="json">
                                 {
@@ -1648,10 +1662,10 @@
                             </source-code>
                         </li>
                         <li>
-                            Ändern Sie anschließend mit einer <tt>PATCH</tt>-Anfrage die Songwriter auf „Elton John, Tim Rice”.
+                            Ändern Sie anschließend mit einer <code>PATCH</code>-Anfrage die Songwriter auf „Elton John, Tim Rice”.
                         </li>
                         <li>
-                            Ändern Sie mit einer <tt>PUT</tt>-Anfrage den Songtitel auf „Circle of Life (from Lion King)”.
+                            Ändern Sie mit einer <code>PUT</code>-Anfrage den Songtitel auf „Circle of Life (from Lion King)”.
                         </li>
                     </ol>
                 </div>
@@ -2296,7 +2310,7 @@
                         <lsx-tab-page title="Schema">
                             <table class="table table-sm table-light table-hover w-100 caption-top">
                                 <caption>
-                                    <tt>Address</tt>
+                                    <code>Address</code>
                                     <span class="float-end">Adressbucheintrag</span>
                                 </caption>
                                 <thead>
@@ -2308,32 +2322,32 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><tt>_links</tt></td>
+                                        <td><code>_links</code></td>
                                         <td>HATEOAS_Resource</td>
                                         <td>HATEOAS-Verlinkungen</td>
                                     </tr>
                                     <tr>
-                                        <td><tt>_id</tt></td>
+                                        <td><code>_id</code></td>
                                         <td>String</td>
                                         <td>Eindeutiger Schlüsselwert</td>
                                     </tr>
                                     <tr>
-                                        <td><tt>first_name</tt></td>
+                                        <td><code>first_name</code></td>
                                         <td>String</td>
                                         <td>Vorname</td>
                                     </tr>
                                     <tr>
-                                        <td><tt>last_name</tt></td>
+                                        <td><code>last_name</code></td>
                                         <td>String</td>
                                         <td>Nachname</td>
                                     </tr>
                                     <tr>
-                                        <td><tt>phone</tt></td>
+                                        <td><code>phone</code></td>
                                         <td>String</td>
                                         <td>Telefonnummer</td>
                                     </tr>
                                     <tr>
-                                        <td><tt>email</tt></td>
+                                        <td><code>email</code></td>
                                         <td>String</td>
                                         <td>E-Mailadresse</td>
                                     </tr>
@@ -2368,7 +2382,7 @@
                         <lsx-tab-page title="Schema">
                             <table class="table table-sm table-light table-hover w-100 caption-top">
                                 <caption>
-                                    <tt>HATEOAS_Collection</tt>
+                                    <code>HATEOAS_Collection</code>
                                     <span class="float-end">Beschreibung einer einzelnen Collection</span>
                                 </caption>
                                 <thead>
@@ -2380,17 +2394,17 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><tt>_name</tt></td>
+                                        <td><code>_name</code></td>
                                         <td>String</td>
                                         <td>Name der Collection</td>
                                     </tr>
                                     <tr>
-                                        <td><tt>query</tt></td>
+                                        <td><code>query</code></td>
                                         <td>HATEOAS_Link</td>
                                         <td>Link zum Durchsuchen der Collection</td>
                                     </tr>
                                     <tr>
-                                        <td><tt>create</tt></td>
+                                        <td><code>create</code></td>
                                         <td>HATEOAS_Link</td>
                                         <td>Link zur Anlage neuer Einträge</td>
                                     </tr>
@@ -2399,7 +2413,7 @@
         
                             <table class="table table-sm table-light table-hover w-100 caption-top">
                                 <caption>
-                                    <tt>HATEOAS_Link</tt>
+                                    <code>HATEOAS_Link</code>
                                     <span class="float-end">Details zu einem Link</span>
                                 </caption>
                                 <thead>
@@ -2411,17 +2425,17 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><tt>url</tt></td>
+                                        <td><code>url</code></td>
                                         <td>String</td>
                                         <td>URL-Pfad relativ zur Startadresse des Webservices</td>
                                     </tr>
                                     <tr>
-                                        <td><tt>method</tt></td>
+                                        <td><code>method</code></td>
                                         <td>String</td>
                                         <td>Zu verwendende HTTP-Methode (z.B. GET oder POST)</td>
                                     </tr>
                                     <tr>
-                                        <td><tt>query_params</tt></td>
+                                        <td><code>query_params</code></td>
                                         <td>Array[String]</td>
                                         <td>
                                             <p class="mb-0">
@@ -2469,7 +2483,7 @@
                         <lsx-tab-page title="Schema">
                             <table class="table table-sm table-light table-hover w-100 caption-top">
                                 <caption>
-                                    <tt>HATEOAS_Resource</tt>
+                                    <code>HATEOAS_Resource</code>
                                     <span class="float-end">Links zu einer einzelnen Ressource</span>
                                 </caption>
                                 <thead>
@@ -2481,22 +2495,22 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><tt>read</tt></td>
+                                        <td><code>read</code></td>
                                         <td>HATEOAS_Link</td>
                                         <td>Link zum Lesen der Ressource</td>
                                     </tr>
                                     <tr>
-                                        <td><tt>update</tt></td>
+                                        <td><code>update</code></td>
                                         <td>HATEOAS_Link</td>
                                         <td>Link zum Überschreiben der Ressource</td>
                                     </tr>
                                     <tr>
-                                        <td><tt>patch</tt></td>
+                                        <td><code>patch</code></td>
                                         <td>HATEOAS_Link</td>
                                         <td>Link zum Ändern einzelner Felder der Ressource</td>
                                     </tr>
                                     <tr>
-                                        <td><tt>delete</tt></td>
+                                        <td><code>delete</code></td>
                                         <td>HATEOAS_Link</td>
                                         <td>Link zum Löschen der Ressource</td>
                                     </tr>
@@ -2560,7 +2574,7 @@
                     <lsx-accordion>
                         <lsx-accordion-page>
                             <lsx-accordion-title>
-                                <b><tt>GET</tt>:</b> &nbsp;
+                                <b><code>GET</code>:</b> &nbsp;
                                 HATEOAS-Übersicht abrufen
                             </lsx-accordion-title>
                             <lsx-accordion-content>
@@ -2619,14 +2633,14 @@
                 <lsx-tab-page title="/address">
                     <p>
                         Da es sich hierbei um eine Collection handelt, kann diese mit einer
-                        <tt>GET</tt>-Anfrage durchsucht oder mit <tt>POST</tt> zur Anlage
+                        <code>GET</code>-Anfrage durchsucht oder mit <code>POST</code> zur Anlage
                         neuer Einträge verwendet werden.
                     </p>
         
                     <lsx-accordion>
                         <lsx-accordion-page>
                             <lsx-accordion-title>
-                                <b><tt>GET</tt>:</b> &nbsp;
+                                <b><code>GET</code>:</b> &nbsp;
                                 Adressen suchen
                             </lsx-accordion-title>
                             <lsx-accordion-content>
@@ -2641,22 +2655,22 @@
                                                 </tr>
                                             </thead>
                                             <tr>
-                                                <td><tt>first_name</tt></td>
+                                                <td><code>first_name</code></td>
                                                 <td>String</td>
                                                 <td>Gesuchter Vorname</td>
                                             </tr>
                                             <tr>
-                                                <td><tt>last_name</tt></td>
+                                                <td><code>last_name</code></td>
                                                 <td>String</td>
                                                 <td>Gesuchter Nachname</td>
                                             </tr>
                                             <tr>
-                                                <td><tt>phone</tt></td>
+                                                <td><code>phone</code></td>
                                                 <td>String</td>
                                                 <td>Gesuchte Telefonnummer</td>
                                             </tr>
                                             <tr>
-                                                <td><tt>email</tt></td>
+                                                <td><code>email</code></td>
                                                 <td>String</td>
                                                 <td>Gesuchte E-Mailadresse</td>
                                             </tr>
@@ -2712,13 +2726,13 @@
         
                         <lsx-accordion-page>
                             <lsx-accordion-title>
-                                <b><tt>POST</tt>:</b> &nbsp;
+                                <b><code>POST</code>:</b> &nbsp;
                                 Neue Adresse anlegen
                             </lsx-accordion-title>
                             <lsx-accordion-content>
                                 <lsx-tab-pages>
                                     <lsx-tab-page title="Request Body">
-                                        <tt>Address</tt>
+                                        <code>Address</code>
                                     </lsx-tab-page>
         
                                     <lsx-tab-page title="Statuscodes">
@@ -2785,7 +2799,7 @@
                     <lsx-accordion>
                         <lsx-accordion-page>
                             <lsx-accordion-title>
-                                <b><tt>GET</tt>:</b> &nbsp;
+                                <b><code>GET</code>:</b> &nbsp;
                                 Adresse lesen
                             </lsx-accordion-title>
                             <lsx-accordion-content>
@@ -2841,13 +2855,13 @@
         
                         <lsx-accordion-page>
                             <lsx-accordion-title>
-                                <b><tt>PUT</tt>:</b> &nbsp;
+                                <b><code>PUT</code>:</b> &nbsp;
                                 Adresse überschreiben
                             </lsx-accordion-title>
                             <lsx-accordion-content>
                                 <lsx-tab-pages>
                                     <lsx-tab-page title="Request Body">
-                                        <tt>Address</tt>
+                                        <code>Address</code>
                                     </lsx-tab-page>
         
                                     <lsx-tab-page title="Statuscodes">
@@ -2909,13 +2923,13 @@
         
                         <lsx-accordion-page>
                             <lsx-accordion-title>
-                                <b><tt>PATCH</tt>:</b> &nbsp;
+                                <b><code>PATCH</code>:</b> &nbsp;
                                 <span class="float-end">Einzelne Felder ändern</span>
                             </lsx-accordion-title>
                             <lsx-accordion-content>
                                 <lsx-tab-pages>
                                     <lsx-tab-page title="Request Body">
-                                        <tt>Address</tt>
+                                        <code>Address</code>
                                     </lsx-tab-page>
         
                                     <lsx-tab-page title="Statuscodes">
@@ -2974,7 +2988,7 @@
         
                         <lsx-accordion-page>
                             <lsx-accordion-title>
-                                <b><tt>DELETE</tt>:</b> &nbsp;
+                                <b><code>DELETE</code>:</b> &nbsp;
                                 <span class="float-end">Adresse löschen</span>
                             </lsx-accordion-title>
                             <lsx-accordion-content>
@@ -3076,24 +3090,24 @@
                         ["fallbeispiel-apicurio-05.png", "5. Kontaktdaten und Lizenz ausfüllen"],
                         ["fallbeispiel-apicurio-06.png", "6. Je Entität ein neues Tag anlegen"],
                         ["fallbeispiel-apicurio-07.png", "7. Benötigte Datentypen anlegen"],
-                        ["fallbeispiel-apicurio-08.png", "8. Datentyp <tt>Address</tt> beschreiben"],
+                        ["fallbeispiel-apicurio-08.png", "8. Datentyp <code>Address</code> beschreiben"],
                         ["fallbeispiel-apicurio-09.png", "9. URL-Endpunkte für Adressen generieren lassen"],
                         ["fallbeispiel-apicurio-10.png", "10. Weitere Datentypen anlegen"],
-                        ["fallbeispiel-apicurio-11.png", "11. Schemadefinition <tt>HATEOAS_Link</tt>"],
+                        ["fallbeispiel-apicurio-11.png", "11. Schemadefinition <code>HATEOAS_Link</code>"],
                         ["fallbeispiel-apicurio-12.png", "12. Für die HATEOAS-Typen keine URL-Endpunkte generieren"],
-                        ["fallbeispiel-apicurio-14.png", "13. Vorläufige Schemadefinition <tt>HATEOAS_Collection</tt>"],
-                        ["fallbeispiel-apicurio-13.png", "14. Vorläufige Schemadefinition <tt>HATEOAS_Resource</tt>"],
-                        ["fallbeispiel-apicurio-15.png", "15. Finale Schemadefinition <tt>HATEOAS_Collection</tt>"],
-                        ["fallbeispiel-apicurio-16.png", "16. Finale Schemadefinition <tt>HATEOAS_Resource</tt>"],
-                        ["fallbeispiel-apicurio-17.png", "17. Schemadefinition <tt>Address</tt> erweitern"],
-                        ["fallbeispiel-apicurio-18.png", "18. HATEOAS-Informationen zum <tt>Address</tt>-Schema hinzufügen"],
-                        ["fallbeispiel-apicurio-19.png", "19. URL <tt>/addresses</tt> umbenennen"],
+                        ["fallbeispiel-apicurio-14.png", "13. Vorläufige Schemadefinition <code>HATEOAS_Collection</code>"],
+                        ["fallbeispiel-apicurio-13.png", "14. Vorläufige Schemadefinition <code>HATEOAS_Resource</code>"],
+                        ["fallbeispiel-apicurio-15.png", "15. Finale Schemadefinition <code>HATEOAS_Collection</code>"],
+                        ["fallbeispiel-apicurio-16.png", "16. Finale Schemadefinition <code>HATEOAS_Resource</code>"],
+                        ["fallbeispiel-apicurio-17.png", "17. Schemadefinition <code>Address</code> erweitern"],
+                        ["fallbeispiel-apicurio-18.png", "18. HATEOAS-Informationen zum <code>Address</code>-Schema hinzufügen"],
+                        ["fallbeispiel-apicurio-19.png", "19. URL <code>/addresses</code> umbenennen"],
                         ["fallbeispiel-apicurio-20.png", "20. Ergebnis der manuellen Anpassungen"],
                         ["fallbeispiel-apicurio-21.png", "21. Query-Parameter zum Suchen von Adressen anlegen"],
                         ["fallbeispiel-apicurio-22.png", "22. Neu angelegte Query-Parameter zum Suchen von Adressen"],
-                        ["fallbeispiel-apicurio-23.png", "23. <tt>PATCH</tt>-Anfragen ergänzen"],
-                        ["fallbeispiel-apicurio-24.png", "24. HTTP-Anfrage für <tt>PATCH</tt>"],
-                        ["fallbeispiel-apicurio-25.png", "25. HTTP-Antwort für <tt>PATCH</tt>"],
+                        ["fallbeispiel-apicurio-23.png", "23. <code>PATCH</code>-Anfragen ergänzen"],
+                        ["fallbeispiel-apicurio-24.png", "24. HTTP-Anfrage für <code>PATCH</code>"],
+                        ["fallbeispiel-apicurio-25.png", "25. HTTP-Antwort für <code>PATCH</code>"],
                         ["fallbeispiel-apicurio-26.png", "26. Live-Vorschau der Dokumentation öffnen"],
                         ["fallbeispiel-apicurio-27.png", "27. Dokumentation des Webservices"],
                         ["fallbeispiel-apicurio-28.png", "28. Zurück zur Startseite des Webservices"],

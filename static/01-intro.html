@@ -27,90 +27,582 @@
         zeigt, was Sie dabei erwartet.
 </section>
 
-<section data-title="Kompetenzziele der Vorlesung">
-    <article class="markdown dhbw-limited-width">
-        ## Fachkompetenz
+<section data-title="Vorlesungsinhalte">
+    <article>
+        <lsx-accordion>
+            <lsx-accordion-page title="<b>3. Semester:</b>&nbsp;Webprogrammierung" active>
+                <p>
+                    <small>
+                        Von der ersten Webseite bis zur eigenen Webanwendung
+                    </small>
+                </p>
 
-        Die Studierenden kennen die **grundlegenden Kernkonzepte der Nebenläufigkeit und
-        Internetkommunikation** sowie die darauf aufbauenden **aktuellen Technologien und
-        Werkzeuge** für den **Entwurf und für die Implementierung von Webanwendungen**.
-        Die Studierenden kennen die technischen Grundlagen, Konzepte, Architekturen und
-        Technologien verteilter Systeme und Anwendungen sowie die gängigen Methoden,
-        Werkzeuge, Frameworks und Entwurfsmuster für die Entwicklung verteilter Anwendungen.
-        Die Studierenden können die Konzepte, Werkzeuge und Methoden der Webprogrammierung
-        anwenden und autonom Webanwendungen entwerfen, implementieren und testen.
+                <lsx-ul emoji="✅" class="mb-4">
+                    <li>Grundlagen des Web</li>
+                    <li>Webdesign mit HTML und CSS</li>
+                    <li>Responsive Webdesign</li>
+                    <li>JavaScript im Browser</li>
+                </lsx-ul>
 
-        ## Methodenkompetenz
+                <img src="01-intro/vorlesungsinhalte-webprog.png" class="d-block w-100">
+            </lsx-accordion-page>
 
-        Die Studierenden können die **Konzepte, Werkzeuge und Methoden der verteilten Systementwicklung
-        anwenden** und unter Einsatz von Frameworks und Entwurfsmustern **einfache verteilte Anwendungen
-        entwerfen, implementieren und testen**.
+            <lsx-accordion-page title="<b>4. Semester:</b>&nbsp;Verteilte Systeme">
+                <p>
+                    <small>
+                        Von Microservices bis zum Internet of Things
+                    </small>
+                </p>
 
-        ## Personale und soziale Kompetenz
+                <lsx-ul emoji="✅" class="mb-4">
+                    <li>Architekturmuster verteilter Systeme</li>
+                    <li>Backendprogrammierung mit JavaScript</li>
+                    <li>Synchrone Webservice-Kommunikation</li>
+                    <li>Asynchroner Nachrichtenaustausch</li>
+                </lsx-ul>
 
-        Die Studierenden können **eigenständig verteilte Anwendungsarchitekturen erarbeiten**. Sie können
-        stichhaltig und sachangemessen über Konzepte, eigene Entwürfe und deren Implementierungen sowie
-        die damit verbundenen Probleme argumentieren, eigene Umsetzungen plausibel darstellen und
-        eventuelle Fehler nachvollziehbar gegenüber anderen begründen.
-
-        ## Übergreifende Handlungskompetenz
-
-        Die Studierenden können eigenständig aktuelle Methoden der Analyse, des Entwurfs und der
-        Implementierung verteilter Systeme und Anwendungen für betriebliche Problemstellungen
-        diskutieren, bewerten und anwenden.
+                <img src="01-intro/vorlesungsinhalte-vertsys.png" class="d-block w-100">
+            </lsx-accordion-page>
+        </lsx-accordion>
     </article>
-    <aside>
-        TODO: Wie in Webprog andersrum. Modulhandbuch links, Aufzählung rechts
+    <aside class="markdown">
+        Die Vorlesung „Verteilte Systeme“ des vierten Semesters baut auf der Vorgängervorlesung
+        „Webprogrammierung“ im dritten Semester auf und vervollständigt das Bild zur Entwicklung
+        gesamter Anwendungen. Haben wir uns im dritten Semester überwiegend um die Clientseite
+        und hier vor allem um das Web als Anwendungsplattform gekümmert, greifen wir im vierten
+        Semester nochmal den Grundgedanken auf, verteilte Anwendungen zu entwickeln, die aus
+        mehr Komponenten als dem auf dem eigenen Computer ausgeführten Quellcode bestehen und
+        komplettieren das Bild um unterschiedliche Backendstrukturen und Kommunikationsarten.
+        
+        Doch nicht nur Webanwendungen wollen wir entwickeln. Benutzeroberflächen mit HTML und CSS
+        laufen heute zwar auch außerhalb des Browsers. Die vorgestellten Architekturmuster und
+        Techniken sind jedoch an keine UI-Technologie gebunden. Mobile Anwendungen, Desktop Apps,
+        IoT-Devices uvm. kommen genauso in Frage wie clientseitige Webanwendungen. Hin und wieder
+        werden wir daher einen kurzen Blick auch auf diese Anwendungsfälle werfen. Konkret werden
+        wir daher folgende Inhalte behandeln:
+
+        1. Architekturmuster verteilter Anwendungen
+        1. Backendprogrammierung mit JavaScript
+        1. Synchrone Webservice-Kommunikation
+        1. Asynchroner Nachrichtenaustausch
+
+        Das erste legt dabei den Grundstein für alle weiteren Inhalte und liefert neben wichtigen
+        Begriffsdefinitionen (Was ist überhaupt ein „Verteiltes System“?) auch einen Überblick über
+        die wichtigsten Architekturbausteine, Struktur- und Kommunikationsmuster. Im zweiten Kapitel
+        führen wir dann die Programmierschiene fort und legen die Grundstein dafür, die vorgestellten
+        Muster am Beispiel von Node.js und JavaScript in konkreten Anwendungen umsetzen zu können.
+        Kapitel drei und vier liefern hierzu dann das notwendige Hintergrund- und Detailwissen anhand
+        vieler Fallbeispiele und Beispielquellcodes.
     </aside>
 </section>
 
-<section data-title="Inhalte der Vorlesung">
-    <article class="centered-content">
-        <lsx-grid>
-            <lsx-row>
-                <lsx-col>
-                    <div class="card p-3">
-                        <img src="01-intro/vorlesungsinhalte.png" alt="" class="img-responsive d-block w-100"/>
-                    </div>
-                </lsx-col>
-            </lsx-row>
-            <lsx-row>
-                <lsx-col size="md">
-                    <div class="card h-100">
-                        <div class="card-header">
-                            <b>3. Semester:</b>
-                            Webprogrammierung
-                        </div>
-                        <div class="card-body markdown">
-                            * Grundlagen des Webs
-                            * Einführung in HTML und CSS
-                            * Responsive Webdesign
-                            * Clientseitiges JavaScript
-                            * Entwicklung von Single Page Apps
-                        </div>
-                    </div>
-                </lsx-col>
-                <lsx-col size="md">
-                    <div class="card h-100">
-                        <div class="card-header">
-                            <b>4. Semester:</b>
-                            Verteilte Systeme
-                        </div>
-                        <div class="card-body markdown">
-                            * Grundlagen verteilter Systeme
-                            * Cloud-Konzepte und Architekturmuster
-                            * Technische Hintergründe zu REST-Webservices
-                            * Entwicklung von Microservices mit Node.js
-                            * Persistente Datenhaltung mit MongoDB 
-                        </div>
-                    </div>
-                </lsx-col>
-            </lsx-row>
-        </lsx-grid>
+<section data-title="Kompetenzziele">
+    <article class="markdown">
+        ## Fachkompetenz
+
+        <small>Welches neue Wissen eigne ich mir an?</small>
+
+        * Definition und Einsatzgebiete von verteilten Anwendungen
+        * Typische Kommunikations- und Architekturmuster verteilter Systeme
+        * Synchrone Webservice-Kommunikation mit REST-Webservices
+        * Asynchroner Nachrichtenaustausch mit Apache Kafka und anderen
+
+        ## Methodenkompetenz
+
+        <small>Welche neuen Werkzeuge und Methoden kann ich anwenden?</small>
+
+        * Verteilte Anwendungen ganzheitlich konzipieren und umsetzen
+        * Alternative Architekturmuster abwägen und anhand der Anforderungen auswählen
+        * Entwicklungswerkzeuge wie Kommandozeilentools, IDEs und Debugger bedienen
+        * Frontend- und Backendprogrammierung mit JavaScript, Browser und Node.js
+
+        ## Personale und soziale Kompetenz
+
+        <small>Wie entwickele ich mich nicht nur fachlich sondern auch persönlich weiter?</small>
+
+        * Aktuelle Konzepte in der Entwicklung verteilter Anwendungen kennen und diskutieren
+        * Eigene Entwürfe verständlich kommunizieren und argumentieren
+        * Eventuelle Programmfehler erkennen und deren Behebung erklären können
+
+        ## Übergreifende Handlungskompetenz
+
+        <small>Welche allgemeinen Fähigkeiten erwerbe ich durch diese Vorlesung?</small>
+                
+        * Trends und Entwicklungen im größeren Bereich der Anwendungsentwicklung bewerten
+        * Sich in Diskussionen einbringen und Lösungsvorschläge unterbreiten
+        * Sich eigenständig in neue Themengebiete der Anwendungsentwicklung einarbeiten
     </article>
+    <aside>
+        <p>
+            Zur Erinnerung hier noch einmal die Beschreibung aus dem Modulhandbuch
+            der DHBW. Es handelt sich um denselben Auszug, den wir auch am Anfang
+            von Webprogrammierung gezeigt haben, da beide Vorlesung zusammen das
+            Modul “Entwicklung verteilter Systeme“ bilden:
+        </p>
+        <div style="font-size:85%" class="markdown">
+            ##### Fachkompetenz
+
+            Die Studierenden kennen die grundlegenden Kernkonzepte der Nebenläufigkeit
+            und Internet-Kommunikation und die darauf aufbauenden aktuellen Technologien
+            und Werkzeuge für den Entwurf und für die Implementierung von Web-Anwendungen.
+            Die Studierenden kennen die technischen Grundlagen, Konzepte, Architekturen
+            und Technologien verteilter Systeme und Anwendungen sowie die gängigen Methoden,
+            Werkzeuge, Frameworks und Entwurfsmuster für die Entwicklung verteilter Anwendungen.
+
+            ##### Methodenkompetenz
+
+            Die Studierenden können die Konzepte, Werkzeuge und Methoden der Web-Programmierung
+            anwenden und autonom Web-Anwendungen entwerfen, implementieren und testen. Die Studierenden
+            können die Konzepte, Werkzeuge und Methoden der verteilten Systementwicklung anwenden und
+            unter Einsatz von Frameworks und Entwurfsmustern einfache verteilte Anwendungen entwerfen,
+            implementieren und testen.
+
+            ##### Personale und soziale Kompetenz
+
+            Die Studierenden können eigenständig verteilte Anwendungsarchitekturen erarbeiten.
+            Sie können stichhaltig und sachangemessen über Konzepte, eigene Entwürfe und deren
+            Implementierungen sowie die damit verbundenen Probleme argumentieren, eigene Umsetzungen
+            plausibel darstellen und eventuelle Fehler nachvollziehbar gegenüber anderen begründen.
+
+
+            ##### Übergreifende Handlungskompetenz
+
+            Die Studierenden können eigenständig aktuelle Methoden der Analyse, des Entwurfs und
+            der Implementierung verteilter Systeme und Anwendungen für betriebliche Problemstellungen
+            diskutieren, bewerten und anwenden.
+        </div>
+        <p>
+            Da diese Beschreibung zwar den inhaltlichen Rahmen vorgibt, bei seiner Ausgestaltung
+            aber viele Freiheiten bieten, findet sich auf der Seite rechts unsere Auslegung am
+            Standort Karlsruhe. Diese lehnt sich an die Lernzeile von „Webprogrammierung” an und
+            deckt sich an vielen Stellen mit dieser. Inhaltlich wird das Bild jedoch nun hin zur
+            ganzheitlichen Konzeptionierung und Entwicklung moderner Anwendungen (nicht nur
+            clientseitige Webanwendungen) erweitert.
+        </p>
+    </aside>
 </section>
 
-<section data-title="Ablauf der Vorlesung">
+<section data-title="Didaktisches Modell">
+    <article>
+        <lsx-tab-pages>
+            <lsx-tab-page title="Ablauf der Vorlesung">
+                <p>
+                    Abweichend zum dritten Semester folgt die Vorlesung einem sehr reduzierten
+                    „Inverted Classroom Model“:
+                </p>
+                <lsx-ul class="mb-3">
+                    <li>
+                        Wie in Webprogrammierung begleitet das Folienskript die Präsenztermine.
+                    </li>
+                    <li>
+                        Es muss jedoch nicht jeder Termin durch ein Selbststudium vorbereitet werden.
+                    </li>
+                    <li>
+                        Dementsprechen fehlen auch die Vorwissensabfrage und Lernkontrollen in Moodle.
+                    </li>
+                    <li>
+                        Es gibt teilweise jedoch verbindliche Hausaufgaben, die auch der Vorbereitung dienen.
+                    </li>
+                    <li>
+                        Insbesondere die Programmieraufgaben fließen als Leistungsnachweis in die Prüfung ein.
+                    </li>
+                </lsx-ul>
+
+                <lsx-grid-fluid class="p-0">
+                    <lsx-row>
+                        <lsx-col size="md">
+                            <img src="01-intro/didaktisches-modell1.png" class="img-thumbnail d-block w-100" />
+                        </lsx-col>
+                        <lsx-col size="md">
+                            <img src="01-intro/didaktisches-modell2.png" class="img-thumbnail d-block w-100" />
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
+            </lsx-tab-page>
+            <lsx-tab-page title="Vorlesungsübersicht in Moodle">
+                <img src="01-intro/moodle1.png" class="img-fluid img-thumbnail mx-auto d-block" />
+            </lsx-tab-page>
+        </lsx-tab-pages>
+    </article>
+    <aside class="markdown">
+        ##### Didaktisches Modell
+
+        Grundsätzlich folgt die Vorlesung im vierten Semester demselben Inverted-Classroom-Modell
+        wie die Vorgängerveranstaltung des dritten Semesters. Aufgrund das allgemein höheren
+        Workloads der Studierenden wird dieses jedoch reduziert, so dass nicht grundsätzlich
+        jede Präsenzeinheit durch ein vorgelagertes Selbststudium vorbereitet werden muss.
+        
+        <!-- 
+        <h5>Didaktisches Modell</h5>
+        <p>
+            Das didaktische Modell der Vorlesung entspricht weitgehend dem Inverted Classroom Model,
+            wandelt dieses jedoch zu Gunsten einer besseren Inhaltsvermittlung und Vertiefung an einigen
+            Punkten ab. So werden die Inhalte nicht durch aufgezeichnete Videos oder Web Based Trainings,
+            bei denen mehr oder weniger die selben Folien wie in der klassischen Präsenzlehre verwertet
+            werden, sondern durch ein speziell aufbereitetes Onlineskript vermittelt. Das Onlineskript
+            besteht hierzu aus schriftlich ausformulierten Inhalten, Visualisierungen, interaktiven
+            Elementen, Screencasts, Quizes und Übungsaufgaben, um die Inhalte bestmöglich zu präsentieren.
+            Auf diese Weise soll die aktive Auseinandersetzung mit den Lerninhalten gefördert werden,
+            anstatt diese zum passiven Konsum anzubieten (Ohren auf Durchzug stellen, Video laufen lassen
+            und nebenbei zocken). Die Kapitel sind daher wie folgt gegliedert:
+        </p>
+        <ol>
+            <li>
+                Selbststudium des Onlineskripts
+            </li>
+            <li>
+                Eine oder mehrere vertiefende Theorievorlesungen
+            </li>
+            <li>
+                Prüfungsrelevante Lernkontrolle nach der ersten Theorievorlesung
+            </li>
+            <li>
+                Eine oder mehrere Übungsstunden
+            </li>
+        </ol>
+        <p>
+            Das Selbststudium besteht immer aus einer Vorwissensabfrage zur Selbsteinschätzung
+            des Kenntnisstands (zwischen zwei und vier Multiple-Choice-Fragen in Moodle), dem
+            eigentlichen Onlineskript und einem Feedbackformular, um Fragen für die nächste
+            Vorlesung zu stellen. Nach Abschluss der ersten Theorievorlesung ist in Moodle ein
+            größerer Multiple-Choice-Test als Lernkontrolle zu bearbeiten, dessen Ergebnis in
+            die Note eingeht.
+        </p>
+
+        <h5>Materialien in Moodle</h5>
+        <p>
+            Der hier abgebildete Screenshot zeigt den Moodleraum dieser
+            Vorlesung. Neben ein paar allgemeinen Informationen zur
+            Vorlesungsplanung oder Ankündigungen (Mitteilungen an den Kurs)
+            gibt es hier je Kapitel einen eigenen Bereich, der durch eine
+            der Kacheln aufgerufen wird. Innerhalb der Kacheln gibt es dann
+            für jedes Selbststudium und jede Vorlesungsstunde eine entsprechende
+            Überschrift mit den dazugehörigen Materialien. Über ein kleines
+            Häkchen am rechten Bildschirmrand können die Materialien dann
+            als Bearbeitet gekennzeichnet werden, um die Fortschrittsanzeige
+            zu aktualisieren.
+        </p>
+
+        <h5>Elektronische Anwesenheitsliste</h5>
+        <p>
+            Eine Besonderheit ist hier die elektronische Anwesenheitsliste
+            in Moodle. Nachdem Corona leider immer noch ein Thema ist, ist
+            es sicher keine gute Idee, jede Vorlesung einen Laufzettel durch
+            alle Hände gehen zu lassen. Bei Onlineterminen funktioniert das
+            darüber hinaus auch gar nicht. Die Anwesenheitsliste wird daher
+            in Moodle geführt, wobei jede*r Teilnehmer*in sich am Anfang einer
+            Stunde selbst einträgt. Dies ist nur während dem jeweiligen Termin
+            möglich und erfordert ein Passwort, dass am Anfang der Stunde
+            bekannt gegeben wird.
+        </p>
+
+        <h5>Selbststudium</h5>
+        <p>
+            Unter dieser Überschrift befindet sich immer eine
+            komplette Selbststudiumseinheit bestehend aus folgenden
+            Materialien:
+        </p>
+        <ol>
+            <li>
+                Vorwissensabfrage
+            </li>
+            <li>
+                Onlineskript
+            </li>
+            <li>
+                Rückfragen zum Onlineskript
+            </li>
+            <li>
+                Lernkontrolle
+            </li>
+            <li>
+                Ergänzende Quellcodes
+            </li>
+        </ol>
+
+        <h5>Vorlesung</h5>
+        <p>
+            Hier finden sich dann alle Quellcodes, Beispiele und Aufgaben,
+            die wir gemeinsam in den Präsenzterminen besprechen.
+        </p> -->
+    </aside>
+</section>
+
+<section data-title="Prüfungsaufgabe">
+    <article>
+        <lsx-tab-pages>
+            <lsx-tab-page title="Allgemeines">
+                <p style="margin-bottom: 1em">
+                    <b>Zuerst die gute Nachricht:</b> Es gibt keine Klausur. 🎉 <br />
+                    <b>Dann die Ernüchterung:</b> Trotzdem gibt es eine Note. 🤔
+                </p>
+                <ul>
+                    <li>
+                        Gemäß Studienordnung gibt es eine Portfolioprüfung über „Webprogrammierung“ und „Verteilte Systeme“.
+                    </li>
+                    <li>
+                        Diese beinhaltet über jedes Semester eine Reihe von online zu erbringender Lernkontrollen,
+                    </li>
+                    <li>
+                        sowie hauptsächlich die Lösungen zu einer großen, semesterbegleitenden Aufgabenstellung.
+                    </li>
+                </ul>
+
+                <h2>Zusammensetzung des Portfolios</h2>
+                <table class="dhbw-table-border" style="width: 100%; margin-bottom: 1em; font-size: 90%;">
+                    <thead>
+                        <tr>
+                            <th>Semester</th>
+                            <th>Portfolioanteil</th>
+                            <th>Abgabefrist</th>
+                            <th>Gewichtung</th>
+                        </tr>
+                    </thead>
+
+                    <!-- Drittes Semester -->
+                    <tr style="background-color: #eaeaea;">
+                        <td>3</td>
+                        <td><b>Lernkontrollen in Moodle</b></td>
+                        <td>Nach der ersten Vorlesung eines Kapitels</td>
+                        <td>2</td>
+                    </tr>
+                    <tr style="background-color: #eaeaea;">
+                        <td>3</td>
+                        <td><b>Programmierprojekt</b></td>
+                        <td>Vor Beginn der Klausurphase</td>
+                        <td>4</td>
+                    </tr>
+
+                    <!-- Viertes Semester -->
+                    <tr style="background-color: white;">
+                        <td>4</td>
+                        <td><b>Lernkontrollen in Moodle</b></td>
+                        <td>Nach der ersten Vorlesung eines Kapitels</td>
+                        <td>1</td>
+                    </tr>
+                    <tr style="background-color: white;">
+                        <td>4</td>
+                        <td><b>Learning Scrum</b></td>
+                        <td>Vor Beginn der Klausurphase</td>
+                        <td>3</td>
+                    </tr>
+                </table>
+
+                <lsx-info-box>
+                    Jeder in der Tabelle genannte Prüfungsanteil wird mit einer Punktzahl bewertet,
+                    die in Prozent umgerechnet wird. Anhand der Teilprozente wird dann ein gewichteter
+                    Mittelwert gebildet, um die Note zu ermitteln.
+                </lsx-info-box>
+            </lsx-tab-page>
+
+            <lsx-tab-page title="Unterlagen in Moodle">
+                <img src="01-intro/pf-moodle.png" class="img-fluid img-thumbnail mx-auto d-block" />
+            </lsx-tab-page>
+
+            <lsx-tab-page title="Aufgabenblatt">
+                <div class="d-flex w-100" style="gap: 0.5em;">
+                    <div class="flex-grow-1 flex-shrink-1">
+                        <img src="01-intro/pf-blatt1.png" class="img-thumbnail d-block w-100" />
+                    </div>
+                    <div class="flex-grow-1 flex-shrink-1">
+                        <img src="01-intro/pf-blatt2.png" class="img-thumbnail d-block w-100" />
+                    </div>
+                </div>
+            </lsx-tab-page>
+        </lsx-tab-pages>
+    </article>
+    <aside>
+        <h2>Inhalt des Prüfungsportfolios</h2>
+        <p>
+            Die gute Nachricht zuerst: Wir schreiben keine Klausur. 🎉
+            Stattdessen sieht das Modulhandbuch eine Portfolioprüfung
+            für Webprogrammierung und Verteilte Systeme vor. Auf diese Weise
+            sollen die Vorlesungsinhalte besser und auch praxisnäher geprüft
+            werden, als dies bei einer Klausur möglich wäre. Die Noten fallen
+            erfahrungsgemäß auch besser aus.
+        </p>
+        <p>
+            Der Zeitaufwand ist vergleichbar wie bei einer Klausur, für die
+            im Vorfeld meistens ja auch umfangreich gelernt werden muss.
+            Die Bearbeitung der Portfolioaufgaben dauert in etwa genauso lange.
+            Der Vorteil ist allerdings, dass man kontinuierlich und wesentlich
+            zielgerichteter lernt. Anstatt „auf Verdacht hin“ alles auswendig zu
+            lernen, lernt man genau das, was man wirklich benötigt oder einen
+            interessiert. Durch die Aufgabenstellung gibt es dabei auch immer
+            einen praktischen Bezug.
+        </p>
+        <p>
+            Unser Prüfungsportolio setzt sich daher aus folgenden Teilen zusammen:
+        </p>
+        <ul>
+            <li>
+                <b>Lernkontrollen in Moodle</b> prüfen das unmittelbar Gelernte nach
+                den jeweiligen Selbststudiumseinheiten. Sie weisen nach, dass das
+                Selbststudium bearbeitet wurde und die wesentlichen Inhalte daraus
+                bekannt sind.
+            </li>
+            <li>
+                <b>Ein Programmierprojekt</b> im dritten Semester dient der praktischen
+                Anwendung der Vorlesungsinhalte, in dem jede*r Studierende*r eine eigen
+                Webanwendung entwirft, umsetzt und (kurz) präsentiert.
+            </li>
+            <li>
+                Im vierten Semester kommt hierzu ein <b>Learning Scrum</b> genanntes
+                Format, bei dem sich die Studierende in kleine Gruppen zusammenschließen,
+                um ein selbstgewähltes Thema selbst zu erarbeiten.
+            </li>
+        </ul>
+        <p>
+            Im Gegensatz zu den meisten Klausuren gibt es daher keine eindeutige
+            Musterlösung. Die Aufgaben sind bewusst so gestellt, dass unterschiedliche
+            Lösungsansätze möglich und erwünscht sind.
+        </p>
+
+        <h2>Berechnung der Note</h2>
+        <p>
+            Ähnlich wie in den meisten anderen Modulen gibt es für das Modul
+            „Entwicklung verteilter Systeme“ eine Modulnote im vierten Semester.
+            Der Portfolioanteil des dritten Semesters erhält keine eigene Note,
+            sondern wird mit dem vierten Semester verrechnet. Die Studienordnung
+            schreibt dabei vor, dass die beiden Vorlesungen entsprechend ihrer
+            Anzahl Vorlesungsstunden in die Note einfließen müssen. Konkret
+            bedeutet das, dass das dritte Semester zu 60% und das vierte Semester
+            zu 40% die Note bilden.
+        </p>
+        <p>
+            Zur Berechnung der Note werden werden Portfolioartefakte einzeln
+            mit Punkten bewertet. Aus diesen ergibt sich eine Prozentzahl,
+            wie viele Punkte tatsächlich erreicht wurden. Die Prozentzahlen
+            werden dann einfach in einem gewichteten Durschnitt miteinander
+            verrechnet. Anhand der Notenskala der DHBW ergibt sich daraus
+            die eigentliche Note.
+        </p>
+    </aside>
+</section>
+
+<section data-title="Benötigte Software">
+    <article>
+        <lsx-tab-pages>
+            <lsx-tab-page title="Visual Studio Code">
+                <lsx-grid-fluid>
+                    <lsx-row class="mb-0">
+                        <lsx-col size="md">
+                            <h2>Entwicklungsumgebung: Visual Studio Code</h2>
+                            <p>
+                                Da der Atom-Editor nicht mehr weiterentwickelt wird. 🙁
+                            </p>
+                        </lsx-col>
+                    </lsx-row>
+
+                    <lsx-row>
+                        <lsx-col size="md">
+                            <img src="01-intro/vscode-screenshot.png" class="img-thumbnail d-block" style="width: 100%; height: 100%;" />
+                        </lsx-col>
+                        <lsx-col size="md">
+                            <!-- <lsx-youtube class="img-thumbnail embed-responsive" video="KMxo3T_MTvY"></lsx-youtube> -->
+                            <div class="img-thumbnail embed-responsive" style="width: 100%; height: 100%;">
+                                <iframe class="d-block" style="width: 100%; height: 100%;" src="https://www.youtube-nocookie.com/embed/KMxo3T_MTvY?rel=0&amp;showinfo=0" allowfullscreen></iframe>
+                            </div>
+                        </lsx-col>
+                    </lsx-row>
+
+                    <lsx-row>
+                        <lsx-col size="md">
+                            <ul>
+                                <li>
+                                    Weit verbreitete IDE für alle gängigen Betriebssysteme
+                                </li>
+                                <li>
+                                    Geschrieben in HTML und JavaScript (basierend auf der Chrome Webengine)
+                                </li>
+                                <li>
+                                    Open-Source von Microsoft (Made in Switzerland)
+                                </li>
+                            </ul>
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
+            </lsx-tab-page>
+
+            <lsx-tab-page title="node.js">
+                <lsx-grid-fluid>
+                    <lsx-row class="mb-0">
+                        <lsx-col size="md">
+                            <h2>Serversprache und Werkzeugsammlung: node.js</h2>
+                        </lsx-col>
+                    </lsx-row>
+
+                    <lsx-row>
+                        <lsx-col size="md">
+                            <img src="01-intro/node.js-logo.svg" class="img-thumbnail d-block" style="width: 100%; height: 100%;" />
+                        </lsx-col>
+                        <lsx-col size="md">
+                            <img src="01-intro/node.js-screenshot.png" class="img-thumbnail d-block" style="width: 100%; height: 100%;" />
+                        </lsx-col>
+                    </lsx-row>
+
+                    <lsx-row>
+                        <lsx-col size="md">
+                            <ul>
+                                <li>
+                                    Beinhaltet den Node Package Manager zur einfachen Installation aller für ein Projekt benötigten Bibliotheken
+                                </li>
+                                <li>
+                                    Liefert uns alle Build- und Testwerkzeuge, die wir während der Entwicklung benötigen
+                                </li>
+                                <li>
+                                    Beinhaltet eine komplette JavaScript-Laufzeitumgebung für die serverseitige Programmierung
+                                </li>
+                            </ul>
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
+            </lsx-tab-page>
+        </lsx-tab-pages>
+    </article>
+    <aside>
+        <p>
+            Ein Handwerker braucht zum Arbeiten sein Werkzeug. Das ist
+            beim Programmieren natürlich nicht anders. Und genau wie beim
+            Handwerkszeug gibt es eine geradezu unendliche Auswahl an
+            Editoren, Frameworks, Datenbanken und Servern, die man zur
+            Entwicklung seiner Anwendungen nutzen kann. In der Vorlesung
+            haben wir uns daher auf folgende Werkzeuge festgelegt.
+        </p>
+
+        <h5>Visual Studio Code</h5>
+        <p>
+            Visual Studio Code hat sich in den letzten Jahren zu einer der
+            beliebtesten und flexibelsten IDEs überhaupt entwickelt. Im
+            Gegensatz zu klassischen IDEs wit Eclipse, NetBeans oder dem
+            großen Bruder Visual Studio, ist Visual Studio Code im Kern
+            jedoch äußert kompakt und dank der durchgängigen Verwendung
+            Technologien leicht anpass- und erweiterbar.
+        </p>
+        <p>
+            <a href="https://code.visualstudio.com/" target="_blank">https://code.visualstudio.com/</a>
+        </p>
+
+        <h5>node.js und npm</h5>
+        <p>
+            Leider werden wir uns nicht sehr ausführlich mit node.js
+            beschäftigen, auch wenn das wirklich lohnenswert wäre.
+            Gegen Ende der Vorlesung wollen wir uns jedoch ein wenig
+            damit beschäftigen und da macht es natürlich Sinn, sich
+            auch die Serverseite unter JavaScript anzuschauen. node.js
+            ist hier eine stabile und weit verbreitete Laufzeitumgebung
+            für JavaScript außerhalb des Browsers. Außerdem enthält es
+            den <b>node package manager</b>, mit dem wir uns allerlei
+            nützliche Bibliotheken und Werkzeuge leicht installieren
+            können.
+        </p>
+        <p>
+            <a href="https://nodejs.org/" target="_blank">https://nodejs.org/</a>
+        </p>
+    </aside>
+</section>
+
+<section data-title="#Ablauf der Vorlesung">
     <article class="centered-content">
         <div class="d-flex align-items-stretch" style="gap: 1em;">
             <div class="card">
@@ -183,84 +675,6 @@
                         Zusätzlich bietet sich ein Programm zum Testen von HTTP-Aufrufen
                         wie <a href="https://www.postman.com/downloads/?utm_source=postman-home" target="_blank">Postman</a> an.
                     </div>
-                </div>
-            </div>
-        </div>
-    </article>
-</section>
-
-<section data-title="Prüfungsaufgabe" class="limited-width">
-    <article class="centered-content">
-        <div>
-            <div class="card mb-3">
-                <div class="card-header fw-bold">
-                    Rahmenbedingungen
-                </div>
-                <div class="card-body markdown">
-                    * **Aufgabe 1:** Architekturentwurf als Einzelleistung
-                    * **Aufgabe 2:** Programmierprojekt als Gruppenarbeit
-                    * Getrennte Abgabe beider Teile während dem Semester
-                    * Eigenverantwortliche Bearbeitung parallel zur Vorlesung
-                </div>
-            </div>
-        
-            <div class="card">
-                <div class="card-header fw-bold">
-                    Portfoliozusammensetzung
-                </div>
-                <div class="card-body">
-                    <table class="dhbw-table-border" style="width: 100%; margin-bottom: 1em; font-size: 90%;">
-                        <thead>
-                            <tr>
-                                <th>Semester</th>
-                                <th>I/G</th>
-                                <th>Artefakt</th>
-                                <th>Schwierigkeit</th>
-                                <th>Abgabefrist</th>
-                                <th>Gewichtung</th>
-                            </tr>
-                        </thead>
-            
-                        <!-- Drittes Semester -->
-                        <tr style="background-color: #eaeaea;">
-                            <td>3</td>
-                            <td>I</td>
-                            <td><b>Lernkontrollen zu „Webprogrammierung”</b></td>
-                            <td>Erinnern, Verstehen</td>
-                            <td>Vor der jeweiligen Vorlesung</td>
-                            <td>2</td>
-                        </tr>
-                        <tr style="background-color: #eaeaea;">
-                            <td>3</td>
-                            <td>I</td>
-                            <td><b>Vertiefende Aufgaben zu den einzelnen Kapiteln</b></td>
-                            <td>Anwenden, Analysieren, Beurteilen</td>
-                            <td>Ende des dritten Semesters</td>
-                            <td>4</td>
-                        </tr>
-            
-                        <!-- Viertes Semester -->
-                        <tr>
-                            <td>4</td>
-                            <td>I</td>
-                            <td><b>Architekturentwurf</b></td>
-                            <td>Anwenden, Analysieren, Beurteilen</td>
-                            <td>Mitte des vierten Semesters</td>
-                            <td>1</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>G</td>
-                            <td><b>Programmierprojekt</b></td>
-                            <td>Verstehen, Anwenden, Analysieren, Beurteilen</td>
-                            <td>Vor Beginn der Klausurphase</td>
-                            <td>3</td>
-                        </tr>
-                    </table>
-                    <p>
-                        <b>I/G:</b> Individualleistung oder Gruppenleistung <br />
-                        <b>Schwierigkeit:</b> Erinnern &lt; Verstehen &lt; Anwenden &lt; Analysieren &lt; Beurteilen
-                    </p>
                 </div>
             </div>
         </div>
