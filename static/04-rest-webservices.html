@@ -2287,426 +2287,492 @@
     </article>
 </section>
 
-<section data-title="Fallbeispiel Adressbuch: Datenmodell">
-    <article class="centered-content">
-        <div class="limited-width">
-            <div class="markdown">
-                Auf den folgenden Seiten soll die Entwicklung des Adressbuch-Beispiels aus den Vorlesungsquellcodes
-                gezeigt werden. Da das Beispiel dem **Contract First** Ansatz folgt, wird im ersten Schritt zunächst
-                das Datenmodell, bestehend aus den fachlichen Daten sowie einer einfachen Umsetzung dem HATEOAS-Prinzips,
-                definiert.
-            </div>
-        
-            <lsx-accordion>
-                <lsx-accordion-page title="Adressbucheinträge">
-                    <p class="mb-0">
-                        Der Webservice verwaltet als einzige Ressource Adressen, welche
-                        die Einträge des Adressbuchs darstellen. Jede Adresse besteht aus
-                        einem Vornamen, Nachnamen, einer E-Mailadresse und Telefonnummer.
-                        Darüber hinaus besitzt sie eine eindeutige ID sowie Verlinkungen
-                        gemäß dem HATEOAS-Prinzip.
-                    </p>
-                    <lsx-tab-pages>
-                        <lsx-tab-page title="Schema">
-                            <table class="table table-sm table-light table-hover w-100 caption-top">
-                                <caption>
-                                    <code>Address</code>
-                                    <span class="float-end">Adressbucheintrag</span>
-                                </caption>
-                                <thead>
-                                    <tr>
-                                        <th>Feld</th>
-                                        <th>Datentyp</th>
-                                        <th>Beschreibung</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><code>_links</code></td>
-                                        <td>HATEOAS_Resource</td>
-                                        <td>HATEOAS-Verlinkungen</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code>_id</code></td>
-                                        <td>String</td>
-                                        <td>Eindeutiger Schlüsselwert</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code>first_name</code></td>
-                                        <td>String</td>
-                                        <td>Vorname</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code>last_name</code></td>
-                                        <td>String</td>
-                                        <td>Nachname</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code>phone</code></td>
-                                        <td>String</td>
-                                        <td>Telefonnummer</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code>email</code></td>
-                                        <td>String</td>
-                                        <td>E-Mailadresse</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </lsx-tab-page>
-                        <lsx-tab-page title="Beispiel">
-                            <source-code language="json">
-                                {
-                                    "_links": {
-                                        …
-                                    }
-                                    "_id": "621ff9a936997df5baba746e",
-                                    "first_name": "Fox",
-                                    "last_name": "Mulder",
-                                    "email": "mulder@xfiles.com",
-                                    "phone": "+49 721 553181"
-                                }
-                            </source-code>
-                        </lsx-tab-page>
-                    </lsx-tab-pages>
-                </lsx-accordion-page>
-        
-                <lsx-accordion-page title="HATEOAS-Verlinkungen">
-                    <p class="mb-0">
-                        Die Startadresse des Webservices soll eine Übersicht mit allen
-                        Collections liefern, wobei zu jeder Collection die URLs, HTTP-Verben
-                        und URL-Parameter zum Durchsuchen der Collections und zur Anlage neuer
-                        Einträge mitgeteilt werden sollen.
-                    </p>
-                    <lsx-tab-pages>
-                        <lsx-tab-page title="Schema">
-                            <table class="table table-sm table-light table-hover w-100 caption-top">
-                                <caption>
-                                    <code>HATEOAS_Collection</code>
-                                    <span class="float-end">Beschreibung einer einzelnen Collection</span>
-                                </caption>
-                                <thead>
-                                    <tr>
-                                        <th>Feld</th>
-                                        <th>Datentyp</th>
-                                        <th>Beschreibung</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><code>_name</code></td>
-                                        <td>String</td>
-                                        <td>Name der Collection</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code>query</code></td>
-                                        <td>HATEOAS_Link</td>
-                                        <td>Link zum Durchsuchen der Collection</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code>create</code></td>
-                                        <td>HATEOAS_Link</td>
-                                        <td>Link zur Anlage neuer Einträge</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-        
-                            <table class="table table-sm table-light table-hover w-100 caption-top">
-                                <caption>
-                                    <code>HATEOAS_Link</code>
-                                    <span class="float-end">Details zu einem Link</span>
-                                </caption>
-                                <thead>
-                                    <tr>
-                                        <th>Feld</th>
-                                        <th>Datentyp</th>
-                                        <th>Beschreibung</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><code>url</code></td>
-                                        <td>String</td>
-                                        <td>URL-Pfad relativ zur Startadresse des Webservices</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code>method</code></td>
-                                        <td>String</td>
-                                        <td>Zu verwendende HTTP-Methode (z.B. GET oder POST)</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code>query_params</code></td>
-                                        <td>Array[String]</td>
-                                        <td>
-                                            <p class="mb-0">
-                                                Namen aller erlaubten URL-Parameter
-                                            </p>
-                                            <p class="text-secondary">
-                                                <small>
-                                                    Der Einfachheit halber ohne weitere Details,
-                                                    wie z.B. dem Datentyp der Parameter oder welche Parameter optional sind. Es wird
-                                                    davon ausgeganen, dass es keine Pflichtparameter gibt und der Aufrufer weiß, in
-                                                    welchem Format die Werte übergeben werden müssen.
-                                                </small>
-                                            </p>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </lsx-tab-page>
-                        <lsx-tab-page title="Beispiel">
-                            <source-code language="json">
-                                [
+<section data-title="Fallbeispiel Adressbuch">
+    <section data-title="Datenmodell">
+        <article class="centered-content">
+            <div class="limited-width">
+                <div class="markdown">
+                    Auf den folgenden Seiten soll die Entwicklung des Adressbuch-Beispiels aus den Vorlesungsquellcodes
+                    gezeigt werden. Da das Beispiel dem **Contract First** Ansatz folgt, wird im ersten Schritt zunächst
+                    das Datenmodell, bestehend aus den fachlichen Daten sowie einer einfachen Umsetzung dem HATEOAS-Prinzips,
+                    definiert.
+                </div>
+            
+                <lsx-accordion>
+                    <lsx-accordion-page title="Adressbucheinträge">
+                        <p class="mb-0">
+                            Der Webservice verwaltet als einzige Ressource Adressen, welche
+                            die Einträge des Adressbuchs darstellen. Jede Adresse besteht aus
+                            einem Vornamen, Nachnamen, einer E-Mailadresse und Telefonnummer.
+                            Darüber hinaus besitzt sie eine eindeutige ID sowie Verlinkungen
+                            gemäß dem HATEOAS-Prinzip.
+                        </p>
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Schema">
+                                <table class="table table-sm table-light table-hover w-100 caption-top">
+                                    <caption>
+                                        <code>Address</code>
+                                        <span class="float-end">Adressbucheintrag</span>
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th>Feld</th>
+                                            <th>Datentyp</th>
+                                            <th>Beschreibung</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>_links</code></td>
+                                            <td>HATEOAS_Resource</td>
+                                            <td>HATEOAS-Verlinkungen</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>_id</code></td>
+                                            <td>String</td>
+                                            <td>Eindeutiger Schlüsselwert</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>first_name</code></td>
+                                            <td>String</td>
+                                            <td>Vorname</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>last_name</code></td>
+                                            <td>String</td>
+                                            <td>Nachname</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>phone</code></td>
+                                            <td>String</td>
+                                            <td>Telefonnummer</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>email</code></td>
+                                            <td>String</td>
+                                            <td>E-Mailadresse</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </lsx-tab-page>
+                            <lsx-tab-page title="Beispiel">
+                                <source-code language="json">
                                     {
-                                        "_name": "address",
-                                        "query": {
-                                            "url": "/address",
-                                            "method": "GET",
-                                            "query_params": ["search", "first_name", "last_name", "phone", "email"]
-                                        },
-                                        "create": {
-                                            "url": "/address",
-                                            "method": "POST",
+                                        "_links": {
+                                            …
                                         }
+                                        "_id": "621ff9a936997df5baba746e",
+                                        "first_name": "Fox",
+                                        "last_name": "Mulder",
+                                        "email": "mulder@xfiles.com",
+                                        "phone": "+49 721 553181"
                                     }
-                                ]
-                            </source-code>
-                        </lsx-tab-page>
-                    </lsx-tab-pages>
-        
-                    <p class="mb-0">
-                        Jede Ressource des Webserivces (hier also jeder Adressbucheintrag) soll
-                        darüber hinaus alle notwendigen Informationen liefern, damit ein Client
-                        weiß, wie er die Ressource lesen, ändern und löschen kann.
-                    </p>
-                    <lsx-tab-pages>
-                        <lsx-tab-page title="Schema">
-                            <table class="table table-sm table-light table-hover w-100 caption-top">
-                                <caption>
-                                    <code>HATEOAS_Resource</code>
-                                    <span class="float-end">Links zu einer einzelnen Ressource</span>
-                                </caption>
-                                <thead>
-                                    <tr>
-                                        <th>Feld</th>
-                                        <th>Datentyp</th>
-                                        <th>Beschreibung</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><code>read</code></td>
-                                        <td>HATEOAS_Link</td>
-                                        <td>Link zum Lesen der Ressource</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code>update</code></td>
-                                        <td>HATEOAS_Link</td>
-                                        <td>Link zum Überschreiben der Ressource</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code>patch</code></td>
-                                        <td>HATEOAS_Link</td>
-                                        <td>Link zum Ändern einzelner Felder der Ressource</td>
-                                    </tr>
-                                    <tr>
-                                        <td><code>delete</code></td>
-                                        <td>HATEOAS_Link</td>
-                                        <td>Link zum Löschen der Ressource</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </lsx-tab-page>
-                        <lsx-tab-page title="Beispiel">
-                            <source-code language="json">
-                                {
-                                    "_id": "621ff9a936997df5baba746e",
-                                    "first_name": "Fox",
-                                    "last_name": "Mulder",
-                                    …
-        
-                                    "_links": {
-                                        "read": {
-                                            "url": "/address/621ff9a936997df5baba746e",
-                                            "method": "GET",
+                                </source-code>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+                    </lsx-accordion-page>
+            
+                    <lsx-accordion-page title="HATEOAS-Verlinkungen">
+                        <p class="mb-0">
+                            Die Startadresse des Webservices soll eine Übersicht mit allen
+                            Collections liefern, wobei zu jeder Collection die URLs, HTTP-Verben
+                            und URL-Parameter zum Durchsuchen der Collections und zur Anlage neuer
+                            Einträge mitgeteilt werden sollen.
+                        </p>
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Schema">
+                                <table class="table table-sm table-light table-hover w-100 caption-top">
+                                    <caption>
+                                        <code>HATEOAS_Collection</code>
+                                        <span class="float-end">Beschreibung einer einzelnen Collection</span>
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th>Feld</th>
+                                            <th>Datentyp</th>
+                                            <th>Beschreibung</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>_name</code></td>
+                                            <td>String</td>
+                                            <td>Name der Collection</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>query</code></td>
+                                            <td>HATEOAS_Link</td>
+                                            <td>Link zum Durchsuchen der Collection</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>create</code></td>
+                                            <td>HATEOAS_Link</td>
+                                            <td>Link zur Anlage neuer Einträge</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+            
+                                <table class="table table-sm table-light table-hover w-100 caption-top">
+                                    <caption>
+                                        <code>HATEOAS_Link</code>
+                                        <span class="float-end">Details zu einem Link</span>
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th>Feld</th>
+                                            <th>Datentyp</th>
+                                            <th>Beschreibung</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>url</code></td>
+                                            <td>String</td>
+                                            <td>URL-Pfad relativ zur Startadresse des Webservices</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>method</code></td>
+                                            <td>String</td>
+                                            <td>Zu verwendende HTTP-Methode (z.B. GET oder POST)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>query_params</code></td>
+                                            <td>Array[String]</td>
+                                            <td>
+                                                <p class="mb-0">
+                                                    Namen aller erlaubten URL-Parameter
+                                                </p>
+                                                <p class="text-secondary">
+                                                    <small>
+                                                        Der Einfachheit halber ohne weitere Details,
+                                                        wie z.B. dem Datentyp der Parameter oder welche Parameter optional sind. Es wird
+                                                        davon ausgeganen, dass es keine Pflichtparameter gibt und der Aufrufer weiß, in
+                                                        welchem Format die Werte übergeben werden müssen.
+                                                    </small>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </lsx-tab-page>
+                            <lsx-tab-page title="Beispiel">
+                                <source-code language="json">
+                                    [
+                                        {
+                                            "_name": "address",
+                                            "query": {
+                                                "url": "/address",
+                                                "method": "GET",
+                                                "query_params": ["search", "first_name", "last_name", "phone", "email"]
+                                            },
+                                            "create": {
+                                                "url": "/address",
+                                                "method": "POST",
+                                            }
+                                        }
+                                    ]
+                                </source-code>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+            
+                        <p class="mb-0">
+                            Jede Ressource des Webserivces (hier also jeder Adressbucheintrag) soll
+                            darüber hinaus alle notwendigen Informationen liefern, damit ein Client
+                            weiß, wie er die Ressource lesen, ändern und löschen kann.
+                        </p>
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Schema">
+                                <table class="table table-sm table-light table-hover w-100 caption-top">
+                                    <caption>
+                                        <code>HATEOAS_Resource</code>
+                                        <span class="float-end">Links zu einer einzelnen Ressource</span>
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th>Feld</th>
+                                            <th>Datentyp</th>
+                                            <th>Beschreibung</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>read</code></td>
+                                            <td>HATEOAS_Link</td>
+                                            <td>Link zum Lesen der Ressource</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>update</code></td>
+                                            <td>HATEOAS_Link</td>
+                                            <td>Link zum Überschreiben der Ressource</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>patch</code></td>
+                                            <td>HATEOAS_Link</td>
+                                            <td>Link zum Ändern einzelner Felder der Ressource</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>delete</code></td>
+                                            <td>HATEOAS_Link</td>
+                                            <td>Link zum Löschen der Ressource</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </lsx-tab-page>
+                            <lsx-tab-page title="Beispiel">
+                                <source-code language="json">
+                                    {
+                                        "_id": "621ff9a936997df5baba746e",
+                                        "first_name": "Fox",
+                                        "last_name": "Mulder",
+                                        …
+            
+                                        "_links": {
+                                            "read": {
+                                                "url": "/address/621ff9a936997df5baba746e",
+                                                "method": "GET",
+                                            },
+                                            "update": {
+                                                "url": "/address/621ff9a936997df5baba746e",
+                                                "method": "PUT",
+                                            },
+                                            "patch": {
+                                                "url": "/address/621ff9a936997df5baba746e",
+                                                "method": "PATCH",
+                                            },
+                                            "delete": {
+                                                "url": "/address/621ff9a936997df5baba746e",
+                                                "method": "DELETE",
+                                            },
                                         },
-                                        "update": {
-                                            "url": "/address/621ff9a936997df5baba746e",
-                                            "method": "PUT",
-                                        },
-                                        "patch": {
-                                            "url": "/address/621ff9a936997df5baba746e",
-                                            "method": "PATCH",
-                                        },
-                                        "delete": {
-                                            "url": "/address/621ff9a936997df5baba746e",
-                                            "method": "DELETE",
-                                        },
-                                    },
-                                }
-                            </source-code>
-                        </lsx-tab-page>
-                    </lsx-tab-pages>
-                </lsx-accordion-page>
-            </lsx-accordion>
-        </div>
-    </article>
-</section>
-
-<section data-title="Fallbeispiel Adressbuch: URL-Endpunkte und HTTP-Nachrichten">
-    <article class="centered-content">
-        <div class="limited-width">
-            <div class="markdown">
-                Anhand der Schemadefinitionen des Datenmodells können nun die URLs des
-                Webservices definiert werden. Zu jeder URL müssen dann die erlaubten
-                HTTP-Verben und zu jedem Verb der Aufbau der HTTP-Anfrage und der
-                HTTP-Antwort definiert werden.
+                                    }
+                                </source-code>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+                    </lsx-accordion-page>
+                </lsx-accordion>
             </div>
-        
-            <lsx-tab-pages>
-                <lsx-tab-page title="/">
-                    <p>
-                        Die Wurzeladresse des Webservices liefert lediglich eine Übersicht
-                        aller Collections mit ihren wichtigsten URLs als Einstieg für
-                        HATEOAS-fähige Clients.
-                    </p>
-        
-                    <lsx-accordion>
-                        <lsx-accordion-page>
-                            <lsx-accordion-title>
-                                <b><code>GET</code>:</b> &nbsp;
-                                HATEOAS-Übersicht abrufen
-                            </lsx-accordion-title>
-                            <lsx-accordion-content>
-                                <lsx-tab-pages>
-                                    <lsx-tab-page title="Statuscodes">
-                                        <table class="table table-sm table-light table-hover w-100 caption-top">
-                                            <thead>
+        </article>
+    </section>
+    
+    <section data-title="URL-Endpunkte und HTTP-Nachrichten">
+        <article class="centered-content">
+            <div class="limited-width">
+                <div class="markdown">
+                    Anhand der Schemadefinitionen des Datenmodells können nun die URLs des
+                    Webservices definiert werden. Zu jeder URL müssen dann die erlaubten
+                    HTTP-Verben und zu jedem Verb der Aufbau der HTTP-Anfrage und der
+                    HTTP-Antwort definiert werden.
+                </div>
+            
+                <lsx-tab-pages>
+                    <lsx-tab-page title="/">
+                        <p>
+                            Die Wurzeladresse des Webservices liefert lediglich eine Übersicht
+                            aller Collections mit ihren wichtigsten URLs als Einstieg für
+                            HATEOAS-fähige Clients.
+                        </p>
+            
+                        <lsx-accordion>
+                            <lsx-accordion-page>
+                                <lsx-accordion-title>
+                                    <b><code>GET</code>:</b> &nbsp;
+                                    HATEOAS-Übersicht abrufen
+                                </lsx-accordion-title>
+                                <lsx-accordion-content>
+                                    <lsx-tab-pages>
+                                        <lsx-tab-page title="Statuscodes">
+                                            <table class="table table-sm table-light table-hover w-100 caption-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Statuscode</th>
+                                                        <th>Response Body</th>
+                                                    </tr>
+                                                </thead>
                                                 <tr>
-                                                    <th>Statuscode</th>
-                                                    <th>Response Body</th>
+                                                    <td>200 Ok</td>
+                                                    <td>Array[HATEOAS_Collection]</td>
                                                 </tr>
-                                            </thead>
-                                            <tr>
-                                                <td>200 Ok</td>
-                                                <td>Array[HATEOAS_Collection]</td>
-                                            </tr>
-                                        </table>
-                                    </lsx-tab-page>
-        
-                                    <lsx-tab-page title="Beispiel">
-                                        <h4 class="mt-4">HTTP-Anfrage</h4>
-                                        <source-code language="http">
-                                            GET / HTTP/1.1
-                                            Host: example.com
-                                            Accept: application/json
-                                        </source-code>
-        
-                                        <h4 class="mt-4">HTTP-Antwort</h4>
-                                        <source-code language="http">
-                                            HTTP/1.1 200 Ok
-                                            Content-Type: application/json; charset=utf-8
-                                        </source-code>
-                                        <source-code language="json">
-                                            [
-                                                {
-                                                    "_name": "address",
-                                                    "query": {
-                                                        "url": "/address",
-                                                        "method": "GET",
-                                                        "query_params": ["search", "first_name", "last_name", "phone", "email"]
-                                                    },
-                                                    "create": {
-                                                        "url": "/address",
-                                                        "method": "POST",
+                                            </table>
+                                        </lsx-tab-page>
+            
+                                        <lsx-tab-page title="Beispiel">
+                                            <h4 class="mt-4">HTTP-Anfrage</h4>
+                                            <source-code language="http">
+                                                GET / HTTP/1.1
+                                                Host: example.com
+                                                Accept: application/json
+                                            </source-code>
+            
+                                            <h4 class="mt-4">HTTP-Antwort</h4>
+                                            <source-code language="http">
+                                                HTTP/1.1 200 Ok
+                                                Content-Type: application/json; charset=utf-8
+                                            </source-code>
+                                            <source-code language="json">
+                                                [
+                                                    {
+                                                        "_name": "address",
+                                                        "query": {
+                                                            "url": "/address",
+                                                            "method": "GET",
+                                                            "query_params": ["search", "first_name", "last_name", "phone", "email"]
+                                                        },
+                                                        "create": {
+                                                            "url": "/address",
+                                                            "method": "POST",
+                                                        }
                                                     }
+                                                ]
+                                            </source-code>
+                                        </lsx-tab-page>
+                                    </lsx-tab-pages>
+                                <lsx-accordion-content>
+                            </lsx-accordion-page>
+                        </lsx-accordion>
+                    </lsx-tab-page>
+            
+                    <lsx-tab-page title="/address">
+                        <p>
+                            Da es sich hierbei um eine Collection handelt, kann diese mit einer
+                            <code>GET</code>-Anfrage durchsucht oder mit <code>POST</code> zur Anlage
+                            neuer Einträge verwendet werden.
+                        </p>
+            
+                        <lsx-accordion>
+                            <lsx-accordion-page>
+                                <lsx-accordion-title>
+                                    <b><code>GET</code>:</b> &nbsp;
+                                    Adressen suchen
+                                </lsx-accordion-title>
+                                <lsx-accordion-content>
+                                    <lsx-tab-pages>
+                                        <lsx-tab-page title="Query-Parameter">
+                                            <table class="table table-sm table-light table-hover w-100 caption-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Parameter</th>
+                                                        <th>Datentyp</th>
+                                                        <th>Beschreibung</th>
+                                                    </tr>
+                                                </thead>
+                                                <tr>
+                                                    <td><code>first_name</code></td>
+                                                    <td>String</td>
+                                                    <td>Gesuchter Vorname</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><code>last_name</code></td>
+                                                    <td>String</td>
+                                                    <td>Gesuchter Nachname</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><code>phone</code></td>
+                                                    <td>String</td>
+                                                    <td>Gesuchte Telefonnummer</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><code>email</code></td>
+                                                    <td>String</td>
+                                                    <td>Gesuchte E-Mailadresse</td>
+                                                </tr>
+                                            </table>
+                                        </lsx-tab-page>
+            
+                                        <lsx-tab-page title="Statuscodes">
+                                            <table class="table table-sm table-light table-hover w-100 caption-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Statuscode</th>
+                                                        <th>Response Body</th>
+                                                    </tr>
+                                                </thead>
+                                                <tr>
+                                                    <td>200 Ok</td>
+                                                    <td>Array[Address]</td>
+                                                </tr>
+                                            </table>
+                                        </lsx-tab-page>
+            
+                                        <lsx-tab-page title="Beispiel">
+                                            <h4 class="mt-4">HTTP-Anfrage</h4>
+                                            <source-code language="http">
+                                                GET /address?first_name=Fox HTTP/1.1
+                                                Host: example.com
+                                                Accept: application/json
+                                            </source-code>
+            
+                                            <h4 class="mt-4">HTTP-Antwort</h4>
+                                            <source-code language="http">
+                                                HTTP/1.1 200 Ok
+                                                Content-Type: application/json; charset=utf-8
+                                            </source-code>
+                                            <source-code language="json">
+                                                [
+                                                    {
+                                                        "_links": {
+                                                            …
+                                                        }
+                                                        "_id": "621ff9a936997df5baba746e",
+                                                        "first_name": "Fox",
+                                                        "last_name": "Mulder",
+                                                        "email": "mulder@xfiles.com",
+                                                        "phone": "+49 721 553181"
+                                                    }
+                                                ]
+                                            </source-code>
+                                        </lsx-tab-page>
+                                    </lsx-tab-pages>
+                                <lsx-accordion-content>
+                            </lsx-accordion-page>
+            
+                            <lsx-accordion-page>
+                                <lsx-accordion-title>
+                                    <b><code>POST</code>:</b> &nbsp;
+                                    Neue Adresse anlegen
+                                </lsx-accordion-title>
+                                <lsx-accordion-content>
+                                    <lsx-tab-pages>
+                                        <lsx-tab-page title="Request Body">
+                                            <code>Address</code>
+                                        </lsx-tab-page>
+            
+                                        <lsx-tab-page title="Statuscodes">
+                                            <table class="table table-sm table-light table-hover w-100 caption-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Statuscode</th>
+                                                        <th>Response Body</th>
+                                                    </tr>
+                                                </thead>
+                                                <tr>
+                                                    <td>201 Created</td>
+                                                    <td>Address</td>
+                                                </tr>
+                                            </table>
+                                        </lsx-tab-page>
+            
+                                        <lsx-tab-page title="Beispiel">
+                                            <h4 class="mt-4">HTTP-Anfrage</h4>
+                                            <source-code language="http">
+                                                POST /address HTTP/1.1
+                                                Host: example.com
+                                                Accept: application/json
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "first_name": "Fox",
+                                                    "last_name": "Mulder",
+                                                    "email": "mulder@xfiles.com",
+                                                    "phone": "+49 721 553181"
                                                 }
-                                            ]
-                                        </source-code>
-                                    </lsx-tab-page>
-                                </lsx-tab-pages>
-                            <lsx-accordion-content>
-                        </lsx-accordion-page>
-                    </lsx-accordion>
-                </lsx-tab-page>
-        
-                <lsx-tab-page title="/address">
-                    <p>
-                        Da es sich hierbei um eine Collection handelt, kann diese mit einer
-                        <code>GET</code>-Anfrage durchsucht oder mit <code>POST</code> zur Anlage
-                        neuer Einträge verwendet werden.
-                    </p>
-        
-                    <lsx-accordion>
-                        <lsx-accordion-page>
-                            <lsx-accordion-title>
-                                <b><code>GET</code>:</b> &nbsp;
-                                Adressen suchen
-                            </lsx-accordion-title>
-                            <lsx-accordion-content>
-                                <lsx-tab-pages>
-                                    <lsx-tab-page title="Query-Parameter">
-                                        <table class="table table-sm table-light table-hover w-100 caption-top">
-                                            <thead>
-                                                <tr>
-                                                    <th>Parameter</th>
-                                                    <th>Datentyp</th>
-                                                    <th>Beschreibung</th>
-                                                </tr>
-                                            </thead>
-                                            <tr>
-                                                <td><code>first_name</code></td>
-                                                <td>String</td>
-                                                <td>Gesuchter Vorname</td>
-                                            </tr>
-                                            <tr>
-                                                <td><code>last_name</code></td>
-                                                <td>String</td>
-                                                <td>Gesuchter Nachname</td>
-                                            </tr>
-                                            <tr>
-                                                <td><code>phone</code></td>
-                                                <td>String</td>
-                                                <td>Gesuchte Telefonnummer</td>
-                                            </tr>
-                                            <tr>
-                                                <td><code>email</code></td>
-                                                <td>String</td>
-                                                <td>Gesuchte E-Mailadresse</td>
-                                            </tr>
-                                        </table>
-                                    </lsx-tab-page>
-        
-                                    <lsx-tab-page title="Statuscodes">
-                                        <table class="table table-sm table-light table-hover w-100 caption-top">
-                                            <thead>
-                                                <tr>
-                                                    <th>Statuscode</th>
-                                                    <th>Response Body</th>
-                                                </tr>
-                                            </thead>
-                                            <tr>
-                                                <td>200 Ok</td>
-                                                <td>Array[Address]</td>
-                                            </tr>
-                                        </table>
-                                    </lsx-tab-page>
-        
-                                    <lsx-tab-page title="Beispiel">
-                                        <h4 class="mt-4">HTTP-Anfrage</h4>
-                                        <source-code language="http">
-                                            GET /address?first_name=Fox HTTP/1.1
-                                            Host: example.com
-                                            Accept: application/json
-                                        </source-code>
-        
-                                        <h4 class="mt-4">HTTP-Antwort</h4>
-                                        <source-code language="http">
-                                            HTTP/1.1 200 Ok
-                                            Content-Type: application/json; charset=utf-8
-                                        </source-code>
-                                        <source-code language="json">
-                                            [
+                                            </source-code>
+            
+                                            <h4 class="mt-4">HTTP-Antwort</h4>
+                                            <source-code language="http">
+                                                HTTP/1.1 201 Created
+                                                Content-Type: application/json; charset=utf-8
+                                            </source-code>
+                                            <source-code language="json">
                                                 {
                                                     "_links": {
                                                         …
@@ -2717,376 +2783,313 @@
                                                     "email": "mulder@xfiles.com",
                                                     "phone": "+49 721 553181"
                                                 }
-                                            ]
-                                        </source-code>
-                                    </lsx-tab-page>
-                                </lsx-tab-pages>
-                            <lsx-accordion-content>
-                        </lsx-accordion-page>
-        
-                        <lsx-accordion-page>
-                            <lsx-accordion-title>
-                                <b><code>POST</code>:</b> &nbsp;
-                                Neue Adresse anlegen
-                            </lsx-accordion-title>
-                            <lsx-accordion-content>
-                                <lsx-tab-pages>
-                                    <lsx-tab-page title="Request Body">
-                                        <code>Address</code>
-                                    </lsx-tab-page>
-        
-                                    <lsx-tab-page title="Statuscodes">
-                                        <table class="table table-sm table-light table-hover w-100 caption-top">
-                                            <thead>
+                                            </source-code>
+                                        </lsx-tab-page>
+                                    </lsx-tab-pages>
+                                <lsx-accordion-content>
+                            </lsx-accordion-page>
+                        </lsx-accordion>
+                    </lsx-tab-page>
+            
+                    <lsx-tab-page title="/address/{id}">
+                        <p>
+                            Gemäß den REST-Prinzipien besitzt jeder Adressbucheintrag besitzt eine eindeutige
+                            URL. Über diese kann er gelesen, überschrieben, geändert und gelöscht werden.
+                        </p>
+            
+                        <lsx-accordion>
+                            <lsx-accordion-page>
+                                <lsx-accordion-title>
+                                    <b><code>GET</code>:</b> &nbsp;
+                                    Adresse lesen
+                                </lsx-accordion-title>
+                                <lsx-accordion-content>
+                                    <lsx-tab-pages>
+                                        <lsx-tab-page title="Statuscodes">
+                                            <table class="table table-sm table-light table-hover w-100 caption-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Statuscode</th>
+                                                        <th>Response Body</th>
+                                                    </tr>
+                                                </thead>
                                                 <tr>
-                                                    <th>Statuscode</th>
-                                                    <th>Response Body</th>
+                                                    <td>200 Ok</td>
+                                                    <td>Address</td>
                                                 </tr>
-                                            </thead>
-                                            <tr>
-                                                <td>201 Created</td>
-                                                <td>Address</td>
-                                            </tr>
-                                        </table>
-                                    </lsx-tab-page>
-        
-                                    <lsx-tab-page title="Beispiel">
-                                        <h4 class="mt-4">HTTP-Anfrage</h4>
-                                        <source-code language="http">
-                                            POST /address HTTP/1.1
-                                            Host: example.com
-                                            Accept: application/json
-                                        </source-code>
-                                        <source-code language="json">
-                                            {
-                                                "first_name": "Fox",
-                                                "last_name": "Mulder",
-                                                "email": "mulder@xfiles.com",
-                                                "phone": "+49 721 553181"
-                                            }
-                                        </source-code>
-        
-                                        <h4 class="mt-4">HTTP-Antwort</h4>
-                                        <source-code language="http">
-                                            HTTP/1.1 201 Created
-                                            Content-Type: application/json; charset=utf-8
-                                        </source-code>
-                                        <source-code language="json">
-                                            {
-                                                "_links": {
-                                                    …
+                                                <tr>
+                                                    <td>404 Not Found</td>
+                                                    <td>–</td>
+                                                </tr>
+                                            </table>
+                                        </lsx-tab-page>
+            
+                                        <lsx-tab-page title="Beispiel">
+                                            <h4 class="mt-4">HTTP-Anfrage</h4>
+                                            <source-code language="http">
+                                                GET /address/621ff9a936997df5baba746e HTTP/1.1
+                                                Host: example.com
+                                                dhbw-lightblue                   Accept: application/json
+                                            </source-code>
+            
+                                            <h4 class="mt-4">HTTP-Antwort</h4>
+                                            <source-code language="http">
+                                                HTTP/1.1 200 Ok
+                                                Content-Type: application/json; charset=utf-8
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "_links": {
+                                                        …
+                                                    }
+                                                    "_id": "621ff9a936997df5baba746e",
+                                                    "first_name": "Fox",
+                                                    "last_name": "Mulder",
+                                                    "email": "mulder@xfiles.com",
+                                                    "phone": "+49 721 553181"
                                                 }
-                                                "_id": "621ff9a936997df5baba746e",
-                                                "first_name": "Fox",
-                                                "last_name": "Mulder",
-                                                "email": "mulder@xfiles.com",
-                                                "phone": "+49 721 553181"
-                                            }
-                                        </source-code>
-                                    </lsx-tab-page>
-                                </lsx-tab-pages>
-                            <lsx-accordion-content>
-                        </lsx-accordion-page>
-                    </lsx-accordion>
-                </lsx-tab-page>
-        
-                <lsx-tab-page title="/address/{id}">
-                    <p>
-                        Gemäß den REST-Prinzipien besitzt jeder Adressbucheintrag besitzt eine eindeutige
-                        URL. Über diese kann er gelesen, überschrieben, geändert und gelöscht werden.
-                    </p>
-        
-                    <lsx-accordion>
-                        <lsx-accordion-page>
-                            <lsx-accordion-title>
-                                <b><code>GET</code>:</b> &nbsp;
-                                Adresse lesen
-                            </lsx-accordion-title>
-                            <lsx-accordion-content>
-                                <lsx-tab-pages>
-                                    <lsx-tab-page title="Statuscodes">
-                                        <table class="table table-sm table-light table-hover w-100 caption-top">
-                                            <thead>
+                                            </source-code>
+                                        </lsx-tab-page>
+                                    </lsx-tab-pages>
+                                </lsx-accordion-content>
+                            </lsx-accordion-page>
+            
+                            <lsx-accordion-page>
+                                <lsx-accordion-title>
+                                    <b><code>PUT</code>:</b> &nbsp;
+                                    Adresse überschreiben
+                                </lsx-accordion-title>
+                                <lsx-accordion-content>
+                                    <lsx-tab-pages>
+                                        <lsx-tab-page title="Request Body">
+                                            <code>Address</code>
+                                        </lsx-tab-page>
+            
+                                        <lsx-tab-page title="Statuscodes">
+                                            <table class="table table-sm table-light table-hover w-100 caption-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Statuscode</th>
+                                                        <th>Response Body</th>
+                                                    </tr>
+                                                </thead>
                                                 <tr>
-                                                    <th>Statuscode</th>
-                                                    <th>Response Body</th>
+                                                    <td>200 Ok</td>
+                                                    <td>Address</td>
                                                 </tr>
-                                            </thead>
-                                            <tr>
-                                                <td>200 Ok</td>
-                                                <td>Address</td>
-                                            </tr>
-                                            <tr>
-                                                <td>404 Not Found</td>
-                                                <td>–</td>
-                                            </tr>
-                                        </table>
-                                    </lsx-tab-page>
-        
-                                    <lsx-tab-page title="Beispiel">
-                                        <h4 class="mt-4">HTTP-Anfrage</h4>
-                                        <source-code language="http">
-                                            GET /address/621ff9a936997df5baba746e HTTP/1.1
-                                            Host: example.com
-                                            dhbw-lightblue                   Accept: application/json
-                                        </source-code>
-        
-                                        <h4 class="mt-4">HTTP-Antwort</h4>
-                                        <source-code language="http">
-                                            HTTP/1.1 200 Ok
-                                            Content-Type: application/json; charset=utf-8
-                                        </source-code>
-                                        <source-code language="json">
-                                            {
-                                                "_links": {
-                                                    …
+                                                <tr>
+                                                    <td>404 Not Found</td>
+                                                    <td>–</td>
+                                                </tr>
+                                            </table>
+                                        </lsx-tab-page>
+            
+                                        <lsx-tab-page title="Beispiel">
+                                            <h4 class="mt-4">HTTP-Anfrage</h4>
+                                            <source-code language="http">
+                                                PUT /address/621ff9a936997df5baba746e HTTP/1.1
+                                                Host: example.com
+                                                Accept: application/json
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "first_name": "Fox",
+                                                    "last_name": "Mulder",
+                                                    "email": "fox.mulder@xfiles.com",
+                                                    "phone": "+49 721 553181"
                                                 }
-                                                "_id": "621ff9a936997df5baba746e",
-                                                "first_name": "Fox",
-                                                "last_name": "Mulder",
-                                                "email": "mulder@xfiles.com",
-                                                "phone": "+49 721 553181"
-                                            }
-                                        </source-code>
-                                    </lsx-tab-page>
-                                </lsx-tab-pages>
-                            </lsx-accordion-content>
-                        </lsx-accordion-page>
-        
-                        <lsx-accordion-page>
-                            <lsx-accordion-title>
-                                <b><code>PUT</code>:</b> &nbsp;
-                                Adresse überschreiben
-                            </lsx-accordion-title>
-                            <lsx-accordion-content>
-                                <lsx-tab-pages>
-                                    <lsx-tab-page title="Request Body">
-                                        <code>Address</code>
-                                    </lsx-tab-page>
-        
-                                    <lsx-tab-page title="Statuscodes">
-                                        <table class="table table-sm table-light table-hover w-100 caption-top">
-                                            <thead>
-                                                <tr>
-                                                    <th>Statuscode</th>
-                                                    <th>Response Body</th>
-                                                </tr>
-                                            </thead>
-                                            <tr>
-                                                <td>200 Ok</td>
-                                                <td>Address</td>
-                                            </tr>
-                                            <tr>
-                                                <td>404 Not Found</td>
-                                                <td>–</td>
-                                            </tr>
-                                        </table>
-                                    </lsx-tab-page>
-        
-                                    <lsx-tab-page title="Beispiel">
-                                        <h4 class="mt-4">HTTP-Anfrage</h4>
-                                        <source-code language="http">
-                                            PUT /address/621ff9a936997df5baba746e HTTP/1.1
-                                            Host: example.com
-                                            Accept: application/json
-                                        </source-code>
-                                        <source-code language="json">
-                                            {
-                                                "first_name": "Fox",
-                                                "last_name": "Mulder",
-                                                "email": "fox.mulder@xfiles.com",
-                                                "phone": "+49 721 553181"
-                                            }
-                                        </source-code>
-        
-                                        <h4 class="mt-4">HTTP-Antwort</h4>
-                                        <source-code language="http">
-                                            HTTP/1.1 200 Ok
-                                            Content-Type: application/json; charset=utf-8
-                                        </source-code>
-                                        <source-code language="json">
-                                            {
-                                                "_links": {
-                                                    …
+                                            </source-code>
+            
+                                            <h4 class="mt-4">HTTP-Antwort</h4>
+                                            <source-code language="http">
+                                                HTTP/1.1 200 Ok
+                                                Content-Type: application/json; charset=utf-8
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "_links": {
+                                                        …
+                                                    }
+                                                    "_id": "621ff9a936997df5baba746e",
+                                                    "first_name": "Fox",
+                                                    "last_name": "Mulder",
+                                                    "email": "fox.mulder@xfiles.com",
+                                                    "phone": "+49 721 553181"
                                                 }
-                                                "_id": "621ff9a936997df5baba746e",
-                                                "first_name": "Fox",
-                                                "last_name": "Mulder",
-                                                "email": "fox.mulder@xfiles.com",
-                                                "phone": "+49 721 553181"
-                                            }
-                                        </source-code>
-                                    </lsx-tab-page>
-                                </lsx-tab-pages>
-                            </lsx-accordion-content>
-                        </lsx-accordion-page>
-        
-                        <lsx-accordion-page>
-                            <lsx-accordion-title>
-                                <b><code>PATCH</code>:</b> &nbsp;
-                                <span class="float-end">Einzelne Felder ändern</span>
-                            </lsx-accordion-title>
-                            <lsx-accordion-content>
-                                <lsx-tab-pages>
-                                    <lsx-tab-page title="Request Body">
-                                        <code>Address</code>
-                                    </lsx-tab-page>
-        
-                                    <lsx-tab-page title="Statuscodes">
-                                        <table class="table table-sm table-light table-hover w-100 caption-top">
-                                            <thead>
+                                            </source-code>
+                                        </lsx-tab-page>
+                                    </lsx-tab-pages>
+                                </lsx-accordion-content>
+                            </lsx-accordion-page>
+            
+                            <lsx-accordion-page>
+                                <lsx-accordion-title>
+                                    <b><code>PATCH</code>:</b> &nbsp;
+                                    <span class="float-end">Einzelne Felder ändern</span>
+                                </lsx-accordion-title>
+                                <lsx-accordion-content>
+                                    <lsx-tab-pages>
+                                        <lsx-tab-page title="Request Body">
+                                            <code>Address</code>
+                                        </lsx-tab-page>
+            
+                                        <lsx-tab-page title="Statuscodes">
+                                            <table class="table table-sm table-light table-hover w-100 caption-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Statuscode</th>
+                                                        <th>Response Body</th>
+                                                    </tr>
+                                                </thead>
                                                 <tr>
-                                                    <th>Statuscode</th>
-                                                    <th>Response Body</th>
+                                                    <td>200 Ok</td>
+                                                    <td>Address</td>
                                                 </tr>
-                                            </thead>
-                                            <tr>
-                                                <td>200 Ok</td>
-                                                <td>Address</td>
-                                            </tr>
-                                            <tr>
-                                                <td>404 Not Found</td>
-                                                <td>–</td>
-                                            </tr>
-                                        </table>
-                                    </lsx-tab-page>
-        
-                                    <lsx-tab-page title="Beispiel">
-                                        <h4 class="mt-4">HTTP-Anfrage</h4>
-                                        <source-code language="http">
-                                            PATCH /address/621ff9a936997df5baba746e HTTP/1.1
-                                            Host: example.com
-                                            Accept: application/json
-                                        </source-code>
-                                        <source-code language="json">
-                                            {
-                                                "email": "fox.mulder@xfiles.com",
-                                            }
-                                        </source-code>
-        
-                                        <h4 class="mt-4">HTTP-Antwort</h4>
-                                        <source-code language="http">
-                                            HTTP/1.1 200 Ok
-                                            Content-Type: application/json; charset=utf-8
-                                        </source-code>
-                                        <source-code language="json">
-                                            {
-                                                "_links": {
-                                                    …
+                                                <tr>
+                                                    <td>404 Not Found</td>
+                                                    <td>–</td>
+                                                </tr>
+                                            </table>
+                                        </lsx-tab-page>
+            
+                                        <lsx-tab-page title="Beispiel">
+                                            <h4 class="mt-4">HTTP-Anfrage</h4>
+                                            <source-code language="http">
+                                                PATCH /address/621ff9a936997df5baba746e HTTP/1.1
+                                                Host: example.com
+                                                Accept: application/json
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "email": "fox.mulder@xfiles.com",
                                                 }
-                                                "_id": "621ff9a936997df5baba746e",
-                                                "first_name": "Fox",
-                                                "last_name": "Mulder",
-                                                "email": "fox.mulder@xfiles.com",
-                                                "phone": "+49 721 553181"
-                                            }
-                                        </source-code>
-                                    </lsx-tab-page>
-                                </lsx-tab-pages>
-                            </lsx-accordion-content>
-                        </lsx-accordion-page>
-        
-                        <lsx-accordion-page>
-                            <lsx-accordion-title>
-                                <b><code>DELETE</code>:</b> &nbsp;
-                                <span class="float-end">Adresse löschen</span>
-                            </lsx-accordion-title>
-                            <lsx-accordion-content>
-                                <lsx-tab-pages>
-                                    <lsx-tab-page title="Statuscodes">
-                                        <table class="table table-sm table-light table-hover w-100 caption-top">
-                                            <thead>
+                                            </source-code>
+            
+                                            <h4 class="mt-4">HTTP-Antwort</h4>
+                                            <source-code language="http">
+                                                HTTP/1.1 200 Ok
+                                                Content-Type: application/json; charset=utf-8
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "_links": {
+                                                        …
+                                                    }
+                                                    "_id": "621ff9a936997df5baba746e",
+                                                    "first_name": "Fox",
+                                                    "last_name": "Mulder",
+                                                    "email": "fox.mulder@xfiles.com",
+                                                    "phone": "+49 721 553181"
+                                                }
+                                            </source-code>
+                                        </lsx-tab-page>
+                                    </lsx-tab-pages>
+                                </lsx-accordion-content>
+                            </lsx-accordion-page>
+            
+                            <lsx-accordion-page>
+                                <lsx-accordion-title>
+                                    <b><code>DELETE</code>:</b> &nbsp;
+                                    <span class="float-end">Adresse löschen</span>
+                                </lsx-accordion-title>
+                                <lsx-accordion-content>
+                                    <lsx-tab-pages>
+                                        <lsx-tab-page title="Statuscodes">
+                                            <table class="table table-sm table-light table-hover w-100 caption-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Statuscode</th>
+                                                        <th>Response Body</th>
+                                                    </tr>
+                                                </thead>
                                                 <tr>
-                                                    <th>Statuscode</th>
-                                                    <th>Response Body</th>
+                                                    <td>200 Ok</td>
+                                                    <td>–</td>
                                                 </tr>
-                                            </thead>
-                                            <tr>
-                                                <td>200 Ok</td>
-                                                <td>–</td>
-                                            </tr>
-                                            <tr>
-                                                <td>404 Not Found</td>
-                                                <td>–</td>
-                                            </tr>
-                                        </table>
-                                    </lsx-tab-page>
-        
-                                    <lsx-tab-page title="Beispiel">
-                                        <h4 class="mt-4">HTTP-Anfrage</h4>
-                                        <source-code language="http">
-                                            DELETE /address/621ff9a936997df5baba746e HTTP/1.1
-                                            Host: example.com
-                                            Accept: application/json
-                                        </source-code>
-        
-                                        <h4 class="mt-4">HTTP-Antwort</h4>
-                                        <source-code language="http">
-                                            HTTP/1.1 200 Ok
-                                            Content-Type: application/json; charset=utf-8
-                                        </source-code>
-                                    </lsx-tab-page>
-                                </lsx-tab-pages>
-                            </lsx-accordion-content>
-                        </lsx-accordion-page>
-                    </lsx-accordion>
-                </lsx-tab-page>
-            </lsx-tab-pages>
-        </div>
-    </article>
-</section>
-
-<section data-title="Fallbeispiel Adressbuch: Erstellen der OpenAPI-Spezifikation">
-    <article class="d-flex flex-wrap justify-content-center align-items-center gap-3">
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-01.png" caption="1. Neue API anlegen"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-02.png" caption="2. Allgemeine Informationen eintragen"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-03.png" caption="3. Wechsel in den Änderungsmodus"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-04.png" caption="4. Live-Dokumentation zur Ergebniskontrolle öffnen"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-05.png" caption="5. Kontaktdaten und Lizenz ausfüllen"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-06.png" caption="6. Je Entität ein neues Tag anlegen"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-07.png" caption="7. Benötigte Datentypen anlegen"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-08.png" caption="8. Datentyp Address beschreiben"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-09.png" caption="9. URL-Endpunkte für Adressen generieren lassen"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-10.png" caption="10. Weitere Datentypen anlegen"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-11.png" caption="11. Schemadefinition HATEOAS_Link"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-12.png" caption="12. Für die HATEOAS-Typen keine URL-Endpunkte generieren"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-14.png" caption="13. Vorläufige Schemadefinition HATEOAS_Collection"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-13.png" caption="14. Vorläufige Schemadefinition HATEOAS_Resource"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-15.png" caption="15. Finale Schemadefinition HATEOAS_Collection"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-16.png" caption="16. Finale Schemadefinition HATEOAS_Resource"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-17.png" caption="17. Schemadefinition Address erweitern"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-18.png" caption="18. HATEOAS-Informationen zum Address-Schema hinzufügen"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-19.png" caption="19. URL /addresses umbenennen"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-20.png" caption="20. Ergebnis der manuellen Anpassungen"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-21.png" caption="21. Query-Parameter zum Suchen von Adressen anlegen"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-22.png" caption="22. Neu angelegte Query-Parameter zum Suchen von Adressen"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-23.png" caption="23. PATCH-Anfragen ergänzen"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-24.png" caption="24. HTTP-Anfrage für PATCH"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-25.png" caption="25. HTTP-Antwort für PATCH"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-26.png" caption="26. Live-Vorschau der Dokumentation öffnen"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-27.png" caption="27. Dokumentation des Webservices"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-28.png" caption="28. Zurück zur Startseite des Webservices"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-29.png" caption="29. OpenAPI-Beschreibung herunterladen"></lsx-modal-image>
-        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-30.png" caption="30. Format YAML auswählen"></lsx-modal-image>
-    </article>
-</section>
-
-<section data-title="Fallbeispiel Adressbuch: Ergebnis">
-    <article class="centered-content">
-        <div class="limited-width2">
-            <p>
-                <a
-                    href="https://editor.swagger.io/?url=https://raw.githubusercontent.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes/main/Beispielanwendung%20Adressbuch/Backend/src/api/openapi.yaml"
-                    target="_blank"
-                >
-                    Link zum Swagger Editor
-                </a>
-            </p>
+                                                <tr>
+                                                    <td>404 Not Found</td>
+                                                    <td>–</td>
+                                                </tr>
+                                            </table>
+                                        </lsx-tab-page>
+            
+                                        <lsx-tab-page title="Beispiel">
+                                            <h4 class="mt-4">HTTP-Anfrage</h4>
+                                            <source-code language="http">
+                                                DELETE /address/621ff9a936997df5baba746e HTTP/1.1
+                                                Host: example.com
+                                                Accept: application/json
+                                            </source-code>
+            
+                                            <h4 class="mt-4">HTTP-Antwort</h4>
+                                            <source-code language="http">
+                                                HTTP/1.1 200 Ok
+                                                Content-Type: application/json; charset=utf-8
+                                            </source-code>
+                                        </lsx-tab-page>
+                                    </lsx-tab-pages>
+                                </lsx-accordion-content>
+                            </lsx-accordion-page>
+                        </lsx-accordion>
+                    </lsx-tab-page>
+                </lsx-tab-pages>
+            </div>
+        </article>
+    </section>
     
-            <img src="04-rest-webservices/fallbeispiel-swagger-editor.png" class="img-responsive img-thumbnail" />
-        </div>
-    </article>
+    <section data-title="Erstellen der OpenAPI-Spezifikation">
+        <article class="d-flex flex-wrap justify-content-center align-items-center gap-3">
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-01.png" caption="1. Neue API anlegen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-02.png" caption="2. Allgemeine Informationen eintragen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-03.png" caption="3. Wechsel in den Änderungsmodus"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-04.png" caption="4. Live-Dokumentation zur Ergebniskontrolle öffnen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-05.png" caption="5. Kontaktdaten und Lizenz ausfüllen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-06.png" caption="6. Je Entität ein neues Tag anlegen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-07.png" caption="7. Benötigte Datentypen anlegen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-08.png" caption="8. Datentyp Address beschreiben"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-09.png" caption="9. URL-Endpunkte für Adressen generieren lassen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-10.png" caption="10. Weitere Datentypen anlegen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-11.png" caption="11. Schemadefinition HATEOAS_Link"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-12.png" caption="12. Für die HATEOAS-Typen keine URL-Endpunkte generieren"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-14.png" caption="13. Vorläufige Schemadefinition HATEOAS_Collection"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-13.png" caption="14. Vorläufige Schemadefinition HATEOAS_Resource"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-15.png" caption="15. Finale Schemadefinition HATEOAS_Collection"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-16.png" caption="16. Finale Schemadefinition HATEOAS_Resource"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-17.png" caption="17. Schemadefinition Address erweitern"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-18.png" caption="18. HATEOAS-Informationen zum Address-Schema hinzufügen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-19.png" caption="19. URL /addresses umbenennen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-20.png" caption="20. Ergebnis der manuellen Anpassungen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-21.png" caption="21. Query-Parameter zum Suchen von Adressen anlegen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-22.png" caption="22. Neu angelegte Query-Parameter zum Suchen von Adressen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-23.png" caption="23. PATCH-Anfragen ergänzen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-24.png" caption="24. HTTP-Anfrage für PATCH"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-25.png" caption="25. HTTP-Antwort für PATCH"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-26.png" caption="26. Live-Vorschau der Dokumentation öffnen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-27.png" caption="27. Dokumentation des Webservices"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-28.png" caption="28. Zurück zur Startseite des Webservices"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-29.png" caption="29. OpenAPI-Beschreibung herunterladen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-30.png" caption="30. Format YAML auswählen"></lsx-modal-image>
+        </article>
+    </section>
+    
+    <section data-title="Ergebnis">
+        <article class="centered-content">
+            <div class="limited-width2">
+                <p>
+                    <a
+                        href="https://editor.swagger.io/?url=https://raw.githubusercontent.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes/main/Beispielanwendung%20Adressbuch/Backend/src/api/openapi.yaml"
+                        target="_blank"
+                    >
+                        Link zum Swagger Editor
+                    </a>
+                </p>
+        
+                <img src="04-rest-webservices/fallbeispiel-swagger-editor.png" class="img-responsive img-thumbnail" />
+            </div>
+        </article>
+    </section>
 </section>
+
 
 <section data-title="Aufgabe: HTTP Statuscodes" data-background-color="rgb(231, 221, 141)">
     <article class="centered-content">
