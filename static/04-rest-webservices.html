@@ -26,7 +26,7 @@
 
 <section data-title="Was ist eine Anwendung?">
     <article class="centered-content">
-        <div class="dhbw-limited-width">
+        <div class="limited-width">
             <blockquote class="blockquote markdown mb-4">
                 Als **Anwendungssoftware** werden Computerprogramme bezeichnet, die genutzt werden, um eine nützliche,
                 nicht systemtechnische Funktionalität zu unterstützen. Sie dienen der **Lösung von Benutzerproblemen**.
@@ -106,7 +106,7 @@
 
 <section data-title="Typische Einsatzgebiete für Webservices">
     <article class="centered-content">
-        <div class="markdown dhbw-limited-width m-auto mb-5">
+        <div class="markdown limited-width m-auto mb-5">
             Im Gegensatz zu früher ist es heute üblich, dass viele Anwendungen und Apps
             auf Dienste im Internet zugreifen. Dies reicht vom einfachen Auslagern einzelner
             Funktionen bis zu Anwendungen, bei denen die komplette Anwendungslogik entfernt
@@ -137,7 +137,7 @@
 
 <section data-title="Ökonomische Bedeutung von Webservices">
     <article class="centered-content">
-        <div class="markdown dhbw-limited-width m-auto mb-5">
+        <div class="markdown limited-width m-auto mb-5">
             Ist ein Webservice dafür gemacht, von unterschiedlichen Anwendungen aufgerufen zu werden,
             spricht man heute auch von einer API. Gemeint ist damit ein **Application Programming Interface**,
             das seine Funktionen verschiedenen Anwendungen zur Verfügung stellt. Ursprünglich kommt dieser
@@ -864,7 +864,7 @@
 <!--
 <section data-title="Grundprinzipien einfacher SOAP-Webservices">
     <article class="centered-content">
-        <div class="dhbw-limited-width">
+        <div class="limited-width">
             <div class="markdown mb-5">
                 Angeleitet vom Konzept des **entfernten Methodenaufrufs** entwickelte sich Anfang der
                 2000er-Jahre **SOAP** zu einem weit verbreiteten Standard. Die Abkürzung stand dabei
@@ -894,7 +894,7 @@
 
 <section data-title="Grundprinzipien moderner REST-Webservices">
     <article class="centered-content">
-        <div class="dhbw-limited-width2">
+        <div class="limited-width2">
             <div class="markdown">
                 Im Gegensatz zu SOAP orientiert sich REST vollständig an den Möglichkeiten von HTTP und überträgt
                 diese konzeptionell vom Abruf einer Webseite auf die **Verwaltung beliebiger „Ressourcen”**, wobei
@@ -2033,7 +2033,7 @@
 
 <section data-title="Wie beschreibt man einen Webservice?">
     <article class="centered-content">
-        <div class="markdown dhbw-limited-width m-auto mb-5">
+        <div class="markdown limited-width m-auto mb-5">
             Während SOAP-Webservices von Anfang an mit der **Webservice Definition Language**
             (meist einfach nur WSDL abegkürzt) in einem maschinenlesbaren formal beschrieben wurden,
             gab es für REST-Webservices lange Zeit keinen vergleichbaren Standard. Dabei bietet
@@ -2061,8 +2061,8 @@
 </section>
 
 <section data-title="Vorgehen bei der Programmierung">
-    <article>
-        <div class="markdown dhbw-limited-width m-auto">
+    <article class="centered-content">
+        <div class="markdown limited-width m-auto">
             Generell sind zwei Vorgehensweisen bei der Programmierung denkbar:
     
             * **Code First:** Die API-Spezifikation wird anhand der Webservice-Implementierung
@@ -3037,86 +3037,37 @@
 </section>
 
 <section data-title="Fallbeispiel Adressbuch: Erstellen der OpenAPI-Spezifikation">
-    <article>
-        <div id="openapi_thumbnails" class="d-flex justify-content-center align-items-center flex-wrap gap-3"></div>
-
-        <script>
-            window.create_thumbnails = function(items) {
-                let container = document.getElementById("openapi_thumbnails");
-
-                if (!container) {
-                    console.warn("OpenAPI Example: create_thumbnails() - Container nicht gefunden.");
-                    return;
-                }
-                
-                let html = "";
-
-                for (let item of items) {
-                    html += `
-                        <div class="dhbw-thumbnail" onclick="open_modal_image('04-rest-webservices/${item[0]}');">
-                            <img src="04-rest-webservices/${item[0]}" class="img-thumbnail w-100" />
-                            ${item[1]}
-                        </div>
-                    `;
-                }
-
-                container.innerHTML = html;
-            };
-
-            window.open_modal_image = function(url) {
-                let divElement = document.createElement("div");
-                divElement.classList.add("dhbw-modal");
-
-                let imgElement = document.createElement("img");
-                imgElement.src = url;
-                imgElement.classList.add("img-responsive");
-                imgElement.classList.add("img-thumbnail");
-                divElement.appendChild(imgElement);
-
-                divElement.addEventListener("click", () => {
-                    divElement.remove();
-                });
-
-                document.querySelector("body").appendChild(divElement);
-            }
-
-            window.addEventListener("ls-slide-changed", () => {
-                window.setTimeout(function() {
-                    create_thumbnails([
-                        ["fallbeispiel-apicurio-01.png", "1. Neue API anlegen"],
-                        ["fallbeispiel-apicurio-02.png", "2. Allgemeine Informationen eintragen"],
-                        ["fallbeispiel-apicurio-03.png", "3. Wechsel in den Änderungsmodus"],
-                        ["fallbeispiel-apicurio-04.png", "4. Live-Dokumentation zur Ergebniskontrolle öffnen"],
-                        ["fallbeispiel-apicurio-05.png", "5. Kontaktdaten und Lizenz ausfüllen"],
-                        ["fallbeispiel-apicurio-06.png", "6. Je Entität ein neues Tag anlegen"],
-                        ["fallbeispiel-apicurio-07.png", "7. Benötigte Datentypen anlegen"],
-                        ["fallbeispiel-apicurio-08.png", "8. Datentyp <code>Address</code> beschreiben"],
-                        ["fallbeispiel-apicurio-09.png", "9. URL-Endpunkte für Adressen generieren lassen"],
-                        ["fallbeispiel-apicurio-10.png", "10. Weitere Datentypen anlegen"],
-                        ["fallbeispiel-apicurio-11.png", "11. Schemadefinition <code>HATEOAS_Link</code>"],
-                        ["fallbeispiel-apicurio-12.png", "12. Für die HATEOAS-Typen keine URL-Endpunkte generieren"],
-                        ["fallbeispiel-apicurio-14.png", "13. Vorläufige Schemadefinition <code>HATEOAS_Collection</code>"],
-                        ["fallbeispiel-apicurio-13.png", "14. Vorläufige Schemadefinition <code>HATEOAS_Resource</code>"],
-                        ["fallbeispiel-apicurio-15.png", "15. Finale Schemadefinition <code>HATEOAS_Collection</code>"],
-                        ["fallbeispiel-apicurio-16.png", "16. Finale Schemadefinition <code>HATEOAS_Resource</code>"],
-                        ["fallbeispiel-apicurio-17.png", "17. Schemadefinition <code>Address</code> erweitern"],
-                        ["fallbeispiel-apicurio-18.png", "18. HATEOAS-Informationen zum <code>Address</code>-Schema hinzufügen"],
-                        ["fallbeispiel-apicurio-19.png", "19. URL <code>/addresses</code> umbenennen"],
-                        ["fallbeispiel-apicurio-20.png", "20. Ergebnis der manuellen Anpassungen"],
-                        ["fallbeispiel-apicurio-21.png", "21. Query-Parameter zum Suchen von Adressen anlegen"],
-                        ["fallbeispiel-apicurio-22.png", "22. Neu angelegte Query-Parameter zum Suchen von Adressen"],
-                        ["fallbeispiel-apicurio-23.png", "23. <code>PATCH</code>-Anfragen ergänzen"],
-                        ["fallbeispiel-apicurio-24.png", "24. HTTP-Anfrage für <code>PATCH</code>"],
-                        ["fallbeispiel-apicurio-25.png", "25. HTTP-Antwort für <code>PATCH</code>"],
-                        ["fallbeispiel-apicurio-26.png", "26. Live-Vorschau der Dokumentation öffnen"],
-                        ["fallbeispiel-apicurio-27.png", "27. Dokumentation des Webservices"],
-                        ["fallbeispiel-apicurio-28.png", "28. Zurück zur Startseite des Webservices"],
-                        ["fallbeispiel-apicurio-29.png", "29. OpenAPI-Beschreibung herunterladen"],
-                        ["fallbeispiel-apicurio-30.png", "30. Format YAML auswählen"],
-                    ]);
-                }, 1000);
-            });
-        </script>
+    <article class="d-flex flex-wrap justify-content-center align-items-center gap-3">
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-01.png" caption="1. Neue API anlegen"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-02.png" caption="2. Allgemeine Informationen eintragen"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-03.png" caption="3. Wechsel in den Änderungsmodus"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-04.png" caption="4. Live-Dokumentation zur Ergebniskontrolle öffnen"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-05.png" caption="5. Kontaktdaten und Lizenz ausfüllen"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-06.png" caption="6. Je Entität ein neues Tag anlegen"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-07.png" caption="7. Benötigte Datentypen anlegen"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-08.png" caption="8. Datentyp Address beschreiben"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-09.png" caption="9. URL-Endpunkte für Adressen generieren lassen"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-10.png" caption="10. Weitere Datentypen anlegen"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-11.png" caption="11. Schemadefinition HATEOAS_Link"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-12.png" caption="12. Für die HATEOAS-Typen keine URL-Endpunkte generieren"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-14.png" caption="13. Vorläufige Schemadefinition HATEOAS_Collection"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-13.png" caption="14. Vorläufige Schemadefinition HATEOAS_Resource"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-15.png" caption="15. Finale Schemadefinition HATEOAS_Collection"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-16.png" caption="16. Finale Schemadefinition HATEOAS_Resource"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-17.png" caption="17. Schemadefinition Address erweitern"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-18.png" caption="18. HATEOAS-Informationen zum Address-Schema hinzufügen"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-19.png" caption="19. URL /addresses umbenennen"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-20.png" caption="20. Ergebnis der manuellen Anpassungen"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-21.png" caption="21. Query-Parameter zum Suchen von Adressen anlegen"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-22.png" caption="22. Neu angelegte Query-Parameter zum Suchen von Adressen"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-23.png" caption="23. PATCH-Anfragen ergänzen"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-24.png" caption="24. HTTP-Anfrage für PATCH"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-25.png" caption="25. HTTP-Antwort für PATCH"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-26.png" caption="26. Live-Vorschau der Dokumentation öffnen"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-27.png" caption="27. Dokumentation des Webservices"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-28.png" caption="28. Zurück zur Startseite des Webservices"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-29.png" caption="29. OpenAPI-Beschreibung herunterladen"></lsx-modal-image>
+        <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-30.png" caption="30. Format YAML auswählen"></lsx-modal-image>
     </article>
 </section>
 

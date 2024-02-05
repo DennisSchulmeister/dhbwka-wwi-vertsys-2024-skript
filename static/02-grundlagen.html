@@ -111,21 +111,38 @@
 <!-- ==================== -->
 <section data-use-template="teilkapitel" data-titel="Begriffsdefinitionen"></section>
 
-<!-- TODO: Zu einer Folie zusammenfassen: Oben Tabs: Video, System, Tanenbaum, Unten: Kacheln mit Beispielen -->
-<section data-title="Was ist ein System? (1)">
-    <article class="centered-content">
-        <div class="markdown limited-width">
-            <lsx-youtube video="UWU14-EK9CE" aspect-ratio="16x9" style="width: 50em; max-width: 100%;"></lsx-youtube>
+<section data-title="Was ist ein verteiltes System?" data-background-image="02-grundlagen/definition-hintergrund.jpg" data-background-blur="5px">
+    <section data-title="Alltäglicher Sprachgebrauch" class="centered-content">
+        <lsx-grid-fluid class="p-0 limited-width2">
+            <lsx-row>
+                <lsx-col size="md-8">
+                    <lsx-youtube video="UWU14-EK9CE" aspect-ratio="16x9" class="w-100 mb-0"></lsx-youtube>
+    
+                    <small>
+                        <small>
+                            Quelle: Filmausschnitt aus „Star Trek der Film (1979)”
+                        </small>
+                    </small>
+                </lsx-col>
+                <lsx-col size="md" class="markdown lead centered-content align-items-start">
+                    Jeden Tag sprechen wir von Systemen:
+                    
+                    <lsx-ul emoji="🚀">
+                        <li><i>„Du musst dich am System anmelden.”</i></li>
+                        <li><i>„Das ist im System gespeichert.”</i></li>
+                        <li><i>„Mein Betriebssystem hängt mal wieder.”</i></li>
+                    </lsx-ul>
+    
+                    Doch was ist überhaupt ein „System“
+                    <span style="color: crimson; text-shadow: 1px 1px 1px rgba(0,0,0,0.5);">⁉️</span>
+                </lsx-col>
+            </lsx-row>
+        </lsx-grid-fluid>
+    </section>
 
-            [Link zum Video](https://youtu.be/UWU14-EK9CE)
-        </div>
-    </article>
-</section>
-
-<section data-title="Was ist ein System? (2)">
-    <article class="centered-content">
+    <section data-title="System" class="centered-content">
         <div class="limited-width">
-            <blockquote class="blockquote">
+            <blockquote class="blockquote fst-italic">
                 <p>
                     Als System (altgriechisch sýstēma „aus mehreren Einzelteilen zusammengesetztes Ganzes“)
                     wird im Allgemeinen ein abgrenzbares, natürliches oder künstliches „Gebilde“ bezeichnet,
@@ -137,81 +154,223 @@
                     <cite>Wikipedia zum Begriff „System”</cite>
                 </figcaption>
             </blockquote>
+    
+            <h4>Wichtige Stichworte dieser Definition</h4>
+    
+            <lsx-ul emoji="☑️">
+                <li>Aus mehren Einzelteilen zusammengesetztes Ganzes</li>
+                <li>Abgrenzbares Gebilde aus verschienden Komponenten</li>
+                <li>Geordnete Beziehungen untereinander</li>
+                <li>Als gemeinsames Ganzes betrachtet</li>
+            </lsx-ul>
         </div>
-    </article>
+    </section>
+
+    <section data-title="Verteiltes System" class="centered-content">
+        <div class="limited-width2">
+            <lsx-grid-fluid class="p-0 mb-4">
+                <lsx-row>
+                    <lsx-col size="md">
+                        <blockquote class="blockquote fst-italic card p-2">
+                            <p>
+                                A distributed system stops you from getting any work done because computer crashed
+                                that you didn't even know it existed.
+                            </p>
+                            <figcaption class="blockquote-footer">
+                                <cite>Scherzhafte Definition nach Leslie Lamport</cite>
+                            </figcaption>
+                        </blockquote>
+                    </lsx-col>
+    
+                    <lsx-col size="md">
+                        <blockquote class="blockquote fst-italic card p-2">
+                            <p>
+                                A distributed system is a collection of [computers] that appears to its users as a single
+                                coherent system.
+                            </p>
+                            <figcaption class="blockquote-footer">
+                                <cite>Steen & Tanenbaum</cite>
+                            </figcaption>
+                        </blockquote>
+                    </lsx-col>
+                </lsx-row>
+            </lsx-grid-fluid>
+    
+            <h4>Arbeitsdefinition für diese Vorlesung</h4>
+    
+            <lsx-ul emoji="☑️">
+                <li>Mehrere, voneinander unabhängig agierende Computer (muss zumindest möglich sein)</li>
+                <li>Datenaustausch über ein Netzwerk ohne geteilten Hauptspeicher</li>
+                <li>Die Knoten arbeiten zusammen, um eine übergeordnete, gemeinsame Aufgabe zu erfüllen</li>
+            </lsx-ul>
+        </div>
+    </section>
+
+    <section data-title="Grundregel verteilter Systeme" class="centered-content">
+        <div class="limited-width2">
+            <lsx-grid-fluid class="p-0">
+                <lsx-row>
+                    <lsx-col size="md">
+                        <img src="02-grundlagen/grundregel1.jpg" class="img-thumbnail d-block w-100" alt="First rule of distributed systems: Don't do it!">
+                    </lsx-col>
+                    <lsx-col size="md">
+                        <img src="02-grundlagen/grundregel2.jpg" class="img-thumbnail d-block w-100">
+                    </lsx-col>
+                </lsx-row>
+            </lsx-grid-fluid>
+            <p>
+                <small>
+                    <small>
+                        Bildnachweise: OpenAI DALL-E, Prompt: First rule of distributed systems: Don't do it
+                    </small>
+                </small>
+            </p>
+    
+            <p>
+                Warum diese merkwürdig anmutende Regel? Weil Verteilte Systeme nicht die Lösung für alle Probleme sind
+                („mit dem Hammer in der Hand …”), jedoch ihre ganz eigenen Probleme mitbringen, die nicht immer leicht
+                zu lösen sind.
+            </p>
+    
+            <lsx-ul emoji="⁉️">
+                <li>Aufteilung der Anwendungslogik in unabhängige Teilkomponenten</li>
+                <li>Definition passender Schnittstellen zwischen den Komponenten</li>
+                <li>Zuverlässiger Datenaustausch über ein unzuverlässiges Netzwerk</li>
+                <li>Sicherstellen der Datenkonsistenz in verteilten Transaktionen</li>
+                <li>Partitionierung, Replikation und Verfügbarkeit von Daten</li>
+                <li>Koordination vieler verschiedener Knoten (wer ist der Chef?)</li>
+                <li>Und viele mehr</li>
+            </lsx-ul>
+    
+            <p>Natürlich gibt es dennoch viele sinnvolle Einsatzgebiete. Sonst würde es diese Vorlesung ja gar nicht geben. 😵‍💫</p>
+        </div>
+    </section>
+
+    <section data-title="Fallbeispiele" class="centered-content">
+        <div class="centered-content flex-row flex-wrap gap-3">
+            <!-- Das Internet -->
+            <lsx-modal>
+                <lsx-thumbnail style="height: 18em;" class="mw-100">
+                    <img src="02-grundlagen/arpanet.png" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                </lsx-thumbnail>
+                <lsx-content>
+                    <lsx-card title="Das Internet" bold class="mh-100">
+                        <lsx-card-body class="overflow-scroll">
+                            <p class="lead mb-4" style="text-align: justify;">
+                                Das größte verteilte System weltweit ist natürlich das Internet. Es ging in der heutigen
+                                Form 1983 aus dem bereits seit den 1960ern entwickelten ARPANET hervor. Die Abbildung unten
+                                zeigt eine zeitgenösische Karten mit allen damals an das ARPANET angeschlossenen Knoten.
+                            </p>
+                            <img src="02-grundlagen/arpanet.png" class="d-block m-auto" style="max-height: 50vh;"/>
+                        </lsx-card-body>
+                    </lsx-card>
+                </lsx-content>
+            </lsx-modal>
+
+            <!-- Webanwendungen -->
+            <lsx-modal>
+                <lsx-thumbnail style="height: 18em;" class="mw-100">
+                    <img src="02-grundlagen/webapp.png" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                </lsx-thumbnail>
+                <lsx-content>
+                    <lsx-card title="Webanwendungen" bold class="mh-100">
+                        <lsx-card-body class="overflow-scroll">
+                            <p class="lead mb-4" style="text-align: justify;">
+                                Webanwendungen mit Serverbackend sind ebenfalls verteilte Systeme (bzw. verteilte Anwendungen,
+                                je nachdem wie genau man zwischen diesen beiden Begriffe unterscheiden will). Ausschlaggebend
+                                hierfür ist das Zusammenspiel von Browser, Webserver und weiteren Komponenten. Man kann es sich
+                                aber auch so herleiten, dass Webanwendungen ein Teilausschnitt des größten verteilten Systems,
+                                nämlich des Internets, sind.
+                            </p>
+                            <img src="02-grundlagen/webapp.png" class="d-block m-auto" style="max-height: 50vh;"/>
+                        </lsx-card-body>
+                    </lsx-card>
+                </lsx-content>
+            </lsx-modal>
+
+            <!-- Internet of Things -->
+            <lsx-modal>
+                <lsx-thumbnail style="height: 18em;" class="mw-100">
+                    <img src="02-grundlagen/iot.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                </lsx-thumbnail>
+                <lsx-content>
+                    <lsx-card title="Internet of Things" bold class="mh-100">
+                        <lsx-card-body class="overflow-scroll">
+                            <p class="lead mb-4" style="text-align: justify;">
+                                IoT-Anwendungen zählen ebenfalls zu den größten verteilten Systemen (bzw. verteilten
+                                Anwendungen) weltweit, da oft viele tausend physische Geräte über das Internet miteinander
+                                verbunden sind. Hinzu kommen meist große Serverbackends zur Überwachung und Steuerung der
+                                Geräte sowie der Datensammlung und Auswertung.
+                            </p>
+                            <div class="d-flex flex-wrap justify-content-center align-items-center gap-3">
+                                <img src="02-grundlagen/iot.jpg" class="d-block h-100" style="max-height: 40vh;"/>
+                                <img src="02-grundlagen/iot-cartoon.png" class="d-block h-100" style="max-height: 40vh;"/>
+                            </div>
+                        </lsx-card-body>
+                    </lsx-card>
+                </lsx-content>
+            </lsx-modal>
+
+            <!-- Blockchain -->
+            <lsx-modal>
+                <lsx-thumbnail style="height: 18em;" class="mw-100">
+                    <img src="02-grundlagen/blockchain1.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                </lsx-thumbnail>
+                <lsx-content>
+                    <lsx-card title="Blockchain" bold class="mh-100">
+                        <lsx-card-body class="overflow-scroll">
+                            <p class="lead style="text-align: justify;">
+                                Bei der Blockchain handelt es sich um eine kryptographisch abgesicherte, verteilte
+                                Datenbank, an die nur neue Inhalte angehängt, aber keine enthaltenen Daten gelöscht
+                                werden können. Man spricht hier auch von Transaktionen. Eine Transaktion gilt nur
+                                dann als bestätigt, wenn mehr als die Hälfte aller Hauptknoten diese in ihre lokale
+                                Version der Blockchain-Datanbasis aufnimmt. Die Daten werden hierfür in einem P2P-Netzwerk
+                                veröffentlicht und untereinander ausgetauscht.
+                            </p>
+                            <p class="mb-4" style="text-align: justify;">
+                                Bitcoin leicht erklärt:
+                                <a href="https://www.wpvs.de/repo/publikationen/Wie%20funktioniert%20eigentlich%20Bitcoin.pdf" target="_blank">Wie funktioniert eigentlich Bitcoin?</a>
+                            </p>
+                            <div class="d-flex flex-wrap justify-content-center align-items-center gap-5">
+                                <img src="02-grundlagen/blockchain1.jpg" style="height: 20em; max-height: 40vh;"/>
+                                <img src="02-grundlagen/blockchain2.png" style="height: 20em; max-height: 40vh;"/>
+                                <img src="02-grundlagen/blockchain3.png" style="height: 20em; max-height: 40vh;"/>
+                            </div>
+                        </lsx-card-body>
+                    </lsx-card>
+                </lsx-content>
+            </lsx-modal>
+
+            <!-- MIDI -->
+            <lsx-modal>
+                <lsx-thumbnail style="height: 18em;" class="mw-100">
+                    <img src="02-grundlagen/midi.png" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                </lsx-thumbnail>
+                <lsx-content>
+                    <lsx-card title="Musical Instrument Digital Interface" bold class="mh-100">
+                        <lsx-card-body class="overflow-scroll">
+                            <p class="lead mb-4" style="text-align: justify;">
+                                <a href="https://de.wikipedia.org/wiki/MIDI" target="_blank">MIDI</a>
+                                ist eine 1982 eingeführte Digitalschnittstelle zur Verbindung elektronischer Musikgeräte.
+                                Ursprünglich zur herstellerübergreifenden Verbindung von Synthesizern und Masterkeyboards vorgesehen,
+                                können damit heute alle möglichen Geräte gesteuert werden. Technisch gesehen beinhalten die Geräte
+                                hierfür einen eingebetteten Microprozessor, um MIDI-Nachrichten senden und empfangen zu können.
+                                Die Nachrichten selbst sind überwiegend drei Bytes lang und kodieren musikalische Ereignisse wie
+                                das Spielen einer Note oder Drücken des Haltepedals.
+                            </p>
+                            <!-- <lsx-youtube class="img-thumbnail embed-responsive" video="Kpzhh9_5iqB0"></lsx-youtube> -->
+                            <div class="centered-content">
+                                <div class="embed-responsive ratio ratio-16x9 limited-width">
+                                    <iframe class="d-block" src="https://www.youtube-nocookie.com/embed/pzhh9_5iqB0?rel=0&amp;showinfo=0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </lsx-card-body>
+                    </lsx-card>
+                </lsx-content>
+            </lsx-modal>
+        </div>
+    </section>
 </section>
-
-<section data-title="Definition nach Andrew Tanenbaum">
-    <article class="centered-content">
-        <div class="limited-width">
-            <div class="markdown mb-4">
-                Ein **verteiltes System** ist ein System, in dem sich Hardware-
-                und Softwarekomponenten auf **mehreren Computern** befinden (können)
-                und diese nur über den **Austausch von Nachrichten** untereinander
-                kommunizieren, um ihre Aktionen zu koordinieren.
-        
-                <!-- Eine **verteilte Anwendung** ist eine Anwendung, die ein verteiltes
-                System zur Lösung des Anwendungsproblems nutzt und aus mehreren
-                Komponenten besteht, die über definierte Schnittstellen mit anderen
-                Komponenten des Systems und dem Anwender kommunizieren. {.mb-0} -->
-            </div>
-        
-            <lsx-accordion>
-                <lsx-accordion-page title="ARPANET / Internet" bold>
-                    <img src="02-grundlagen/arpanet.png" class="d-block w-100"/>
-                </lsx-accordion-page>
-
-                <lsx-accordion-page title="Webanwendungen" bold>
-                    <img src="02-grundlagen/webapp.png" class="d-block w-100" />
-                </lsx-accordion-page>
-
-                <lsx-accordion-page title="Internet of Things" bold>
-                    <div class="container-fluid">
-                        <div class="row gap-3">
-                            <div class="col-md p-3">
-                                <img src="02-grundlagen/pubsub-iot.png" class="d-block w-100" />
-                            </div>
-                        </div>
-                        <div class="row gap-3">
-                            <div class="col-md p-3">
-                                <img src="02-grundlagen/iot.jpg" class="d-block w-100" />
-                            </div>
-                            <div class="col-md p-3">
-                                <img src="02-grundlagen/iot-cartoon.png" class="d-block w-100" />
-                            </div>
-                        </div>
-                    </div>
-                </lsx-accordion-page>
-
-                <lsx-accordion-page title="Blockchain" bold>
-                    <div class="container-fluid">
-                        <div class="row gap-3">
-                            <div class="col-md p-3">
-                                <img src="02-grundlagen/blockchain1.png" class="d-block w-100" />
-                            </div>
-                        </div>
-                        <div class="row gap-3">
-                            <div class="col-md p-3">
-                                <img src="02-grundlagen/blockchain2.png" class="d-block w-100" />
-                            </div>
-                        </div>
-                        <div class="row gap-3">
-                            <div class="col-md p-3">
-                                <img src="02-grundlagen/blockchain5.png" class="d-block w-100" />
-                            </div>
-                        </div>
-                    </div>
-                </lsx-accordion-page>
-
-                <lsx-accordion-page title="MIDI" bold>
-                    <lsx-youtube video="pzhh9_5iqB0" aspect-ratio="16x9" style="width: 100%;"></lsx-youtube>
-                    <a href="https://youtu.be/pzhh9_5iqB0" target="_blank">Link zum Video</a>
-                </lsx-accordion-page>
-            </lsx-accordion>
-        </div>    
-    </article>
-</section>
-<!-- Bis hier -->
 
 <section data-title="Von Clients, Servern und Peers">
     <article class="centered-content">
@@ -355,7 +514,7 @@
                         Schichten für die Anwendungslogik und Datenhaltung können hingegen auch mehrere Server umfassen.
                     </p>
                     <div class="d-flex justify-content-center">
-                        <img src="02-grundlagen/architektur-3schichten.svg" alt="Skizze einer Dreischichtenarchitektur" class="d-block dhbw-limited-width m-auto" />
+                        <img src="02-grundlagen/architektur-3schichten.svg" alt="Skizze einer Dreischichtenarchitektur" class="d-block limited-width m-auto" />
                     </div>
                     
                     <h2 class="mt-4">Fallbeispiele</h2>
@@ -383,7 +542,7 @@
                         findet man häufig bei ERP-Systemen, die mehrere Clienttechnologien unterstützen müssen.
                     </p>
                     <div class="d-flex justify-content-center">
-                        <img src="02-grundlagen/architektur-4schichten.svg" alt="Skizze einer Dreischichtenarchitektur" class="d-block dhbw-limited-width m-auto" />
+                        <img src="02-grundlagen/architektur-4schichten.svg" alt="Skizze einer Dreischichtenarchitektur" class="d-block limited-width m-auto" />
                     </div>
                     
                     <h2 class="mt-4">Fallbeispiele</h2>
