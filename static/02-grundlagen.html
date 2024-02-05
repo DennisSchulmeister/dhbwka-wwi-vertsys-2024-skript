@@ -1,5 +1,4 @@
-<section data-chapter="h1" data-background-color="rgb(210,190,210)">
-    <h1>Grundlagen verteilter Systeme</h1>
+<section data-chapter="h1" data-title="Architektur verteilter Systeme" data-background-color="rgb(210,190,210)">
     <article class="markdown">
         ### Nach Abschluss dieses Kapitels können Sie …
         
@@ -15,103 +14,103 @@
     </article>
 </section>
 
-<section data-background-color="rgb(210,190,210)">
-    <h1>Verteilte Anwendungen im Alltag</h1>
-    <article>
-        <lsx-grid-fluid>
-            <lsx-row>
-                <lsx-col size="md">
-                    <img src="02-grundlagen/motivation-internet.png" class="img-thumbnail d-block" style="width: 100%" />
-                    Sämtliche Internetdienste
-                    <p class="dhbw-fontsize-tiny">
-                        <small>
-                            Bildnachweis: <a href="https://pixabay.com/illustrations/email-newsletter-marketing-online-3249062/" target="_blank">Pixabay: ribkhan</a>
-                        </small>
-                    </p>
-                </lsx-col>
-                <lsx-col size="md">
-                    <img src="02-grundlagen/motivation-mobile.jpg" class="img-thumbnail d-block" style="width: 100%" />
-                    Mobile Kommunikation
-                    <p class="dhbw-fontsize-tiny">
-                        <small>
-                            Bildnachweis: <a href="https://pixabay.com/photos/communication-communicate-3095538/" target="_blank">Pixabay: Bru-nO</a>
-                        </small>
-                    </p>
-                </lsx-col>
-            </lsx-row>
-            <lsx-row>
-                <lsx-col size="md">
-                    <img src="02-grundlagen/motivation-forschung.jpg" class="img-thumbnail d-block" style="width: 100%" />
-                    Forschung und Wissenschaft
-                    <p class="dhbw-fontsize-tiny">
-                        <small>
-                            Bildnachweis: <a href="https://pixabay.com/photos/moon-landing-apollo-11-nasa-60582/" target="_blank">Pixabay: WikiImages</a>
-                        </small>
-                    </p>
-                </lsx-col>
-                <lsx-col size="md">
-                    <img src="02-grundlagen/motivation-vod.jpg" class="img-thumbnail d-block" style="width: 100%" />
-                    Video-on-Demand
-                    <p class="dhbw-fontsize-tiny">
-                        <small>
-                            Bildnachweis: <a href="https://unsplash.com/photos/ngMtsE5r9eI" target="_blank">Unsplash: jenskreuter</a>
-                        </small>
-                    </p>
-                </lsx-col>
-            </lsx-row>
-            <lsx-row>
-                <lsx-col size="md">
-                    <img src="02-grundlagen/motivation-autonomes-fahren.jpg" class="img-thumbnail d-block" style="width: 100%" />
-                    Autonomes Fahren
-                </lsx-col>
-                <lsx-col size="md">
-                    <img src="02-grundlagen/motivation-iot.jpg" class="img-thumbnail d-block" style="width: 100%" />
-                    Internet of Things
-                    <p class="dhbw-fontsize-tiny">
-                        <small>
-                            Bildnachweis: <a href="https://pixabay.com/photos/smarthome-smart-house-smart-4447520/" target="_blank">Pixabay: haus_automation</a>
-                        </small>
-                    </p>
-                </lsx-col>
-            </lsx-row>
-        </lsx-grid-fluid>
-    </article>
-    <aside>
-        <p>
-            Auch wenn wir es inzwischen kaum noch merken, begleiten verteilte Systeme und Anwendungen
-            schon seit langem unseren Alltag. Wie selbstverständlich surfen wir im Internet, teilen
-            Bilder online oder verschicken Kurznachrichten mit dem Smartphone. Abends streamen wir dann
-            die neuste Folge unserer Lieblingsserie ohne dabei auf feste Sendezeiten angewiesen zu sein. 🍿
-            Und geht es nach dem Willen der Hersteller, steuern wir schon bald sämtliche Haushaltsgeräte
-            ganz bequem per Sprachbefehl vom Sofa aus, 🛋️ optimieren den Straßenverkehr mit vernetzten
-            selbstfahrenden Fahrzeugen und überwachen unsere Umwelt mit immer mehr IoT-Devices.
-        </p>
-        <p>
-            Ohne Zweifel leben wir in einer vernetzten Welt, in der immer mehr Computer, Smartphones,
-            Smart TVs und viele andere Gegenstände miteinander verbunden sind. Neu ist diese Entwicklung
-            allerdings nicht, da die zugrunde liegenden Technologien oftmals schon seit Jahrzehnten
-            eingesetzt und weiterentwickelt werden. 📆 So waren bereits an der ersten Mondlandung 1969
-            mindestens vier miteinander verbundene Computersysteme beteiligt, wodurch der Mondflug
-            überhaupt nur durchgeführt werden konnte. 🚀 Seither wurden natürlich immer mehr Anwendungsfälle
-            gefunden, so dass verteilte Anwendungen heute nicht mehr die Ausnahme sondern in vielen
-            Bereichen sogar die Regel sind.
-        </p>
-        <p>
-            Technisch gesehen erfordern all diese Anwendungen in der Regel eine weit beachtlichere
-            Infrastruktur, als wir aus Anwendersicht zunächst vermuten würden. Ziel dieses Kapitels
-            soll daher sein, die ersten Geheimnisse über das Wesen und die Beschaffenheit verteilter
-            Systeme zu lüften, damit wir am Ende des Semesters wissen, wie all diese tollen Dinge
-            funktionieren. 🧙‍♂️
-        </p>
-    </aside>
-</section>
-
-<!-- ==================== -->
-<!-- Begriffsdefinitionen -->
-<!-- ==================== -->
-<section data-use-template="teilkapitel" data-titel="Begriffsdefinitionen"></section>
+<!-- =================== -->
+<!-- Allgemeine Begriffe -->
+<!-- =================== -->
+<section data-use-template="teilkapitel" data-titel="Allgemeine Begriffe"></section>
 
 <section data-title="Was ist ein verteiltes System?" data-background-image="02-grundlagen/definition-hintergrund.jpg" data-background-blur="5px">
+    <!-- TODO: In die Intro verschieben? -->
+    <section data-title="Verteilte Anwendungen im Alltag">
+        <article>
+            <lsx-grid-fluid>
+                <lsx-row>
+                    <lsx-col size="md">
+                        <img src="02-grundlagen/motivation-internet.png" class="img-thumbnail d-block" style="width: 100%" />
+                        Sämtliche Internetdienste
+                        <p class="dhbw-fontsize-tiny">
+                            <small>
+                                Bildnachweis: <a href="https://pixabay.com/illustrations/email-newsletter-marketing-online-3249062/" target="_blank">Pixabay: ribkhan</a>
+                            </small>
+                        </p>
+                    </lsx-col>
+                    <lsx-col size="md">
+                        <img src="02-grundlagen/motivation-mobile.jpg" class="img-thumbnail d-block" style="width: 100%" />
+                        Mobile Kommunikation
+                        <p class="dhbw-fontsize-tiny">
+                            <small>
+                                Bildnachweis: <a href="https://pixabay.com/photos/communication-communicate-3095538/" target="_blank">Pixabay: Bru-nO</a>
+                            </small>
+                        </p>
+                    </lsx-col>
+                </lsx-row>
+                <lsx-row>
+                    <lsx-col size="md">
+                        <img src="02-grundlagen/motivation-forschung.jpg" class="img-thumbnail d-block" style="width: 100%" />
+                        Forschung und Wissenschaft
+                        <p class="dhbw-fontsize-tiny">
+                            <small>
+                                Bildnachweis: <a href="https://pixabay.com/photos/moon-landing-apollo-11-nasa-60582/" target="_blank">Pixabay: WikiImages</a>
+                            </small>
+                        </p>
+                    </lsx-col>
+                    <lsx-col size="md">
+                        <img src="02-grundlagen/motivation-vod.jpg" class="img-thumbnail d-block" style="width: 100%" />
+                        Video-on-Demand
+                        <p class="dhbw-fontsize-tiny">
+                            <small>
+                                Bildnachweis: <a href="https://unsplash.com/photos/ngMtsE5r9eI" target="_blank">Unsplash: jenskreuter</a>
+                            </small>
+                        </p>
+                    </lsx-col>
+                </lsx-row>
+                <lsx-row>
+                    <lsx-col size="md">
+                        <img src="02-grundlagen/motivation-autonomes-fahren.jpg" class="img-thumbnail d-block" style="width: 100%" />
+                        Autonomes Fahren
+                    </lsx-col>
+                    <lsx-col size="md">
+                        <img src="02-grundlagen/motivation-iot.jpg" class="img-thumbnail d-block" style="width: 100%" />
+                        Internet of Things
+                        <p class="dhbw-fontsize-tiny">
+                            <small>
+                                Bildnachweis: <a href="https://pixabay.com/photos/smarthome-smart-house-smart-4447520/" target="_blank">Pixabay: haus_automation</a>
+                            </small>
+                        </p>
+                    </lsx-col>
+                </lsx-row>
+            </lsx-grid-fluid>
+        </article>
+        <aside>
+            <p>
+                Auch wenn wir es inzwischen kaum noch merken, begleiten verteilte Systeme und Anwendungen
+                schon seit langem unseren Alltag. Wie selbstverständlich surfen wir im Internet, teilen
+                Bilder online oder verschicken Kurznachrichten mit dem Smartphone. Abends streamen wir dann
+                die neuste Folge unserer Lieblingsserie ohne dabei auf feste Sendezeiten angewiesen zu sein. 🍿
+                Und geht es nach dem Willen der Hersteller, steuern wir schon bald sämtliche Haushaltsgeräte
+                ganz bequem per Sprachbefehl vom Sofa aus, 🛋️ optimieren den Straßenverkehr mit vernetzten
+                selbstfahrenden Fahrzeugen und überwachen unsere Umwelt mit immer mehr IoT-Devices.
+            </p>
+            <p>
+                Ohne Zweifel leben wir in einer vernetzten Welt, in der immer mehr Computer, Smartphones,
+                Smart TVs und viele andere Gegenstände miteinander verbunden sind. Neu ist diese Entwicklung
+                allerdings nicht, da die zugrunde liegenden Technologien oftmals schon seit Jahrzehnten
+                eingesetzt und weiterentwickelt werden. 📆 So waren bereits an der ersten Mondlandung 1969
+                mindestens vier miteinander verbundene Computersysteme beteiligt, wodurch der Mondflug
+                überhaupt nur durchgeführt werden konnte. 🚀 Seither wurden natürlich immer mehr Anwendungsfälle
+                gefunden, so dass verteilte Anwendungen heute nicht mehr die Ausnahme sondern in vielen
+                Bereichen sogar die Regel sind.
+            </p>
+            <p>
+                Technisch gesehen erfordern all diese Anwendungen in der Regel eine weit beachtlichere
+                Infrastruktur, als wir aus Anwendersicht zunächst vermuten würden. Ziel dieses Kapitels
+                soll daher sein, die ersten Geheimnisse über das Wesen und die Beschaffenheit verteilter
+                Systeme zu lüften, damit wir am Ende des Semesters wissen, wie all diese tollen Dinge
+                funktionieren. 🧙‍♂️
+            </p>
+        </aside>
+    </section>
+
     <section data-title="Alltäglicher Sprachgebrauch" class="centered-content">
         <lsx-grid-fluid class="p-0 limited-width2">
             <lsx-row>
@@ -372,273 +371,31 @@
     </section>
 </section>
 
-<section data-title="Von Clients, Servern und Peers">
-    <article class="centered-content">
-        <table class="m-auto mb-5">
-            <tr>
-                <td style="padding-right: 0.5em;">
-                    💿
-                </td>
-                <td style="padding-right: 0.5em;">
-                    <b>Server</b>
-                </td>
-                <td>
-                    Langlaufendes Programm, das einen Dienst zur Verfügung stellt.
-                    <span style="color: darkred;">
-                        Wartet darauf, bis sich ein Client mit ihm verbindet.
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td style="padding-right: 0.33em;">
-                    💿
-                </td>
-                <td style="padding-right: 0.5em;">
-                    <b>Client</b>
-                </td>
-                <td>
-                    Kurzlebiges Programm, das den Dienst nutzt.
-                    <span style="color: darkred;">
-                        Stellt hierfür eine Verbindung zum Server her.
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td style="padding-right: 0.5em; padding-bottom: 1em;">
-                    💿
-                </td>
-                <td style="padding-right: 0.5em; padding-bottom: 1em;">
-                    <b>Peer</b>
-                </td>
-                <td style="padding-bottom: 1em;">
-                    Spezielles Programm, das sowohl Client als auch Server ist.
-                </td>
-            </tr>
-            <tr style="border: 0px dashed black; border-top-width: 1px;">
-                <td style="padding-top: 1em; padding-right: 0.5em;">
-                    🖥
-                </td>
-                <td style="padding-top: 1em; padding-right: 0.5em;">
-                    <b>Host</b>
-                </td>
-                <td style="padding-top: 1em;">
-                    Der Rechner, auf dem die Software läuft.
-                    <span style="color: darkred;">
-                        Oft sagen die Leute „Server” und meinen damit den „Host”.
-                    </span>
-                </td>
-            </tr>
-        </table>
+<!-- TODO:
+    - Fallbeispiel Socketprogrammierung in Node.js
+       - TCP/IP-Stack (Untere drei im OS, Anwendung kann sich nochmal aufteilen)
+       - Quellcode des Beispiels
 
-        <lsx-tab-pages>
-            <lsx-tab-page title="Einfache Architekturmuster">
-                <div class="d-flex gap-3">
-                    <div class="card p-3">
-                        <h3 class="mb-4">Client/Server-Architektur</h3>
-                        <img src="02-grundlagen/client-server.svg" alt="Skizze mit vielen Clients und einem Server in der Mitte" class="d-block w-100" />
-                    </div>
-                    <div class="card p-3">
-                        <h3 class="mb-4">Peer-to-Peer-Architektur</h3>
-                        <img src="02-grundlagen/peer-to-peer.svg" alt="Skizze mit vielen untereinander verbundenen Peers" class="d-block w-100" />
-                    </div>
-                </div>
-            </lsx-tab-page>
-            <lsx-tab-page title="Fallbeispiel: Socketprogrammierung mit Node.js">
-                <lsx-github-edit url="https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes/tree/main/Socketprogrammierung%20mit%20Node.js"></lsx-github-edit>
+    - Vorteilte verteilter Systeme
+        - Skalierung: Doppeldecker-Bus, Raytracing (Michael und alte Folie #5)
+        - Resilienz (Folien Michael)
 
-                <lsx-grid-fluid class="mt-3 p-0">
-                    <lsx-row>
-                        <lsx-col size="md">
-                            <img src="02-grundlagen/socket-server.png" class="img-thumbnail d-block w-100" />
-                        </lsx-col>
-                        <lsx-col size="md">
-                            <img src="02-grundlagen/socket-client.png" class="img-thumbnail d-block w-100" />
-                        </lsx-col>
-                        <lsx-col size="md">
-                            <img src="02-grundlagen/socket-netcat.png" class="img-thumbnail d-block w-100" />
-                        </lsx-col>
-                    </lsx-row>
-                </lsx-grid-fluid>
-            </lsx-tab-page>
-        </lsx-tab-pages>
-    </article>
-</section>
-
-<section data-title="Grundlegende Architekturmodelle">
-    <article class="centered-content">
-        <div class="limited-width2">
-            <lsx-tab-pages class="w-100">
-                <lsx-tab-page title="Grundmodell">
-                    <h2>Beschreibung</h2>
-                    <p style="margin-bottom: 2em;">
-                        Dies ist die einfachste Architektur von allen. Sie besteht lediglich aus einem Server,
-                        der einen Dienst anbietet und den Clients, welche den Dienst konsumieren. Sehr oft kommt
-                        dabei ein synchrones, den Client blockierendes Request/Reply-Verfahren zum Einsatz, das
-                        besonders einfach zu programmieren ist. Technisch gesehen ist dies aber kein Muss, da
-                        Sockets prinzipiell jede Kommunikationsreihenfolge zulassen.
-                    </p>
-                    <div class="d-flex justify-content-center">
-                        <img src="02-grundlagen/architektur-client-server.svg" alt="Skizze eines Servers und dreier Clients" class="d-block m-auto" style="max-width: 45em;" />
-                    </div>
-                    
-                    <h2 class="mt-4">Fallbeispiele</h2>
-                    <lsx-ul emoji="✅">
-                        <li>
-                            Browser und Webserver im World Wide Web
-                        </li>
-                        <li>
-                            Browser App mit Zugriff auf den Server via Websockets
-                        </li>
-                        <li>
-                            Wartungszugang auf einen Rechner per Secure Shell
-                        </li>
-                        <li>
-                            Zugriff auf ein E-Mailpostfach mit IMAP
-                        </li>
-                        <li>
-                            Zentrale Quellcodeverwaltung mit Subversion
-                        </li>
-                        <li>
-                            WebDAV-Zugriff auf einen geteilten Onlineordner
-                        </li>
-                    </lsx-ul>
-                </lsx-tab-page>
+    - Nachteile verteilter Systeme, 2PC, Eheschließung, 3PC
+       - 2PC heute nicht mehr relevant, ebenso wie synchrone Programmiermodelle
+         Weil sie die Verteilung quasi aufheben und so die Vorteile nicht nutzen
+         Heute Systeme sind eventuell-konsistent
+       - Acht Irrtümer
+       - Zeitsynchronisation, gekürzt, wichtige Begriffe: Kausalität, Happened-Before-Relation
+       - CAP-Theorem auch anhand Michaels Folien
+       - Fehlerstrategien, Coffee Shop
     
-                <lsx-tab-page title="Dreischichtenarchitektur">
-                    <h2>Beschreibung</h2>
-                    <p style="margin-bottom: 2em;">
-                        Hierbei handelt es sich ebenfalls um eine Client/Server-Architektur, jedoch greift der Server zusätzlich
-                        auf eine Datenbank zu. Client, Server und Datenbank werden daher den drei Schichten <b>Darstellung</b>,
-                        <b>Anwendungslogik</b> und <b>Datenhaltung</b> zugeordnet. Für die Darstellung wurden früher ausschließlich
-                        native Clients verwendet, die heute zunehmend von Webanwendungen und mobilen Apps verdrängt werden. Die
-                        Schichten für die Anwendungslogik und Datenhaltung können hingegen auch mehrere Server umfassen.
-                    </p>
-                    <div class="d-flex justify-content-center">
-                        <img src="02-grundlagen/architektur-3schichten.svg" alt="Skizze einer Dreischichtenarchitektur" class="d-block limited-width m-auto" />
-                    </div>
-                    
-                    <h2 class="mt-4">Fallbeispiele</h2>
-                    <lsx-ul emoji="✅">
-                        <li>
-                            Jede Webanwendung mit einer Datenbank im Hintergrund
-                        </li>
-                        <li>
-                            Einfache Informationssysteme ohne eigenständigen Präsentationsserver
-                        </li>
-                        <li>
-                            Die meisten ERP- und CRM-Systeme (unter anderem SAP und Navision)
-                        </li>
-                        <li>
-                            Per Webservice erreichbare Microservices
-                        </li>
-                    </lsx-ul>
-                </lsx-tab-page>
+    - Allgemeine Anforderungen an verteilte Systeme (alte Folie "Anforderungen an den Systementwurf
+       - Übersicht
+       - Beispiel: Skalierung und Ausfallsicherheit in der Cloud
+       - Beispiel: Die neuen Transparenzarten
     
-                <lsx-tab-page title="Vierschichtenarchitektur">
-                    <h2>Beschreibung</h2>
-                    <p style="margin-bottom: 2em;">
-                        Hierbei handelt es sich um eine Variation der Dreischichtenarchitektur, bei der die mittlere Sicht
-                        in eine <b>Präsentations-</b> und eine <b>Anwendungsschicht</b> zerlegt wurde. Dieses Modell
-                        findet man häufig bei ERP-Systemen, die mehrere Clienttechnologien unterstützen müssen.
-                    </p>
-                    <div class="d-flex justify-content-center">
-                        <img src="02-grundlagen/architektur-4schichten.svg" alt="Skizze einer Dreischichtenarchitektur" class="d-block limited-width m-auto" />
-                    </div>
-                    
-                    <h2 class="mt-4">Fallbeispiele</h2>
-                    <lsx-ul emoji="✅">
-                        <li>
-                            ERP- und CRM-Systeme mit einem eigenständigen Präsentationsserver
-                        </li>
-                        <li>
-                            Java-Webanwendung mit getrenntem Deployment von Servlets und EJBs
-                        </li>
-                    </lsx-ul>
-                </lsx-tab-page>
-    
-                <lsx-tab-page title="Microservices">
-                    <h2>Beschreibung</h2>
-                    <p>
-                        Microservices zerlegen eine große, monolithische Anwendung in viele kleine Teilanwendungen. Jeder Microservice hat
-                        ein klar umrissenes Aufgabengebiet, besitzt eine gut dokumentierte und versionierte Schnittstelle und wird in der
-                        Regel von einem eigenen Team entwickelt und betrieben. Entwicklung, Test und Betrieb sind sehr stark automatisiert.
-                        Microservices eignen sich daher oft für große Firmen mit mehreren, unabhängigen Entwicklungsmannschaften.
-                    </p>
-                    <div class="d-flex justify-content-center">
-                        <img src="02-grundlagen/microservices.png" alt="Skizze einer Microservice-Architektur" style="max-height: 26em; max-width: 100%;" />
-                    </div>
-                    
-                    <h2 class="mt-4">Fallbeispiele</h2>
-                    <lsx-ul emoji="✅">
-                        <li>
-                            Amazon gilt allgemein als Vorreiter, obwohl sie den Begriff selbst nicht verwenden
-                        </li>
-                        <li>
-                            Große Internetplattformen wie eBay, Netflix, SoundCloud, Spotify, …
-                        </li>
-                    </lsx-ul>
-                </lsx-tab-page>
-                
-                <lsx-tab-page title="Reverse Proxy / API-Gateway">
-                    <h2>Beschreibung</h2>
-                    <p style="margin-bottom: 2em;">
-                        Serverseitig kann ein Reverse Proxy als API-Gateway eingesetzt werden, um die eingehenden Anfragen
-                        zu bündeln. Dadurch wird es möglich, zusätzliche Sicherheitsprüfungen zu implementieren, häufig
-                        angefragte Inhalte zu cachen oder eine transparente Lastverteilung vorzunehmen.
-                    </p>
-                    <div class="d-flex justify-content-center">
-                        <img src="02-grundlagen/proxy-serverseitig.png" alt="Architekturskizze mit serverseitigem Proxy" style="max-height: 16em; max-width: 100%;" />
-                    </div>
-                    
-                    <h2 class="mt-4">Anwendungsbeispiele</h2>
-                    <lsx-ul emoji="✅">
-                        <li>
-                            Steigerung der Performance durch Caching häufig angefragter Daten
-                        </li>
-                        <li>
-                            Implementierung von Zugangsbeschränkungen und Upload Filtern
-                        </li>
-                        <li>
-                            Realisierung von Paywalls zum Ausfiltern kostenpflichtiger Inhalte
-                        </li>
-                        <li>
-                            Sicherstellen einer vorgelagerten, zentralen Authentifizierung
-                        </li>
-                        <li>
-                            Serverseitige Lastverteilung durch Weiterleitung an unterschiedliche Server
-                        </li>
-                    </lsx-ul>
-                </lsx-tab-page>
-                
-                <lsx-tab-page title="Proxy">
-                    <h2>Beschreibung</h2>
-                    <p style="margin-bottom: 2em;">
-                        Ein clientseitiger Proxy bildet die Schnittstelle eines entfernten Servers innerhalb
-                        des lokalen Netzwerks ab. Die Anfragen der Clients werden nicht direkt an den Server
-                        sondern an den lokalen Proxy gesendet, der daraufhin entscheiden kann, ob er die
-                        Anfragen weiterleitet oder selbst beantwortet.
-                    </p>
-                    <div class="d-flex justify-content-center">
-                        <img src="02-grundlagen/proxy-clientseitig.png" alt="Architekturskizze mit clientseitigem Proxy" style="max-height: 16em; max-width: 100%;" />
-                    </div>
-                    
-                    <h2 class="mt-4">Anwendungsbeispiele</h2>
-                    <lsx-ul emoji="✅">
-                        <li>
-                            Steigerung der Performance durch Caching häufig angefragter Daten
-                        </li>
-                        <li>
-                            Implementierung von Zugangsbeschränkungen und Content Filtern
-                        </li>
-                        <li>
-                            Clientseitige Lastverteilung durch Weiterleitung an unterschiedliche Server
-                        </li>
-                    </lsx-ul>
-                </lsx-tab-page>
-            </lsx-tab-pages>
-        </div>
-    </article>
-</section>
+    - Quiz
+-->
 
 <!-- ================== -->
 <!-- Entwurfsprinzipien -->
@@ -1827,3 +1584,290 @@
         </small>
     </aside>
 </section>
+
+<!-- ================= -->
+<!-- Architekturmuster -->
+<!-- ================= -->
+<section data-use-template="teilkapitel" data-titel="Architekturmuster"></section>
+
+<!-- TODO: Hier auch die Cloud-Architektur-Folien einarbeiten (ggf. in gekürzter Fassung) -->
+<section data-title="Von Clients, Servern und Peers">
+    <article class="centered-content">
+        <table class="m-auto mb-5">
+            <tr>
+                <td style="padding-right: 0.5em;">
+                    💿
+                </td>
+                <td style="padding-right: 0.5em;">
+                    <b>Server</b>
+                </td>
+                <td>
+                    Langlaufendes Programm, das einen Dienst zur Verfügung stellt.
+                    <span style="color: darkred;">
+                        Wartet darauf, bis sich ein Client mit ihm verbindet.
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-right: 0.33em;">
+                    💿
+                </td>
+                <td style="padding-right: 0.5em;">
+                    <b>Client</b>
+                </td>
+                <td>
+                    Kurzlebiges Programm, das den Dienst nutzt.
+                    <span style="color: darkred;">
+                        Stellt hierfür eine Verbindung zum Server her.
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-right: 0.5em; padding-bottom: 1em;">
+                    💿
+                </td>
+                <td style="padding-right: 0.5em; padding-bottom: 1em;">
+                    <b>Peer</b>
+                </td>
+                <td style="padding-bottom: 1em;">
+                    Spezielles Programm, das sowohl Client als auch Server ist.
+                </td>
+            </tr>
+            <tr style="border: 0px dashed black; border-top-width: 1px;">
+                <td style="padding-top: 1em; padding-right: 0.5em;">
+                    🖥
+                </td>
+                <td style="padding-top: 1em; padding-right: 0.5em;">
+                    <b>Host</b>
+                </td>
+                <td style="padding-top: 1em;">
+                    Der Rechner, auf dem die Software läuft.
+                    <span style="color: darkred;">
+                        Oft sagen die Leute „Server” und meinen damit den „Host”.
+                    </span>
+                </td>
+            </tr>
+        </table>
+
+        <lsx-tab-pages>
+            <lsx-tab-page title="Einfache Architekturmuster">
+                <div class="d-flex gap-3">
+                    <div class="card p-3">
+                        <h3 class="mb-4">Client/Server-Architektur</h3>
+                        <img src="02-grundlagen/client-server.svg" alt="Skizze mit vielen Clients und einem Server in der Mitte" class="d-block w-100" />
+                    </div>
+                    <div class="card p-3">
+                        <h3 class="mb-4">Peer-to-Peer-Architektur</h3>
+                        <img src="02-grundlagen/peer-to-peer.svg" alt="Skizze mit vielen untereinander verbundenen Peers" class="d-block w-100" />
+                    </div>
+                </div>
+            </lsx-tab-page>
+            <lsx-tab-page title="Fallbeispiel: Socketprogrammierung mit Node.js">
+                <lsx-github-edit url="https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes/tree/main/Socketprogrammierung%20mit%20Node.js"></lsx-github-edit>
+
+                <lsx-grid-fluid class="mt-3 p-0">
+                    <lsx-row>
+                        <lsx-col size="md">
+                            <img src="02-grundlagen/socket-server.png" class="img-thumbnail d-block w-100" />
+                        </lsx-col>
+                        <lsx-col size="md">
+                            <img src="02-grundlagen/socket-client.png" class="img-thumbnail d-block w-100" />
+                        </lsx-col>
+                        <lsx-col size="md">
+                            <img src="02-grundlagen/socket-netcat.png" class="img-thumbnail d-block w-100" />
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
+            </lsx-tab-page>
+        </lsx-tab-pages>
+    </article>
+</section>
+
+<section data-title="Grundlegende Architekturmodelle">
+    <article class="centered-content">
+        <div class="limited-width2">
+            <lsx-tab-pages class="w-100">
+                <lsx-tab-page title="Grundmodell">
+                    <h2>Beschreibung</h2>
+                    <p style="margin-bottom: 2em;">
+                        Dies ist die einfachste Architektur von allen. Sie besteht lediglich aus einem Server,
+                        der einen Dienst anbietet und den Clients, welche den Dienst konsumieren. Sehr oft kommt
+                        dabei ein synchrones, den Client blockierendes Request/Reply-Verfahren zum Einsatz, das
+                        besonders einfach zu programmieren ist. Technisch gesehen ist dies aber kein Muss, da
+                        Sockets prinzipiell jede Kommunikationsreihenfolge zulassen.
+                    </p>
+                    <div class="d-flex justify-content-center">
+                        <img src="02-grundlagen/architektur-client-server.svg" alt="Skizze eines Servers und dreier Clients" class="d-block m-auto" style="max-width: 45em;" />
+                    </div>
+                    
+                    <h2 class="mt-4">Fallbeispiele</h2>
+                    <lsx-ul emoji="✅">
+                        <li>
+                            Browser und Webserver im World Wide Web
+                        </li>
+                        <li>
+                            Browser App mit Zugriff auf den Server via Websockets
+                        </li>
+                        <li>
+                            Wartungszugang auf einen Rechner per Secure Shell
+                        </li>
+                        <li>
+                            Zugriff auf ein E-Mailpostfach mit IMAP
+                        </li>
+                        <li>
+                            Zentrale Quellcodeverwaltung mit Subversion
+                        </li>
+                        <li>
+                            WebDAV-Zugriff auf einen geteilten Onlineordner
+                        </li>
+                    </lsx-ul>
+                </lsx-tab-page>
+    
+                <lsx-tab-page title="Dreischichtenarchitektur">
+                    <h2>Beschreibung</h2>
+                    <p style="margin-bottom: 2em;">
+                        Hierbei handelt es sich ebenfalls um eine Client/Server-Architektur, jedoch greift der Server zusätzlich
+                        auf eine Datenbank zu. Client, Server und Datenbank werden daher den drei Schichten <b>Darstellung</b>,
+                        <b>Anwendungslogik</b> und <b>Datenhaltung</b> zugeordnet. Für die Darstellung wurden früher ausschließlich
+                        native Clients verwendet, die heute zunehmend von Webanwendungen und mobilen Apps verdrängt werden. Die
+                        Schichten für die Anwendungslogik und Datenhaltung können hingegen auch mehrere Server umfassen.
+                    </p>
+                    <div class="d-flex justify-content-center">
+                        <img src="02-grundlagen/architektur-3schichten.svg" alt="Skizze einer Dreischichtenarchitektur" class="d-block limited-width m-auto" />
+                    </div>
+                    
+                    <h2 class="mt-4">Fallbeispiele</h2>
+                    <lsx-ul emoji="✅">
+                        <li>
+                            Jede Webanwendung mit einer Datenbank im Hintergrund
+                        </li>
+                        <li>
+                            Einfache Informationssysteme ohne eigenständigen Präsentationsserver
+                        </li>
+                        <li>
+                            Die meisten ERP- und CRM-Systeme (unter anderem SAP und Navision)
+                        </li>
+                        <li>
+                            Per Webservice erreichbare Microservices
+                        </li>
+                    </lsx-ul>
+                </lsx-tab-page>
+    
+                <lsx-tab-page title="Vierschichtenarchitektur">
+                    <h2>Beschreibung</h2>
+                    <p style="margin-bottom: 2em;">
+                        Hierbei handelt es sich um eine Variation der Dreischichtenarchitektur, bei der die mittlere Sicht
+                        in eine <b>Präsentations-</b> und eine <b>Anwendungsschicht</b> zerlegt wurde. Dieses Modell
+                        findet man häufig bei ERP-Systemen, die mehrere Clienttechnologien unterstützen müssen.
+                    </p>
+                    <div class="d-flex justify-content-center">
+                        <img src="02-grundlagen/architektur-4schichten.svg" alt="Skizze einer Dreischichtenarchitektur" class="d-block limited-width m-auto" />
+                    </div>
+                    
+                    <h2 class="mt-4">Fallbeispiele</h2>
+                    <lsx-ul emoji="✅">
+                        <li>
+                            ERP- und CRM-Systeme mit einem eigenständigen Präsentationsserver
+                        </li>
+                        <li>
+                            Java-Webanwendung mit getrenntem Deployment von Servlets und EJBs
+                        </li>
+                    </lsx-ul>
+                </lsx-tab-page>
+    
+                <lsx-tab-page title="Microservices">
+                    <h2>Beschreibung</h2>
+                    <p>
+                        Microservices zerlegen eine große, monolithische Anwendung in viele kleine Teilanwendungen. Jeder Microservice hat
+                        ein klar umrissenes Aufgabengebiet, besitzt eine gut dokumentierte und versionierte Schnittstelle und wird in der
+                        Regel von einem eigenen Team entwickelt und betrieben. Entwicklung, Test und Betrieb sind sehr stark automatisiert.
+                        Microservices eignen sich daher oft für große Firmen mit mehreren, unabhängigen Entwicklungsmannschaften.
+                    </p>
+                    <div class="d-flex justify-content-center">
+                        <img src="02-grundlagen/microservices.png" alt="Skizze einer Microservice-Architektur" style="max-height: 26em; max-width: 100%;" />
+                    </div>
+                    
+                    <h2 class="mt-4">Fallbeispiele</h2>
+                    <lsx-ul emoji="✅">
+                        <li>
+                            Amazon gilt allgemein als Vorreiter, obwohl sie den Begriff selbst nicht verwenden
+                        </li>
+                        <li>
+                            Große Internetplattformen wie eBay, Netflix, SoundCloud, Spotify, …
+                        </li>
+                    </lsx-ul>
+                </lsx-tab-page>
+                
+                <lsx-tab-page title="Reverse Proxy / API-Gateway">
+                    <h2>Beschreibung</h2>
+                    <p style="margin-bottom: 2em;">
+                        Serverseitig kann ein Reverse Proxy als API-Gateway eingesetzt werden, um die eingehenden Anfragen
+                        zu bündeln. Dadurch wird es möglich, zusätzliche Sicherheitsprüfungen zu implementieren, häufig
+                        angefragte Inhalte zu cachen oder eine transparente Lastverteilung vorzunehmen.
+                    </p>
+                    <div class="d-flex justify-content-center">
+                        <img src="02-grundlagen/proxy-serverseitig.png" alt="Architekturskizze mit serverseitigem Proxy" style="max-height: 16em; max-width: 100%;" />
+                    </div>
+                    
+                    <h2 class="mt-4">Anwendungsbeispiele</h2>
+                    <lsx-ul emoji="✅">
+                        <li>
+                            Steigerung der Performance durch Caching häufig angefragter Daten
+                        </li>
+                        <li>
+                            Implementierung von Zugangsbeschränkungen und Upload Filtern
+                        </li>
+                        <li>
+                            Realisierung von Paywalls zum Ausfiltern kostenpflichtiger Inhalte
+                        </li>
+                        <li>
+                            Sicherstellen einer vorgelagerten, zentralen Authentifizierung
+                        </li>
+                        <li>
+                            Serverseitige Lastverteilung durch Weiterleitung an unterschiedliche Server
+                        </li>
+                    </lsx-ul>
+                </lsx-tab-page>
+                
+                <lsx-tab-page title="Proxy">
+                    <h2>Beschreibung</h2>
+                    <p style="margin-bottom: 2em;">
+                        Ein clientseitiger Proxy bildet die Schnittstelle eines entfernten Servers innerhalb
+                        des lokalen Netzwerks ab. Die Anfragen der Clients werden nicht direkt an den Server
+                        sondern an den lokalen Proxy gesendet, der daraufhin entscheiden kann, ob er die
+                        Anfragen weiterleitet oder selbst beantwortet.
+                    </p>
+                    <div class="d-flex justify-content-center">
+                        <img src="02-grundlagen/proxy-clientseitig.png" alt="Architekturskizze mit clientseitigem Proxy" style="max-height: 16em; max-width: 100%;" />
+                    </div>
+                    
+                    <h2 class="mt-4">Anwendungsbeispiele</h2>
+                    <lsx-ul emoji="✅">
+                        <li>
+                            Steigerung der Performance durch Caching häufig angefragter Daten
+                        </li>
+                        <li>
+                            Implementierung von Zugangsbeschränkungen und Content Filtern
+                        </li>
+                        <li>
+                            Clientseitige Lastverteilung durch Weiterleitung an unterschiedliche Server
+                        </li>
+                    </lsx-ul>
+                </lsx-tab-page>
+            </lsx-tab-pages>
+        </div>
+    </article>
+</section>
+
+<!-- TODO: Übungsaufgaben
+    - Gruppenarbeit: Größere Beispiel-Anwendung zum Laufen bringen, erst jeder auf seinem Laptop, dann verteilt
+    - Gruppenarbeit: Skalierung eines Microservices (je Laptop eine Instanz)
+-->
+
+<!-- =========== -->
+<!-- Algorithmen -->
+<!-- =========== -->
+<section data-use-template="teilkapitel" data-titel="Algorithmen"></section>
+
+<!-- TODO: Folien Michael zu Leader Election usw. -->
+
