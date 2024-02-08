@@ -28,7 +28,7 @@ let ctx = await esbuild.context({
 
 let { host, port } = await ctx.serve({
     servedir: path.join(__dirname, "..", "static"),
-    port: 8080,
+    port: 8888,
 });
 
 console.log(`Listening on ${host}:${port}`);
