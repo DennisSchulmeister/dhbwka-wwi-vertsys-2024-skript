@@ -1243,11 +1243,160 @@
 
 <section data-title="Vorteile verteilter Systeme">
     <section data-title="Skalierbarkeit">
-        ...
+        <!-- 1. Skalierungsarten, 2. Busbeispiel, 3. Render Farm -->
+        <article class="centered-content">
+            <div class="limited-width2">
+                <div class="d-md-flex flex-wrap gap-3 align-items-center mb-5">
+                    <img src="02-grundlagen/skalierung.png" class="d-block w-100" style="flex: 1;">
+                    <div class="markdown" style="flex: 2;">
+                        Ein typischer Anwendungsfall für verteilte Systeme ist die Skalierung einer Anwendung,
+                        die auf einem einzelnen Rechner ausgeführt zu lange laufen würde. Zwar kann man den
+                        Rechner zunächst versuchen, **vertikal zu skalieren**, indem man mehr Ressourcen hinzugefügt
+                        (z.B. eine stärkere CPU), dies stößt aber schnell an seine Grenzen. Mit **horizontaler Skalierung**
+                        können hingegen beliebig viele, weitere Rechnerknoten hinzugefügt werden, um die Leistung
+                        unbegrenzt zu erhöhen.
+                    </div>
+                </div>
+
+                <div class="centered-content flex-row flex-wrap gap-3">
+                    <!-- Fallbeispiel: Omnibus -->
+                    <lsx-modal>
+                        <lsx-thumbnail style="height: 14em;" class="mw-100">
+                            <img src="02-grundlagen/omnibus3.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                        </lsx-thumbnail>
+                        <lsx-content>
+                            <lsx-card title="Fallbeispiel: Omnibus" bold class="mh-100 mw-100">
+                                <lsx-card-body class="overflow-scroll">
+                                    <lsx-ul class="lead">
+                                        <li>In der realen Welt kennen wir Gelenkbusse und Doppeldeckerbusse.</li>
+                                        <li>Doch mehr wie zwei Gelenke und zwei Decks sind praktisch nicht handhabbar.</li>
+                                        <li>Dreistöckige Busse gibt es daher nur bei Harry Potter und KI-generierten Bildern.</li>
+                                        <li>Mehrere Busse zu betreiben ist hoch vorteilhaft bei (un)geplanten Ausfällen wegen Wartung, Unfall, …</li>
+                                    </lsx-ul>
+
+                                    <div class="d-flex flex-wrap justify-content-center align-items-center gap-3">
+                                        <img src="02-grundlagen/omnibus1.jpg" class="img-thumbnail d-block h-100" style="max-height: 40vh;"/>
+                                        <img src="02-grundlagen/omnibus2.jpg" class="img-thumbnail d-block h-100" style="max-height: 40vh;"/>
+                                        <img src="02-grundlagen/omnibus3.jpg" class="img-thumbnail d-block h-100" style="max-height: 40vh;"/>
+                                    </div>
+                                    <p>
+                                        <small>
+                                            <small>
+                                                Bildnachweise:
+                                                Bing Image Creator,
+                                                Bing Image Creator,
+                                                <a href="https://commons.wikimedia.org/wiki/File:2012-08-08_Doppelgelenkbus_Hamburger_Hochbahn.jpg" targegt="_blank">Wikipedia: Wo st 01</a>
+                                            </small>
+                                        </small>
+                                    </p>
+                                </lsx-card-body>
+                            </lsx-card>
+                        </lsx-content>
+                    </lsx-modal>
+    
+                    <!-- Fallbeispiel: Render Farm -->
+                    <lsx-modal>
+                        <lsx-thumbnail style="height: 14em;" class="mw-100">
+                            <img src="02-grundlagen/renderfarm1.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                        </lsx-thumbnail>
+                        <lsx-content>
+                            <lsx-card title="Fallbeispiel: Render Farm" bold class="mh-100 mw-100">
+                                <lsx-card-body class="overflow-scroll">
+                                    <div class="lead">
+                                        <p>
+                                            Abendfüllende 3D-Animationsfilme zu rendern ist eine monumentale Aufgabe
+                                        </p>
+                                        <h5>Gedankenexperiment</h5>
+                                        <lsx-ul class="mb-4">
+                                            <li>25 Bilder/Sekunde ✕ 60 Sekunden ✕ 120 Minuten = 180.000 Einzelbilder</li>
+                                            <li>Typische 8k-Auflösung im Kino: 8192 ✕ 4320 Pixel = 35.389.440 Pixel je Einzelbild</li>
+                                            <li><a href="https://de.wikipedia.org/wiki/Raytracing" target="_blank">Raytracing</a> mit ca. 120 Rekursionen je Pixel: 4.246.732.800 tatsächlich zu berechnende Pixel</li>
+                                            <li>Frage: Wie lange dauert es im Schnitt, einen typischen Film zu rendern?</li>
+                                        </lsx-ul>
+                                        <p>
+                                            Bild rechts: Renderfarm bei Pixar im Jahr 1995. Auf einer solchen Render Farm wurde Toy Story gerechnet.
+                                        </p>
+                                    </div>
+                                    <div class="d-flex flex-wrap justify-content-center align-items-center gap-3">
+                                        <img src="02-grundlagen/renderfarm1.jpg" class="img-thumbnail d-block h-100" style="max-height: 30vh;"/>
+                                        <img src="02-grundlagen/renderfarm2.jpg" class="img-thumbnail d-block h-100" style="max-height: 30vh;"/>
+                                    </div>
+                                    <p>
+                                        <small>
+                                            <small>
+                                                Bildnachweise:
+                                                <a href="http://nullisland.blot.im/pixar-render-farm-1995" target="_blank">nullisland.blot.im</a>,
+                                                <a href="https://pixabay.com/photos/screw-thread-technology-mother-1924219/" target="_blank">Pixabay: PIRO4D</a>
+                                            </small>
+                                        </small>
+                                    </p>
+                                </lsx-card-body>
+                            </lsx-card>
+                        </lsx-content>
+                    </lsx-modal>
+    
+                    <!-- Fallbeispiel: Supercomputer -->
+                    <lsx-modal>
+                        <lsx-thumbnail style="height: 14em;" class="mw-100">
+                            <img src="02-grundlagen/supercomputer2.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                        </lsx-thumbnail>
+                        <lsx-content>
+                            <lsx-card title="Fallbeispiel: Supercomputer" bold class="mh-100 mw-100">
+                                <lsx-card-body class="overflow-scroll">
+                                    <p class="lead" style="text-align: justify;">
+                                        Hochleistungsrechner, wie sie in der Forschung und Wissenschaft oder von großen Internetkonzernen
+                                        genutzt werden, bestehen aus einem reisigen Cluster kleiner Computer mit eigenem Hauptspeicher und
+                                        in der Regel auch eigenem Massenspeicher. Die Einzelcomputer werden dabei in Storage Nodes zur
+                                        Speicherung von Daten und in Compute Nodes zur Bereitstellung von Rechenleistung unterschieden. 
+                                    </p>
+                                    </lsx-ul>
+                                    <div class="d-flex flex-wrap justify-content-center align-items-center gap-3">
+                                        <img src="02-grundlagen/supercomputer1.svg" class="img-thumbnail d-block h-100" style="max-height: 30vh;"/>
+                                        <img src="02-grundlagen/supercomputer2.jpg" class="img-thumbnail d-block h-100" style="max-height: 30vh;"/>
+                                    </div>
+                                    <p>
+                                        <small>
+                                            <small>
+                                                Bildnachweis (Foto):
+                                                <a href="https://de.wikipedia.org/wiki/Blue_Gene#/media/File:IBM_Blue_Gene_P_supercomputer.jpg" target="_blank">Wikimedia Commons: Argonne National Laboratory</a>
+                                            </small>
+                                        </small>
+                                    </p>
+                                </lsx-card-body>
+                            </lsx-card>
+                        </lsx-content>
+                    </lsx-modal>
+                </div>
+            </div>
+        </article>
     </section>
 
     <section data-title="Resilienz">
-        ...
+        <article class="centered-content">
+            <div class="limited-width">
+                <div class="markdown mb-4">
+                    Verteilte Systeme können darüber hinaus helfen, die Resilienz einer Anwendung zu erhöhen,
+                    indem **Single Point of Failure** vermieden werden (durch horizontale Skalierung) und
+                    Redundanzen geschaffen werden, so dass bei Ausfall eines Knotens, ein anderer Knoten
+                    übernehmen kann (bspw. als **Hot-Standby**).
+                </div>
+
+                <lsx-info-box type="warning" class="mb-4">
+                    Neben der Rechenleistung muss auch die Plattenkapazität redundant ausgelegt werden, um
+                    Datenverluste zu vermeiden, wodurch wiederum das Problem anfällt, die Datenbestände
+                    synchron zu halten.
+                </lsx-info-box>
+
+                <lsx-accordion>
+                    <lsx-accordion-page title="Single Poirnt of Failure" bold>
+                        <img src="02-grundlagen/resilienz1.png" class="d-block w-100"/>
+                    </lsx-accordion-page>
+                    <lsx-accordion-page title="Vollständig redundante Architektur" bold>
+                        <img src="02-grundlagen/resilienz2.png" class="d-block w-100"/>
+                    </lsx-accordion-page>
+                </lsx-accordion>
+            </div>
+        </article>
     </section>
 </section>
 
@@ -1290,111 +1439,158 @@
     </section>
 
     <section data-title="Komplexe Fehlerszenarien">
-        <article>
-            <lsx-tab-pages>
-                <lsx-tab-page title="Das CAP-Theorem">
-                    <lsx-grid-fluid>
-                        <lsx-row>
-                            <lsx-col size="md-5">
-                                <img src="02-grundlagen/cap-theorem.png" alt="Visualisierung des CAP-Theorems" style="width: 100%;" />
-                            </lsx-col>
-                            <lsx-col size="md">
-                                <h4>Consistency (Konsistenz)</h4>
-                                <p>
-                                    Alle Knoten sehen immer exakt dieselben, konsistenten Daten. Bei replizierten Datenbeständen
-                                    werden die Änderungen daher erst sichtbar, wenn sie in allen Repliken nachgezogen wurden.
-                                </p>
-                    
-                                <h4>Availability (Verfügbarkeit)</h4>
-                                <p>
-                                    Das System ist jederzeit erreichbar und überschreitet niemals die maximal zulässige
-                                    Antwortzeit.
-                                </p>
-                    
-                                <h4>Partition Tolerance (Partitionstoleranz)</h4>
-                                <p>
-                                    Die Anwendung funktioniert auch dann noch, wenn einzelne Teile ausgefallen sind.
-                                </p>
-                            </lsx-col>
-                        </lsx-row>
-                        <lsx-row>
-                            <lsx-col size="md">
-                                <p style="color: darkred;">
-                                    Eine verteilte Anwendung kann immer nur zwei dieser Anforderungen gänzlich erfüllen!
-                                </p>
-                                <p>
-                                    Moderne Anwendungen sind deshalb oft nur „eventuell-konsistent”. Beispielsweise kann es
-                                    in Facebook vorkommen, dass ein Like in den ersten Sekunden nicht für alle Profilbesucher
-                                    sichtbar wird, da nicht alle auf derselben Datenreplik arbeiten.
-                                </p>
-                                <p>
-                                    eBay hingegen würde bei der Gebotsabgabe sicher lieber eine etwas längere Antwortzeit in
-                                    Kauf nehmen, anstatt sich überschreibende Gebote zu riskieren.
-                                </p>
-                            </lsx-col>
-                        </lsx-row>
-                    </lsx-grid-fluid>
-                </lsx-tab-page>
-        
-                <lsx-tab-page title="Strategien zur Fehlerbehandlung">
-                    <lsx-grid-fluid>
-                        <lsx-row>
-                            <lsx-col size="md-4">
-                                <h3>Fehler vermeiden</h3>
-                                <img src="02-grundlagen/fehler-vermeiden.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
-                                Zum Beispiel durch Eingabehilfen oder einen sauberen Programmierstil
-                            </lsx-col>
-                            <lsx-col size="md-4">
-                                <h3>Fehler erkennen</h3>
-                                <img src="02-grundlagen/fehler-erkennen.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
-                                Zum Beispiel durch Checksummen, Plausiprüfungen oder Monitoring
-                            </lsx-col>
-                            <lsx-col size="md-4">
-                                <h3>Fehler maskieren</h3>
-                                <img src="02-grundlagen/fehler-maskieren.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
-                                Zum Beispiel durch spätere Wiederholung des Vorgangs
-                            </lsx-col>
-                        </lsx-row>
-                        <lsx-row>
-                            <lsx-col size="md-4">
-                                <h3>Fehler tolerieren</h3>
-                                <img src="02-grundlagen/fehler-tolerieren.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
-                                Zum Beispiel durch Speichern beider Versionen bei Schreibkonflikten
-                            </lsx-col>
-                            <lsx-col size="md-4">
-                                <h3>Fehler beheben</h3>
-                                <img src="02-grundlagen/fehler-beheben.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
-                                Zum Beispiel durch automatisches Umschalten auf ein Hot-Standby
-                            </lsx-col>
-                        </lsx-row>
-                        <lsx-row>
-                            <lsx-col size="md">
+        <article class="centered-content">
+            <div class="limited-width2">
+                <lsx-tab-pages>
+                    <lsx-tab-page title="Strikte Konsistenz">
+                        <lsx-grid-fluid class="p-0">
+                            <lsx-row class="m-0">
+                                <lsx-col size="lg-5" class="ps-0">
+                                    <img src="02-grundlagen/2-phase-commit-1.jpg" class="img-thumbnail d-block w-100 h-100"/>
+                                </lsx-col>
+                                <lsx-col size="lg-4">
+                                    <img src="02-grundlagen/2-phase-commit-2.png" class="img-thumbnail d-block w-100 h-100"/>
+                                </lsx-col>
+                                <lsx-col size="lg-3" class="pe-0 markdown">
+                                    Frühere verteilte Systeme versuchten, dieselben Garantien wie die nicht-vertielter ACID-Transaktionen
+                                    einzuhalten, wofür u.a. das **Zwei-Phasen-Commit**-Protokoll definiert wurde. Bei diesem steuert ein
+                                    zentraler Koordinator den Ablauf der Transaktion über alle Knoten hinweg.
+    
+                                    <lsx-ul>
+                                        <li><b>Phase 1:</b> Vote</li>
+                                        <li><b>Phase 2:</b> Commit</li>
+                                    </lsx-ul>
+                                </lsx-col>
+                            </lsx-row>
+                            <p>
                                 <small>
                                     <small>
-                                        Bildnachweise:
-                                        <a href="https://pixabay.com/en/rappelling-rope-safety-security-755400/" target="_blank">Pixabay: cegoh</a>,
-                                        <a href="https://pixabay.com/en/equipment-hospital-ecg-3089883/" target="_blank">Pixabay: hioahelsefag</a>,
-                                        <a href="https://pixabay.com/en/redirect-shield-tree-attention-2257746/" target="_blank">Pixabay: Digitalpfade</a>,
-                                        <a href="https://pixabay.com/en/home-single-family-home-on-the-head-2308799/" target="_blank">Pixabay: ulleo</a>,
-                                        <a href="https://pixabay.com/en/first-aid-frog-medic-nurse-funny-1732708/" target="_blank">Pixabay: Alexas_Fotos</a>
+                                        Bildnachweise: Bing Image Creator und
+                                        <a href="https://pixabay.com/vectors/crown-golden-royal-shining-shiny-312734/" target="_blank">Pixabay: Clker-Free-Vector-Images</a>
                                     </small>
                                 </small>
-                            </lsx-col>
-                        </lsx-row>
-                    </lsx-grid-fluid>
-                </lsx-tab-page>
-        
-                <lsx-tab-page title="Fallbeispiel: Coffe Shop">
-                    <a href="https://ieeexplore.ieee.org/document/1407829" target="_blank">IEEE Software, Volume: 22, Issue: 2, Pages 64–66</a>
-                    <div class="d-flex gap-3">
-                        <img src="02-grundlagen/coffeeshop1.png" class="img-thumbnail d-block w-100"/>
-                        <img src="02-grundlagen/coffeeshop2.png" class="img-thumbnail d-block w-100" />
-                        <img src="02-grundlagen/coffeeshop3.png" class="img-thumbnail d-block w-100" />
-                    </div>
-                </lsx-tab-page>
-            </lsx-tab-pages>
+                            </p>
+    
+                            <div class="markdown">
+                                Man nennt dies auch ein **pessimistisches Verfahren**, da die Ressourcen vor Beginn der Transaktion
+                                zur exklusiven Nutzung gesperrt werden. Neben dem stark ausgebremsten Durchsatz (da parallele
+                                Schreibzugriffe komplett unterbunden werden), gibt es noch ein weiteres Problem:
+                            </div>
+                            <lsx-info-box type="danger">
+                                Was passiert, wenn der Koordinator mittn in einer Transaktion ausfällt?
+                            </lsx-info-box>
+                            <p>
+                                Beim klassischen Zwei-Phasen-Commit hängt die Transaktion und kann nur durch manuelles Eingreifen
+                                aufgelöst werden. Dasselbe passiert auch, wenn anstelle des Koordinators einer der anderen Knoten
+                                ausfällt, nachdem ein anderer Knoten bereits den Commit bestätigt hat.
+                            </p>
+                        </lsx-grid-fluid>
+                    </lsx-tab-page>
+    
+                    <lsx-tab-page title="Das CAP-Theorem">
+                        <lsx-grid-fluid>
+                            <lsx-row>
+                                <lsx-col size="md-5">
+                                    <img src="02-grundlagen/cap-theorem.png" alt="Visualisierung des CAP-Theorems" style="width: 100%;" />
+                                </lsx-col>
+                                <lsx-col size="md">
+                                    <h4>Consistency (Konsistenz)</h4>
+                                    <p>
+                                        Alle Knoten sehen immer exakt dieselben, konsistenten Daten. Bei replizierten Datenbeständen
+                                        werden die Änderungen daher erst sichtbar, wenn sie in allen Repliken nachgezogen wurden.
+                                    </p>
+                        
+                                    <h4>Availability (Verfügbarkeit)</h4>
+                                    <p>
+                                        Das System ist jederzeit erreichbar und überschreitet niemals die maximal zulässige
+                                        Antwortzeit.
+                                    </p>
+                        
+                                    <h4>Partition Tolerance (Partitionstoleranz)</h4>
+                                    <p>
+                                        Die Anwendung funktioniert auch dann noch, wenn einzelne Teile ausgefallen sind.
+                                    </p>
+                                </lsx-col>
+                            </lsx-row>
+                            <lsx-row>
+                                <lsx-col size="md">
+                                    <p style="color: darkred;">
+                                        Eine verteilte Anwendung kann immer nur zwei dieser Anforderungen gänzlich erfüllen!
+                                    </p>
+                                    <p>
+                                        Moderne Anwendungen sind deshalb oft nur „eventuell-konsistent”. Beispielsweise kann es
+                                        in Facebook vorkommen, dass ein Like in den ersten Sekunden nicht für alle Profilbesucher
+                                        sichtbar wird, da nicht alle auf derselben Datenreplik arbeiten.
+                                    </p>
+                                    <p>
+                                        eBay hingegen würde bei der Gebotsabgabe sicher lieber eine etwas längere Antwortzeit in
+                                        Kauf nehmen, anstatt sich überschreibende Gebote zu riskieren.
+                                    </p>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
+                    </lsx-tab-page>
+            
+                    <lsx-tab-page title="Fallbeispiel: Coffe Shop">
+                        <a href="https://ieeexplore.ieee.org/document/1407829" target="_blank">IEEE Software, Volume: 22, Issue: 2, Pages 64–66</a>
+                        <div class="d-flex gap-3">
+                            <img src="02-grundlagen/coffeeshop1.png" class="img-thumbnail d-block w-100"/>
+                            <img src="02-grundlagen/coffeeshop2.png" class="img-thumbnail d-block w-100" />
+                            <img src="02-grundlagen/coffeeshop3.png" class="img-thumbnail d-block w-100" />
+                        </div>
+                    </lsx-tab-page>
+    
+                    <lsx-tab-page title="Strategien zur Fehlerbehandlung">
+                        <lsx-grid-fluid>
+                            <lsx-row>
+                                <lsx-col size="md-4">
+                                    <h3>Fehler vermeiden</h3>
+                                    <img src="02-grundlagen/fehler-vermeiden.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
+                                    Zum Beispiel durch Eingabehilfen oder einen sauberen Programmierstil
+                                </lsx-col>
+                                <lsx-col size="md-4">
+                                    <h3>Fehler erkennen</h3>
+                                    <img src="02-grundlagen/fehler-erkennen.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
+                                    Zum Beispiel durch Checksummen, Plausiprüfungen oder Monitoring
+                                </lsx-col>
+                                <lsx-col size="md-4">
+                                    <h3>Fehler maskieren</h3>
+                                    <img src="02-grundlagen/fehler-maskieren.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
+                                    Zum Beispiel durch spätere Wiederholung des Vorgangs
+                                </lsx-col>
+                            </lsx-row>
+                            <lsx-row>
+                                <lsx-col size="md-4">
+                                    <h3>Fehler tolerieren</h3>
+                                    <img src="02-grundlagen/fehler-tolerieren.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
+                                    Zum Beispiel durch Speichern beider Versionen bei Schreibkonflikten
+                                </lsx-col>
+                                <lsx-col size="md-4">
+                                    <h3>Fehler beheben</h3>
+                                    <img src="02-grundlagen/fehler-beheben.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
+                                    Zum Beispiel durch automatisches Umschalten auf ein Hot-Standby
+                                </lsx-col>
+                            </lsx-row>
+                            <lsx-row>
+                                <lsx-col size="md">
+                                    <small>
+                                        <small>
+                                            Bildnachweise:
+                                            <a href="https://pixabay.com/en/rappelling-rope-safety-security-755400/" target="_blank">Pixabay: cegoh</a>,
+                                            <a href="https://pixabay.com/en/equipment-hospital-ecg-3089883/" target="_blank">Pixabay: hioahelsefag</a>,
+                                            <a href="https://pixabay.com/en/redirect-shield-tree-attention-2257746/" target="_blank">Pixabay: Digitalpfade</a>,
+                                            <a href="https://pixabay.com/en/home-single-family-home-on-the-head-2308799/" target="_blank">Pixabay: ulleo</a>,
+                                            <a href="https://pixabay.com/en/first-aid-frog-medic-nurse-funny-1732708/" target="_blank">Pixabay: Alexas_Fotos</a>
+                                        </small>
+                                    </small>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
+                    </lsx-tab-page>
+                </lsx-tab-pages>
+            </div>
         </article>
-        <aside class="markdown">
+        <!-- <aside class="markdown">
             Ein guter Datenbankentwurf beruht auf
             <a href="https://de.wikipedia.org/wiki/Normalisierung_(Datenbank)" target="_blank">normalisierten Datenmodellen</a>
             und <a href="https://de.wikipedia.org/wiki/Transaktion_(Informatik)" target="_blank">atomaren Transaktionen</a>,
@@ -1434,167 +1630,169 @@
             1. <b>Verringerte Verfügbarkeit:</b> eBay hingegen würde bei der Gebotsabgabe sicher lieber eine etwas längere Antwortzeit
                 in Kauf nehmen, anstatt doppelte Gebote zu riskieren. Die Konsistenz ist hier also König. 👑 Dafür kann es vorkommen, dass
                 ein Gebot in letzter Sekunde nicht mehr rechtzeitig abgegeben werden kann.
-        </aside>
+        </aside> -->
     </section>
 
-    <section data-title="Kausale Abhängigkeiten">
-        <article>
-            <lsx-tab-pages>
-                <lsx-tab-page title="Fallbeispiel">
-                    <img src="02-grundlagen/zeitproblem-karte.jpg" class="d-block img-fluid img-thumbnail" />
-                    <p>
-                        <small>
+    <section data-title="Kausale und zeitliche Abhängigkeiten">
+        <article class="centered-content">
+            <div class="limited-width2">
+                <lsx-tab-pages>
+                    <lsx-tab-page title="Fallbeispiel">
+                        <img src="02-grundlagen/zeitproblem-karte.jpg" class="d-block img-fluid img-thumbnail" />
+                        <p>
                             <small>
-                                Bildnachweise:
-                                <a href="https://pixabay.com/illustrations/map-central-europe-europe-1804891/s"
-                                    target="_blank">Pixabay: Hans</a>,
-                                <a href="https://pixabay.com/vectors/map-pin-illustrator-holder-place-42871/"
-                                    target="_blank">Pixabay: Clker-Free-Vector-Images</a>
+                                <small>
+                                    Bildnachweise:
+                                    <a href="https://pixabay.com/illustrations/map-central-europe-europe-1804891/s"
+                                        target="_blank">Pixabay: Hans</a>,
+                                    <a href="https://pixabay.com/vectors/map-pin-illustrator-holder-place-42871/"
+                                        target="_blank">Pixabay: Clker-Free-Vector-Images</a>
+                                </small>
                             </small>
-                        </small>
-                    </p>
-                    <lsx-ul>
-                        <li emoji="🌡️">
-                            Aufzeichnung von Umweltdaten zur Vorhersage von Unwettern und Naturkatastrophen
-                        </li>
-                        <li emoji="🗺️">
-                            Aktuell 19 Messstationen in verschiedenen Ländern und Zeitzonen
-                        </li>
-                        <li emoji="🕒">
-                            Messung und Übermittlung eines kompletten Datensatzes alle fünf Minuten
-                        </li>
-                        <li emoji="💽 ">
-                            Speicherung aller Messwerte im Rechenzentrum in Frankfurt am Main
-                        </li>
-                    </lsx-ul>
-                </lsx-tab-page>
-            
-                <lsx-tab-page title="Fallstricke">
-                    <lsx-grid-fluid class="p-0">
-                        <lsx-row>
-                            <lsx-col size="md-6">
-                                <img src="02-grundlagen/zeitproblem-latenz-deutschland.jpg" alt="" class="img-thumbnail" style="width: 100%" />
-                                <small>
-                                    Latenz beim Zugriff auf wpvs.de aus Deutschland
-                                </small>
-                            </lsx-col>
-                            <lsx-col size="md-6">
-                                <img src="02-grundlagen/zeitproblem-latenz-spanien.jpg" alt="" class="img-thumbnail" style="width: 100%" />
-                                <small>
-                                    Latenz beim Zugriff auf wpvs.de aus Südspanien
-                                </small>
-                            </lsx-col>
-                        </lsx-row>
-                        <lsx-row>
-                            <lsx-col size="md">
-                                <lsx-ul emoji="🗯️">
-                                    <li>
-                                        Werden Datum und Uhrzeit der Messwerte vor Ort oder vom Server ermittelt?
-                                    </li>
-                                    <li>
-                                        Wie kann die zeitliche Reihenfolge aller Messwerte garantiert werden?
-                                    </li>
-                                    <li>
-                                        Wie können Latenzen in der Datenübertragung ausgeglichen werden?
-                                    </li>
-                                    <li>
-                                        Was passiert, wenn die Uhren der Messstationen nicht gleich gehen?
-                                    </li>
-                                    <li>
-                                        Wie kann verhindert werden, dass die Uhren auseinander driften?
-                                    </li>
-                                    <li>
-                                        Wie sollen die Zeitzonen oder die Sommer-/Winterzeit berücksichtigt werden?
-                                    </li>
-                                    <li>
-                                        Wie können verspätet eintreffende Messwerte korrekt gespeichert werden?
-                                    </li>
-                                    <li>
-                                        Wie sollen fehlende Messdaten (z.B. wegen dem Ausfall einer Station) behandelt werden?
-                                    </li>
-                                </lsx-ul>
-                            </lsx-col>
-                        </lsx-row>
-                    </lsx-grid-fluid>
-                </lsx-tab-page>
-            
-                <lsx-tab-page title="Lösungsansätze">
-                    <lsx-ul emoji="🌞">
-                        <li>
-                            Datum und Uhrzeit sowohl auf den Devices als auch dem Server ermitteln und vergleichen.
-                        </li>
-                        <li>
-                            Alle Uhren in regelmäßigen Abständen via
-                            <a href="https://de.wikipedia.org/wiki/Network_Time_Protocol" target="blank">NTP</a>
-                            synchronisieren.
-                        </li>
-                        <li>
-                            Sämtliche Messwerte zusätzlich zum Zeitstempel fortlaufend durchnummerieren.
-                        </li>
-                        <li>
-                            Die Messwerte immer inklusive Zeitzone und Abweichung zur Normalzeit speichern.
-                        </li>
-                        <li>
-                            Alternativ Datum und Uhrzeit immer in die Zeitzone des Servers umrechnen.
-                        </li>
-                        <li>
-                            Nachträgliches Einfügen von Messwerten innerhalb eines gegebenen Zeitfensters zulassen.
-                        </li>
-                    </lsx-ul>
-            
-                    <h3 class="dhbw-lightblue" style="margin-top: 1em;">Beginn der Zeitrechnung</h3>
-            
-                    <lsx-grid-fluid class="p-0">
-                        <lsx-row>
-                            <lsx-col size="md">
-                                <img src="02-grundlagen/zeitproblem-beginn-wissenschaft.jpg" class="d-block img-fluid img-thumbnail" />
-                                <b>Wissenschaft:</b> Mit dem Urknall
-                            </lsx-col>
-                            <lsx-col size="md">
-                                <img src="02-grundlagen/zeitproblem-beginn-kirche.jpg" class="d-block img-fluid img-thumbnail" />
-                                <b>Kirche:</b> Als Gott die Erde erschuf
-                            </lsx-col>
-                        </lsx-row>
-                        <lsx-row>
-                            <lsx-col size="md">
-                                <img src="02-grundlagen/zeitproblem-beginn-sport.jpg" class="d-block img-fluid img-thumbnail" />
-                                <b>Wettläufer:</b> Ab dem Startschuss
-                            </lsx-col>
-                            <lsx-col size="md">
-                                <img src="02-grundlagen/zeitproblem-beginn-entwickler.jpg" class="d-block img-fluid img-thumbnail" />
-                                <b>Softwareentwickler:</b> <a href="https://de.wikipedia.org/wiki/Unixzeit"
-                                    target="_blank">01.01.1970 0:00 Uhr</a> 🥴
-                                <br />
-                                <small>
-                                    <b>Youtube:</b>
-                                    <a href="https://www.youtube.com/watch?v=jNQXAC9IVRw" target="_blank">23.04.2005</a>
-                                </small>
-                            </lsx-col>
-                        </lsx-row>
-                        <lsx-row>
-                            <lsx-col size="md">
-                                <p>
+                        </p>
+                        <lsx-ul>
+                            <li emoji="🌡️">
+                                Aufzeichnung von Umweltdaten zur Vorhersage von Unwettern und Naturkatastrophen
+                            </li>
+                            <li emoji="🗺️">
+                                Aktuell 19 Messstationen in verschiedenen Ländern und Zeitzonen
+                            </li>
+                            <li emoji="🕒">
+                                Messung und Übermittlung eines kompletten Datensatzes alle fünf Minuten
+                            </li>
+                            <li emoji="💽 ">
+                                Speicherung aller Messwerte im Rechenzentrum in Frankfurt am Main
+                            </li>
+                        </lsx-ul>
+                    </lsx-tab-page>
+                
+                    <lsx-tab-page title="Fallstricke">
+                        <lsx-grid-fluid class="p-0">
+                            <lsx-row>
+                                <lsx-col size="md-6">
+                                    <img src="02-grundlagen/zeitproblem-latenz-deutschland.jpg" alt="" class="img-thumbnail" style="width: 100%" />
                                     <small>
-                                        <small>
-                                            Bildnachweise:
-                                            <a href="https://pixabay.com/illustrations/universe-space-expansion-big-bang-11636/"
-                                                target="_blank">Pixabay: WikiImages</a>,
-                                            <a href="https://pixabay.com/photos/genesis-mosaic-iconography-2435989/"
-                                                target="_blank">Pixabay: dimitrisvetsikas1969</a>,
-                                            <a href="https://pixabay.com/photos/race-finish-line-athletes-695303/"
-                                                target="_blank">Pixabay: skeeze</a>,
-                                            <a href="https://commons.wikimedia.org/wiki/File:Vt100-adventure.jpg"
-                                                target="_blank">Wikimedia: Shieldforyoureyes</a>
-                                        </small>
+                                        Latenz beim Zugriff auf wpvs.de aus Deutschland
                                     </small>
-                                </p>
-                            </lsx-col>
-                        </lsx-row>
-                    </lsx-grid-fluid>
-                </lsx-tab-page>
-            </lsx-tab-pages>
+                                </lsx-col>
+                                <lsx-col size="md-6">
+                                    <img src="02-grundlagen/zeitproblem-latenz-spanien.jpg" alt="" class="img-thumbnail" style="width: 100%" />
+                                    <small>
+                                        Latenz beim Zugriff auf wpvs.de aus Südspanien
+                                    </small>
+                                </lsx-col>
+                            </lsx-row>
+                            <lsx-row>
+                                <lsx-col size="md">
+                                    <lsx-ul emoji="🗯️">
+                                        <li>
+                                            Werden Datum und Uhrzeit der Messwerte vor Ort oder vom Server ermittelt?
+                                        </li>
+                                        <li>
+                                            Wie kann die zeitliche Reihenfolge aller Messwerte garantiert werden?
+                                        </li>
+                                        <li>
+                                            Wie können Latenzen in der Datenübertragung ausgeglichen werden?
+                                        </li>
+                                        <li>
+                                            Was passiert, wenn die Uhren der Messstationen nicht gleich gehen?
+                                        </li>
+                                        <li>
+                                            Wie kann verhindert werden, dass die Uhren auseinander driften?
+                                        </li>
+                                        <li>
+                                            Wie sollen die Zeitzonen oder die Sommer-/Winterzeit berücksichtigt werden?
+                                        </li>
+                                        <li>
+                                            Wie können verspätet eintreffende Messwerte korrekt gespeichert werden?
+                                        </li>
+                                        <li>
+                                            Wie sollen fehlende Messdaten (z.B. wegen dem Ausfall einer Station) behandelt werden?
+                                        </li>
+                                    </lsx-ul>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
+                    </lsx-tab-page>
+                
+                    <lsx-tab-page title="Lösungsansätze">
+                        <lsx-ul emoji="🌞">
+                            <li>
+                                Datum und Uhrzeit sowohl auf den Devices als auch dem Server ermitteln und vergleichen.
+                            </li>
+                            <li>
+                                Alle Uhren in regelmäßigen Abständen via
+                                <a href="https://de.wikipedia.org/wiki/Network_Time_Protocol" target="blank">NTP</a>
+                                synchronisieren.
+                            </li>
+                            <li>
+                                Sämtliche Messwerte zusätzlich zum Zeitstempel fortlaufend durchnummerieren.
+                            </li>
+                            <li>
+                                Die Messwerte immer inklusive Zeitzone und Abweichung zur Normalzeit speichern.
+                            </li>
+                            <li>
+                                Alternativ Datum und Uhrzeit immer in die Zeitzone des Servers umrechnen.
+                            </li>
+                            <li>
+                                Nachträgliches Einfügen von Messwerten innerhalb eines gegebenen Zeitfensters zulassen.
+                            </li>
+                        </lsx-ul>
+                
+                        <h3 class="dhbw-lightblue" style="margin-top: 1em;">Beginn der Zeitrechnung</h3>
+                
+                        <lsx-grid-fluid class="p-0">
+                            <lsx-row>
+                                <lsx-col size="md">
+                                    <img src="02-grundlagen/zeitproblem-beginn-wissenschaft.jpg" class="d-block img-fluid img-thumbnail" />
+                                    <b>Wissenschaft:</b> Mit dem Urknall
+                                </lsx-col>
+                                <lsx-col size="md">
+                                    <img src="02-grundlagen/zeitproblem-beginn-kirche.jpg" class="d-block img-fluid img-thumbnail" />
+                                    <b>Kirche:</b> Als Gott die Erde erschuf
+                                </lsx-col>
+                            </lsx-row>
+                            <lsx-row>
+                                <lsx-col size="md">
+                                    <img src="02-grundlagen/zeitproblem-beginn-sport.jpg" class="d-block img-fluid img-thumbnail" />
+                                    <b>Wettläufer:</b> Ab dem Startschuss
+                                </lsx-col>
+                                <lsx-col size="md">
+                                    <img src="02-grundlagen/zeitproblem-beginn-entwickler.jpg" class="d-block img-fluid img-thumbnail" />
+                                    <b>Softwareentwickler:</b> <a href="https://de.wikipedia.org/wiki/Unixzeit"
+                                        target="_blank">01.01.1970 0:00 Uhr</a> 🥴
+                                    <br />
+                                    <small>
+                                        <b>Youtube:</b>
+                                        <a href="https://www.youtube.com/watch?v=jNQXAC9IVRw" target="_blank">23.04.2005</a>
+                                    </small>
+                                </lsx-col>
+                            </lsx-row>
+                            <lsx-row>
+                                <lsx-col size="md">
+                                    <p>
+                                        <small>
+                                            <small>
+                                                Bildnachweise:
+                                                <a href="https://pixabay.com/illustrations/universe-space-expansion-big-bang-11636/"
+                                                    target="_blank">Pixabay: WikiImages</a>,
+                                                <a href="https://pixabay.com/photos/genesis-mosaic-iconography-2435989/"
+                                                    target="_blank">Pixabay: dimitrisvetsikas1969</a>,
+                                                <a href="https://pixabay.com/photos/race-finish-line-athletes-695303/"
+                                                    target="_blank">Pixabay: skeeze</a>,
+                                                <a href="https://commons.wikimedia.org/wiki/File:Vt100-adventure.jpg"
+                                                    target="_blank">Wikimedia: Shieldforyoureyes</a>
+                                            </small>
+                                        </small>
+                                    </p>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
+                    </lsx-tab-page>
+                </lsx-tab-pages>
+            </div>
         </article>
-        <aside class="markdown">
+        <!-- <aside class="markdown">
             Verteilte Systeme erstecken sich, je nach Anwendungsfall, häufig über mehrere Länder und Kontinente.
             Manchmal ergibt sich das einfach nur aus der weltweiten Nutzung einer Anwendung, selbst wenn sie nur
             an einem Standort betrieben wird. Oftmals ist die geografische Verteilung aber auch wesenticher
@@ -1666,15 +1864,11 @@
             <small>
                 Diese Seite enthält hierfür ein paar mehr oder weniger ernst gemeinte Beispiele.
             </small>
-        </aside>
+        </aside> -->
     </section>
 </section>
 
 <!-- TODO:
-    - Vorteilte verteilter Systeme
-        - Skalierung: Doppeldecker-Bus, Raytracing (Michael und alte Folie #5)
-        - Resilienz (Folien Michael)
-
     - Nachteile verteilter Systeme, 2PC, Eheschließung, 3PC
        - Acht Irrtümer
        - 2PC heute nicht mehr relevant, ebenso wie synchrone Programmiermodelle
@@ -1688,8 +1882,8 @@
 <section data-title="Entwurf verteilter Systeme">
     <!-- TODO: Cards? -->
     <section data-title="Anforderungen an den Systementwurf">
-        <article>
-            <lsx-grid-fluid>
+        <article class="centered-content">
+            <lsx-grid-fluid class="limited-width2">
                 <lsx-row>
                     <lsx-col size="md">
                         <h3>Optimale Ressourcennutzung</h3>
@@ -1752,7 +1946,7 @@
                 </lsx-row>
             </lsx-grid-fluid>
         </article>
-        <aside class="markdown">
+        <!-- <aside class="markdown">
             Hat man sich einmal zu einem verteilten System hinreisen lassen, will man natürlich, dass es die gewünschte
             Aufgabe so gut wie möglich unterstützt. Und hierfür will man in den meisten Fällen, dass folgende Anforderungen
             berücksichtigt werden, was uns beim Programmieren manchmal vor echte Herausforderungen stellen kann: 🤔
@@ -1870,12 +2064,12 @@
                     können dies sicherstellen.
                 </dd>
             </dl>
-        </aside>
+        </aside> -->
     </section>
 
     <section data-title="Die neun Arten der Transparenz">
-        <article>
-            <lsx-grid-fluid>
+        <article class="centered-content">
+            <lsx-grid-fluid class="limited-width2">
                 <!-- Vergleich Wirtschaft vs. Informatik -->
                 <lsx-row style="margin-bottom: 0;">
                     <lsx-col size="md">
@@ -2388,7 +2582,7 @@
                 </lsx-row>
             </lsx-grid-fluid>
         </article>
-        <aside>
+        <!-- <aside>
             <blockquote cite="https://de.wikipedia.org/wiki/Clarkesche_Gesetze" class="text-end">
                 <i>
                     „Jede hinreichend komplexe Technologie ist von Magie nicht zu unterscheiden.”
@@ -2433,7 +2627,7 @@
                 den wichtigsten Punkten, in denen eine gute Anwendung transparent sein sollte, mitsamt einfachen Definitionen und
                 aktuellen Beispielen.
             </p>
-        </aside>
+        </aside> -->
     </section>
 
     <section data-title="Ausfallsicherheit und Skalierung in der Cloud">
@@ -2460,8 +2654,7 @@
     </section>
 </section>
 
-<section data-background-color="rgb(231, 221, 141)">
-    <h1>Aufgabe 1: Ein kleines Architekturmuster-Quiz</h1>
+<section data-title="Aufgabe 1: Ein kleines Architekturmuster-Quiz" data-background-color="rgb(231, 221, 141)">
     <article>
         <lsx-tab-pages>
             <lsx-tab-page title="Aufgabe 1.1">
