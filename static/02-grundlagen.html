@@ -1683,10 +1683,6 @@
        - Zeitsynchronisation, gekürzt, wichtige Begriffe: Kausalität, Happened-Before-Relation
        - CAP-Theorem auch anhand Michaels Folien
        - Fehlerstrategien, Coffee Shop
-        
-    - Aufgabe 1: Sprach-Server/Client auf Laptop ausführen
-    - Aufgabe 2: Lamport-Uhr
-    - Quiz
 -->
 
 <section data-title="Entwurf verteilter Systeme">
@@ -2462,6 +2458,351 @@
             </div>
         </article>
     </section>
+</section>
+
+<section data-background-color="rgb(231, 221, 141)">
+    <h1>Aufgabe 1: Ein kleines Architekturmuster-Quiz</h1>
+    <article>
+        <lsx-tab-pages>
+            <lsx-tab-page title="Aufgabe 1.1">
+                <lsx-quiz>
+                    <lsx-exercise title="Clients, Server und Peers">
+                        <lsx-question
+                            type = "single-choice"
+                            text = "a) Welche der folgenden Definitionen beschreibt einen Server?"
+                        >
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Ein Programm, das einen Dienst anbietet und sich hierfür mit anderen,
+                                gleichartigen Programmen verbindet.
+                            </lsx-answer>
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Ein Programm, das einen Dienst anbietet und hierfür wartet, bis sich
+                                ein Nutzer mit ihm verbindet.
+                            </lsx-answer>
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Ein Programm, das temporär gestartet wird, um einen Dienst zu nutzen.
+                            </lsx-answer>
+                        </lsx-question>
+                        <lsx-question
+                            type = "single-choice"
+                            text = "b) TCP/IP-Verbindungen werden immer vom Server initiiert, der sich hierfür mit dem Client verbindet."
+                        >
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Wahr
+                            </lsx-answer>
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Falsch
+                            </lsx-answer>
+                        </lsx-question>
+                        <lsx-question
+                            type = "multiple-choice"
+                            text = "c) Welche der folgenden Aussagen sind korrekt?"
+                        >
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Die Peers in einem Peer-to-Peer-Netzwerk sind sowohl Client als auch Server.
+                            </lsx-answer>
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Peer-to-Peer-Netzwerke besitzen einen zentralen Master-Server für die gesamte Kommunikation.
+                            </lsx-answer>
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Jeder Peer verbindet sich als Client mit anderen anderen Peers, die gleichzeitig als Server fungieren.
+                            </lsx-answer>
+                        </lsx-question>
+                    </lsx-exercise>
+                </lsx-quiz>
+            </lsx-tab-page>
+
+            <lsx-tab-page title="Aufgabe 1.2">
+                <lsx-quiz>
+                    <lsx-exercise title="Proxyserver">
+                        <lsx-question
+                            type = "single-choice"
+                            text = "a) Welche der folgenden Definitionen entspricht der eines Proxyservers?"
+                        >
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Ein Proxyserver verbindet sich mit vielen anderen Proxyservern zu einem virtuellen Gesamtsystem.
+                            </lsx-answer>
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Ein Proxyserver dient der Zusammenführung mehrerer Microservices in einer Weboberfläche.
+                            </lsx-answer>
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Ein Proxyserver kopiert die Schnittstelle eines anderen Servers und vertritt diesen gegenüber seinen Clients.
+                            </lsx-answer>
+                        </lsx-question>
+                        <lsx-question
+                            type = "single-choice"
+                            text = "b) Welche der folgenden Aufgaben gehören nicht zu denen eines Proxyservers?"
+                        >
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Chachen häufig angefragter Inhalte
+                            </lsx-answer>
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Vereinheitlichung unterschiedlicher Serverprotokolle
+                            </lsx-answer>
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Content Filter, Upload Filter, Paywalls
+                            </lsx-answer>
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Lastverteilung über mehrere Serverinstanzen
+                            </lsx-answer>
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Sicherstellen einer zentralen Authentifizierung
+                            </lsx-answer>
+                        </lsx-question>
+                    </lsx-exercise>
+                </lsx-quiz>
+            </lsx-tab-page>
+
+            <lsx-tab-page title="Aufgabe 1.3">
+                <lsx-quiz>
+                    <lsx-exercise title="Dreischichtenarchitektur">
+                        <lsx-question
+                            type = "multiple-choice"
+                            text = "a) Welche der folgenden Schichten gehören zur Dreischichtenarchitektur?"
+                        >
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Datenhaltungsschicht
+                            </lsx-answer>
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Präsentationsschicht
+                            </lsx-answer>
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Darstellungsschicht
+                            </lsx-answer>
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Clientschicht
+                            </lsx-answer>
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Spätschicht
+                            </lsx-answer>
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Anwendungsschicht
+                            </lsx-answer>
+                        </lsx-question>
+                        <lsx-question
+                            type = "multiple-choice"
+                            text = "b) Welche der folgenden Schichten gehören zur Vierschichtenarchitektur?"
+                        >
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Mittelschicht
+                            </lsx-answer>
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Anwendungsschicht
+                            </lsx-answer>
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Präsentationsschicht
+                            </lsx-answer>
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Peer-To-Peer-Schicht
+                            </lsx-answer>
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Darstellungsschicht
+                            </lsx-answer>
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Datenhaltungsschicht
+                            </lsx-answer>
+                        </lsx-question>
+                    </lsx-exercise>
+                </lsx-quiz>
+            </lsx-tab-page>
+
+            <lsx-tab-page title="Aufgabe 1.4">
+                <lsx-quiz>
+                    <lsx-exercise title="Microservices">
+                        <lsx-question
+                            type = "single-choice"
+                            text = "a) Jeder Microservice entspricht einer Dreischichtenarchitektur?"
+                        >
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Wahr
+                            </lsx-answer>
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Falsch
+                            </lsx-answer>
+                        </lsx-question>
+                        <lsx-question
+                            type = "single-choice"
+                            text = "b) Microservices lohnen sich in der Regel eher für …"
+                        >
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Große Anwendungen in großen Unternehmen mit vielen Entwicklern
+                            </lsx-answer>
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Große Anwendungen in kleinen Unternehmen mit wenigen Entwicklern
+                            </lsx-answer>
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Kleine Anwendungen in großen Unternehmen mit wenigen Entwicklern
+                            </lsx-answer>
+                        </lsx-question>
+                        <lsx-question
+                            type = "multiple-choice"
+                            text = "c) Welche der folgenden Techniken kommen als Schnittstelle für Microservices in Frage?"
+                        >
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Entfernte Prozedur-/Methodenaufrufe
+                            </lsx-answer>
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Webservices
+                            </lsx-answer>
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Weboberflächen im Browser
+                            </lsx-answer>
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Message Broker
+                            </lsx-answer>
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Mobile Apps
+                            </lsx-answer>
+                        </lsx-question>
+                        <lsx-question
+                            type = "single-choice"
+                            text = "d) Die Microservices einer großen Anwendung besitzen alle dieselbe Versionsnummer"
+                        >
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Wahr
+                            </lsx-answer>
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Falsch
+                            </lsx-answer>
+                        </lsx-question>
+                    </lsx-exercise>
+                </lsx-quiz>
+            </lsx-tab-page>
+
+            <lsx-tab-page title="Aufgabe 1.5">
+                <lsx-quiz>
+                    <lsx-exercise title="Asynchrone Kommunikation">
+                        <lsx-question
+                            type = "single-choice"
+                            text = "a) Beim asynchronen Modell wird zwischen Sendern und Empfängern unterschieden. Ein Sender ist dabei immer ein Client und ein Emfpänger immer ein Server."
+                        >
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Wahr
+                            </lsx-answer>
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Falsch
+                            </lsx-answer>
+                        </lsx-question>
+                        <lsx-question
+                            type = "multiple-choice"
+                            text = "b) Welche der folgenden Ausagen über asynchrone Kommunikation sind korrekt?"
+                        >
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Jegliche Kommunikation wird über den Message Broker abgewickelt, der die Sender und
+                                Empfänger auf diese Weise voneinander entkoppelt.
+                            </lsx-answer>
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Die Kommunikation erfolgt immer nach einem Request/Reply-Verfahren, in dem jede Nachricht
+                                eines Senders mit einer Antwortnachricht eines Empfängers quitiert wird.
+                            </lsx-answer>
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Form und Inhalt der gesendeten Nachrichten können von der Anwendung meist frei definiert werden.
+                            </lsx-answer>
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Jede Nachricht wird immer an eine Warteschlange gesendwet, ohne dass der Sender weiß, ob und
+                                wie viele Empfänger diese überwachen.
+                            </lsx-answer>
+                        </lsx-question>
+                        <lsx-question
+                            type = "single-choice"
+                            text = "c) Was passiert mit einer Nachricht, die an eine Broadcast-Warteschlange gesendet wird?"
+                        >
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Aus allen Empfängern, welche die Warteschlange überwachen, wird einer ausgewählt, dem
+                                die Nachricht weitergeleitet wird. Dies beruht auf der Annahme, dass jeder Empfänger
+                                die Nachricht vollständig bearbeiten könnte und daher eine Lastverteilung umgesetzt
+                                werden kann. Die Nachrichten werden bei Bedarf in der Warteschlange zwischengespeichert,
+                                falls aktuell kein Empfänger verfügbar ist.
+                            </lsx-answer>
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Die Nachricht wird an alle Empfänger weitergeleitet, die die Warteschlange zum aktuellen
+                                Zeitpunkt überwachen. Haben keine Empfänger die entsprechende Warteschlange aboniert,
+                                geht die Nachricht jedoch verloren.
+                            </lsx-answer>
+                        </lsx-question>
+                        <lsx-question
+                            type = "single-choice"
+                            text = "d) Was passiert mit einer Nachricht, die an eine Point-to-Point-Warteschlange gesendet wird?"
+                        >
+                            <lsx-answer correct class="dhbw-fontsize-small">
+                                Aus allen Empfängern, welche die Warteschlange überwachen, wird einer ausgewählt, dem
+                                die Nachricht weitergeleitet wird. Dies beruht auf der Annahme, dass jeder Empfänger
+                                die Nachricht vollständig bearbeiten könnte und daher eine Lastverteilung umgesetzt
+                                werden kann. Die Nachrichten werden bei Bedarf in der Warteschlange zwischengespeichert,
+                                falls aktuell kein Empfänger verfügbar ist.
+                            </lsx-answer>
+                            <lsx-answer class="dhbw-fontsize-small">
+                                Die Nachricht wird an alle Empfänger weitergeleitet, die die Warteschlange zum aktuellen
+                                Zeitpunkt überwachen. Haben keine Empfänger die entsprechende Warteschlange aboniert,
+                                geht die Nachricht jedoch verloren.
+                            </lsx-answer>
+                        </lsx-question>
+                    </lsx-exercise>
+                </lsx-quiz>
+            </lsx-tab-page>
+        </lsx-tab-pages>
+    </article>
+    <aside>
+        <p>
+            Und hier nun das große Finale! 🎪 Zum Abschluss dieser Einheit darfst du ein paar
+            Fragen zu den eben gelernten Architekturmustern beantworten.
+        </p>
+        <img src="shared/quiz.png" class="img-fluid d-block" style="max-width: 20em;"/>
+        <p>
+            <small>
+                Bildnachweis:
+                <a href="https://pixabay.com/illustrations/quiz-tiles-letters-red-game-test-2058883/" target="_blank">Pixabay: 905513</a>
+            </small>
+        </p>
+    </aside>
+</section>
+
+<section data-title="Aufgabe 2: Wir erkunden Streams und Sockets" data-background-color="rgb(231, 221, 141)">
+    ... Sprach-Server/Client auf Laptop ausführen
+</section>
+
+<section data-title="Aufgabe 3: Wer hat an der Uhr gedreht?" data-background-color="rgb(231, 221, 141)">
+    <article class="markdown">
+        Wichtige Anforderung an verteilte Systeme ist häufig, dass die **Kausalordnung** von Ereignissen
+        erhalten bleibt, das heißt, dass die zeitliche Abfolge von Ursache und Wirkung nicht vertauscht
+        wird. Doch auch ohne kausalen Zusammenhang müssen so genannte **Happened-Before**-Beziehungen
+        erhalten bleiben. In beiden Fällen läuft es auf einen Vergleich von Zeitstempeln hinaus, wofür
+        entweder eine **Echtzeituhr** oder eine **logische Uhr** verwendet werden kann.
+        
+        #### a) Begriffsdefinitionen {.mt-4 .dhbw-lightblue}
+
+        Recherchieren Sie folgende Begriffe und formulieren Sie eine dazu passende Definition:
+
+        * Kausalordnung
+        * Happened-Before-Relation
+        * Nebenläufigkeit
+        * Echtzeituhr
+        * Lamport-Uhr
+
+        #### b) Fallbeispiel {.mt-4 .dhbw-lightblue}
+
+        Zeigen Sie anhand eines minimalen Beispiels, wie die zeitliche Abfolge mehrerer Ereignisse anhand
+        einer logischen Uhr sichergestellt werden kann.
+        
+        #### c) Nebenläufigkeit {.mt-4 .dhbw-lightblue}
+
+        Erklären Sie, warum eine einfache Lamport-Uhr keine nebenläufigen Prozesse abbilden kann und zeigen Sie,
+        wie eine Vektoruhr dies ermöglicht.
+    </article>
+    <aside>
+        <p>
+            Diese Aufgabe ist eine Vertiefungsaufgabe zum Thema „Zeitsynchronisation in verteilten Systemen”.
+            Die Antworten müssen daher selbständig recherchiert werden, wobei die deutsche Wikipedia bereits
+            sehr gute Artikel 📑 zu den einzelnen Begriffen enthält.
+        </p>
+        <img src="shared/pocket-watch.svg" class="d-block" style="max-width: 20em;" />
+        <p>
+            <small>
+                Bildnachweis:
+                <a href="https://pixabay.com/vectors/pocket-watch-fob-watch-147107/" target="_blank">Pixabay: OpenClipart-Vectors</a>
+            </small>
+        </p>
+    </aside>
 </section>
 
 <!-- TODO:
