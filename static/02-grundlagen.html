@@ -566,31 +566,695 @@
             </div>
         </article>
     </section>
+
+    <section data-title="Von Clients, Servern und Peers">
+        <article class="centered-content">
+            <div class="limited-width2">
+                <p class="mb-4">
+                    Im Zusammenhang mit verteilten Netzwerkanwendungen haben sich bereits früh folgende Begriffe
+                    mit fester Bedeutung etabliert. Leider werden aber gerade die Begriffe „Server” und „Service”
+                    im alltäglichen Sprachgebrauch heutzutage sehr unscharf verwendet.
+                </p>
+    
+                <table class="w-100 mb-5">
+                    <tr>
+                        <td style="padding-right: 0.5em;">
+                            💿
+                        </td>
+                        <td style="padding-right: 0.5em;">
+                            <b>Server</b>
+                        </td>
+                        <td>
+                            Langlaufendes Programm, das einen Dienst zur Verfügung stellt.
+                            <span style="color: darkred;">
+                                Wartet darauf, bis sich ein Client mit ihm verbindet.
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 0.33em;">
+                            💿
+                        </td>
+                        <td style="padding-right: 0.5em;">
+                            <b>Client</b>
+                        </td>
+                        <td>
+                            Kurzlebiges Programm, das den Dienst nutzt.
+                            <span style="color: darkred;">
+                                Stellt hierfür eine Verbindung zum Server her.
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 0.5em; padding-bottom: 1em;">
+                            💿
+                        </td>
+                        <td style="padding-right: 0.5em; padding-bottom: 1em;">
+                            <b>Peer</b>
+                        </td>
+                        <td style="padding-bottom: 1em;">
+                            Spezielles Programm, das sowohl Client als auch Server ist.
+                        </td>
+                    </tr>
+                    <tr style="border: 0px dashed black; border-top-width: 1px;">
+                        <td style="padding-top: 1em; padding-right: 0.5em;">
+                            🖥
+                        </td>
+                        <td style="padding-top: 1em; padding-right: 0.5em;">
+                            <b>Host</b>
+                        </td>
+                        <td style="padding-top: 1em;">
+                            Der Rechner, auf dem die Software läuft.
+                            <span style="color: darkred;">
+                                Oft sagen die Leute „Server” und meinen damit den „Host”.
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+        
+                <div class="d-flex gap-3">
+                    <lsx-card title="Client/Server-Architektur" bold>
+                        <img src="02-grundlagen/client-server.svg" alt="Skizze mit vielen Clients und einem Server in der Mitte" class="d-block w-100" />
+                    </lsx-card>
+                    <lsx-card title="Peer-to-Peer-Architektur" bold>
+                        <img src="02-grundlagen/peer-to-peer.svg" alt="Skizze mit vielen untereinander verbundenen Peers" class="d-block w-100" />
+                    </lsx-card>
+                </div>
+            </div>
+        </article>
+    </section>
+    
+    <section data-title="Grundlegende Architekturmodelle">
+        <article class="centered-content">
+            <div class="limited-width2">
+                <lsx-tab-pages class="w-100">
+                    <lsx-tab-page title="Grundmodell">
+                        <h2>Beschreibung</h2>
+                        <p style="margin-bottom: 2em;">
+                            Dies ist die einfachste Architektur von allen. Sie besteht lediglich aus einem Server,
+                            der einen Dienst anbietet und den Clients, welche den Dienst konsumieren. Sehr oft kommt
+                            dabei ein synchrones, den Client blockierendes Request/Reply-Verfahren zum Einsatz, das
+                            besonders einfach zu programmieren ist. Technisch gesehen ist dies aber kein Muss, da
+                            Sockets prinzipiell jede Kommunikationsreihenfolge zulassen.
+                        </p>
+                        <div class="d-flex justify-content-center">
+                            <img src="02-grundlagen/architektur-client-server.svg" alt="Skizze eines Servers und dreier Clients" class="d-block m-auto" style="max-width: 45em;" />
+                        </div>
+                        
+                        <h2 class="mt-4">Fallbeispiele</h2>
+                        <lsx-ul emoji="✅">
+                            <li>
+                                Browser und Webserver im World Wide Web
+                            </li>
+                            <li>
+                                Browser App mit Zugriff auf den Server via Websockets
+                            </li>
+                            <li>
+                                Wartungszugang auf einen Rechner per Secure Shell
+                            </li>
+                            <li>
+                                Zugriff auf ein E-Mailpostfach mit IMAP
+                            </li>
+                            <li>
+                                Zentrale Quellcodeverwaltung mit Subversion
+                            </li>
+                            <li>
+                                WebDAV-Zugriff auf einen geteilten Onlineordner
+                            </li>
+                        </lsx-ul>
+                    </lsx-tab-page>
+        
+                    <lsx-tab-page title="Dreischichtenarchitektur">
+                        <h2>Beschreibung</h2>
+                        <p style="margin-bottom: 2em;">
+                            Hierbei handelt es sich ebenfalls um eine Client/Server-Architektur, jedoch greift der Server zusätzlich
+                            auf eine Datenbank zu. Client, Server und Datenbank werden daher den drei Schichten <b>Darstellung</b>,
+                            <b>Anwendungslogik</b> und <b>Datenhaltung</b> zugeordnet. Für die Darstellung wurden früher ausschließlich
+                            native Clients verwendet, die heute zunehmend von Webanwendungen und mobilen Apps verdrängt werden. Die
+                            Schichten für die Anwendungslogik und Datenhaltung können hingegen auch mehrere Server umfassen.
+                        </p>
+                        <div class="d-flex justify-content-center">
+                            <img src="02-grundlagen/architektur-3schichten.svg" alt="Skizze einer Dreischichtenarchitektur" class="d-block limited-width m-auto" />
+                        </div>
+                        
+                        <h2 class="mt-4">Fallbeispiele</h2>
+                        <lsx-ul emoji="✅">
+                            <li>
+                                Jede Webanwendung mit einer Datenbank im Hintergrund
+                            </li>
+                            <li>
+                                Einfache Informationssysteme ohne eigenständigen Präsentationsserver
+                            </li>
+                            <li>
+                                Die meisten ERP- und CRM-Systeme (unter anderem SAP und Navision)
+                            </li>
+                            <li>
+                                Per Webservice erreichbare Microservices
+                            </li>
+                        </lsx-ul>
+                    </lsx-tab-page>
+        
+                    <lsx-tab-page title="Vierschichtenarchitektur">
+                        <h2>Beschreibung</h2>
+                        <p style="margin-bottom: 2em;">
+                            Hierbei handelt es sich um eine Variation der Dreischichtenarchitektur, bei der die mittlere Sicht
+                            in eine <b>Präsentations-</b> und eine <b>Anwendungsschicht</b> zerlegt wurde. Dieses Modell
+                            findet man häufig bei ERP-Systemen, die mehrere Clienttechnologien unterstützen müssen.
+                        </p>
+                        <div class="d-flex justify-content-center">
+                            <img src="02-grundlagen/architektur-4schichten.svg" alt="Skizze einer Dreischichtenarchitektur" class="d-block limited-width m-auto" />
+                        </div>
+                        
+                        <h2 class="mt-4">Fallbeispiele</h2>
+                        <lsx-ul emoji="✅">
+                            <li>
+                                ERP- und CRM-Systeme mit einem eigenständigen Präsentationsserver
+                            </li>
+                            <li>
+                                Java-Webanwendung mit getrenntem Deployment von Servlets und EJBs
+                            </li>
+                        </lsx-ul>
+                    </lsx-tab-page>
+        
+                    <lsx-tab-page title="Microservices">
+                        <h2>Beschreibung</h2>
+                        <p>
+                            Microservices zerlegen eine große, monolithische Anwendung in viele kleine Teilanwendungen. Jeder Microservice hat
+                            ein klar umrissenes Aufgabengebiet, besitzt eine gut dokumentierte und versionierte Schnittstelle und wird in der
+                            Regel von einem eigenen Team entwickelt und betrieben. Entwicklung, Test und Betrieb sind sehr stark automatisiert.
+                            Microservices eignen sich daher oft für große Firmen mit mehreren, unabhängigen Entwicklungsmannschaften.
+                        </p>
+                        <div class="d-flex justify-content-center">
+                            <img src="02-grundlagen/microservices.png" alt="Skizze einer Microservice-Architektur" style="max-height: 26em; max-width: 100%;" />
+                        </div>
+                        
+                        <h2 class="mt-4">Fallbeispiele</h2>
+                        <lsx-ul emoji="✅">
+                            <li>
+                                Amazon gilt allgemein als Vorreiter, obwohl sie den Begriff selbst nicht verwenden
+                            </li>
+                            <li>
+                                Große Internetplattformen wie eBay, Netflix, SoundCloud, Spotify, …
+                            </li>
+                        </lsx-ul>
+                    </lsx-tab-page>
+                    
+                    <lsx-tab-page title="Reverse Proxy / API-Gateway">
+                        <h2>Beschreibung</h2>
+                        <p style="margin-bottom: 2em;">
+                            Serverseitig kann ein Reverse Proxy als API-Gateway eingesetzt werden, um die eingehenden Anfragen
+                            zu bündeln. Dadurch wird es möglich, zusätzliche Sicherheitsprüfungen zu implementieren, häufig
+                            angefragte Inhalte zu cachen oder eine transparente Lastverteilung vorzunehmen.
+                        </p>
+                        <div class="d-flex justify-content-center">
+                            <img src="02-grundlagen/proxy-serverseitig.png" alt="Architekturskizze mit serverseitigem Proxy" style="max-height: 16em; max-width: 100%;" />
+                        </div>
+                        
+                        <h2 class="mt-4">Anwendungsbeispiele</h2>
+                        <lsx-ul emoji="✅">
+                            <li>
+                                Steigerung der Performance durch Caching häufig angefragter Daten
+                            </li>
+                            <li>
+                                Implementierung von Zugangsbeschränkungen und Upload Filtern
+                            </li>
+                            <li>
+                                Realisierung von Paywalls zum Ausfiltern kostenpflichtiger Inhalte
+                            </li>
+                            <li>
+                                Sicherstellen einer vorgelagerten, zentralen Authentifizierung
+                            </li>
+                            <li>
+                                Serverseitige Lastverteilung durch Weiterleitung an unterschiedliche Server
+                            </li>
+                        </lsx-ul>
+                    </lsx-tab-page>
+                    
+                    <lsx-tab-page title="Proxy">
+                        <h2>Beschreibung</h2>
+                        <p style="margin-bottom: 2em;">
+                            Ein clientseitiger Proxy bildet die Schnittstelle eines entfernten Servers innerhalb
+                            des lokalen Netzwerks ab. Die Anfragen der Clients werden nicht direkt an den Server
+                            sondern an den lokalen Proxy gesendet, der daraufhin entscheiden kann, ob er die
+                            Anfragen weiterleitet oder selbst beantwortet.
+                        </p>
+                        <div class="d-flex justify-content-center">
+                            <img src="02-grundlagen/proxy-clientseitig.png" alt="Architekturskizze mit clientseitigem Proxy" style="max-height: 16em; max-width: 100%;" />
+                        </div>
+                        
+                        <h2 class="mt-4">Anwendungsbeispiele</h2>
+                        <lsx-ul emoji="✅">
+                            <li>
+                                Steigerung der Performance durch Caching häufig angefragter Daten
+                            </li>
+                            <li>
+                                Implementierung von Zugangsbeschränkungen und Content Filtern
+                            </li>
+                            <li>
+                                Clientseitige Lastverteilung durch Weiterleitung an unterschiedliche Server
+                            </li>
+                        </lsx-ul>
+                    </lsx-tab-page>
+                </lsx-tab-pages>
+            </div>
+        </article>
+    </section>
+</section>
+
+<section data-title="Exkurs: Ein Blick in die Geschichte" data-background-image="02-grundlagen/historie-hintergrund.jpg" data-background-blur="5px">
+    <section data-title="Netzwerkprogrammierung im Laufe der Zeit">
+        <article class="centered-content">
+            <div class="centered-content flex-row flex-wrap gap-3">
+                <!-- Host-to-Host -->
+                <lsx-modal>
+                    <lsx-thumbnail style="height: 14em;" class="mw-100">
+                        <img src="02-grundlagen/historie-abb1.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                    </lsx-thumbnail>
+                    <lsx-content>
+                        <lsx-card title="Host-to-Host" bold class="mh-100 mw-100" style="width: 35em;">
+                            <lsx-card-body class="overflow-scroll">
+                                <table class="lead" style="margin-bottom: 1em;">
+                                    <tr>
+                                        <td style="padding-right: 0.5em;">🔌</td>
+                                        <td>Direkte Kabelverbindung zwischen zwei Rechnern</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding-right: 0.5em;">🔌</td>
+                                        <td>Keine Unterstützung durch das Betriebssystem</td>
+                                    </tr>
+                                </table>
+
+                                <img src="02-grundlagen/historie-kabel.svg" alt="Zwei VS-Knoten mit direkter Kabelverbindung" style="width: 100%; margin-bottom: 1em;" />
+                                <img src="02-grundlagen/historie-abb1.jpg" alt="" style="width: 100%;" />
+                            </lsx-card-body>
+                        </lsx-card>
+                    </lsx-content>
+                </lsx-modal>
+    
+                <!-- Packet Switching -->
+                <lsx-modal>
+                    <lsx-thumbnail style="height: 14em;" class="mw-100">
+                        <img src="02-grundlagen/historie-abb2.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                    </lsx-thumbnail>
+                    <lsx-content>
+                        <lsx-card title="Packet Switching" bold class="mh-100 mw-100" style="width: 35em;">
+                            <lsx-card-body class="overflow-scroll">
+                                <table class="lead" style="margin-bottom: 1em;">
+                                    <td style="padding-right: 0.5em;">📦</td>
+                                    <td>NCP und später TCP als Vorläufer von TCP/IP</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-right: 0.5em;">📦</td>
+                                    <td>Weltweiter Datenaustausch zwischen allen Hosts</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-right: 0.5em;">📦</td>
+                                    <td>Anschluss des Computers hierfür an einen <a href="https://en.wikipedia.org/wiki/Interface_Message_Processor" target="_blank">IMP</a></td>
+                                </table>
+
+                                <img src="02-grundlagen/imp-subnet.svg" alt="Netzwerktopologie des früheren ARPANET" style="width: 100%; margin-bottom: 1em;" />
+
+                                <!-- <lsx-youtube class="img-thumbnail embed-responsive" video="yU9oMOcRsuE"></lsx-youtube> -->
+                                <div class="centered-content">
+                                    <div class="embed-responsive ratio ratio-16x9 limited-width">
+                                        <iframe class="d-block" src="https://www.youtube-nocookie.com/embed/yU9oMOcRsuE?rel=0&amp;showinfo=0" allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </lsx-card-body>
+                        </lsx-card>
+                    </lsx-content>
+                </lsx-modal>
+    
+                <!-- Sockets- und Middleware -->
+                <lsx-modal>
+                    <lsx-thumbnail style="height: 14em;">
+                        <img src="02-grundlagen/historie-abb3.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                    </lsx-thumbnail>
+                    <lsx-content>
+                        <lsx-card title="Streams und Sockets" bold class="mh-100 mw-100" style="width: 35em;">
+                            <lsx-card-body class="overflow-scroll">
+                                <table class="lead" style="margin-bottom: 1em;">
+                                    <tr>
+                                        <td style="padding-right: 0.5em;">📃</td>
+                                        <td><a href="https://de.wikipedia.org/wiki/Remote_Procedure_Call" target="_blank">Remote Procedure Call</a> ab den 1970ern</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding-right: 0.5em;">📃</td>
+                                        <td>Zunächst konkurrierende Programmiermodelle</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding-right: 0.5em;">📃</td>
+                                        <td>Streams und Sockets ab 1983 in BSD Unix</td>
+                                    </tr>
+                                </table>
+
+                                <img src="02-grundlagen/historie-sockets.svg" alt="Zwei VS-Knoten mit Middleware" style="width: 100%; margin-bottom: 1em;" />
+                                <img src="02-grundlagen/historie-abb3.jpg" alt="" style="width: 100%;" />
+                            </lsx-card-body>
+                        </lsx-card>
+                    </lsx-content>
+                </lsx-modal>
+    
+                <!-- Applikationsserver -->
+                <lsx-modal>
+                    <lsx-thumbnail style="height: 14em;">
+                        <img src="02-grundlagen/historie-abb4.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                    </lsx-thumbnail>
+                    <lsx-content>
+                        <lsx-card title="Applikationsserver" bold class="mh-100 mw-100" style="width: 35em;">
+                            <lsx-card-body class="overflow-scroll">
+                                <table class="lead" style="margin-bottom: 1em;">
+                                    <tr>
+                                        <td style="padding-right: 0.5em;">🚢</td>
+                                        <td>Große Applikationsserver ab den 1990ern</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding-right: 0.5em;">🚢</td>
+                                        <td>Zunächst RPC später Webtechnologien</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding-right: 0.5em;">🚢</td>
+                                        <td>Heute eher leichtgewichtigere Micro-Frameworks</td>
+                                    </tr>
+                                </table>
+
+                                <img src="02-grundlagen/historie-appserver.svg" alt="Drei VS-Knoten von denen einer ein Applikationsserver ist" style="width: 100%; margin-bottom: 1em;" />
+                                <img src="02-grundlagen/historie-abb4.jpg" alt="" style="width: 100%;" />
+                            </lsx-card-body>
+                        </lsx-card>
+                    </lsx-content>
+                </lsx-modal>
+            </div>
+        </article>
+    </section>
+
+    <section data-title="Heute übliche Programmiermodelle">
+        <article class="centered-content">
+            <div class="limited-width2">
+
+                <lsx-grid-fluid>
+                    <lsx-row>
+                        <lsx-col size="md">
+                            <lsx-card title="App-Server / Frameworks" bold class="h-100">
+                                <lsx-card-body class="h-100 d-flex flex-column">
+                                    <lsx-ul emoji="🎙️">
+                                        <li>Beinhalten für Business Apps übliche Grundfunktionen</li>
+                                        <li>Unterstützen verschieden Schnittstellentechnologien</li>
+                                        <li>Oft auf die Entwicklung von Webanwendungen ausgerichtet</li>
+                                    </lsx-ul>
+    
+                                    <div style="flex: 1"></div>
+                                    <img src="02-grundlagen/arten-appserver.png" alt="" class="w-100" />
+                                </lsx-card-body>
+                            </lsx-card>
+                        </lsx-col>
+
+                        <lsx-col size="md">
+                            <lsx-card title="Entfernte Methodenaufrufe" bold class="h-100">
+                                <lsx-card-body class="h-100 d-flex flex-column">
+                                    <lsx-ul emoji="🎙️">
+                                        <li>Direkter Aufruf von Funktionen/Methoden des Servers</li>
+                                        <li>Sowohl prozedural als auch objekt-orientiert möglich</li>
+                                        <li>Teilweise auch zwischen verschiedenen Programmiersprachen</li>
+                                    </lsx-ul>
+    
+                                    <div style="flex: 1"></div>
+                                    <img src="02-grundlagen/arten-methodenaufrufe.png" alt="" class="w-100" />
+                                </lsx-card-body>
+                            </lsx-card>
+                        </lsx-col>
+                    </lsx-row>
+
+                    <lsx-row>
+                        <lsx-col size="md">
+                            <lsx-card title="Webservices" bold class="h-100">
+                                <lsx-card-body class="h-100 d-flex flex-column">
+                                    <lsx-ul emoji="🎙️">
+                                        <li>Grundsätzlich dieselbe Idee wie bei entfernten Methodenaufrufen</li>
+                                        <li>Jedoch auf Basis von Webstandards wie HTTP, XML, JSON</li>
+                                        <li>Früher SOAP, heue überwiegend REST-Webservices</li>
+                                    </lsx-ul>
+    
+                                    <div style="flex: 1"></div>
+                                    <img src="02-grundlagen/arten-webservices.png" alt="" class="w-100" />
+                                </lsx-card-body>
+                            </lsx-card>
+                        </lsx-col>
+
+                        <lsx-col size="md">
+                            <lsx-card title="Message Broker" bold class="h-100">
+                                <lsx-card-body class="h-100 d-flex flex-column">
+                                    <lsx-ul emoji="🎙️">
+                                        <li>Grundsätzlich asycnchroner Nachrichtenaustausch</li>
+                                        <li>Mehrere Empfänger für eine Nachricht möglich und üblich</li>
+                                        <li>Store and Forward der Nachrichten in einer FIFO-Warteschlange</li>
+                                    </lsx-ul>
+    
+                                    <div style="flex: 1"></div>
+                                    <img src="02-grundlagen/arten-pubsub.png" alt="" class="w-100" />
+                                </lsx-card-body>
+                            </lsx-card>
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
+            </div>
+        </article>
+    </section>
+
+<!--
+    <section data-title="Heute übliche Programmiermodelle">
+        <article>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md">
+                        <div class="img-thumbnail" style="padding: 0.5em; height: 100%; display: flex; flex-direction: column;">
+                            <h2>Applikationsserver</h2>
+                            <table style="margin-bottom: 1em;">
+                                <tr>
+                                    <td style="padding-right: 0.5em;">
+                                        🎙️
+                                    </td>
+                                    <td>
+                                        Beinhalten sehr viele Grundfunktionen
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-right: 0.5em;">
+                                        🎙️
+                                    </td>
+                                    <td>
+                                        Bieten verschiedene Schnittstellen nach außen
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-right: 0.5em;">
+                                        🎙️
+                                    </td>
+                                    <td>
+                                        Beinhalten oft auch einen Webserver
+                                    </td>
+                                </tr>
+                            </table>
+                            <div style="flex: 1"></div>
+                            <img src="arten-appserver.png" alt="" style="width: 100%" />
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="img-thumbnail" style="padding: 0.5em; height: 100%; display: flex; flex-direction: column;">
+                            <h2>Entfernte Methodenaufrufe</h2>
+                            <table style="margin-bottom: 1em;">
+                                <tr>
+                                    <td style="padding-right: 0.5em;">
+                                        🎙️
+                                    </td>
+                                    <td>
+                                        Direkter Aufruf von Objektmethoden des Servers
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-right: 0.5em;">
+                                        🎙️
+                                    </td>
+                                    <td>
+                                        Programmiersprachen müssen nicht identisch sein
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-right: 0.5em;">
+                                        🎙️
+                                    </td>
+                                    <td>
+                                        Jedoch kennt nicht jede Middleware alle Sprachen
+                                    </td>
+                                </tr>
+                            </table>
+                            <div style="flex: 1"></div>
+                            <img src="arten-methodenaufrufe.png" alt="" style="width: 100%" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md">
+                        <div class="img-thumbnail" style="padding: 0.5em; height: 100%; display: flex; flex-direction: column;">
+                            <h2>Webservices</h2>
+                            <table style="margin-bottom: 1em;">
+                                <tr>
+                                    <td style="padding-right: 0.5em;">
+                                        🎙️
+                                    </td>
+                                    <td>
+                                        Selbe Idee wie bei entfernten Aufrufen
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-right: 0.5em;">
+                                        🎙️
+                                    </td>
+                                    <td>
+                                        Jedoch auf Basis offener Webstandards
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-right: 0.5em;">
+                                        🎙️
+                                    </td>
+                                    <td>
+                                        SOAP und REST als relevante Standards
+                                    </td>
+                                </tr>
+                            </table>
+                            <div style="flex: 1"></div>
+                            <img src="arten-webservices.png" alt="" style="width: 100%" />
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="img-thumbnail" style="padding: 0.5em; height: 100%; display: flex; flex-direction: column;">
+                            <h2>Message Broker</h2>
+                            <table style="margin-bottom: 1em;">
+                                <tr>
+                                    <td style="padding-right: 0.5em;">
+                                        🎙️
+                                    </td>
+                                    <td>
+                                        Asynchrone Kommuniktion ohne Wartezeiten
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-right: 0.5em;">
+                                        🎙️
+                                    </td>
+                                    <td>
+                                        Nachrichten werden in FIFO-Queues gesammelt
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-right: 0.5em;">
+                                        🎙️
+                                    </td>
+                                    <td>
+                                        Beliebig viele Empfänger für eine Nachricht
+                                    </td>
+                                </tr>
+                            </table>
+                            <div style="flex: 1"></div>
+                            <img src="arten-pubsub.png" alt="" style="width: 100%" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <aside>
+            <p>
+                Heute sind im Wesentlichen vier Arten von Middleware von Bedeutung: Applikationsserver,
+                Entfernte Methodenaufrufe, Webservices und Message Broker. In der Vorlesung werden wir
+                uns deshalb alle anschauen und für eigene Anwendungen nutzen. Damit du weißt, was da auf
+                dich zukommt, haben wir hier eine kurze Übersicht zusammengestellt.
+            </p>
+
+            <h4>Applikationsserver</h4>
+            <p>
+                Anwendungsserver haben wir eben ja schon ein wenig kennengelernt. Es handelt sich dabei um
+                die einzige Art anwendungsorientierter Middleware. Angefangen haben sie als eine Erweiterung
+                der klassischen Middleware um relationale Datenbankfunktionen. Anwendungsserver werden daher
+                überwiegend für Informationssysteme mit folgenden Eigenschaften genutzt:
+            </p>
+            <ul>
+                <li>
+                    <b>Software-Intensiv:</b> Typische Informationssysteme bestehen nicht selten aus
+                    hunderttausenden oder gar Millionen Zeilen Quellcode.
+                </li>
+                <li>
+                    <b>Datenzentriert:</b> Hauptaufgabe ist die Erfassung, Verwaltung und Anzeige von
+                    Daten, wofür so gut wie immer eine relationale Datenbank genutzt wird.
+                </li>
+                <li>
+                    <b>Nebenläufig:</b> In großen Installationen arbeiten nicht selten tausende
+                    Benutzer gleichzeitig mit der Anwendung.
+                </li>
+                <li>
+                    <b>Interaktiv:</b> Grundlage der Bedienung ist entweder ein dedizierter Client
+                    für den Desktop und Mobil oder eine Weboberfläche. Die meisten Anwendungsserver
+                    bieten daher auch Funktionen zur Webentwicklung.
+                </li>
+            </ul>
+            <p>
+                Ein weiterer Schwerpunkt liegt in der Bereitstellung möglichst vieler Schnittstellen,
+                damit sich jede Art von Client mit dem Server verbinden kann. Gängige Applikationsserver
+                implementieren daher jede der nachfolgend aufgezählten Kommunikationsarten.
+            </p>
+
+            <h4>Entfernte Methodenaufrufe</h4>
+            <p>
+                Entfernte Methodenaufrufe können entweder durch eine Klassenbibliothek als kommunikationsorientierte
+                Middleware oder durch einen Applikationsserver bereitgestellt werden. Grundidee dahinter ist, dass
+                der Server eine Sammlung von Objekten enthält, deren Methoden über Rechnergrenzen hinweg aufgerufen
+                werden können. Die Middleware versucht dabei, die Unterschiede zwischen lokalen und entfernten Aufrufen
+                so gut es geht zu verstecken. Die Programmierung ist daher sehr einfach. Das Konzept bringt jedoch mit
+                sich, dass ein Client bei einem entfernten Aufruf meistens warten muss, bis der Server eine Antwort liefert.
+                Da der rufende Thread dadurch komplett angehalten wird, kann dies die Performance des Clients ziemlich
+                beeinflussen.
+            </p>
+
+            <h4>Webservices</h4>
+            <p>
+                Webservices sind in den ausgehenden 1990ern als gedanklicher Nachfolger der entfernten Methodenaufrufe
+                entstanden. Die Grundidee ist im Prinzip dieselbe, nur anstelle proprietärer Protokolle werden ausschließlich
+                offene Webstandards genutzt. Der Transport erfolgt daher über HTTP und als Datenformat kommen XML und JSON
+                zum Einsatz. Heute unterscheidet man dabei zwischen den beiden konkurrierenden Ansätzen SOAP und REST.
+                Da sie beide im ihrem jeweiligen Kontext eine große Bedeutung haben, werden wir uns beide Arten anschauen.
+            </p>
+
+            <h4>Message Broker</h4>
+            <p>
+                Message Broker fallen im Vergleich zu entfernten Aufrufen und Webservices ein wenig aus der Reihe.
+                Zwar handelt es sich dabei auch um eine kommunikationsorientierte Middleware, jedoch wird dafür ein
+                zentraler Message Server (Message Broker genannt) verwendet, der eine asynchrone Kommunikation zwischen
+                den Programmen herstellt. Die Programmierung erfolgt deshalb nicht „innerhalb” des Servers wie bei
+                den Anwendungsservern sondern wie gewohnt in Form ganz normaler (Java-)Programme, die sich mit dem
+                Server verbinden, um Nachrichten zu senden und zu empfangen. 📨 Die Nachrichten werden dabei in
+                unterschiedlichen FIFO-Warteschlangen gesammelt 📥 und von dort zeitversetzt an einen oder mehrere
+                Empfänger weitergeleitet. 📤 Sender und Empfänger bleiben dadurch sehr performant, jedoch muss man
+                beim Programmieren etwas umdenken. Im IoT-Umfeld sind Message Broker daher sehr verbreitet, was
+                wir uns gegen Ende der Vorlesung ebenfalls anschauen werden.
+            </p>
+        </aside>
+    </section> -->
 </section>
 
 <!-- TODO:
-    - Fallbeispiel Socketprogrammierung in Node.js
-       - TCP/IP-Stack (Untere drei im OS, Anwendung kann sich nochmal aufteilen)
-       - Quellcode des Beispiels
-
     - Vorteilte verteilter Systeme
         - Skalierung: Doppeldecker-Bus, Raytracing (Michael und alte Folie #5)
         - Resilienz (Folien Michael)
 
     - Nachteile verteilter Systeme, 2PC, Eheschließung, 3PC
+       - Acht Irrtümer
        - 2PC heute nicht mehr relevant, ebenso wie synchrone Programmiermodelle
          Weil sie die Verteilung quasi aufheben und so die Vorteile nicht nutzen
          Heute Systeme sind eventuell-konsistent
-       - Acht Irrtümer
        - Zeitsynchronisation, gekürzt, wichtige Begriffe: Kausalität, Happened-Before-Relation
        - CAP-Theorem auch anhand Michaels Folien
        - Fehlerstrategien, Coffee Shop
-    
-    - Allgemeine Anforderungen an verteilte Systeme (alte Folie "Anforderungen an den Systementwurf
-       - Übersicht
-       - Beispiel: Skalierung und Ausfallsicherheit in der Cloud
-       - Beispiel: Die neuen Transparenzarten
-    
+        
     - Quiz
 -->
 
@@ -598,6 +1262,29 @@
 <!-- Entwurfsprinzipien -->
 <!-- ================== -->
 <section data-use-template="teilkapitel" data-titel="Entwurfsprinzipien"></section>
+
+<!-- TODO:
+ - Allgemeine Anforderungen an verteilte Systeme (alte Folie "Anforderungen an den Systementwurf
+       - Übersicht
+       - Beispiel: Skalierung und Ausfallsicherheit in der Cloud
+       - Beispiel: Die neuen Transparenzarten
+-->
+
+<!-- TODO:
+    - Hier auch die Cloud-Architektur-Folien einarbeiten (ggf. in gekürzter Fassung) 
+    - Interaktionsmuster, (lose) Kopplung, synchron, asynchron, Nebenläufigkeit
+    - Synchrone Requests können heute auch "asynchron programmiert" werden
+    - Conversation Pattern: Asynchrone Prozesse fangen oft synchron bzw. haben synchrone Teilan.
+      Bsp. Amazon-Bestellung: Synchron - Auftragsnummer zuweisen, Asynchron - Bestellabwicklung, Synchron: Bezahlung
+    
+    - Aufgabe: Banküberweisungen sind das klassische ACID-Transaktionen Beispiel. Aber sind sie wirklich atomar und isloert?
+      Recherchieren Sie den Begriffe Valuta bzw. Wertstellung und ziehen Sie diesen für Ihre Begründung heran.
+-->
+
+<!-- TODO: Übungsaufgaben
+    - Gruppenarbeit: Größere Beispiel-Anwendung zum Laufen bringen, erst jeder auf seinem Laptop, dann verteilt
+    - Gruppenarbeit: Skalierung eines Microservices (je Laptop eine Instanz)
+-->
 
 <!-- TODO: Cards? -->
 <section data-title="Anforderungen an den Systementwurf">
@@ -1788,294 +2475,6 @@
         </small>
     </aside>
 </section>
-
-<!-- ================= -->
-<!-- Architekturmuster -->
-<!-- ================= -->
-<section data-use-template="teilkapitel" data-titel="Architekturmuster"></section>
-
-<!-- TODO:
-    - Hier auch die Cloud-Architektur-Folien einarbeiten (ggf. in gekürzter Fassung) 
-    - Interaktionsmuster, (lose) Kopplung, synchron, asynchron, Nebenläufigkeit
-    - Synchrone Requests können heute auch "asynchron programmiert" werden
-    - Conversation Pattern: Asynchrone Prozesse fangen oft synchron bzw. haben synchrone Teilan.
-      Bsp. Amazon-Bestellung: Synchron - Auftragsnummer zuweisen, Asynchron - Bestellabwicklung, Synchron: Bezahlung
-    
-    - Aufgabe: Banküberweisungen sind das klassische ACID-Transaktionen Beispiel. Aber sind sie wirklich atomar und isloert?
-      Recherchieren Sie den Begriffe Valuta bzw. Wertstellung und ziehen Sie diesen für Ihre Begründung heran.
--->
-<section data-title="Von Clients, Servern und Peers">
-    <article class="centered-content">
-        <table class="m-auto mb-5">
-            <tr>
-                <td style="padding-right: 0.5em;">
-                    💿
-                </td>
-                <td style="padding-right: 0.5em;">
-                    <b>Server</b>
-                </td>
-                <td>
-                    Langlaufendes Programm, das einen Dienst zur Verfügung stellt.
-                    <span style="color: darkred;">
-                        Wartet darauf, bis sich ein Client mit ihm verbindet.
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td style="padding-right: 0.33em;">
-                    💿
-                </td>
-                <td style="padding-right: 0.5em;">
-                    <b>Client</b>
-                </td>
-                <td>
-                    Kurzlebiges Programm, das den Dienst nutzt.
-                    <span style="color: darkred;">
-                        Stellt hierfür eine Verbindung zum Server her.
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td style="padding-right: 0.5em; padding-bottom: 1em;">
-                    💿
-                </td>
-                <td style="padding-right: 0.5em; padding-bottom: 1em;">
-                    <b>Peer</b>
-                </td>
-                <td style="padding-bottom: 1em;">
-                    Spezielles Programm, das sowohl Client als auch Server ist.
-                </td>
-            </tr>
-            <tr style="border: 0px dashed black; border-top-width: 1px;">
-                <td style="padding-top: 1em; padding-right: 0.5em;">
-                    🖥
-                </td>
-                <td style="padding-top: 1em; padding-right: 0.5em;">
-                    <b>Host</b>
-                </td>
-                <td style="padding-top: 1em;">
-                    Der Rechner, auf dem die Software läuft.
-                    <span style="color: darkred;">
-                        Oft sagen die Leute „Server” und meinen damit den „Host”.
-                    </span>
-                </td>
-            </tr>
-        </table>
-
-        <lsx-tab-pages>
-            <lsx-tab-page title="Einfache Architekturmuster">
-                <div class="d-flex gap-3">
-                    <div class="card p-3">
-                        <h3 class="mb-4">Client/Server-Architektur</h3>
-                        <img src="02-grundlagen/client-server.svg" alt="Skizze mit vielen Clients und einem Server in der Mitte" class="d-block w-100" />
-                    </div>
-                    <div class="card p-3">
-                        <h3 class="mb-4">Peer-to-Peer-Architektur</h3>
-                        <img src="02-grundlagen/peer-to-peer.svg" alt="Skizze mit vielen untereinander verbundenen Peers" class="d-block w-100" />
-                    </div>
-                </div>
-            </lsx-tab-page>
-            <lsx-tab-page title="Fallbeispiel: Socketprogrammierung mit Node.js">
-                <lsx-github-edit url="https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes/tree/main/Socketprogrammierung%20mit%20Node.js"></lsx-github-edit>
-
-                <lsx-grid-fluid class="mt-3 p-0">
-                    <lsx-row>
-                        <lsx-col size="md">
-                            <img src="02-grundlagen/socket-server.png" class="img-thumbnail d-block w-100" />
-                        </lsx-col>
-                        <lsx-col size="md">
-                            <img src="02-grundlagen/socket-client.png" class="img-thumbnail d-block w-100" />
-                        </lsx-col>
-                        <lsx-col size="md">
-                            <img src="02-grundlagen/socket-netcat.png" class="img-thumbnail d-block w-100" />
-                        </lsx-col>
-                    </lsx-row>
-                </lsx-grid-fluid>
-            </lsx-tab-page>
-        </lsx-tab-pages>
-    </article>
-</section>
-
-<section data-title="Grundlegende Architekturmodelle">
-    <article class="centered-content">
-        <div class="limited-width2">
-            <lsx-tab-pages class="w-100">
-                <lsx-tab-page title="Grundmodell">
-                    <h2>Beschreibung</h2>
-                    <p style="margin-bottom: 2em;">
-                        Dies ist die einfachste Architektur von allen. Sie besteht lediglich aus einem Server,
-                        der einen Dienst anbietet und den Clients, welche den Dienst konsumieren. Sehr oft kommt
-                        dabei ein synchrones, den Client blockierendes Request/Reply-Verfahren zum Einsatz, das
-                        besonders einfach zu programmieren ist. Technisch gesehen ist dies aber kein Muss, da
-                        Sockets prinzipiell jede Kommunikationsreihenfolge zulassen.
-                    </p>
-                    <div class="d-flex justify-content-center">
-                        <img src="02-grundlagen/architektur-client-server.svg" alt="Skizze eines Servers und dreier Clients" class="d-block m-auto" style="max-width: 45em;" />
-                    </div>
-                    
-                    <h2 class="mt-4">Fallbeispiele</h2>
-                    <lsx-ul emoji="✅">
-                        <li>
-                            Browser und Webserver im World Wide Web
-                        </li>
-                        <li>
-                            Browser App mit Zugriff auf den Server via Websockets
-                        </li>
-                        <li>
-                            Wartungszugang auf einen Rechner per Secure Shell
-                        </li>
-                        <li>
-                            Zugriff auf ein E-Mailpostfach mit IMAP
-                        </li>
-                        <li>
-                            Zentrale Quellcodeverwaltung mit Subversion
-                        </li>
-                        <li>
-                            WebDAV-Zugriff auf einen geteilten Onlineordner
-                        </li>
-                    </lsx-ul>
-                </lsx-tab-page>
-    
-                <lsx-tab-page title="Dreischichtenarchitektur">
-                    <h2>Beschreibung</h2>
-                    <p style="margin-bottom: 2em;">
-                        Hierbei handelt es sich ebenfalls um eine Client/Server-Architektur, jedoch greift der Server zusätzlich
-                        auf eine Datenbank zu. Client, Server und Datenbank werden daher den drei Schichten <b>Darstellung</b>,
-                        <b>Anwendungslogik</b> und <b>Datenhaltung</b> zugeordnet. Für die Darstellung wurden früher ausschließlich
-                        native Clients verwendet, die heute zunehmend von Webanwendungen und mobilen Apps verdrängt werden. Die
-                        Schichten für die Anwendungslogik und Datenhaltung können hingegen auch mehrere Server umfassen.
-                    </p>
-                    <div class="d-flex justify-content-center">
-                        <img src="02-grundlagen/architektur-3schichten.svg" alt="Skizze einer Dreischichtenarchitektur" class="d-block limited-width m-auto" />
-                    </div>
-                    
-                    <h2 class="mt-4">Fallbeispiele</h2>
-                    <lsx-ul emoji="✅">
-                        <li>
-                            Jede Webanwendung mit einer Datenbank im Hintergrund
-                        </li>
-                        <li>
-                            Einfache Informationssysteme ohne eigenständigen Präsentationsserver
-                        </li>
-                        <li>
-                            Die meisten ERP- und CRM-Systeme (unter anderem SAP und Navision)
-                        </li>
-                        <li>
-                            Per Webservice erreichbare Microservices
-                        </li>
-                    </lsx-ul>
-                </lsx-tab-page>
-    
-                <lsx-tab-page title="Vierschichtenarchitektur">
-                    <h2>Beschreibung</h2>
-                    <p style="margin-bottom: 2em;">
-                        Hierbei handelt es sich um eine Variation der Dreischichtenarchitektur, bei der die mittlere Sicht
-                        in eine <b>Präsentations-</b> und eine <b>Anwendungsschicht</b> zerlegt wurde. Dieses Modell
-                        findet man häufig bei ERP-Systemen, die mehrere Clienttechnologien unterstützen müssen.
-                    </p>
-                    <div class="d-flex justify-content-center">
-                        <img src="02-grundlagen/architektur-4schichten.svg" alt="Skizze einer Dreischichtenarchitektur" class="d-block limited-width m-auto" />
-                    </div>
-                    
-                    <h2 class="mt-4">Fallbeispiele</h2>
-                    <lsx-ul emoji="✅">
-                        <li>
-                            ERP- und CRM-Systeme mit einem eigenständigen Präsentationsserver
-                        </li>
-                        <li>
-                            Java-Webanwendung mit getrenntem Deployment von Servlets und EJBs
-                        </li>
-                    </lsx-ul>
-                </lsx-tab-page>
-    
-                <lsx-tab-page title="Microservices">
-                    <h2>Beschreibung</h2>
-                    <p>
-                        Microservices zerlegen eine große, monolithische Anwendung in viele kleine Teilanwendungen. Jeder Microservice hat
-                        ein klar umrissenes Aufgabengebiet, besitzt eine gut dokumentierte und versionierte Schnittstelle und wird in der
-                        Regel von einem eigenen Team entwickelt und betrieben. Entwicklung, Test und Betrieb sind sehr stark automatisiert.
-                        Microservices eignen sich daher oft für große Firmen mit mehreren, unabhängigen Entwicklungsmannschaften.
-                    </p>
-                    <div class="d-flex justify-content-center">
-                        <img src="02-grundlagen/microservices.png" alt="Skizze einer Microservice-Architektur" style="max-height: 26em; max-width: 100%;" />
-                    </div>
-                    
-                    <h2 class="mt-4">Fallbeispiele</h2>
-                    <lsx-ul emoji="✅">
-                        <li>
-                            Amazon gilt allgemein als Vorreiter, obwohl sie den Begriff selbst nicht verwenden
-                        </li>
-                        <li>
-                            Große Internetplattformen wie eBay, Netflix, SoundCloud, Spotify, …
-                        </li>
-                    </lsx-ul>
-                </lsx-tab-page>
-                
-                <lsx-tab-page title="Reverse Proxy / API-Gateway">
-                    <h2>Beschreibung</h2>
-                    <p style="margin-bottom: 2em;">
-                        Serverseitig kann ein Reverse Proxy als API-Gateway eingesetzt werden, um die eingehenden Anfragen
-                        zu bündeln. Dadurch wird es möglich, zusätzliche Sicherheitsprüfungen zu implementieren, häufig
-                        angefragte Inhalte zu cachen oder eine transparente Lastverteilung vorzunehmen.
-                    </p>
-                    <div class="d-flex justify-content-center">
-                        <img src="02-grundlagen/proxy-serverseitig.png" alt="Architekturskizze mit serverseitigem Proxy" style="max-height: 16em; max-width: 100%;" />
-                    </div>
-                    
-                    <h2 class="mt-4">Anwendungsbeispiele</h2>
-                    <lsx-ul emoji="✅">
-                        <li>
-                            Steigerung der Performance durch Caching häufig angefragter Daten
-                        </li>
-                        <li>
-                            Implementierung von Zugangsbeschränkungen und Upload Filtern
-                        </li>
-                        <li>
-                            Realisierung von Paywalls zum Ausfiltern kostenpflichtiger Inhalte
-                        </li>
-                        <li>
-                            Sicherstellen einer vorgelagerten, zentralen Authentifizierung
-                        </li>
-                        <li>
-                            Serverseitige Lastverteilung durch Weiterleitung an unterschiedliche Server
-                        </li>
-                    </lsx-ul>
-                </lsx-tab-page>
-                
-                <lsx-tab-page title="Proxy">
-                    <h2>Beschreibung</h2>
-                    <p style="margin-bottom: 2em;">
-                        Ein clientseitiger Proxy bildet die Schnittstelle eines entfernten Servers innerhalb
-                        des lokalen Netzwerks ab. Die Anfragen der Clients werden nicht direkt an den Server
-                        sondern an den lokalen Proxy gesendet, der daraufhin entscheiden kann, ob er die
-                        Anfragen weiterleitet oder selbst beantwortet.
-                    </p>
-                    <div class="d-flex justify-content-center">
-                        <img src="02-grundlagen/proxy-clientseitig.png" alt="Architekturskizze mit clientseitigem Proxy" style="max-height: 16em; max-width: 100%;" />
-                    </div>
-                    
-                    <h2 class="mt-4">Anwendungsbeispiele</h2>
-                    <lsx-ul emoji="✅">
-                        <li>
-                            Steigerung der Performance durch Caching häufig angefragter Daten
-                        </li>
-                        <li>
-                            Implementierung von Zugangsbeschränkungen und Content Filtern
-                        </li>
-                        <li>
-                            Clientseitige Lastverteilung durch Weiterleitung an unterschiedliche Server
-                        </li>
-                    </lsx-ul>
-                </lsx-tab-page>
-            </lsx-tab-pages>
-        </div>
-    </article>
-</section>
-
-<!-- TODO: Übungsaufgaben
-    - Gruppenarbeit: Größere Beispiel-Anwendung zum Laufen bringen, erst jeder auf seinem Laptop, dann verteilt
-    - Gruppenarbeit: Skalierung eines Microservices (je Laptop eine Instanz)
--->
 
 <!-- =========== -->
 <!-- Algorithmen -->
