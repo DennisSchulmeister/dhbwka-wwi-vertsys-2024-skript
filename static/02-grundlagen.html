@@ -17,7 +17,7 @@
 <!-- =================== -->
 <!-- Allgemeine Begriffe -->
 <!-- =================== -->
-<section data-use-template="teilkapitel" data-titel="Allgemeine Begriffe"></section>
+<section data-use-template="teilkapitel" data-titel="Technische Grundlagen"></section>
 
 <section data-title="Was ist ein verteiltes System?" data-background-image="02-grundlagen/definition-hintergrund.jpg" data-background-blur="5px">
     <section data-title="Alltäglicher Sprachgebrauch" class="centered-content">
@@ -277,6 +277,294 @@
                 </lsx-content>
             </lsx-modal>
         </div>
+    </section>
+</section>
+
+<section data-title="Der TCP/IP-Protokollstapel">
+    <section data-title="Beteiligte Komponenten">
+        <article class="centered-content">
+            <div class="limited-width">
+                <div class="markdown mb-4" detail-content>
+                    Die überwiegende Mehrheit der verteilten Anwendungen laufen heute über das Internet oder nutzen zumindest
+                    den TCP/IP-Protokollstapel. Das verteilte System besteht in diesem Fall aus einer beliebigen Anzahl von
+                    Rechnerknoten mit einem netzwerkfähigen Betriebssystem, die über untereinander Nachrichten austauschen können.
+                    Die auf den Rechnern laufenden Programmkomponenten bilden in ihrer Gesamtheit die eigentliche verteilte
+                    Anwendung.
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="tcpip-details-switch">
+                            <label class="form-check-label" for="tcpip-details-switch">Details anzeigen</label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <img src="02-grundlagen/tcpip-stack1.png" id="tcpip-stack1" class="d-block w-100" alt="Vereinfachter schematischer Aufbau eines verteilten Systems">
+                        <img src="02-grundlagen/tcpip-stack2.png" id="tcpip-stack2" class="d-block w-100 hidden" alt="Vereinfachter schematischer Aufbau eines verteilten Systems">
+                    </div>
+                </div>
+
+                <div id="tcpip-stack3" class="markdown hidden" detail-content>
+                    Der Netzwerk-Stack des Betriebssystems wird grob wie folgt unterteilt:
+
+                    * **Netzwerkschicht:** Dient der Anbindung an das physikalische Netzwerk, z.B. Ethernet oder WiFi.
+
+                    * **Vermittlungsschicht:** Dient der Adressierung der Rechnerknoten und dem Routing von Datenpaketen
+                      über lokale Netzwerkgrenzen hinweg. Auf dieser Ebene läuft das
+                      [Internet Protocol (IP)](https://de.wikipedia.org/wiki/Internet_Protocol){target=_blank}, das jedem
+                      Rechner eine (global) eindeutige IP-Adresse zuweist.
+
+                    * **Transportschicht:** Dient der Adressierung mehrerer Dienste auf einem Rechner und der optionalen
+                      Sicherstellung eine zuverlässigen Datenaustauschs. Auf dieser Ebene laufen das
+                      [Transport Control Protocol (TCP)](https://de.wikipedia.org/wiki/Transmission_Control_Protocol){target=_blank}
+                      und das [User Datagram Protocol (UDP)](https://de.wikipedia.org/wiki/User_Datagram_Protocol){target=_blank},
+                      welche die Portnummern verwalten.
+
+                    * **Anwendungsschicht:** Die eigentlichen auf dem Rechnerknoten laufenden Anwendungsprogramme.
+                      Im einfachsten Fall nutzen diese die unteren Schichten direkt, um untereinander Daten auszutauschen.
+                      Die meisten Betriebssysteme bzw. Programmiersprachen stellen hierfür
+                      [Streams und Sockets](https://de.wikipedia.org/wiki/Socket_%28Software%29){target=_blank}
+                      als Programmierschnittstelle bereit.
+
+                      In größeren Anwendungen kommen jedoch spezialisierte Anwendungsprotokolle zum Einsatz, die
+                      losgelöst vom fachlichen Anwendungscode entwickelt werden.
+                </div>
+
+                <script>
+                    window.toggle_tcpip_details = function() {
+                        let checkbox = document.querySelector("#tcpip-details-switch");
+                        let image1   = document.querySelector("#tcpip-stack1");
+                        let image2   = document.querySelector("#tcpip-stack2");
+                        let details  = document.querySelector("#tcpip-stack3");
+
+                        image1.classList.remove("hidden");
+                        image2.classList.remove("hidden");
+                        details.classList.remove("hidden");
+
+                        if (checkbox.checked) {
+                            image1.classList.add("hidden");
+                        } else {
+                            image2.classList.add("hidden");
+                            details.classList.add("hidden");
+                        }
+                    }
+
+                    window.addEventListener("ls-slide-changed", () => {
+                        window.setTimeout(function() {                    
+                            let checkbox = document.querySelector("#tcpip-details-switch");
+                            if (!checkbox) return;
+
+                            checkbox.addEventListener("change", toggle_tcpip_details);
+                        }, 1000);
+                    });
+                </script>
+            </div>
+        </article>
+    </section>
+
+    <section data-title="Fallbeispiel: Sockets in Node.js">
+        <article class="centered-content">
+            <div class="limited-width2 mb-4">
+                <div class="markdown" detail-text>
+                    Das nachfolgende Beispiel zeigt eine kleine Client/Server-Anwendung mit Node.js und JavaScript.
+                    Client und Server setzen auf dem eben gezeigten TCP/IP-Protokollstapel auf und nutzen die Klassen
+                    [`net.Server`](https://nodejs.org/docs/latest/api/net.html#class-netserver){target=_blank} bzw.
+                    [`net.Socket`](https://nodejs.org/docs/latest/api/net.html#class-netsocket){target=_blank} für
+                    den Datenaustausch. Es handelt sich dabei um die niedrigste Ebene, auf der Netzwerkanwendungen
+                    mit [Node.js](https://nodejs.org/en){target=_blank} programmiert werden können.
+                </div>
+
+                <div class="d-flex flex-column gap-3 mb-4 fs-6">
+                    <div class="d-flex gap-3 align-items-center">
+                        <lsx-github-edit url="https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2024-quellcodes/tree/main/1%20Architektur%20verteilter%20Systeme/Beispiele/Socket-Minimalbeispiel"></lsx-github-edit>
+                        <div>Minimalbeispiel</div>
+                    </div>
+                    <div class="d-flex gap-3 align-items-center">
+                        <lsx-github-edit url="https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2024-quellcodes/tree/main/1%20Architektur%20verteilter%20Systeme/Beispiele/Socket-Sprachserver"></lsx-github-edit>
+                        <div>Sprachserver</div>
+                    </div>
+                </div>
+
+                <lsx-accordion class="mb-4">
+                    <lsx-accordion-page title="Grundgerüst der Serveranwendung" bold>
+                        <div class="markdown" detail-text>
+                            Innerhalb der Serveranwendung muss ein Server-Objekt erzeugt und dessen
+                            <src-code language="javascript">listen()</src-code>-Methode aufgerufen werden,
+                            um TCP/IP-Verbindungsanfragen behandeln zu können. Für jeden neuen Client wird
+                            eine Rückruffunktion zur Abwicklung des Datenaustauschs aufgerufen. Diese bekommt
+                            ein <code>Socket</code>-Objekt zum Senden und Empfangen der Daten übergeben.
+                        </div>
+
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Schritte">
+                                <lsx-ul>
+                                    <li>
+                                        <code>Server</code>-Objekt erzeugen mit <src-code language="javascript">net.createServer()</src-code>
+                                    </li>
+                                    <li>
+                                        <src-code language="javascript">listen()</src-code>-Methode aufrufen, um auf
+                                        Clientverbindungen zu warten
+                                    </li>
+                                    <li>
+                                        Callback-Funktion zur Abwicklung der Kommunikation mit einem Client übergeben
+                                    </li>
+                                    <li>
+                                       Innerhalb der Client-Funktionen die <code>Socket</code>-Events und Metoden verwenden
+                                    </li>
+                                </lsx-ul>
+                            </lsx-tab-page>
+
+                            <lsx-tab-page title="Quellcode">
+                                <source-code language="javascript">
+                                    import net from "net";
+        
+                                    // Socket-Server starten
+                                    let server = net.createServer(socket => {
+                                        // Verbindung mit neuem Client hergestellt
+                                        log(socket, "Client verbunden");
+                                    
+                                        socket.setEncoding("utf-8");
+                                        socket.setNoDelay();
+                                        socket.write("Hallo! Ich bin der Server.\n");
+                                    
+                                        socket.on("error", err => log(socket, err));
+                                        socket.on("close", () => log(socket, "Client getrennt"));
+                                    
+                                        socket.on("data", data => {
+                                            log(socket, "Empfangene Daten:", data);
+                                            socket.write(data);
+                                        });
+                                    });
+                                    
+                                    server.listen("7000", "localhost");
+                                </source-code>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+                    </lsx-accordion-page>
+
+                    <lsx-accordion-page title="Grundgerüst der Clientanwendung" bold>
+                        <div class="markdown" detail-text>
+                            Die Programmierung der Clientseite erfolgt grundsätzlich gleich, nur dass hier die Methode
+                            <src-code language="javascript">net.createConnection()</src-code> verwendet werden muss, um
+                            eine Verbindung zum Server herzustellen. Analog zum Serverbeispiel erwartet diese eine
+                            Callback-Funktion innerhalb derer ein <code>Socket</code>-Objekt zur Abwicklung des
+                            Datenaustauschs verwendet werden kann. Was den hier gezeigten Quellcode allerdings komplexer
+                            als die Serverseite macht, ist dass hier mit Hilfe der Klasse <code>EventEmitter</code>
+                            eine Synchronisation zwische den vielen Event Handlern hergestellt werden muss, um die
+                            Reihenfolge aus Anfrage und Antwort korrekt einhalten zu können.
+                        </div>
+
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Schritte">
+                                <lsx-ul>
+                                    <li>
+                                        <code>Spcket</code>-Objekt erzeugen mit <src-code language="javascript">net.createConnection()</src-code>
+                                    </li>
+                                    <li>
+                                        Callback-Funktion zur Abwicklung der Kommunikation mit einem Server übergeben
+                                    </li>
+                                    <li>
+                                        Innerhalb der Client-Funktionen die <code>Socket</code>-Events und Metoden verwenden
+                                    </li>
+                                    <li>
+                                        Ggf. Klassen wie <code>EventEmitter</code> nutzen, um die richtige Reihenfolge sicherzustellen
+                                    </li>
+                                </lsx-ul>
+                            </lsx-tab-page>
+
+                            <lsx-tab-page title="Quellcode">
+                                <source-code language="javascript">
+                                    import net                from "net";
+                                    
+                                    import * as readline      from 'node:readline/promises';
+                                    import {stdin as input}   from 'node:process';
+                                    import {stdout as output} from 'node:process';
+                                    
+                                    import {EventEmitter}     from 'node:events';
+                                    import {once}             from 'node:events';
+                                    
+                                    let rl           = readline.createInterface({input, output});
+                                    let dataReceived = new EventEmitter();
+                                    let connected    = false;
+                                    
+                                    // Verbindung mit Server herstellen und Protokoll abwickeln
+                                    let socket = net.createConnection({host: "localhost", port: 7000}, async () => {
+                                        socket.setNoDelay();
+                                        connected = true;
+                                                                
+                                        while (connected) {
+                                            let input = await rl.question("Ihre Eingabe: ");
+                                            if (!connected) break;
+                                    
+                                            // Daten an den Server schicken
+                                            if (input) {
+                                                socket.write(input);
+                                        
+                                                // Antwort vom Server anzeigen
+                                                let response = await once(dataReceived, "data");
+                                                console.log("Server:", response[0], "\n");
+                                            } else {
+                                                connected = false;
+                                            }
+                                        }
+                                    
+                                        // Verbindung trennen
+                                        socket.end();
+                                        socket.destroy();
+                                    
+                                        rl.close();
+                                    });
+                                    
+                                    
+                                    // Empfangene Daten an die Hauptschleife oben schicken
+                                    socket.on("data", data => {
+                                        data = data.toString();
+                                        dataReceived.emit("data", data);
+                                    });
+                                    
+                                    socket.on("error", err => console.error("\n", err));
+                                    socket.on("end", () => connected = false);
+                                </source-code>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+                    </lsx-accordion-page>
+
+                    <lsx-accordion-page title="Ausgetauschte Rohdaten" bold>
+                        <div class="markdown mb-4" detail-text>
+                            In der Tradition klassischer Internetdienste nutzt die Beispielanwendung ein einfach
+                            gestricktes, textbasiertes Protokoll zur Verständigung zwischen Client und Server.
+                            Der Screenshot zeigt die zwischen beiden Seiten ausgetauschten Daten, wobei die Sitzung
+                            immer mit einer `HELLO`-Nachricht vom Client an den Server beginnt. Für dieses Beispiel
+                            wurde mit dem Programm [netcat](https://de.wikipedia.org/wiki/Netcat){target=_blank}
+                            eine direkte Socketverbindung zum Server hergestellt, anstelle die JavaScript-Clientanwendung
+                            zu verwenden.
+                        </div>
+
+                        <img src="02-grundlagen/socket-netcat.png" class="d-block w-100" alt="Ausgetauschte Rohdaten">
+                    </lsx-accordion-page>
+                </lsx-accordion>
+
+                <div class="d-flex flex-column flex-md-row gap-3">
+                    <img src="02-grundlagen/socket-server.png" class="img-thumbnail d-block w-100" alt="Serverprogramm">
+                    <img src="02-grundlagen/socket-client.png" class="img-thumbnail d-block w-100" alt="Clientprogramm">
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section data-title="Benutzeroberfläche des Beispiels">
+        <article class="centered-content">
+            <div style="width: 35em; max-width: 100%;">
+                <img src="02-grundlagen/frontenders-and-backenders.jpeg" class="d-block w-100">
+                <small>
+                    <small>
+                        Bildnachweis:
+                        <a href="https://turnoff.us/geek/frontenders-and-backenders/" target="_blank">turnoff.us</a>
+                    </small>
+                </small>
+            </div>
+        </article>
     </section>
 </section>
 
