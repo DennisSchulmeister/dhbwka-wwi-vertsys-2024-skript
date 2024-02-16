@@ -239,10 +239,79 @@
         </div>
     </section>
 
-</section>
+    <section data-title="Alltägliche Beispiele" class="centered-content">
+        <div class="limited-width2">
+            <p class="dhbw-text-columns mb-5" detail-content>
+                Auch wenn wir es inzwischen kaum noch merken, begleiten verteilte Systeme und Anwendungen
+                schon seit langem unseren Alltag. Wie selbstverständlich surfen wir im Internet, teilen
+                Bilder online oder verschicken Kurznachrichten mit dem Smartphone. Abends streamen wir dann
+                die neuste Folge unserer Lieblingsserie und geht es nach dem Willen der Hersteller, steuern
+                wir schon bald sämtliche Haushaltsgeräte ganz bequem per Sprachbefehl vom Sofa aus, optimieren
+                den Straßenverkehr mit vernetzten Fahrzeugen und überwachen unsere Umwelt mit immer mehr IoT-Devices.
+                Ohne Zweifel leben wir in einer vernetzten Welt, in der immer mehr Computer, Smartphones,
+                Smart TVs und viele andere Gegenstände miteinander verbunden sind.
+            </p>
+    
+            <lsx-grid-fluid class="p-0">
+                <lsx-row>
+                    <lsx-col size="md">
+                        <img src="02-architektur/alltag-internet.png" class="img-thumbnail d-block" style="width: 100%" />
+                        Sämtliche Internetdienste
+                        <p class="dhbw-fontsize-tiny">
+                            <small>
+                                Bildnachweis: <a href="https://pixabay.com/illustrations/email-newsletter-marketing-online-3249062/" target="_blank">Pixabay: ribkhan</a>
+                            </small>
+                        </p>
+                    </lsx-col>
+                    <lsx-col size="md">
+                        <img src="02-architektur/alltag-mobile.jpg" class="img-thumbnail d-block" style="width: 100%" />
+                        Mobile Kommunikation
+                        <p class="dhbw-fontsize-tiny">
+                            <small>
+                                Bildnachweis: <a href="https://pixabay.com/photos/communication-communicate-3095538/" target="_blank">Pixabay: Bru-nO</a>
+                            </small>
+                        </p>
+                    </lsx-col>
+                </lsx-row>
+                <lsx-row>
+                    <lsx-col size="md">
+                        <img src="02-architektur/alltag-forschung.jpg" class="img-thumbnail d-block" style="width: 100%" />
+                        Forschung und Wissenschaft
+                        <p class="dhbw-fontsize-tiny">
+                            <small>
+                                Bildnachweis: <a href="https://pixabay.com/photos/moon-landing-apollo-11-nasa-60582/" target="_blank">Pixabay: WikiImages</a>
+                            </small>
+                        </p>
+                    </lsx-col>
+                    <lsx-col size="md">
+                        <img src="02-architektur/alltag-vod.jpg" class="img-thumbnail d-block" style="width: 100%" />
+                        Video-on-Demand
+                        <p class="dhbw-fontsize-tiny">
+                            <small>
+                                Bildnachweis: <a href="https://unsplash.com/photos/ngMtsE5r9eI" target="_blank">Unsplash: jenskreuter</a>
+                            </small>
+                        </p>
+                    </lsx-col>
+                </lsx-row>
+                <lsx-row>
+                    <lsx-col size="md">
+                        <img src="02-architektur/alltag-autonomes-fahren.jpg" class="img-thumbnail d-block" style="width: 100%" />
+                        Autonomes Fahren
+                    </lsx-col>
+                    <lsx-col size="md">
+                        <img src="02-architektur/alltag-iot.jpg" class="img-thumbnail d-block" style="width: 100%" />
+                        Internet of Things
+                        <p class="dhbw-fontsize-tiny">
+                            <small>
+                                Bildnachweis: <a href="https://pixabay.com/photos/smarthome-smart-house-smart-4447520/" target="_blank">Pixabay: haus_automation</a>
+                            </small>
+                        </p>
+                    </lsx-col>
+                </lsx-row>
+            </lsx-grid-fluid>
+        </div>
+    </section>
 
-<!-- TODO: Wohin damit? :-) -->
-<section data-title="Blick in die Geschichte" data-background-image="02-architektur/historie-hintergrund.jpg" data-background-blur="5px">
     <section data-title="Heute übliche Programmiermodelle">
         <article class="centered-content">
             <div class="limited-width2">
@@ -315,7 +384,7 @@
             </div>
         </article>
     </section>
-
+    
     <section data-title="Historische Entwicklung">
         <article class="centered-content">
             <div class="centered-content flex-row flex-wrap gap-3">
@@ -361,7 +430,7 @@
                                     Sender zum Empfänger suchen zu lassen. Heute haben wir Router für diese Aufgabe. Im ARPANET hießen
                                     diese „Interface Message Processor” und waren so groß wie ein Schrank.
                                 </p>
-
+    
                                 <lsx-ul emoji="📦" class="lead mb-4">
                                     <li>NCP und später TCP als Vorläufer von TCP/IP</li>
                                     <li>Weltweiter Datenaustausch zwischen allen Hosts</li>
@@ -397,13 +466,13 @@
                                     über das Netzwerk direkt aufgerufen werden können, ohne den konkreten Datenaustausch auf Byte-Ebene hierfür
                                     kennen zu müssen.
                                 </p>
-
+    
                                 <lsx-ul emoji="📃" class="lead mb-4">
                                     <li><a href="https://de.wikipedia.org/wiki/Remote_Procedure_Call" target="_blank">Remote Procedure Call</a> ab den 1970ern</li>
                                     <li>Zunächst konkurrierende Programmiermodelle</li>
                                     <li>Streams und Sockets ab 1983 in BSD Unix</li>
                                 </lsx-ul>
-
+    
                                 <img src="02-architektur/historie-sockets.svg" alt="Zwei VS-Knoten mit Middleware" style="width: 100%; margin-bottom: 1em;" />
                                 <img src="02-architektur/historie-abb3.jpg" alt="" style="width: 100%;" />
                             </lsx-card-body>
@@ -432,13 +501,13 @@
                                     geht der Trend stattdessen mehr in die Richtung, die ehemals vom Applikationsserver bereitgestellten
                                     Funktionen in Form Quellcode-Bibliotheken oder Micro-Frameworks zu integrieren.
                                 </p>
-
+    
                                 <lsx-ul emoji="🚢" class="lead mb-4">
                                     <li>Große Applikationsserver ab den 1990ern</>
                                     <li>Zunächst RPC später Webtechnologien</li>
                                     <li>Heute eher leichtgewichtigere Micro-Frameworks</li>
                                 </lsx-ul>
-
+    
                                 <img src="02-architektur/historie-appserver.svg" alt="Drei VS-Knoten von denen einer ein Applikationsserver ist" style="width: 100%; margin-bottom: 1em;" />
                                 <img src="02-architektur/historie-abb4.jpg" alt="" style="width: 100%;" />
                             </lsx-card-body>
@@ -536,7 +605,7 @@
     <section data-title="Fallbeispiel: Sockets in Node.js">
         <article class="centered-content">
             <div class="limited-width2 mb-4">
-                <div class="markdown" detail-text>
+                <div class="markdown dhbw-text-columns mb-4" detail-text>
                     Das nachfolgende Beispiel zeigt eine kleine Client/Server-Anwendung mit Node.js und JavaScript.
                     Client und Server setzen auf dem eben gezeigten TCP/IP-Protokollstapel auf und nutzen die Klassen
                     [`net.Server`](https://nodejs.org/docs/latest/api/net.html#class-netserver){target=_blank} bzw.
@@ -814,180 +883,252 @@
         </article>
     </section>
     
-    <!-- TODO:
-        Bei Microservices: API-Gateway definieren mit typischen Funktionen (Michael Folie 02/9)
-        Soll hier auch über Services Meshes (interen Kommunikation zwischen den Services) und Service Discovery gesprochen werden ??? Neue Vertiefungsfolie?
-    -->
     <section data-title="Grundlegende Architekturmodelle">
         <article class="centered-content">
             <div class="limited-width2">
                 <lsx-tab-pages class="w-100">
-                    <lsx-tab-page title="Grundmodell">
-                        <h2>Beschreibung</h2>
-                        <p style="margin-bottom: 2em;">
+                    <lsx-tab-page title="Client/Server">
+                        <p class="dhbw-text-columns mb-4" detail-content>
                             Dies ist die einfachste Architektur von allen. Sie besteht lediglich aus einem Server,
                             der einen Dienst anbietet und den Clients, welche den Dienst konsumieren. Sehr oft kommt
                             dabei ein synchrones, den Client blockierendes Request/Reply-Verfahren zum Einsatz, das
                             besonders einfach zu programmieren ist. Technisch gesehen ist dies aber kein Muss, da
                             Sockets prinzipiell jede Kommunikationsreihenfolge zulassen.
                         </p>
-                        <div class="d-flex justify-content-center">
-                            <img src="02-architektur/architektur-client-server.svg" alt="Skizze eines Servers und dreier Clients" class="d-block m-auto" style="max-width: 45em;" />
-                        </div>
-                        
-                        <h2 class="mt-4">Fallbeispiele</h2>
-                        <lsx-ul emoji="✅">
-                            <li>
-                                Browser und Webserver im World Wide Web
-                            </li>
-                            <li>
-                                Browser App mit Zugriff auf den Server via Websockets
-                            </li>
-                            <li>
-                                Wartungszugang auf einen Rechner per Secure Shell
-                            </li>
-                            <li>
-                                Zugriff auf ein E-Mailpostfach mit IMAP
-                            </li>
-                            <li>
-                                Zentrale Quellcodeverwaltung mit Subversion
-                            </li>
-                            <li>
-                                WebDAV-Zugriff auf einen geteilten Onlineordner
-                            </li>
-                        </lsx-ul>
+
+                        <lsx-grid-fluid class="p-0">
+                            <lsx-row>
+                                <lsx-col size="md" class="d-flex justify-content-center mb-4 mb-md-0">
+                                    <img src="02-architektur/architektur-client-server.svg" alt="Skizze eines Servers und dreier Clients" class="d-block m-auto" style="max-width: 45em;" />
+                                </lsx-col>
+                                <lsx-col size="md" class="d-flex justify-content-center align-items-center">
+                                    <lsx-card title="Fallbeispiele" style="flex: 1;">
+                                        <lsx-ul emoji="✅">
+                                            <li>
+                                                Browser und Webserver im World Wide Web
+                                            </li>
+                                            <li>
+                                                Browser App mit Zugriff auf den Server via Websockets
+                                            </li>
+                                            <li>
+                                                Wartungszugang auf einen Rechner per Secure Shell
+                                            </li>
+                                            <li>
+                                                Zugriff auf ein E-Mailpostfach mit IMAP
+                                            </li>
+                                            <li>
+                                                Zentrale Quellcodeverwaltung mit Subversion
+                                            </li>
+                                            <li>
+                                                WebDAV-Zugriff auf einen geteilten Onlineordner
+                                            </li>
+                                        </lsx-ul>
+                                    </lsx-card>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
                     </lsx-tab-page>
         
-                    <lsx-tab-page title="Dreischichtenarchitektur">
-                        <h2>Beschreibung</h2>
-                        <p style="margin-bottom: 2em;">
+                    <lsx-taAufzeichnung der aufgerufenen URL-Routenb-page title="Dreischichtenarchitektur">
+                        <p class="dhbw-text-columns mb-4" detail-content>
                             Hierbei handelt es sich ebenfalls um eine Client/Server-Architektur, jedoch greift der Server zusätzlich
                             auf eine Datenbank zu. Client, Server und Datenbank werden daher den drei Schichten <b>Darstellung</b>,
                             <b>Anwendungslogik</b> und <b>Datenhaltung</b> zugeordnet. Für die Darstellung wurden früher ausschließlich
                             native Clients verwendet, die heute zunehmend von Webanwendungen und mobilen Apps verdrängt werden. Die
                             Schichten für die Anwendungslogik und Datenhaltung können hingegen auch mehrere Server umfassen.
                         </p>
-                        <div class="d-flex justify-content-center">
-                            <img src="02-architektur/architektur-3schichten.svg" alt="Skizze einer Dreischichtenarchitektur" class="d-block limited-width m-auto" />
-                        </div>
-                        
-                        <h2 class="mt-4">Fallbeispiele</h2>
-                        <lsx-ul emoji="✅">
-                            <li>
-                                Jede Webanwendung mit einer Datenbank im Hintergrund
-                            </li>
-                            <li>
-                                Einfache Informationssysteme ohne eigenständigen Präsentationsserver
-                            </li>
-                            <li>
-                                Die meisten ERP- und CRM-Systeme (unter anderem SAP und Navision)
-                            </li>
-                            <li>
-                                Per Webservice erreichbare Microservices
-                            </li>
-                        </lsx-ul>
-                    </lsx-tab-page>
+
+                        <lsx-grid-fluid class="p-0">
+                            <lsx-row>
+                                <lsx-col size="md" class="d-flex justify-content-center mb-4 mb-md-0">
+                                    <img src="02-architektur/architektur-3schichten.svg" alt="Skizze einer Dreischichtenarchitektur" class="d-block limited-width m-auto" />
+                                </lsx-col>
+                                <lsx-col size="md" class="d-flex justify-content-center align-items-center">
+                                    <lsx-card title="Fallbeispiele" style="flex: 1;">
+                                        <lsx-ul emoji="✅">
+                                            <li>
+                                                Jede Webanwendung mit einer Datenbank im Hintergrund
+                                            </li>
+                                            <li>
+                                                Informationssysteme ohne eigenständigen Präsentationsserver
+                                            </li>
+                                            <li>
+                                                Die meisten ERP- und CRM-Systeme (SAP S/4HANA, Navision, …)
+                                            </li>
+                                            <li>
+                                                Per Webservice erreichbare Microservices
+                                            </li>
+                                        </lsx-ul>
+                                    </lsx-card>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
+                    </lsx-taAufzeichnung>
         
                     <lsx-tab-page title="Vierschichtenarchitektur">
-                        <h2>Beschreibung</h2>
-                        <p style="margin-bottom: 2em;">
+                        <p class="dhbw-text-columns mb-4" detail-content>
                             Hierbei handelt es sich um eine Variation der Dreischichtenarchitektur, bei der die mittlere Sicht
                             in eine <b>Präsentations-</b> und eine <b>Anwendungsschicht</b> zerlegt wurde. Dieses Modell
                             findet man häufig bei ERP-Systemen, die mehrere Clienttechnologien unterstützen müssen.
                         </p>
-                        <div class="d-flex justify-content-center">
-                            <img src="02-architektur/architektur-4schichten.svg" alt="Skizze einer Dreischichtenarchitektur" class="d-block limited-width m-auto" />
-                        </div>
-                        
-                        <h2 class="mt-4">Fallbeispiele</h2>
-                        <lsx-ul emoji="✅">
-                            <li>
-                                ERP- und CRM-Systeme mit einem eigenständigen Präsentationsserver
-                            </li>
-                            <li>
-                                Java-Webanwendung mit getrenntem Deployment von Servlets und EJBs
-                            </li>
-                        </lsx-ul>
+
+                        <lsx-grid-fluid class="p-0">
+                            <lsx-row>
+                                <lsx-col size="md" class="d-flex justify-content-center mb-4 mb-md-0">
+                                    <img src="02-architektur/architektur-4schichten.svg" alt="Skizze einer Dreischichtenarchitektur" class="d-block limited-width m-auto" />
+                                </lsx-col>
+                                <lsx-col size="md" class="d-flex justify-content-center align-items-center">
+                                    <lsx-card title="Fallbeispiele" style="flex: 1;">
+                                        <lsx-ul emoji="✅">
+                                            <li>
+                                                ERP- und CRM-Systeme mit Präsentationsserver
+                                            </li>
+                                            <li>
+                                                Typische Single Page Apps mit Webservice-Backend
+                                            </li>
+                                        </lsx-ul>
+                                    </lsx-card>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
                     </lsx-tab-page>
         
                     <lsx-tab-page title="Microservices">
-                        <h2>Beschreibung</h2>
-                        <p>
+                        <p class="dhbw-text-columns mb-4" detail-content>
                             Microservices zerlegen eine große, monolithische Anwendung in viele kleine Teilanwendungen. Jeder Microservice hat
                             ein klar umrissenes Aufgabengebiet, besitzt eine gut dokumentierte und versionierte Schnittstelle und wird in der
                             Regel von einem eigenen Team entwickelt und betrieben. Entwicklung, Test und Betrieb sind sehr stark automatisiert.
                             Microservices eignen sich daher oft für große Firmen mit mehreren, unabhängigen Entwicklungsmannschaften.
                         </p>
-                        <div class="d-flex justify-content-center">
-                            <img src="02-architektur/microservices.png" alt="Skizze einer Microservice-Architektur" style="max-height: 26em; max-width: 100%;" />
+
+                        <div class="form-check form-switch mb-4 fw-bold">
+                            <input class="form-check-input" type="checkbox" role="switch" id="microservices-switch">
+                            <label class="form-check-label microservices-switch-off" for="microservices-switch">Beschreibung</label>
+                            <label class="form-check-label microservices-switch-on hidden" for="microservices-switch">Fallbeispiel</label>
                         </div>
-                        
-                        <h2 class="mt-4">Fallbeispiele</h2>
-                        <lsx-ul emoji="✅">
-                            <li>
-                                Amazon gilt allgemein als Vorreiter, obwohl sie den Begriff selbst nicht verwenden
-                            </li>
-                            <li>
-                                Große Internetplattformen wie eBay, Netflix, SoundCloud, Spotify, …
-                            </li>
-                        </lsx-ul>
+
+                        <lsx-grid-fluid class="p-0 microservices-switch-off">
+                            <lsx-row>
+                                <lsx-col size="md" class="d-flex justify-content-center mb-4 mb-md-0">
+                                    <img src="02-architektur/microservices.png" alt="Skizze einer Microservice-Architektur" class="d-block limited-width m-auto" />
+                                </lsx-col>
+                                <lsx-col size="md" class="d-flex justify-content-center align-items-center">
+                                    <lsx-card title="Fallbeispiele" style="flex: 1;">
+                                        <lsx-ul emoji="✅">
+                                            <li>
+                                                Amazon gilt als Erfinder, obwohl sie den Begriff nicht verwenden
+                                            </li>
+                                            <li>
+                                                Große Internetplattformen wie eBay, Netflix, SoundCloud, Spotify, …
+                                            </li>
+                                            <li>
+                                                So gut wie jede größere Cloud-Anwendung
+                                            </li>
+                                        </lsx-ul>
+                                    </lsx-card>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
+
+                        <img src="02-architektur/microservices-beispiel.png" alt="Fallbeispiel für eine Microservice-Architektur" class="d-block w-100 hidden microservices-switch-on">
+
+                        <script>
+                            window.toggle_microservices_content = function() {
+                                let checkbox = document.querySelector("#microservices-switch");
+
+                                for (let element of document.querySelectorAll(".microservices-switch-off, .microservices-switch-on")) {
+                                    element.classList.add("hidden");
+                                }
+
+                                for (let element of document.querySelectorAll(checkbox.checked ? ".microservices-switch-on" : ".microservices-switch-off")) {
+                                    element.classList.remove("hidden");
+                                }
+                            }
+        
+                            window.addEventListener("ls-slide-changed", () => {
+                                window.setTimeout(function() {                    
+                                    let checkbox = document.querySelector("#microservices-switch");
+                                    if (!checkbox) return;
+        
+                                    checkbox.addEventListener("change", toggle_microservices_content);
+                                }, 1000);
+                            });
+                        </script>
                     </lsx-tab-page>
                     
                     <lsx-tab-page title="Reverse Proxy / API-Gateway">
-                        <h2>Beschreibung</h2>
-                        <p style="margin-bottom: 2em;">
+                        <p class="dhbw-text-columns mb-4" detail-content>
                             Serverseitig kann ein Reverse Proxy als API-Gateway eingesetzt werden, um die eingehenden Anfragen
                             zu bündeln. Dadurch wird es möglich, zusätzliche Sicherheitsprüfungen zu implementieren, häufig
                             angefragte Inhalte zu cachen oder eine transparente Lastverteilung vorzunehmen.
                         </p>
-                        <div class="d-flex justify-content-center">
-                            <img src="02-architektur/proxy-serverseitig.png" alt="Architekturskizze mit serverseitigem Proxy" style="max-height: 16em; max-width: 100%;" />
-                        </div>
-                        
-                        <h2 class="mt-4">Anwendungsbeispiele</h2>
-                        <lsx-ul emoji="✅">
-                            <li>
-                                Steigerung der Performance durch Caching häufig angefragter Daten
-                            </li>
-                            <li>
-                                Implementierung von Zugangsbeschränkungen und Upload Filtern
-                            </li>
-                            <li>
-                                Realisierung von Paywalls zum Ausfiltern kostenpflichtiger Inhalte
-                            </li>
-                            <li>
-                                Sicherstellen einer vorgelagerten, zentralen Authentifizierung
-                            </li>
-                            <li>
-                                Serverseitige Lastverteilung durch Weiterleitung an unterschiedliche Server
-                            </li>
-                        </lsx-ul>
+
+                        <lsx-grid-fluid class="p-0">
+                            <lsx-row>
+                                <lsx-col size="md" class="d-flex justify-content-center mb-4 mb-md-0">
+                                    <img src="02-architektur/proxy-serverseitig.png" alt="Architekturskizze mit serverseitigem Proxy" style="max-height: 16em; max-width: 100%;" />
+                                </lsx-col>
+                                <lsx-col size="md" class="d-flex justify-content-center align-items-center">
+                                    <lsx-card title="Fallbeispiele" style="flex: 1;">
+                                        <lsx-ul emoji="✅">
+                                            <li>
+                                                Steigerung der Performance durch Caching häufig angefragter Daten
+                                            </li>
+                                            <li>
+                                                Implementierung von Zugangsbeschränkungen und Upload Filtern
+                                            </li>
+                                            <li>
+                                                Realisierung von Paywalls zum Ausfiltern kostenpflichtiger Inhalte
+                                            </li>
+                                            <li>
+                                                Sicherstellen einer vorgelagerten, zentralen Authentifizierung
+                                            </li>
+                                            <li>
+                                                Überlöastung vermeiden durch Rate Limiting / Throttling
+                                            </li>
+                                            <li>
+                                                Monitoring und statistische Aufzeichnung der Nutzung
+                                            </li>
+                                            <li>
+                                                <u>Serverseitige</u> Lastverteilung
+                                            </li>
+                                        </lsx-ul>
+                                    </lsx-card>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
                     </lsx-tab-page>
                     
                     <lsx-tab-page title="Proxy">
-                        <h2>Beschreibung</h2>
-                        <p style="margin-bottom: 2em;">
+                        <p class="dhbw-text-columns mb-4" detail-content>
                             Ein clientseitiger Proxy bildet die Schnittstelle eines entfernten Servers innerhalb
                             des lokalen Netzwerks ab. Die Anfragen der Clients werden nicht direkt an den Server
                             sondern an den lokalen Proxy gesendet, der daraufhin entscheiden kann, ob er die
                             Anfragen weiterleitet oder selbst beantwortet.
                         </p>
-                        <div class="d-flex justify-content-center">
-                            <img src="02-architektur/proxy-clientseitig.png" alt="Architekturskizze mit clientseitigem Proxy" style="max-height: 16em; max-width: 100%;" />
-                        </div>
-                        
-                        <h2 class="mt-4">Anwendungsbeispiele</h2>
-                        <lsx-ul emoji="✅">
-                            <li>
-                                Steigerung der Performance durch Caching häufig angefragter Daten
-                            </li>
-                            <li>
-                                Implementierung von Zugangsbeschränkungen und Content Filtern
-                            </li>
-                            <li>
-                                Clientseitige Lastverteilung durch Weiterleitung an unterschiedliche Server
-                            </li>
-                        </lsx-ul>
+
+                        <lsx-grid-fluid class="p-0">
+                            <lsx-row>
+                                <lsx-col size="md" class="d-flex justify-content-center mb-4 mb-md-0">
+                                    <img src="02-architektur/proxy-clientseitig.png" alt="Architekturskizze mit clientseitigem Proxy" style="max-height: 16em; max-width: 100%;" />
+                                </lsx-col>
+                                <lsx-col size="md" class="d-flex justify-content-center align-items-center">
+                                    <lsx-card title="Fallbeispiele" style="flex: 1;">
+                                        <lsx-ul emoji="✅">
+                                            <li>
+                                                Steigerung der Performance durch Caching häufig angefragter Daten
+                                            </li>
+                                            <li>
+                                                Implementierung von Zugangsbeschränkungen und Content Filtern
+                                            </li>
+                                            <li>
+                                                <u>Clientseitige</u> Lastverteilung
+                                            </li>
+                                        </lsx-ul>
+                                    </lsx-card>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
                     </lsx-tab-page>
                 </lsx-tab-pages>
             </div>
@@ -996,52 +1137,69 @@
 </section>
 
 <section data-title="Anforderungen an verteilte Systeme">
-    <!-- TODO: Cards? -->
     <section data-title="Allgemeine Anforderungen" class="centered-content">
-        <lsx-grid-fluid class="limited-width2">
+        <lsx-grid-fluid class="limited-width2 p-0">
             <lsx-row>
-                <lsx-col size="md">
-                    <h3>Optimale Ressourcennutzung</h3>
-                    <img src="02-architektur/anforderung-ressourcennutzung.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
-                    Das System muss effizient mit den Ressourcen umgehen und möglichst viele Ressourcen
-                    für die eigentliche Anwendung zur Verfügung stellen. Die Anwendung muss ebenfalls
-                    intelligent damit umgehen und sie gut nutzen.
+                <lsx-col size="md" class="mb-3 mb-md-0">
+                    <lsx-card bold img="02-architektur/anforderung-ressourcennutzung.jpg">
+                        <h4>Optimale Ressourcennutzung</h4>
+                        <p>
+                            Das System muss effizient mit den Ressourcen umgehen und möglichst viele Ressourcen
+                            für die eigentliche Anwendung zur Verfügung stellen. Die Anwendung muss ebenfalls
+                            intelligent damit umgehen und sie gut nutzen.
+                        </p>
+                    </lsx-card>
                 </lsx-col>
                 <lsx-col size="md">
-                    <h3>Stabilität und Fehlertoleranz</h3>
-                    <img src="02-architektur/anforderung-stabilitaet.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
-                    Programmabstürze und unvorhersehbares Verhalten sind unbedingt zu vermeiden.
-                    Beim Programmieren muss man daher neben den fachlichen Fehlern auch die Fehler
-                    berücksichtigen, die sich aus der Verteilung ergeben.
+                    <lsx-card bold img="02-architektur/anforderung-stabilitaet.jpg">
+                        <h4>Stabilität und Fehlertoleranz</h4>
+                        <p>
+                            Programmabstürze und unvorhersehbares Verhalten sind unbedingt zu vermeiden.
+                            Beim Programmieren muss man daher neben den fachlichen Fehlern auch die Fehler
+                            berücksichtigen, die sich aus der Verteilung ergeben.
+                        </p>
+                    </lsx-card>
                 </lsx-col>
             </lsx-row>
             <lsx-row>
-                <lsx-col size="md">
-                    <h3>Einfache Skalierbarkeit</h3>
-                    <img src="02-architektur/anforderung-skalierbarkeit.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
-                    Es muss einfach möglich sein, die Leistung des Systems zu erhöhen oder diese zu reduzieren,
-                    wenn sie nicht mehr benötigt wird. Dies kann je nach System automatisch oder manuell erfolgen.
+                <lsx-col size="md" class="mb-3 mb-md-0">
+                    <lsx-card bold img="02-architektur/anforderung-skalierbarkeit.jpg">
+                        <h4>Einfache Skalierbarkeit</h4>
+                        <p>
+                            Es muss einfach möglich sein, die Leistung des Systems zu erhöhen oder diese zu reduzieren,
+                            wenn sie nicht mehr benötigt wird. Dies kann je nach System automatisch oder manuell erfolgen.
+                        </p>
+                    </lsx-card>
                 </lsx-col>
                 <lsx-col size="md">
-                    <h3>Einfache Nutzung (Transparenz)</h3>
-                    <img src="02-architektur/anforderung-transparenz.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
-                    Zumindest für den Anwender sollte die inheränte Komplexität des Systems verborgen bleiben.
-                    Entwickler und Administratoren freuen sich aber auch, wenn sie sich nicht um jede Kleinigkeit
-                    kümmern müssen.
+                    <lsx-card bold img="02-architektur/anforderung-transparenz.jpg">
+                        <h4>Einfache Nutzung (Transparenz)</h4>
+                        <p>
+                            Zumindest für den Anwender sollte die inheränte Komplexität des Systems verborgen bleiben.
+                            Entwickler und Administratoren freuen sich aber auch, wenn sie sich nicht um jede Kleinigkeit
+                            kümmern müssen.
+                        </p>
+                    </lsx-card>
                 </lsx-col>
             </lsx-row>
             <lsx-row>
-                <lsx-col size="md">
-                    <h3>Einfache Erweiterbarkeit</h3>
-                    <img src="02-architektur/anforderung-erweiterbarkeit.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
-                    Die Architektur muss flexibel genug sein, um einzelne Teile jederzeit austauschen oder
-                    verbessern zu können.
+                <lsx-col size="md" class="mb-3 mb-md-0">
+                    <lsx-card bold img="02-architektur/anforderung-erweiterbarkeit.jpg">
+                        <h4>Einfache Erweiterbarkeit</h4>
+                        <p>
+                            Die Architektur muss flexibel genug sein, um einzelne Teile jederzeit austauschen oder
+                            verbessern zu können.
+                        </p>
+                    </lsx-card>
                 </lsx-col>
                 <lsx-col size="md">
-                    <h3>Sicherheit</h3>
-                    <img src="02-architektur/anforderung-sicherheit.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
-                    Die Vertraulichkeit, Integrität und Authentizität des Systems und seiner Daten muss
-                    gewährleistet bleiben.
+                    <lsx-card bold img="02-architektur/anforderung-sicherheit.jpg">
+                        <h4>Sicherheit</h4>
+                        <p>
+                            Die Vertraulichkeit, Integrität und Authentizität des Systems und seiner Daten muss
+                            gewährleistet bleiben.
+                        </p>
+                    </lsx-card>
                 </lsx-col>
             </lsx-row>
             <lsx-row>
@@ -1067,12 +1225,12 @@
             <!-- Vergleich Wirtschaft vs. Informatik -->
             <lsx-row style="margin-bottom: 0;">
                 <lsx-col size="md">
-                    <h2>Transparenz in der Wirtschaft</h2>
+                    <h3>Transparenz in der Wirtschaft</h3>
                     <img src="02-architektur/transparenz1.jpg" alt="" class="img-thumbnail" style="width: 100%" />
                     Alle Informationen liegen offen.
                 </lsx-col>
                 <lsx-col size="md">
-                    <h2>Transparenz in der Informatik</h2>
+                    <h3>Transparenz in der Informatik</h3>
                     <img src="02-architektur/transparenz2.jpg" alt="" class="img-thumbnail" style="width: 100%" />
                     Ich muss nichts tun. Es läuft einfach.
                 </lsx-col>
@@ -1734,30 +1892,30 @@
         </article>
     </section>
 
-    <!-- TODO:
-        Der Text passt überhaupt nicht. Eher kurz den automatisierten Cluster-Betrieb und die Sicherstellung von
-        Skaliierbarkeit (Scaling Triggers) und Ausfallsicherheit (Redundanz) andeuten.
-    -->
     <section data-title="Beispiel: Cloud-Betrieb">
         <article>
-            <div class="d-flex justify-content-between flex-wrap gap-3">
-                <img src="02-architektur/cloud-betriebsmodell.png" class="d-block img-fluid" />
-                <div class="col markdown">
-                    ## Cluster-Betrieb
+            <lsx-grid-fluid class="p-0">
+                <lsx-row>
+                    <lsx-col size="md-9" class="mb-3">
+                        <img src="02-architektur/cloud-betriebsmodell.png" class="d-block w-100" />
+                    </lsx-col>
+                    <lsx-col size="md" class="d-flex flex-column gap-3">
+                        <lsx-card title="Automatisierung" bold class="small">
+                            Die Grundidee der Cloud ist, die Bereitstellung und den Betrieb verteilter
+                            Anwendungen so weit wie möglich zu automatisieren. Eine Cloudumgebung besteht
+                            daher aus einem großen Rechencluster, dessen Ressourcen auf viele Anwendungen
+                            aufgeteilt werden. Manuelle Installationsschritte sollen vermieden werden.
+                        </lsx-card>
         
-                    * Vollständige Virtualisierung von Rechenleistung und Speicherkapazität
-                    * Kommunikation über ein abgeschirmte, virtuelle App-Netzwerke
-                    * Automatische Replikation einzelner Komponenten je nach Bedarf
-                    * Lastverteilung zwischen mehreren Instanzen einer Komponente
-        
-                    ## Ausfallsichere Deployment-Strategien
-        
-                    * Blue/Green-Deployment
-                    * Rolling Deployment
-                    * Canary Releases
-                    * …
-                </div>
-            </div>
+                        <lsx-card title="Skalierung und Elastizität" bold class="small">
+                            Über eine Cloud-Umgebung bereitgestellte Anwendungen können, zumindest bei den größeren
+                            Anbietern, vollkommen elastisch skaliert werden. Hierfür überwacht die Cloud-Plattform
+                            regelmäßig vorab definierte Kennzahlen einer Anwendung und fährt bei Bedarf weitere
+                            Service-Instanzen hoch oder runter.
+                        </lsx-card>
+                    </lsx-col>
+                </lsx-row>
+            </lsx-grid-fluid>
         </article>
     </section>
 </section>
@@ -1801,7 +1959,7 @@
     </section>
 
     <!-- TODO:
-        - text-detail Attribut setzen
+        - detail-content .dhbw-text-columns setzen
         - Frage: Sollte 2PC eine eigene Hauptfolie sein? Unterfolien dann Prinzip, Braut fällt um (MD 1/24), Standesbeamter fällt um
         - Dann CAP
 
@@ -2257,8 +2415,9 @@
     -->
 </section>
 
+<!-- TODO: Kahoots in Micheals Moodleräumen für weitere Quiz-Fragen 1-->
 <section data-title="Übungsaufgaben" data-background-color="rgb(231, 221, 141)">
-    <section data-title="Ein kleines Architekturmuster-Quiz">
+    <section data-title="Aufgabe 1: Ein kleines Architekturmuster-Quiz">
         <article>
             <lsx-tab-pages>
                 <lsx-tab-page title="Aufgabe 1.1">
@@ -2554,11 +2713,11 @@
         </aside>
     </section>
     
-    <section data-title="Wir erkunden Streams und Sockets">
+    <section data-title="Aufgabe 2: Wir erkunden Streams und Sockets">
         ... Sprach-Server/Client auf Laptop ausführen
     </section>
     
-    <section data-title="Wer hat an der Uhr gedreht?">
+    <section data-title="Aufgabe 3: Wer hat an der Uhr gedreht?">
         <article class="markdown">
             Wichtige Anforderung an verteilte Systeme ist häufig, dass die **Kausalordnung** von Ereignissen
             erhalten bleibt, das heißt, dass die zeitliche Abfolge von Ursache und Wirkung nicht vertauscht

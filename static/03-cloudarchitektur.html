@@ -253,60 +253,40 @@
                     <img src="02-architektur/cloud-betriebsmodell.png" class="d-block w-100" />
                 </lsx-col>
                 <lsx-col size="md" class="d-flex flex-column gap-3">
-                    <div class="card">
-                        <div class="card-header fw-bold">
-                            Automatisierung
-                        </div>
-                        <div class="card-body markdown small">
-                            Die Grundidee der Cloud ist, die Bereitstellung und den Betrieb verteilter
-                            Anwendungen so weit wie möglich zu automatisieren. Eine Cloudumgebung besteht
-                            daher aus einem großen Rechencluster, dessen Ressourcen auf viele Anwendungen
-                            aufgeteilt werden. Manuelle Installationsschritte sollen vermieden werden.
-                            {.mb-0}
-                        </div>
-                    </div>
-    
-                    <div class="card">
-                        <div class="card-header fw-bold">
-                            Isolation
-                        </div>
-                        <div class="card-body markdown small">
-                            Die physischen und virtuellen Maschinen sowie Speicherressourcen einer Cloudumgebung
-                            werden vollständig abstrahiert, wodurch jede Anwendung einen eigenen, **virtuellen
-                            Computercluster** erhält. Häufig (aber nicht immer) wird dabei auch das Netzwerk
-                            virtualisiert, wodurch interne Services in einem **privaten Netzwerk** vor öffentlichen
-                            Zugriffen geschützt werden können.
-                            {.mb-0}
-                        </div>
-                    </div>
-    
-                    <div class="card">
-                        <div class="card-header fw-bold">
-                            Skalierung und Elastizität
-                        </div>
-                        <div class="card-body markdown small">
-                            **Skalierung** beschreibt die Anpassung der zur Verfügung gestellten Ressourcen
-                            entsprechend dem Leistungsbedarf einer Anwendung. Beim klassischen Hosting und
-                            bei sehr einfachen Cloud-Installationen ist dies nur durch manuelles Eingreifen
-                            möglich. Echte Cloud-Anwendungen sind jedoch **elastisch**, so dass der Cluster
-                            die Ressourcen automatisch skalieren kann.
-                            {.mb-0}
-                        </div>
-                    </div>
-    
-                    <div class="card">
-                        <div class="card-header fw-bold">
-                            Variable Kosten
-                        </div>
-                        <div class="card-body markdown small">
-                            Aufgrund der dynamischen Ressourcenzuteilung bieten viele Cloud-Angebote eine
-                            **nutzungsabhängige Abrechnung**, die sich nach Anzahl der tatsächlich genutzten
-                            Minuten zur Ausführung von Programmcode, tatsächlich belegtem Speicherplatz
-                            oder Netzwerktraffic richtet. Im Vergleich zu klassischem Hosting fallen die
-                            durchschnittlichen Kosten daher oft geringer aus.
-                            {.mb-0}
-                        </div>
-                    </div>
+                    <lsx-card title="Automatisierung" bold class="markdown small">
+                        Die Grundidee der Cloud ist, die Bereitstellung und den Betrieb verteilter
+                        Anwendungen so weit wie möglich zu automatisieren. Eine Cloudumgebung besteht
+                        daher aus einem großen Rechencluster, dessen Ressourcen auf viele Anwendungen
+                        aufgeteilt werden. Manuelle Installationsschritte sollen vermieden werden.
+                        {.mb-0}
+                    </lsx-card>
+                    
+                    <lsx-card title="Isolation" bold class="markdown small">
+                        Die physischen und virtuellen Maschinen sowie Speicherressourcen einer Cloudumgebung
+                        werden vollständig abstrahiert, wodurch jede Anwendung einen eigenen, **virtuellen
+                        Computercluster** erhält. Häufig (aber nicht immer) wird dabei auch das Netzwerk
+                        virtualisiert, wodurch interne Services in einem **privaten Netzwerk** vor öffentlichen
+                        Zugriffen geschützt werden können.
+                        {.mb-0}
+                    </lsx-card>
+                    
+                    <lsx-card title="Skalierung und Elastizität" bold class="markdown small">
+                        **Skalierung** beschreibt die Anpassung der zur Verfügung gestellten Ressourcen
+                        entsprechend dem Leistungsbedarf einer Anwendung. Beim klassischen Hosting und
+                        bei sehr einfachen Cloud-Installationen ist dies nur durch manuelles Eingreifen
+                        möglich. Echte Cloud-Anwendungen sind jedoch **elastisch**, so dass der Cluster
+                        die Ressourcen automatisch skalieren kann.
+                        {.mb-0}
+                    </lsx-card>
+                    
+                    <lsx-card title="Variable Kosten" bold class="markdown small">
+                        Aufgrund der dynamischen Ressourcenzuteilung bieten viele Cloud-Angebote eine
+                        **nutzungsabhängige Abrechnung**, die sich nach Anzahl der tatsächlich genutzten
+                        Minuten zur Ausführung von Programmcode, tatsächlich belegtem Speicherplatz
+                        oder Netzwerktraffic richtet. Im Vergleich zu klassischem Hosting fallen die
+                        durchschnittlichen Kosten daher oft geringer aus.
+                        {.mb-0}
+                    </lsx-card>
                 </lsx-col>
             </lsx-row>
         </lsx-grid-fluid>
