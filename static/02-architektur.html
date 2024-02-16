@@ -2673,18 +2673,686 @@
 <!-- ============ -->
 <section data-use-template="teilkapitel" data-titel="Vertiefungen"></section>
 
-<!-- TODO: Hier zweiter Teil des alten Cloud-Kapitels -->
 <section data-title="Monolith vs. Microservices">
-</section>
+    <section data-title="Anwendungsarchitektur früher">
+        <article class="centered-content">
+            <div class="limited-width2">
+                <div class="markdown">
+                    Frühere Anwendungsarchitekturen, bei denen sämtliche Funktionen in einer großen Codebasis
+                    untergebracht waren, werden heute als Monolith bezeichnet. Zwar kann der Quellcode
+                    durchaus modular aufgebaut und somit leicht um neue Funktionen erweiterbar sein. Jedoch
+                    kann die Anwendung nur als Ganzes deployed und in Betrieb genommen werden.
+                    
+                    <img src="02-architektur/monolith.png" class="d-block limited-width m-auto mb-3" />
+        
+                    Verteilte Anwendungen werden daher häufig mit einer Microservice-Architektur gestaltet.
+                    Für kleine Entwicklerteams kann ein Monolith dennoch die bessere Wahl sein, da nicht
+                    jedes Unternehmen organisatorisch auf Microservices vorbereitet ist. Vor allem, wenn
+                    die Entwicklung nicht auf mehrere Teams verteilt werden kann, sind die Voraussetzungen
+                    meist nicht gegeben.
+                </div>
+    
+                <lsx-grid-fluid class="p-0">
+                    <lsx-row>
+                        <lsx-col size="md">
+                            <div class="card h-100">
+                                <div class="card-header fw-bold">
+                                    Vorteile von Monolithen
+                                </div>
+                                <div class="card-body markdown">
+                                    * Einfache Anwendungsarchitektur mit wenigen Komponenten.
+                                    * Insbesondere für kleine Entwicklerteams leicht handlebar.
+                                    * Eine Programmiersprache für alle Teile der Anwendung.
+                                    * Direkter Datenaustausch zwischen den Anwendungskomponenten.
+                                    * Anwendungskomponenten können sich gegenseitig direkt aufrufen.
+                                </div>
+                            </div>
+                        </lsx-col>
+    
+                        <lsx-col size="md">
+                            <div class="card h-100">
+                                <div class="card-header fw-bold">
+                                    Nachteile von Monolithen
+                                </div>
+                                <div class="card-body markdown">
+                                    * Unpraktisch für sehr große Anwendungen mit vielen Funktionen.
+                                    * Die Auswirkungen einer Änderung sind oft schwer nachvollziehbar.
+                                    * In großen Entwicklerteams kommt es oft zu gegenseitigen Störungen.
+                                    * Kein getrenntes Deployment einzelner Anwendungsfunktionen möglich.
+                                    * Vor jedem Deployment muss die ganze Anwendung getestet werden.
+                                    * Fehlerkorrekturen brauchen daher lange, bis sie produktiv gehen.
+                                    * Die Anwendung kann nur als Ganzes skaliert werden.
+                                </div>
+                            </div>
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
+            </div>
+        </article>
+    </section>
+    
+    <section data-title="Probleme beim Deployment monolithischer Anwendungen">
+        <article class="centered-content">
+            <div class="limited-width">
+                <div class="d-flex flex-column flex-md-row gap-5">
+                    <img src="02-architektur/wanted-monolith.jpg" class="d-block w-100" alt="Wanted! The Monolith …">
+                    <img src="02-architektur/code-freeze.jpg" class="d-block w-100" alt="It's really, really, really, really code freeze">
+                </div>
+            
+                <small>
+                    <small>
+                        Bildnachweise:
+                        <a href="https://turnoff.us/geek/not-wanted/" target="_blank">{turnoff.us} not wanted</a>,
+                        <a href="https://geek-and-poke.com/geekandpoke/2015/3/25/code-freeze" target="_blank">Geek & Poke: Code Freeze</a>
+                    </small>
+                </small>
+            </div>
+        </article>
+    </section>
+    
+    <section data-title="Anwendungsarchitektur heute">
+        <article class="centered-content">
+            <div class="limited-width2">
+                <lsx-accordion>
+                    <lsx-accordion-page title="Definition: Microservices" class="markdown" bold active>
+                        Moderne Anwendungen werden heute oft als Microservice-Architektur ausgeführt, in welcher die
+                        Teilfunktionen einer Anwendung in einzelne Serverdienste ausgelagert werden. Microservice-basierte
+                        Anwendungen sind daher immer verteilte Anwendungen. Dabei bildet jeder Microservice eine getrennte
+                        Einheit, die weitgehend unabhängig entwickelt, deployed und betrieben wird. Meistens besitzt jeder
+                        Microservice deshalb eine eigene Datenbank, auf deren Inhalte nur über die öffentliche Schnittstelle
+                        des Microservices entfernt zugegriffen werden kann. Martin Fowler definiert Microservices
+                        [auf seiner Webseite](https://martinfowler.com/microservices/){target=_blank} daher wie folgt:
+                    
+                        * Entfernte Serverdienste als Teilkomponenten einer Anwendung
+                        * Dezentralisierte Verwaltung und dezentrales Datenmanagement
+                        * Entsprechen oft organisatorischer Unternehmenseinheiten
+                        * Deshalb meist langfristig durch eigenständige Teams betreut
+                        * Über eine öffentliche Schnittstelle entfernt aufrufbar
+                        * Fehlertoleranter Entwurf mit evolutionärem Design
+                        * Hoher Automatisierungsgrad für Betrieb und Weiterentwicklung
+                    </lsx-accordion-page>
+    
+                    <lsx-accordion-page title="Beispiele" bold>
+                        <lsx-tab-pages>
+                           <lsx-tab-page title="Single Page App mit API-Gateway">
+                               <div class="markdown">
+                                   Heutige Webanwendungen trennen sehr strickt zwischen der Frontend genannten Benutzeroberfläche
+                                   und der zentralen Anwendungsfunktionen im Backend. Oft handelt es sich beim Frontend um eine
+                                   als Single Page App ausgeführte Webanwendung, die vollständig im Browser des Clientgeräts läuft.
+                                   Aber auch mobile Anwendungen, native Desktopanwendungen oder eine Kombination aus allem sind
+                                   weit verbreitet.
+                                   
+                                   Frontend und Backend kommunizieren daher über das Netzwerk, wobei die Verteilung des Backends
+                                   hinter einem API-Gateway verborgen wird. Das API-Gateway bietet hierfür einen zentralen
+                                   Zugriffspunkt, über den alle Backendservices einheitlich angebsprochen werden können, ohne
+                                   die eigentlichen Backendstrukturen kennen zu müssen (oder dürfen).
+                               </div>
+                               <img id="microservices-bilder-1" src="02-architektur/microservices-gateway.png" class="d-block w-100 mt-4" />
+                           </lsx-tab-page>
+                           <lsx-tab-page title="Webanwendung mit Composite UI">
+                               <div class="markdown">
+                                   Ein früherer Ansatz, wie er heute unter Anderem von Amazon genutzt wird, konzentriert
+                                   sich ausschließlich auf Webanwendungen. Meist handelt es sich dabei um serverseitig
+                                   gerenderte Multi Page Apps ohne die eben besprochene Trennung von Frontend und Backend.
+               
+                                   Als Besonderheit setzt sich die Benutzeroberfläche allerdings wie bei einem Puzzle aus
+                                   unterschiedlichen Teilen zusammen, die jeweils von einem anderen Microservice bereitgestellt
+                                   werden. Praktisch bedeutet dies, dass es ein vorgelagerter Webserver eine mehr oder weniger
+                                   leere HTML-Seite mit nur allgemeinen Dingen wie dem Seitenkopf oder einem einfachen
+                                   Navigationsmenü zur Verfügung stellt. In diese werden dann von den Microservices gelieferte
+                                   HTML-Fragemente (sog. Microfrontends) eingebettet, um die Ansicht zu vervollständigen.
+                               </div>
+                               <img id="microservices-bilder-2" src="02-architektur/microservices-compositeui.png" class="d-block w-100 mt-4" />
+                           </lsx-tab-page>
+                       </lsx-tab-pages>
+                    </lsx-accordion-page>
+    
+                    <lsx-accordion-page title="Vor- und Nachteile" bold>
+                        <lsx-grid-fluid class="p-0">
+                             <lsx-row>
+                                 <lsx-col size="md">
+                                     <div class="card h-100">
+                                         <div class="card-header fw-bold">
+                                             Vorteile von Microservices
+                                         </div>
+                                         <div class="card-body markdown">
+                                             * Die Services sind durch ihre Schnittstellen klar gekapselt.
+                                             * Jeder Service kann einzeln deployed und skaliert werden.
+                                             * Sprachen, Bibliotheken, … können passend zum Service ausgewählt werden.
+                                             * Schwergewichtige Appliktionsserver und Frameworks können oft vermieden werden.
+                                             * Microservices lassen sich meist leicht als Docker-Container o.ä. verpacken.
+                                         </div>
+                                     </div>
+                                 </lsx-col>
+             
+                                 <lsx-col size="md">
+                                     <div class="card h-100">
+                                         <div class="card-header fw-bold">
+                                             Nachteile von Microservices
+                                         </div>
+                                         <div class="card-body markdown">
+                                             * Verteilte Systeme mit vielen Komponenten sind schwer zu programmieren.
+                                             * Microservices müssen eventuellkonsistent und fehlertolerant programmiert werden.
+                                             * Deployment, Betrieb und Überwachung bringen zusätzliche Komplexität.
+                                             * Die Kommunikation zwischen Microservices ist grundsätzlich latenzbehaftet.
+                                             * Kleinere und unerfahrene Teams können mit der Komplexität überfordert sein.
+                                         </div>
+                                     </div>
+                                 </lsx-col>
+                             </lsx-row>
+                         </lsx-grid-fluid>
+             
+                         <div class="markdown">
+                             Laut Martin Fowler lohnt sich eine Microservice-Architektur daher nur, wenn eine Anwendung hinreichend
+                             groß ist und von mehreren Entwicklerteams betreut werden kann. Vgl.
+                             [Martin Fowler: Microservice Guide](https://martinfowler.com/microservices/){target=_blank}
+                         </div>
+                    </lsx-accordion-page>
+                </lsx-accordion>
+            </div>
+        </article>
+    </section>
+    
+    <section data-title="Herausforderungen bei der Nutzung von Microservices">
+        <article class="centered-content">
+            <div class="limited-width2">
+                <div class="d-flex flex-column flex-md-row gap-3">
+                    <img src="02-architektur/valentines-day.png" class="d-block w-100" alt="Happy Valentines Day">
+                    <img src="02-architektur/microservices-and-monolithic.png" class="d-block w-100" alt="Are you ready for microservices?">
+                </div>
+            
+                <small>
+                    <small>
+                        Bildnachweise:
+                        <a href="https://turnoff.us/geek/valentines-day/" target="_blank">{turnoff.us} valentine's day at the kernel</a>,
+                        <a href="https://turnoff.us/geek/are-you-ready-for-microservices/" target="_blank">{turnoff.us} are you ready for microservices?</a>
+                    </small>
+                </small>
+            </div>
+        </article>
+    </section>
+    
+    <section data-title="Skalierung von Microservices">
+        <article class="centered-content">
+            <div class="limited-width">
+                <lsx-carousel class="carousel-fade">
+                    <lsx-carousel-page>
+                        <img src="02-architektur/skalierung-1.png" class="d-block w-100 mb-5">
+                        <p>
+                            Microservice-Architekturen lassen sich grundsätzlich einfacher skalieren als monolithische Anwendungen,
+                            da jeder Service getrennt deployed wird. Für jeden Service kann daher eine optimale Ressourcenzuteilung
+                            entsprechend dem tatsächlichen Bedarf vorgenommen werden.
+                        </p>
+                    </lsx-carousel-page>
+                    <lsx-carousel-page>
+                        <img src="02-architektur/skalierung-2.png" class="d-block w-100 mb-5">
+                        <p>
+                            Bei leicht ansteigender Last könnte die Laufzeitumgebung beispielsweise den laufenden Instanzen mehr
+                            Leistung zur Verfügung stellen.
+                        </p>
+                    </lsx-carousel-page>
+                    <lsx-carousel-page>
+                        <img src="02-architektur/skalierung-3.png" class="d-block w-100 mb-5">
+                        <p>
+                            In der Regel werden so genannte Skalierungstrigger, wie die Anzahl HTTP-Anfragen je Sekunde, jedoch
+                            genutzt, um weitere Serviceinstanzen zu starten. Die eingehenden Anfragen werden dann durch einen Load
+                            Balancer gleichmäßig auf die Instanzen verteilt.
+                        </p>
+                    </lsx-carousel-page>
+                    <lsx-carousel-page>
+                        <img src="02-architektur/skalierung-4.png" class="d-block w-100 mb-5">
+                        <p>
+                            Damit diese Art der Skalierung funktioniert, dürfen die Services allerdings keine temporären Sitzungdaten
+                            im Hauptspeicher ablegen. Denn es kann in der Regel nicht garantiert werden, dass zusammengehörige Anfragen
+                            stets dieselbe Instanz erreichen. Außerdem können die Instanzen jederzeit neugestartet werden, wodurch die
+                            im Hauptspeicher liegenden Daten ebenfalls verloren gingen.
+                        </p>
+                    </lsx-carousel-page>
+                    <lsx-carousel-page>
+                        <img src="02-architektur/skalierung-5.png" class="d-block w-100 mb-5">
+                        <p>
+                            Cloud-Anwendungen, welche serverseitige Sitzungsdaten verwalten, persistieren diese daher meist in einer
+                            Datenbank. Oft wird hierfür dieselbe Datenbank genutzt, in der auch die originären Nutzdaten des jeweiligen
+                            Microservices liegen. Genauso oft kommen allerdings auch spezialisierte Datenbanken oder Objektspeicher
+                            wie Redis zum Einsatz.
+                        </p>
+                    </lsx-carousel-page>
+                    <lsx-carousel-page>
+                        <img src="02-architektur/skalierung-6.png" class="d-block w-100 mb-5">
+                        <p>
+                            Idealerweise benötigt eine Anwendung überhaupt keine serverseitigen Sitzungsdaten, sondern verwaltet diese
+                            rein clientseitig. Dadurch werden der Server entlastet und Zeitverzögerungen aufgrund einer langsamen
+                            Internetverbindung vermieden. Gemäß
+                            <a href="https://martinfowler.com/articles/distributed-objects-microservices.html" target="_blank">Martin Fowler's „First Law of Distributed Objects”</a>
+                            funktioniert dies am besten, wenn die Kommunikation mit dem Backend auf wenige Anfragen mit gebündelten
+                            Inhalten reduziert wird.
+                        </p>
+                    </lsx-carousel-page>
+            
+                    <lsx-carousel-page>
+                        <img class="active d-block w-25 m-auto" src="shared/finish.svg" />
+                        <p>
+                            Wird eine Anwendung nach den vorgenannten Prinzipien serverseitig möglichst zustandslos implementiert,
+                            kann sie jederzeit problemlos hoch- oder runterskaliert werden.
+                        </p>
+                    </lsx-carousel-page>
+                </lsx-carousel>
+            </div>
+        </article>
+    </section>
 
-<!-- TODO:
-    - Erster Teil altes Cloudkapitel
-    - Beide Videos an den Anfang stellen
--->
-<section data-title="Cloud-Architektur">
+    <!-- TODO: Quellcode anpassen, dann hier freischalten und Beschreibung ergänzen -->
+    <!--
+    <section data-title="Fallbeispiel: Adressbuch">
+        <article class="centered-content">
+            <div>
+                <div class="mb-3">
+                    <lsx-github-edit url="https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes/tree/main/Beispielanwendung%20Adressbuch"></lsx-github-edit>
+                </div>
+            
+                <div class="d-flex flex-column flex-md-row gap-3">
+                    <img src="02-architektur/beispiel-adressbuch-1.png" class="img-thumbnail d-block w-100">
+                    <img src="02-architektur/beispiel-adressbuch-2.png" class="img-thumbnail d-block w-100">
+                    <img src="02-architektur/beispiel-adressbuch-3.png" class="img-thumbnail d-block w-100">
+                </div>
+            </div>
+        </article>
+    </section>
+    -->
 </section>
 
 <section data-title="Nicht-fachliche Services">
+    <section data-title="Typische nicht-fachliche Microservices">
+        <article class="centered-content">
+            <div class="limited-width2 markdown">
+                Je größer eine verteilte Anwendung ist oder im Laufe der Zeit wird, desto wichtiger ist es,
+                dass über die funktionalen Anforderungen hinaus auch eine Vielzahl technischer Anforderungen
+                abgedeckt werden, die einen zuverlässigen Betrieb überhaupt erst möglich machen. Neben einer
+                zentralen Benutzer- und Berechtigungsverwaltung gehören hierzu die Überwachung des laufenden
+                Betriebs und viele mehr.
+    
+                In traditionellen, monolithischen Anwendungen müssen derartige Funktionen entweder selbst
+                entwickelt oder durch entsprechende Frameworks bzw. Applikationsserver bereitgestellt werden.
+                Entsprechend groß und schwergewichtig fallen diese aus. Microservices haben hingegen den Vorteil,
+                diese unterstützenden Services von anderen Microservices „out-of-process“ konsumieren zu können.
+                Oft kommen dabei Drittprodukte von spezialisierten Anbietern oder die Plattformservices¹ der
+                großen Cloudanbieter zum Einsatz, die hierfür lediglich über speziell hierfür bereitgestellte
+                Code-Bibliotheken in die eigene Anwendung integriert werden müssen.
+                
+                <lsx-tab-pages>
+                    <lsx-tab-page title="Beispiel-Architektur">
+                        <img src="02-architektur/fallbeispiel-naas-planes.png" class="d-block w-100 mt-4" />
+                    </lsx-tab-page>
+                    <lsx-tab-page title="Service-Arten">
+                        <img src="02-architektur/fallbeispiel-naas-services.png" class="d-block w-100 mt-4" />
+                    </lsx-tab-page>
+                    <lsx-tab-page title="Service Mesh">
+                        <img src="02-architektur/fallbeispiel-naas-mesh.png" class="d-block w-100 mt-4" />
+                    </lsx-tab-page>
+                </lsx-tab-pages>
+    
+                Das obige Beispiel zeigt eine typische Architektur, bei welcher die nicht-funktionalen
+                Anforderungen durch zusätzliche von der Plattform bereitgestellte Microservices abgedeckt werden.
+    
+                ¹
+                <small>
+                    Der Begriff „Plattform” steht sinnbildlich für alles, was für Entwicklung und Betrieb einer
+                    Anwendung vorab gegeben sein muss. Plattformservices sind daher von den Cloudanbietern gegen
+                    Bezahlung bereitgestellte Funktionen zur Unterstützung der in der jeweiligen Cloudumgebung
+                    ausgeführten Anwendungen. Beispiele hierfür können Authentifikationsserver, Monitoring-Angebote,
+                    Proxy-Server uvm. sein.
+                </small>
+            </div>
+        </article>
+    </section>
+    
+    <section data-title="Zwei-Faktor-Authentifizierung ja oder nein?">
+        <article class="centered-content">
+            <div style="max-width: 40em;">
+                <img src="02-architektur/ct-schlagseite-2fa.jpg" class="d-block w-100" alt="Jeden Tag verschwindet einer …">
+            
+                <small>
+                    <small>
+                        Bildnachweis:
+                        <a href="https://www.heise.de/select/ct/2022/11/2200714175714756235" target="_blank">c't 11/2022, S. 13 (Schlagseite)</a>
+                    </small>
+                </small>
+            </div>
+        </article>
+    </section>
+    
+    <section data-title="Überwachung von Microservices">
+        <article class="centered-content">
+            <div>
+                <div class="markdown limited-width m-auto mb-5">
+                    Typische Services in der **Kontrollebene** sind jene zur Überwachung des laufenden
+                    Betriebs einer verteilten Anwendung. Diese unterteilen sich typischerweise in:
+            
+                    * **Metriken:**: Kennzahlen wie Speicherverbrauch, Anzahl Requests je Sekunde, CPU-Auslastung, ...
+                    * **Logging:** Protokollausgaben der einzelnen Services, um Fehler nachvollziehen zu können
+                    * **Tracing:** Nachverfolgung von Aufrufketten, um komplexe Fehlersituationen analysieren zu können
+                </div>
+                <div class="d-flex align-items-stretch" style="gap: 1em;">
+                    <img src="02-architektur/metriken.png" class="d-block w-100 img-thumbnail" />
+                    <img src="02-architektur/logging.png" class="d-block w-100 img-thumbnail" />
+                    <img src="02-architektur/tracing.png" class="d-block w-100 img-thumbnail" />
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <!-- TODO: Quellcode anpassen, dann hier freischalten und Beschreibung ergänzen -->
+    <!--
+    <section data-title="Fallbeispiel: Webflicks">
+        <article class="centered-content">
+            <div>
+                <div class="mb-3">
+                    <lsx-github-edit
+                        url="https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes/tree/main/Beispielanwendung%20Webflicks"></lsx-github-edit>
+                </div>
+            
+                <div class="d-flex flex-column flex-md-row gap-3">
+                    <img src="02-architektur/beispiel-webflicks-1.png" class="img-thumbnail d-block w-100">
+                    <img src="02-architektur/beispiel-webflicks-2.png" class="img-thumbnail d-block w-100">
+                    <img src="02-architektur/beispiel-webflicks-3.png" class="img-thumbnail d-block w-100">
+                </div>
+            </div>
+        </article>
+    </section>
+    -->
+</section>
+
+<section data-title="Das Cloud-Betriebsmodell">
+    <section data-title="Die Cloud aus Konsumentensicht">
+        <article class="centered-content">
+            <div class="limited-width2">
+                <img src="02-architektur/cloud-storage.png" class="d-block w-100 mb-5">
+            
+                <div class="d-flex flex-column flex-md-row gap-2">
+                    <img src="02-architektur/cat1.jpg" class="d-block w-100 img-thumbnail">
+                    <img src="02-architektur/cat2.jpg" class="d-block w-100 img-thumbnail">
+                    <img src="02-architektur/cat3.jpg" class="d-block w-100 img-thumbnail">
+                    <img src="02-architektur/cat4.jpg" class="d-block w-100 img-thumbnail">
+                </div>
+            
+                <small>
+                    <small>
+                        Zitat gefunden auf:
+                        <a href="https://docs.kraudcloud.com/technology/storage/" target="_blank">kraudcloud.com</a>, <br>
+                        
+                        Bildnachweise:
+                        <a href="https://pixabay.com/photos/cat-pet-licking-animal-tabby-cat-323262/" target="_blank">Pixabay: TeamK</a>,
+                        <a href="https://pixabay.com/photos/cat-kitten-pets-animals-housecat-2934720/" target="_blank">Pixabay: Kirgiz03</a>,
+                        <a href="https://pixabay.com/photos/cat-siamese-cat-fur-kitten-2068462/" target="_blank">Pixabay: webandi</a>,
+                        <a href="https://pixabay.com/photos/cat-tired-yawn-stretch-814952/" target="_blank">Pixabay: jonathansautter</a>
+                    </small>
+                </small>
+            </div>
+        </article>
+    </section>
+    
+    <section data-title="Abgrenzung von typischen Onlinediensten">
+        <article class="centered-content">
+            <div class="limited-width2">
+                <div class="markdown mt-3 mb-3">
+                    Anwendungen zum Synchronisieren von Dateien wie Dropbox, OneDrive oder Owncloud
+                    werden umgangssprachlich oft als Cloud bezeichnet. Man sagt, dass die Dateien
+                    _mit der Cloud synchronisiert_ werden. Dies ist jedoch problematisch, da „Cloud”
+                    hier lediglich sinnbildlich für einen irgendwie gearteten Onlinedienst steht.
+                    Hinzu kommt, dass zumindest Owncloud gar keine Cloud-Anwendung ist, sondern eine
+                    in PHP implementierte, traditionelle Webanwendung. Nach dieser Definition müsste
+                    demnach jede Webanwendung auch eine Cloud-Anwendung sein.
+                </div>
+            
+                <lsx-grid-fluid class="p-0">
+                    <lsx-row>
+                        <lsx-col size="md">
+                            <img src="02-architektur/dropbox-screenshot.png" class="d-block img-thumbnail" style="height: 100%;"/>
+                        </lsx-col>
+                        <lsx-col size="md">
+                            <img src="02-architektur/owncloud-screenshot.png" class="d-block img-thumbnail" style="height: 100%;"/>
+                        </lsx-col>
+                    </lsx-row><lsx-row>
+                        <lsx-col size="md">
+                            <img src="02-architektur/owncloud-quellcode.png" class="d-block img-thumbnail" style="height: 100%;"/>
+                        </lsx-col>
+                        <lsx-col size="md">
+                            <img src="02-architektur/owncloud-installation.png" class="d-block img-thumbnail" style="height: 100%;"/>
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
+            </div>
+        </article>
+    </section>
+    
+    <section data-title="Abgrenzung von klassischem Hosting">
+        <article class="centered-content">
+            <div class="limited-width2">
+                <div class="markdown mt-3 mb-3">
+                    Schon früher war es insbesondere für kleinere Unternehmen üblich, die Hardware zur
+                    Bereitstellung eines Onlinedienstes nicht selbst zu betreiben. Dieses Modell wird
+                    Hosting genannt, da der Anbieter zwar die Hardwareplattform (den Host) zur Verfügung
+                    stellt, Installation und Betrieb der Anwendung aber immer noch selbst vorgenommen
+                    werden müssen.
+                </div>
+            
+                <div class="d-flex gap-3 flex-column flex-md-row">
+                    <div class="card flex-grow-1 w-100">
+                        <img src="02-architektur/hosting-dedicated.jpg" class="card-img-top">
+                        <div class="card-header border-top fw-bold">
+                            Dedicated Root Server                        
+                        </div>
+                        <div class="card-body markdown small">
+                            Hier vermietet der Anbieter einen dedizierten Computer an den Kunden.
+                            Installation und Einrichtung müssen, sofern es kein „managed” Angebot
+                            mit zusätzlicher Dienstleistung ist, aus der Ferne selbst erledigt werden.
+                            Im Gegenzug können jedes beliebige Betriebsystem und jede Software
+                            aufgespielt werden.
+                        </div>
+                    </div>
+            
+                    <div class="card flex-grow-1 w-100">
+                        <img src="02-architektur/hosting-vserver.png" class="card-img-top">
+                        <div class="card-header border-top fw-bold">
+                            Virtual Private Server
+                        </div>
+                        <div class="card-body markdown small">
+                            Hier steht eine virtuelle Maschine zur Verfügung, die sich weitgehend wie
+                            dedizierte Hardware nutzen lässt. Die Ressourcen können jedoch geringer
+                            ausfallen, da die Hardware von vielen Kunden geteilt wird. Die Installation
+                            eines eigenen Betriebssystems kann ebenfalls mit Einschränkungen verbunden sein.
+                        </div>
+                    </div>
+            
+                    <div class="card flex-grow-1 w-100">
+                        <img src="02-architektur/hosting-web.png" class="card-img-top">
+                        <div class="card-header border-top fw-bold">
+                            Web Hosting
+                        </div>
+                        <div class="card-body markdown small">
+                            Hier wird lediglich der Webserver virtualisiert und etwas Speicherplatz in
+                            einer vorkonfigurierten Serverfarm angeboten. Die Einstellungsmöglichkeiten
+                            sind sehr begrenzt und oft auf traditionelle Webanwendungen mit PHP als
+                            Programmiersprache und MariaDB als Datenbank zugeschnitten.
+                        </div>
+                    </div>
+                </div>
+            
+                <small>
+                    <small>
+                        ¹ Bildnachweis:
+                        <a href="https://pixabay.com/photos/technology-servers-server-1587673/" target="_blank">Pixabay: heladodementa</a>
+                    </small>
+                </small>
+            </div>
+        </article>
+    </section>
+    
+    <section data-title="Grundidee der Cloud">
+        <article>
+            <lsx-grid-fluid class="p-0">
+                <lsx-row>
+                    <lsx-col size="md-9" class="mb-3">
+                        <img src="02-architektur/cloud-betriebsmodell.png" class="d-block w-100" />
+                    </lsx-col>
+                    <lsx-col size="md" class="d-flex flex-column gap-3">
+                        <lsx-card title="Automatisierung" bold class="markdown small">
+                            Die Grundidee der Cloud ist, die Bereitstellung und den Betrieb verteilter
+                            Anwendungen so weit wie möglich zu automatisieren. Eine Cloudumgebung besteht
+                            daher aus einem großen Rechencluster, dessen Ressourcen auf viele Anwendungen
+                            aufgeteilt werden. Manuelle Installationsschritte sollen vermieden werden.
+                            {.mb-0}
+                        </lsx-card>
+                        
+                        <lsx-card title="Isolation" bold class="markdown small">
+                            Die physischen und virtuellen Maschinen sowie Speicherressourcen einer Cloudumgebung
+                            werden vollständig abstrahiert, wodurch jede Anwendung einen eigenen, **virtuellen
+                            Computercluster** erhält. Häufig (aber nicht immer) wird dabei auch das Netzwerk
+                            virtualisiert, wodurch interne Services in einem **privaten Netzwerk** vor öffentlichen
+                            Zugriffen geschützt werden können.
+                            {.mb-0}
+                        </lsx-card>
+                        
+                        <lsx-card title="Skalierung und Elastizität" bold class="markdown small">
+                            **Skalierung** beschreibt die Anpassung der zur Verfügung gestellten Ressourcen
+                            entsprechend dem Leistungsbedarf einer Anwendung. Beim klassischen Hosting und
+                            bei sehr einfachen Cloud-Installationen ist dies nur durch manuelles Eingreifen
+                            möglich. Echte Cloud-Anwendungen sind jedoch **elastisch**, so dass der Cluster
+                            die Ressourcen automatisch skalieren kann.
+                            {.mb-0}
+                        </lsx-card>
+                        
+                        <lsx-card title="Variable Kosten" bold class="markdown small">
+                            Aufgrund der dynamischen Ressourcenzuteilung bieten viele Cloud-Angebote eine
+                            **nutzungsabhängige Abrechnung**, die sich nach Anzahl der tatsächlich genutzten
+                            Minuten zur Ausführung von Programmcode, tatsächlich belegtem Speicherplatz
+                            oder Netzwerktraffic richtet. Im Vergleich zu klassischem Hosting fallen die
+                            durchschnittlichen Kosten daher oft geringer aus.
+                            {.mb-0}
+                        </lsx-card>
+                    </lsx-col>
+                </lsx-row>
+            </lsx-grid-fluid>
+        </article>
+    </section>
+    
+    <section data-title="Pet vs. Cattle">
+        <article class="centered-content">
+            <div class="limited-width2">
+                <div class="d-flex gap-3 flex-column flex-md-row">
+                    <div class="card flex-grow-1 w-100">
+                        <img src="02-architektur/pet-vs-cattle-1.jpg" class="card-img-top">
+                        <div class="card-header border-top fw-bold">
+                            Hosting
+                        </div>
+                        <div class="card-body small">
+                            Die Software wird gehegt und gepflegt wie ein Haustier.
+                        </div>
+                    </div>
+                
+                    <div class="card flex-grow-1 w-100">
+                        <img src="02-architektur/pet-vs-cattle-2.jpg" class="card-img-top">
+                        <div class="card-header border-top fw-bold">
+                            Cloud
+                        </div>
+                        <div class="card-body small">
+                            Die Software wird wie Vieh in der Massentierhaltung behandelt.
+                        </div>
+                    </div>
+                </div>
+            
+                <small>
+                    <small>
+                        Bildnachweise:
+                        <a href="https://pixabay.com/photos/children-dog-pet-cute-footwear-1866531/" target="_blank">Pixabay: Pexels</a>,
+                        <a href="https://pixabay.com/photos/sheeps-animals-mammals-live-stock-6828766/" target="_blank">Pixabay: smoms_photography</a>
+                    </small>
+                </small>
+            </div>
+        </article>
+    </section>
+    
+    <section data-title="Das As-a-Service-Geschäftsmodell">
+        <article class="centered-content">
+            <div class="limited-width2">
+                <div class="markdown mt-3 mb-5">
+                    Cloudangebote werden häufig mit dem Namenszusatz „as-a-Service” angeboten,
+                    wie beispielsweise „Database-as-a-Service“ oder „Software-as-a-Service".
+                    Damit ist gemeint, dass die jeweilige Software **nicht klassisch lizenziert,
+                    sondern als Dienstleistung** vermarktet wird. Installation, Betrieb und Pflege
+                    werden fallen in die Verantwortung des Anbieters, wodurch diese aus Kundensicht
+                    komplett ausgelagert werden können.
+                </div>
+            
+                <div class="d-flex gap-3 flex-column flex-md-row mb-4">
+                    <div class="flex-grow-1 w-100 markdown small">
+                        ### Infrastructure-as-a-Service {.mb-3}
+            
+                        <img src="02-architektur/modelle-iaas.png" class="w-100 mb-3">
+                
+                        Im einfachsten Fall stellt die Cloud virtuelle Maschinen zur manuellen Einrichtung
+                        sowie dazugehörige Dienste wie Objektspeicher und Netzwerkrouting zur Verfügung.
+                        Lediglich die Bereitstellung aus Sicht des Cloudanbieters wird dabei automatisiert.
+                    </div>
+                    <div class="flex-grow-1 w-100 markdown small">
+                        ### Platform-as-a-Service {.mb-3}
+            
+                        <img src="02-architektur/modelle-paas.png" class="w-100 mb-3">
+                
+                        Auf die Entwicklung von Cloudanwendungen zugeschnittene Angebote bieten eine
+                        vorkonfigurierte Laufzeitumgebung für selbstgeschriebenen Quellcode. Deployment
+                        und Betrieb werden weitgehend automatisiert. Es besteht jedoch die Gefahr von
+                        Vendor Lock-In aufgrund der Verwendung anbieterspezifischer Bibliotheken.
+                    </div>
+                    <div class="flex-grow-1 w-100 markdown small">
+                        ### Software-as-a-Service {.mb-3}
+            
+                        <img src="02-architektur/modelle-saas.png" class="w-100 mb-3">
+                
+                        Am weitesten abstrahiert sind SaaS-Angebote zur Bereitstellung ganzer Anwendungspakete.
+                        Als Kunde registriert man sich lediglich für eine Anwendung, die gegen eine monatliche
+                        Gebühr zur Verfügung gestellt wird. Alle Kunden teilen sich meist den Quellcode, während
+                        die Daten getrennt werden.
+                    </div>
+                </div>
+            
+                <div class="markdown">
+                    Angebote wie **Function-as-a-Service** (auch **Serverless** genannt, da die Verwaltung von Serverinstanzen komplett
+                    wegabstrahiert wird) oder **Database-as-a-Service** richten ebenfalls an Anwendungsentwickler und zählen deshalb zu
+                    Platform-as-a-Service.
+                    
+                    Die großen Anbieter wie Amazon, Google oder Microsoft bieten grundsätzlich eine Mischung aus allen Modellen, während
+                    sich kleinere Anbieter wie [Heroku](https://heroku.com/){target="_blank"}, [Render](https://render.com/){target="_blank"},
+                    [Fly.io](https://fly.io/){target="_blank"} meist auf Plattformdienste beschränken.
+                    [MongoDB Atlas](https://www.mongodb.com/de-de/atlas){target="_blank"}, [Auth0](https://auth0.com/){target="_blank"}
+                    und viele mehr zielen hingegen auf ganz spezielle Anwendungsfälle ab.
+                </div>
+            </div>
+        </article>
+    </section>
+    
+    <section data-title="Vertiefende Videos" class="centered-content">
+        <div class="limited-width2">
+            <lsx-grid-fluid>
+                <lsx-row>
+                    <lsx-col size="md">
+                        <lsx-youtube video="_epyprLse_4" aspect-ratio="16x9" class="w-100"></lsx-youtube>
+                        <a href="https://youtu.be/_epyprLse_4" target="_blank">Link zum Video</a>
+                    </lsx-col>
+                    <lsx-col size="md">
+                        <lsx-youtube video="Q7580888ce4" aspect-ratio="16x9" class="w-100"></lsx-youtube>
+                        <a href="https://youtu.be/Q7580888ce4" target="_blank">Link zum Video</a>
+                    </lsx-col>
+                </lsx-row>
+            </lsx-grid-fluid>
+        
+            <lsx-info-box type="warning" class="mt-3">
+                Die Videos beziehen sich an manchen Stellen noch auf die Entwicklung mit Java und
+                dem Spring-Framework. Auch wenn wir inzwischen Node.js/JavaScript in der Vorlesung
+                verwenden, sind die Grundprinzipien jedoch dieselben.
+            </lsx-info-box>
+        </div>
+    </section>
 </section>
 
 <!-- TODO: Übungsaufgaben
