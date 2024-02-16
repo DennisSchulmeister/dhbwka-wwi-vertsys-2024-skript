@@ -311,212 +311,6 @@
             </lsx-grid-fluid>
         </div>
     </section>
-
-    <section data-title="Heute übliche Programmiermodelle">
-        <article class="centered-content">
-            <div class="limited-width2">
-    
-                <lsx-grid-fluid>
-                    <lsx-row>
-                        <lsx-col size="md">
-                            <lsx-card title="App-Server / Frameworks" bold class="h-100">
-                                <lsx-card-body class="h-100 d-flex flex-column">
-                                    <lsx-ul emoji="🎙️">
-                                        <li>Beinhalten für Business Apps übliche Grundfunktionen</li>
-                                        <li>Unterstützen verschieden Schnittstellentechnologien</li>
-                                        <li>Oft auf die Entwicklung von Webanwendungen ausgerichtet</li>
-                                    </lsx-ul>
-    
-                                    <div style="flex: 1"></div>
-                                    <img src="02-architektur/arten-appserver.png" alt="" class="w-100" />
-                                </lsx-card-body>
-                            </lsx-card>
-                        </lsx-col>
-    
-                        <lsx-col size="md">
-                            <lsx-card title="Entfernte Methodenaufrufe" bold class="h-100">
-                                <lsx-card-body class="h-100 d-flex flex-column">
-                                    <lsx-ul emoji="🎙️">
-                                        <li>Direkter Aufruf von Funktionen/Methoden des Servers</li>
-                                        <li>Sowohl prozedural als auch objekt-orientiert möglich</li>
-                                        <li>Teilweise auch zwischen verschiedenen Programmiersprachen</li>
-                                    </lsx-ul>
-    
-                                    <div style="flex: 1"></div>
-                                    <img src="02-architektur/arten-methodenaufrufe.png" alt="" class="w-100" />
-                                </lsx-card-body>
-                            </lsx-card>
-                        </lsx-col>
-                    </lsx-row>
-    
-                    <lsx-row>
-                        <lsx-col size="md">
-                            <lsx-card title="Webservices" bold class="h-100">
-                                <lsx-card-body class="h-100 d-flex flex-column">
-                                    <lsx-ul emoji="🎙️">
-                                        <li>Grundsätzlich dieselbe Idee wie bei entfernten Methodenaufrufen</li>
-                                        <li>Jedoch auf Basis von Webstandards wie HTTP, XML, JSON</li>
-                                        <li>Früher SOAP, heute überwiegend REST-Webservices</li>
-                                    </lsx-ul>
-    
-                                    <div style="flex: 1"></div>
-                                    <img src="02-architektur/arten-webservices.png" alt="" class="w-100" />
-                                </lsx-card-body>
-                            </lsx-card>
-                        </lsx-col>
-    
-                        <lsx-col size="md">
-                            <lsx-card title="Message Broker" bold class="h-100">
-                                <lsx-card-body class="h-100 d-flex flex-column">
-                                    <lsx-ul emoji="🎙️">
-                                        <li>Grundsätzlich asynchroner Nachrichtenaustausch</li>
-                                        <li>Mehrere Empfänger für eine Nachricht möglich und üblich</li>
-                                        <li>Store and Forward der Nachrichten in einer FIFO-Warteschlange</li>
-                                    </lsx-ul>
-    
-                                    <div style="flex: 1"></div>
-                                    <img src="02-architektur/arten-pubsub.png" alt="" class="w-100" />
-                                </lsx-card-body>
-                            </lsx-card>
-                        </lsx-col>
-                    </lsx-row>
-                </lsx-grid-fluid>
-            </div>
-        </article>
-    </section>
-
-    <section data-title="Historische Entwicklung">
-        <article class="centered-content">
-            <div class="centered-content flex-row flex-wrap gap-3">
-                <!-- Host-to-Host -->
-                <lsx-modal>
-                    <lsx-thumbnail style="height: 14em;" class="mw-100">
-                        <img src="02-architektur/historie-abb1.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
-                    </lsx-thumbnail>
-                    <lsx-content>
-                        <lsx-card title="Host-to-Host" bold class="mh-100 mw-100" style="width: 35em;">
-                            <lsx-card-body class="overflow-scroll">
-                                <p style="text-align: justify; hyphens: auto;">
-                                    Vor Erfindung des ARPANET und ähnlicher Computernetze in den 1960er-Jahren gab es noch kein
-                                    anerkanntes Modell, wie zwei Computer untereinander Daten austauschen können. Die einzige
-                                    Möglichkeit war, eine direkte Kabelverbindung „host-to-host” herzustellen, wobei hierfür
-                                    Hard- und Software auf beiden Seiten komplett selbst entwickelt werden mussten.
-                                </p>
-                                
-                                <lsx-ul emoji="🔌" class="lead mb-4">
-                                    <li>Direkte Kabelverbindung zwischen zwei Rechnern</li>
-                                    <li>Keine Unterstützung durch das Betriebssystem</li>
-                                </lsx-ul>
-                                
-                                <img src="02-architektur/historie-kabel.svg" alt="Zwei VS-Knoten mit direkter Kabelverbindung" style="width: 100%; margin-bottom: 1em;" />
-                                <img src="02-architektur/historie-abb1.jpg" alt="" style="width: 100%;" />
-                            </lsx-card-body>
-                        </lsx-card>
-                    </lsx-content>
-                </lsx-modal>
-    
-                <!-- Packet Switching -->
-                <lsx-modal>
-                    <lsx-thumbnail style="height: 14em;" class="mw-100">
-                        <img src="02-architektur/historie-abb2.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
-                    </lsx-thumbnail>
-                    <lsx-content>
-                        <lsx-card title="Packet Switching" bold class="mh-100 mw-100" style="width: 35em;">
-                            <lsx-card-body class="overflow-scroll">
-                                <p style="text-align: justify; hyphens: auto;">
-                                    In den ausgehenden 1960er-Jahren wurde für die neuentwickelten Computernetzwerke das auch heute
-                                    noch gültige Prinzip des Packet Switching erfunden. Die Idee dahinter ist, die zu versendenden
-                                    Daten in kleine Pakete zu zerlegen und jedes Paket seinen eigenen Weg durch das Netzwerk vom
-                                    Sender zum Empfänger suchen zu lassen. Heute haben wir Router für diese Aufgabe. Im ARPANET hießen
-                                    diese „Interface Message Processor” und waren so groß wie ein Schrank.
-                                </p>
-    
-                                <lsx-ul emoji="📦" class="lead mb-4">
-                                    <li>NCP und später TCP als Vorläufer von TCP/IP</li>
-                                    <li>Weltweiter Datenaustausch zwischen allen Hosts</li>
-                                    <li>Anschluss des Computers hierfür an einen <a href="https://en.wikipedia.org/wiki/Interface_Message_Processor" target="_blank">IMP</a></li>
-                                </lsx-ul>
-    
-                                <img src="02-architektur/imp-subnet.svg" alt="Netzwerktopologie des früheren ARPANET" style="width: 100%; margin-bottom: 1em;" />
-    
-                                <!-- <lsx-youtube class="img-thumbnail embed-responsive" video="yU9oMOcRsuE"></lsx-youtube> -->
-                                <div class="centered-content">
-                                    <div class="embed-responsive ratio ratio-16x9 limited-width">
-                                        <iframe class="d-block" src="https://www.youtube-nocookie.com/embed/yU9oMOcRsuE?rel=0&amp;showinfo=0" allowfullscreen></iframe>
-                                    </div>
-                                </div>
-                            </lsx-card-body>
-                        </lsx-card>
-                    </lsx-content>
-                </lsx-modal>
-    
-                <!-- Sockets- und Middleware -->
-                <lsx-modal>
-                    <lsx-thumbnail style="height: 14em;">
-                        <img src="02-architektur/historie-abb3.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
-                    </lsx-thumbnail>
-                    <lsx-content>
-                        <lsx-card title="Streams und Sockets" bold class="mh-100 mw-100" style="width: 35em;">
-                            <lsx-card-body class="overflow-scroll">
-                                <p style="text-align: justify; hyphens: auto;">
-                                    Obwohl die heute vorherrschenden Streams und Sockets noch nicht erfunden waren (dies geschah erst 1983 mit
-                                    Veröffentlichung der Socket API für BSD Unix), suchte man bereits in den 1970er-Jahren nach Möglichkeiten,
-                                    die Netzwerkprogrammierung zu vereinfachen. In dieser Zeit wurde der „entfernte Prozeduraufruf“ erfunden,
-                                    bei dem die Unterprogramme (bzw. Funktionen bzw. Methoden, je nach Programmiersprache) eines Serverprogramms
-                                    über das Netzwerk direkt aufgerufen werden können, ohne den konkreten Datenaustausch auf Byte-Ebene hierfür
-                                    kennen zu müssen.
-                                </p>
-    
-                                <lsx-ul emoji="📃" class="lead mb-4">
-                                    <li><a href="https://de.wikipedia.org/wiki/Remote_Procedure_Call" target="_blank">Remote Procedure Call</a> ab den 1970ern</li>
-                                    <li>Zunächst konkurrierende Programmiermodelle</li>
-                                    <li>Streams und Sockets ab 1983 in BSD Unix</li>
-                                </lsx-ul>
-    
-                                <img src="02-architektur/historie-sockets.svg" alt="Zwei VS-Knoten mit Middleware" style="width: 100%; margin-bottom: 1em;" />
-                                <img src="02-architektur/historie-abb3.jpg" alt="" style="width: 100%;" />
-                            </lsx-card-body>
-                        </lsx-card>
-                    </lsx-content>
-                </lsx-modal>
-    
-                <!-- Applikationsserver -->
-                <lsx-modal>
-                    <lsx-thumbnail style="height: 14em;">
-                        <img src="02-architektur/historie-abb4.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
-                    </lsx-thumbnail>
-                    <lsx-content>
-                        <lsx-card title="Applikationsserver" bold class="mh-100 mw-100" style="width: 35em;">
-                            <lsx-card-body class="overflow-scroll">
-                                <p style="text-align: justify; hyphens: auto;">
-                                    Mit zunehmendem Umfang der Anforderungen stieg spätestens ab Mitte der 1990er-Jahre auch die
-                                    Komplexität typischer verteilter Anwendungen deutlich an. In Folge daraus versuchte man über
-                                    den Datenaustauschs hinausgehende Querschnittsfunktionen typischer Informationssysteme in sog.
-                                    Applikationsserver auszugliedern, die als generische Laufzeitumgebung frei programmierbar an
-                                    den jeweiligen Anwendungsfall angepasst werden konnten.
-                                </p>
-                                <p style="text-align: justify; hyphens: auto;">
-                                    Aus heutiger Sicht vereinfacht das damit verbundene Programmiermodell die Erstellung neuer
-                                    Anwendungen zwar drastisch, wird aber dennoch als schwerfällig und komplex empfunden. Heute
-                                    geht der Trend stattdessen mehr in die Richtung, die ehemals vom Applikationsserver bereitgestellten
-                                    Funktionen in Form Quellcode-Bibliotheken oder Micro-Frameworks zu integrieren.
-                                </p>
-    
-                                <lsx-ul emoji="🚢" class="lead mb-4">
-                                    <li>Große Applikationsserver ab den 1990ern</>
-                                    <li>Zunächst RPC später Webtechnologien</li>
-                                    <li>Heute eher leichtgewichtigere Micro-Frameworks</li>
-                                </lsx-ul>
-    
-                                <img src="02-architektur/historie-appserver.svg" alt="Drei VS-Knoten von denen einer ein Applikationsserver ist" style="width: 100%; margin-bottom: 1em;" />
-                                <img src="02-architektur/historie-abb4.jpg" alt="" style="width: 100%;" />
-                            </lsx-card-body>
-                        </lsx-card>
-                    </lsx-content>
-                </lsx-modal>
-            </div>
-        </article>
-    </section>
 </section>
 
 <section data-title="Der TCP/IP-Protokollstapel">
@@ -809,10 +603,11 @@
     <section data-title="Von Clients, Servern und Peers">
         <article class="centered-content">
             <div class="limited-width2">
-                <p class="mb-4">
-                    Im Zusammenhang mit verteilten Netzwerkanwendungen haben sich bereits früh folgende Begriffe
-                    mit fester Bedeutung etabliert. Leider werden aber gerade die Begriffe „Server” und „Service”
-                    im alltäglichen Sprachgebrauch heutzutage sehr unscharf verwendet.
+                <p class="mb-4" detail-content>
+                    Im Zusammenhang mit verteilten Netzwerkanwendungen haben sich bereits früh folgende Rollenbezeichnungen,
+                    die wir schon im Fallbeispiel eben gesehen haben, etabliert. Die Begriffe haben dabei eine klar definierte
+                    Bedeutung, werden im Alltag aber leider nicht immer korrekt verwendet, da vor allem "Server" und "Service"
+                    oft sehr frei ausgelegt werden.
                 </p>
     
                 <table class="w-100 mb-5">
@@ -883,18 +678,236 @@
         </article>
     </section>
     
+    <section data-title="Heute übliche Programmiermodelle">
+        <article class="centered-content">
+            <div class="limited-width2">
+    
+                <lsx-grid-fluid>
+                    <lsx-row>
+                        <lsx-col size="md">
+                            <lsx-card title="App-Server / Frameworks" bold class="h-100">
+                                <lsx-card-body class="h-100 d-flex flex-column">
+                                    <lsx-ul emoji="🎙️">
+                                        <li>Beinhalten für Business Apps übliche Grundfunktionen</li>
+                                        <li>Unterstützen verschieden Schnittstellentechnologien</li>
+                                        <li>Oft auf die Entwicklung von Webanwendungen ausgerichtet</li>
+                                    </lsx-ul>
+    
+                                    <div style="flex: 1"></div>
+                                    <img src="02-architektur/arten-appserver.png" alt="" class="w-100" />
+                                </lsx-card-body>
+                            </lsx-card>
+                        </lsx-col>
+    
+                        <lsx-col size="md">
+                            <lsx-card title="Entfernte Methodenaufrufe" bold class="h-100">
+                                <lsx-card-body class="h-100 d-flex flex-column">
+                                    <lsx-ul emoji="🎙️">
+                                        <li>Direkter Aufruf von Funktionen/Methoden des Servers</li>
+                                        <li>Sowohl prozedural als auch objekt-orientiert möglich</li>
+                                        <li>Teilweise auch zwischen verschiedenen Programmiersprachen</li>
+                                    </lsx-ul>
+    
+                                    <div style="flex: 1"></div>
+                                    <img src="02-architektur/arten-methodenaufrufe.png" alt="" class="w-100" />
+                                </lsx-card-body>
+                            </lsx-card>
+                        </lsx-col>
+                    </lsx-row>
+    
+                    <lsx-row>
+                        <lsx-col size="md">
+                            <lsx-card title="Webservices" bold class="h-100">
+                                <lsx-card-body class="h-100 d-flex flex-column">
+                                    <lsx-ul emoji="🎙️">
+                                        <li>Grundsätzlich dieselbe Idee wie bei entfernten Methodenaufrufen</li>
+                                        <li>Jedoch auf Basis von Webstandards wie HTTP, XML, JSON</li>
+                                        <li>Früher SOAP, heute überwiegend REST-Webservices</li>
+                                    </lsx-ul>
+    
+                                    <div style="flex: 1"></div>
+                                    <img src="02-architektur/arten-webservices.png" alt="" class="w-100" />
+                                </lsx-card-body>
+                            </lsx-card>
+                        </lsx-col>
+    
+                        <lsx-col size="md">
+                            <lsx-card title="Message Broker" bold class="h-100">
+                                <lsx-card-body class="h-100 d-flex flex-column">
+                                    <lsx-ul emoji="🎙️">
+                                        <li>Grundsätzlich asynchroner Nachrichtenaustausch</li>
+                                        <li>Mehrere Empfänger für eine Nachricht möglich und üblich</li>
+                                        <li>Store and Forward der Nachrichten in einer FIFO-Warteschlange</li>
+                                    </lsx-ul>
+    
+                                    <div style="flex: 1"></div>
+                                    <img src="02-architektur/arten-pubsub.png" alt="" class="w-100" />
+                                </lsx-card-body>
+                            </lsx-card>
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
+            </div>
+        </article>
+    </section>
+
+    <section data-title="Historische Entwicklung">
+        <article class="centered-content">
+            <div class="centered-content flex-row flex-wrap gap-3">
+                <!-- Host-to-Host -->
+                <lsx-modal>
+                    <lsx-thumbnail style="height: 14em;" class="mw-100">
+                        <img src="02-architektur/historie-abb1.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                    </lsx-thumbnail>
+                    <lsx-content>
+                        <lsx-card title="Host-to-Host" bold class="mh-100 mw-100" style="width: 35em;">
+                            <lsx-card-body class="overflow-scroll">
+                                <p style="text-align: justify; hyphens: auto;">
+                                    Vor Erfindung des ARPANET und ähnlicher Computernetze in den 1960er-Jahren gab es noch kein
+                                    anerkanntes Modell, wie zwei Computer untereinander Daten austauschen können. Die einzige
+                                    Möglichkeit war, eine direkte Kabelverbindung „host-to-host” herzustellen, wobei hierfür
+                                    Hard- und Software auf beiden Seiten komplett selbst entwickelt werden mussten.
+                                </p>
+                                
+                                <lsx-ul emoji="🔌" class="lead mb-4">
+                                    <li>Direkte Kabelverbindung zwischen zwei Rechnern</li>
+                                    <li>Keine Unterstützung durch das Betriebssystem</li>
+                                </lsx-ul>
+                                
+                                <img src="02-architektur/historie-kabel.svg" alt="Zwei VS-Knoten mit direkter Kabelverbindung" style="width: 100%; margin-bottom: 1em;" />
+                                <img src="02-architektur/historie-abb1.jpg" alt="" style="width: 100%;" />
+                            </lsx-card-body>
+                        </lsx-card>
+                    </lsx-content>
+                </lsx-modal>
+    
+                <!-- Packet Switching -->
+                <lsx-modal>
+                    <lsx-thumbnail style="height: 14em;" class="mw-100">
+                        <img src="02-architektur/historie-abb2.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                    </lsx-thumbnail>
+                    <lsx-content>
+                        <lsx-card title="Packet Switching" bold class="mh-100 mw-100" style="width: 35em;">
+                            <lsx-card-body class="overflow-scroll">
+                                <p style="text-align: justify; hyphens: auto;">
+                                    In den ausgehenden 1960er-Jahren wurde für die neuentwickelten Computernetzwerke das auch heute
+                                    noch gültige Prinzip des Packet Switching erfunden. Die Idee dahinter ist, die zu versendenden
+                                    Daten in kleine Pakete zu zerlegen und jedes Paket seinen eigenen Weg durch das Netzwerk vom
+                                    Sender zum Empfänger suchen zu lassen. Heute haben wir Router für diese Aufgabe. Im ARPANET hießen
+                                    diese „Interface Message Processor” und waren so groß wie ein Schrank.
+                                </p>
+    
+                                <lsx-ul emoji="📦" class="lead mb-4">
+                                    <li>NCP und später TCP als Vorläufer von TCP/IP</li>
+                                    <li>Weltweiter Datenaustausch zwischen allen Hosts</li>
+                                    <li>Anschluss des Computers hierfür an einen <a href="https://en.wikipedia.org/wiki/Interface_Message_Processor" target="_blank">IMP</a></li>
+                                </lsx-ul>
+    
+                                <img src="02-architektur/imp-subnet.svg" alt="Netzwerktopologie des früheren ARPANET" style="width: 100%; margin-bottom: 1em;" />
+    
+                                <!-- <lsx-youtube class="img-thumbnail embed-responsive" video="yU9oMOcRsuE"></lsx-youtube> -->
+                                <div class="centered-content">
+                                    <div class="embed-responsive ratio ratio-16x9 limited-width">
+                                        <iframe class="d-block" src="https://www.youtube-nocookie.com/embed/yU9oMOcRsuE?rel=0&amp;showinfo=0" allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </lsx-card-body>
+                        </lsx-card>
+                    </lsx-content>
+                </lsx-modal>
+    
+                <!-- Sockets- und Middleware -->
+                <lsx-modal>
+                    <lsx-thumbnail style="height: 14em;">
+                        <img src="02-architektur/historie-abb3.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                    </lsx-thumbnail>
+                    <lsx-content>
+                        <lsx-card title="Streams und Sockets" bold class="mh-100 mw-100" style="width: 35em;">
+                            <lsx-card-body class="overflow-scroll">
+                                <p style="text-align: justify; hyphens: auto;">
+                                    Obwohl die heute vorherrschenden Streams und Sockets noch nicht erfunden waren (dies geschah erst 1983 mit
+                                    Veröffentlichung der Socket API für BSD Unix), suchte man bereits in den 1970er-Jahren nach Möglichkeiten,
+                                    die Netzwerkprogrammierung zu vereinfachen. In dieser Zeit wurde der „entfernte Prozeduraufruf“ erfunden,
+                                    bei dem die Unterprogramme (bzw. Funktionen bzw. Methoden, je nach Programmiersprache) eines Serverprogramms
+                                    über das Netzwerk direkt aufgerufen werden können, ohne den konkreten Datenaustausch auf Byte-Ebene hierfür
+                                    kennen zu müssen.
+                                </p>
+    
+                                <lsx-ul emoji="📃" class="lead mb-4">
+                                    <li><a href="https://de.wikipedia.org/wiki/Remote_Procedure_Call" target="_blank">Remote Procedure Call</a> ab den 1970ern</li>
+                                    <li>Zunächst konkurrierende Programmiermodelle</li>
+                                    <li>Streams und Sockets ab 1983 in BSD Unix</li>
+                                </lsx-ul>
+    
+                                <img src="02-architektur/historie-sockets.svg" alt="Zwei VS-Knoten mit Middleware" style="width: 100%; margin-bottom: 1em;" />
+                                <img src="02-architektur/historie-abb3.jpg" alt="" style="width: 100%;" />
+                            </lsx-card-body>
+                        </lsx-card>
+                    </lsx-content>
+                </lsx-modal>
+    
+                <!-- Applikationsserver -->
+                <lsx-modal>
+                    <lsx-thumbnail style="height: 14em;">
+                        <img src="02-architektur/historie-abb4.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                    </lsx-thumbnail>
+                    <lsx-content>
+                        <lsx-card title="Applikationsserver" bold class="mh-100 mw-100" style="width: 35em;">
+                            <lsx-card-body class="overflow-scroll">
+                                <p style="text-align: justify; hyphens: auto;">
+                                    Mit zunehmendem Umfang der Anforderungen stieg spätestens ab Mitte der 1990er-Jahre auch die
+                                    Komplexität typischer verteilter Anwendungen deutlich an. In Folge daraus versuchte man über
+                                    den Datenaustauschs hinausgehende Querschnittsfunktionen typischer Informationssysteme in sog.
+                                    Applikationsserver auszugliedern, die als generische Laufzeitumgebung frei programmierbar an
+                                    den jeweiligen Anwendungsfall angepasst werden konnten.
+                                </p>
+                                <p style="text-align: justify; hyphens: auto;">
+                                    Aus heutiger Sicht vereinfacht das damit verbundene Programmiermodell die Erstellung neuer
+                                    Anwendungen zwar drastisch, wird aber dennoch als schwerfällig und komplex empfunden. Heute
+                                    geht der Trend stattdessen mehr in die Richtung, die ehemals vom Applikationsserver bereitgestellten
+                                    Funktionen in Form Quellcode-Bibliotheken oder Micro-Frameworks zu integrieren.
+                                </p>
+    
+                                <lsx-ul emoji="🚢" class="lead mb-4">
+                                    <li>Große Applikationsserver ab den 1990ern</>
+                                    <li>Zunächst RPC später Webtechnologien</li>
+                                    <li>Heute eher leichtgewichtigere Micro-Frameworks</li>
+                                </lsx-ul>
+    
+                                <img src="02-architektur/historie-appserver.svg" alt="Drei VS-Knoten von denen einer ein Applikationsserver ist" style="width: 100%; margin-bottom: 1em;" />
+                                <img src="02-architektur/historie-abb4.jpg" alt="" style="width: 100%;" />
+                            </lsx-card-body>
+                        </lsx-card>
+                    </lsx-content>
+                </lsx-modal>
+            </div>
+        </article>
+    </section>
+
     <section data-title="Grundlegende Architekturmodelle">
         <article class="centered-content">
             <div class="limited-width2">
                 <lsx-tab-pages class="w-100">
                     <lsx-tab-page title="Client/Server">
-                        <p class="dhbw-text-columns mb-4" detail-content>
+                        <div class="markdown dhbw-text-columns mb-4" detail-content>
                             Dies ist die einfachste Architektur von allen. Sie besteht lediglich aus einem Server,
-                            der einen Dienst anbietet und den Clients, welche den Dienst konsumieren. Sehr oft kommt
-                            dabei ein synchrones, den Client blockierendes Request/Reply-Verfahren zum Einsatz, das
-                            besonders einfach zu programmieren ist. Technisch gesehen ist dies aber kein Muss, da
-                            Sockets prinzipiell jede Kommunikationsreihenfolge zulassen.
-                        </p>
+                            der einen Dienst anbietet und den Clients, welche den Dienst konsumieren. Die Kommunikation
+                            folgt dabei häufig einem einfachen **Request/Response**-Verfahren, obwohl Sockts prinzipiell
+                            jede Reihenfolge zulassen.
+    
+                            Früher wurden die Aufrufe clientseitig synchron programmiert. Dies sollte das Konzept eines
+                            einfachen Methodenaufrufs simulieren, indem der rufende Thread für die Dauer einer Anfrage
+                            blockiert und erst nach Eintreffer der Serverantwort wieder aufgeweckt wurde. In etwa so:
+
+                            <src-code language="javascript">
+                                let response = send_http_request("GET", "http://localhost:8080/");
+                                // Hier geht es erst weiter, wenn die Antwort empfangen wurde
+                            </src-code>
+                            
+                            Da das aber sehr inneffizient ist, folgend moderne Bibliotheken einem asynchronen Ansatz, bei
+                            dem der Clientthread wahlweise warten oder parallel weiterarbeiten kann. {.mt-4}
+                        </div>
+
 
                         <lsx-grid-fluid class="p-0">
                             <lsx-row>
@@ -929,7 +942,7 @@
                         </lsx-grid-fluid>
                     </lsx-tab-page>
         
-                    <lsx-taAufzeichnung der aufgerufenen URL-Routenb-page title="Dreischichtenarchitektur">
+                    <lsx-tab-page title="Dreischichtenarchitektur">
                         <p class="dhbw-text-columns mb-4" detail-content>
                             Hierbei handelt es sich ebenfalls um eine Client/Server-Architektur, jedoch greift der Server zusätzlich
                             auf eine Datenbank zu. Client, Server und Datenbank werden daher den drei Schichten <b>Darstellung</b>,
@@ -963,7 +976,7 @@
                                 </lsx-col>
                             </lsx-row>
                         </lsx-grid-fluid>
-                    </lsx-taAufzeichnung>
+                    </lsx-tab-page>
         
                     <lsx-tab-page title="Vierschichtenarchitektur">
                         <p class="dhbw-text-columns mb-4" detail-content>
@@ -1138,86 +1151,97 @@
 
 <section data-title="Anforderungen an verteilte Systeme">
     <section data-title="Allgemeine Anforderungen" class="centered-content">
-        <lsx-grid-fluid class="limited-width2 p-0">
-            <lsx-row>
-                <lsx-col size="md" class="mb-3 mb-md-0">
-                    <lsx-card bold img="02-architektur/anforderung-ressourcennutzung.jpg">
-                        <h4>Optimale Ressourcennutzung</h4>
-                        <p>
-                            Das System muss effizient mit den Ressourcen umgehen und möglichst viele Ressourcen
-                            für die eigentliche Anwendung zur Verfügung stellen. Die Anwendung muss ebenfalls
-                            intelligent damit umgehen und sie gut nutzen.
-                        </p>
-                    </lsx-card>
-                </lsx-col>
-                <lsx-col size="md">
-                    <lsx-card bold img="02-architektur/anforderung-stabilitaet.jpg">
-                        <h4>Stabilität und Fehlertoleranz</h4>
-                        <p>
-                            Programmabstürze und unvorhersehbares Verhalten sind unbedingt zu vermeiden.
-                            Beim Programmieren muss man daher neben den fachlichen Fehlern auch die Fehler
-                            berücksichtigen, die sich aus der Verteilung ergeben.
-                        </p>
-                    </lsx-card>
-                </lsx-col>
-            </lsx-row>
-            <lsx-row>
-                <lsx-col size="md" class="mb-3 mb-md-0">
-                    <lsx-card bold img="02-architektur/anforderung-skalierbarkeit.jpg">
-                        <h4>Einfache Skalierbarkeit</h4>
-                        <p>
-                            Es muss einfach möglich sein, die Leistung des Systems zu erhöhen oder diese zu reduzieren,
-                            wenn sie nicht mehr benötigt wird. Dies kann je nach System automatisch oder manuell erfolgen.
-                        </p>
-                    </lsx-card>
-                </lsx-col>
-                <lsx-col size="md">
-                    <lsx-card bold img="02-architektur/anforderung-transparenz.jpg">
-                        <h4>Einfache Nutzung (Transparenz)</h4>
-                        <p>
-                            Zumindest für den Anwender sollte die inheränte Komplexität des Systems verborgen bleiben.
-                            Entwickler und Administratoren freuen sich aber auch, wenn sie sich nicht um jede Kleinigkeit
-                            kümmern müssen.
-                        </p>
-                    </lsx-card>
-                </lsx-col>
-            </lsx-row>
-            <lsx-row>
-                <lsx-col size="md" class="mb-3 mb-md-0">
-                    <lsx-card bold img="02-architektur/anforderung-erweiterbarkeit.jpg">
-                        <h4>Einfache Erweiterbarkeit</h4>
-                        <p>
-                            Die Architektur muss flexibel genug sein, um einzelne Teile jederzeit austauschen oder
-                            verbessern zu können.
-                        </p>
-                    </lsx-card>
-                </lsx-col>
-                <lsx-col size="md">
-                    <lsx-card bold img="02-architektur/anforderung-sicherheit.jpg">
-                        <h4>Sicherheit</h4>
-                        <p>
-                            Die Vertraulichkeit, Integrität und Authentizität des Systems und seiner Daten muss
-                            gewährleistet bleiben.
-                        </p>
-                    </lsx-card>
-                </lsx-col>
-            </lsx-row>
-            <lsx-row>
-                <lsx-col size="md">
-                    <small>
+        <div class="limited-width2">
+            <p class="mb-4" detail-content>
+                Die Auswahl geeigneter Architektur-, Kommunikations- und Programmiermodelle hängt sehr stark
+                von den Anforderungen des jeweiligen Systems ab bzw. wie diese gewichtet werden. Die nachfolgende
+                Übersicht zeigt die wesentlichen Aspekte, die hierbei berücksichtigt werden müssen. Doch auch
+                mögliche Problemsituationen müssen, wie wir gleich noch sehen werden, in Betracht gezogen werden,
+                da jedes Modell wie so oft eine Verbesserung im einen und einen Kompromiss im anderen Bereich
+                mit sich bringt.
+            </p>
+
+            <lsx-grid-fluid class="p-0">
+                <lsx-row>
+                    <lsx-col size="md" class="mb-3 mb-md-0">
+                        <lsx-card bold img="02-architektur/anforderung-ressourcennutzung.jpg">
+                            <h4>Optimale Ressourcennutzung</h4>
+                            <p>
+                                Das System muss effizient mit den Ressourcen umgehen und möglichst viele Ressourcen
+                                für die eigentliche Anwendung zur Verfügung stellen. Die Anwendung muss ebenfalls
+                                intelligent damit umgehen und sie gut nutzen.
+                            </p>
+                        </lsx-card>
+                    </lsx-col>
+                    <lsx-col size="md">
+                        <lsx-card bold img="02-architektur/anforderung-stabilitaet.jpg">
+                            <h4>Stabilität und Fehlertoleranz</h4>
+                            <p>
+                                Programmabstürze und unvorhersehbares Verhalten sind unbedingt zu vermeiden.
+                                Beim Programmieren muss man daher neben den fachlichen Fehlern auch die Fehler
+                                berücksichtigen, die sich aus der Verteilung ergeben.
+                            </p>
+                        </lsx-card>
+                    </lsx-col>
+                </lsx-row>
+                <lsx-row>
+                    <lsx-col size="md" class="mb-3 mb-md-0">
+                        <lsx-card bold img="02-architektur/anforderung-skalierbarkeit.jpg">
+                            <h4>Einfache Skalierbarkeit</h4>
+                            <p>
+                                Es muss einfach möglich sein, die Leistung des Systems zu erhöhen oder diese zu reduzieren,
+                                wenn sie nicht mehr benötigt wird. Dies kann je nach System automatisch oder manuell erfolgen.
+                            </p>
+                        </lsx-card>
+                    </lsx-col>
+                    <lsx-col size="md">
+                        <lsx-card bold img="02-architektur/anforderung-transparenz.jpg">
+                            <h4>Einfache Nutzung (Transparenz)</h4>
+                            <p>
+                                Zumindest für den Anwender sollte die inheränte Komplexität des Systems verborgen bleiben.
+                                Entwickler und Administratoren freuen sich aber auch, wenn sie sich nicht um jede Kleinigkeit
+                                kümmern müssen.
+                            </p>
+                        </lsx-card>
+                    </lsx-col>
+                </lsx-row>
+                <lsx-row>
+                    <lsx-col size="md" class="mb-3 mb-md-0">
+                        <lsx-card bold img="02-architektur/anforderung-erweiterbarkeit.jpg">
+                            <h4>Einfache Erweiterbarkeit</h4>
+                            <p>
+                                Die Architektur muss flexibel genug sein, um einzelne Teile jederzeit austauschen oder
+                                verbessern zu können.
+                            </p>
+                        </lsx-card>
+                    </lsx-col>
+                    <lsx-col size="md">
+                        <lsx-card bold img="02-architektur/anforderung-sicherheit.jpg">
+                            <h4>Sicherheit</h4>
+                            <p>
+                                Die Vertraulichkeit, Integrität und Authentizität des Systems und seiner Daten muss
+                                gewährleistet bleiben.
+                            </p>
+                        </lsx-card>
+                    </lsx-col>
+                </lsx-row>
+                <lsx-row>
+                    <lsx-col size="md">
                         <small>
-                            Bildnachweise:
-                            <a href="https://pixabay.com/en/wallet-tape-measure-economical-levy-2383496/" target="_blank">Pixabay: Myriams-Fotos</a>,
-                            <a href="https://pixabay.com/en/house-of-cards-fragile-patience-763246/" target="_blank">Pixabay: wilhei</a>,
-                            <a href="https://pixabay.com/en/mixer-fader-digital-console-1631398/" target="_blank">Pixabay: michaelmep</a>,
-                            <a href="https://pixabay.com/en/glass-water-napkin-sky-reflection-2875091/" target="_blank">Pixabay: Michael-T</a>,
-                            <a href="https://pixabay.com/en/floor-plan-blueprint-house-home-1474454/" target="_blank">Pixabay: ElasticComputerFarm</a>,
-                            <a href="https://pixabay.com/en/building-cctv-door-female-ladies-1839464/" target="_blank">Pixabay: Pexels</a>
+                            <small>
+                                Bildnachweise:
+                                <a href="https://pixabay.com/en/wallet-tape-measure-economical-levy-2383496/" target="_blank">Pixabay: Myriams-Fotos</a>,
+                                <a href="https://pixabay.com/en/house-of-cards-fragile-patience-763246/" target="_blank">Pixabay: wilhei</a>,
+                                <a href="https://pixabay.com/en/mixer-fader-digital-console-1631398/" target="_blank">Pixabay: michaelmep</a>,
+                                <a href="https://pixabay.com/en/glass-water-napkin-sky-reflection-2875091/" target="_blank">Pixabay: Michael-T</a>,
+                                <a href="https://pixabay.com/en/floor-plan-blueprint-house-home-1474454/" target="_blank">Pixabay: ElasticComputerFarm</a>,
+                                <a href="https://pixabay.com/en/building-cctv-door-female-ladies-1839464/" target="_blank">Pixabay: Pexels</a>
+                            </small>
                         </small>
-                    </small>
-                </lsx-col>
-            </lsx-row>
-        </lsx-grid-fluid>
+                    </lsx-col>
+                </lsx-row>
+            </lsx-grid-fluid>
+        </div>
     </section>
 
     <section data-title="Transparenz" class="centered-content">
