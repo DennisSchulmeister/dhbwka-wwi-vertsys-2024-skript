@@ -384,7 +384,7 @@
             </div>
         </article>
     </section>
-    
+
     <section data-title="Historische Entwicklung">
         <article class="centered-content">
             <div class="centered-content flex-row flex-wrap gap-3">
@@ -1921,13 +1921,15 @@
 </section>
 
 <section data-title="Typische Herausforderungen">
-    <section data-title="Die acht Irrtümer verteilter Systeme">
+    <section data-title="Verfügbarkeit und Leistung">
         <article>
             <lsx-grid-fluid>
                 <lsx-row>
                     <lsx-col size="lg-7">
                         <div style="height: 100%; display: flex; align-items: center;">
                             <div class="markdown">
+                                #### Die acht Irrtümer verteilter Systeme
+
                                 1. Das Netzwerk ist immer verfügbar.
                                 1. Es gibt keine Latenzzeiten.
                                 1. Der Datendurchsatz ist unendlich schnell.
@@ -1958,183 +1960,258 @@
         </article>
     </section>
 
-    <!-- TODO:
-        - detail-content .dhbw-text-columns setzen
-        - Frage: Sollte 2PC eine eigene Hauptfolie sein? Unterfolien dann Prinzip, Braut fällt um (MD 1/24), Standesbeamter fällt um
-        - Dann CAP
-
-        ==> Bessere Gesamtüberschrift?
-
-        ==> Fallbeispiel StarBucks separat, mit Fehlerstrategien, dort aber Begriffe ergänzen (Compensating Action usw.)
-    -->
-    <section data-title="Komplexe Fehlerszenarien">
+    <section data-title="Verteilte Transaktionen">
         <article class="centered-content">
             <div class="limited-width2">
                 <lsx-tab-pages>
-                    <lsx-tab-page title="Strikte Konsistenz">
+                    <lsx-tab-page title="Problemstellung">
                         <lsx-grid-fluid class="p-0">
-                            <lsx-row class="m-0">
-                                <lsx-col size="lg-5" class="ps-0">
-                                    <img src="02-architektur/2-phase-commit-1.jpg" class="img-thumbnail d-block w-100 h-100"/>
-                                </lsx-col>
-                                <lsx-col size="lg-4">
-                                    <img src="02-architektur/2-phase-commit-2.png" class="img-thumbnail d-block w-100 h-100"/>
-                                </lsx-col>
-                                <lsx-col size="lg-3" class="pe-0 markdown">
-                                    Frühere verteilte Systeme versuchten, dieselben Garantien wie die nicht-vertielter ACID-Transaktionen
-                                    einzuhalten, wofür u.a. das **Zwei-Phasen-Commit**-Protokoll definiert wurde. Bei diesem steuert ein
-                                    zentraler Koordinator den Ablauf der Transaktion über alle Knoten hinweg.
-    
-                                    <lsx-ul>
-                                        <li><b>Phase 1:</b> Vote</li>
-                                        <li><b>Phase 2:</b> Commit</li>
+                            <lsx-row>
+                                <lsx-col size="md-8">
+                                    <p>
+                                        Von nicht-verteilten Systemen bzw. der klassischen Datenbankprogrammierung kennen wir die
+                                        ACID-Kriterien für datenändernde Transaktionen:
+                                    </p>
+                                    <lsx-ul class="dhbw-list-spacious">
+                                        <li>
+                                            <b>Atomicity:</b> Eine Transaktion wird ganz oder gar nicht ausgeführt.
+                                        </li>
+                                        <li>
+                                            <b>Consistency:</b> Vor und nach der Transaktion sind die Daten zu 100% konsistent.
+                                        </li>
+                                        <li>
+                                            <b>Isolation:</b> Jede Transaktion läuft isoliert. Ihre Änderungen werden erst nachträglich sichtbar.
+                                        </li>
+                                        <li>
+                                            <b>Durability:</b>Einmal bestätigte Änderungen bleiben ohne manuelles Zutun dauerhaft erhalten.
+                                        </li>
                                     </lsx-ul>
+                                    <p>
+                                        Grundsätzlich gibt es keinen Grund, warum dies nicht auch für verteilte Transaktionen, bei denen
+                                        zusammengehörige Daten auf unterschiedlichen Rechnerknoten geändert werden, erwünscht sein sollte.
+                                        Die Frage ist nur:
+                                    </p>
+                                    <lsx-info-box>
+                                        Lassen sich ACID-Transaktionen in verteilten Systemen überhaupt realisieren?
+                                    </lsx-info-box>
+                                </lsx-col>
+
+                                <lsx-col size="md">
+                                    <img src="02-architektur/acid-transaction.jpg" alt="" class="img-thumbnail d-block w-100">
+                                    <p class="fs-6">
+                                        ACID-Transaktionen auf <a href="https://de.wikipedia.org/wiki/Klingonische_Sprache" target="_blank">klingonisch</a>.
+                                        Abstrakte Konzepte und Schriftzeichen funktionieren mit KI-Bildgeneratoren aktuell noch nicht gut.
+                                    </p>
                                 </lsx-col>
                             </lsx-row>
-                            <p>
-                                <small>
-                                    <small>
-                                        Bildnachweise: Bing Image Creator und
-                                        <a href="https://pixabay.com/vectors/crown-golden-royal-shining-shiny-312734/" target="_blank">Pixabay: Clker-Free-Vector-Images</a>
-                                    </small>
-                                </small>
-                            </p>
-    
-                            <div class="markdown">
-                                Man nennt dies auch ein **pessimistisches Verfahren**, da die Ressourcen vor Beginn der Transaktion
-                                zur exklusiven Nutzung gesperrt werden. Neben dem stark ausgebremsten Durchsatz (da parallele
-                                Schreibzugriffe komplett unterbunden werden), gibt es noch ein weiteres Problem:
-                            </div>
-                            <lsx-info-box type="danger">
-                                Was passiert, wenn der Koordinator mitten in einer Transaktion ausfällt?
-                            </lsx-info-box>
-                            <lsx-info-box type="danger">
-                                Oder eines der beteiligten Systeme?
-                            </lsx-info-box>
-                            <p>
-                                Beim klassischen Zwei-Phasen-Commit hängt die Transaktion und kann nur durch manuelles Eingreifen
-                                aufgelöst werden. Dasselbe passiert auch, wenn anstelle des Koordinators einer der anderen Knoten
-                                ausfällt, nachdem ein anderer Knoten bereits den Commit bestätigt hat.
-                            </p>
                         </lsx-grid-fluid>
                     </lsx-tab-page>
-    
-                    <!-- TODO: Das CAP-Theorem nach Eric Brewer (2000)
 
-                        Fehler, die zu Partitionierung des Netzwerks führen, sind in der Praxis unver-
-                        meidbar, deshalb hat man nur die Wahl zwischen entweder Konsistenz oder
-                        Verfügbarkeit (Kleppmann, S. 337).
-                    -->
+                    <lsx-tab-page title="Zwei-Phasen-Commit">
+                        <div class="markdown dhbw-text-columns mb-4" detail-content>
+                            Das Zwei-Phasen-Commit-Protokoll ist ein früher Versuch, die ACID-Kriterien auf verteilte
+                            Transaktionen anzulegen. Die Transaktionen werden hierfür durch einen zusätzlichen Knoten,
+                            der „Koordinator” genannt wird, gesteuert. Er steuert den gesamten Ablauf, sorgt darfür,
+                            dass alle beteiligten Ressourcen exklusiv gesperrt werden (sog. pessimistisches Verhalten)
+                            und trfft die finale Entscheidung über den Status der Transaktion. Die finale Entscheidung
+                            über Bestätigung oder Ablehnung wird dabei in zwei Phasen getroffen:
+
+                            <lsx-ul>
+                                <li><b>Phase 1:</b> Vote (Abstimmung)</li>
+                                <li><b>Phase 2:</b> Commit (Bestätigung)</li>
+                            </lsx-ul>
+                        </div>
+                        
+                        <img src="02-architektur/2-phase-commit-ablauf.png" class="img-thumbnail d-block mw-100 m-auto" style="width: 30em;"/>
+
+                        <p>
+                            <small>
+                                <small>
+                                    Bildnachweise: Bing Image Creator und
+                                    <a href="https://pixabay.com/vectors/crown-golden-royal-shining-shiny-312734/" target="_blank">Pixabay: Clker-Free-Vector-Images</a>
+                                </small>
+                            </small>
+                        </p>
+                    </lsx-tab-page>
+
+                    <lsx-tab-page title="Mögliche Probleme">
+                        <div class="markdown dhbw-text-columns mb-4" detail-content>
+                            Der Zwei-Phasen-Commit soll die ACID-Kriterien für verteilte Transaktionen sicherstellen.
+                            Jedoch lässt sich dies mit diesem Protokoll nicht 100%ig erzielen, da insbesondere der
+                            Ausfall einer der beteiligten Knoten zu inkonsistenten Ständen führt, die oft nur durch
+                            manuelles Eingreifen behebbar sind.
+
+                            Schauen wir uns zum Verständis eine Transaktion mit dem Zwei-Phasen-Commit-Protokoll
+                            aus der realen Welt an und überlegen, was bei Ausfall einer der Beteiligten passieren kann.
+                        </div>
+
+                        <lsx-grid-fluid class="p-0">
+                            <lsx-row>
+                                <lsx-col size="md">
+                                    <img src="02-architektur/2-phase-commit-1.jpg" class="img-thumbnail d-block w-100 mb-2"/>
+                                    <lsx-info-box>
+                                        Der Standesbeamte fällt vorzeitig aus
+                                    </lsx-info-box>
+                                </lsx-col>
+
+                                <lsx-col size="md">
+                                    <img src="02-architektur/2-phase-commit-2.jpg" class="img-thumbnail d-block w-100 mb-2"/>
+                                    <lsx-info-box>
+                                        Die Braut wird in letzter Sekunde ohnmächtig
+                                    </lsx-info-box>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
+
+                        <div class="markdown dhbw-text-columns mb-4" detail-content>
+                            Im ersten Fall hängt die Transaktion, und das Paar ist verheiratet aber auch nicht verheiretet.
+                            Da der „Koodinator“, wie man den Standesbeamten beim Zwei-Phasen-Commit nennen würde, ausgefallen
+                            ist, bleibt die Transaktion bis auf unbestimmte Zeit hängen. Im zweiten Fall kann der Koordinator
+                            immerhin einen Timeout feststellen und die Zeremonie zu einem späteren Zeitpunkt wiederholen.
+                        </div>
+                    </lsx-tab-page>
+    
                     <lsx-tab-page title="Das CAP-Theorem">
+                        <div class="dhbw-text-columns mb-4" detail-content>
+                            Das CAP-Theorem nach Eric Brewer (2000) belegt, dass eine verteilte Anwendung immer nur zwei der
+                            folgenden Kriterien vollständig erfüllen kann. Zwar wird die dritte Bedingung nicht vollständig
+                            aufgegeben, muss aber zumindest in Teilen aufgeweicht werden. Frühe Protokolle wie der
+                            Zwei-Phasen-Commit entsprechen beispielsweise einem Versuch, an verteilte Systeme dieselben
+                            ACID-Transaktionsbedingungen wie an nicht verteilte Systeme anzulegen. Dies ist möglich. Wie wir
+                            aber eben gesehen haben, geht dies nicht ohne Kompromisse bei der Partitionstoleranz.
+                        </div>
+
                         <lsx-grid-fluid>
                             <lsx-row>
                                 <lsx-col size="md-5">
                                     <img src="02-architektur/cap-theorem.png" alt="Visualisierung des CAP-Theorems" style="width: 100%;" />
                                 </lsx-col>
-                                <lsx-col size="md">
-                                    <h4>Consistency (Konsistenz)</h4>
-                                    <p>
+                                <lsx-col size="md" class="d-flex flex-column justify-content-center gap-3">
+                                    <lsx-card title="Consistency (Konsistenz)" bold>
                                         Alle Knoten sehen immer exakt dieselben, konsistenten Daten. Bei replizierten Datenbeständen
                                         werden die Änderungen daher erst sichtbar, wenn sie in allen Repliken nachgezogen wurden.
-                                    </p>
-                        
-                                    <h4>Availability (Verfügbarkeit)</h4>
-                                    <p>
+                                    </lsx-card>
+
+                                    <lsx-card title="Availability (Verfügbarkeit)" bold>
                                         Das System ist jederzeit erreichbar und überschreitet niemals die maximal zulässige
                                         Antwortzeit.
-                                    </p>
-                        
-                                    <h4>Partition Tolerance (Partitionstoleranz)</h4>
-                                    <p>
+                                    </lsx-card>
+                                    
+                                    <lsx-card title="Partition Tolerance (Partitionstoleranz)" bold>
                                         Die Anwendung funktioniert auch dann noch, wenn einzelne Teile ausgefallen sind.
-                                    </p>
-                                </lsx-col>
-                            </lsx-row>
-                            <lsx-row>
-                                <lsx-col size="md">
-                                    <p style="color: darkred;">
-                                        Eine verteilte Anwendung kann immer nur zwei dieser Anforderungen gänzlich erfüllen!
-                                    </p>
-                                    <p>
-                                        Moderne Anwendungen sind deshalb oft nur „eventuell-konsistent”. Beispielsweise kann es
-                                        in Facebook vorkommen, dass ein Like in den ersten Sekunden nicht für alle Profilbesucher
-                                        sichtbar wird, da nicht alle auf derselben Datenreplik arbeiten.
-                                    </p>
-                                    <p>
-                                        eBay hingegen würde bei der Gebotsabgabe sicher lieber eine etwas längere Antwortzeit in
-                                        Kauf nehmen, anstatt sich überschreibende Gebote zu riskieren.
-                                    </p>
+                                    </lsx-card>
                                 </lsx-col>
                             </lsx-row>
                         </lsx-grid-fluid>
-                    </lsx-tab-page>
-            
-                    <!-- TODO:
-                            - Interaktionsmuster, (lose) Kopplung, synchron, asynchron, Nebenläufigkeit
-                            - Synchrone Requests können heute auch "asynchron programmiert" werden
-                            - Conversation Pattern: Asynchrone Prozesse fangen oft synchron bzw. haben synchrone Teilan.
 
-                            Weiteres Bsp. Amazon-Bestellung: Synchron - Auftragsnummer zuweisen, Asynchron - Bestellabwicklung, Synchron: Bezahlung
-                    -->
-                    <lsx-tab-page title="Fallbeispiel: Coffe Shop">
-                        <a href="https://ieeexplore.ieee.org/document/1407829" target="_blank">IEEE Software, Volume: 22, Issue: 2, Pages 64–66</a>
-                        <div class="d-flex gap-3">
-                            <img src="02-architektur/coffeeshop1.png" class="img-thumbnail d-block w-100"/>
-                            <img src="02-architektur/coffeeshop2.png" class="img-thumbnail d-block w-100" />
-                            <img src="02-architektur/coffeeshop3.png" class="img-thumbnail d-block w-100" />
+                        <div class="markdown dhbw-text-columns" detail-content>
+                            In der praktischen Umsetzung lassen sich Fehler, die zu einer Partitionierung des Netzwerks bzw.
+                            Nichterreichbarkeit einzelner Dienste, führen, oft nicht vermeiden. Dies triff vor allem bei
+                            internet-basierten, verteilten Systemen zu. Häufig entscheidet man sich deshalb zu einer
+                            aufgeweichten "quasi-konsistenz", bei der kurzzeitige Inkonsistenzen zu Gunsten einer erhöhten
+                            Verfügbarkeit in Kauf genommen werden. Hierzu ein Beispiel und ein Gegenbeispiel:
+
+                            * __Quasi-Konsistenz (Verfügbarkeit vor Konsistenz):__ In weltweit genutzten, sozialen Netzwerken
+                            wie Youtube oder Facebook kann es sicher vorkommen, dass ein Like oder Kommentar nicht sofort für
+                            alle Seitenbesucher*innen sichtbar wird, da dieser erst in die geografisch verteilten Datenbanken
+                            repliziert werden muss. Nach einer kurzen Weile ist der Like oder Kommentar jedoch weltweit sichtbar.
+
+                            * __Konsistenz vor Verfügbarkeit:__ Als Internetauktion auf eBay im Trend waren (und eBay noch
+                            auf Privatverkäufe ausgelegt war), war es üblich, möglichst knapp vor Ende der Auktion zu bieten,
+                            um anderen Mitbietern zuvor zu kommen. Die letzten Sekunden vor Auktionsschluss sind daher die
+                            heißesten, in denen der meiste Traffic anfällt. Entsprechend länger ist die Wartezeit, bis ein
+                            Gebot tatsächlich von der Plattform angenommen und bestätigt wird. Bei zu hoher Auslastung kann
+                            es vorkommen, dass die Auktion aufgrund der Verzögerung zwischenzeitlich zu Ende gelaufen ist.
+                            Das ist ärgerlich, aber der einzig richtige Weg, um ungewünschte Datenprobleme, wie zwei identische
+                            von der Plattform bestätigte Höchstgebote, zu vermeiden.
                         </div>
-                    </lsx-tab-page>
-    
-                    <lsx-tab-page title="Strategien zur Fehlerbehandlung">
-                        <lsx-grid-fluid>
-                            <lsx-row>
-                                <lsx-col size="md-4">
-                                    <h3>Fehler vermeiden</h3>
-                                    <img src="02-architektur/fehler-vermeiden.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
-                                    Zum Beispiel durch Eingabehilfen oder einen sauberen Programmierstil
-                                </lsx-col>
-                                <lsx-col size="md-4">
-                                    <h3>Fehler erkennen</h3>
-                                    <img src="02-architektur/fehler-erkennen.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
-                                    Zum Beispiel durch Checksummen, Plausiprüfungen oder Monitoring
-                                </lsx-col>
-                                <lsx-col size="md-4">
-                                    <h3>Fehler maskieren</h3>
-                                    <img src="02-architektur/fehler-maskieren.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
-                                    Zum Beispiel durch spätere Wiederholung des Vorgangs
-                                </lsx-col>
-                            </lsx-row>
-                            <lsx-row>
-                                <lsx-col size="md-4">
-                                    <h3>Fehler tolerieren</h3>
-                                    <img src="02-architektur/fehler-tolerieren.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
-                                    Zum Beispiel durch Speichern beider Versionen bei Schreibkonflikten
-                                </lsx-col>
-                                <lsx-col size="md-4">
-                                    <h3>Fehler beheben</h3>
-                                    <img src="02-architektur/fehler-beheben.jpg" alt="" class="img-thumbnail" style="width: 100%;" />
-                                    Zum Beispiel durch automatisches Umschalten auf ein Hot-Standby
-                                </lsx-col>
-                            </lsx-row>
-                            <lsx-row>
-                                <lsx-col size="md">
-                                    <small>
-                                        <small>
-                                            Bildnachweise:
-                                            <a href="https://pixabay.com/en/rappelling-rope-safety-security-755400/" target="_blank">Pixabay: cegoh</a>,
-                                            <a href="https://pixabay.com/en/equipment-hospital-ecg-3089883/" target="_blank">Pixabay: hioahelsefag</a>,
-                                            <a href="https://pixabay.com/en/redirect-shield-tree-attention-2257746/" target="_blank">Pixabay: Digitalpfade</a>,
-                                            <a href="https://pixabay.com/en/home-single-family-home-on-the-head-2308799/" target="_blank">Pixabay: ulleo</a>,
-                                            <a href="https://pixabay.com/en/first-aid-frog-medic-nurse-funny-1732708/" target="_blank">Pixabay: Alexas_Fotos</a>
-                                        </small>
-                                    </small>
-                                </lsx-col>
-                            </lsx-row>
-                        </lsx-grid-fluid>
                     </lsx-tab-page>
                 </lsx-tab-pages>
             </div>
         </article>
+    </section>
+
+    <section data-title="Fallbeispiel: Coffee Shop" class="centered-content">
+        <div class="limited-width markdown" detail-content>
+            Dieser Artikel beschreibt für verteilte Systeme wichtige Begriffe wie Synchronizität, Interaktionsmuster (engl. „Conversation Pattern“),
+            oder Transaktionsverhalten. Als anschauliches Beispiel wird eine typische Bestellung in einem Coffe Shop betrachtet. Alternative Beispiele
+            des Alltags, auf die sich die Beobachtungen übertragen lassen und die inzwischen sogar weitgehend digital ablaufen, sind die Abläufe in
+            einem Fast-Food-Restaurant oder eine Bestellung in einem Onlineshop.
+        </div>
+        <div>
+            <a href="https://ieeexplore.ieee.org/document/1407829" target="_blank">IEEE Software, Volume: 22, Issue: 2, Pages 64–66</a>
+            <div class="d-flex gap-3">
+                <img src="02-architektur/coffeeshop1.png" class="img-thumbnail d-block w-100"/>
+                <img src="02-architektur/coffeeshop2.png" class="img-thumbnail d-block w-100" />
+                <img src="02-architektur/coffeeshop3.png" class="img-thumbnail d-block w-100" />
+            </div>
+        </div>
+    </section>
+
+    <section data-title="Strategien zur Fehlerbehandlung" class="centered-content">
+        <lsx-grid-fluid class="limited-width2 p-0">
+            <lsx-row>
+                <lsx-col size="md-4" class="mb-3 mb-md-0">
+                    <lsx-card bold img="02-architektur/fehler-vermeiden.jpg">
+                        <h4>Fehler vermeiden</h4>
+                        <p>
+                            Zum Beispiel durch Eingabehilfen oder einen sauberen Programmierstil
+                        </p>
+                    </lsx-card>
+                </lsx-col>
+                <lsx-col size="md-4" class="mb-3 mb-md-0">
+                    <lsx-card bold img="02-architektur/fehler-erkennen.jpg">
+                        <h4>Fehler erkennen</h4>
+                        <p>
+                            Zum Beispiel durch Checksummen, Plausiprüfungen oder Monitoring
+                        </p>
+                    </lsx-card>
+                </lsx-col>
+                <lsx-col size="md">
+                    <lsx-card bold img="02-architektur/fehler-maskieren.jpg">
+                        <h4>Fehler maskieren</h4>
+                        <p>
+                            Zum Beispiel durch spätere Wiederholung des Vorgangs
+                        </p>
+                    </lsx-card>
+                </lsx-col>
+            </lsx-row>
+            <lsx-row>
+                <lsx-col size="md-4" class="mb-3 mb-md-0">
+                    <lsx-card bold img="02-architektur/fehler-tolerieren.jpg">
+                        <h4>Fehler tolerieren</h4>
+                        <p>
+                            Zum Beispiel durch Speichern beider Versionen bei Schreibkonflikten
+                        </p>
+                    </lsx-card>
+                </lsx-col>
+                <lsx-col size="md-4" class="mb-3 mb-md-0">
+                    <lsx-card bold img="02-architektur/fehler-beheben.jpg">
+                        <h4>Fehler beheben</h4>
+                        <p>
+                            Zum Beispiel durch automatisches Umschalten auf ein Hot-Standby
+                        </p>
+                    </lsx-card>
+                </lsx-col>
+                <lsx-col size="md">
+                    <!-- Leer -->
+                </lsx-col>
+            </lsx-row>
+            <lsx-row>
+                <lsx-col size="md">
+                    <small>
+                        <small>
+                            Bildnachweise:
+                            <a href="https://pixabay.com/en/rappelling-rope-safety-security-755400/" target="_blank">Pixabay: cegoh</a>,
+                            <a href="https://pixabay.com/en/equipment-hospital-ecg-3089883/" target="_blank">Pixabay: hioahelsefag</a>,
+                            <a href="https://pixabay.com/en/redirect-shield-tree-attention-2257746/" target="_blank">Pixabay: Digitalpfade</a>,
+                            <a href="https://pixabay.com/en/home-single-family-home-on-the-head-2308799/" target="_blank">Pixabay: ulleo</a>,
+                            <a href="https://pixabay.com/en/first-aid-frog-medic-nurse-funny-1732708/" target="_blank">Pixabay: Alexas_Fotos</a>
+                        </small>
+                    </small>
+                </lsx-col>
+            </lsx-row>
+        </lsx-grid-fluid>
     </section>
 
     <section data-title="Grundregel verteilter Systeme" class="centered-content">
@@ -2176,246 +2253,9 @@
             <p>Natürlich gibt es dennoch viele sinnvolle Einsatzgebiete. Sonst würde es diese Vorlesung ja gar nicht geben. 😵‍💫</p>
         </div>
     </section>
-
-    <!-- TODO: Bilder auf letztem Tab in die Zeit-Aufgabe einarbeiten -->
-    <!--
-    <section data-title="Kausale und zeitliche Abhängigkeiten">
-        <article class="centered-content">
-            <div class="limited-width2">
-                <lsx-tab-pages>
-                    <lsx-tab-page title="Fallbeispiel">
-                        <img src="02-architektur/zeitproblem-karte.jpg" class="d-block img-fluid img-thumbnail" />
-                        <p>
-                            <small>
-                                <small>
-                                    Bildnachweise:
-                                    <a href="https://pixabay.com/illustrations/map-central-europe-europe-1804891/s"
-                                        target="_blank">Pixabay: Hans</a>,
-                                    <a href="https://pixabay.com/vectors/map-pin-illustrator-holder-place-42871/"
-                                        target="_blank">Pixabay: Clker-Free-Vector-Images</a>
-                                </small>
-                            </small>
-                        </p>
-                        <lsx-ul>
-                            <li emoji="🌡️">
-                                Aufzeichnung von Umweltdaten zur Vorhersage von Unwettern und Naturkatastrophen
-                            </li>
-                            <li emoji="🗺️">
-                                Aktuell 19 Messstationen in verschiedenen Ländern und Zeitzonen
-                            </li>
-                            <li emoji="🕒">
-                                Messung und Übermittlung eines kompletten Datensatzes alle fünf Minuten
-                            </li>
-                            <li emoji="💽 ">
-                                Speicherung aller Messwerte im Rechenzentrum in Frankfurt am Main
-                            </li>
-                        </lsx-ul>
-                    </lsx-tab-page>
-                
-                    <lsx-tab-page title="Fallstricke">
-                        <lsx-grid-fluid class="p-0">
-                            <lsx-row>
-                                <lsx-col size="md-6">
-                                    <img src="02-architektur/zeitproblem-latenz-deutschland.jpg" alt="" class="img-thumbnail" style="width: 100%" />
-                                    <small>
-                                        Latenz beim Zugriff auf wpvs.de aus Deutschland
-                                    </small>
-                                </lsx-col>
-                                <lsx-col size="md-6">
-                                    <img src="02-architektur/zeitproblem-latenz-spanien.jpg" alt="" class="img-thumbnail" style="width: 100%" />
-                                    <small>
-                                        Latenz beim Zugriff auf wpvs.de aus Südspanien
-                                    </small>
-                                </lsx-col>
-                            </lsx-row>
-                            <lsx-row>
-                                <lsx-col size="md">
-                                    <lsx-ul emoji="🗯️">
-                                        <li>
-                                            Werden Datum und Uhrzeit der Messwerte vor Ort oder vom Server ermittelt?
-                                        </li>
-                                        <li>
-                                            Wie kann die zeitliche Reihenfolge aller Messwerte garantiert werden?
-                                        </li>
-                                        <li>
-                                            Wie können Latenzen in der Datenübertragung ausgeglichen werden?
-                                        </li>
-                                        <li>
-                                            Was passiert, wenn die Uhren der Messstationen nicht gleich gehen?
-                                        </li>
-                                        <li>
-                                            Wie kann verhindert werden, dass die Uhren auseinander driften?
-                                        </li>
-                                        <li>
-                                            Wie sollen die Zeitzonen oder die Sommer-/Winterzeit berücksichtigt werden?
-                                        </li>
-                                        <li>
-                                            Wie können verspätet eintreffende Messwerte korrekt gespeichert werden?
-                                        </li>
-                                        <li>
-                                            Wie sollen fehlende Messdaten (z.B. wegen dem Ausfall einer Station) behandelt werden?
-                                        </li>
-                                    </lsx-ul>
-                                </lsx-col>
-                            </lsx-row>
-                        </lsx-grid-fluid>
-                    </lsx-tab-page>
-                
-                    <lsx-tab-page title="Lösungsansätze">
-                        <lsx-ul emoji="🌞">
-                            <li>
-                                Datum und Uhrzeit sowohl auf den Devices als auch dem Server ermitteln und vergleichen.
-                            </li>
-                            <li>
-                                Alle Uhren in regelmäßigen Abständen via
-                                <a href="https://de.wikipedia.org/wiki/Network_Time_Protocol" target="blank">NTP</a>
-                                synchronisieren.
-                            </li>
-                            <li>
-                                Sämtliche Messwerte zusätzlich zum Zeitstempel fortlaufend durchnummerieren.
-                            </li>
-                            <li>
-                                Die Messwerte immer inklusive Zeitzone und Abweichung zur Normalzeit speichern.
-                            </li>
-                            <li>
-                                Alternativ Datum und Uhrzeit immer in die Zeitzone des Servers umrechnen.
-                            </li>
-                            <li>
-                                Nachträgliches Einfügen von Messwerten innerhalb eines gegebenen Zeitfensters zulassen.
-                            </li>
-                        </lsx-ul>
-                
-                        <h3 class="dhbw-lightblue" style="margin-top: 1em;">Beginn der Zeitrechnung</h3>
-                
-                        <lsx-grid-fluid class="p-0">
-                            <lsx-row>
-                                <lsx-col size="md">
-                                    <img src="02-architektur/zeitproblem-beginn-wissenschaft.jpg" class="d-block img-fluid img-thumbnail" />
-                                    <b>Wissenschaft:</b> Mit dem Urknall
-                                </lsx-col>
-                                <lsx-col size="md">
-                                    <img src="02-architektur/zeitproblem-beginn-kirche.jpg" class="d-block img-fluid img-thumbnail" />
-                                    <b>Kirche:</b> Als Gott die Erde erschuf
-                                </lsx-col>
-                            </lsx-row>
-                            <lsx-row>
-                                <lsx-col size="md">
-                                    <img src="02-architektur/zeitproblem-beginn-sport.jpg" class="d-block img-fluid img-thumbnail" />
-                                    <b>Wettläufer:</b> Ab dem Startschuss
-                                </lsx-col>
-                                <lsx-col size="md">
-                                    <img src="02-architektur/zeitproblem-beginn-entwickler.jpg" class="d-block img-fluid img-thumbnail" />
-                                    <b>Softwareentwickler:</b> <a href="https://de.wikipedia.org/wiki/Unixzeit"
-                                        target="_blank">01.01.1970 0:00 Uhr</a> 🥴
-                                    <br />
-                                    <small>
-                                        <b>Youtube:</b>
-                                        <a href="https://www.youtube.com/watch?v=jNQXAC9IVRw" target="_blank">23.04.2005</a>
-                                    </small>
-                                </lsx-col>
-                            </lsx-row>
-                            <lsx-row>
-                                <lsx-col size="md">
-                                    <p>
-                                        <small>
-                                            <small>
-                                                Bildnachweise:
-                                                <a href="https://pixabay.com/illustrations/universe-space-expansion-big-bang-11636/"
-                                                    target="_blank">Pixabay: WikiImages</a>,
-                                                <a href="https://pixabay.com/photos/genesis-mosaic-iconography-2435989/"
-                                                    target="_blank">Pixabay: dimitrisvetsikas1969</a>,
-                                                <a href="https://pixabay.com/photos/race-finish-line-athletes-695303/"
-                                                    target="_blank">Pixabay: skeeze</a>,
-                                                <a href="https://commons.wikimedia.org/wiki/File:Vt100-adventure.jpg"
-                                                    target="_blank">Wikimedia: Shieldforyoureyes</a>
-                                            </small>
-                                        </small>
-                                    </p>
-                                </lsx-col>
-                            </lsx-row>
-                        </lsx-grid-fluid>
-                    </lsx-tab-page>
-                </lsx-tab-pages>
-            </div>
-        </article>
-        <! -- <aside class="markdown">
-            Verteilte Systeme erstecken sich, je nach Anwendungsfall, häufig über mehrere Länder und Kontinente.
-            Manchmal ergibt sich das einfach nur aus der weltweiten Nutzung einer Anwendung, selbst wenn sie nur
-            an einem Standort betrieben wird. Oftmals ist die geografische Verteilung aber auch wesenticher
-            Bestandteil der Systemarchitektur. 🗺️ Ein Problem, das in beiden Fällen gerne mal übersehen wird, ist
-            die zeitliche Synchronisierung aller Systemkomponenten. Zwar klingt es zunächst trivial, die zeitliche
-            Reihenfolge zweier oder mehr Ereignisse festzustellen. Werden die Ereignisse jedoch von unterschiedlichen
-            Rechnern erzeugt, genügt ein einfacher Datums- und Uhrzeitvergleich längst nicht aus, da hierfür erst
-            einmal ein einheitliches Verständnis über die aktuelle Zeit 🕑 in allen Knoten hergestellt werden muss.
-    
-            Anhand eines einfachen Fallbeispiels lassen sich die auftretenden Probleme anschaulich erklären. Wir
-            gehen deshalb im Folgenden von einem Projekt zur Vorhersage von Unwettern und Naturkatastrophen aus,
-            für das in ganz Europa an 19 verschiedenen Standorten aktuelle Umweltdaten gemessen und an einen Server
-            in Frankfurt am Main geschickt werden. Jede Messstation schickt hierfür alle fünf Minuten aktuelle Messwerte
-            an den Server, um diese zu speichern, wobei das genaue Intervall an dieser Stelle gar nicht wichtig ist.
-            Die Karte auf der Folie ziegt die Standorte, an denen die Messwerte jeweils erhoben werden.
-    
-            Klar ist, dass zu jeder Messung folgende Daten gespeichert werden müssen:
-    
-            * Standort der Messung
-            * Datum und Uhrzeit der Messung
-            * Gemessene Werte
-            
-            Daraus ergeben sich allerdings mehrere Fallstricke, die beim Systementwurf beachtet werden müssen.
-            Zunächst ist da zum Beispiel die Frage zu klären, ob Datum und Uhrzeit einer Messung auf Seiten
-            der jeweiligen Messstation oder des Servers ermittelt werden und wie dabei die zeitliche Reihenfolge
-            der Messwerte sichergestellt werden kann. Denn immerhin kann es ja sein, dass die Uhr einer Station
-            etwas vor geht und ihre Messwerte somit fälschlich vor denen der anderen Stationen eingeordnet werden.
-            Werden die Zeitstempel vom Server ermittelt, müssen Verzögerungen während der Datenübertragung, die
-            so genannte Latenz, ausgeglichen werden, um die zeitliche Reihenfolge zu gewähren. Erfolgt die Ermittlung
-            durch die Stationen, müssen ihre Uhren regelmäßig synchronisiert werden. Außerdem müssen die Auswirkungen
-            unterschiedliche Zeitzonen sowie von Sommer- und Winterzeit berücksichtigt werden und es muss bedacht
-            werden, dass Messwerte möglicherweise verloren gehen oder erst mit Verspätung beim Server eintreffen. 😲
-    
-            Die Beantwortung dieser Fragen hängt immer vom konkreten Anwendungsfall ab. Mögliche Lösungsansätze,
-            die hierbei in Erwägung gezogen werden können, sind folgende:
-        
-            * Datum und Uhrzeit könnten nicht einfach nur durch die Messstationen sondern zusätzlich auf dem Server
-                ermittelt werden. Durch einen Vergleich beider Werte ḱann, sofern die Uhren auf beiden Seiten richtig
-                gehen und die Daten sofort versendet werden, die Latenz der Datenübertragung abgeleitet werden.
-                Diese sollte dabei niemals größer als ein/zwei Sekunden sein. Andernfalls geht eine der Uhren falsch
-                oder es findet eine Replay-Attacke statt.
-            
-            * Die exakte Synchronisation aller Uhren kann mit dem
-                <a href="https://de.wikipedia.org/wiki/Network_Time_Protocol" target="blank">Network Time Protocol</a>
-                sichergestellt werden. Alle bekannten Betriebssysteme unterstützen dieses Verfahren, wodurch die
-                Abweichungen zwischen den Uhren auf wenige Millisekunden reduziert werden können.
-            
-            * Zusätzlich sollten alle Messwerte mit einer fortlaufenden Nummer versehen werden, um Vertauschungen
-                auch ohne korrekt eingestellte Uhren erkennen zu können.
-            
-            * Für die Weiterverarbeitung der Daten sehr wichtig ist das Format, in dem die Zeitstempel übertragen
-                und gespeichert werden.¹ Hier ist zu prüfen, ob das Format den erforderlichen Zeitraum überhaupt mit
-                einer ausreichenden Genauigkeit abdeckt. Außerdem sollten neben den Werten für Datum und Uhrzeit immer
-                auch der Name der Zeitzone und/oder die Abweichung zur Normalzeit enthalten sein, um die Werte
-                unterschiedlicher Standort miteinander vergleichen zu können.
-            
-            * Manche System konvertieren sämtliche Zeitstempel stattdessen in die Zeitzone des Servers, um somit
-                Probleme aufgrund unterschiedlicher Zeitzonen zu umgehen. Prominentestes Beispiel hierfür ist Youtube,
-                wo sich das Uploaddatum eines Videos immer auf die aktuelle Uhrzeit in Kalifornien bezieht.
-            
-            * Sollte ein nachträgliches Einfügen von Messwerten aufgrund der verwendeten Technologie nicht möglich
-                oder nicht praktikabel sein, kann es ganz hilfreich zu sein, zunächst mehrere Datensätze auf dem
-                Server zu sammeln, und diese zum Beispiel nur einmal je Minute zu sichern. Beispielsweise kann eine
-                Blockchain nur aufeinander folgende Werte beinhalten. Durch die Speicherung in Blöcken können aber
-                während eines kurzen Zeitraums nachträglich noch Werte eingefügt werden, solange diese noch nicht in
-                der Blockchain persistiert wurden.
-            
-            ¹
-            <small>
-                Diese Seite enthält hierfür ein paar mehr oder weniger ernst gemeinte Beispiele.
-            </small>
-        </aside> -- >
-    </section>
-    -->
 </section>
 
-<!-- TODO: Kahoots in Micheals Moodleräumen für weitere Quiz-Fragen 1-->
+<!-- TODO: Weitere Aufgaben, Kahoots in Micheals Moodleräumen für weitere Quiz-Fragen -->
 <section data-title="Übungsaufgaben" data-background-color="rgb(231, 221, 141)">
     <section data-title="Aufgabe 1: Ein kleines Architekturmuster-Quiz">
         <article>
@@ -2713,37 +2553,103 @@
         </aside>
     </section>
     
-    <section data-title="Aufgabe 2: Wir erkunden Streams und Sockets">
+    <!-- <section data-title="Aufgabe 2: Wir erkunden Streams und Sockets">
         ... Sprach-Server/Client auf Laptop ausführen
-    </section>
+    </section> -->
     
-    <section data-title="Aufgabe 3: Wer hat an der Uhr gedreht?">
-        <article class="markdown">
-            Wichtige Anforderung an verteilte Systeme ist häufig, dass die **Kausalordnung** von Ereignissen
-            erhalten bleibt, das heißt, dass die zeitliche Abfolge von Ursache und Wirkung nicht vertauscht
-            wird. Doch auch ohne kausalen Zusammenhang müssen so genannte **Happened-Before**-Beziehungen
-            erhalten bleiben. In beiden Fällen läuft es auf einen Vergleich von Zeitstempeln hinaus, wofür
-            entweder eine **Echtzeituhr** oder eine **logische Uhr** verwendet werden kann.
+    <section data-title="Aufgabe 2: Wer hat an der Uhr gedreht?">
+        <article>
+            <div class="markdown">
+                Wichtige Anforderung an verteilte Systeme ist häufig, dass die **Kausalordnung** von Ereignissen
+                erhalten bleibt, das heißt, dass die zeitliche Abfolge von Ursache und Wirkung nicht vertauscht
+                wird. Doch auch ohne kausalen Zusammenhang müssen so genannte **Happened-Before**-Beziehungen
+                erhalten bleiben. In beiden Fällen läuft es auf einen Vergleich von Zeitstempeln hinaus, wofür
+                entweder eine **Echtzeituhr** oder eine **logische Uhr** verwendet werden kann.
+            </div>
+
+            <lsx-tab-pages>
+                <lsx-tab-page title="Aufgabenstellung" class="markdown">
+                    #### a) Begriffsdefinitionen {.mt-4 .dhbw-lightblue}
             
-            #### a) Begriffsdefinitionen {.mt-4 .dhbw-lightblue}
-    
-            Recherchieren Sie folgende Begriffe und formulieren Sie eine dazu passende Definition:
-    
-            * Kausalordnung
-            * Happened-Before-Relation
-            * Nebenläufigkeit
-            * Echtzeituhr
-            * Lamport-Uhr
-    
-            #### b) Fallbeispiel {.mt-4 .dhbw-lightblue}
-    
-            Zeigen Sie anhand eines minimalen Beispiels, wie die zeitliche Abfolge mehrerer Ereignisse anhand
-            einer logischen Uhr sichergestellt werden kann.
+                    Recherchieren Sie folgende Begriffe und formulieren Sie eine dazu passende Definition:
             
-            #### c) Nebenläufigkeit {.mt-4 .dhbw-lightblue}
-    
-            Erklären Sie, warum eine einfache Lamport-Uhr keine nebenläufigen Prozesse abbilden kann und zeigen Sie,
-            wie eine Vektoruhr dies ermöglicht.
+                    * Kausalordnung
+                    * Happened-Before-Relation
+                    * Nebenläufigkeit
+                    * Echtzeituhr
+                    * Lamport-Uhr
+            
+                    #### b) Fallbeispiel {.mt-4 .dhbw-lightblue}
+            
+                    Zeigen Sie anhand eines minimalen Beispiels, wie die zeitliche Abfolge mehrerer Ereignisse anhand
+                    einer logischen Uhr sichergestellt werden kann.
+                    
+                    #### c) Nebenläufigkeit {.mt-4 .dhbw-lightblue}
+            
+                    Erklären Sie, warum eine einfache Lamport-Uhr keine nebenläufigen Prozesse abbilden kann und zeigen Sie,
+                    wie eine Vektoruhr dies ermöglicht.
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Hinweis zur Zeitrechnung">
+                    <p>
+                        Egal, welche Art von Uhr zum Einsatz kommt, alle Beteiligten müssen sich über die
+                        zugrunde liegenden Konventionen einig sein. Dass diese mitunter nicht immer eindeutig
+                        sind (wird ein Unix-Zeitstempel in Sekunden oder in Millisekunden gezählt?) zeigt
+                        folgende, nicht ganz ernste Aufzählung. 😉
+                    </p>
+
+                    <h4>Beginn der Zeitrechnung</h4>
+
+                    <lsx-grid-fluid class="p-0">
+                        <lsx-row>
+                            <lsx-col size="md">
+                                <img src="02-architektur/zeitproblem-beginn-wissenschaft.jpg" class="d-block img-fluid img-thumbnail" />
+                                <b>Wissenschaft:</b> Mit dem Urknall
+                            </lsx-col>
+                            <lsx-col size="md">
+                                <img src="02-architektur/zeitproblem-beginn-kirche.jpg" class="d-block img-fluid img-thumbnail" />
+                                <b>Kirche:</b> Als Gott die Erde erschuf
+                            </lsx-col>
+                        </lsx-row>
+                        <lsx-row>
+                            <lsx-col size="md">
+                                <img src="02-architektur/zeitproblem-beginn-sport.jpg" class="d-block img-fluid img-thumbnail" />
+                                <b>Wettläufer:</b> Ab dem Startschuss
+                            </lsx-col>
+                            <lsx-col size="md">
+                                <img src="02-architektur/zeitproblem-beginn-entwickler.jpg" class="d-block img-fluid img-thumbnail" />
+                                <b>Softwareentwickler:</b> <a href="https://de.wikipedia.org/wiki/Unixzeit"
+                                    target="_blank">01.01.1970 0:00 Uhr</a>
+                                <br />
+                                <small>
+                                    <b>Youtube:</b>
+                                    <a href="https://www.youtube.com/watch?v=jNQXAC9IVRw" target="_blank">23.04.2005, irgendwann mittags</a>
+                                </small>
+                            </lsx-col>
+                        </lsx-row>
+                        <lsx-row>
+                            <lsx-col size="md">
+                                <p>
+                                    <small>
+                                        <small>
+                                            Bildnachweise:
+                                            <a href="https://pixabay.com/illustrations/universe-space-expansion-big-bang-11636/"
+                                                target="_blank">Pixabay: WikiImages</a>,
+                                            <a href="https://pixabay.com/photos/genesis-mosaic-iconography-2435989/"
+                                                target="_blank">Pixabay: dimitrisvetsikas1969</a>,
+                                            <a href="https://pixabay.com/photos/race-finish-line-athletes-695303/"
+                                                target="_blank">Pixabay: skeeze</a>,
+                                            <a href="https://commons.wikimedia.org/wiki/File:Vt100-adventure.jpg"
+                                                target="_blank">Wikimedia: Shieldforyoureyes</a>
+                                        </small>
+                                    </small>
+                                </p>
+                            </lsx-col>
+                        </lsx-row>
+                    </lsx-grid-fluid>
+                </lsx-tab-page>
+            </lsx-tab-pages>
+            
         </article>
         <aside>
             <p>
@@ -2789,5 +2695,5 @@
     - Aufgabe: Banküberweisungen sind das klassische Beispiel für ACID-Transaktionen. Aber sind sie wirklich atomar und isloert?
       Recherchieren Sie den Begriffe Valuta bzw. Wertstellung und ziehen Sie diesen für Ihre Begründung heran.
 -->
-<section data-title="Übungsaufgaben">
-</section>
+<!-- <section data-title="Übungsaufgaben">
+</section> -->
