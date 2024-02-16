@@ -2677,19 +2677,23 @@
     <section data-title="Anwendungsarchitektur früher">
         <article class="centered-content">
             <div class="limited-width2">
-                <div class="markdown">
-                    Frühere Anwendungsarchitekturen, bei denen sämtliche Funktionen in einer großen Codebasis
-                    untergebracht waren, werden heute als Monolith bezeichnet. Zwar kann der Quellcode
-                    durchaus modular aufgebaut und somit leicht um neue Funktionen erweiterbar sein. Jedoch
-                    kann die Anwendung nur als Ganzes deployed und in Betrieb genommen werden.
+                <div>
+                    <p detail-content>
+                        Frühere Anwendungsarchitekturen, bei denen sämtliche Funktionen in einer großen Codebasis
+                        untergebracht waren, werden heute als Monolith bezeichnet. Zwar kann der Quellcode
+                        durchaus modular aufgebaut und somit leicht um neue Funktionen erweiterbar sein. Jedoch
+                        kann die Anwendung nur als Ganzes deployed und in Betrieb genommen werden.
+                    </p>
                     
                     <img src="02-architektur/monolith.png" class="d-block limited-width m-auto mb-3" />
         
-                    Verteilte Anwendungen werden daher häufig mit einer Microservice-Architektur gestaltet.
-                    Für kleine Entwicklerteams kann ein Monolith dennoch die bessere Wahl sein, da nicht
-                    jedes Unternehmen organisatorisch auf Microservices vorbereitet ist. Vor allem, wenn
-                    die Entwicklung nicht auf mehrere Teams verteilt werden kann, sind die Voraussetzungen
-                    meist nicht gegeben.
+                    <p detail-content>
+                        Verteilte Anwendungen werden daher häufig mit einer Microservice-Architektur gestaltet.
+                        Für kleine Entwicklerteams kann ein Monolith dennoch die bessere Wahl sein, da nicht
+                        jedes Unternehmen organisatorisch auf Microservices vorbereitet ist. Vor allem, wenn
+                        die Entwicklung nicht auf mehrere Teams verteilt werden kann, sind die Voraussetzungen
+                        meist nicht gegeben.
+                    </p>
                 </div>
     
                 <lsx-grid-fluid class="p-0">
@@ -2969,7 +2973,7 @@
                 dass über die funktionalen Anforderungen hinaus auch eine Vielzahl technischer Anforderungen
                 abgedeckt werden, die einen zuverlässigen Betrieb überhaupt erst möglich machen. Neben einer
                 zentralen Benutzer- und Berechtigungsverwaltung gehören hierzu die Überwachung des laufenden
-                Betriebs und viele mehr.
+                Betriebs und viele mehr. {detail-content}
     
                 In traditionellen, monolithischen Anwendungen müssen derartige Funktionen entweder selbst
                 entwickelt oder durch entsprechende Frameworks bzw. Applikationsserver bereitgestellt werden.
@@ -2977,7 +2981,7 @@
                 diese unterstützenden Services von anderen Microservices „out-of-process“ konsumieren zu können.
                 Oft kommen dabei Drittprodukte von spezialisierten Anbietern oder die Plattformservices¹ der
                 großen Cloudanbieter zum Einsatz, die hierfür lediglich über speziell hierfür bereitgestellte
-                Code-Bibliotheken in die eigene Anwendung integriert werden müssen.
+                Code-Bibliotheken in die eigene Anwendung integriert werden müssen. {detail-content}
                 
                 <lsx-tab-pages>
                     <lsx-tab-page title="Beispiel-Architektur">
@@ -2992,7 +2996,7 @@
                 </lsx-tab-pages>
     
                 Das obige Beispiel zeigt eine typische Architektur, bei welcher die nicht-funktionalen
-                Anforderungen durch zusätzliche von der Plattform bereitgestellte Microservices abgedeckt werden.
+                Anforderungen durch zusätzliche von der Plattform bereitgestellte Microservices abgedeckt werden. {detail-content}
     
                 ¹
                 <small>
@@ -3001,7 +3005,7 @@
                     Bezahlung bereitgestellte Funktionen zur Unterstützung der in der jeweiligen Cloudumgebung
                     ausgeführten Anwendungen. Beispiele hierfür können Authentifikationsserver, Monitoring-Angebote,
                     Proxy-Server uvm. sein.
-                </small>
+                </small> {detail-content}
             </div>
         </article>
     </section>
@@ -3094,7 +3098,7 @@
     <section data-title="Abgrenzung von typischen Onlinediensten">
         <article class="centered-content">
             <div class="limited-width2">
-                <div class="markdown mt-3 mb-3">
+                <div class="markdown mt-3 mb-3" detail-content>
                     Anwendungen zum Synchronisieren von Dateien wie Dropbox, OneDrive oder Owncloud
                     werden umgangssprachlich oft als Cloud bezeichnet. Man sagt, dass die Dateien
                     _mit der Cloud synchronisiert_ werden. Dies ist jedoch problematisch, da „Cloud”
@@ -3128,7 +3132,7 @@
     <section data-title="Abgrenzung von klassischem Hosting">
         <article class="centered-content">
             <div class="limited-width2">
-                <div class="markdown mt-3 mb-3">
+                <div class="markdown mt-3 mb-3" detail-content>
                     Schon früher war es insbesondere für kleinere Unternehmen üblich, die Hardware zur
                     Bereitstellung eines Onlinedienstes nicht selbst zu betreiben. Dieses Modell wird
                     Hosting genannt, da der Anbieter zwar die Hardwareplattform (den Host) zur Verfügung
@@ -3275,7 +3279,7 @@
     <section data-title="Das As-a-Service-Geschäftsmodell">
         <article class="centered-content">
             <div class="limited-width2">
-                <div class="markdown mt-3 mb-5">
+                <div class="markdown mt-3 mb-5" detail-content>
                     Cloudangebote werden häufig mit dem Namenszusatz „as-a-Service” angeboten,
                     wie beispielsweise „Database-as-a-Service“ oder „Software-as-a-Service".
                     Damit ist gemeint, dass die jeweilige Software **nicht klassisch lizenziert,
@@ -3316,7 +3320,7 @@
                     </div>
                 </div>
             
-                <div class="markdown">
+                <div class="markdown" detail-content>
                     Angebote wie **Function-as-a-Service** (auch **Serverless** genannt, da die Verwaltung von Serverinstanzen komplett
                     wegabstrahiert wird) oder **Database-as-a-Service** richten ebenfalls an Anwendungsentwickler und zählen deshalb zu
                     Platform-as-a-Service.
