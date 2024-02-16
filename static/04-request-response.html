@@ -1,5 +1,4 @@
-<section data-chapter="h1" data-background-color="rgb(210,190,210)">
-    <h1>REST-Webservices</h1>
+<section data-chapter="h1" data-title="Synchrones Request/Response-Modell" data-background-color="rgb(210,190,210)">
     <article class="markdown">
         ### Nach Abschluss dieses Kapitels können Sie …
 
@@ -18,6 +17,15 @@
         <span style="font-size: 240px; color: white;" class="dhbw-text-shadow" >🏁</span>
     </article>
 </section>
+
+<!-- TODO: Übungsaufgaben
+    * Wir eröffnen ein Kino (2020/2018er-Skript)
+    * Kleiderkreisl (2020er-Aufgabenblatt)
+    * Alle meine Stromkreise (2020er-Aufgabenblatt)
+    * Golfcard (2018er-Version, REST WS in Frontend einbauen)
+    * Wastebin (2018er-Version, REST WS anhand Verwendung im Frontend ausprogrammieren)
+    * Welche noch?
+-->
 
 <!-- ==================== -->
 <!-- Praktische Bedeutung -->
@@ -93,12 +101,12 @@
             <div class="d-flex align-items-stretch" style="gap: 1em;">
                 <div>
                     <h5>Webanwendung</h5>
-                    <img src="04-rest-webservices/webanwendung.png" class="d-block w-100 img-thumbnail"/>
+                    <img src="04-request-response/webanwendung.png" class="d-block w-100 img-thumbnail"/>
                 </div>
         
                 <div>
                     <h5>Webservice</h5>
-                    <img src="04-rest-webservices/webservice.png" class="d-block w-100 img-thumbnail"/>
+                    <img src="04-request-response/webservice.png" class="d-block w-100 img-thumbnail"/>
                 </div>
             </div>
         </div>
@@ -128,10 +136,10 @@
     
         <div class="d-flex flex-wrap justify-content-center " style="gap: 1em;">
             <!-- https://github.com/grote/Transportr -->
-            <img src="04-rest-webservices/screenshot-maps.png" class="d-block img-thumbnail" style="width: 30em;"/>
-            <img src="04-rest-webservices/screenshot-mobidict.png" class="d-block img-thumbnail" style="width: 30em;"/>
-            <img src="04-rest-webservices/screenshot-ui5.png" class="d-block img-thumbnail" style="width: 30em;"/>
-            <img src="04-rest-webservices/screenshot-transportr1.png" class="d-block img-thumbnail" style="width: 12em;"/>
+            <img src="04-request-response/screenshot-maps.png" class="d-block img-thumbnail" style="width: 30em;"/>
+            <img src="04-request-response/screenshot-mobidict.png" class="d-block img-thumbnail" style="width: 30em;"/>
+            <img src="04-request-response/screenshot-ui5.png" class="d-block img-thumbnail" style="width: 30em;"/>
+            <img src="04-request-response/screenshot-transportr1.png" class="d-block img-thumbnail" style="width: 12em;"/>
         </div>
     </article>
 </section>
@@ -159,14 +167,14 @@
             <div class="d-flex align-items-stretch" style="gap: 1em; margin-bottom: 1em;">
                 <!-- https://www.creditsafe.com/de/de/risiko-und-kreditmanagement/systemanbindungen/api-dokumentation.html -->
                 <!-- https://www.bisnode.de/apis-und-integration/ -->
-                <img src="04-rest-webservices/api-creditsafe.png" class="d-block w-100 img-thumbnail"/>
-                <img src="04-rest-webservices/api-bisnode.png" class="d-block w-100 img-thumbnail"/>
+                <img src="04-request-response/api-creditsafe.png" class="d-block w-100 img-thumbnail"/>
+                <img src="04-request-response/api-bisnode.png" class="d-block w-100 img-thumbnail"/>
             </div>
             <div class="d-flex align-items-stretch" style="gap: 1em;">
                 <!-- https://developers.google.com/products -->
                 <!-- https://de.wikipedia.org/wiki/Spezial:ApiSandbox -->
-                <img src="04-rest-webservices/api-google.png" class="d-block w-100 img-thumbnail"/>
-                <img src="04-rest-webservices/api-wikipedia.png" class="d-block w-100 img-thumbnail"/>
+                <img src="04-request-response/api-google.png" class="d-block w-100 img-thumbnail"/>
+                <img src="04-request-response/api-wikipedia.png" class="d-block w-100 img-thumbnail"/>
             </div>
         </div>
     </article>
@@ -177,10 +185,10 @@
         <div class="limited-width2">
             <lsx-tab-pages class="w-100">
                 <lsx-tab-page title="Reiseportal">
-                    <img src="04-rest-webservices/anwendungen-reiseportal.png" class="b-block img-fluid" />
+                    <img src="04-request-response/anwendungen-reiseportal.png" class="b-block img-fluid" />
                 </lsx-tab-page>
                 <lsx-tab-page title="Business-to-Business">
-                    <img src="04-rest-webservices/anwendungen-b2b.png" class="b-block img-fluid" />
+                    <img src="04-request-response/anwendungen-b2b.png" class="b-block img-fluid" />
                 </lsx-tab-page>
             </lsx-tab-pages>
         </div>
@@ -254,10 +262,10 @@
         </div>
     
         <div id="webapp-architektur">
-            <img id="webapp-architektur-1" src="04-rest-webservices/wiederholung_spa-1.svg" class="b-block w-100" />
-            <img id="webapp-architektur-2" src="04-rest-webservices/wiederholung_spa-2.svg" class="b-block w-100 hidden" />
-            <img id="webapp-architektur-3" src="04-rest-webservices/wiederholung_spa-3.svg" class="b-block w-100 hidden" />
-            <img id="webapp-architektur-4" src="04-rest-webservices/wiederholung_spa-4.svg" class="b-block w-100 hidden" />
+            <img id="webapp-architektur-1" src="04-request-response/wiederholung_spa-1.svg" class="b-block w-100" />
+            <img id="webapp-architektur-2" src="04-request-response/wiederholung_spa-2.svg" class="b-block w-100 hidden" />
+            <img id="webapp-architektur-3" src="04-request-response/wiederholung_spa-3.svg" class="b-block w-100 hidden" />
+            <img id="webapp-architektur-4" src="04-request-response/wiederholung_spa-4.svg" class="b-block w-100 hidden" />
         </div>
     </article>
 </section>
@@ -270,7 +278,7 @@
                 Eine kuratierte Liste mit öffentlich zugänglichen Webservices
             </p>
         
-            <img src="04-rest-webservices/public-apis.png" class="img-thumbnail w-100" />
+            <img src="04-request-response/public-apis.png" class="img-thumbnail w-100" />
         </div>
     </article>
 </section>
@@ -443,45 +451,45 @@
                                 Hier wollen wir uns anschauen, welche Daten beim Senden einer HTTP-Anfrage „über die Leitung gehen”.
                                 Wir starten mit einer leeren Konsole. Du kennst doch die Konsole deines Betriebssystems, oder? 🐒
                             </p>
-                            <img class="active d-block w-100" src="04-rest-webservices/http_demo_01.gif" />
+                            <img class="active d-block w-100" src="04-request-response/http_demo_01.gif" />
                         </lsx-carousel-page>
                         <lsx-carousel-page>
                             <p>
                                 Mit <code>telnet</code> stellen wir eine <a href="https://de.wikipedia.org/wiki/Socket_(Software)"
                                 target="_blank">TCP/IP-Verbindung</a> zum Webserver her.
                             </p>
-                            <img class="active d-block w-100" src="04-rest-webservices/http_demo_02.gif" />
+                            <img class="active d-block w-100" src="04-request-response/http_demo_02.gif" />
                         </lsx-carousel-page>
                         <lsx-carousel-page>
                             <p>
                                 Daraufhin meldet <code>telnet</code>, dass die Verbindung erfolgreich aufgebaut wurde und der Server wartet
                                 auf Eingaben.
                             </p>
-                            <img class="active d-block w-100" src="04-rest-webservices/http_demo_03.gif" />
+                            <img class="active d-block w-100" src="04-request-response/http_demo_03.gif" />
                         </lsx-carousel-page>
                         <lsx-carousel-page>
                             <p>
                                 Wir schicken eine <code>GET</code>-Anfrage zum Abruf der Datei <code>/webprog/hallo-http.txt</code>.
                             </p>
-                            <img class="active d-block w-100" src="04-rest-webservices/http_demo_04.gif" />
+                            <img class="active d-block w-100" src="04-request-response/http_demo_04.gif" />
                         </lsx-carousel-page>
                         <lsx-carousel-page>
                             <p>
                                 Als nächstes folgt das Header Field <code>Host</code>, da es mehrere Domains mit derselben IP-Adresse gibt.
                             </p>
-                            r              <img class="active d-block w-100" src="04-rest-webservices/http_demo_05.gif" />
+                            r              <img class="active d-block w-100" src="04-request-response/http_demo_05.gif" />
                         </lsx-carousel-page>
                         <lsx-carousel-page>
                             <p>
                                 Das war es dann auch schon mit den Header Fields. Zum Abschluss folgt deshalb eine Leerzeile.
                             </p>
-                            <img class="active d-block w-100" src="04-rest-webservices/http_demo_06.gif" />
+                            <img class="active d-block w-100" src="04-request-response/http_demo_06.gif" />
                         </lsx-carousel-page>
                         <lsx-carousel-page>
                             <p>
                                 Und schon schickt uns der Server die Antwort und trennt die Verbindung.
                             </p>
-                            <img class="active d-block w-100" src="04-rest-webservices/http_demo_07.gif" />
+                            <img class="active d-block w-100" src="04-request-response/http_demo_07.gif" />
                         </lsx-carousel-page>
                         <lsx-carousel-page>
                             <p>
@@ -882,10 +890,10 @@
         
             <lsx-tab-pages>
                 <lsx-tab-page title="Webservice-Anfrage">
-                    <img src="04-rest-webservices/soap-request.svg" alt="" class="d-block w-100" />
+                    <img src="04-request-response/soap-request.svg" alt="" class="d-block w-100" />
                 </lsx-tab-page>
                 <lsx-tab-page title="Webservice-Antwort">
-                    <img src="04-rest-webservices/soap-response.svg" alt="" class="d-block w-100" />
+                    <img src="04-request-response/soap-response.svg" alt="" class="d-block w-100" />
                 </lsx-tab-page>
             </lsx-tab-pages>
         </div>
@@ -1500,7 +1508,7 @@
             </div>
         
             <div class="d-flex justify-content-center" style="margin-bottom: 1em;">
-                <img src="04-rest-webservices/hateoas-beispiel.svg" alt="Zustandsdiagramm für Bankkonten" class="img-fluid"/>
+                <img src="04-request-response/hateoas-beispiel.svg" alt="Zustandsdiagramm für Bankkonten" class="img-fluid"/>
             </div>
         
             <lsx-tab-pages class="w-100 mb-4">
@@ -1673,10 +1681,10 @@
             </div>
             <div class="row">
                 <div class="col-md">
-                    <img src="04-rest-webservices/aufgabe1-browser.png" alt="Screenshot des Webservices im Browser" class="d-block" style="width: 100%; border: 1px solid grey;" />
+                    <img src="04-request-response/aufgabe1-browser.png" alt="Screenshot des Webservices im Browser" class="d-block" style="width: 100%; border: 1px solid grey;" />
                 </div>
                 <div class="col-md">
-                    <img src="04-rest-webservices/aufgabe1-postman.png" alt="Screenshot des Webservices in Postman" class="d-block" style="width: 100%; border: 1px solid grey;" />
+                    <img src="04-request-response/aufgabe1-postman.png" alt="Screenshot des Webservices in Postman" class="d-block" style="width: 100%; border: 1px solid grey;" />
                 </div>
             </div>
         </div>
@@ -1726,7 +1734,7 @@
             1. Wie kann man die URL zur Verwendung des Bilds in einer Webseite oder App erzeugen?
         </div>
     
-        <img src="04-rest-webservices/artic-api.png" class="img-thumbnail w-100" />
+        <img src="04-request-response/artic-api.png" class="img-thumbnail w-100" />
     </article>
     <aside>
         <p>
@@ -2054,9 +2062,9 @@
         </div>
     
         <div class="d-flex align-items-stretch" style="gap: 1em;">
-            <img src="04-rest-webservices/openapi-beispiel.png" class="d-block img-thumbnail" style="width: 30em;"/>
-            <img src="04-rest-webservices/api-creditsafe.png" class="d-block img-thumbnail" style="width: 30em;"/>
-            <img src="04-rest-webservices/api-wikipedia.png" class="d-block img-thumbnail" style="width: 30em;"/>
+            <img src="04-request-response/openapi-beispiel.png" class="d-block img-thumbnail" style="width: 30em;"/>
+            <img src="04-request-response/api-creditsafe.png" class="d-block img-thumbnail" style="width: 30em;"/>
+            <img src="04-request-response/api-wikipedia.png" class="d-block img-thumbnail" style="width: 30em;"/>
         </div>
     </article>
 </section>
@@ -2086,15 +2094,15 @@
         <div class="d-flex flex-row gap-3">
             <div class="fw-bold flex-fill">
                 <a href="https://editor.swagger.io" target="_blank">Swagger Editor</a> (Nur Quellcode)
-                <img src="04-rest-webservices/openapi-beispiel.png" class="img-thumbnail d-block w-100" />
+                <img src="04-request-response/openapi-beispiel.png" class="img-thumbnail d-block w-100" />
             </div>
             <div class="fw-bold flex-fill">
                 <a href="https://www.apicur.io" target="_blank">Apicurio Studio</a> (grafischer Editor, open-source)
-                <img src="04-rest-webservices/apicurio-1.png" class="img-thumbnail d-block w-100" />
+                <img src="04-request-response/apicurio-1.png" class="img-thumbnail d-block w-100" />
             </div>
             <div class="fw-bold flex-fill">
                 Live-Vorschau in Apicurio Studio
-                <img src="04-rest-webservices/apicurio-2.png" class="img-thumbnail d-block w-100" />
+                <img src="04-request-response/apicurio-2.png" class="img-thumbnail d-block w-100" />
             </div>
         </div>
     </article>
@@ -3040,36 +3048,36 @@
     
     <section data-title="Erstellen der OpenAPI-Spezifikation">
         <article class="d-flex flex-wrap justify-content-center align-items-center gap-3">
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-01.png" caption="1. Neue API anlegen"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-02.png" caption="2. Allgemeine Informationen eintragen"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-03.png" caption="3. Wechsel in den Änderungsmodus"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-04.png" caption="4. Live-Dokumentation zur Ergebniskontrolle öffnen"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-05.png" caption="5. Kontaktdaten und Lizenz ausfüllen"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-06.png" caption="6. Je Entität ein neues Tag anlegen"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-07.png" caption="7. Benötigte Datentypen anlegen"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-08.png" caption="8. Datentyp Address beschreiben"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-09.png" caption="9. URL-Endpunkte für Adressen generieren lassen"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-10.png" caption="10. Weitere Datentypen anlegen"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-11.png" caption="11. Schemadefinition HATEOAS_Link"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-12.png" caption="12. Für die HATEOAS-Typen keine URL-Endpunkte generieren"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-14.png" caption="13. Vorläufige Schemadefinition HATEOAS_Collection"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-13.png" caption="14. Vorläufige Schemadefinition HATEOAS_Resource"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-15.png" caption="15. Finale Schemadefinition HATEOAS_Collection"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-16.png" caption="16. Finale Schemadefinition HATEOAS_Resource"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-17.png" caption="17. Schemadefinition Address erweitern"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-18.png" caption="18. HATEOAS-Informationen zum Address-Schema hinzufügen"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-19.png" caption="19. URL /addresses umbenennen"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-20.png" caption="20. Ergebnis der manuellen Anpassungen"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-21.png" caption="21. Query-Parameter zum Suchen von Adressen anlegen"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-22.png" caption="22. Neu angelegte Query-Parameter zum Suchen von Adressen"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-23.png" caption="23. PATCH-Anfragen ergänzen"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-24.png" caption="24. HTTP-Anfrage für PATCH"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-25.png" caption="25. HTTP-Antwort für PATCH"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-26.png" caption="26. Live-Vorschau der Dokumentation öffnen"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-27.png" caption="27. Dokumentation des Webservices"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-28.png" caption="28. Zurück zur Startseite des Webservices"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-29.png" caption="29. OpenAPI-Beschreibung herunterladen"></lsx-modal-image>
-            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-30.png" caption="30. Format YAML auswählen"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-01.png" caption="1. Neue API anlegen"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-02.png" caption="2. Allgemeine Informationen eintragen"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-03.png" caption="3. Wechsel in den Änderungsmodus"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-04.png" caption="4. Live-Dokumentation zur Ergebniskontrolle öffnen"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-05.png" caption="5. Kontaktdaten und Lizenz ausfüllen"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-06.png" caption="6. Je Entität ein neues Tag anlegen"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-07.png" caption="7. Benötigte Datentypen anlegen"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-08.png" caption="8. Datentyp Address beschreiben"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-09.png" caption="9. URL-Endpunkte für Adressen generieren lassen"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-10.png" caption="10. Weitere Datentypen anlegen"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-11.png" caption="11. Schemadefinition HATEOAS_Link"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-12.png" caption="12. Für die HATEOAS-Typen keine URL-Endpunkte generieren"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-14.png" caption="13. Vorläufige Schemadefinition HATEOAS_Collection"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-13.png" caption="14. Vorläufige Schemadefinition HATEOAS_Resource"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-15.png" caption="15. Finale Schemadefinition HATEOAS_Collection"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-16.png" caption="16. Finale Schemadefinition HATEOAS_Resource"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-17.png" caption="17. Schemadefinition Address erweitern"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-18.png" caption="18. HATEOAS-Informationen zum Address-Schema hinzufügen"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-19.png" caption="19. URL /addresses umbenennen"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-20.png" caption="20. Ergebnis der manuellen Anpassungen"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-21.png" caption="21. Query-Parameter zum Suchen von Adressen anlegen"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-22.png" caption="22. Neu angelegte Query-Parameter zum Suchen von Adressen"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-23.png" caption="23. PATCH-Anfragen ergänzen"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-24.png" caption="24. HTTP-Anfrage für PATCH"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-25.png" caption="25. HTTP-Antwort für PATCH"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-26.png" caption="26. Live-Vorschau der Dokumentation öffnen"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-27.png" caption="27. Dokumentation des Webservices"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-28.png" caption="28. Zurück zur Startseite des Webservices"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-29.png" caption="29. OpenAPI-Beschreibung herunterladen"></lsx-modal-image>
+            <lsx-modal-image src="04-request-response/fallbeispiel-apicurio-30.png" caption="30. Format YAML auswählen"></lsx-modal-image>
         </article>
     </section>
     
@@ -3085,7 +3093,7 @@
                     </a>
                 </p>
         
-                <img src="04-rest-webservices/fallbeispiel-swagger-editor.png" class="img-responsive img-thumbnail" />
+                <img src="04-request-response/fallbeispiel-swagger-editor.png" class="img-responsive img-thumbnail" />
             </div>
         </article>
     </section>
@@ -3116,8 +3124,8 @@
             </div>
         
             <div class="d-flex align-items-stretch" style="gap: 1em; margin-bottom: 1em;">
-                <img src="04-rest-webservices/status-100.avif" class="d-block w-100"/>
-                <img src="04-rest-webservices/status-101.avif" class="d-block w-100"/>
+                <img src="04-request-response/status-100.avif" class="d-block w-100"/>
+                <img src="04-request-response/status-101.avif" class="d-block w-100"/>
             </div>
         </div>
     </article>
@@ -3138,7 +3146,7 @@
                 1. Welchen Aufbau haben die verwalteten Daten der API?
             </div>
         
-            <img src="04-rest-webservices/openapi-beispiel.png" class="img-thumbnail w-100" />
+            <img src="04-request-response/openapi-beispiel.png" class="img-thumbnail w-100" />
         </div>
     </article>
 </section>
@@ -3176,7 +3184,7 @@
                 * Falls ja, in welcher Form sollen die Links zurückgeliefert werden?
             </div>
         
-            <img src="04-rest-webservices/apicurio-1.png" class="img-thumbnail w-100" />
+            <img src="04-request-response/apicurio-1.png" class="img-thumbnail w-100" />
         </div>
     </article>
 </section>

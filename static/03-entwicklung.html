@@ -1,5 +1,4 @@
-<section data-chapter="h1" data-background-color="rgb(210,190,210)">
-    <h1>Cloud-Entwicklung in JavaScript</h1>
+<section data-chapter="h1" data-title="Entwicklung verteilter Systeme" data-background-color="rgb(210,190,210)">
     <article class="markdown">
         ### Nach Abschluss dieses Kapitels können Sie …
 
@@ -27,6 +26,8 @@
     </article>
 </section>
 
+<!-- TODO: Fallbeispiele: Golfcard,  Golfcard Plus, was noch? -->
+
 <!-- ========================= -->
 <!-- Programmieren mit Node.js -->
 <!-- ========================= -->
@@ -44,8 +45,8 @@
             </div>
         
             <div class="d-flex align-items-stretch" style="gap: 1em;">
-                <img src="05-entwicklung/nodejs-1.png" class="d-block w-100 img-thumbnail"/>
-                <img src="05-entwicklung/nodejs-2.png" class="d-block w-100 img-thumbnail"/>
+                <img src="03-entwicklung/nodejs-1.png" class="d-block w-100 img-thumbnail"/>
+                <img src="03-entwicklung/nodejs-2.png" class="d-block w-100 img-thumbnail"/>
             </div>
         </div>
     </article>
@@ -65,7 +66,7 @@
                 Darüber hinaus gibt es nichts besonderes zu beachten.
             </div>
     
-            <terminal-cast url="05-entwicklung/meet-nodejs.cast" poster="npt:3.0" style="height: 30em;"></terminal-cast>
+            <terminal-cast url="03-entwicklung/meet-nodejs.cast" poster="npt:3.0" style="height: 30em;"></terminal-cast>
         </div>
     </article>
 </section>
@@ -73,7 +74,7 @@
 <section data-title="Abhängigkeiten suchen auf npmjs.com">
     <article class="centered-content">
         <div class="limited-width2">
-            <img src="05-entwicklung/npmjs.com.png" class="d-block img-thumbnail" style="max-width: 80em;"/>
+            <img src="03-entwicklung/npmjs.com.png" class="d-block img-thumbnail" style="max-width: 80em;"/>
         
             <div class="markdown mt-3">
                 Installation mit folgenden Befehlen:
@@ -142,7 +143,7 @@
                 * <span class="cmd">npm run &lt;skript&gt;</span>: Ausführen eines in der `package.json` definierten „Run-Skripts”
             </div>
         
-            <terminal-cast url="05-entwicklung/npm.cast" poster="npt:2.0" style="height: 30em;"></terminal-cast>
+            <terminal-cast url="03-entwicklung/npm.cast" poster="npt:2.0" style="height: 30em;"></terminal-cast>
         </div>
     </article>
 </section>
@@ -158,7 +159,7 @@
         
             <a href="https://www.gitpod.io/#https://github.com/DennisSchulmeister/whb-web-mobidict" target="_blank" class="fw-bold">Online IDE: MobiDict Quellcode</a>
         
-            ![Gitpod](05-entwicklung/gitpod-1.png){.img-thumbnail img-responsive}
+            ![Gitpod](03-entwicklung/gitpod-1.png){.img-thumbnail img-responsive}
         </div>
 
         <lsx-tab-pages>
@@ -214,6 +215,81 @@
 <!-- Programmierung der Serverseite -->
 <!-- ============================== -->
 <section data-use-template="teilkapitel" data-titel="Programmieren der Serverseite"></section>
+
+<section data-title="12-Faktor-Apps / Cloud Native Apps">
+    <article class="centered-content">
+        <div class="limited-width2">
+            <div class="markdown">
+                Eine elastische Skalierung setzt voraus, dass jederzeit weitere Instanzen eines Services gestartet
+                oder nicht mehr benötigte Instanzen gestoppt werden können. Um dies zu vereinfachen, haben die Macher
+                der Heroku-Cloud auf der Webseite [12factor.net](https://12factor.net){target=_blank} das 12-Faktor-Manifest
+                mit zwölf Regeln für **Cloud Native Apps** (auch **12-Faktor-Apps** genannt) veröffentlicht. Diese lassen
+                sich wie folgt zusammenfassen:
+            </div>
+
+            <lsx-tab-pages>
+                <lsx-tab-page title="Entwicklung">
+                    <div class="markdown">
+                        * Zentral verwalteter Quellcode
+                        * Abhängigkeiten explizit deklarieren
+                        * Getrennte Build-, Release- und Run-Phasen
+                        * Vergleichbare Entwicklungs- und Produktivumgebungen
+
+                        Microservices werden mit modernen Werkzeugen und modernen Programmierpraktiken entwickelt. Ihr Quellcode
+                        wird deshalb mit Werkzeugen wie Git versioniert, so dass jede Änderung daran nachvollziehbar ist. Werkzeuge
+                        wie `npm`, `pip` oder `maven` verwalten darüber hinaus die Abhängigkeiten zu externen Bibliotheken und sorgen
+                        für automatisierte Build- und Releaseprozesse.
+                        
+                        Zusätzlich finden Entwicklung und Test und vergleichbaren Bedingungen wie der spätere Produktiveinsatz statt,
+                        wofür die Produktivumgebung auf den Entwicklungs- und Testmaschinen so gut wie möglich nachgebildet wird.
+                    </div>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Konfiguration">
+                    <div class="markdown">
+                        * Nutzung fremder Dienste über das Netzwerk
+                        * Unterstützende Dienste sind Ressourcen
+                        * Konfiguration durch Umgebungsvariablen
+                        * Adminprozesse sind einmalige Vorgänge
+
+                        Microservices kommunizieren grundsätzlich über das Netzwerk bzw. das Internet mit anderen Microservices.
+                        Andere Schnittstellen sind nicht vorgesehen, um die Microservices auf getrennten virtuellen Maschinen und
+                        oft sogar getrennten physischen Maschinen betreiben zu können. Über die Konfiguration der Services, welche
+                        innerhalb der Cloudumgebung vorgenommen wird, werden jedem Microservice die Netzadressen der von ihm benötigten
+                        anderen Services mitgeteilt. Diese stehen dann zur Laufzeit als Umgebungsvariablen des Betriebssystems zur
+                        Verfügung, da es sich hierbei um eine universale, einfache Möglichkeit handelt.
+
+                        Falls administrative Aktionen wie die Reorganisation einer Datenbank oder das Löschen veralteter Daten
+                        notwendig sind, erfolgen diese durch einmalig aufgerufene, vom eigentlichen Microservice getrennt laufende
+                        Werkzeugprogramme.
+                    </div>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Ausführung">
+                    <div class="markdown">
+                        * Ausführung als einzelner Betriebssystemprozess
+                        * Parallelität durch weitere Betriebssystemprozesse
+                        * Robuster und schneller Start bzw. Stopp der Prozesse
+                        * Protokollierung durch zeitbezogene Ereignisse
+
+                        Microservices sind immer in sich geschlossen und bringen sämtliche Laufzeitumgebungen, Bibliotheken und
+                        Hilfsprogramme mit, um ausgeführt werden zu können. Sie können dadurch als einzelner Betriebssystemprozess
+                        leicht gestartet und gestoppt werden, beispielsweise indem sie in ein Container-Image verpackt werden.
+                        Start und Stopp müssen besonders schnell gehen, damit die Skalierung jederzeit elastisch angpasst werden
+                        kann.
+
+                        Für die Fehlersuche schreiben Microservices umfangreiche Protokollmeldungen in die Konsole (ihre Standardausgabe).
+                        Jede Meldung wird dabei mit einem eindeutigen Zeitstempel am Anfang versehen, so dass die Protokollmeldungen
+                        von der Cloud wie ein kontinuierlicher Datenstrom von zeitpunktbezogenen Ereignissen behandelt und archiviert
+                        werden können.
+                    </div>
+                </lsx-tab-page>
+            </lsx-tab-pages>
+
+            <!-- <img src="03-entwicklung/12factor.net.png" class="d-block dhbw-border limited-width m-auto"> -->
+        </div>
+    </article>
+</section>
 
 <section data-title="Vorbereitungen zur Entwicklung">
     <article class="centered-content">
@@ -273,8 +349,8 @@
                 </div>
             
                 <div id="terminal-docker1">
-                    <terminal-cast id="terminal-docker1-1" url="05-entwicklung/docker1.cast" poster="npt:5.0" style="height: 30em;"></terminal-cast>
-                    <terminal-cast id="terminal-docker1-2" url="05-entwicklung/docker2.cast" poster="npt:8.5" style="height: 30em;" class="hidden"></terminal-cast>
+                    <terminal-cast id="terminal-docker1-1" url="03-entwicklung/docker1.cast" poster="npt:5.0" style="height: 30em;"></terminal-cast>
+                    <terminal-cast id="terminal-docker1-2" url="03-entwicklung/docker2.cast" poster="npt:8.5" style="height: 30em;" class="hidden"></terminal-cast>
                 </div>
             </div>
         </div>
@@ -299,8 +375,8 @@
         </div>
     
         <div class="d-flex align-items-stretch" style="gap: 1em;">
-            <img src="05-entwicklung/restify.png" class="d-block w-100 img-thumbnail"/>
-            <img src="05-entwicklung/mongodb.png" class="d-block w-100 img-thumbnail"/>
+            <img src="03-entwicklung/restify.png" class="d-block w-100 img-thumbnail"/>
+            <img src="03-entwicklung/mongodb.png" class="d-block w-100 img-thumbnail"/>
         </div>
     </article>
 </section>
@@ -1007,7 +1083,7 @@
         </div>
         
         <div class="limited-width2">
-            <terminal-cast url="05-entwicklung/server-index.cast" poster="npt:3.0" rows="58" class="mt-3" style="height: 50em;"></terminal-cast>
+            <terminal-cast url="03-entwicklung/server-index.cast" poster="npt:3.0" rows="58" class="mt-3" style="height: 50em;"></terminal-cast>
         </div>
     </article>
 </section>
@@ -1229,7 +1305,7 @@
             </lsx-accordion>
         </div>
     
-        <terminal-cast url="05-entwicklung/server-rootcontroller.cast" poster="npt:9.0" style="height: 30em;"></terminal-cast>
+        <terminal-cast url="03-entwicklung/server-rootcontroller.cast" poster="npt:9.0" style="height: 30em;"></terminal-cast>
     </article>
 </section>
 
@@ -1347,8 +1423,8 @@
             </lsx-accordion>
         </div>
     
-        <img src="05-entwicklung/http-ablauf.svg" class="d-block limited-width2 m-auto mb-4">
-        <terminal-cast url="05-entwicklung/server-services.cast" poster="npt:9.0" style="height: 30em;"></terminal-cast>
+        <img src="03-entwicklung/http-ablauf.svg" class="d-block limited-width2 m-auto mb-4">
+        <terminal-cast url="03-entwicklung/server-services.cast" poster="npt:9.0" style="height: 30em;"></terminal-cast>
     </article>
 </section>
 
@@ -1476,11 +1552,11 @@
                 </lsx-tab-page>
 
                 <lsx-tab-page title="Dokumentenbasierte Datenbank">
-                    <img id="datenbank-1" src="05-entwicklung/datenbank-dokumentenbasiert.svg" class="d-block w-100">
+                    <img id="datenbank-1" src="03-entwicklung/datenbank-dokumentenbasiert.svg" class="d-block w-100">
                 </lsx-tab-page>
 
                 <lsx-tab-page title="Traditionelle SQL-Datenbank">
-                    <img id="datenbank-2" src="05-entwicklung/datenbank-relational.svg" class="d-block w-100">
+                    <img id="datenbank-2" src="03-entwicklung/datenbank-relational.svg" class="d-block w-100">
                 </lsx-tab-page>
             </lsx-tab-pages>
         </div>
@@ -1546,8 +1622,8 @@
             </div>
         
             <div id="terminal-docker2">
-                <terminal-cast id="terminal-docker2-1" url="05-entwicklung/docker1.cast" poster="npt:5.0" style="height: 30em;"></terminal-cast>
-                <terminal-cast id="terminal-docker2-2" url="05-entwicklung/docker2.cast" poster="npt:8.5" class="hidden" style="height: 30em;"></terminal-cast>
+                <terminal-cast id="terminal-docker2-1" url="03-entwicklung/docker1.cast" poster="npt:5.0" style="height: 30em;"></terminal-cast>
+                <terminal-cast id="terminal-docker2-2" url="03-entwicklung/docker2.cast" poster="npt:8.5" class="hidden" style="height: 30em;"></terminal-cast>
             </div>
         </div>
     </article>
@@ -1574,11 +1650,11 @@
 
             <lsx-tab-pages>
                 <lsx-tab-page title="Alte Version mit clientseitiger Datenbank">
-                    <img id="spa-struktur-1" src="05-entwicklung/spa-struktur-alt.svg" class="d-block w-100">
+                    <img id="spa-struktur-1" src="03-entwicklung/spa-struktur-alt.svg" class="d-block w-100">
                 </lsx-tab-page>
                 
                 <lsx-tab-page title="Neue Version mit Backendzugriff">
-                    <img id="spa-struktur-2" src="05-entwicklung/spa-struktur-neu.svg" class="d-block w-100">
+                    <img id="spa-struktur-2" src="03-entwicklung/spa-struktur-neu.svg" class="d-block w-100">
                 </lsx-tab-page>
             </lsx-tab-pages>
         </div>
@@ -1768,7 +1844,7 @@
             </lsx-accordion>
         </div>
     
-        <terminal-cast url="05-entwicklung/spa-neue-seite.cast" poster="npt:10.0" rows="58" style="height: 50em"></terminal-cast>
+        <terminal-cast url="03-entwicklung/spa-neue-seite.cast" poster="npt:10.0" rows="58" style="height: 50em"></terminal-cast>
     </article>
 </section>
 
