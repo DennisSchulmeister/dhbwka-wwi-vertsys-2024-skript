@@ -1,7 +1,7 @@
 <section data-chapter="h1" data-title="Architektur verteilter Systeme" data-background-color="rgb(210,190,210)">
     <article class="markdown">
         ### Nach Abschluss dieses Kapitels können Sie …
-        
+
         * den Begriff verteiltes System erklären und von ähnlichen Begriffen abgrenzen.
         * Beispiele für verteilte Anwendungen nennen und von normalen Anwendungen abgrenzen.
         * die wichtigsten Gründe für die Entwicklung verteilter Systeme nennen. 💰
@@ -25,7 +25,7 @@
             <lsx-row>
                 <lsx-col size="md-8">
                     <lsx-youtube video="UWU14-EK9CE" aspect-ratio="16x9" class="w-100 mb-0"></lsx-youtube>
-    
+
                     <small>
                         <small>
                             Quelle: Filmausschnitt aus „Star Trek der Film (1979)”
@@ -34,13 +34,13 @@
                 </lsx-col>
                 <lsx-col size="md" class="markdown lead centered-content align-items-start">
                     Jeden Tag sprechen wir von Systemen:
-                    
+
                     <lsx-ul emoji="🚀">
                         <li><i>„Du musst dich am System anmelden.”</i></li>
                         <li><i>„Das ist im System gespeichert.”</i></li>
                         <li><i>„Mein Betriebssystem hängt mal wieder.”</i></li>
                     </lsx-ul>
-    
+
                     Doch was ist überhaupt ein „System“
                     <span style="color: crimson; text-shadow: 1px 1px 1px rgba(0,0,0,0.5);">⁉️</span>
                 </lsx-col>
@@ -62,9 +62,9 @@
                     <cite>Wikipedia zum Begriff „System”</cite>
                 </figcaption>
             </blockquote>
-    
+
             <h4>Wichtige Stichworte dieser Definition</h4>
-    
+
             <lsx-ul emoji="☑️">
                 <li>Aus mehren Einzelteilen zusammengesetztes Ganzes</li>
                 <li>Abgrenzbares Gebilde aus verschienden Komponenten</li>
@@ -89,7 +89,7 @@
                             </figcaption>
                         </blockquote>
                     </lsx-col>
-    
+
                     <lsx-col size="md">
                         <blockquote class="blockquote fst-italic card p-2">
                             <p>
@@ -103,9 +103,9 @@
                     </lsx-col>
                 </lsx-row>
             </lsx-grid-fluid>
-    
+
             <h4>Arbeitsdefinition für diese Vorlesung</h4>
-    
+
             <lsx-ul emoji="☑️">
                 <li>Mehrere, voneinander unabhängig agierende Computer (muss zumindest möglich sein)</li>
                 <li>Datenaustausch über ein Netzwerk ohne geteilten Hauptspeicher</li>
@@ -251,7 +251,7 @@
                 Ohne Zweifel leben wir in einer vernetzten Welt, in der immer mehr Computer, Smartphones,
                 Smart TVs und viele andere Gegenstände miteinander verbunden sind.
             </p>
-    
+
             <lsx-grid-fluid class="p-0">
                 <lsx-row>
                     <lsx-col size="md">
@@ -384,7 +384,7 @@
                     }
 
                     window.addEventListener("ls-slide-changed", () => {
-                        window.setTimeout(function() {                    
+                        window.setTimeout(function() {
                             let checkbox = document.querySelector("#tcpip-details-switch");
                             if (!checkbox) return;
 
@@ -451,25 +451,25 @@
                             <lsx-tab-page title="Quellcode">
                                 <source-code language="javascript">
                                     import net from "net";
-        
+
                                     // Socket-Server starten
                                     let server = net.createServer(socket => {
                                         // Verbindung mit neuem Client hergestellt
                                         log(socket, "Client verbunden");
-                                    
+
                                         socket.setEncoding("utf-8");
                                         socket.setNoDelay();
                                         socket.write("Hallo! Ich bin der Server.\n");
-                                    
+
                                         socket.on("error", err => log(socket, err));
                                         socket.on("close", () => log(socket, "Client getrennt"));
-                                    
+
                                         socket.on("data", data => {
                                             log(socket, "Empfangene Daten:", data);
                                             socket.write(data);
                                         });
                                     });
-                                    
+
                                     server.listen("7000", "localhost");
                                 </source-code>
                             </lsx-tab-page>
@@ -509,31 +509,31 @@
                             <lsx-tab-page title="Quellcode">
                                 <source-code language="javascript">
                                     import net                from "net";
-                                    
+
                                     import * as readline      from 'node:readline/promises';
                                     import {stdin as input}   from 'node:process';
                                     import {stdout as output} from 'node:process';
-                                    
+
                                     import {EventEmitter}     from 'node:events';
                                     import {once}             from 'node:events';
-                                    
+
                                     let rl           = readline.createInterface({input, output});
                                     let dataReceived = new EventEmitter();
                                     let connected    = false;
-                                    
+
                                     // Verbindung mit Server herstellen und Protokoll abwickeln
                                     let socket = net.createConnection({host: "localhost", port: 7000}, async () => {
                                         socket.setNoDelay();
                                         connected = true;
-                                                                
+
                                         while (connected) {
                                             let input = await rl.question("Ihre Eingabe: ");
                                             if (!connected) break;
-                                    
+
                                             // Daten an den Server schicken
                                             if (input) {
                                                 socket.write(input);
-                                        
+
                                                 // Antwort vom Server anzeigen
                                                 let response = await once(dataReceived, "data");
                                                 console.log("Server:", response[0], "\n");
@@ -541,21 +541,21 @@
                                                 connected = false;
                                             }
                                         }
-                                    
+
                                         // Verbindung trennen
                                         socket.end();
                                         socket.destroy();
-                                    
+
                                         rl.close();
                                     });
-                                    
-                                    
+
+
                                     // Empfangene Daten an die Hauptschleife oben schicken
                                     socket.on("data", data => {
                                         data = data.toString();
                                         dataReceived.emit("data", data);
                                     });
-                                    
+
                                     socket.on("error", err => console.error("\n", err));
                                     socket.on("end", () => connected = false);
                                 </source-code>
@@ -609,7 +609,7 @@
                     Bedeutung, werden im Alltag aber leider nicht immer korrekt verwendet, da vor allem "Server" und "Service"
                     oft sehr frei ausgelegt werden.
                 </p>
-    
+
                 <table class="w-100 mb-5">
                     <tr>
                         <td style="padding-right: 0.5em;">
@@ -665,7 +665,7 @@
                         </td>
                     </tr>
                 </table>
-        
+
                 <div class="d-flex gap-3">
                     <lsx-card title="Client/Server-Architektur" bold>
                         <img src="02-architektur/client-server.svg" alt="Skizze mit vielen Clients und einem Server in der Mitte" class="d-block w-100" />
@@ -677,11 +677,11 @@
             </div>
         </article>
     </section>
-    
+
     <section data-title="Heute übliche Programmiermodelle">
         <article class="centered-content">
             <div class="limited-width2">
-    
+
                 <lsx-grid-fluid>
                     <lsx-row>
                         <lsx-col size="md">
@@ -692,13 +692,13 @@
                                         <li>Unterstützen verschieden Schnittstellentechnologien</li>
                                         <li>Oft auf die Entwicklung von Webanwendungen ausgerichtet</li>
                                     </lsx-ul>
-    
+
                                     <div style="flex: 1"></div>
                                     <img src="02-architektur/arten-appserver.png" alt="" class="w-100" />
                                 </lsx-card-body>
                             </lsx-card>
                         </lsx-col>
-    
+
                         <lsx-col size="md">
                             <lsx-card title="Entfernte Methodenaufrufe" bold class="h-100">
                                 <lsx-card-body class="h-100 d-flex flex-column">
@@ -707,14 +707,14 @@
                                         <li>Sowohl prozedural als auch objekt-orientiert möglich</li>
                                         <li>Teilweise auch zwischen verschiedenen Programmiersprachen</li>
                                     </lsx-ul>
-    
+
                                     <div style="flex: 1"></div>
                                     <img src="02-architektur/arten-methodenaufrufe.png" alt="" class="w-100" />
                                 </lsx-card-body>
                             </lsx-card>
                         </lsx-col>
                     </lsx-row>
-    
+
                     <lsx-row>
                         <lsx-col size="md">
                             <lsx-card title="Webservices" bold class="h-100">
@@ -724,13 +724,13 @@
                                         <li>Jedoch auf Basis von Webstandards wie HTTP, XML, JSON</li>
                                         <li>Früher SOAP, heute überwiegend REST-Webservices</li>
                                     </lsx-ul>
-    
+
                                     <div style="flex: 1"></div>
                                     <img src="02-architektur/arten-webservices.png" alt="" class="w-100" />
                                 </lsx-card-body>
                             </lsx-card>
                         </lsx-col>
-    
+
                         <lsx-col size="md">
                             <lsx-card title="Message Broker" bold class="h-100">
                                 <lsx-card-body class="h-100 d-flex flex-column">
@@ -739,7 +739,7 @@
                                         <li>Mehrere Empfänger für eine Nachricht möglich und üblich</li>
                                         <li>Store and Forward der Nachrichten in einer FIFO-Warteschlange</li>
                                     </lsx-ul>
-    
+
                                     <div style="flex: 1"></div>
                                     <img src="02-architektur/arten-pubsub.png" alt="" class="w-100" />
                                 </lsx-card-body>
@@ -768,19 +768,19 @@
                                     Möglichkeit war, eine direkte Kabelverbindung „host-to-host” herzustellen, wobei hierfür
                                     Hard- und Software auf beiden Seiten komplett selbst entwickelt werden mussten.
                                 </p>
-                                
+
                                 <lsx-ul emoji="🔌" class="lead mb-4">
                                     <li>Direkte Kabelverbindung zwischen zwei Rechnern</li>
                                     <li>Keine Unterstützung durch das Betriebssystem</li>
                                 </lsx-ul>
-                                
+
                                 <img src="02-architektur/historie-kabel.svg" alt="Zwei VS-Knoten mit direkter Kabelverbindung" style="width: 100%; margin-bottom: 1em;" />
                                 <img src="02-architektur/historie-abb1.jpg" alt="" style="width: 100%;" />
                             </lsx-card-body>
                         </lsx-card>
                     </lsx-content>
                 </lsx-modal>
-    
+
                 <!-- Packet Switching -->
                 <lsx-modal>
                     <lsx-thumbnail style="height: 14em;" class="mw-100">
@@ -796,15 +796,15 @@
                                     Sender zum Empfänger suchen zu lassen. Heute haben wir Router für diese Aufgabe. Im ARPANET hießen
                                     diese „Interface Message Processor” und waren so groß wie ein Schrank.
                                 </p>
-    
+
                                 <lsx-ul emoji="📦" class="lead mb-4">
                                     <li>NCP und später TCP als Vorläufer von TCP/IP</li>
                                     <li>Weltweiter Datenaustausch zwischen allen Hosts</li>
                                     <li>Anschluss des Computers hierfür an einen <a href="https://en.wikipedia.org/wiki/Interface_Message_Processor" target="_blank">IMP</a></li>
                                 </lsx-ul>
-    
+
                                 <img src="02-architektur/imp-subnet.svg" alt="Netzwerktopologie des früheren ARPANET" style="width: 100%; margin-bottom: 1em;" />
-    
+
                                 <!-- <lsx-youtube class="img-thumbnail embed-responsive" video="yU9oMOcRsuE"></lsx-youtube> -->
                                 <div class="centered-content">
                                     <div class="embed-responsive ratio ratio-16x9 limited-width">
@@ -815,7 +815,7 @@
                         </lsx-card>
                     </lsx-content>
                 </lsx-modal>
-    
+
                 <!-- Sockets- und Middleware -->
                 <lsx-modal>
                     <lsx-thumbnail style="height: 14em;">
@@ -832,20 +832,20 @@
                                     über das Netzwerk direkt aufgerufen werden können, ohne den konkreten Datenaustausch auf Byte-Ebene hierfür
                                     kennen zu müssen.
                                 </p>
-    
+
                                 <lsx-ul emoji="📃" class="lead mb-4">
                                     <li><a href="https://de.wikipedia.org/wiki/Remote_Procedure_Call" target="_blank">Remote Procedure Call</a> ab den 1970ern</li>
                                     <li>Zunächst konkurrierende Programmiermodelle</li>
                                     <li>Streams und Sockets ab 1983 in BSD Unix</li>
                                 </lsx-ul>
-    
+
                                 <img src="02-architektur/historie-sockets.svg" alt="Zwei VS-Knoten mit Middleware" style="width: 100%; margin-bottom: 1em;" />
                                 <img src="02-architektur/historie-abb3.jpg" alt="" style="width: 100%;" />
                             </lsx-card-body>
                         </lsx-card>
                     </lsx-content>
                 </lsx-modal>
-    
+
                 <!-- Applikationsserver -->
                 <lsx-modal>
                     <lsx-thumbnail style="height: 14em;">
@@ -867,13 +867,13 @@
                                     geht der Trend stattdessen mehr in die Richtung, die ehemals vom Applikationsserver bereitgestellten
                                     Funktionen in Form Quellcode-Bibliotheken oder Micro-Frameworks zu integrieren.
                                 </p>
-    
+
                                 <lsx-ul emoji="🚢" class="lead mb-4">
                                     <li>Große Applikationsserver ab den 1990ern</>
                                     <li>Zunächst RPC später Webtechnologien</li>
                                     <li>Heute eher leichtgewichtigere Micro-Frameworks</li>
                                 </lsx-ul>
-    
+
                                 <img src="02-architektur/historie-appserver.svg" alt="Drei VS-Knoten von denen einer ein Applikationsserver ist" style="width: 100%; margin-bottom: 1em;" />
                                 <img src="02-architektur/historie-abb4.jpg" alt="" style="width: 100%;" />
                             </lsx-card-body>
@@ -894,7 +894,7 @@
                             der einen Dienst anbietet und den Clients, welche den Dienst konsumieren. Die Kommunikation
                             folgt dabei häufig einem einfachen **Request/Response**-Verfahren, obwohl Sockts prinzipiell
                             jede Reihenfolge zulassen.
-    
+
                             Früher wurden die Aufrufe clientseitig synchron programmiert. Dies sollte das Konzept eines
                             einfachen Methodenaufrufs simulieren, indem der rufende Thread für die Dauer einer Anfrage
                             blockiert und erst nach Eintreffer der Serverantwort wieder aufgeweckt wurde. In etwa so:
@@ -903,7 +903,7 @@
                                 let response = send_http_request("GET", "http://localhost:8080/");
                                 // Hier geht es erst weiter, wenn die Antwort empfangen wurde
                             </src-code>
-                            
+
                             Da das aber sehr inneffizient ist, folgend moderne Bibliotheken einem asynchronen Ansatz, bei
                             dem der Clientthread wahlweise warten oder parallel weiterarbeiten kann. {.mt-4}
                         </div>
@@ -941,7 +941,7 @@
                             </lsx-row>
                         </lsx-grid-fluid>
                     </lsx-tab-page>
-        
+
                     <lsx-tab-page title="Dreischichtenarchitektur">
                         <p class="dhbw-text-columns mb-4" detail-content>
                             Hierbei handelt es sich ebenfalls um eine Client/Server-Architektur, jedoch greift der Server zusätzlich
@@ -977,7 +977,7 @@
                             </lsx-row>
                         </lsx-grid-fluid>
                     </lsx-tab-page>
-        
+
                     <lsx-tab-page title="Vierschichtenarchitektur">
                         <p class="dhbw-text-columns mb-4" detail-content>
                             Hierbei handelt es sich um eine Variation der Dreischichtenarchitektur, bei der die mittlere Sicht
@@ -1005,7 +1005,7 @@
                             </lsx-row>
                         </lsx-grid-fluid>
                     </lsx-tab-page>
-        
+
                     <lsx-tab-page title="Microservices">
                         <p class="dhbw-text-columns mb-4" detail-content>
                             Microservices zerlegen eine große, monolithische Anwendung in viele kleine Teilanwendungen. Jeder Microservice hat
@@ -1057,18 +1057,18 @@
                                     element.classList.remove("hidden");
                                 }
                             }
-        
+
                             window.addEventListener("ls-slide-changed", () => {
-                                window.setTimeout(function() {                    
+                                window.setTimeout(function() {
                                     let checkbox = document.querySelector("#microservices-switch");
                                     if (!checkbox) return;
-        
+
                                     checkbox.addEventListener("change", toggle_microservices_content);
                                 }, 1000);
                             });
                         </script>
                     </lsx-tab-page>
-                    
+
                     <lsx-tab-page title="Reverse Proxy / API-Gateway">
                         <p class="dhbw-text-columns mb-4" detail-content>
                             Serverseitig kann ein Reverse Proxy als API-Gateway eingesetzt werden, um die eingehenden Anfragen
@@ -1111,7 +1111,7 @@
                             </lsx-row>
                         </lsx-grid-fluid>
                     </lsx-tab-page>
-                    
+
                     <lsx-tab-page title="Proxy">
                         <p class="dhbw-text-columns mb-4" detail-content>
                             Ein clientseitiger Proxy bildet die Schnittstelle eines entfernten Servers innerhalb
@@ -1271,7 +1271,7 @@
                     </small>
                 </lsx-col>
             </lsx-row>
-    
+
             <!-- Die neun Arten der Transparenz -->
             <lsx-row>
                 <lsx-col size="md">
@@ -1334,7 +1334,7 @@
                                 </lsx-row>
                             </lsx-grid-fluid>
                         </lsx-accordion-page>
-    
+
                         <lsx-accordion-page title="Ortstransparenz" bold>
                             <lsx-grid-fluid class="p-0">
                                 <lsx-row>
@@ -1395,7 +1395,7 @@
                                 </lsx-row>
                             </lsx-grid-fluid>
                         </lsx-accordion-page>
-    
+
                         <lsx-accordion-page title="Mobilitätstransparenz" bold>
                             <lsx-grid-fluid class="p-0">
                                 <lsx-row>
@@ -1456,7 +1456,7 @@
                                 </lsx-row>
                             </lsx-grid-fluid>
                         </lsx-accordion-page>
-    
+
                         <lsx-accordion-page title="Persistenztransparenz" bold>
                             <lsx-grid-fluid class="p-0">
                                 <lsx-row>
@@ -1488,7 +1488,7 @@
                                 </lsx-row>
                             </lsx-grid-fluid>
                         </lsx-accordion-page>
-    
+
                         <lsx-accordion-page title="Replikationstransparenz" bold>
                             <lsx-grid-fluid class="p-0">
                                 <lsx-row>
@@ -1534,7 +1534,7 @@
                                 </lsx-row>
                             </lsx-grid-fluid>
                         </lsx-accordion-page>
-    
+
                         <lsx-accordion-page title="Fehlertransparenz" bold>
                             <lsx-grid-fluid class="p-0">
                                 <lsx-row>
@@ -1599,7 +1599,7 @@
                                 </lsx-row>
                             </lsx-grid-fluid>
                         </lsx-accordion-page>
-    
+
                         <lsx-accordion-page title="Nebenläufigkeitstransparenz" bold>
                             <lsx-grid-fluid class="p-0">
                                 <lsx-row>
@@ -1657,7 +1657,7 @@
                                 </lsx-row>
                             </lsx-grid-fluid>
                         </lsx-accordion-page>
-    
+
                         <lsx-accordion-page title="Skalierbarkeitstransparenz" bold>
                             <lsx-grid-fluid class="p-0">
                                 <lsx-row>
@@ -1704,7 +1704,7 @@
                                 </lsx-row>
                             </lsx-grid-fluid>
                         </lsx-accordion-page>
-    
+
                         <lsx-accordion-page title="Leistungstransparenz" bold>
                             <lsx-grid-fluid class="p-0">
                                 <lsx-row>
@@ -1810,7 +1810,7 @@
                             </lsx-card>
                         </lsx-content>
                     </lsx-modal>
-    
+
                     <!-- Fallbeispiel: Render Farm -->
                     <lsx-modal>
                         <lsx-thumbnail style="height: 14em;" class="mw-100">
@@ -1851,7 +1851,7 @@
                             </lsx-card>
                         </lsx-content>
                     </lsx-modal>
-    
+
                     <!-- Fallbeispiel: Supercomputer -->
                     <lsx-modal>
                         <lsx-thumbnail style="height: 14em;" class="mw-100">
@@ -1864,7 +1864,7 @@
                                         Hochleistungsrechner, wie sie in der Forschung und Wissenschaft oder von großen Internetkonzernen
                                         genutzt werden, bestehen aus einem reisigen Cluster kleiner Computer mit eigenem Hauptspeicher und
                                         in der Regel auch eigenem Massenspeicher. Die Einzelcomputer werden dabei in Storage Nodes zur
-                                        Speicherung von Daten und in Compute Nodes zur Bereitstellung von Rechenleistung unterschieden. 
+                                        Speicherung von Daten und in Compute Nodes zur Bereitstellung von Rechenleistung unterschieden.
                                     </p>
                                     </lsx-ul>
                                     <div class="d-flex flex-wrap justify-content-center align-items-center gap-3">
@@ -1905,7 +1905,7 @@
                 </lsx-info-box>
 
                 <lsx-accordion>
-                    <lsx-accordion-page title="Single Poirnt of Failure" bold>
+                    <lsx-accordion-page title="Single Point of Failure" bold>
                         <img src="02-architektur/resilienz1.png" class="d-block w-100"/>
                     </lsx-accordion-page>
                     <lsx-accordion-page title="Vollständig redundante Architektur" bold>
@@ -1930,7 +1930,7 @@
                             daher aus einem großen Rechencluster, dessen Ressourcen auf viele Anwendungen
                             aufgeteilt werden. Manuelle Installationsschritte sollen vermieden werden.
                         </lsx-card>
-        
+
                         <lsx-card title="Skalierung und Elastizität" bold class="small">
                             Über eine Cloud-Umgebung bereitgestellte Anwendungen können, zumindest bei den größeren
                             Anbietern, vollkommen elastisch skaliert werden. Hierfür überwacht die Cloud-Plattform
@@ -1969,7 +1969,7 @@
                         <img src="02-architektur/dilbert-1997-01-28.gif" class="d-block w-100 mb-3" />
                         <img src="02-architektur/dilbert-1997-01-29.gif" class="d-block w-100 mb-3" />
                         <img src="02-architektur/dilbert-2018-03-22.gif" class="d-block w-100 mb-3" />
-        
+
                         <small>
                             <small>
                                 Bildnachweise:
@@ -2045,7 +2045,7 @@
                                 <li><b>Phase 2:</b> Commit (Bestätigung)</li>
                             </lsx-ul>
                         </div>
-                        
+
                         <img src="02-architektur/2-phase-commit-ablauf.png" class="img-thumbnail d-block mw-100 m-auto" style="width: 30em;"/>
 
                         <p>
@@ -2094,7 +2094,7 @@
                             immerhin einen Timeout feststellen und die Zeremonie zu einem späteren Zeitpunkt wiederholen.
                         </div>
                     </lsx-tab-page>
-    
+
                     <lsx-tab-page title="Das CAP-Theorem">
                         <div class="dhbw-text-columns mb-4" detail-content>
                             Das CAP-Theorem nach Eric Brewer (2000) belegt, dass eine verteilte Anwendung immer nur zwei der
@@ -2120,7 +2120,7 @@
                                         Das System ist jederzeit erreichbar und überschreitet niemals die maximal zulässige
                                         Antwortzeit.
                                     </lsx-card>
-                                    
+
                                     <lsx-card title="Partition Tolerance (Partitionstoleranz)" bold>
                                         Die Anwendung funktioniert auch dann noch, wenn einzelne Teile ausgefallen sind.
                                     </lsx-card>
@@ -2257,13 +2257,13 @@
                     </small>
                 </small>
             </p>
-    
+
             <p>
                 Warum diese merkwürdig anmutende Regel? Weil Verteilte Systeme nicht die Lösung für alle Probleme sind
                 („mit dem Hammer in der Hand …”), jedoch ihre ganz eigenen Probleme mitbringen, die nicht immer leicht
                 zu lösen sind.
             </p>
-    
+
             <lsx-ul emoji="⁉️">
                 <li>Aufteilung der Anwendungslogik in unabhängige Teilkomponenten</li>
                 <li>Definition passender Schnittstellen zwischen den Komponenten</li>
@@ -2273,7 +2273,7 @@
                 <li>Koordination vieler verschiedener Knoten (wer ist der Chef?)</li>
                 <li>Und viele mehr</li>
             </lsx-ul>
-    
+
             <p>Natürlich gibt es dennoch viele sinnvolle Einsatzgebiete. Sonst würde es diese Vorlesung ja gar nicht geben. 😵‍💫</p>
         </div>
     </section>
@@ -2331,7 +2331,7 @@
                         </lsx-exercise>
                     </lsx-quiz>
                 </lsx-tab-page>
-    
+
                 <lsx-tab-page title="Aufgabe 1.2">
                     <lsx-quiz>
                         <lsx-exercise title="Proxyserver">
@@ -2372,7 +2372,7 @@
                         </lsx-exercise>
                     </lsx-quiz>
                 </lsx-tab-page>
-    
+
                 <lsx-tab-page title="Aufgabe 1.3">
                     <lsx-quiz>
                         <lsx-exercise title="Dreischichtenarchitektur">
@@ -2425,7 +2425,7 @@
                         </lsx-exercise>
                     </lsx-quiz>
                 </lsx-tab-page>
-    
+
                 <lsx-tab-page title="Aufgabe 1.4">
                     <lsx-quiz>
                         <lsx-exercise title="Microservices">
@@ -2488,7 +2488,7 @@
                         </lsx-exercise>
                     </lsx-quiz>
                 </lsx-tab-page>
-    
+
                 <lsx-tab-page title="Aufgabe 1.5">
                     <lsx-quiz>
                         <lsx-exercise title="Asynchrone Kommunikation">
@@ -2576,11 +2576,11 @@
             </p>
         </aside>
     </section>
-    
+
     <!-- <section data-title="Aufgabe 2: Wir erkunden Streams und Sockets">
         ... Sprach-Server/Client auf Laptop ausführen
     </section> -->
-    
+
     <section data-title="Aufgabe 2: Wer hat an der Uhr gedreht?">
         <article>
             <div class="markdown">
@@ -2594,22 +2594,22 @@
             <lsx-tab-pages>
                 <lsx-tab-page title="Aufgabenstellung" class="markdown">
                     #### a) Begriffsdefinitionen {.mt-4 .dhbw-lightblue}
-            
+
                     Recherchieren Sie folgende Begriffe und formulieren Sie eine dazu passende Definition:
-            
+
                     * Kausalordnung
                     * Happened-Before-Relation
                     * Nebenläufigkeit
                     * Echtzeituhr
                     * Lamport-Uhr
-            
+
                     #### b) Fallbeispiel {.mt-4 .dhbw-lightblue}
-            
+
                     Zeigen Sie anhand eines minimalen Beispiels, wie die zeitliche Abfolge mehrerer Ereignisse anhand
                     einer logischen Uhr sichergestellt werden kann.
-                    
+
                     #### c) Nebenläufigkeit {.mt-4 .dhbw-lightblue}
-            
+
                     Erklären Sie, warum eine einfache Lamport-Uhr keine nebenläufigen Prozesse abbilden kann und zeigen Sie,
                     wie eine Vektoruhr dies ermöglicht.
                 </lsx-tab-page>
@@ -2673,7 +2673,7 @@
                     </lsx-grid-fluid>
                 </lsx-tab-page>
             </lsx-tab-pages>
-            
+
         </article>
         <aside>
             <p>
@@ -2708,9 +2708,9 @@
                         durchaus modular aufgebaut und somit leicht um neue Funktionen erweiterbar sein. Jedoch
                         kann die Anwendung nur als Ganzes deployed und in Betrieb genommen werden.
                     </p>
-                    
+
                     <img src="02-architektur/monolith.png" class="d-block limited-width m-auto mb-3" />
-        
+
                     <p detail-content>
                         Verteilte Anwendungen werden daher häufig mit einer Microservice-Architektur gestaltet.
                         Für kleine Entwicklerteams kann ein Monolith dennoch die bessere Wahl sein, da nicht
@@ -2719,7 +2719,7 @@
                         meist nicht gegeben.
                     </p>
                 </div>
-    
+
                 <lsx-grid-fluid class="p-0">
                     <lsx-row>
                         <lsx-col size="md">
@@ -2736,7 +2736,7 @@
                                 </div>
                             </div>
                         </lsx-col>
-    
+
                         <lsx-col size="md">
                             <div class="card h-100">
                                 <div class="card-header fw-bold">
@@ -2758,7 +2758,7 @@
             </div>
         </article>
     </section>
-    
+
     <section data-title="Probleme beim Deployment monolithischer Anwendungen">
         <article class="centered-content">
             <div class="limited-width">
@@ -2766,7 +2766,7 @@
                     <img src="02-architektur/wanted-monolith.jpg" class="d-block w-100" alt="Wanted! The Monolith …">
                     <img src="02-architektur/code-freeze.jpg" class="d-block w-100" alt="It's really, really, really, really code freeze">
                 </div>
-            
+
                 <small>
                     <small>
                         Bildnachweise:
@@ -2777,7 +2777,7 @@
             </div>
         </article>
     </section>
-    
+
     <section data-title="Anwendungsarchitektur heute">
         <article class="centered-content">
             <div class="limited-width2">
@@ -2790,7 +2790,7 @@
                         Microservice deshalb eine eigene Datenbank, auf deren Inhalte nur über die öffentliche Schnittstelle
                         des Microservices entfernt zugegriffen werden kann. Martin Fowler definiert Microservices
                         [auf seiner Webseite](https://martinfowler.com/microservices/){target=_blank} daher wie folgt:
-                    
+
                         * Entfernte Serverdienste als Teilkomponenten einer Anwendung
                         * Dezentralisierte Verwaltung und dezentrales Datenmanagement
                         * Entsprechen oft organisatorischer Unternehmenseinheiten
@@ -2799,7 +2799,7 @@
                         * Fehlertoleranter Entwurf mit evolutionärem Design
                         * Hoher Automatisierungsgrad für Betrieb und Weiterentwicklung
                     </lsx-accordion-page>
-    
+
                     <lsx-accordion-page title="Beispiele" bold>
                         <lsx-tab-pages>
                            <lsx-tab-page title="Single Page App mit API-Gateway">
@@ -2809,7 +2809,7 @@
                                    als Single Page App ausgeführte Webanwendung, die vollständig im Browser des Clientgeräts läuft.
                                    Aber auch mobile Anwendungen, native Desktopanwendungen oder eine Kombination aus allem sind
                                    weit verbreitet.
-                                   
+
                                    Frontend und Backend kommunizieren daher über das Netzwerk, wobei die Verteilung des Backends
                                    hinter einem API-Gateway verborgen wird. Das API-Gateway bietet hierfür einen zentralen
                                    Zugriffspunkt, über den alle Backendservices einheitlich angebsprochen werden können, ohne
@@ -2822,7 +2822,7 @@
                                    Ein früherer Ansatz, wie er heute unter Anderem von Amazon genutzt wird, konzentriert
                                    sich ausschließlich auf Webanwendungen. Meist handelt es sich dabei um serverseitig
                                    gerenderte Multi Page Apps ohne die eben besprochene Trennung von Frontend und Backend.
-               
+
                                    Als Besonderheit setzt sich die Benutzeroberfläche allerdings wie bei einem Puzzle aus
                                    unterschiedlichen Teilen zusammen, die jeweils von einem anderen Microservice bereitgestellt
                                    werden. Praktisch bedeutet dies, dass es ein vorgelagerter Webserver eine mehr oder weniger
@@ -2834,7 +2834,7 @@
                            </lsx-tab-page>
                        </lsx-tab-pages>
                     </lsx-accordion-page>
-    
+
                     <lsx-accordion-page title="Vor- und Nachteile" bold>
                         <lsx-grid-fluid class="p-0">
                              <lsx-row>
@@ -2852,7 +2852,7 @@
                                          </div>
                                      </div>
                                  </lsx-col>
-             
+
                                  <lsx-col size="md">
                                      <div class="card h-100">
                                          <div class="card-header fw-bold">
@@ -2869,7 +2869,7 @@
                                  </lsx-col>
                              </lsx-row>
                          </lsx-grid-fluid>
-             
+
                          <div class="markdown">
                              Laut Martin Fowler lohnt sich eine Microservice-Architektur daher nur, wenn eine Anwendung hinreichend
                              groß ist und von mehreren Entwicklerteams betreut werden kann. Vgl.
@@ -2880,7 +2880,7 @@
             </div>
         </article>
     </section>
-    
+
     <section data-title="Herausforderungen bei der Nutzung von Microservices">
         <article class="centered-content">
             <div class="limited-width2">
@@ -2888,7 +2888,7 @@
                     <img src="02-architektur/valentines-day.png" class="d-block w-100" alt="Happy Valentines Day">
                     <img src="02-architektur/microservices-and-monolithic.png" class="d-block w-100" alt="Are you ready for microservices?">
                 </div>
-            
+
                 <small>
                     <small>
                         Bildnachweise:
@@ -2899,7 +2899,7 @@
             </div>
         </article>
     </section>
-    
+
     <section data-title="Skalierung von Microservices">
         <article class="centered-content">
             <div class="limited-width">
@@ -2956,7 +2956,7 @@
                             Inhalten reduziert wird.
                         </p>
                     </lsx-carousel-page>
-            
+
                     <lsx-carousel-page>
                         <img class="active d-block w-25 m-auto" src="shared/finish.svg" />
                         <p>
@@ -2977,7 +2977,7 @@
                 <div class="mb-3">
                     <lsx-github-edit url="https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes/tree/main/Beispielanwendung%20Adressbuch"></lsx-github-edit>
                 </div>
-            
+
                 <div class="d-flex flex-column flex-md-row gap-3">
                     <img src="02-architektur/beispiel-adressbuch-1.png" class="img-thumbnail d-block w-100">
                     <img src="02-architektur/beispiel-adressbuch-2.png" class="img-thumbnail d-block w-100">
@@ -2998,7 +2998,7 @@
                 abgedeckt werden, die einen zuverlässigen Betrieb überhaupt erst möglich machen. Neben einer
                 zentralen Benutzer- und Berechtigungsverwaltung gehören hierzu die Überwachung des laufenden
                 Betriebs und viele mehr. {detail-content}
-    
+
                 In traditionellen, monolithischen Anwendungen müssen derartige Funktionen entweder selbst
                 entwickelt oder durch entsprechende Frameworks bzw. Applikationsserver bereitgestellt werden.
                 Entsprechend groß und schwergewichtig fallen diese aus. Microservices haben hingegen den Vorteil,
@@ -3006,7 +3006,7 @@
                 Oft kommen dabei Drittprodukte von spezialisierten Anbietern oder die Plattformservices¹ der
                 großen Cloudanbieter zum Einsatz, die hierfür lediglich über speziell hierfür bereitgestellte
                 Code-Bibliotheken in die eigene Anwendung integriert werden müssen. {detail-content}
-                
+
                 <lsx-tab-pages>
                     <lsx-tab-page title="Beispiel-Architektur">
                         <img src="02-architektur/fallbeispiel-naas-planes.png" class="d-block w-100 mt-4" />
@@ -3018,10 +3018,10 @@
                         <img src="02-architektur/fallbeispiel-naas-mesh.png" class="d-block w-100 mt-4" />
                     </lsx-tab-page>
                 </lsx-tab-pages>
-    
+
                 Das obige Beispiel zeigt eine typische Architektur, bei welcher die nicht-funktionalen
                 Anforderungen durch zusätzliche von der Plattform bereitgestellte Microservices abgedeckt werden. {detail-content}
-    
+
                 ¹
                 <small>
                     Der Begriff „Plattform” steht sinnbildlich für alles, was für Entwicklung und Betrieb einer
@@ -3033,12 +3033,12 @@
             </div>
         </article>
     </section>
-    
+
     <section data-title="Zwei-Faktor-Authentifizierung ja oder nein?">
         <article class="centered-content">
             <div style="max-width: 40em;">
                 <img src="02-architektur/ct-schlagseite-2fa.jpg" class="d-block w-100" alt="Jeden Tag verschwindet einer …">
-            
+
                 <small>
                     <small>
                         Bildnachweis:
@@ -3048,14 +3048,14 @@
             </div>
         </article>
     </section>
-    
+
     <section data-title="Überwachung von Microservices">
         <article class="centered-content">
             <div>
                 <div class="markdown limited-width m-auto mb-5">
                     Typische Services in der **Kontrollebene** sind jene zur Überwachung des laufenden
                     Betriebs einer verteilten Anwendung. Diese unterteilen sich typischerweise in:
-            
+
                     * **Metriken:**: Kennzahlen wie Speicherverbrauch, Anzahl Requests je Sekunde, CPU-Auslastung, ...
                     * **Logging:** Protokollausgaben der einzelnen Services, um Fehler nachvollziehen zu können
                     * **Tracing:** Nachverfolgung von Aufrufketten, um komplexe Fehlersituationen analysieren zu können
@@ -3078,7 +3078,7 @@
                     <lsx-github-edit
                         url="https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes/tree/main/Beispielanwendung%20Webflicks"></lsx-github-edit>
                 </div>
-            
+
                 <div class="d-flex flex-column flex-md-row gap-3">
                     <img src="02-architektur/beispiel-webflicks-1.png" class="img-thumbnail d-block w-100">
                     <img src="02-architektur/beispiel-webflicks-2.png" class="img-thumbnail d-block w-100">
@@ -3095,19 +3095,19 @@
         <article class="centered-content">
             <div class="limited-width2">
                 <img src="02-architektur/cloud-storage.png" class="d-block w-100 mb-5">
-            
+
                 <div class="d-flex flex-column flex-md-row gap-2">
                     <img src="02-architektur/cat1.jpg" class="d-block w-100 img-thumbnail">
                     <img src="02-architektur/cat2.jpg" class="d-block w-100 img-thumbnail">
                     <img src="02-architektur/cat3.jpg" class="d-block w-100 img-thumbnail">
                     <img src="02-architektur/cat4.jpg" class="d-block w-100 img-thumbnail">
                 </div>
-            
+
                 <small>
                     <small>
                         Zitat gefunden auf:
                         <a href="https://docs.kraudcloud.com/technology/storage/" target="_blank">kraudcloud.com</a>, <br>
-                        
+
                         Bildnachweise:
                         <a href="https://pixabay.com/photos/cat-pet-licking-animal-tabby-cat-323262/" target="_blank">Pixabay: TeamK</a>,
                         <a href="https://pixabay.com/photos/cat-kitten-pets-animals-housecat-2934720/" target="_blank">Pixabay: Kirgiz03</a>,
@@ -3118,7 +3118,7 @@
             </div>
         </article>
     </section>
-    
+
     <section data-title="Abgrenzung von typischen Onlinediensten">
         <article class="centered-content">
             <div class="limited-width2">
@@ -3131,7 +3131,7 @@
                     in PHP implementierte, traditionelle Webanwendung. Nach dieser Definition müsste
                     demnach jede Webanwendung auch eine Cloud-Anwendung sein.
                 </div>
-            
+
                 <lsx-grid-fluid class="p-0">
                     <lsx-row>
                         <lsx-col size="md">
@@ -3152,7 +3152,7 @@
             </div>
         </article>
     </section>
-    
+
     <section data-title="Abgrenzung von klassischem Hosting">
         <article class="centered-content">
             <div class="limited-width2">
@@ -3163,12 +3163,12 @@
                     stellt, Installation und Betrieb der Anwendung aber immer noch selbst vorgenommen
                     werden müssen.
                 </div>
-            
+
                 <div class="d-flex gap-3 flex-column flex-md-row">
                     <div class="card flex-grow-1 w-100">
                         <img src="02-architektur/hosting-dedicated.jpg" class="card-img-top">
                         <div class="card-header border-top fw-bold">
-                            Dedicated Root Server                        
+                            Dedicated Root Server
                         </div>
                         <div class="card-body markdown small">
                             Hier vermietet der Anbieter einen dedizierten Computer an den Kunden.
@@ -3178,7 +3178,7 @@
                             aufgespielt werden.
                         </div>
                     </div>
-            
+
                     <div class="card flex-grow-1 w-100">
                         <img src="02-architektur/hosting-vserver.png" class="card-img-top">
                         <div class="card-header border-top fw-bold">
@@ -3191,7 +3191,7 @@
                             eines eigenen Betriebssystems kann ebenfalls mit Einschränkungen verbunden sein.
                         </div>
                     </div>
-            
+
                     <div class="card flex-grow-1 w-100">
                         <img src="02-architektur/hosting-web.png" class="card-img-top">
                         <div class="card-header border-top fw-bold">
@@ -3205,7 +3205,7 @@
                         </div>
                     </div>
                 </div>
-            
+
                 <small>
                     <small>
                         ¹ Bildnachweis:
@@ -3215,7 +3215,7 @@
             </div>
         </article>
     </section>
-    
+
     <section data-title="Grundidee der Cloud">
         <article>
             <lsx-grid-fluid class="p-0">
@@ -3231,7 +3231,7 @@
                             aufgeteilt werden. Manuelle Installationsschritte sollen vermieden werden.
                             {.mb-0}
                         </lsx-card>
-                        
+
                         <lsx-card title="Isolation" bold class="markdown small">
                             Die physischen und virtuellen Maschinen sowie Speicherressourcen einer Cloudumgebung
                             werden vollständig abstrahiert, wodurch jede Anwendung einen eigenen, **virtuellen
@@ -3240,7 +3240,7 @@
                             Zugriffen geschützt werden können.
                             {.mb-0}
                         </lsx-card>
-                        
+
                         <lsx-card title="Skalierung und Elastizität" bold class="markdown small">
                             **Skalierung** beschreibt die Anpassung der zur Verfügung gestellten Ressourcen
                             entsprechend dem Leistungsbedarf einer Anwendung. Beim klassischen Hosting und
@@ -3249,7 +3249,7 @@
                             die Ressourcen automatisch skalieren kann.
                             {.mb-0}
                         </lsx-card>
-                        
+
                         <lsx-card title="Variable Kosten" bold class="markdown small">
                             Aufgrund der dynamischen Ressourcenzuteilung bieten viele Cloud-Angebote eine
                             **nutzungsabhängige Abrechnung**, die sich nach Anzahl der tatsächlich genutzten
@@ -3263,7 +3263,7 @@
             </lsx-grid-fluid>
         </article>
     </section>
-    
+
     <section data-title="Pet vs. Cattle">
         <article class="centered-content">
             <div class="limited-width2">
@@ -3277,7 +3277,7 @@
                             Die Software wird gehegt und gepflegt wie ein Haustier.
                         </div>
                     </div>
-                
+
                     <div class="card flex-grow-1 w-100">
                         <img src="02-architektur/pet-vs-cattle-2.jpg" class="card-img-top">
                         <div class="card-header border-top fw-bold">
@@ -3288,7 +3288,7 @@
                         </div>
                     </div>
                 </div>
-            
+
                 <small>
                     <small>
                         Bildnachweise:
@@ -3299,7 +3299,7 @@
             </div>
         </article>
     </section>
-    
+
     <section data-title="Das As-a-Service-Geschäftsmodell">
         <article class="centered-content">
             <div class="limited-width2">
@@ -3311,22 +3311,22 @@
                     werden fallen in die Verantwortung des Anbieters, wodurch diese aus Kundensicht
                     komplett ausgelagert werden können.
                 </div>
-            
+
                 <div class="d-flex gap-3 flex-column flex-md-row mb-4">
                     <div class="flex-grow-1 w-100 markdown small">
                         ### Infrastructure-as-a-Service {.mb-3}
-            
+
                         <img src="02-architektur/modelle-iaas.png" class="w-100 mb-3">
-                
+
                         Im einfachsten Fall stellt die Cloud virtuelle Maschinen zur manuellen Einrichtung
                         sowie dazugehörige Dienste wie Objektspeicher und Netzwerkrouting zur Verfügung.
                         Lediglich die Bereitstellung aus Sicht des Cloudanbieters wird dabei automatisiert.
                     </div>
                     <div class="flex-grow-1 w-100 markdown small">
                         ### Platform-as-a-Service {.mb-3}
-            
+
                         <img src="02-architektur/modelle-paas.png" class="w-100 mb-3">
-                
+
                         Auf die Entwicklung von Cloudanwendungen zugeschnittene Angebote bieten eine
                         vorkonfigurierte Laufzeitumgebung für selbstgeschriebenen Quellcode. Deployment
                         und Betrieb werden weitgehend automatisiert. Es besteht jedoch die Gefahr von
@@ -3334,21 +3334,21 @@
                     </div>
                     <div class="flex-grow-1 w-100 markdown small">
                         ### Software-as-a-Service {.mb-3}
-            
+
                         <img src="02-architektur/modelle-saas.png" class="w-100 mb-3">
-                
+
                         Am weitesten abstrahiert sind SaaS-Angebote zur Bereitstellung ganzer Anwendungspakete.
                         Als Kunde registriert man sich lediglich für eine Anwendung, die gegen eine monatliche
                         Gebühr zur Verfügung gestellt wird. Alle Kunden teilen sich meist den Quellcode, während
                         die Daten getrennt werden.
                     </div>
                 </div>
-            
+
                 <div class="markdown" detail-content>
                     Angebote wie **Function-as-a-Service** (auch **Serverless** genannt, da die Verwaltung von Serverinstanzen komplett
                     wegabstrahiert wird) oder **Database-as-a-Service** richten ebenfalls an Anwendungsentwickler und zählen deshalb zu
                     Platform-as-a-Service.
-                    
+
                     Die großen Anbieter wie Amazon, Google oder Microsoft bieten grundsätzlich eine Mischung aus allen Modellen, während
                     sich kleinere Anbieter wie [Heroku](https://heroku.com/){target="_blank"}, [Render](https://render.com/){target="_blank"},
                     [Fly.io](https://fly.io/){target="_blank"} meist auf Plattformdienste beschränken.
@@ -3358,7 +3358,7 @@
             </div>
         </article>
     </section>
-    
+
     <section data-title="Vertiefende Videos" class="centered-content">
         <div class="limited-width2">
             <lsx-grid-fluid>
@@ -3373,7 +3373,7 @@
                     </lsx-col>
                 </lsx-row>
             </lsx-grid-fluid>
-        
+
             <lsx-info-box type="warning" class="mt-3">
                 Die Videos beziehen sich an manchen Stellen noch auf die Entwicklung mit Java und
                 dem Spring-Framework. Auch wenn wir inzwischen Node.js/JavaScript in der Vorlesung
