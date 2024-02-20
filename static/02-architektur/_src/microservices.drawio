@@ -1,120 +1,120 @@
-<mxfile host="app.diagrams.net" modified="2024-02-16T08:57:46.090Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/119.0" etag="waYm2jkg2mMHKYt_2s4C" version="23.1.5" type="device" pages="3">
+<mxfile host="app.diagrams.net" modified="2024-02-20T14:58:45.177Z" agent="Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/119.0" etag="wbQbAG-U9jIOC6W8Hdwo" version="23.1.5" type="device" pages="3">
   <diagram id="AQ4L_uzbZbfP-BAkbXQ9" name="beispiel">
-    <mxGraphModel dx="1834" dy="766" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1834" dy="715" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-1" value="" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.laptop_2;" vertex="1" parent="1">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-1" value="" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.laptop_2;" parent="1" vertex="1">
           <mxGeometry x="-160" y="270" width="116" height="86.5" as="geometry" />
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-2" value="Fallbeispiel: &quot;Notebook as a Service&quot;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;fontStyle=1;fontSize=16;fontColor=#990000;" vertex="1" parent="1">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-2" value="Fallbeispiel: &quot;Notebook as a Service&quot;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;fontStyle=1;fontSize=16;fontColor=#990000;" parent="1" vertex="1">
           <mxGeometry x="-160" y="160" width="300" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-3" value="Single Page App mit Microservice-Backend und API-Gateway" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=12;fontColor=#000066;" vertex="1" parent="1">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-3" value="Single Page App mit Microservice-Backend und API-Gateway" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=12;fontColor=#000066;" parent="1" vertex="1">
           <mxGeometry x="-160" y="180" width="340" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-4" value="" style="group" vertex="1" connectable="0" parent="1">
-          <mxGeometry x="109" y="220" width="170" height="171" as="geometry" />
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-4" value="" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="109" y="220" width="180" height="171" as="geometry" />
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-5" value="" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.web_server;" vertex="1" parent="M1x9D8d4_y4kX1i0SUsq-4">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-5" value="" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.web_server;" parent="M1x9D8d4_y4kX1i0SUsq-4" vertex="1">
           <mxGeometry width="76.5" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-6" value="&lt;b&gt;Content Web Server&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» Statische HTML/CSS/JS-Dateien&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» Statische Bilder und Videos&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» …&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;fontColor=#990000;" vertex="1" parent="M1x9D8d4_y4kX1i0SUsq-4">
-          <mxGeometry y="91" width="170" height="80" as="geometry" />
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-6" value="&lt;b&gt;Frontend Server&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» Statische HTML/CSS/JS-Dateien&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» Statische Bilder und Videos&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» …&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;fontColor=#990000;" parent="M1x9D8d4_y4kX1i0SUsq-4" vertex="1">
+          <mxGeometry y="91" width="180" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-7" value="" style="group" vertex="1" connectable="0" parent="1">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-7" value="" style="group" parent="1" vertex="1" connectable="0">
           <mxGeometry x="379" y="220" width="180" height="141" as="geometry" />
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-8" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" edge="1" parent="M1x9D8d4_y4kX1i0SUsq-7" target="M1x9D8d4_y4kX1i0SUsq-11">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-8" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" parent="M1x9D8d4_y4kX1i0SUsq-7" target="M1x9D8d4_y4kX1i0SUsq-11" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="60" y="65" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-9" value="" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.web_server;" vertex="1" parent="M1x9D8d4_y4kX1i0SUsq-7">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-9" value="" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.web_server;" parent="M1x9D8d4_y4kX1i0SUsq-7" vertex="1">
           <mxGeometry width="76.5" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-10" value="&lt;div&gt;&lt;b&gt;Katalog-Backend&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» Serverseitige HTML-Generierung&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» Verwaltung der ausleihbaren Geräte&lt;br&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;" vertex="1" parent="M1x9D8d4_y4kX1i0SUsq-7">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-10" value="&lt;div&gt;&lt;b&gt;Katalog-Backend&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» Serverseitige HTML-Generierung&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» Verwaltung der ausleihbaren Geräte&lt;br&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;" parent="M1x9D8d4_y4kX1i0SUsq-7" vertex="1">
           <mxGeometry y="91" width="180" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-11" value="" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.database;" vertex="1" parent="M1x9D8d4_y4kX1i0SUsq-7">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-11" value="" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.database;" parent="M1x9D8d4_y4kX1i0SUsq-7" vertex="1">
           <mxGeometry x="90" y="40" width="42.5" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-12" value="" style="group" vertex="1" connectable="0" parent="1">
-          <mxGeometry x="379" y="380" width="200" height="151" as="geometry" />
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-12" value="" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="379" y="380" width="210" height="151" as="geometry" />
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-13" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" edge="1" parent="M1x9D8d4_y4kX1i0SUsq-12" target="M1x9D8d4_y4kX1i0SUsq-16">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-13" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" parent="M1x9D8d4_y4kX1i0SUsq-12" target="M1x9D8d4_y4kX1i0SUsq-16" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="60" y="65" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-14" value="" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.web_server;" vertex="1" parent="M1x9D8d4_y4kX1i0SUsq-12">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-14" value="" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.web_server;" parent="M1x9D8d4_y4kX1i0SUsq-12" vertex="1">
           <mxGeometry width="76.5" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-15" value="&lt;div&gt;&lt;b&gt;Verleih-Backend&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» Serverseitige HTML-Generierung&lt;/font&gt;&lt;br&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» Funktionen zum Ausleihen von Geräten&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» Bezahlung und Abrechnung&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;" vertex="1" parent="M1x9D8d4_y4kX1i0SUsq-12">
-          <mxGeometry y="91" width="200" height="60" as="geometry" />
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-15" value="&lt;div&gt;&lt;b&gt;Auftrags-Backend&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» Serverseitige HTML-Generierung&lt;/font&gt;&lt;br&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» Funktionen zum Ausleihen von Geräten&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» Bezahlung und Abrechnung&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;" parent="M1x9D8d4_y4kX1i0SUsq-12" vertex="1">
+          <mxGeometry y="91" width="210" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-16" value="" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.database;" vertex="1" parent="M1x9D8d4_y4kX1i0SUsq-12">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-16" value="" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.database;" parent="M1x9D8d4_y4kX1i0SUsq-12" vertex="1">
           <mxGeometry x="90" y="40" width="42.5" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-17" value="" style="endArrow=classic;html=1;strokeColor=#000000;fontSize=10;fontColor=#990000;" edge="1" parent="1">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-17" value="" style="endArrow=classic;html=1;strokeColor=#000000;fontSize=10;fontColor=#990000;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="-30" y="310" as="sourcePoint" />
             <mxPoint x="100" y="250" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-18" value="" style="endArrow=classic;html=1;strokeColor=#000000;fontSize=10;fontColor=#990000;" edge="1" parent="1">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-18" value="" style="endArrow=classic;html=1;strokeColor=#000000;fontSize=10;fontColor=#990000;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="-30" y="330" as="sourcePoint" />
             <mxPoint x="100" y="420" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-19" value="" style="endArrow=classic;html=1;strokeColor=#000000;fontSize=10;fontColor=#990000;" edge="1" parent="1">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-19" value="" style="endArrow=classic;html=1;strokeColor=#000000;fontSize=10;fontColor=#990000;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="189" y="410" as="sourcePoint" />
             <mxPoint x="369" y="270" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-20" value="" style="endArrow=classic;html=1;strokeColor=#000000;fontSize=10;fontColor=#990000;" edge="1" parent="1">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-20" value="" style="endArrow=classic;html=1;strokeColor=#000000;fontSize=10;fontColor=#990000;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="189" y="430" as="sourcePoint" />
             <mxPoint x="369" y="430" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-21" value="HTTP+HTML" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=10;labelBackgroundColor=none;fontColor=#000066;rotation=-25;" vertex="1" parent="1">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-21" value="HTTP+HTML" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=10;labelBackgroundColor=none;fontColor=#000066;rotation=-25;" parent="1" vertex="1">
           <mxGeometry x="-40" y="280" width="70" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-22" value="&lt;div&gt;HTTP-Webservice&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=10;labelBackgroundColor=none;fontColor=#000066;rotation=35;" vertex="1" parent="1">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-22" value="&lt;div&gt;HTTP-Webservice&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=10;labelBackgroundColor=none;fontColor=#000066;rotation=35;" parent="1" vertex="1">
           <mxGeometry x="-40" y="356.5" width="100" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-23" value="HTTP-Webservice" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=10;fontColor=#000066;" vertex="1" parent="1">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-23" value="HTTP-Webservice" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=10;fontColor=#000066;" parent="1" vertex="1">
           <mxGeometry x="189" y="415" width="100" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-24" value="" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.tablet_1;" vertex="1" parent="1">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-24" value="" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.tablet_1;" parent="1" vertex="1">
           <mxGeometry x="-105" y="375.5" width="61" height="79" as="geometry" />
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-25" value="" style="endArrow=classic;html=1;strokeColor=#000000;fontSize=10;fontColor=#000066;" edge="1" parent="1">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-25" value="" style="endArrow=classic;html=1;strokeColor=#000000;fontSize=10;fontColor=#000066;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="-30" y="430" as="sourcePoint" />
             <mxPoint x="100" y="430" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-26" value="&lt;div&gt;HTTP-Webservice&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=10;labelBackgroundColor=none;fontColor=#000066;rotation=0;" vertex="1" parent="1">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-26" value="&lt;div&gt;HTTP-Webservice&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;fontSize=10;labelBackgroundColor=none;fontColor=#000066;rotation=0;" parent="1" vertex="1">
           <mxGeometry x="-31" y="410" width="100" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-29" value="" style="group" vertex="1" connectable="0" parent="1">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-29" value="" style="group" parent="1" vertex="1" connectable="0">
           <mxGeometry x="109" y="370" width="240" height="211" as="geometry" />
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-30" value="" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.edgesight_server;shadow=0;fillColor=none;fontSize=10;fontColor=#000000;" vertex="1" parent="M1x9D8d4_y4kX1i0SUsq-29">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-30" value="" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.edgesight_server;shadow=0;fillColor=none;fontSize=10;fontColor=#000000;" parent="M1x9D8d4_y4kX1i0SUsq-29" vertex="1">
           <mxGeometry y="10" width="76.5" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="M1x9D8d4_y4kX1i0SUsq-31" value="&lt;b&gt;API-Gateway&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» Schirmt Frontends und Backends voneinander ab&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» Routet alle Anfragen an die Backends durch&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» Zentrale Authentifizierung und Autorisierung&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» Zentrale Stelle für die SSL-Verschlüsselung&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;» Zentrale Stelle für Circuit Breaker&lt;br&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» Bereitstellung einer API-Dokumentation&lt;/font&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» …&lt;br&gt;&lt;/font&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;fontColor=#004C99;" vertex="1" parent="M1x9D8d4_y4kX1i0SUsq-29">
+        <mxCell id="M1x9D8d4_y4kX1i0SUsq-31" value="&lt;b&gt;API-Gateway&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» Schirmt Frontends und Backends voneinander ab&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» Routet alle Anfragen an die Backends durch&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» Zentrale Authentifizierung und Autorisierung&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» Zentrale Stelle für die SSL-Verschlüsselung&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;» Zentrale Stelle für Circuit Breaker&lt;br&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» Bereitstellung einer API-Dokumentation&lt;/font&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;» …&lt;br&gt;&lt;/font&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;fontColor=#004C99;" parent="M1x9D8d4_y4kX1i0SUsq-29" vertex="1">
           <mxGeometry y="100" width="240" height="120" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram name="gateway" id="5hDzmGWh-DsyDR7hl5gv">
-    <mxGraphModel dx="2234" dy="366" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2234" dy="315" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="OcNhOAE2UDeHGj7oMj6U-0" />
         <mxCell id="OcNhOAE2UDeHGj7oMj6U-1" parent="OcNhOAE2UDeHGj7oMj6U-0" />
@@ -152,7 +152,7 @@
         <mxCell id="OcNhOAE2UDeHGj7oMj6U-18" value="" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.web_server;" parent="OcNhOAE2UDeHGj7oMj6U-16" vertex="1">
           <mxGeometry width="76.5" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="OcNhOAE2UDeHGj7oMj6U-19" value="&lt;div style=&quot;&quot;&gt;&lt;b&gt;Verleih-Service&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;Ausleihen von Geräten&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;Bezahlung und Abrechnung&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;" parent="OcNhOAE2UDeHGj7oMj6U-16" vertex="1">
+        <mxCell id="OcNhOAE2UDeHGj7oMj6U-19" value="&lt;div style=&quot;&quot;&gt;&lt;b&gt;Auftrags-Service&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;Ausleihen von Geräten&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;Bezahlung und Abrechnung&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;" parent="OcNhOAE2UDeHGj7oMj6U-16" vertex="1">
           <mxGeometry y="91" width="150" height="50" as="geometry" />
         </mxCell>
         <mxCell id="OcNhOAE2UDeHGj7oMj6U-20" value="" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.database;" parent="OcNhOAE2UDeHGj7oMj6U-16" vertex="1">
@@ -177,13 +177,13 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="QSrv21iuS2mczquYGAQM-6" value="" style="group" parent="OcNhOAE2UDeHGj7oMj6U-1" vertex="1" connectable="0">
-          <mxGeometry x="-210" y="540" width="150" height="131" as="geometry" />
+          <mxGeometry x="-210" y="540" width="160" height="131" as="geometry" />
         </mxCell>
         <mxCell id="OcNhOAE2UDeHGj7oMj6U-8" value="" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.web_server;" parent="QSrv21iuS2mczquYGAQM-6" vertex="1">
           <mxGeometry width="76.5" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="OcNhOAE2UDeHGj7oMj6U-9" value="&lt;b&gt;Content Web Server&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;fontColor=#990000;" parent="QSrv21iuS2mczquYGAQM-6" vertex="1">
-          <mxGeometry x="40" y="91" width="140" height="40" as="geometry" />
+        <mxCell id="OcNhOAE2UDeHGj7oMj6U-9" value="&lt;b&gt;Frontend Server&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;fontColor=#990000;" parent="QSrv21iuS2mczquYGAQM-6" vertex="1">
+          <mxGeometry x="40" y="91" width="120" height="40" as="geometry" />
         </mxCell>
         <mxCell id="QSrv21iuS2mczquYGAQM-7" value="" style="group" parent="OcNhOAE2UDeHGj7oMj6U-1" vertex="1" connectable="0">
           <mxGeometry x="-210" y="716.5" width="100" height="120" as="geometry" />
@@ -216,7 +216,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="compositeui" id="SlMkUBh-QHx6uQdkfPXw">
-    <mxGraphModel dx="1834" dy="366" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1834" dy="315" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="TalG5VYHhIm1QpI3wTf5-0" />
         <mxCell id="TalG5VYHhIm1QpI3wTf5-1" parent="TalG5VYHhIm1QpI3wTf5-0" />
@@ -295,7 +295,7 @@
         <mxCell id="TalG5VYHhIm1QpI3wTf5-5" value="" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.web_server;" parent="4yXDjum3irz8IN0s1OsI-0" vertex="1">
           <mxGeometry width="76.5" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="TalG5VYHhIm1QpI3wTf5-8" value="&lt;b&gt;Content Web Server&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;Statische HTML/CSS/JS-Dateien&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;Rahmengerüst der HTML-Seite&lt;br&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;" parent="4yXDjum3irz8IN0s1OsI-0" vertex="1">
+        <mxCell id="TalG5VYHhIm1QpI3wTf5-8" value="&lt;b&gt;Frontend Server&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;Statische HTML/CSS/JS-Dateien&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;Rahmengerüst der HTML-Seite&lt;br&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;" parent="4yXDjum3irz8IN0s1OsI-0" vertex="1">
           <mxGeometry y="91" width="170" height="50" as="geometry" />
         </mxCell>
         <mxCell id="4yXDjum3irz8IN0s1OsI-1" value="" style="group" parent="TalG5VYHhIm1QpI3wTf5-1" vertex="1" connectable="0">
@@ -326,7 +326,7 @@
         <mxCell id="8BCd9KyNDRwrOG5pHQCl-1" value="" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.web_server;" parent="4yXDjum3irz8IN0s1OsI-2" vertex="1">
           <mxGeometry width="76.5" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="8BCd9KyNDRwrOG5pHQCl-2" value="&lt;div&gt;&lt;b&gt;Verleih-Service&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;Ausleihen von Geräten&lt;/font&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;Bezahlung und Abrechnung&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;" parent="4yXDjum3irz8IN0s1OsI-2" vertex="1">
+        <mxCell id="8BCd9KyNDRwrOG5pHQCl-2" value="&lt;div&gt;&lt;b&gt;Auftrags-Service&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;Ausleihen von Geräten&lt;/font&gt;&lt;div style=&quot;font-size: 10px&quot;&gt;&lt;font style=&quot;font-size: 10px&quot;&gt;Bezahlung und Abrechnung&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];autosize=1;" parent="4yXDjum3irz8IN0s1OsI-2" vertex="1">
           <mxGeometry y="91" width="150" height="50" as="geometry" />
         </mxCell>
         <mxCell id="8BCd9KyNDRwrOG5pHQCl-3" value="" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.database;" parent="4yXDjum3irz8IN0s1OsI-2" vertex="1">
