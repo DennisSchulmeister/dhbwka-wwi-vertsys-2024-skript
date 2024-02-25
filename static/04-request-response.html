@@ -19,6 +19,7 @@
 </section>
 
 <!-- TODO: Übungsaufgaben
+    * Michael Programmierübung 2: DELETE-Endpunkt ergänzen (als Einstiegsaufgabe zu Express, da sehr einfach)
     * Hey, Mr. Postman (2020er-Skript) + Frage zu Controller/Service
     * Wir eröffnen ein Kino (2020/2018er-Skript)
     * Kleiderkreisel (2020er-Aufgabenblatt)
@@ -29,6 +30,11 @@
     Fallbeispiele:
 
     * Gästebuch (2028er-Skript)
+-->
+
+<!-- 
+    Einleitung / Wiederholung Webprog: Quiz aus Michael Kahoot 1
+    Ende: Quiz aus Michael Kahoot 4
 -->
 
 <!-- ==================== -->
@@ -1629,414 +1635,444 @@
 </section>
 -->
 
-<section data-title="Aufgabe: Hey, Mr. Postman!" data-background-color="rgb(231, 221, 141)">
-    <article>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md">
-                    <lsx-github-edit url="Aufgabe%20Mr.%20Postman" download="Aufgabe%20Mr.%20Postman"></lsx-github-edit>
+<!-- TODO -->
+<section data-title="Übungsaufgaben" data-background-color="rgb(231, 221, 141)">
+    <!-- TODO -->
+    <section data-title="Aufgabe 1: Ein kleines Express.js-Quiz">
+    </section>
+
+    <!-- TODO -->
+    <section data-title="Aufgabe 2: Musikdatenbank">
+        <article>
+            <lsx-github-edit url="3 REST-Webservices/Beispiele/Musikdatenbank"></lsx-github-edit>
+        </article>
+        <aside>
+            <p>
+                xxx
+            </p>
+            <img src="shared/github_atom.png" class="img-fluid d-block"/>
+            <p>
+                <small>
+                    Bildnachweis:
+                    <a href="https://atom.io/" target="_blank">Atom Webseite</a>
+                </small>
+            </p>
+        </aside>
+    </section>
+
+    <!--
+    <section data-title="Aufgabe: Hey, Mr. Postman!">
+        <article>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md">
+                        <lsx-github-edit url="Aufgabe%20Mr.%20Postman" download="Aufgabe%20Mr.%20Postman"></lsx-github-edit>
+                    </div>
+                </div>
+        
+                <div class="row">
+                    <div class="col-md">
+                        <p>
+                            Nun, welche Musik hören Sie gerne? 🎼 Hier kommt die einmalige Gelegenheit, sie über einen REST-Webservice
+                            in eine Datenbank einzutragen. Hierfür muss lediglich der oben verlinkte Beispielservice zum Laufen gebracht
+                            werden. Anfangs kann zum Test die Adresse <a href="http://localhost:3000/" target="_blank">http://localhost:3000/</a>
+                            im Browser aufgerufen werden. Da auf diese Weise aber nur GET-Anfragen ausgelöst werden können, muss der
+                            Webservice eigentlich mit einem Werkzeug wie Postman analysiert werden. Führen Sie hierzu die folgenden
+                            Schritte in Postman aus:
+                        </p>
+                        <ol>
+                            <li>
+                                Senden Sie eine <code>GET</code>-Anfrage an die Startadresse des Webservices.
+                            </li>
+                            <li>
+                                Navigieren Sie von der Antwort zur Songliste und von dort zum ersten Song.
+                            </li>
+                            <li>
+                                Gehen Sie zurück zur Startseite und finden heraus, welcher Link für Suchanfragen benutzt wird.
+                            </li>
+                            <li>
+                                Suchen Sie anschließend alle Songs von den Dire Straits.
+                            </li>
+                            <li>
+                                <p>
+                                    Senden Sie eine <code>POST</code>-Anfrage an die Song-Collection, um folgenden Song anzulegen:
+                                </p>
+                                <source-code language="json">
+                                    {
+                                        "artist": "Elton John",
+                                        "name": "Circle of Life",
+                                        "releaseYear": 1994
+                                        "songwriters": "Tim Rice",
+                                    }
+                                </source-code>
+                            </li>
+                            <li>
+                                Ändern Sie anschließend mit einer <code>PATCH</code>-Anfrage die Songwriter auf „Elton John, Tim Rice”.
+                            </li>
+                            <li>
+                                Ändern Sie mit einer <code>PUT</code>-Anfrage den Songtitel auf „Circle of Life (from Lion King)”.
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md">
+                        <img src="04-request-response/aufgabe1-browser.png" alt="Screenshot des Webservices im Browser" class="d-block" style="width: 100%; border: 1px solid grey;" />
+                    </div>
+                    <div class="col-md">
+                        <img src="04-request-response/aufgabe1-postman.png" alt="Screenshot des Webservices in Postman" class="d-block" style="width: 100%; border: 1px solid grey;" />
+                    </div>
                 </div>
             </div>
+        </article>
+        <aside>
+            <p>
+                Hier können Sie die ersten, praktischen Erfahrungen mit REST sammeln. Führen Sie hierfür einfach
+                den Quellcode aus und erkunden Sie den enthaltenen Webservice mit Postman. Die nächste Aufgabe
+                ist danach sicher ganz einfach. 🎓 Den gleichnamigen Song (in der Version von den Carpenters) finden
+                Sie derweil auf Youtube.
+            </p>
+            <img src="shared/mail.png" class="img-fluid d-block" style="max-width: 15em;"/>
+            <p>
+                <small>
+                    Bildnachweis:
+                    <a href="https://pixabay.com/vectors/communication-document-letter-mail-2024204/" target="_blank">Pixabay: OpenClipart-Vectors</a>
+                </small>
+            </p>
     
-            <div class="row">
-                <div class="col-md">
-                    <p>
-                        Nun, welche Musik hören Sie gerne? 🎼 Hier kommt die einmalige Gelegenheit, sie über einen REST-Webservice
-                        in eine Datenbank einzutragen. Hierfür muss lediglich der oben verlinkte Beispielservice zum Laufen gebracht
-                        werden. Anfangs kann zum Test die Adresse <a href="http://localhost:3000/" target="_blank">http://localhost:3000/</a>
-                        im Browser aufgerufen werden. Da auf diese Weise aber nur GET-Anfragen ausgelöst werden können, muss der
-                        Webservice eigentlich mit einem Werkzeug wie Postman analysiert werden. Führen Sie hierzu die folgenden
-                        Schritte in Postman aus:
-                    </p>
-                    <ol>
-                        <li>
-                            Senden Sie eine <code>GET</code>-Anfrage an die Startadresse des Webservices.
-                        </li>
-                        <li>
-                            Navigieren Sie von der Antwort zur Songliste und von dort zum ersten Song.
-                        </li>
-                        <li>
-                            Gehen Sie zurück zur Startseite und finden heraus, welcher Link für Suchanfragen benutzt wird.
-                        </li>
-                        <li>
-                            Suchen Sie anschließend alle Songs von den Dire Straits.
-                        </li>
-                        <li>
-                            <p>
-                                Senden Sie eine <code>POST</code>-Anfrage an die Song-Collection, um folgenden Song anzulegen:
-                            </p>
+            <lsx-youtube video="dcLbS0yxzdk"></lsx-youtube>
+        </aside>
+    </section>
+    -->
+    
+    <!-- TODO -->
+    <section data-title="Aufgabe 3: Art Institute of Chicago">
+        <article>
+            <div class="markdown">
+                Nach ein wenig Stöbern in der zuvor gezeigten Liste öffentlicher Webservices
+                finden wir die API des „Art Institute of Chicago”, einem 1879 gegründeten,
+                international bekannten Kunstmuseum. In der Liste wird auf die Schnittstellenbeschreibung
+                unter <a href="https://api.artic.edu/" target="_blank">api.artic.edu</a> verwiesen.
+                Stöbern Sie ein wenig in der Dokumentation und beantworten Sie anschließend
+                folgende Fragen:
+        
+                1. Warum kann man hier tatsächlich von einer API und nicht einfach nur von
+                einem Webservice sprechen?
+        
+                1. Welche Collections (in der Dokumentation „Endpoints” genannt) unterstützt die API?
+        
+                <!-- 1. Unterstützt der Webservice das HATEOAS-Prinzip? -->
+        
+                1. Werden tatsächlich alle für REST-Webservices typischen HTTP-Verben unterstützt?
+        
+                1. Fall nicht alle HTTP-Verben unterstützt werden: Was könnte der Grund hierfür sein?
+        
+                1. Welche Informationen liefert die API zu einem einzelnen Bild?
+        
+                1. Wie kann man die URL zur Verwendung des Bilds in einer Webseite oder App erzeugen?
+            </div>
+        
+            <img src="04-request-response/artic-api.png" class="img-thumbnail w-100" />
+        </article>
+        <aside>
+            <p>
+                Zum Vergleich schauen wir uns in dieser Aufgabe einen „echten” Webservice
+                eines „echten“ Anbieters an: Die Webservice-API des Art Institute of Chicago.
+                Ihre Dokumentation gibt viel Aufschluss darüber, wie die REST-Prinzipien
+                in der Praxis tatsächlich genutzt werden.
+            </p>
+            <img src="shared/github_atom.png" class="img-fluid d-block"/>
+            <p>
+                <small>
+                    Bildnachweis:
+                    <a href="https://atom.io/" target="_blank">Atom Webseite</a>
+                </small>
+            </p>
+        </aside>
+    </section>
+    
+    <!-- TODO -->
+    <section data-title="Aufgabe 4: Ein kleines HTTP- und REST-Quiz">
+        <article>
+            <lsx-quiz>
+                <lsx-exercise title="HTTP-Verben">
+                    <lsx-question
+                        type = "single-choice"
+                        text = "a) Was bewirkt das HTTP-Verb POST?"
+                    >
+                        <lsx-answer>
+                            Es werden bereits vorhandene Daten vom Server abgerufen.
+                        </lsx-answer>
+                        <lsx-answer>
+                            Es werden Daten auf dem Server gelöscht (POST = Postpone).
+                        </lsx-answer>
+                        <lsx-answer correct>
+                            Es werden Daten werden zur Verarbeitung an den Server geschickt.
+                        </lsx-answer>
+                    </lsx-question>
+        
+                    <lsx-question
+                        type = "single-choice"
+                        text = "b) Was bewirkt das HTTP-Verb DELETE?"
+                    >
+                        <lsx-answer>
+                            Die ausgewählten Daten werden im Browser gelöscht.
+                        </lsx-answer>
+                        <lsx-answer correct>
+                            Die ausgewählten Daten werden auf dem Server gelöscht.
+                        </lsx-answer>
+                        <lsx-answer>
+                            Es wird geprüft, ob die Daten gelöscht werden können.
+                        </lsx-answer>
+                    </lsx-question>
+        
+                    <lsx-question
+                        type = "single-choice"
+                        text = "c) Was bewirkt das HTTP-Verb GET?"
+                    >
+                        <lsx-answer correct>
+                            Es werden Daten vom Server abgerufen (zum Beispiel der HTML-Code einer Webseite).
+                        </lsx-answer>
+                        <lsx-answer>
+                            Es wird eine Dateiliste vom Server mit den Namen aller Dateien einer Webseite abgerufen.
+                        </lsx-answer>
+                        <lsx-answer>
+                            Der Inhalt einer Datei wird vom Browser an den Server übertragen.
+                        </lsx-answer>
+                    </lsx-question>
+                </lsx-exercise>
+        
+                <lsx-exercise title="HTTP-Statuscodes">
+                    <lsx-question
+                        type = "single-choice"
+                        text = "a) Was bedeutet der Statuscode 401 Unauthorized?"
+                    >
+                        <lsx-answer>
+                            Die gesuchten Daten wurden nicht gefunden.
+                        </lsx-answer>
+                        <lsx-answer>
+                            Die gewünschte Funktion wurde nicht ausprogrammiert.
+                        </lsx-answer>
+                        <lsx-answer correct>
+                            Die gewünschte Funktion darf nicht ausgeführt werden.
+                        </lsx-answer>
+                    </lsx-question>
+        
+                    <lsx-question
+                        type = "single-choice"
+                        text = "b) Was bedeutet der Statuscode 503 Service Unavailble?"
+                    >
+                        <lsx-answer correct>
+                            Es ist ein temporärer Fehler aufgetreten, bitte später nochmal versuchen.
+                        </lsx-answer>
+                        <lsx-answer>
+                            Es ist ein schwerwiegender Fehler aufgetreten. Nichts geht mehr.
+                        </lsx-answer>
+                        <lsx-answer>
+                            Die gesuchte Information wurde nicht gefunden. Bitte anders suchen.
+                        </lsx-answer>
+                    </lsx-question>
+        
+                    <lsx-question
+                        type = "single-choice"
+                        text = "c) Welcher Statuscode signalisiert, dass eine Seite nicht gefunden wurde?"
+                    >
+                        <lsx-answer>
+                            200
+                        </lsx-answer>
+                        <lsx-answer>
+                            301
+                        </lsx-answer>
+                        <lsx-answer correct>
+                            404
+                        </lsx-answer>
+                    </lsx-question>
+        
+                    <lsx-question
+                        type = "single-choice"
+                        text = "d) Welcher Statuscode wird geschickt, wenn alles okay ist?"
+                    >
+                        <lsx-answer>
+                            100
+                        </lsx-answer>
+                        <lsx-answer correct>
+                            200
+                        </lsx-answer>
+                        <lsx-answer>
+                            300
+                        </lsx-answer>
+                    </lsx-question>
+                </lsx-exercise>
+        
+                <lsx-exercise title="REST-Webservices">
+                    <lsx-question
+                        type = "single-choice"
+                        text = "a) Wofür steht die Abkürzung REST?"
+                    >
+                        <lsx-answer>
+                            <a href="https://www.youtube.com/watch?v=qx9HEn8aq1c" target="_blank">Rest in Peace</a>
+                        </lsx-answer>
+                        <lsx-answer correct>
+                            Representational State Transfer
+                        </lsx-answer>
+                        <lsx-answer>
+                            Representational Standard Transfer
+                        </lsx-answer>
+                        <lsx-answer>
+                            Represent Every State Through HTTP
+                        </lsx-answer>
+                    </lsx-question>
+        
+                    <lsx-question
+                        type = "single-choice"
+                        text = "b) Eine Ressource sollte immer einer Collection oder einem Store angehören?"
+                    >
+                        <lsx-answer correct>
+                            Wahr
+                        </lsx-answer>
+                        <lsx-answer>
+                            Falsch
+                        </lsx-answer>
+                    </lsx-question>
+        
+                    <lsx-question
+                        type = "single-choice"
+                        text = "c) Worin unterscheiden sich Collections und Stores?"
+                    >
+                        <lsx-answer>
+                            Bei einer Collection werden neue Ressourcen vom Client eingefügt, bei einem Store vom Server.
+                        </lsx-answer>
+                        <lsx-answer correct>
+                            Bei einer Collection legt der Server fest, welche URL die Ressourcen erhalten, bei einem Store der Client.
+                        </lsx-answer>
+                        <lsx-answer>
+                            In eine Collection können nur gleichartige Ressourcen eingefügt werden, in einen Store alle Arten.
+                        </lsx-answer>
+                        <lsx-answer>
+                            In einer Collection besitzen alle Ressourcen eine natürliche Reihenfolge, in einem Store nicht.
+                        </lsx-answer>
+                        <lsx-answer>
+                            In einer Collection werden die Ressourcen dauerhaft gespeichert, in einem Store nicht.
+                        </lsx-answer>
+                    </lsx-question>
+        
+                    <lsx-question
+                        type = "single-choice"
+                        text = "d) Welches HTTP-Verb wird typischerweise zum Anlegen neuer Ressourcen genutzt?"
+                    >
+                        <lsx-answer correct>
+                            POST
+                        </lsx-answer>
+                        <lsx-answer>
+                            PUT
+                        </lsx-answer>
+                        <lsx-answer>
+                            PATCH
+                        </lsx-answer>
+                        <lsx-answer>
+                            HEAD
+                        </lsx-answer>
+                    </lsx-question>
+        
+                    <lsx-question
+                        type = "single-choice"
+                        text = "e) Welches HTTP-Verb wird typischerweise zum Ändern einer Ressource genutzt?"
+                    >
+                        <lsx-answer>
+                            POST
+                        </lsx-answer>
+                        <lsx-answer correct>
+                            PUT
+                        </lsx-answer>
+                        <lsx-answer>
+                            PATCH
+                        </lsx-answer>
+                        <lsx-answer>
+                            HEAD
+                        </lsx-answer>
+                    </lsx-question>
+        
+                    <lsx-question
+                        type = "single-choice"
+                        text = "f) Welche Aufgabe besitzt das HTTP-Verb PATCH?"
+                    >
+                        <lsx-answer>
+                            Anlegen einer neuen Collection.
+                        </lsx-answer>
+                        <lsx-answer>
+                            Anlegen einer neuen Ressource.
+                        </lsx-answer>
+                        <lsx-answer>
+                            Ändern der URL einer Ressource.
+                        </lsx-answer>
+                        <lsx-answer correct>
+                            Ändern einzelner Felder einer Ressource.
+                        </lsx-answer>
+                    </lsx-question>
+        
+                    <lsx-question
+                        type = "single-choice"
+                        text = "g) Warum sollten Actions niemals mit einer GET-Anfrage ausgelöst werden?"
+                    >
+                        <lsx-answer correct>
+                            Weil GET-Anfragen keine Seiteneffekte haben dürfen.
+                        </lsx-answer>
+                        <lsx-answer>
+                            Weil es mit DO ein besser geeignetes HTTP-Verb dafür gibt.
+                        </lsx-answer>
+                        <lsx-answer>
+                            Man darf schon, aber nur wenn die Action ein Ergebnis liefert.
+                        </lsx-answer>
+                    </lsx-question>
+        
+                    <lsx-question
+                        type = "single-choice"
+                        text = "h) Welche der folgenden Antworten entspricht nicht dem HATEOAS-Prinzip?"
+                    >
+                        <lsx-answer correct>
                             <source-code language="json">
                                 {
-                                    "artist": "Elton John",
-                                    "name": "Circle of Life",
-                                    "releaseYear": 1994
-                                    "songwriters": "Tim Rice",
+                                    "id": 3110,
+                                    "first_name": "Gilian",
+                                    "last_name": "Anderson",
                                 }
                             </source-code>
-                        </li>
-                        <li>
-                            Ändern Sie anschließend mit einer <code>PATCH</code>-Anfrage die Songwriter auf „Elton John, Tim Rice”.
-                        </li>
-                        <li>
-                            Ändern Sie mit einer <code>PUT</code>-Anfrage den Songtitel auf „Circle of Life (from Lion King)”.
-                        </li>
-                    </ol>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md">
-                    <img src="04-request-response/aufgabe1-browser.png" alt="Screenshot des Webservices im Browser" class="d-block" style="width: 100%; border: 1px solid grey;" />
-                </div>
-                <div class="col-md">
-                    <img src="04-request-response/aufgabe1-postman.png" alt="Screenshot des Webservices in Postman" class="d-block" style="width: 100%; border: 1px solid grey;" />
-                </div>
-            </div>
-        </div>
-    </article>
-    <aside>
-        <p>
-            Hier können Sie die ersten, praktischen Erfahrungen mit REST sammeln. Führen Sie hierfür einfach
-            den Quellcode aus und erkunden Sie den enthaltenen Webservice mit Postman. Die nächste Aufgabe
-            ist danach sicher ganz einfach. 🎓 Den gleichnamigen Song (in der Version von den Carpenters) finden
-            Sie derweil auf Youtube.
-        </p>
-        <img src="shared/mail.png" class="img-fluid d-block" style="max-width: 15em;"/>
-        <p>
-            <small>
-                Bildnachweis:
-                <a href="https://pixabay.com/vectors/communication-document-letter-mail-2024204/" target="_blank">Pixabay: OpenClipart-Vectors</a>
-            </small>
-        </p>
-
-        <lsx-youtube video="dcLbS0yxzdk"></lsx-youtube>
-    </aside>
-</section>
-
-<section data-title="Aufgabe: Art Institute of Chicago" data-background-color="rgb(231, 221, 141)">
-    <article>
-        <div class="markdown">
-            Nach ein wenig Stöbern in der zuvor gezeigten Liste öffentlicher Webservices
-            finden wir die API des „Art Institute of Chicago”, einem 1879 gegründeten,
-            international bekannten Kunstmuseum. In der Liste wird auf die Schnittstellenbeschreibung
-            unter <a href="https://api.artic.edu/" target="_blank">api.artic.edu</a> verwiesen.
-            Stöbern Sie ein wenig in der Dokumentation und beantworten Sie anschließend
-            folgende Fragen:
-    
-            1. Warum kann man hier tatsächlich von einer API und nicht einfach nur von
-            einem Webservice sprechen?
-    
-            1. Welche Collections (in der Dokumentation „Endpoints” genannt) unterstützt die API?
-    
-            <!-- 1. Unterstützt der Webservice das HATEOAS-Prinzip? -->
-    
-            1. Werden tatsächlich alle für REST-Webservices typischen HTTP-Verben unterstützt?
-    
-            1. Fall nicht alle HTTP-Verben unterstützt werden: Was könnte der Grund hierfür sein?
-    
-            1. Welche Informationen liefert die API zu einem einzelnen Bild?
-    
-            1. Wie kann man die URL zur Verwendung des Bilds in einer Webseite oder App erzeugen?
-        </div>
-    
-        <img src="04-request-response/artic-api.png" class="img-thumbnail w-100" />
-    </article>
-    <aside>
-        <p>
-            Zum Vergleich schauen wir uns in dieser Aufgabe einen „echten” Webservice
-            eines „echten“ Anbieters an: Die Webservice-API des Art Institute of Chicago.
-            Ihre Dokumentation gibt viel Aufschluss darüber, wie die REST-Prinzipien
-            in der Praxis tatsächlich genutzt werden.
-        </p>
-        <img src="shared/github_atom.png" class="img-fluid d-block"/>
-        <p>
-            <small>
-                Bildnachweis:
-                <a href="https://atom.io/" target="_blank">Atom Webseite</a>
-            </small>
-        </p>
-    </aside>
-</section>
-
-<section data-title="Aufgabe: Ein kleines HTTP- und REST-Quiz" data-background-color="rgb(231, 221, 141)">
-    <article>
-        <lsx-quiz>
-            <lsx-exercise title="HTTP-Verben">
-                <lsx-question
-                    type = "single-choice"
-                    text = "a) Was bewirkt das HTTP-Verb POST?"
-                >
-                    <lsx-answer>
-                        Es werden bereits vorhandene Daten vom Server abgerufen.
-                    </lsx-answer>
-                    <lsx-answer>
-                        Es werden Daten auf dem Server gelöscht (POST = Postpone).
-                    </lsx-answer>
-                    <lsx-answer correct>
-                        Es werden Daten werden zur Verarbeitung an den Server geschickt.
-                    </lsx-answer>
-                </lsx-question>
-    
-                <lsx-question
-                    type = "single-choice"
-                    text = "b) Was bewirkt das HTTP-Verb DELETE?"
-                >
-                    <lsx-answer>
-                        Die ausgewählten Daten werden im Browser gelöscht.
-                    </lsx-answer>
-                    <lsx-answer correct>
-                        Die ausgewählten Daten werden auf dem Server gelöscht.
-                    </lsx-answer>
-                    <lsx-answer>
-                        Es wird geprüft, ob die Daten gelöscht werden können.
-                    </lsx-answer>
-                </lsx-question>
-    
-                <lsx-question
-                    type = "single-choice"
-                    text = "c) Was bewirkt das HTTP-Verb GET?"
-                >
-                    <lsx-answer correct>
-                        Es werden Daten vom Server abgerufen (zum Beispiel der HTML-Code einer Webseite).
-                    </lsx-answer>
-                    <lsx-answer>
-                        Es wird eine Dateiliste vom Server mit den Namen aller Dateien einer Webseite abgerufen.
-                    </lsx-answer>
-                    <lsx-answer>
-                        Der Inhalt einer Datei wird vom Browser an den Server übertragen.
-                    </lsx-answer>
-                </lsx-question>
-            </lsx-exercise>
-    
-            <lsx-exercise title="HTTP-Statuscodes">
-                <lsx-question
-                    type = "single-choice"
-                    text = "a) Was bedeutet der Statuscode 401 Unauthorized?"
-                >
-                    <lsx-answer>
-                        Die gesuchten Daten wurden nicht gefunden.
-                    </lsx-answer>
-                    <lsx-answer>
-                        Die gewünschte Funktion wurde nicht ausprogrammiert.
-                    </lsx-answer>
-                    <lsx-answer correct>
-                        Die gewünschte Funktion darf nicht ausgeführt werden.
-                    </lsx-answer>
-                </lsx-question>
-    
-                <lsx-question
-                    type = "single-choice"
-                    text = "b) Was bedeutet der Statuscode 503 Service Unavailble?"
-                >
-                    <lsx-answer correct>
-                        Es ist ein temporärer Fehler aufgetreten, bitte später nochmal versuchen.
-                    </lsx-answer>
-                    <lsx-answer>
-                        Es ist ein schwerwiegender Fehler aufgetreten. Nichts geht mehr.
-                    </lsx-answer>
-                    <lsx-answer>
-                        Die gesuchte Information wurde nicht gefunden. Bitte anders suchen.
-                    </lsx-answer>
-                </lsx-question>
-    
-                <lsx-question
-                    type = "single-choice"
-                    text = "c) Welcher Statuscode signalisiert, dass eine Seite nicht gefunden wurde?"
-                >
-                    <lsx-answer>
-                        200
-                    </lsx-answer>
-                    <lsx-answer>
-                        301
-                    </lsx-answer>
-                    <lsx-answer correct>
-                        404
-                    </lsx-answer>
-                </lsx-question>
-    
-                <lsx-question
-                    type = "single-choice"
-                    text = "d) Welcher Statuscode wird geschickt, wenn alles okay ist?"
-                >
-                    <lsx-answer>
-                        100
-                    </lsx-answer>
-                    <lsx-answer correct>
-                        200
-                    </lsx-answer>
-                    <lsx-answer>
-                        300
-                    </lsx-answer>
-                </lsx-question>
-            </lsx-exercise>
-    
-            <lsx-exercise title="REST-Webservices">
-                <lsx-question
-                    type = "single-choice"
-                    text = "a) Wofür steht die Abkürzung REST?"
-                >
-                    <lsx-answer>
-                        <a href="https://www.youtube.com/watch?v=qx9HEn8aq1c" target="_blank">Rest in Peace</a>
-                    </lsx-answer>
-                    <lsx-answer correct>
-                        Representational State Transfer
-                    </lsx-answer>
-                    <lsx-answer>
-                        Representational Standard Transfer
-                    </lsx-answer>
-                    <lsx-answer>
-                        Represent Every State Through HTTP
-                    </lsx-answer>
-                </lsx-question>
-    
-                <lsx-question
-                    type = "single-choice"
-                    text = "b) Eine Ressource sollte immer einer Collection oder einem Store angehören?"
-                >
-                    <lsx-answer correct>
-                        Wahr
-                    </lsx-answer>
-                    <lsx-answer>
-                        Falsch
-                    </lsx-answer>
-                </lsx-question>
-    
-                <lsx-question
-                    type = "single-choice"
-                    text = "c) Worin unterscheiden sich Collections und Stores?"
-                >
-                    <lsx-answer>
-                        Bei einer Collection werden neue Ressourcen vom Client eingefügt, bei einem Store vom Server.
-                    </lsx-answer>
-                    <lsx-answer correct>
-                        Bei einer Collection legt der Server fest, welche URL die Ressourcen erhalten, bei einem Store der Client.
-                    </lsx-answer>
-                    <lsx-answer>
-                        In eine Collection können nur gleichartige Ressourcen eingefügt werden, in einen Store alle Arten.
-                    </lsx-answer>
-                    <lsx-answer>
-                        In einer Collection besitzen alle Ressourcen eine natürliche Reihenfolge, in einem Store nicht.
-                    </lsx-answer>
-                    <lsx-answer>
-                        In einer Collection werden die Ressourcen dauerhaft gespeichert, in einem Store nicht.
-                    </lsx-answer>
-                </lsx-question>
-    
-                <lsx-question
-                    type = "single-choice"
-                    text = "d) Welches HTTP-Verb wird typischerweise zum Anlegen neuer Ressourcen genutzt?"
-                >
-                    <lsx-answer correct>
-                        POST
-                    </lsx-answer>
-                    <lsx-answer>
-                        PUT
-                    </lsx-answer>
-                    <lsx-answer>
-                        PATCH
-                    </lsx-answer>
-                    <lsx-answer>
-                        HEAD
-                    </lsx-answer>
-                </lsx-question>
-    
-                <lsx-question
-                    type = "single-choice"
-                    text = "e) Welches HTTP-Verb wird typischerweise zum Ändern einer Ressource genutzt?"
-                >
-                    <lsx-answer>
-                        POST
-                    </lsx-answer>
-                    <lsx-answer correct>
-                        PUT
-                    </lsx-answer>
-                    <lsx-answer>
-                        PATCH
-                    </lsx-answer>
-                    <lsx-answer>
-                        HEAD
-                    </lsx-answer>
-                </lsx-question>
-    
-                <lsx-question
-                    type = "single-choice"
-                    text = "f) Welche Aufgabe besitzt das HTTP-Verb PATCH?"
-                >
-                    <lsx-answer>
-                        Anlegen einer neuen Collection.
-                    </lsx-answer>
-                    <lsx-answer>
-                        Anlegen einer neuen Ressource.
-                    </lsx-answer>
-                    <lsx-answer>
-                        Ändern der URL einer Ressource.
-                    </lsx-answer>
-                    <lsx-answer correct>
-                        Ändern einzelner Felder einer Ressource.
-                    </lsx-answer>
-                </lsx-question>
-    
-                <lsx-question
-                    type = "single-choice"
-                    text = "g) Warum sollten Actions niemals mit einer GET-Anfrage ausgelöst werden?"
-                >
-                    <lsx-answer correct>
-                        Weil GET-Anfragen keine Seiteneffekte haben dürfen.
-                    </lsx-answer>
-                    <lsx-answer>
-                        Weil es mit DO ein besser geeignetes HTTP-Verb dafür gibt.
-                    </lsx-answer>
-                    <lsx-answer>
-                        Man darf schon, aber nur wenn die Action ein Ergebnis liefert.
-                    </lsx-answer>
-                </lsx-question>
-    
-                <lsx-question
-                    type = "single-choice"
-                    text = "h) Welche der folgenden Antworten entspricht nicht dem HATEOAS-Prinzip?"
-                >
-                    <lsx-answer correct>
-                        <source-code language="json">
-                            {
-                                "id": 3110,
-                                "first_name": "Gilian",
-                                "last_name": "Anderson",
-                            }
-                        </source-code>
-                    </lsx-answer>
-                    <lsx-answer>
-                        <source-code language="json">
-                            {
-                                "id": 2512,
-                                "first_name": "David",
-                                "last_name": "Duchovny",
-                                "_links": {
-                                    "as-actor": {
-                                        "href": "/actors/3686/credited-as-actor"
-                                    },
-                                    "as-director": {
-                                        "href": "actors/3686/credited-as-director"
+                        </lsx-answer>
+                        <lsx-answer>
+                            <source-code language="json">
+                                {
+                                    "id": 2512,
+                                    "first_name": "David",
+                                    "last_name": "Duchovny",
+                                    "_links": {
+                                        "as-actor": {
+                                            "href": "/actors/3686/credited-as-actor"
+                                        },
+                                        "as-director": {
+                                            "href": "actors/3686/credited-as-director"
+                                        }
                                     }
                                 }
-                            }
-                        </source-code>
-                    </lsx-answer>
-                </lsx-question>
-            </lsx-exercise>
-        </lsx-quiz>
-    </article>
-    <aside>
-        <p>
-            Wie immer an dieser Stelle: Ein kleines Quiz mit dem Sie Ihr neues
-            Wissen rund um HTTP und REST-Webservices prüfen können.🐧
-        </p>
-        <img src="shared/quiz.png" class="img-fluid d-block" style="max-width: 20em;"/>
-        <p>
-            <small>
-                Bildnachweis:
-                <a href="https://pixabay.com/illustrations/quiz-tiles-letters-red-game-test-2058883/" target="_blank">Pixabay: 905513</a>
-            </small>
-        </p>
-    </aside>
+                            </source-code>
+                        </lsx-answer>
+                    </lsx-question>
+                </lsx-exercise>
+            </lsx-quiz>
+        </article>
+        <aside>
+            <p>
+                Wie immer an dieser Stelle: Ein kleines Quiz mit dem Sie Ihr neues
+                Wissen rund um HTTP und REST-Webservices prüfen können.🐧
+            </p>
+            <img src="shared/quiz.png" class="img-fluid d-block" style="max-width: 20em;"/>
+            <p>
+                <small>
+                    Bildnachweis:
+                    <a href="https://pixabay.com/illustrations/quiz-tiles-letters-red-game-test-2058883/" target="_blank">Pixabay: 905513</a>
+                </small>
+            </p>
+        </aside>
+    </section>
 </section>
 
 <!-- ======================== -->

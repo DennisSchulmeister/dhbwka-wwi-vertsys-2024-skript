@@ -114,7 +114,7 @@ window.addEventListener("load", async () => {
                 labelQuizPoints: "{1} von {2}",
                 labelQuizEvaluate: "Bewerten",
                 labelQuizNewTry: "Neuer Versuch",
-                githubEditUrlPrefix: "https://github.com/DennisSchulmeister/dhbwka-wwi-webprog-quellcodes/tree/master/",
+                githubEditUrlPrefix: "https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2024-quellcodes/tree/main/",
             }),
             HighlightJs: new LsPluginHighlightJs({
                 languages: {
