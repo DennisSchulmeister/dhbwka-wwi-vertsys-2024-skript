@@ -2279,7 +2279,6 @@
     </section>
 </section>
 
-<!-- TODO -->
 <section data-title="Übungsaufgaben" data-background-color="rgb(231, 221, 141)">
     <section data-title="Aufgabe 1: Ein kleines Verteilte-Systeme-Quiz">
         <article>
@@ -2608,11 +2607,36 @@
 
                             <lsx-question
                                 type = "single-choice"
-                                text = "d) Was passiert, weenn beim zuvor gefragten Protokoll der Koordinatior ausfällt?"
+                                text = "d) Was passiert, wenn beim zuvor gefragten Protokoll der Koordinatior ausfällt?"
                             >
                                 <lsx-answer correct>Die Transaktion hängt und muss manuell zurückgesetzt werden.</lsx-answer>
                                 <lsx-answer>Das System schließt die Transaktion nach Ablauf des Timeouts trotzdem ab.</lsx-answer>
                                 <lsx-answer>Das System erkennt die Situation und rollt die Transaktion zurück.</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "free-text"
+                                text = "e) Banküberweisungen sind das klassische Beispiel für ACID-Transaktionen. Aber sind sie wirklich atomar und isoliert? Recherchieren Sie den Begriffe Valuta bzw. Wertstellung und ziehen Sie diesen für Ihre Begründung heran."
+                            >
+                                <lsx-free-text editor="text">
+                                    <lsx-initial-answer>
+                                        Hier bitte Ihre Antwort eingeben.
+                                    </lsx-initial-answer>
+                                    <lsx-sample-answer>
+                                        <p>
+                                            Die Valuta bzw. Wertstellung (beide Begriffe bedeuten dasselbe) ist das Datum, an dem eine
+                                            Kontobewegung wirksam wird. Dem steht das Buchungsdatum entgegen, wann die Kontobewegung
+                                            bei der Bank registriert wurde. In vielen Fällen sind beide Daten identisch. Bei
+                                            Auslandsüberweisungen, Bezahlung mit Kreditkarte usw. können sie aber voneinander abweichen,
+                                            wobei die Valuta immer nach dem Buchungsdatum liegt.
+                                        </p>
+                                        <p>
+                                            Damit eine zeitverzögerte Buchung nicht wegen mangelnder Deckung des Kontos rückabgewickelt
+                                            werden muss, reduzieren die Banken den Kontostand bereits bei Buchungseingang vorläufig,
+                                            wobei in diesem Fall auch zwei Kontostände ausgewiesen werden.
+                                        </p>
+                                    </lsx-sample-answer>
+                                </lsx-free-text>
                             </lsx-question>
                         </lsx-exercise>
                     </lsx-quiz>
@@ -2634,10 +2658,122 @@
         </aside>
     </section>
 
-    <!-- TODO Sprach-Server/Client auf Laptop ausführen -->
     <section data-title="Aufgabe 2: Wir erkunden Streams und Sockets">
         <article>
-            <lsx-github-edit url="1%20Architektur%20verteilter%20Systeme/Beispiele/Socket-Sprachserver"></lsx-github-edit>
+            <div class="mb-4">
+                <lsx-github-edit url="1%20Architektur%20verteilter%20Systeme/Beispiele/Socket-Sprachserver"></lsx-github-edit>
+            </div>
+
+            <div class="d-flex flex-column flex-md-row gap-3 mb-4">
+                <img src="02-architektur/socket-server.png" class="img-thumbnail d-block w-100" alt="Serverprogramm">
+                <img src="02-architektur/socket-client.png" class="img-thumbnail d-block w-100" alt="Clientprogramm">
+            </div>
+
+            <lsx-tab-pages>
+                <lsx-tab-page title="a) Server starten">
+                    <ol class="dhbw-list-spacious mb-4">
+                        <li>
+                            Laden Sie den Quellcode herunter und entpacken Sie ihn auf Ihrem Rechner.
+                        </li>
+                        <li>
+                            Öffnen Sie das Verzeichnis <tt>Speach-Server</tt> in einem Terminal-Fenster.¹
+                        </li>
+                        <li>
+                            Geben Sie den Befehl <code>npm install</code> ein, um die benötigten Node.js-Pakete
+                            zu installieren.
+                        </li>
+                        <li>
+                            Starten Sie den Server durch Eingabe des Befehls <code>npm start</code>.
+                        </li>
+                        <li>
+                            Lassen Sie den Server für die folgenden Aufgaben im Hintergrund weiter laufen.²
+                        </li>
+                    </ol>
+
+                    <div>
+                        ¹
+                        <small>
+                            Unter Windows können Sie hierfür das Verzeichnis im Explorer öffnen und den Befehl
+                            <src-code>CMD</src-code> in die Adresszeile eingeben.
+                        </small>
+                    </div>
+                    <div>
+                        ²
+                        <small>
+                            Später können Sie den Server durch Eingabe von <kbd>Strg</kbd>+<kbd>C</kbd> beenden.
+                        </small>
+                    </div>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="b) Client starten">
+                    <ol class="dhbw-list-spacious">
+                        <li>
+                            Öffnen Sie das Verzeichnis <tt>Speach-Client</tt> in einem weiteren Terminal-Fenster.
+                        </li>
+                        <li>
+                            Geben Sie den Befehl <code>npm install</code> ein, um die benötigten Node.js-Pakete
+                            zu installieren.
+                        </li>
+                        <li>
+                            Starten Sie den Client durch Eingabe des Befehls <code>npm start</code>.
+                        </li>
+                        <li>
+                            Lassen Sie den Server ein paar sehr lange Sätze sprechen.
+                        </li>
+                        <li>
+                            Fragen Sie mit dem Client die Warteschlange der noch zu sprechende Sätze ab.
+                        </li>
+                        <li>
+                            Trennen Sie die Verbindung zum Server.
+                        </li>
+                    </ol>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="c) Direkte Socketverbindung">
+                    <p>
+                        Für diesen Teil benötigten Sie ein Programm wie <a href="https://nmap.org/ncat/" target="_blank">Netcat</a>,
+                        mit dem eine direkte Socketverbindung zu einem entfernten Server hergestellt werden kann. Auf der verlinkten
+                        Seite können Sie eine portable EXE-Datei für Windows herunterladen. Unter Mac oder Linux ist es häufig unter
+                        dem Namen <code>nc</code> oder <code>netcat</code> bereits vorinstalliert.
+                    </p>
+
+                    <img src="02-architektur/socket-netcat.png" class="img-thumbnail d-block mw-100 mb-4 m-auto" style="width: 50em;" alt="Netcat">
+
+                    <ol class="dhbw-list-spacious mb-4">
+                        <li>
+                            Öffnen Sie ein Terminal-Fenster und geben den Befehl <code>nc localhost 7000</code> ein.¹
+                        </li>
+                        <li>
+                            Geben Sie die Zeichenfolge <code>HELLO</code> ein und drücken anschließend <kbd>Enter</kbd>.
+                        </li>
+                        <li>
+                            Geben Sie <code>SAY: Hello, Server. Are you listening?</code> ein und drücken <kbd>Enter</kbd>.
+                        </li>
+                        <li>
+                            Verabschieden Sie sich mit <code>BYE</code> und trennen die Verbindung mit
+                            <kbd>Strg</kbd>+<kbd>C</kbd>.
+                        </li>
+                    </ol>
+                </lsx-col>
+
+                <p>
+                    Wenn alles klappt, sollte der erste Befehl eine Socketverbindung zum Server herstellen.
+                    Ihre Eingaben werden unverändert an den Server übertragen, der diese auswertet und mit einer
+                    eigenen Zeichenfolge antwortet. Diese wird ihnen unmittelbar nach Ihrer eigenen Einage im
+                    Konsolenfenster angezeigt. Der obige Screenshot zeigt eine Beispiel-Session, bei der die
+                    Ein- und Ausgaben zur Unterscheidung nachträglich eingefärbt wurden.
+                </p>
+
+                <div>
+                    ¹
+                    <small>
+                        Wenn dies nicht funktioniert, versuchen Sie <code>netcat</code> anstelle von <code>nc</code>,
+                        Alternativ können Sie behelfsweise auch <code>telnet</code> verwenden, das unter Windows aber
+                        ebenfalls nachinstalliert werden muss.
+                    </small>
+                </div>
+                </lsx-tab-page>
+            </lsx-tab-pages>
         </article>
         <aside>
             <p>
@@ -2891,12 +3027,7 @@
         </aside>
     </section>
 
-    <!-- Banküberweisungen sind das klassische Beispiel für ACID-Transaktionen. Aber sind sie wirklich atomar und isloert?
-    Recherchieren Sie den Begriffe Valuta bzw. Wertstellung und ziehen Sie diesen für Ihre Begründung heran. -->
-    <section data-title="Aufgabe 4: Verteilte Transaktionen">
-    </section>
-
-    <section data-title="Aufgabe 5: Wer hat an der Uhr gedreht?">
+    <section data-title="Aufgabe 4: Wer hat an der Uhr gedreht?">
         <article>
             <div class="markdown">
                 Wichtige Anforderung an verteilte Systeme ist häufig, dass die **Kausalordnung** von Ereignissen
