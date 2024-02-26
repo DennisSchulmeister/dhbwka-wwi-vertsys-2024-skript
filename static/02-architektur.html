@@ -3829,11 +3829,218 @@
     </section>
 </section>
 
-<!-- TODO -->
 <section data-title="Übungsaufgaben" data-background-color="rgb(231, 221, 141)">
-    <!-- TODO -->
     <section data-title="Aufgabe 1: Ein kleines Cloud-Quiz">
         <article>
+            <lsx-tab-pages>
+                <lsx-tab-page title="Aufgabe 1.1">
+                    <lsx-quiz>
+                        <lsx-exercise title="Monolith vs. Microservice">
+                            <lsx-question
+                                type = "multiple-choice"
+                                text = "a) Welche der folgenden Aussagen treffen auf monolithische Anwendungen zu?"
+                            >
+                                <lsx-answer correct>Ein einzelner Server beinhaltet einen Großteil der Anwendungslogik.</lsx-answer>
+                                <lsx-answer>Die Entwicklung erfolgt mit speziellen hierfür vorgesehenen Frameworks.</lsx-answer>
+                                <lsx-answer correct>Monolithische Anwendungen lassen sich oft weniger gut skalieren.</lsx-answer>
+                                <lsx-answer correct>Monolithen besitzen oft einen über Jahre gewachsenen Umfang.</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "multiple-choice"
+                                text = "b) Welche Vorteile haben Microservices gegenüber monolithischen Anwendungen?"
+                            >
+                                <lsx-answer>Die Gesamtarchitektur der Anwendung lässt sich deutlich vereinfachen.</lsx-answer>
+                                <lsx-answer correct>Microservices können getrennt voneinander entwickelt und deployed werden.</lsx-answer>
+                                <lsx-answer correct>Für jeden Microservice kann die am besten geeignete Technologie gewählt werden.</lsx-answer>
+                                <lsx-answer correct>Eine Microservice-Anwendung kann wesentlich bedarfsgerechter skaliert werden.</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "multiple-choice"
+                                text = "c) Welche Nachteile können Microservices gegenüber Monolithen haben?"
+                            >
+                                <lsx-answer correct>Microservices können für kleine Entwicklerteams schwer zu handhaben sein.</lsx-answer>
+                                <lsx-answer>Microservices setzen besonders leistungsfähige Hardware voraus.</lsx-answer>
+                                <lsx-answer correct>Die Programmierung wird durch die vielen Service-Schnittstellen eher komplexer.</lsx-answer>
+                                <lsx-answer>Ältere Programmiersprachen und Bibliotheken eignen sich nicht für ihre Entwicklung.</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "d) Was ist eine so genannte „Sticky Session”?"
+                            >
+                                <lsx-answer correct>Sie sorgt dafür, dass alle Anfragen eines Clients von derselben Serverinstanz bearbeitet werden.</lsx-answer>
+                                <lsx-answer>Sie sorgt dafür, dass alle Antworten einer Servierinstanz an denselben Client geschickt werden.</lsx-answer>
+                                <lsx-answer>Sie sorgt dafür, dass ein Server nach einem Absturz automatisch neugestartet wird.</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "multiple-choice"
+                                text = "e) Welche Gründe sprechen dafür, den Sitzungszustand clientseitig zu speichern?"
+                            >
+                                <lsx-answer correct>Die Serverseite kann komplett zustandslos gehalten werden.</lsx-answer>
+                                <lsx-answer correct>Clientseitig bringt die Verwaltung des Sitzungszustands keine Nachteile.</lsx-answer>
+                                <lsx-answer>Dadurch müssen serverseitig keine Daten persisteirt werden.</lsx-answer>
+                                <lsx-answer correct>Insgesamt kann die Anwendung einfacher skaliert werden.</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "f) Wie sollte die Kommunikation zwischen Frontend und Backend gestaltet sein?"
+                            >
+                                <lsx-answer>Möglichst viele Anfragen mit geringem Datenvolumen vom Frontend an das Backend.</lsx-answer>
+                                <lsx-answer correct>Möglichst wenige Anfragen verschicken, die dafür ggf. größer ausfallen können.</lsx-answer>
+                            </lsx-question>
+                        </lsx-exercise>
+                    </lsx-quiz>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Aufgabe 1.2">
+                    <lsx-quiz>
+                        <lsx-exercise title="Microservices im Detail">
+                            <lsx-question
+                                type = "single-choice"
+                                text = "a) Welches Architekturmuster steckt hinter der Implementierung eine API-Gateways?"
+                            >
+                                <lsx-question-line>
+                                    <lsx-answer>Drei-Schichten</lsx-answer>
+                                    <lsx-answer>Vier-Schichten</lsx-answer>
+                                    <lsx-answer correct>Reverse Proxy</lsx-answer>
+                                    <lsx-answer>Forward Proxy</lsx-answer>
+                                </lsx-question-line>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "multiple-choice"
+                                text = "b) Welche Aufgaben können durch ein API-Gateway typischerweise erbracht werden?"
+                            >
+                                <lsx-answer>Performance-Optimierung</lsx-answer>
+                                <lsx-answer>Automatische Skalierung der Server</lsx-answer>
+                                <lsx-answer>Verhindern von Verbiungsfehlern</lsx-answer>
+                                <lsx-answer correct>Verschattung der Backend-Strukturen</lsx-answer>
+                                <lsx-answer correct>Benutzerauthentifizierung</lsx-answer>
+                                <lsx-answer correct>Bereitstellung statischer Web-Inhalte</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "multiple-choice"
+                                text = "c) Welche Probleme werden hingegen eher durch ein Service-Mesh gelöst?"
+                            >
+                                <lsx-answer correct>Kommunikation zwischen den Services</lsx-answer>
+                                <lsx-answer correct>Regelmäßige Health Checks der Services</lsx-answer>
+                                <lsx-answer correct>Unterstützung bei der Überwachung der Services</lsx-answer>
+                                <lsx-answer>Implementierung von Sicherheitsmechanismen</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "d) Welches Sicherheitskonzept steckt hinter dem Begriff Zwei-Faktor-Authentifizierung?"
+                            >
+                                <lsx-answer>Zwei Passwörter sind sicherer als eines.</lsx-answer>
+                                <lsx-answer>Lange Passwörter sind sicherer als kürzere.</lsx-answer>
+                                <lsx-answer correct>Kombination mehrerer Authentifizierungsmethoden.</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type         = "assignment"
+                                text         = "e) Ordnen Sie den folgenden Begriffen die richtige Bedeutung zu?"
+                                label-length = "10em"
+                                select-style = "background: rgb(228, 229, 230);"
+                            >
+                                <lsx-assignment answer="Feststellung der Benutzeridentität">Authentifizierung</lsx-assignment>
+                                <lsx-assignment answer="Durchsetzung von Zugriffsberechtigungen">Authorisierung</lsx-assignment>
+                            </lsx-question>
+
+                            <lsx-question
+                                type         = "assignment"
+                                text         = "f) Welchen Zweck erfüllen die folgenden Arten, die Betrieb von Microservices zu überwachen?"
+                                label-length = "10em"
+                                select-style = "background: rgb(228, 229, 230);"
+                            >
+                                <lsx-assignment answer="Kennzahlen aus dem laufenden Betrieb ermitteln">Metriken</lsx-assignment>
+                                <lsx-assignment answer="Auftretende Ereignisse im zeitlichen Verlauf protokollieren">Logging</lsx-assignment>
+                                <lsx-assignment answer="Kommunikationsabläufe zwischen den Services aufzeichnen">Tracing</lsx-assignment>
+                            </lsx-question>
+                        </lsx-exercise>
+                    </lsx-quiz>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Aufgabe 1.3">
+                    <lsx-quiz>
+                        <lsx-exercise title="Cloudanwendungen">
+                            <lsx-question
+                                type = "single-choice"
+                                text = "a) Welche Beschreibung entspricht am ehesten der Grundidee der Cloud?"
+                            >
+                                <lsx-answer>Synchronisation von Dateien zwischen mehreren Geräten</lsx-answer>
+                                <lsx-answer>Bereitstellung von Rechenleistung für manuell installierte Anwendungen</lsx-answer>
+                                <lsx-answer correct>Weitgehende Automatisierung des Betriebs verteilter Anwendungen</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "b) Eine Webanwendung wird händisch auf einer Maschine installiert."
+                            >
+                                <lsx-question-line>
+                                    <lsx-answer correct>Pet</lsx-answer>
+                                    <lsx-answer>Cattle</lsx-answer>
+                                </lsx-question-line>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "c) Warum werden Webanwendungen von Laien häufig als Cloudanwendungen bezeichnet?"
+                            >
+                                <lsx-answer correct>Da die technischen Unterschiede für Laien meist nicht offensichtlich sind.</lsx-answer>
+                                <lsx-answer>Weil Cloudanwendungen anfangs tatsächlich überwiegend Webanwendungen waren.</lsx-answer>
+                                <lsx-answer>Weil die Begriffe Rechenzentrum und Cloud weitgehend identische Bedeutungen besitzen.</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "multiple-choice"
+                                text = "d) Welches sind typische Eigenschaften eines klassischen Hosting-Angebots?"
+                            >
+                                <lsx-answer correct>Statisch zugewiesene Computerressourcen</lsx-answer>
+                                <lsx-answer correct>Manuelle Inbetriebnahme und Installation</lsx-answer>
+                                <lsx-answer>Variable nutzungsorientierte Kosten</lsx-answer>
+                                <lsx-answer>Automatisierte, vertikale Skalierung</lsx-answer>
+                                <lsx-answer correct>Backups meist in Kundenverantwortung</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "multiple-choice"
+                                text = "e) Welches sind typische Eigenschaften des Cloud-Betriebs?"
+                            >
+                                <lsx-answer>Administration via Mobile Apps</lsx-answer>
+                                <lsx-answer correct>Weitreichende Automatisierung</lsx-answer>
+                                <lsx-answer correct>Skalierbarkeit der bereitgestellten Ressourcen</lsx-answer>
+                                <lsx-answer>Händische Konfiguration virtueller Maschinen</lsx-answer>
+                                <lsx-answer correct>Nutzungsabhängige Kostenabrechnung</lsx-answer>
+                                <lsx-answer>Statisch zugewiesene Speicherkapazität</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type            = "assignment"
+                                text            = "f) Ordnen Sie den nachfolgenden Angebotsbeschreibungen den richtigen Namen zu."
+                                label-length    = "100%"
+                                select-position = "below"
+                                select-style    = "background: rgb(228, 229, 230);"
+                            >
+                                <lsx-assignment answer="Platform-as-a-Service">
+                                    Auf die Entwicklung von Cloudanwendungen zugeschnittene Angebote bieten eine vorkonfigurierte Laufzeitumgebung für selbstgeschriebenen Quellcode.
+                                </lsx-assignment>
+                                <lsx-assignment answer="Infrastructure-as-a-Service">
+                                    Bereitstellung virtueller Rechenleistung, Speicherkapazität und Netzressourcen durch die Cloud. Anwendungen müssen jedoch manuell deployed werden.
+                                </lsx-assignment>
+                                <lsx-assignment answer="Software-as-a-Service">
+                                    Bereitstellung ganzer Anwendungspakete meist gegen eine variable, nutzungsabhängige Montatsgebühr. Keine sonstigen Aufwendungen auf Kundenseite.
+                                </lsx-assignment>
+                            </lsx-question>
+                        </lsx-exercise>
+                    </lsx-quiz>
+                </lsx-tab-page>
+            </lsx-tab-pages>
         </article>
         <aside>
             <p>
@@ -3850,10 +4057,236 @@
         </aside>
     </section>
 
-    <!-- TODO -->
     <section data-title="Aufgabe 2: Notebook-as-a-Service">
         <article>
-            <lsx-github-edit url="1%20Architektur%20verteilter%20Systeme/Beispiele/Notebook-as-a-Service"></lsx-github-edit>
+            <div class="mb-4">
+                <lsx-github-edit url="1%20Architektur%20verteilter%20Systeme/Beispiele/Notebook-as-a-Service"></lsx-github-edit>
+            </div>
+
+            <img src="02-architektur/naas-screenshot1.png" class="img-thumbnail d-block w-100 mb-4" alt="Weboberfläche">
+            
+            <lsx-tab-pages>
+                <lsx-tab-page title="Beschreibung" class="markdown">
+                    Das Notebook-as-a-Service-Beispiel wurde auf den vorangegangenen Seiten immer wieder als
+                    Fallbeispiel für eine Microservice-Architektur vorgestellt. In Einklang damit besteht der
+                    Quellcode aus folgenden Teilanwendungen:
+
+                    * __Frontend-Server (Port 8000):__ Dient als einfacher Webserver, der die clientseitig benötigten
+                    HTML, CSS und JavaScript-Dateien zur Verfügung stellt. Serverseitig gibt es keine Logik,
+                    obwohl dies im Sinne des „Backend for Frontend“ (BFF) Architekturansatzes durchaus
+                    möglich wäre.
+                    
+                    * __API-Gateway (Port 8010):__ Dies ist ein einfacher HTTP Reverse Proxy, der die Backendservices
+                    nach außen hin verschattet. Die Backend-Server können dadurch über eine einheitliche
+                    URL aufgerufen werden, ohne die genaue Backendstruktur kennen zu müssen. Im Idealfall
+                    sorgt die Ausführumgebung durch ein virtuelles, privates Netzwerk sogar dafür, dass
+                    die Backendservices aus dem öffentlichen Internet gar nicht erreichbar sind.
+                    
+                    * __Katalog-Backend (Port 8020):__ Stellt eine einfache Datenbank für den Produktkatalog zur Verfügung.
+                    In der Beispielanwendung verwaltet dieser Service die ausleihbaren Geräte.
+                    
+                    * __Auftrags-Backend (Port 8030):__ Wickelt den Bestellvorgang ab und verwaltet die Bestellungen
+                    in seiner eigenen kleinen Datenbank. Kommuniziert hierfür mit dem Katalog-Backend,
+                    um zu prüfen, ob die bestellten Geräte tatsächlich vorhanden sind.
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Start der Services">
+                    <p>
+                        Der Einfachheit halber sind alle Services in Node.js mit dem
+                        <a href="http://expressjs.com/" target="_blank">Express-Framework</a>
+                        realisiert. Somit wird nur Node.js benötigt, um die Anwendung auszuführen.
+                        Hierfür müssen zunächst im Hauptverzeichnis und in den Unterverzeichnissen
+                        die Node-Module installiert werden. Am einfachsten geht dies mit folgenden
+                        Befehlen:
+                    </p>
+                    <source-code language="sh">
+                        # Installation der Node-Module im Hauptverzeichnis
+                        npm install
+
+                        # Installation der Node-Module der einzelnen Services
+                        npm run install
+                    </source-code>
+                    <p>
+                        Danach können die Services in beliebiger Reihenfolge gestartet werden. Im Hauptverzeichnis kann hierfür
+                        einfach <code>npm start</code> eingegeben werden. Dadurch starten alle Server parallel und teilen sich
+                        das Konsolenfenster für ihre Ausgaben. Für die späteren Versuche sollte jedoch jeder Service in seinem
+                        eigenen Terminalfenster gestartet werden.
+                    </p>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Aufgabenstellung">
+                    <p>
+                        In dieser Aufgabe geht es nicht darum, den Quellcode zu verstehen, auch wenn Sie natürlich
+                        gerne reinschauen können. Viel mehr sollen Sie die untenstehenden Versuche ausführen, um eine
+                        Microservice-Architektur mit API-Gateway und Load Balancing praktisch kennenzulernen. Versuchen
+                        Sie dabei auch die Verständnisfragen zu beantworten.
+                    </p>
+
+                    <lsx-accordion>
+                        <lsx-accordion-page title="Schritt 1">
+                            <p>
+                                Führen Sie im Hauptverzeichnis des Beispiels den Befehl <code>npm start</code> aus,
+                                um alle Services zu starten. Beobachten Sie dabei die Konsolenausgaben.
+                            </p>
+                            <lsx-info-box>
+                                Woran erkennen Sie, welche Protokollzeile zu welchem Service gehört?
+                            </lsx-info-box>
+                        </lsx-accordion-page>
+
+                        <lsx-accordion-page title="Schritt 2">
+                            <p>
+                                Rufen Sie nun die Adresse <a href="http://localhost:8000" target="_blank">http://localhost:8000</a>
+                                im Browser auf, um die Anwendung zu testen. Spielen Sie den Ausleihprozess einmal komplett durch und
+                                beobachten Sie die Protokollausgaben im Konsolenfenster.
+                            </p>
+                            <lsx-info-box>
+                                Welche Aktionen führen zu einer Anfrage an das API-Gateway und welche zu einer Anfrage an
+                                den Frontend-Server?
+                            </lsx-info-box>
+                        </lsx-accordion-page>
+
+                        <lsx-accordion-page title="Schritt 3">
+                            <p>
+                                Rufen Sie nun die Adressen <a href="http://localhost:8020" target="_blank">http://localhost:8020</a> und
+                                <a href="http://localhost:8030" target="_blank">http://localhost:8030</a> im Browser auf, um die beiden
+                                Backend-Services in Isolation zu testen. Klicken Sie auf die Links in der Übersichtsseite, um einfache
+                                GET-Anfragen an die Services zu schicken.
+                            </p>
+                            <lsx-info-box>
+                                Woran erkennen Sie, dass es sich um Webservices und keine Webanwendungen handelt?
+                            </lsx-info-box>
+                        </lsx-accordion-page>
+
+                        <lsx-accordion-page title="Schritt 4">
+                            <p>
+                                Rufen Sie nun die Adresse <a href="http://localhost:8010" target="_blank">http://localhost:8010</a> auf,
+                                um die Services über das API-Gateway anzusprechen. Klicken Sie wieder auf die Links in der Übersichtsseite,
+                                um ein paar GET-Anfragen an die Services zu schicken. Beobachten Sie dabei die Protokollausgaben im
+                                Konsolenfenster.
+                            </p>
+                            <lsx-info-box>
+                                Woher weiß das API-Gateway, an welchen Backendserver eine Anfrage weitergeleitet werden muss?
+                            </lsx-info-box>
+                            <lsx-info-box>
+                                Wie ändert sich die URL bei einer erfolgreichen Weiterleitung?
+                            </lsx-info-box>
+
+                        </lsx-accordion-page>
+
+                        <lsx-accordion-page title="Schritt 5">
+                            <p>
+                                Öffnen Sie die Datei <span class="fn">api-gateway/config/example.yml</span> in einem Editor und
+                                versuchen Sie, diese nachzuvollziehen.
+                            </p>
+                            <lsx-info-box>
+                                In wiefern bestätigen sich Ihre Antworten zum letzten Schritt hierdurch?                                >
+                            </lsx-info-box>
+                        </lsx-accordion-page>
+                        
+                        <lsx-accordion-page title="Schritt 6">
+                            <div class="markdown">
+                                Schließen Sie sich in Zweiergruppen zusammen und versuchen Sie, die Services auf mehreren
+                                Rechnern auszuführen. Kopieren Sie hierfür die Datei `api-gateway/config/example.yml`
+                                nach `api-gateway/config/exercise.yml` und nehmen folgende Änderungen darin vor:
+
+                                1. Kommentieren Sie in den Weiterleitungsregeln die weiteren Instanzen für den Katalog-Service
+                                   ein. Es handelt sich um eine einfache Load-Balancing-Konfiguration, bei der alle Anfragen
+                                   auf drei Backend-Instanzen aufgeteilt werden.
+
+                                1. Passen Sie die Weiterleitungsregeln so an, dass die Backend-Services nicht auf `localhost`
+                                   sondern auf einem fremden Rechner laufen. Ersetzen Sie das Wort `localhost` hierfür durch
+                                   die IP-Adresse des fremden Rechners. Achten Sie jedoch darauf, die Portnummern beizubehalten!
+                            </div>
+                        </lsx-accordion-page>
+
+                        <lsx-accordion-page title="Schritt 7">
+                            <div class="markdown">
+                                Starten Sie nun auf dem eigenen Rechner Frontend und API-Gateway, und auf dem anderen Rechner
+                                die Backend-Services:
+                                
+                                <table>
+                                    <tr>
+                                        <td colspan="4"><b>Rechner 1</b>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Konsolenfenster 1
+                                            <pre>cd frontend<br>npm start</pre>
+                                        </td>
+                                        <td>
+                                            Konsolenfenster 2
+                                            <pre>cd api-gateway<br>npm start:exercise</pre>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4"><b>Rechner 2</b>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Konsolenfenster 1
+                                            <pre>cd catalogue-service<br>npm start</pre>
+                                        </td>
+                                        <td>
+                                            Konsolenfenster 2
+                                            <pre>cd catalogue-service<br>npm start1</pre>
+                                        </td>
+                                        <td>
+                                            Konsolenfenster 3
+                                            <pre>cd catalogue-service<br>npm start2</pre>
+                                        </td>
+                                        <td>
+                                            Konsolenfenster 4
+                                            <pre>cd order-service<br>npm start</pre>
+                                        </td>
+                                    </tr>
+                                </table>
+                                
+                                Im Gegensatz zu bisher sollten Sie auf dem zweiten Rechner nun drei Instanzen des
+                                Katalog-Services laufen haben, die auf den Ports 8020, 8021 und 8022 aufrufbar sind.
+                                
+                                **HINWEISE:** Wenn Sie Frontend und API-Gateway auf unterschiedlichen Rechnern laufen
+                                lassen wollen, müssen Sie in der Datei `frontend/.env` die Zieladresse des API-Gateways
+                                anpassen. Wenn Sie Katalog- und Auftrags-Service auf unterschiedlichen Rechnern
+                                laufen lassen wollen, müssen Sie in der Datei `order-service/.env` die Zieladresse
+                                des Katalog-Services anpassen.                                
+                            </div>
+                        </lsx-accordion-page>
+
+                        <lsx-accordion-page title="Schritt 8">
+                            <p>
+                                Rufen Sie die Adresse <a href="http://localhost:8000" target="_blank">http://localhost:8000</a>
+                                im Browser auf, um die Anwendung erneut zu testen. Spielen Sie den Bestellvorgang einmal komplett
+                                durch. Es sollte zu keinen Fehlern kommen.
+                            </p>
+                            <lsx-info-box>
+                                Welche Anfragen an den Katalogservice werden von welcher Instanz verarbeitet?
+                            </lsx-info-box>
+                        </lsx-accordion-page>
+
+                        <lsx-accordion-page title="Schritt 9">
+                            <p>
+                                Zum Schluss wollen wir noch die Ausfallsicherheit der Anwendung überprüfen. Denn zumindest
+                                der Katalog-Service ist dreifach redundant ausgelegt. Öffnen Sie daher die Adresse
+                                <a href="http://localhost:8010" target="_blank">http://localhost:8010</a> im Browser und
+                                klicken Sie auf die Links, um ein paar Anfragen gegen den Katalog-Service zu schicken.
+                                Beenden Sie dann nach und nach eine weitere Instanz des Katalogservices und schicken Sie
+                                dann erneuut ein paar Anfragen über das API-Gateway.
+                            </p>
+                            <lsx-info-box>
+                                Wie verhält sich das API-Gateway, wenn eine Instanz nicht erreicht werden kann?
+                            </lsx-info-box>
+                            <lsx-info-box>
+                                Wie verhält sich das API-Gateway, wenn gar keine Instanz erreicht werden kann?
+                            </lsx-info-box>
+                            <lsx-info-box>
+                                Was passiert, wenn eine Instanz später wieder verfügbar ist?
+                            </lsx-info-box>
+                        </lsx-accordion-page>
+                    </lsx-accordion>
+                </lsx-tab-page>
+            </lsx-tab-pages>
         </article>
         <aside>
             <p>
@@ -3872,6 +4305,7 @@
     </section>
 
     <!-- TODO Aufgabe 1 von Michael -->
+    <!--
     <section data-title="Aufgabe 3: Wir programmieren einen Webserver">
         <article>
         </article>
@@ -3891,4 +4325,5 @@
             </p>
         </aside>
     </section>
+    -->
 </section>
