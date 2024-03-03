@@ -1,3 +1,1720 @@
+<section data-use-template="deckblatt" data-title="Anhang"></section>
+
+<!-- ======= -->
+<!-- OPENAPI -->
+<!-- ======= -->
+<section data-use-template="teilkapitel" data-titel="OpenAPI"></section>
+
+<section data-title="OpenAPI in aller Kürze">
+    <section data-title="Wie beschreibt man einen Webservice?">
+        <article class="centered-content">
+            <div class="markdown limited-width m-auto mb-5">
+                Während SOAP-Webservices von Anfang an mit der **Webservice Definition Language**
+                (meist einfach nur WSDL abegkürzt) in einem maschinenlesbaren formal beschrieben wurden,
+                gab es für REST-Webservices lange Zeit keinen vergleichbaren Standard. Dabei bietet
+                eine formale Beschreibung oftmals folgende Möglichkeiten:
+        
+                * Generieren von Client-Code zum Aufruf des Webservices
+                * Generieren von Server-Code zur Implementierung des Webservices
+                * Automatische Validierung von Anfragen und Antworten
+                * Generieren statische Dokumentationsseiten
+                * …
+        
+                Als möglichst leichtgewichtiger Ansatz kamen REST-Webservices lange ohne eine
+                formale Beschreibung und entsprechende Werkzeuge aus. Meistens wurden sie einfach
+                nur in Prosatext auf einer Begleitwebseite beschrieben, sofern es sich um öffentliche
+                APIs handelt (vgl. z.B. die Wikipedia API). Inzwischen hat sich jedoch das
+                **OpenAPI-Format** (vormals Swagger genannt) als De-Facto-Standard durchgesetzt.
+            </div>
+        
+            <div class="d-flex align-items-stretch" style="gap: 1em;">
+                <img src="99-anhang/openapi/openapi-beispiel.png" class="d-block img-thumbnail" style="width: 30em;"/>
+                <img src="99-anhang/openapi/api-creditsafe.png" class="d-block img-thumbnail" style="width: 30em;"/>
+                <img src="99-anhang/openapi/api-wikipedia.png" class="d-block img-thumbnail" style="width: 30em;"/>
+            </div>
+        </article>
+    </section>
+    
+    <section data-title="Vorgehen bei der Programmierung">
+        <article class="centered-content">
+            <div class="markdown limited-width m-auto">
+                Generell sind zwei Vorgehensweisen bei der Programmierung denkbar:
+        
+                * **Code First:** Die API-Spezifikation wird anhand der Webservice-Implementierung
+                automatisch generiert (z.B. mit dem Node.js-Paket
+                <a href="https://www.npmjs.com/package/express-oas-generator" target="_blank">express-oas-generator</a>).
+        
+                * **Contract First:** Die Spezifikation wird unabhängig von der konkreten
+                Implementierung erstellt und der Servercode anschließend entweder daraus
+                generiert oder von Hand implementiert.
+        
+                REST-Webservices werden allerdings fast immer **Contract First** erstellt.
+                Die hierfür notwendigen OpenAPI-Dokumente werdem im JSON- oder YAML-Format
+                erstellt, wobei YAML meist bevorzugt wird. Gute Anleitungen finden sich u.a.
+                hier:
+        
+                * <a href="https://swagger.io/docs/specification/about/" target="_blank">Swagger OpenAPI Guide</a>
+                * <a href="https://support.smartbear.com/swaggerhub/docs/tutorials/openapi-3-tutorial.html" target="_blank">Smartbear OpenAPI Tutorial</a>
+            </div>
+        
+            <div class="d-flex flex-row gap-3">
+                <div class="fw-bold flex-fill">
+                    <a href="https://editor.swagger.io" target="_blank">Swagger Editor</a> (Nur Quellcode)
+                    <img src="99-anhang/openapi/openapi-beispiel.png" class="img-thumbnail d-block w-100" />
+                </div>
+                <div class="fw-bold flex-fill">
+                    <a href="https://www.apicur.io" target="_blank">Apicurio Studio</a> (grafischer Editor, open-source)
+                    <img src="99-anhang/openapi/apicurio-1.png" class="img-thumbnail d-block w-100" />
+                </div>
+                <div class="fw-bold flex-fill">
+                    Live-Vorschau in Apicurio Studio
+                    <img src="99-anhang/openapi/apicurio-2.png" class="img-thumbnail d-block w-100" />
+                </div>
+            </div>
+        </article>
+    </section>
+    
+    <section data-title="Bestandteile einer OpenAPI-Spezifikation">
+        <article class="centered-content">
+            <div class="limited-width">
+                <p>
+                    OpenAPI-Spezifikationen bestehen in der Regel aus drei Teilen
+                    innerhalb derselben Datei:
+                </p>
+            
+                <lsx-accordion>
+                    <lsx-accordion-page title="Allgemeine Angaben" bold>
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Beschreibung">
+                                <div class="markdown">
+                                    * Name des Webservices
+                                    * Prosatext zur Beschreibung
+                                    * Kontaktdaten der Entwickler*innen
+                                    * Lizenzhinweise
+                                    * Webservice-URL
+                                    * Tags (Kategorien für die URL-Endpunkte)
+                                </div>
+                            </lsx-tab-page>
+                            <lsx-tab-page title="Syntaxbeispiel">
+                                <source-code language="yaml">
+                                    openapi: 3.0.0
+                                    info:
+                                        title: "Aufgabe: Hey, Mr. Postman"
+                                        description: "Dieser Webservice dient dazu, die typischen HTTP-Aufrufe bei \
+                                        \ Verwendung eines REST-Webservices mit einem Werkzeug wie Postman (https://www.postman.com/) \
+                                        \ auszuprobieren. Hierfür wird eine simple API zur Verwaltung von Songs angeboten."
+                                        contact:
+                                        name: Dennis Schulmeister-Zimolong
+                                        url: https://www.wpvs.de
+                                        email: dhbw@windows3.de
+                                        license:
+                                        name: CC-BY-4.0
+                                        url: https://creativecommons.org/licenses/by/4.0/deed.de
+                                        version: "1.0"
+                                    servers:
+                                    - url: http://localhost:3000
+                                    tags:
+                                    - name: Index
+                                    - name: Song
+                                </source-code>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+                    </lsx-accordion-page>
+            
+                    <lsx-accordion-page title="URL-Endpunkte" bold>
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Beschreibung">
+                                <div class="markdown">
+                                    Tief geschachtelte Struktur mit folgenden Inhalten:
+            
+                                    * **URL-Pfade** (ggf. mit Platzhaltern)
+                                        * **HTTP-Verben**
+                                        * Tag (Kategorie)
+                                        * Name und Beschreibung
+                                        * URL-Parameter (optional)
+                                        * Query-Parameter (optional)
+                                        * Erwartete Anfragedaten
+                                        * **HTTP-Statuscodes**
+                                            * Erzeugte Antwortdaten
+            
+                                    Für die Definition der Anfrage- und Antwortdaten wird meistens auf
+                                    ein weiter unten definiertes Schema verwiesen, da sie oft an mehreren
+                                    Stellen benötigt werden.
+                                </div>
+                            </lsx-tab-page>
+                            <lsx-tab-page title="Syntaxbeispiel">
+                                <source-code language="yaml">
+                                    paths:
+                                        /:
+                                        get:
+                                            tags:
+                                            - Index
+                                            summary: Wurzeladresse des Webservices
+                                            description: Liefert eine HATEOAS-Übersicht aller collections
+                                            responses:
+                                            "200":
+                                                description: OK
+                                                content:
+                                                application/json:
+                                                    schema:
+                                                    type: array
+                                                    items:
+                                                        $ref: '#/components/schemas/HATEOAS_Collection'
+                                                    x-content-type: application/json
+            
+                                        /song:
+                                        …
+                                        /song/{id}:
+                                        get:
+                                            tags:
+                                            - Song
+                                            summary: Song lesen
+                                            description: Liest einen einzelnen Song vom Server.
+                                            parameters:
+                                            - name: id
+                                            in: path
+                                            required: true
+                                            style: simple
+                                            explode: false
+                                            schema:
+                                                type: string
+                                            responses:
+                                            "200":
+                                                description: OK
+                                                content:
+                                                application/json:
+                                                    schema:
+                                                    $ref: '#/components/schemas/Song'
+                                            "404":
+                                                description: Not Found
+                                        delete:
+                                            tags:
+                                            - Song
+                                            summary: Song löschen
+                                            description: Löscht einen Song auf dem Server.
+                                            parameters:
+                                            - name: id
+                                            in: path
+                                            required: true
+                                            style: simple
+                                            explode: false
+                                            schema:
+                                                type: string
+                                            responses:
+                                            "200":
+                                                description: OK
+                                            "404":
+                                                description: Not Found
+                                        …
+                                </source-code>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+                    </lsx-accordion-page>
+            
+                    <lsx-accordion-page title="Schema-Definitionen" bold>
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Beschreibung">
+                                <div class="markdown">
+                                    In der Regel je Ressource eine Schema-Beschreibung ihrer zulässigen
+                                    Felder und Datentypen. Zusätzlich ggf. weitere Schema-Beschreibungen
+                                    für geschachtelte Strukturfelder oder einzelne HTTP-Anfragen bzw.
+                                    HTTP-Antworten.
+                                </div>
+                            </lsx-tab-page>
+                            <lsx-tab-page title="Syntaxbeispiel">
+                                <source-code language="yaml">
+                                    components:
+                                        schemas:
+                                        Song:
+                                            title: Song
+                                            type: object
+                                            properties:
+                                            _id:
+                                                type: string
+                                            artist:
+                                                type: string
+                                            name:
+                                                type: string
+                                            releaseYear:
+                                                type: integer
+                                            songwriters:
+                                                type: string
+                                            required:
+                                            - name
+                                            example:
+                                            _id: "621ff9a936997df5baba746e"
+                                            artist: "Elton John"
+                                            name: "Circle of Life"
+                                            releaseYear: 1994
+                                            songwriters: "Tim Rice"
+            
+                                        Artist:
+                                            …
+            
+                                        Playlist:
+                                            …
+                                </source-code>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+                    </lsx-accordion-page>
+                </lsx-accordion>
+            </div>
+        </article>
+    </section>
+</section>
+
+<section data-title="Fallbeispiel Adressbuch">
+    <section data-title="Datenmodell">
+        <article class="centered-content">
+            <div class="limited-width">
+                <div class="markdown">
+                    Auf den folgenden Seiten soll die Entwicklung des Adressbuch-Beispiels aus den Vorlesungsquellcodes
+                    gezeigt werden. Da das Beispiel dem **Contract First** Ansatz folgt, wird im ersten Schritt zunächst
+                    das Datenmodell, bestehend aus den fachlichen Daten sowie einer einfachen Umsetzung dem HATEOAS-Prinzips,
+                    definiert.
+                </div>
+            
+                <lsx-accordion>
+                    <lsx-accordion-page title="Adressbucheinträge">
+                        <p class="mb-0">
+                            Der Webservice verwaltet als einzige Ressource Adressen, welche
+                            die Einträge des Adressbuchs darstellen. Jede Adresse besteht aus
+                            einem Vornamen, Nachnamen, einer E-Mailadresse und Telefonnummer.
+                            Darüber hinaus besitzt sie eine eindeutige ID sowie Verlinkungen
+                            gemäß dem HATEOAS-Prinzip.
+                        </p>
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Schema">
+                                <table class="table table-sm table-light table-hover w-100 caption-top">
+                                    <caption>
+                                        <code>Address</code>
+                                        <span class="float-end">Adressbucheintrag</span>
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th>Feld</th>
+                                            <th>Datentyp</th>
+                                            <th>Beschreibung</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>_links</code></td>
+                                            <td>HATEOAS_Resource</td>
+                                            <td>HATEOAS-Verlinkungen</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>_id</code></td>
+                                            <td>String</td>
+                                            <td>Eindeutiger Schlüsselwert</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>first_name</code></td>
+                                            <td>String</td>
+                                            <td>Vorname</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>last_name</code></td>
+                                            <td>String</td>
+                                            <td>Nachname</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>phone</code></td>
+                                            <td>String</td>
+                                            <td>Telefonnummer</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>email</code></td>
+                                            <td>String</td>
+                                            <td>E-Mailadresse</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </lsx-tab-page>
+                            <lsx-tab-page title="Beispiel">
+                                <source-code language="json">
+                                    {
+                                        "_links": {
+                                            …
+                                        }
+                                        "_id": "621ff9a936997df5baba746e",
+                                        "first_name": "Fox",
+                                        "last_name": "Mulder",
+                                        "email": "mulder@xfiles.com",
+                                        "phone": "+49 721 553181"
+                                    }
+                                </source-code>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+                    </lsx-accordion-page>
+            
+                    <lsx-accordion-page title="HATEOAS-Verlinkungen">
+                        <p class="mb-0">
+                            Die Startadresse des Webservices soll eine Übersicht mit allen
+                            Collections liefern, wobei zu jeder Collection die URLs, HTTP-Verben
+                            und URL-Parameter zum Durchsuchen der Collections und zur Anlage neuer
+                            Einträge mitgeteilt werden sollen.
+                        </p>
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Schema">
+                                <table class="table table-sm table-light table-hover w-100 caption-top">
+                                    <caption>
+                                        <code>HATEOAS_Collection</code>
+                                        <span class="float-end">Beschreibung einer einzelnen Collection</span>
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th>Feld</th>
+                                            <th>Datentyp</th>
+                                            <th>Beschreibung</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>_name</code></td>
+                                            <td>String</td>
+                                            <td>Name der Collection</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>query</code></td>
+                                            <td>HATEOAS_Link</td>
+                                            <td>Link zum Durchsuchen der Collection</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>create</code></td>
+                                            <td>HATEOAS_Link</td>
+                                            <td>Link zur Anlage neuer Einträge</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+            
+                                <table class="table table-sm table-light table-hover w-100 caption-top">
+                                    <caption>
+                                        <code>HATEOAS_Link</code>
+                                        <span class="float-end">Details zu einem Link</span>
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th>Feld</th>
+                                            <th>Datentyp</th>
+                                            <th>Beschreibung</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>url</code></td>
+                                            <td>String</td>
+                                            <td>URL-Pfad relativ zur Startadresse des Webservices</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>method</code></td>
+                                            <td>String</td>
+                                            <td>Zu verwendende HTTP-Methode (z.B. GET oder POST)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>query_params</code></td>
+                                            <td>Array[String]</td>
+                                            <td>
+                                                <p class="mb-0">
+                                                    Namen aller erlaubten URL-Parameter
+                                                </p>
+                                                <p class="text-secondary">
+                                                    <small>
+                                                        Der Einfachheit halber ohne weitere Details,
+                                                        wie z.B. dem Datentyp der Parameter oder welche Parameter optional sind. Es wird
+                                                        davon ausgeganen, dass es keine Pflichtparameter gibt und der Aufrufer weiß, in
+                                                        welchem Format die Werte übergeben werden müssen.
+                                                    </small>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </lsx-tab-page>
+                            <lsx-tab-page title="Beispiel">
+                                <source-code language="json">
+                                    [
+                                        {
+                                            "_name": "address",
+                                            "query": {
+                                                "url": "/address",
+                                                "method": "GET",
+                                                "query_params": ["search", "first_name", "last_name", "phone", "email"]
+                                            },
+                                            "create": {
+                                                "url": "/address",
+                                                "method": "POST",
+                                            }
+                                        }
+                                    ]
+                                </source-code>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+            
+                        <p class="mb-0">
+                            Jede Ressource des Webserivces (hier also jeder Adressbucheintrag) soll
+                            darüber hinaus alle notwendigen Informationen liefern, damit ein Client
+                            weiß, wie er die Ressource lesen, ändern und löschen kann.
+                        </p>
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Schema">
+                                <table class="table table-sm table-light table-hover w-100 caption-top">
+                                    <caption>
+                                        <code>HATEOAS_Resource</code>
+                                        <span class="float-end">Links zu einer einzelnen Ressource</span>
+                                    </caption>
+                                    <thead>
+                                        <tr>
+                                            <th>Feld</th>
+                                            <th>Datentyp</th>
+                                            <th>Beschreibung</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>read</code></td>
+                                            <td>HATEOAS_Link</td>
+                                            <td>Link zum Lesen der Ressource</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>update</code></td>
+                                            <td>HATEOAS_Link</td>
+                                            <td>Link zum Überschreiben der Ressource</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>patch</code></td>
+                                            <td>HATEOAS_Link</td>
+                                            <td>Link zum Ändern einzelner Felder der Ressource</td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>delete</code></td>
+                                            <td>HATEOAS_Link</td>
+                                            <td>Link zum Löschen der Ressource</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </lsx-tab-page>
+                            <lsx-tab-page title="Beispiel">
+                                <source-code language="json">
+                                    {
+                                        "_id": "621ff9a936997df5baba746e",
+                                        "first_name": "Fox",
+                                        "last_name": "Mulder",
+                                        …
+            
+                                        "_links": {
+                                            "read": {
+                                                "url": "/address/621ff9a936997df5baba746e",
+                                                "method": "GET",
+                                            },
+                                            "update": {
+                                                "url": "/address/621ff9a936997df5baba746e",
+                                                "method": "PUT",
+                                            },
+                                            "patch": {
+                                                "url": "/address/621ff9a936997df5baba746e",
+                                                "method": "PATCH",
+                                            },
+                                            "delete": {
+                                                "url": "/address/621ff9a936997df5baba746e",
+                                                "method": "DELETE",
+                                            },
+                                        },
+                                    }
+                                </source-code>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+                    </lsx-accordion-page>
+                </lsx-accordion>
+            </div>
+        </article>
+    </section>
+    
+    <section data-title="URL-Endpunkte und HTTP-Nachrichten">
+        <article class="centered-content">
+            <div class="limited-width">
+                <div class="markdown">
+                    Anhand der Schemadefinitionen des Datenmodells können nun die URLs des
+                    Webservices definiert werden. Zu jeder URL müssen dann die erlaubten
+                    HTTP-Verben und zu jedem Verb der Aufbau der HTTP-Anfrage und der
+                    HTTP-Antwort definiert werden.
+                </div>
+            
+                <lsx-tab-pages>
+                    <lsx-tab-page title="/">
+                        <p>
+                            Die Wurzeladresse des Webservices liefert lediglich eine Übersicht
+                            aller Collections mit ihren wichtigsten URLs als Einstieg für
+                            HATEOAS-fähige Clients.
+                        </p>
+            
+                        <lsx-accordion>
+                            <lsx-accordion-page>
+                                <lsx-accordion-title>
+                                    <b><code>GET</code>:</b> &nbsp;
+                                    HATEOAS-Übersicht abrufen
+                                </lsx-accordion-title>
+                                <lsx-accordion-content>
+                                    <lsx-tab-pages>
+                                        <lsx-tab-page title="Statuscodes">
+                                            <table class="table table-sm table-light table-hover w-100 caption-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Statuscode</th>
+                                                        <th>Response Body</th>
+                                                    </tr>
+                                                </thead>
+                                                <tr>
+                                                    <td>200 Ok</td>
+                                                    <td>Array[HATEOAS_Collection]</td>
+                                                </tr>
+                                            </table>
+                                        </lsx-tab-page>
+            
+                                        <lsx-tab-page title="Beispiel">
+                                            <h4 class="mt-4">HTTP-Anfrage</h4>
+                                            <source-code language="http">
+                                                GET / HTTP/1.1
+                                                Host: example.com
+                                                Accept: application/json
+                                            </source-code>
+            
+                                            <h4 class="mt-4">HTTP-Antwort</h4>
+                                            <source-code language="http">
+                                                HTTP/1.1 200 Ok
+                                                Content-Type: application/json; charset=utf-8
+                                            </source-code>
+                                            <source-code language="json">
+                                                [
+                                                    {
+                                                        "_name": "address",
+                                                        "query": {
+                                                            "url": "/address",
+                                                            "method": "GET",
+                                                            "query_params": ["search", "first_name", "last_name", "phone", "email"]
+                                                        },
+                                                        "create": {
+                                                            "url": "/address",
+                                                            "method": "POST",
+                                                        }
+                                                    }
+                                                ]
+                                            </source-code>
+                                        </lsx-tab-page>
+                                    </lsx-tab-pages>
+                                <lsx-accordion-content>
+                            </lsx-accordion-page>
+                        </lsx-accordion>
+                    </lsx-tab-page>
+            
+                    <lsx-tab-page title="/address">
+                        <p>
+                            Da es sich hierbei um eine Collection handelt, kann diese mit einer
+                            <code>GET</code>-Anfrage durchsucht oder mit <code>POST</code> zur Anlage
+                            neuer Einträge verwendet werden.
+                        </p>
+            
+                        <lsx-accordion>
+                            <lsx-accordion-page>
+                                <lsx-accordion-title>
+                                    <b><code>GET</code>:</b> &nbsp;
+                                    Adressen suchen
+                                </lsx-accordion-title>
+                                <lsx-accordion-content>
+                                    <lsx-tab-pages>
+                                        <lsx-tab-page title="Query-Parameter">
+                                            <table class="table table-sm table-light table-hover w-100 caption-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Parameter</th>
+                                                        <th>Datentyp</th>
+                                                        <th>Beschreibung</th>
+                                                    </tr>
+                                                </thead>
+                                                <tr>
+                                                    <td><code>first_name</code></td>
+                                                    <td>String</td>
+                                                    <td>Gesuchter Vorname</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><code>last_name</code></td>
+                                                    <td>String</td>
+                                                    <td>Gesuchter Nachname</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><code>phone</code></td>
+                                                    <td>String</td>
+                                                    <td>Gesuchte Telefonnummer</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><code>email</code></td>
+                                                    <td>String</td>
+                                                    <td>Gesuchte E-Mailadresse</td>
+                                                </tr>
+                                            </table>
+                                        </lsx-tab-page>
+            
+                                        <lsx-tab-page title="Statuscodes">
+                                            <table class="table table-sm table-light table-hover w-100 caption-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Statuscode</th>
+                                                        <th>Response Body</th>
+                                                    </tr>
+                                                </thead>
+                                                <tr>
+                                                    <td>200 Ok</td>
+                                                    <td>Array[Address]</td>
+                                                </tr>
+                                            </table>
+                                        </lsx-tab-page>
+            
+                                        <lsx-tab-page title="Beispiel">
+                                            <h4 class="mt-4">HTTP-Anfrage</h4>
+                                            <source-code language="http">
+                                                GET /address?first_name=Fox HTTP/1.1
+                                                Host: example.com
+                                                Accept: application/json
+                                            </source-code>
+            
+                                            <h4 class="mt-4">HTTP-Antwort</h4>
+                                            <source-code language="http">
+                                                HTTP/1.1 200 Ok
+                                                Content-Type: application/json; charset=utf-8
+                                            </source-code>
+                                            <source-code language="json">
+                                                [
+                                                    {
+                                                        "_links": {
+                                                            …
+                                                        }
+                                                        "_id": "621ff9a936997df5baba746e",
+                                                        "first_name": "Fox",
+                                                        "last_name": "Mulder",
+                                                        "email": "mulder@xfiles.com",
+                                                        "phone": "+49 721 553181"
+                                                    }
+                                                ]
+                                            </source-code>
+                                        </lsx-tab-page>
+                                    </lsx-tab-pages>
+                                <lsx-accordion-content>
+                            </lsx-accordion-page>
+            
+                            <lsx-accordion-page>
+                                <lsx-accordion-title>
+                                    <b><code>POST</code>:</b> &nbsp;
+                                    Neue Adresse anlegen
+                                </lsx-accordion-title>
+                                <lsx-accordion-content>
+                                    <lsx-tab-pages>
+                                        <lsx-tab-page title="Request Body">
+                                            <code>Address</code>
+                                        </lsx-tab-page>
+            
+                                        <lsx-tab-page title="Statuscodes">
+                                            <table class="table table-sm table-light table-hover w-100 caption-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Statuscode</th>
+                                                        <th>Response Body</th>
+                                                    </tr>
+                                                </thead>
+                                                <tr>
+                                                    <td>201 Created</td>
+                                                    <td>Address</td>
+                                                </tr>
+                                            </table>
+                                        </lsx-tab-page>
+            
+                                        <lsx-tab-page title="Beispiel">
+                                            <h4 class="mt-4">HTTP-Anfrage</h4>
+                                            <source-code language="http">
+                                                POST /address HTTP/1.1
+                                                Host: example.com
+                                                Accept: application/json
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "first_name": "Fox",
+                                                    "last_name": "Mulder",
+                                                    "email": "mulder@xfiles.com",
+                                                    "phone": "+49 721 553181"
+                                                }
+                                            </source-code>
+            
+                                            <h4 class="mt-4">HTTP-Antwort</h4>
+                                            <source-code language="http">
+                                                HTTP/1.1 201 Created
+                                                Content-Type: application/json; charset=utf-8
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "_links": {
+                                                        …
+                                                    }
+                                                    "_id": "621ff9a936997df5baba746e",
+                                                    "first_name": "Fox",
+                                                    "last_name": "Mulder",
+                                                    "email": "mulder@xfiles.com",
+                                                    "phone": "+49 721 553181"
+                                                }
+                                            </source-code>
+                                        </lsx-tab-page>
+                                    </lsx-tab-pages>
+                                <lsx-accordion-content>
+                            </lsx-accordion-page>
+                        </lsx-accordion>
+                    </lsx-tab-page>
+            
+                    <lsx-tab-page title="/address/{id}">
+                        <p>
+                            Gemäß den REST-Prinzipien besitzt jeder Adressbucheintrag besitzt eine eindeutige
+                            URL. Über diese kann er gelesen, überschrieben, geändert und gelöscht werden.
+                        </p>
+            
+                        <lsx-accordion>
+                            <lsx-accordion-page>
+                                <lsx-accordion-title>
+                                    <b><code>GET</code>:</b> &nbsp;
+                                    Adresse lesen
+                                </lsx-accordion-title>
+                                <lsx-accordion-content>
+                                    <lsx-tab-pages>
+                                        <lsx-tab-page title="Statuscodes">
+                                            <table class="table table-sm table-light table-hover w-100 caption-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Statuscode</th>
+                                                        <th>Response Body</th>
+                                                    </tr>
+                                                </thead>
+                                                <tr>
+                                                    <td>200 Ok</td>
+                                                    <td>Address</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>404 Not Found</td>
+                                                    <td>–</td>
+                                                </tr>
+                                            </table>
+                                        </lsx-tab-page>
+            
+                                        <lsx-tab-page title="Beispiel">
+                                            <h4 class="mt-4">HTTP-Anfrage</h4>
+                                            <source-code language="http">
+                                                GET /address/621ff9a936997df5baba746e HTTP/1.1
+                                                Host: example.com
+                                                dhbw-lightblue                   Accept: application/json
+                                            </source-code>
+            
+                                            <h4 class="mt-4">HTTP-Antwort</h4>
+                                            <source-code language="http">
+                                                HTTP/1.1 200 Ok
+                                                Content-Type: application/json; charset=utf-8
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "_links": {
+                                                        …
+                                                    }
+                                                    "_id": "621ff9a936997df5baba746e",
+                                                    "first_name": "Fox",
+                                                    "last_name": "Mulder",
+                                                    "email": "mulder@xfiles.com",
+                                                    "phone": "+49 721 553181"
+                                                }
+                                            </source-code>
+                                        </lsx-tab-page>
+                                    </lsx-tab-pages>
+                                </lsx-accordion-content>
+                            </lsx-accordion-page>
+            
+                            <lsx-accordion-page>
+                                <lsx-accordion-title>
+                                    <b><code>PUT</code>:</b> &nbsp;
+                                    Adresse überschreiben
+                                </lsx-accordion-title>
+                                <lsx-accordion-content>
+                                    <lsx-tab-pages>
+                                        <lsx-tab-page title="Request Body">
+                                            <code>Address</code>
+                                        </lsx-tab-page>
+            
+                                        <lsx-tab-page title="Statuscodes">
+                                            <table class="table table-sm table-light table-hover w-100 caption-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Statuscode</th>
+                                                        <th>Response Body</th>
+                                                    </tr>
+                                                </thead>
+                                                <tr>
+                                                    <td>200 Ok</td>
+                                                    <td>Address</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>404 Not Found</td>
+                                                    <td>–</td>
+                                                </tr>
+                                            </table>
+                                        </lsx-tab-page>
+            
+                                        <lsx-tab-page title="Beispiel">
+                                            <h4 class="mt-4">HTTP-Anfrage</h4>
+                                            <source-code language="http">
+                                                PUT /address/621ff9a936997df5baba746e HTTP/1.1
+                                                Host: example.com
+                                                Accept: application/json
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "first_name": "Fox",
+                                                    "last_name": "Mulder",
+                                                    "email": "fox.mulder@xfiles.com",
+                                                    "phone": "+49 721 553181"
+                                                }
+                                            </source-code>
+            
+                                            <h4 class="mt-4">HTTP-Antwort</h4>
+                                            <source-code language="http">
+                                                HTTP/1.1 200 Ok
+                                                Content-Type: application/json; charset=utf-8
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "_links": {
+                                                        …
+                                                    }
+                                                    "_id": "621ff9a936997df5baba746e",
+                                                    "first_name": "Fox",
+                                                    "last_name": "Mulder",
+                                                    "email": "fox.mulder@xfiles.com",
+                                                    "phone": "+49 721 553181"
+                                                }
+                                            </source-code>
+                                        </lsx-tab-page>
+                                    </lsx-tab-pages>
+                                </lsx-accordion-content>
+                            </lsx-accordion-page>
+            
+                            <lsx-accordion-page>
+                                <lsx-accordion-title>
+                                    <b><code>PATCH</code>:</b> &nbsp;
+                                    <span class="float-end">Einzelne Felder ändern</span>
+                                </lsx-accordion-title>
+                                <lsx-accordion-content>
+                                    <lsx-tab-pages>
+                                        <lsx-tab-page title="Request Body">
+                                            <code>Address</code>
+                                        </lsx-tab-page>
+            
+                                        <lsx-tab-page title="Statuscodes">
+                                            <table class="table table-sm table-light table-hover w-100 caption-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Statuscode</th>
+                                                        <th>Response Body</th>
+                                                    </tr>
+                                                </thead>
+                                                <tr>
+                                                    <td>200 Ok</td>
+                                                    <td>Address</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>404 Not Found</td>
+                                                    <td>–</td>
+                                                </tr>
+                                            </table>
+                                        </lsx-tab-page>
+            
+                                        <lsx-tab-page title="Beispiel">
+                                            <h4 class="mt-4">HTTP-Anfrage</h4>
+                                            <source-code language="http">
+                                                PATCH /address/621ff9a936997df5baba746e HTTP/1.1
+                                                Host: example.com
+                                                Accept: application/json
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "email": "fox.mulder@xfiles.com",
+                                                }
+                                            </source-code>
+            
+                                            <h4 class="mt-4">HTTP-Antwort</h4>
+                                            <source-code language="http">
+                                                HTTP/1.1 200 Ok
+                                                Content-Type: application/json; charset=utf-8
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "_links": {
+                                                        …
+                                                    }
+                                                    "_id": "621ff9a936997df5baba746e",
+                                                    "first_name": "Fox",
+                                                    "last_name": "Mulder",
+                                                    "email": "fox.mulder@xfiles.com",
+                                                    "phone": "+49 721 553181"
+                                                }
+                                            </source-code>
+                                        </lsx-tab-page>
+                                    </lsx-tab-pages>
+                                </lsx-accordion-content>
+                            </lsx-accordion-page>
+            
+                            <lsx-accordion-page>
+                                <lsx-accordion-title>
+                                    <b><code>DELETE</code>:</b> &nbsp;
+                                    <span class="float-end">Adresse löschen</span>
+                                </lsx-accordion-title>
+                                <lsx-accordion-content>
+                                    <lsx-tab-pages>
+                                        <lsx-tab-page title="Statuscodes">
+                                            <table class="table table-sm table-light table-hover w-100 caption-top">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Statuscode</th>
+                                                        <th>Response Body</th>
+                                                    </tr>
+                                                </thead>
+                                                <tr>
+                                                    <td>200 Ok</td>
+                                                    <td>–</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>404 Not Found</td>
+                                                    <td>–</td>
+                                                </tr>
+                                            </table>
+                                        </lsx-tab-page>
+            
+                                        <lsx-tab-page title="Beispiel">
+                                            <h4 class="mt-4">HTTP-Anfrage</h4>
+                                            <source-code language="http">
+                                                DELETE /address/621ff9a936997df5baba746e HTTP/1.1
+                                                Host: example.com
+                                                Accept: application/json
+                                            </source-code>
+            
+                                            <h4 class="mt-4">HTTP-Antwort</h4>
+                                            <source-code language="http">
+                                                HTTP/1.1 200 Ok
+                                                Content-Type: application/json; charset=utf-8
+                                            </source-code>
+                                        </lsx-tab-page>
+                                    </lsx-tab-pages>
+                                </lsx-accordion-content>
+                            </lsx-accordion-page>
+                        </lsx-accordion>
+                    </lsx-tab-page>
+                </lsx-tab-pages>
+            </div>
+        </article>
+    </section>
+    
+    <section data-title="Erstellen der OpenAPI-Spezifikation">
+        <article class="d-flex flex-wrap justify-content-center align-items-center gap-3">
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-01.png" caption="1. Neue API anlegen"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-02.png" caption="2. Allgemeine Informationen eintragen"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-03.png" caption="3. Wechsel in den Änderungsmodus"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-04.png" caption="4. Live-Dokumentation zur Ergebniskontrolle öffnen"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-05.png" caption="5. Kontaktdaten und Lizenz ausfüllen"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-06.png" caption="6. Je Entität ein neues Tag anlegen"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-07.png" caption="7. Benötigte Datentypen anlegen"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-08.png" caption="8. Datentyp Address beschreiben"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-09.png" caption="9. URL-Endpunkte für Adressen generieren lassen"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-10.png" caption="10. Weitere Datentypen anlegen"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-11.png" caption="11. Schemadefinition HATEOAS_Link"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-12.png" caption="12. Für die HATEOAS-Typen keine URL-Endpunkte generieren"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-14.png" caption="13. Vorläufige Schemadefinition HATEOAS_Collection"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-13.png" caption="14. Vorläufige Schemadefinition HATEOAS_Resource"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-15.png" caption="15. Finale Schemadefinition HATEOAS_Collection"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-16.png" caption="16. Finale Schemadefinition HATEOAS_Resource"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-17.png" caption="17. Schemadefinition Address erweitern"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-18.png" caption="18. HATEOAS-Informationen zum Address-Schema hinzufügen"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-19.png" caption="19. URL /addresses umbenennen"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-20.png" caption="20. Ergebnis der manuellen Anpassungen"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-21.png" caption="21. Query-Parameter zum Suchen von Adressen anlegen"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-22.png" caption="22. Neu angelegte Query-Parameter zum Suchen von Adressen"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-23.png" caption="23. PATCH-Anfragen ergänzen"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-24.png" caption="24. HTTP-Anfrage für PATCH"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-25.png" caption="25. HTTP-Antwort für PATCH"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-26.png" caption="26. Live-Vorschau der Dokumentation öffnen"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-27.png" caption="27. Dokumentation des Webservices"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-28.png" caption="28. Zurück zur Startseite des Webservices"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-29.png" caption="29. OpenAPI-Beschreibung herunterladen"></lsx-modal-image>
+            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-30.png" caption="30. Format YAML auswählen"></lsx-modal-image>
+        </article>
+    </section>
+    
+    <section data-title="Ergebnis">
+        <article class="centered-content">
+            <div class="limited-width2">
+                <p>
+                    <a
+                        href="https://editor.swagger.io/?url=https://raw.githubusercontent.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes/main/Beispielanwendung%20Adressbuch/Backend/src/api/openapi.yaml"
+                        target="_blank"
+                    >
+                        Link zum Swagger Editor
+                    </a>
+                </p>
+        
+                <img src="99-anhang/openapi/fallbeispiel-swagger-editor.png" class="img-responsive img-thumbnail" />
+            </div>
+        </article>
+    </section>
+</section>
+
+<section data-title="Übungsaufgaben" data-background-color="rgb(231, 221, 141)">
+    <!-- TODO -->
+    <section data-title="Aufgabe 1: Ein kleines OpenAPI-Quiz">
+    </section>
+
+    <section data-title="Aufgabe 2: HTTP Statuscodes">
+        <article class="centered-content">
+            <div class="limited-width">
+                <div class="markdown mb-4">
+                    Besuchen Sie die Seite <a href="https://http.dog/" target="_blank">http.dog</a>.
+                    Dort finden Sie „für jeden HTTP-Statuscode einen Hund”. Schauen Sie sich die Liste
+                    an und beantworten Sie dann folgende Fragen:
+            
+                    1. Welche Statuscodes könnten in einer typischen OpenAPI-Spezifikation
+                    dokumentiert sein?
+            
+                    1. Welche Statuscodes könnten vom Webserver darüber hinaus gelegentlich
+                    geliefert werden?
+            
+                    1. In welchen Fällen könnte der
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/418" target="_blank">Statuscode 418</a>
+                    geliefert werden?
+            
+                    Wenn Sie wollen, können Sie die Seite
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status" target="_blank">HTTP response status codes</a>
+                    im Mozilla Developer Network zu Rate ziehen, um einzelne Statuscodes nachzuschlagen.
+                </div>
+            
+                <div class="d-flex align-items-stretch" style="gap: 1em; margin-bottom: 1em;">
+                    <img src="99-anhang/openapi/status-100.avif" class="d-block w-100"/>
+                    <img src="99-anhang/openapi/status-101.avif" class="d-block w-100"/>
+                </div>
+            </div>
+        </article>
+    </section>
+    
+    <section data-title="Aufgabe 3: Eine OpenAPI-Spezifikation lesen">
+        <article class="centered-content">
+            <div class="limited-width">
+                <div class="markdown mb-4">
+                    Laden Sie sich von GitHub die
+                    <a href="https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes/blob/main/Beispielanwendung%20Adressbuch/Backend/src/api/openapi.yaml" target=_blank>OpenAPI-Beschreibung des Adressbuch-Beispiels</a>
+                    herunter und öffnen Sie diese im <a href="https://editor.swagger.io" target="_blank">Swagger Online-Editor</a>.
+                    Lesen Sie sich die Beschreibung durch und beantworten Sie folgende Fragen dazu:
+            
+                    1. Was ist der Sinn und Zweck der API?
+                    1. Welche URL-Endpunkte werden von ihr unterstützt?
+                    1. Wie wird das HATEOAS-Prinzip von der API umgesetzt?
+                    1. Welchen Aufbau haben die verwalteten Daten der API?
+                </div>
+            
+                <img src="99-anhang/openapi/openapi-beispiel.png" class="img-thumbnail w-100" />
+            </div>
+        </article>
+    </section>
+    
+    <section data-title="Aufgabe 4: Definition einer eigenen API">
+        <article class="centered-content">
+            <div class="limited-width">
+                <div class="markdown mb-4">
+                    Überlegen Sie sich einen einfachen Anwendungsfall für eine öffentliche
+                    REST API und arbeiten Sie diese als OpenAPI-Spezifikation aus. Skizzieren
+                    Sie hierfür zunächst auf einem Blatt Papier oder einem Schreib- bzw.
+                    Malprogramm die grobe Struktur der API:
+            
+                    * Welche Collections soll die API besitzen?
+                    * Welche Felder sollen die einzelnen Resourcen besitzen?
+                    * Wie sollen die URLs der API strukturiert sein?
+            
+                    Nachdem Sie diese grundlegenden Dinge festgelegt haben, versuchen Sie, die
+                    API im OpenAPI-Format zu beschreiben. Hierfür bietet es sich an, die OpenAPI-Datei
+                    aus dem Vorlageprojekt als Grundalge zu verwenden. Diese können Sie entwder im
+                    <a href="https://editor.swagger.io/" target="_blank">Swagger Online-Editor</a>
+                    (wenn Sie sich sicher genug im Umgang mit YAML und OpenAPI fühlen) oder in
+                    <a href="https://studio.apicur.io" target="_blank">Apicurio Studio</a> öffnen. Letzteres
+                    erfordert eine Anmeldung z.B. mit einem GitHub-Benutzer, ist grundsätzlich aber Open Source
+                    und kostenlos nutzen. Es bietet eine intuitive, grafische Oberfläche für alle OpenAPI-Elemente
+                    anstelle dem Nur-Codeeditor von Swagger.
+            
+                    Weitere Fragen, die Sie sich beim Erstellen der Beschreibung überlegen müssen sind:
+            
+                    * Welche HTTP-Verben sollen je URL-Endpunkt unterstützt werden?
+                    * Welcher Aufruf soll welchen HTTP-Statuscode liefern?
+                    * Werden optionale Query-Parameter z.B. für die Suche benötigt?
+                    * Wie sieht die exakte JSON-Struktur der einzelnen Anfragen und Antworten aus?
+                    * Soll der Webservice das HATEOAS-Prinzip unterstützen?
+                    * Falls ja, in welcher Form sollen die Links zurückgeliefert werden?
+                </div>
+            
+                <img src="99-anhang/openapi/apicurio-1.png" class="img-thumbnail w-100" />
+            </div>
+        </article>
+    </section>
+</section>
+
+<!-- ====== -->
+<!-- DOCKER -->
+<!-- ====== -->
+<section data-use-template="teilkapitel" data-titel="Docker"></section>
+
+<section data-title="Docker in aller Kürze">
+    <section data-title="Was ist Docker?">
+        <article>
+            <div class="markdown limited-width m-auto mb-4">
+                Docker ist eine **Laufzeitumgebung zur Isolation laufender Prozesse**
+                unter Linux. (Aktuelle Versionen von Microsoft Windows unterstützen diese
+                Funktion inzwischen auch). Die Programme werden hierfür mit allen für ihre
+                Ausführung benötigten Systembibliotheken und Hilfsdateien in binäre Filesystem
+                Images (hier **Container Image** genannt) verpackt und dann durch den
+                Docker Daemon also sog. **Container** ausgeführt, wobei das Wort
+                Container hier die Isolation der Prozesse verdeutlichen soll.
+        
+                Intern werden hierfür verschiedene Mechanismen des Linux-Kernels genutzt,
+                um den Programmen vorzugaukeln, dass sie die einzigen laufenden Programme
+                innerhalb des Betriebssystems wären. Gute Container Images starten daher
+                tatsächlich nur einen Prozess, der automatisch die **Prozess-ID 1**
+                bekommt.
+        
+                Darüber hinaus virtualisiert Docker das Netzwerk sowie den Massenspeicher,
+                um die Container noch weiter voneinander zu isolieren. Zusammengehörige
+                Container können über ein **virtuelles Netzwerk** untereinander
+                kommunizieren und einzelne Ports können vom Host an die Container
+                weitergeleitet werden.
+        
+                Wichtig zu verstehen ist, dass Container ,,immutabel'' sind, was bedeutet,
+                dass sie zwar Dateien in ihrem virtuellen Dateisystem erzeugen können,
+                diese bei einem Neustart des Containers aber verloren gehen. Über sog.
+                **Volumes** können stattdessen externe Massenspeicher angebunden
+                werden, um persistente Daten abzulegen.
+            </div>
+        
+            <div class="d-flex align-items-stretch" style="gap: 1em;">
+                <img src="99-anhang/docker/docker-1.png" class="d-block w-100 img-thumbnail"/>
+                <img src="99-anhang/docker/docker-2.png" class="d-block w-100 img-thumbnail"/>
+            </div>
+        </article>
+    </section>
+    
+    <section data-title="Container Images bauen mit einem Dockerfile">
+        <article class="centered-content">
+            <div class="limited-width">
+                <div class="markdown">
+                    Um ein sog. Image zu bauen, das von Docker als Container ausgeführt werden
+                    kann, muss im Quellcode-Verzeichnis der Anwendung eine Datei namens
+                    <span class="fn">Dockerfile</span> angelegt werden. Ihre Aufgabe ist zu
+                    beschreiben, aus welchen Inhalten (also aus welchen Dateien) sich das Image
+                    zusammensetzen soll.
+            
+                    Hierfür wird in der Regel aus dem „Docker Hub” (oft auch „Registry” genannt,
+                    was aber nicht mit der „Node.js Registry” verwechselt werden darf) ein vorhandenes
+                    Image referenziert und um eigene Dateien erweitert. Als Basis-Image kann dann
+                    entweder ein minimales Betriebssystem-Image (z.B. Debian oder Alpine Linux)
+                    oder eine vorkonfigurierte Laufzeitumgebung wie Node.js, Python, … (die selbst
+                    auf einem der genannten Betriebssystem-Images basiert) ausgewählt werden.
+                </div>
+            
+                <div class="card p-3 mt-3 mb-3 bg-light">
+                    <table class="table table-striped">
+                        <tr>
+                            <td>
+                                <src-code language="docker">FROM node:17-alpine</src-code>
+                            </td>
+                            <td>
+                                Node.js 17.x als Basis-Image verwenden
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <src-code language="docker">ENV NODE_ENV=production HOST=::</src-code>
+                            </td>
+                            <td>
+                                Zur Ausführung benötigte Umgebungsvariablen definieren
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <src-code language="docker">WORKDIR /app</src-code>
+                            </td>
+                            <td>
+                                Wechseln des für die folgenden Befehle verwendeten Arbeitsverzeichnisses im Image
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <src-code language="docker">COPY package.json package-lock.json ./</src-code>
+                            </td>
+                            <td>
+                                Quellcode-Dateien in das eben ausgewählte Arbeitsverzeichnis kopieren
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <src-code language="docker">RUN npm install</src-code>
+                            </td>
+                            <td>
+                                Ausführen eines Befehls, um die benötigten Node.js-Module zu installieren
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <src-code language="docker">COPY src ./src</src-code>
+                            </td>
+                            <td>
+                                Am Schluss den eigentlichen Quellcode in das Filesystem Image kopieren
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <src-code language="docker">EXPOSE 3000/tcp</src-code>
+                            </td>
+                            <td>
+                                Dokumentieren, dass der Container auf TCP-Port 3000 einen Serverdienst bereitstellt
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <src-code language="docker">ENTRYPOINT ["node", "src/index.js"]</src-code>
+                            </td>
+                            <td>
+                                Definition des zur Ausführung des Containers zu startenden Programms
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            
+                <div class="markdown">
+                    Die Reihenfolge der Anweisungen ist wichtig, da die meisten Anweisungen ein neues,
+                    sog. „Filesystem Layer” erzeugen, in dem die durch die Anweisung verursachten
+                    Änderungen an der Dateistruktur festgehalten werden. Indem sich weniger oft ändernde
+                    Dateien an den Anfang gestellt werden, kann die Zeit zum Neubauen eines Containers
+                    und die damit verbrauchte Bandbreite deutlich reduziert werden.
+                </div>
+            </div>
+        </article>
+    </section>
+    
+    <section data-title="Netzwerkvirtualisierung mit Docker">
+        <article>
+            <div class="markdown">
+                * Standardmäßig werden Docker Container vollständig isoliert ausgeführt.
+                * Sie können zwar auf das Internet zugreifen, selbst aber keine Verbindungen entgegennehmen.
+                * Hierfür muss entweder eine Portweiterleitung oder ein virtuelles Netzwerk eingerichtet werden.
+                * Eine Portweiterleitung leitet an den Host gerichtete TCP-Anfragen an einen Container weiter.
+                * Ein virtuelles Netzwerk hingegen ermöglicht es mehreren Containern, untereinander zu kommunizieren.
+            </div>
+        
+            <div class="d-flex align-items-stretch w-100" style="gap: 1em;">
+        
+            <div class="card w-100">
+                <div class="card-header fw-bold">
+                    Start eines Containers mit Portweiterleitung
+                </div>
+                <div class="card-body p-3">
+                    <p>
+                        <span class="cmd">docker run -d --name mongodb -p 27777:27017 mongo</span>
+                    </p>
+                    <table class="table table-striped">
+                        <tr>
+                            <td>
+                                <code>docker run</code>
+                            </td>
+                            <td>
+                                Subkommando zum Starten eines Containers
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>-d</code>
+                            </td>
+                            <td>
+                                Container im Hintergrund ausführen
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>--name mongodb</code>
+                            </td>
+                            <td>
+                                Festen Namen für den Container verwenden
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>-p 27777:27017</code>
+                            </td>
+                            <td>
+                                Anfragen an den TCP-Port 27777 des Hosts an Port 27017 des Containers weiterleiten
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>mongo</code>
+                            </td>
+                            <td>
+                                Name des auszuführenden Images
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        
+            <div class="card w-100">
+                <div class="card-header fw-bold">
+                    Verbinden mehrerer Container über ein virtuelles Netzwerk
+                </div>
+                <div class="card-body p-3">
+                    <p>
+                        <span class="cmd">docker net create beispiel</span> <br />
+                        Virtuelles Netzwerk mit dem Namen <span class="cmd">beispiel</span> erzeugen
+                    </p>
+                    <p>
+                        <span class="cmd">docker run -d --name mongodb --net beispiel mongo</span> <br />
+                        Container im Hintergrund starten und diesen mit dem Beispiel-Netzwerk verbinden.
+                        Über das virtuelle Netzwerk können die im Container laufenden Serverdienste
+                        aufgerufen werden. Von Außen ist der Container allerdings nicht erreichbar.
+                    </p>
+                    <p>
+                        <span class="cmd">docker run -d --name backend --net beispiel -p 3000:3000 adressbuch-backend</span> <br />
+                        Weiteren Container starten und sowohl mit dem Beispiel-Netzwerk verbinden als
+                        auch eine Portweiterleitung definieren. Warum? Weil das Backend unserer Anwendung
+                        vom Browser aus aufrufbar sein muss, über das virtuelle Netzwerk jedoch auch mit der
+                        Datenbank kommunizieren soll.
+                    </p>
+        
+                    <h3>Service Discovery</h3>
+                    <p>
+                        Über den Domainnamen <span class="fn">mongo</span> kann der
+                        Backend-Service die interne IP-Adresse des Datenbank-Containers ermitteln.
+                    </p>
+        
+                    <h3>Load Balancing</h3>
+                    <p>
+                        Wurden mehrere Instanzen des Datenbank-Containers gestartet, verteilt
+                        Docker die Anfragen automatisch auf die unterschiedlichen Instanzen,
+                        indem es bei jedem DNS Lookup die IP-Adresse einer anderen Instanz
+                        zurück liefert.
+                    </p>
+                </div>
+            </div>
+        
+            </div>
+        </article>
+    </section>
+    
+    <section data-title="Mehrere Container orchestrieren mit Docker Compose">
+        <article class="centered-content">
+            <div style="max-width: 70em;">
+                <div class="markdown">
+                    Da die Befehlsketten zur Ausführung und Verknüpfung mehrerer Docker-Container
+                    mitunter sehr komplex werden können, lässt sich ein Setup aus zusammehängenden
+                    Containern auch deklarativ in einer Datei namens <span class="fn">docker-compose.yml</span>
+                    beschreiben. Das Werkzeug **Docker Compose** übernimmt dann den Start und auch die
+                    Beendigung aller Container in der richtigen Reihenfolge. Außerdem kann damit eine
+                    einfache Skalierung durch Starten mehrerer, paralleler Containerinstanzen erreicht
+                    werden. Mit **Docker Swarm** kann eine so definierte Anwendung auch ganz einfach
+                    in einem Cluster produktiv deployed werden.
+                </div>
+            
+                <div class="card p-3 mt-3 mb-3 bg-light">
+                    <table class="table table-striped">
+                        <tr>
+                            <td>
+                                <source-code language="yaml">
+                                    version: "3.9"
+                                </source-code>
+                            </td>
+                            <td>
+                                Definition der Version des Docker-Compose-Dateiformats
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <source-code language="yaml">
+                                    volumes:
+                                        dbdata:
+                                        dbconfig:
+                                </source-code>
+                            </td>
+                            <td>
+                                Aufzählung von sog. Volumes zur Ablage persistenter Daten
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <source-code language="yaml">
+                                    services:
+                                </source-code>
+                            </td>
+                            <td>
+                                Beginn der Service-Definitionen mit den zu startenden Containern
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 3em;">
+                                <source-code language="yaml">
+                                        # MongoDB-Datenbank
+                                        mongodb:
+                                            image: mongo
+                                            restart: always
+                                            environment:
+                                                MONGO_INITDB_ROOT_USERNAME: dbuser
+                                                MONGO_INITDB_ROOT_PASSWORD: dbpass
+                                            volumes:
+                                                - dbdata:/data/db
+                                                - dbconfig:/data/configdb
+                                </source-code>
+                            </td>
+                            <td>
+                                <p>
+                                    Definition des Containers <span class="scr">mongodb</span> zur Ausführung
+                                    des Images <span class="scr">mongo</span> aus dem Docker Hub.
+                                </p>
+                                <p>
+                                    Bei einem Absturz wird der Container automatisch neugestartet (Resilienz).
+                                </p>
+                                <p>
+                                    Im Container werden zwei Umgebungsvariablen mit Konfigurationswerten für
+                                    einen beim ersten Start anzulegenden Admin-Benutzer definiert.
+                                </p>
+                                <p>
+                                    Durch die oben benannten Volumes werden die Inhalte der beiden Verzeichnisse
+                                    <span class="fn">/data/db</span> und <span class="fn">/data/configdb</span>
+                                    mit dem Host geteilt und bleiben somit nach einem Neustart des Containers
+                                    erhalten.
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 3em;">
+                                <source-code language="yaml">
+                                    # Adressbuch-Backend (Produktivmodus)
+                                    backend:
+                                        build:
+                                            context: ./Backend
+                                        depends_on:
+                                            - mongodb
+                                        restart: always
+                                        environment:
+                                            HOST: "::"
+                                            PORT: 3000
+                                            MONGODB: mongodb://dbuser:dbpass@mongodb:27017/
+                                        deploy:
+                                            replicas: 3
+                                </source-code>
+                            </td>
+                            <td>
+                                <p>
+                                    Definition des Containers <span class="scr">backend</span>, der aus dem
+                                    <span class="fn">Dockerfile</span> im Unterverzeichnis <span class="fn">Backend</span>
+                                    gebaut wird.
+                                </p>
+                                <p>
+                                    Der Container kann erst gestartet werden, wenn der Container mit dem Namen
+                                    <span class="scr">mongodb</span> läuft.
+                                </p>
+                                <p>
+                                    Bei einem Absturz wird der Container automatisch neugestartet (Resilienz).
+                                </p>
+                                <p>
+                                    Im Container werden drei Umgebungsvariablen mit den Verbindungsdaten zur
+                                    Mongo-Datenbank definiert.
+                                </p>
+                                <p>
+                                    Standardmäßig werden drei Instanzen des Containers gestartet.
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>    
+        </article>
+    </section>
+    
+    <section data-title="Typische Befehle zur Verwendung von Docker">
+        <article class="centered-content">
+            <div class="d-flex align-items-stretch w-100" style="gap: 1em;">
+                <!-- Docker -->
+                <div class="card w-100">
+                    <div class="card-header fw-bold">
+                        Docker
+                    </div>
+                    <div class="card-body p-3 markdown">
+                        * <span class="cmd">docker help</span>: <br />
+                        Hilfe! 🤕
+                    
+                        * <span class="cmd">docker &lt;kommando&gt; help</span>: <br />
+                            Hilfe zu einem Docker-Subkommando
+                    
+                        * <span class="cmd">docker run -d &lt;container&gt;</span>: <br />
+                            Start eines Containers im Hintergrund
+                    
+                        * <span class="cmd">docker run -it &lt;container&gt; &lt;befehl&gt;</span>: <br />
+                            Ausführen eines interaktiven Befehls in einem neuen Container
+                    
+                        * <span class="cmd">docker container ls</span>: <br />
+                            Alle laufenden Container anzeigen
+                    
+                        * <span class="cmd">docker container stop &lt;name&gt;</span> <br />
+                            Beenden eines laufenden Containers
+                    
+                        * <span class="cmd">docker logs &lt;name&gt;</span> <br />
+                            Konsolen- und Log-Ausgaben eines Containers zeigen
+                    
+                        * <span class="cmd">docker net create &lt;netwerk&gt;</span> <br />
+                            Neues, virtuelles Netzwerk zur Kommunikation mehrerer Container untereinander erstellen
+                    
+                        * <span class="cmd">docker system prune</span> <br />
+                            Nicht mehr benötigte Ressourcen freigeben (wichtig!)
+                    
+                        * <span class="cmd">docker volume prune</span> <br />
+                            Nicht mehr verwendete Volumes löschen, da diese sehr viel Speicher belegen können.
+                
+                        <lsx-info-box type="warning" title="Achtung, Datenverlust!">
+                            Es werden alle Volumes gelöscht, die aktuell von keinem laufenden Container
+                            genutzt werden. Dadurch sind ggf. dann auch die persistenten Daten der MongoDB
+                            weg, wenn diese bei Ausführung des Befehls gerade nicht läuft.
+                        </lsx-info-box>
+                    </div>
+                </div>
+    
+                <!-- Docker Compose -->
+                <div class="card w-100">
+                    <div class="card-header fw-bold">
+                        Docker Compose
+                    </div>
+                    <div class="card-body p-3 markdown">
+                        * <span class="cmd">docker compose up</span>:  <br />
+                        Start mehrerer zusammengehöriger Docker Container **im Vordergrund**
+                
+                        * <span class="cmd">docker compose up -d</span>: <br />
+                            Start mehrerer zusammengehöriger Docker Container **im Hintergrund**
+                    
+                        * <span class="cmd">docker compose down</span>:  <br />
+                            Stoppen der mit Docker Compose gestarteten Container
+                    
+                        * <span class="cmd">docker compose build</span>:  <br />
+                            Neubauen aller Container Images anhand ihres <span class="fn">Dockerfile</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>    
+</section>
+
+<section data-title="Übungsaufgaben" data-background-color="rgb(231, 221, 141)">
+    <!-- TODO -->
+    <section data-title="Aufgabe 1: Ein kleines Docker-Quiz">
+    </section>
+
+    <section data-title="Aufgabe 2: Wir erkunden Docker" data-background-color="rgb(231, 221, 141)">
+        <article>
+            <div class="markdown">
+                Öffnen Sie den folgenden Link zum Starten der GitPod Online IDE mit den Quellcodes
+                zur Vorlesung. Neben einem an Visual Studio Code angelehnten Code-Editor und einer
+                Linux-Umgebung mit Node.js und anderen Werkzeugen, stellt diese Ihnen auch Docker
+                und Docker Compose zur Verfügung. Sie können somit Docker ausprobieren oder gar am
+                Portfolioprojekt der Vorlesung arbeiten, ohne etwas auf Ihrem Rechner installieren
+                zu müssen. Im Gegenzug benötigen Sie allerdings eine dauerhafte Internetverbindung,
+                um programmieren zu können.
+            
+                <a href="https://www.gitpod.io/#https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2022-quellcodes" target="_blank" class="fw-bold">Online IDE: Quellcodes zur Vorlesung</a>
+            
+                ![Gitpod](99-anhang/docker/gitpod-2.png){.img-thumbnail .img-responsive .limited-width}
+            </div>
+    
+            <lsx-tab-pages>
+                <lsx-tab-page title="Anwendung starten" class="markdown">
+                    Falls noch nicht geschehen, öffnen Sie über das Hamburger-Menü oben links ein
+                    neues Terminal. In diesem Wechseln Sie mit dem <span class="cmd">cd</span>-Befehl
+                    in das Adressbuch-Beispiel:
+                
+                    <span class="cmd">cd Beispielanwendung\ Adressbuch</span>
+                
+                    Um nicht den gesamten Befehl eintippen zu müssen, genügt es, wenn Sie nur die
+                    ersten paar Buchstaben tippen und dann die <kbd>Tab</kbd>-Taste drücken, um
+                    die sog. „Command Completion” der Konsole auszuführen. Da es mehrere Verzeichnisse
+                    mit dem Wort „Beispielanwendung” am Anfang gibt, drücken Sie anschließend
+                    <kbd>A</kbd> und dann wieder <kbd>Tab</kbd>, damit sich der Befehl vervollständigt.
+                
+                    Das Tolle an GitPod ist, dass innerhalb des Terminals ausgeführte Serverdienste
+                    wie z.B. der Backend-Service der Anwendung über eine öffentliche URL testbar
+                    gemacht werden. Dies benötigen wir, damit die Frontend-Anwendung (die ja innerhalb
+                    des Browsers und somit nicht in der Linux-Umgebung der IDE läuft) auf das Backend
+                    zugreifen kann. Im ersten Schritt geht es daher darum, die URL des Backend-Services
+                    zu ermitteln und in der Umgebungsvariable `API_KEY` abzulegen. Gehen Sie hierfür
+                    wie folgt vor:
+                
+                    1. Starten Sie alle Container mit dem Befehl <br />
+                    <span class="cmd">docker-compose -f docker-compose.dev.yml up -d</span>
+                
+                    1. Öffnen Sie links in der Sidebar den „Remote Explorer”.
+                
+                    1. Schalten Sie alle Ports frei, um eine öffentliche URL zu erzeugen.
+                
+                    1. Öffnen Sie die Vorschau für den Port 3000.
+                
+                    1. Kopieren Sie sich die URL des Services aus dem Vorschaufenster.
+                
+                    1. Erzeugen Sie die Umgebungsvariable im Terminal mit folgendem Befehl: <br />
+                    <span class="cmd">export API_URL=https://3000-….gitpod.io</span>
+                
+                    1. Starten Sie anschließend mit folgenden Befehlen alle Container neu: <br />
+                    <span class="cmd">docker-compose -f docker-compose.dev.yml down</span> <br />
+                    <span class="cmd">docker-compose -f docker-compose.dev.yml up -d</span> <br />
+                
+                    1. Öffnen Sie anschließend die Vorschau für den Remote Port 8080.
+                    Wenn Sie wollen können Sie die URL aus dem Vorschaufenster in
+                    einen neuen Browser-Tab einfügen. Auf jeden Fall testen Sie, ob
+                    sich die App fehlerfrei bedienen lässt.
+                </lsx-tab-page>
+    
+                <lsx-tab-page title="Quellcode ändern" class="markdown">
+                    Nehmen Sie nun eine Änderung am Backend-Quellcode vor und laden
+                    Sie die Vorschauseite neu. Beobachten Sie dabei, dass die
+                    Änderung sofort aktiv wurde. Anschließend nehmen Sie eine
+                    Änderung am Frontend-Quellcode vor und laden Sie Vorschseite
+                    wieder neu. Beobachten Sie auch hier, dass die Änderung ohne
+                    manuelles Eingreifen sofort aktiv wurde.
+                </lsx-tab-page>
+    
+                <lsx-tab-page title="Docker-Compose-File anpassen" class="markdown">
+                    Versuchen Sie abschließend, mit der Datei <span class="fn">docker-compose.prod.yml</span>
+                    die Produktivversion der Anwendung zu starten. Verschen Sie dann,
+                    die in der Entwicklungsversion definierte Mongo-Admin-Oberfläche
+                    in die Produktiversion aufzunehmen. Welche Schritte sind hierür
+                    notwendig?
+                </lsx-tab-page>
+            </lsx-tab-pages>
+        </article>
+        <aside>
+            <p>
+                Die vorherigen Seiten haben die wichtigsten Befehle rund um Docker sehr kurz
+                zusammengefasst. In dieser Aufgabe wollen wir sie nun anwenden, um Docker im
+                Einsatz zu sehen und seine Funktionalitäten besser zu verstehen.
+            </p>
+            <img src="shared/github_atom.png" class="img-fluid d-block"/>
+            <p>
+                <small>
+                    Bildnachweis:
+                    <a href="https://atom.io/" target="_blank">Atom Webseite</a>
+                </small>
+            </p>
+        </aside>
+    </section>
+</section>
+
+<!-- ============== -->
+<!-- RECHTSHINWEISE -->
+<!-- ============== -->
 <section data-use-template="teilkapitel" data-titel="Rechtshinweise"></section>
 
 <section data-background-color="rgb(158, 203, 231)">
