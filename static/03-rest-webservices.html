@@ -9,11 +9,171 @@
         * Zustandslose von zustandsbehafteter Programmierung abgrenzen.
         * Die Umsetzung der REST-Prinzipien mit HTTP und JSON erklären.
         <!-- -->
-        * Die Vorteile einer maschinenlesbaren API-Spezifikation erklären.
-        * Die typischen Inhalte einer OpenAPI-Beschreibung erklären.
-        * Webservices anhand ihrer OpenAPI-Beschreibung verstehen.
-        * OpenAPI-Spezifikationen mit Apicurio Studio erstellen.
+        <!--
+        TODO
+        -->
 
         <span style="font-size: 240px; color: white;" class="dhbw-text-shadow" >🏁</span>
     </article>
 </section>
+
+<!-- ========================= -->
+<!-- THEORETISCHE HINTERGRÜNDE -->
+<!-- ========================= -->
+
+<section data-use-template="teilkapitel" data-titel="Theoretische Hintergründe"></section>
+
+<section data-title="Was ist ein Webservice?">
+    <section data-title="Server, Service, Webservice">
+        <!--
+            Service: Softwarekomponente stellt Funktion in einem System zur Verfügung
+            Server: Bietet entfernten Zugriff (meist über das Internet) auf einen Service -> M2M!
+            Webservice: Nutzt die Webtechnologien HTTP (und ggf. XML, JSON) zur Implementierung des Servers (basiert also auf einem Webserver)
+        -->
+    </section>
+
+    <section data-title="Webanwendung vs. Webservice">
+        <!--
+            Definition Anwendung mit
+            Beispielen für Anwendungen anhand Bildern
+            Webanwendung: Anwendung auf Basis der Webtechnologien HTML, CSS, JS
+            Nutzen im Hintergrund oft Webservices um Daten zu beschaffen oder zu verschicken
+        -->
+    </section>
+
+    <section data-title="Das HTTP-Übertragungsprotokoll">
+        <!--
+                HTTP-Folie ohne Randtext
+                Dafür kleiner Text obendrüber oder darunter
+                Alles mittig zentriert
+        -->
+    </section>
+
+    <section data-title="Gängige Webservice-Arten">
+        <!--
+            Grundidee schon sehr alt. Spätestens 1999.
+            1998 XML-RPC (Microsoft)
+            1999 SOAP (Microsoft, IBM und andere)
+            2000 REST (seit 2014 nennenswerte Verbreitung)
+            2007 Webhooks (nicht-standardisiert, nur ein User Defined HTTP-Callback für asynchrone Ereignisse)
+
+            Je mit kurzer Zusammenfassung der Funktionsweise und Mini-Beispiel
+
+            Weitere: 2014 OData, 2012 GraphQL
+        -->
+    </section>
+
+    <section data-title="SOAP vs. REST">
+        <!--
+            Comic-Bild: Get Coffee!
+            Alter Vergleich aus den Folien mit Pferdewagen?
+        -->
+    </section>
+
+    <section data-title="Webservice oder API?">
+        <!--
+            Ggf. kürzer / besser formulieren?
+            Screenshot oder Beispiel für traditionelle API: WIN32 C
+        -->
+    </section>
+</section>
+
+<section data-title="Einsatzgebiete von Webservices">
+    <section data-title="Fallbeispiel: Reiseportal">
+        <!-- Bild mit kurzer Erklärung -->
+    </section>
+
+    <section data-title="Fallbeispiel: Business-to-Business">
+        <!-- Bild mit kurzer Erklärung -->
+    </section>
+
+    <section data-title="Fallbeispiel: Serviceorientierte Architektur">
+        <!-- Neues Bild -->
+    </section>
+
+    <section data-title="Weitere Beispiele">
+        <!-- Alte Seite: Beispiele für öffentliche Webservices -->
+    </section>
+</section>
+
+<section data-title="REST-Webservices im Detail">
+    <section data-title="Representational State Transfer">
+        <!--
+            Erklärungstext als alter Folie
+            Representational: Content Negotation für Datenformate
+                - HTTP Anfrage und Antwort zeigen
+                - Mit enthaltenem Beispiel für JSON-Daten
+            State Transfer: Zustandsloser Server, gesamtes Objekt hin- und her schicken
+                -> Auch hier ggf. mit Beispiel-Anfrage/Antwort (Objekt anlegen -> ID + Location Header)
+        -->
+    </section>
+
+    <section data-title="Ressourcen">
+    </section>
+
+    <section data-title="Collections">
+        <!--
+            Mit Bild analog zu Michaels Folien: Collection enthält die Ressourcen
+        -->
+    </section>
+
+    <section data-title="Stores">
+        <!--
+            Eher selten anzutreffen aber möglich
+        -->
+    </section>
+
+    <section data-title="Actions">
+        <!-- Eigentlich Controller genannt, Begriff aber zweideutig! -->
+    </section>
+</section>
+
+<section data-title="Fallbeispiel: Wastebin">
+    <section data-title="Funktionsumfang der App">
+        <!--
+            Screenshots als LibreOffice-Folien mit Kurzbeschreibung aus README
+        -->
+    </section>
+
+    <section data-title="Datenmodell">
+        <!--
+            Aus README übernehmen
+        -->
+    </section>
+
+    <section data-title="REST-Webservice">
+        <!--
+            Aus README übernehmen
+        -->
+    </section>
+
+    <section data-title="Typische HTTP-Anfragen">
+        <!--
+            Alte Skriptseite dazu, aber neu strukturiert und angepasst an das Beispiel
+            Screenshots aus HTTPie vorne anstellen unter Erklärtext
+        -->
+    </section>
+</section>
+
+<section data-title="Übungsaufgaben" data-background-color="rgb(231, 221, 141)">
+    <section data-title="Aufgabe 1: Ein kleines Webservice-Quiz">
+    </section>
+
+    <section data-title="Aufgabe 2: Art Institute of Chicago">
+    </section>
+
+    <section data-title="Aufgabe 3: Circle of Life">
+    </section>
+
+    <section data-title="Aufgabe 4: Kleiderkreisel">
+    </section>
+
+    <section data-title="Aufgabe 5: Wir eröffnen ein Kino">
+    </section>
+</section>
+
+<!-- ========================== -->
+<!-- PROGRAMMIERUNG MIT NODE.JS -->
+<!-- ========================== -->
+
+<section data-use-template="teilkapitel" data-titel="Programmierung mit Node.js"></section>
