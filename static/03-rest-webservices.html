@@ -156,7 +156,299 @@
 </section>
 
 <section data-title="Übungsaufgaben" data-background-color="rgb(231, 221, 141)">
+    <!-- TODO Vervollständigen -->
     <section data-title="Aufgabe 1: Ein kleines Webservice-Quiz">
+        <article>
+            <lsx-tab-pages>
+                <lsx-tab-page title="Aufgabe 1.1">
+                    <lsx-quiz>
+                        <lsx-exercise title="HTTP-Verben">
+                            <lsx-question
+                                type = "single-choice"
+                                text = "a) Was bewirkt das HTTP-Verb POST?"
+                            >
+                                <lsx-answer>
+                                    Es werden bereits vorhandene Daten vom Server abgerufen.
+                                </lsx-answer>
+                                <lsx-answer>
+                                    Es werden Daten auf dem Server gelöscht (POST = Postpone).
+                                </lsx-answer>
+                                <lsx-answer correct>
+                                    Es werden Daten werden zur Verarbeitung an den Server geschickt.
+                                </lsx-answer>
+                            </lsx-question>
+                
+                            <lsx-question
+                                type = "single-choice"
+                                text = "b) Was bewirkt das HTTP-Verb DELETE?"
+                            >
+                                <lsx-answer>
+                                    Die ausgewählten Daten werden im Browser gelöscht.
+                                </lsx-answer>
+                                <lsx-answer correct>
+                                    Die ausgewählten Daten werden auf dem Server gelöscht.
+                                </lsx-answer>
+                                <lsx-answer>
+                                    Es wird geprüft, ob die Daten gelöscht werden können.
+                                </lsx-answer>
+                            </lsx-question>
+                
+                            <lsx-question
+                                type = "single-choice"
+                                text = "c) Was bewirkt das HTTP-Verb GET?"
+                            >
+                                <lsx-answer correct>
+                                    Es werden Daten vom Server abgerufen (zum Beispiel der HTML-Code einer Webseite).
+                                </lsx-answer>
+                                <lsx-answer>
+                                    Es wird eine Dateiliste vom Server mit den Namen aller Dateien einer Webseite abgerufen.
+                                </lsx-answer>
+                                <lsx-answer>
+                                    Der Inhalt einer Datei wird vom Browser an den Server übertragen.
+                                </lsx-answer>
+                            </lsx-question>
+                        </lsx-exercise>
+                    </lsx-quiz>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Aufgabe 1.2">
+                    <lsx-quiz>
+                        <lsx-exercise title="HTTP-Statuscodes">
+                            <lsx-question
+                                type = "single-choice"
+                                text = "a) Was bedeutet der Statuscode 401 Unauthorized?"
+                            >
+                                <lsx-answer>
+                                    Die gesuchten Daten wurden nicht gefunden.
+                                </lsx-answer>
+                                <lsx-answer>
+                                    Die gewünschte Funktion wurde nicht ausprogrammiert.
+                                </lsx-answer>
+                                <lsx-answer correct>
+                                    Die gewünschte Funktion darf nicht ausgeführt werden.
+                                </lsx-answer>
+                            </lsx-question>
+                
+                            <lsx-question
+                                type = "single-choice"
+                                text = "b) Was bedeutet der Statuscode 503 Service Unavailble?"
+                            >
+                                <lsx-answer correct>
+                                    Es ist ein temporärer Fehler aufgetreten, bitte später nochmal versuchen.
+                                </lsx-answer>
+                                <lsx-answer>
+                                    Es ist ein schwerwiegender Fehler aufgetreten. Nichts geht mehr.
+                                </lsx-answer>
+                                <lsx-answer>
+                                    Die gesuchte Information wurde nicht gefunden. Bitte anders suchen.
+                                </lsx-answer>
+                            </lsx-question>
+                
+                            <lsx-question
+                                type = "single-choice"
+                                text = "c) Welcher Statuscode signalisiert, dass eine Seite nicht gefunden wurde?"
+                            >
+                                <lsx-answer>
+                                    200
+                                </lsx-answer>
+                                <lsx-answer>
+                                    301
+                                </lsx-answer>
+                                <lsx-answer correct>
+                                    404
+                                </lsx-answer>
+                            </lsx-question>
+                
+                            <lsx-question
+                                type = "single-choice"
+                                text = "d) Welcher Statuscode wird geschickt, wenn alles okay ist?"
+                            >
+                                <lsx-answer>
+                                    100
+                                </lsx-answer>
+                                <lsx-answer correct>
+                                    200
+                                </lsx-answer>
+                                <lsx-answer>
+                                    300
+                                </lsx-answer>
+                            </lsx-question>
+                        </lsx-exercise>
+                    </lsx-quiz>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Aufgabe 1.3">
+                    <lsx-quiz>
+                        <lsx-exercise title="REST-Webservices">
+                            <lsx-question
+                                type = "single-choice"
+                                text = "a) Wofür steht die Abkürzung REST?"
+                            >
+                                <lsx-answer>
+                                    <a href="https://www.youtube.com/watch?v=qx9HEn8aq1c" target="_blank">Rest in Peace</a>
+                                </lsx-answer>
+                                <lsx-answer correct>
+                                    Representational State Transfer
+                                </lsx-answer>
+                                <lsx-answer>
+                                    Representational Standard Transfer
+                                </lsx-answer>
+                                <lsx-answer>
+                                    Represent Every State Through HTTP
+                                </lsx-answer>
+                            </lsx-question>
+                
+                            <lsx-question
+                                type = "single-choice"
+                                text = "b) Eine Ressource sollte immer einer Collection oder einem Store angehören?"
+                            >
+                                <lsx-answer correct>
+                                    Wahr
+                                </lsx-answer>
+                                <lsx-answer>
+                                    Falsch
+                                </lsx-answer>
+                            </lsx-question>
+                
+                            <lsx-question
+                                type = "single-choice"
+                                text = "c) Worin unterscheiden sich Collections und Stores?"
+                            >
+                                <lsx-answer>
+                                    Bei einer Collection werden neue Ressourcen vom Client eingefügt, bei einem Store vom Server.
+                                </lsx-answer>
+                                <lsx-answer correct>
+                                    Bei einer Collection legt der Server fest, welche URL die Ressourcen erhalten, bei einem Store der Client.
+                                </lsx-answer>
+                                <lsx-answer>
+                                    In eine Collection können nur gleichartige Ressourcen eingefügt werden, in einen Store alle Arten.
+                                </lsx-answer>
+                                <lsx-answer>
+                                    In einer Collection besitzen alle Ressourcen eine natürliche Reihenfolge, in einem Store nicht.
+                                </lsx-answer>
+                                <lsx-answer>
+                                    In einer Collection werden die Ressourcen dauerhaft gespeichert, in einem Store nicht.
+                                </lsx-answer>
+                            </lsx-question>
+                
+                            <lsx-question
+                                type = "single-choice"
+                                text = "d) Welches HTTP-Verb wird typischerweise zum Anlegen neuer Ressourcen genutzt?"
+                            >
+                                <lsx-answer correct>
+                                    POST
+                                </lsx-answer>
+                                <lsx-answer>
+                                    PUT
+                                </lsx-answer>
+                                <lsx-answer>
+                                    PATCH
+                                </lsx-answer>
+                                <lsx-answer>
+                                    HEAD
+                                </lsx-answer>
+                            </lsx-question>
+                
+                            <lsx-question
+                                type = "single-choice"
+                                text = "e) Welches HTTP-Verb wird typischerweise zum Ändern einer Ressource genutzt?"
+                            >
+                                <lsx-answer>
+                                    POST
+                                </lsx-answer>
+                                <lsx-answer correct>
+                                    PUT
+                                </lsx-answer>
+                                <lsx-answer>
+                                    PATCH
+                                </lsx-answer>
+                                <lsx-answer>
+                                    HEAD
+                                </lsx-answer>
+                            </lsx-question>
+                
+                            <lsx-question
+                                type = "single-choice"
+                                text = "f) Welche Aufgabe besitzt das HTTP-Verb PATCH?"
+                            >
+                                <lsx-answer>
+                                    Anlegen einer neuen Collection.
+                                </lsx-answer>
+                                <lsx-answer>
+                                    Anlegen einer neuen Ressource.
+                                </lsx-answer>
+                                <lsx-answer>
+                                    Ändern der URL einer Ressource.
+                                </lsx-answer>
+                                <lsx-answer correct>
+                                    Ändern einzelner Felder einer Ressource.
+                                </lsx-answer>
+                            </lsx-question>
+                
+                            <lsx-question
+                                type = "single-choice"
+                                text = "g) Warum sollten Actions niemals mit einer GET-Anfrage ausgelöst werden?"
+                            >
+                                <lsx-answer correct>
+                                    Weil GET-Anfragen keine Seiteneffekte haben dürfen.
+                                </lsx-answer>
+                                <lsx-answer>
+                                    Weil es mit DO ein besser geeignetes HTTP-Verb dafür gibt.
+                                </lsx-answer>
+                                <lsx-answer>
+                                    Man darf schon, aber nur wenn die Action ein Ergebnis liefert.
+                                </lsx-answer>
+                            </lsx-question>
+                
+                            <lsx-question
+                                type = "single-choice"
+                                text = "h) Welche der folgenden Antworten entspricht nicht dem HATEOAS-Prinzip?"
+                            >
+                                <lsx-answer correct>
+                                    <source-code language="json">
+                                        {
+                                            "id": 3110,
+                                            "first_name": "Gilian",
+                                            "last_name": "Anderson",
+                                        }
+                                    </source-code>
+                                </lsx-answer>
+                                <lsx-answer>
+                                    <source-code language="json">
+                                        {
+                                            "id": 2512,
+                                            "first_name": "David",
+                                            "last_name": "Duchovny",
+                                            "_links": {
+                                                "as-actor": {
+                                                    "href": "/actors/3686/credited-as-actor"
+                                                },
+                                                "as-director": {
+                                                    "href": "actors/3686/credited-as-director"
+                                                }
+                                            }
+                                        }
+                                    </source-code>
+                                </lsx-answer>
+                            </lsx-question>
+                        </lsx-exercise>
+                    </lsx-quiz>
+                </lsx-tab-page>
+            </lsx-tab-pages>
+        </article>
+        <aside>
+            <p>
+                It's Quiz Time! Hier können Sie Ihr neues Wissen rund um HTTP und seine
+                Verwendung in Webservices testen. Viel Erfolg dabei! 🐧
+            </p>
+            <img src="shared/quiz.png" class="img-fluid d-block" style="max-width: 20em;"/>
+            <p>
+                <small>
+                    Bildnachweis:
+                    <a href="https://pixabay.com/illustrations/quiz-tiles-letters-red-game-test-2058883/" target="_blank">Pixabay: 905513</a>
+                </small>
+            </p>
+        </aside>
     </section>
 
     <section data-title="Aufgabe 2: Vorsicht, Falle!">
@@ -189,7 +481,214 @@
 
 <section data-use-template="teilkapitel" data-titel="Programmierung mit Node.js"></section>
 
+<section data-title="Erste Schritte mit Node.js">
+    <section data-title="JavaScript außerhalb des Browsers">
+        <!--
+            Was ist Node.js (V8 Engine, ...)
+            REPL mit node CLI (Screenshot / Screencast)
+            Ausführung von Quellcodes mit "node datei.js"
+            Laufzeitumgebung für nebenläufige Programme
+            Gemacht für Netzwerkprogramme (Clients, Server)
+            Aber auch Desktop-Anwendungen z.B. mit Electron (Screenshots?)
+        -->
+    </section>
+
+    <section data-title="Deklaration von Node Packages">
+        <!--
+            package.json: Bedeutung, Beispiel, Aufbau
+            npm init (Screencast)
+        -->
+    </section>
+
+    <section data-title="Abhängigkeiten verwalten">
+        <!--
+            npmjs.org
+            npm add / install
+            Verzeichnis node_modules                
+            Arten von Dependencies: Runtime und Dev (Peer auch?)
+            Beispiel in package.json
+            Semantische Versionierung
+        -->
+    </section>
+
+    <section data-title="Verwendung von NPM-Skripten">
+        <!--
+            Definition in der package.json
+            Ausführung mit "npm run ..." bzw. "npm start" (Screencast)
+            Hinweis: Umgebungsvariablen setzen (cross-env)
+            Hinweis: Mehrere Befehlen nacheinander
+            Hinweis: Mehrere Programme gleichzeitig (concurrently)
+        -->
+    </section>
+</section>
+
+<section data-title="Serverseitige Webentwicklung mit Express">
+    <section data-title="Funktionsumfang von Express">
+        <!--
+            Screenshot von Webseite
+            Kleine Beschreibung zu Ansatz und Funktionen von Express
+            Kurzaufzählung der Funktionen
+        -->
+    </section>
+
+    <section data-title="Grundgerüst einer Express-Anwendung">
+        <!--
+            Installation
+            main.js: app-Objekt
+            Middleware-Funktionen
+            Mini-Beispiel für GET-Request
+            HINWEIS: Anwendung ist hier etwas doof. Gemeint ist "Webanwendung" mit serverseitigem HTML-Rendering. Wir machen aber Webservices!
+        -->
+    </section>
+
+    <section data-title="Graceful Shutdown ermöglichen">
+    </section>
+
+    <section data-title="Statische Dateien bereitstellen">
+    </section>
+
+    <section data-title="Häufig benötigte Middleware-Funktionen">
+        <!--
+            express.json()
+            Anfragen loggen
+            Fehler behandeln
+        -->
+    </section>
+
+    <section data-title="Typische Request-Handler-Funktionen">
+        <!--
+            Code-Strukturierung: Controller-Module
+            Registrierung der HTTP Endpunkte (Verb + URL mit Platzhaltern)
+            Beispiele für typische GET/POST/... - Handler
+            Hinweis zu generischem Fehler-Handler etc.
+            Alternative: Mehrere Middleware-Funktionen als Array
+        -->
+    </section>
+</section>
+
+<section data-title="Nützliche Werkzeuge und Zusatzbibliotheken">
+    <section data-title="nodemon">
+    </section>
+
+    <section data-title="dotenv">
+    </section>
+
+    <section data-title="logging">
+    </section>
+
+    <section data-title="lowdb">
+    </section>
+</section>
+
 <!-- Fallbeispiel wie Stückeln? Wäre eine Code Tour möglich? -->
+<section data-title="Fallbeispiel: Wastebin">
+    <section data-title="Funktionsumfang des Beispiels">
+    </section>
+
+    <section data-title="Datenmodell und REST-Webservice">
+    </section>
+
+    <section data-title="Strukturierung des Quellcodes">
+        <!-- Bild aus Folien -->
+    </section>
+
+    <section data-title="Start des Webservers">
+    </section>
+
+    <section data-title="Datenbank">
+    </section>
+
+    <section data-title="Service-Schicht">
+    </section>
+
+    <section data-title="HTTP-Controller">
+    </section>
+</section>
+
+<!-- Vgl 2020er-Folien (abgespeckt) -->
+<section data-title="Verwendung von REST-APIs im Browser">
+    <section data-title="Asynchronous JavaScript and XML (AJAX)">
+    </section>
+
+    <section data-title="Anfragen senden mit XMLHttpRequest">
+    </section>
+
+    <section data-title="Anfragen senden mit der Fetch API">
+    </section>
+</section>
+
+<!-- Vgl 2020er-Folien (abgespeckt) -->
+<section data-title="Fallbeispiel: Gästebuch">
+    <section data-title="Funktionsumfang der Webanwendung">
+    </section>
+
+    <section data-title="HTTP-Endpunkte des Webservices">
+    </section>
+
+    <section data-title="Quellcode der Single Page App">
+    </section>
+</section>
+
+<section data-title="Übungsaufgaben" data-background-color="rgb(231, 221, 141)">
+    <section data-title="Aufgabe 1: Ein kleines Node.js-Quiz">
+        <article>
+            <lsx-tab-pages>
+                <lsx-tab-page title="Aufgabe 1.1">
+                    <lsx-quiz>
+                        <lsx-exercise title="XXX">
+                            xxx
+                        </lsx-exercise>
+                    </lsx-quiz>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Aufgabe 1.2">
+                    <lsx-quiz>
+                        <lsx-exercise title="XXX">
+                            xxx
+                        </lsx-exercise>
+                    </lsx-quiz>
+                </lsx-tab-page>
+            </lsx-tab-pages>
+        </article>
+        <aside>
+            <p>
+                Das war ein ganz schön umfangreicher Crash Kurs zur Programmierung mit Node.js.
+                Lassen Sie uns die wichtigsten Inhalte hier nochmal Revue passieren.
+            </p>
+            <img src="shared/quiz.png" class="img-fluid d-block" style="max-width: 20em;"/>
+            <p>
+                <small>
+                    Bildnachweis:
+                    <a href="https://pixabay.com/illustrations/quiz-tiles-letters-red-game-test-2058883/" target="_blank">Pixabay: 905513</a>
+                </small>
+            </p>
+        </aside>
+    </section>
+
+    <section data-title="Aufgabe 2: Mein erster Webservice">
+        <!--
+            Neues Node-Projekt anlegen
+            Webservice ausprogrammieren, der die Hauptstadt eines Bundeslands liefern kann
+                - Liste vorgegeben, Bundesland als Abkürzung, z.B. BW
+                - Mit Mallorca als Fun-Eintrag
+            Webservice im Browser testen
+            Webservice in Tool wie HTTPie testen
+        -->
+    </section>
+
+    <section data-title="Aufgabe 3: MfG, KSC, Oh je mine!">
+        <!--
+            Aufgabe von Michael: DELETE-Endpunkt ergänzen
+        -->
+    </section>
+
+    <section data-title="Aufgabe 4: Golfcard">
+        <!--
+            Webservice-Aufruf in Frontend einbauen
+            Dummy-Methode mit statischen Daten hierfür durch fetch() ersetzen
+        -->
+    </section>
+</section>
 
 <!-- ================ -->
 <!-- VERTIEFUNG: CORS -->
@@ -220,16 +719,62 @@
 </section>
 
 <section data-title="Fallbeispiel: Notebook-as-a-Service">
-    <!--
-        Umsetzung von CORS im Fallbeispiel -> Unterfolien?
-    -->
+    <section data-title="Probleme bei fehlender CORS-Unterstützung">
+        <!--
+            Architekturskizze -> CORS-Relevant weil Gateway eine andere Origin hat
+            Screenshot des abgebrochenen Requests, wenn CORS-Reglen im Gateway fehlen
+            JavaScript-Code bekommt aus Sicherheitsgründen nur einen generischen Fehler gemeldet
+        -->
+    </section>
+
+    <section data-title="CORS-Regeln in der Gateway-Konfiguration">
+        <!--
+            Auszug aus der Gateway-Konfiguration
+            Erklärung der Regeln
+        -->
+    </section>
+
+    <section data-title="Erfolgreicher OPTIONS Pre-Flight">
+    </section>
 </section>
 
 <section data-title="Übungsaufgaben" data-background-color="rgb(231, 221, 141)">
-    <section data-title="Ein kleines CORS-Quiz">
+    <section data-title="Aufgabe 1: Ein kleines CORS-Quiz">
+        <article>
+            <lsx-tab-pages>
+                <lsx-tab-page title="Aufgabe 1.1">
+                    <lsx-quiz>
+                        <lsx-exercise title="XXX">
+                            xxx
+                        </lsx-exercise>
+                    </lsx-quiz>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Aufgabe 1.2">
+                    <lsx-quiz>
+                        <lsx-exercise title="XXX">
+                            xxx
+                        </lsx-exercise>
+                    </lsx-quiz>
+                </lsx-tab-page>
+            </lsx-tab-pages>
+        </article>
+        <aside>
+            <p>
+                Bei CORS dreht sich alles darum, Inhalte zu teilen. Hier können Sie stattdessen
+                Ihr Wissen teilen und überprüfen.
+            </p>
+            <img src="shared/quiz.png" class="img-fluid d-block" style="max-width: 20em;"/>
+            <p>
+                <small>
+                    Bildnachweis:
+                    <a href="https://pixabay.com/illustrations/quiz-tiles-letters-red-game-test-2058883/" target="_blank">Pixabay: 905513</a>
+                </small>
+            </p>
+        </aside>
     </section>
 
-    <section data-title="Versuche am lebenden Objekt">
+    <section data-title="Aufgabe 2: Versuche am lebenden Objekt">
         <!-- 
             Anhand NaaS:
             OPTIONS PreFlight im Browser anschauen
@@ -268,9 +813,9 @@
             </div>
         
             <div class="d-flex align-items-stretch" style="gap: 1em;">
-                <img src="99-anhang/openapi/openapi-beispiel.png" class="d-block img-thumbnail" style="width: 30em;"/>
-                <img src="99-anhang/openapi/api-creditsafe.png" class="d-block img-thumbnail" style="width: 30em;"/>
-                <img src="99-anhang/openapi/api-wikipedia.png" class="d-block img-thumbnail" style="width: 30em;"/>
+                <img src="03-rest-webservices/openapi/openapi-beispiel.png" class="d-block img-thumbnail" style="width: 30em;"/>
+                <img src="03-rest-webservices/openapi/api-creditsafe.png" class="d-block img-thumbnail" style="width: 30em;"/>
+                <img src="03-rest-webservices/openapi/api-wikipedia.png" class="d-block img-thumbnail" style="width: 30em;"/>
             </div>
         </article>
     </section>
@@ -300,15 +845,15 @@
             <div class="d-flex flex-row gap-3">
                 <div class="fw-bold flex-fill">
                     <a href="https://editor.swagger.io" target="_blank">Swagger Editor</a> (Nur Quellcode)
-                    <img src="99-anhang/openapi/openapi-beispiel.png" class="img-thumbnail d-block w-100" />
+                    <img src="03-rest-webservices/openapi/openapi-beispiel.png" class="img-thumbnail d-block w-100" />
                 </div>
                 <div class="fw-bold flex-fill">
                     <a href="https://www.apicur.io" target="_blank">Apicurio Studio</a> (grafischer Editor, open-source)
-                    <img src="99-anhang/openapi/apicurio-1.png" class="img-thumbnail d-block w-100" />
+                    <img src="03-rest-webservices/openapi/apicurio-1.png" class="img-thumbnail d-block w-100" />
                 </div>
                 <div class="fw-bold flex-fill">
                     Live-Vorschau in Apicurio Studio
-                    <img src="99-anhang/openapi/apicurio-2.png" class="img-thumbnail d-block w-100" />
+                    <img src="03-rest-webservices/openapi/apicurio-2.png" class="img-thumbnail d-block w-100" />
                 </div>
             </div>
         </article>
@@ -1255,36 +1800,36 @@
     
     <section data-title="Erstellen der OpenAPI-Spezifikation">
         <article class="d-flex flex-wrap justify-content-center align-items-center gap-3">
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-01.png" caption="1. Neue API anlegen"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-02.png" caption="2. Allgemeine Informationen eintragen"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-03.png" caption="3. Wechsel in den Änderungsmodus"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-04.png" caption="4. Live-Dokumentation zur Ergebniskontrolle öffnen"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-05.png" caption="5. Kontaktdaten und Lizenz ausfüllen"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-06.png" caption="6. Je Entität ein neues Tag anlegen"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-07.png" caption="7. Benötigte Datentypen anlegen"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-08.png" caption="8. Datentyp Address beschreiben"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-09.png" caption="9. URL-Endpunkte für Adressen generieren lassen"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-10.png" caption="10. Weitere Datentypen anlegen"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-11.png" caption="11. Schemadefinition HATEOAS_Link"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-12.png" caption="12. Für die HATEOAS-Typen keine URL-Endpunkte generieren"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-14.png" caption="13. Vorläufige Schemadefinition HATEOAS_Collection"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-13.png" caption="14. Vorläufige Schemadefinition HATEOAS_Resource"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-15.png" caption="15. Finale Schemadefinition HATEOAS_Collection"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-16.png" caption="16. Finale Schemadefinition HATEOAS_Resource"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-17.png" caption="17. Schemadefinition Address erweitern"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-18.png" caption="18. HATEOAS-Informationen zum Address-Schema hinzufügen"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-19.png" caption="19. URL /addresses umbenennen"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-20.png" caption="20. Ergebnis der manuellen Anpassungen"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-21.png" caption="21. Query-Parameter zum Suchen von Adressen anlegen"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-22.png" caption="22. Neu angelegte Query-Parameter zum Suchen von Adressen"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-23.png" caption="23. PATCH-Anfragen ergänzen"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-24.png" caption="24. HTTP-Anfrage für PATCH"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-25.png" caption="25. HTTP-Antwort für PATCH"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-26.png" caption="26. Live-Vorschau der Dokumentation öffnen"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-27.png" caption="27. Dokumentation des Webservices"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-28.png" caption="28. Zurück zur Startseite des Webservices"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-29.png" caption="29. OpenAPI-Beschreibung herunterladen"></lsx-modal-image>
-            <lsx-modal-image src="99-anhang/openapi/fallbeispiel-apicurio-30.png" caption="30. Format YAML auswählen"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-01.png" caption="1. Neue API anlegen"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-02.png" caption="2. Allgemeine Informationen eintragen"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-03.png" caption="3. Wechsel in den Änderungsmodus"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-04.png" caption="4. Live-Dokumentation zur Ergebniskontrolle öffnen"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-05.png" caption="5. Kontaktdaten und Lizenz ausfüllen"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-06.png" caption="6. Je Entität ein neues Tag anlegen"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-07.png" caption="7. Benötigte Datentypen anlegen"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-08.png" caption="8. Datentyp Address beschreiben"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-09.png" caption="9. URL-Endpunkte für Adressen generieren lassen"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-10.png" caption="10. Weitere Datentypen anlegen"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-11.png" caption="11. Schemadefinition HATEOAS_Link"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-12.png" caption="12. Für die HATEOAS-Typen keine URL-Endpunkte generieren"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-14.png" caption="13. Vorläufige Schemadefinition HATEOAS_Collection"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-13.png" caption="14. Vorläufige Schemadefinition HATEOAS_Resource"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-15.png" caption="15. Finale Schemadefinition HATEOAS_Collection"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-16.png" caption="16. Finale Schemadefinition HATEOAS_Resource"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-17.png" caption="17. Schemadefinition Address erweitern"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-18.png" caption="18. HATEOAS-Informationen zum Address-Schema hinzufügen"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-19.png" caption="19. URL /addresses umbenennen"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-20.png" caption="20. Ergebnis der manuellen Anpassungen"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-21.png" caption="21. Query-Parameter zum Suchen von Adressen anlegen"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-22.png" caption="22. Neu angelegte Query-Parameter zum Suchen von Adressen"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-23.png" caption="23. PATCH-Anfragen ergänzen"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-24.png" caption="24. HTTP-Anfrage für PATCH"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-25.png" caption="25. HTTP-Antwort für PATCH"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-26.png" caption="26. Live-Vorschau der Dokumentation öffnen"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-27.png" caption="27. Dokumentation des Webservices"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-28.png" caption="28. Zurück zur Startseite des Webservices"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-29.png" caption="29. OpenAPI-Beschreibung herunterladen"></lsx-modal-image>
+            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-30.png" caption="30. Format YAML auswählen"></lsx-modal-image>
         </article>
     </section>
     
@@ -1300,7 +1845,7 @@
                     </a>
                 </p>
         
-                <img src="99-anhang/openapi/fallbeispiel-swagger-editor.png" class="img-responsive img-thumbnail" />
+                <img src="03-rest-webservices/openapi/fallbeispiel-swagger-editor.png" class="img-responsive img-thumbnail" />
             </div>
         </article>
     </section>
@@ -1309,6 +1854,39 @@
 <section data-title="Übungsaufgaben" data-background-color="rgb(231, 221, 141)">
     <!-- TODO -->
     <section data-title="Aufgabe 1: Ein kleines OpenAPI-Quiz">
+        <article>
+            <lsx-tab-pages>
+                <lsx-tab-page title="Aufgabe 1.1">
+                    <lsx-quiz>
+                        <lsx-exercise title="XXX">
+                            xxx
+                        </lsx-exercise>
+                    </lsx-quiz>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Aufgabe 1.2">
+                    <lsx-quiz>
+                        <lsx-exercise title="XXX">
+                            xxx
+                        </lsx-exercise>
+                    </lsx-quiz>
+                </lsx-tab-page>
+            </lsx-tab-pages>
+        </article>
+        <aside>
+            <p>
+                Eine gute Dokumentation ist eine gute Dokumentation ist eine gute Dokumentation.
+                OpenAPI ist in der heutigen Welt daher unverzichtbar geworden. Prüfen Sie deshalb
+                hier, ob Sie sich die wichtigsten Dinge merken konnten.
+            </p>
+            <img src="shared/quiz.png" class="img-fluid d-block" style="max-width: 20em;"/>
+            <p>
+                <small>
+                    Bildnachweis:
+                    <a href="https://pixabay.com/illustrations/quiz-tiles-letters-red-game-test-2058883/" target="_blank">Pixabay: 905513</a>
+                </small>
+            </p>
+        </aside>
     </section>
 
     <section data-title="Aufgabe 2: HTTP Statuscodes">
@@ -1335,8 +1913,8 @@
                 </div>
             
                 <div class="d-flex align-items-stretch" style="gap: 1em; margin-bottom: 1em;">
-                    <img src="99-anhang/openapi/status-100.avif" class="d-block w-100"/>
-                    <img src="99-anhang/openapi/status-101.avif" class="d-block w-100"/>
+                    <img src="03-rest-webservices/openapi/status-100.avif" class="d-block w-100"/>
+                    <img src="03-rest-webservices/openapi/status-101.avif" class="d-block w-100"/>
                 </div>
             </div>
         </article>
@@ -1357,7 +1935,7 @@
                     1. Welchen Aufbau haben die verwalteten Daten der API?
                 </div>
             
-                <img src="99-anhang/openapi/openapi-beispiel.png" class="img-thumbnail w-100" />
+                <img src="03-rest-webservices/openapi/openapi-beispiel.png" class="img-thumbnail w-100" />
             </div>
         </article>
     </section>
@@ -1395,7 +1973,7 @@
                     * Falls ja, in welcher Form sollen die Links zurückgeliefert werden?
                 </div>
             
-                <img src="99-anhang/openapi/apicurio-1.png" class="img-thumbnail w-100" />
+                <img src="03-rest-webservices/openapi/apicurio-1.png" class="img-thumbnail w-100" />
             </div>
         </article>
     </section>
