@@ -802,7 +802,7 @@
                 * Generieren von Client-Code zum Aufruf des Webservices
                 * Generieren von Server-Code zur Implementierung des Webservices
                 * Automatische Validierung von Anfragen und Antworten
-                * Generieren statische Dokumentationsseiten
+                * Generieren statischer Dokumentationsseiten
                 * …
         
                 Als möglichst leichtgewichtiger Ansatz kamen REST-Webservices lange ohne eine
@@ -1018,7 +1018,10 @@
                                                 type: string
                                             artist:
                                                 type: string
-                                            name:
+                                            name:Generieren von Client-Code zum Aufruf des Webservices
+                                            Generieren von Server-Code zur Implementierung des Webservices
+                                            Automatische Validierung von Anfragen und Antworten
+                                            Generieren statische Dokumentationsseiten
                                                 type: string
                                             releaseYear:
                                                 type: integer
@@ -1855,23 +1858,72 @@
     <!-- TODO -->
     <section data-title="Aufgabe 1: Ein kleines OpenAPI-Quiz">
         <article>
-            <lsx-tab-pages>
-                <lsx-tab-page title="Aufgabe 1.1">
-                    <lsx-quiz>
-                        <lsx-exercise title="XXX">
-                            xxx
-                        </lsx-exercise>
-                    </lsx-quiz>
-                </lsx-tab-page>
+            <lsx-quiz>
+                <lsx-exercise>
+                    <lsx-question
+                        type = "single-choice"
+                        text = "Für REST-Webservices gab es lange Zeit keine formale Beschreibungssprache."
+                    >
+                        <lsx-question-line>
+                            <lsx-answer correct>Wahr</lsx-answer>
+                            <lsx-answer>Falsch</lsx-answer>
+                        </lsx-question-line>
+                    </lsx-question>
 
-                <lsx-tab-page title="Aufgabe 1.2">
-                    <lsx-quiz>
-                        <lsx-exercise title="XXX">
-                            xxx
-                        </lsx-exercise>
-                    </lsx-quiz>
-                </lsx-tab-page>
-            </lsx-tab-pages>
+                    <lsx-question
+                        type = "single-choice"
+                        text = "Welche Beschreibungssprache hat sich heute für REST-Webservices weitgehend durchgesetzt?"
+                    >
+                        <lsx-question-line>
+                            <lsx-answer>SOAP</lsx-answer>
+                            <lsx-answer>WADL</lsx-answer>
+                            <lsx-answer>WSDL</lsx-answer>
+                            <lsx-answer correct>OpenAPI</lsx-answer>
+                            <lsx-answer>ForeignAPI</lsx-answer>
+                            <lsx-answer>WebAPI</lsx-answer>
+                        </lsx-question-line>
+                    </lsx-question>
+
+                    <lsx-question
+                        type = "multiple-choice"
+                        text = "Welche Möglichkeiten ergeben sich aus der maschinenlesbaren Beschreibung eines Webservices?"
+                    >
+                        <lsx-answer correct>Generierung von Dokumentationsseiten</lsx-answer>
+                        <lsx-answer correct>Generierung von Client-Code zur Nutzung eines Webservices</lsx-answer>
+                        <lsx-answer correct>Generierung von Server-Code zur Bereitstellung eines Webservices</lsx-answer>
+                        <lsx-answer correct>Automatische Validierung von Anfragen und Antworten</lsx-answer>                        
+                    </lsx-question>
+
+                    <lsx-question
+                        type = "single-choice"
+                        text = "Wenn erst die Spezifikation und dann der Webserve implementiert wird, nennt man das ..."
+                    >
+                        <lsx-question-line>
+                            <lsx-answer>Code First</lsx-answer>single-choice
+                            <lsx-answer correct>Contract First</lsx-answer>
+                        </lsx-question-line>
+                    </lsx-question>
+
+                    <lsx-question
+                        type = "multiple-choice"
+                        text = "Welche der folgenden Teile gehören üblicherweise zur Beschreibung eines REST-Webservices?"
+                    >
+                        <lsx-answer>Systemanforderungen</lsx-answer>
+                        <lsx-answer correct>Kontaktdaten des Entwicklerteams</lsx-answer>
+                        <lsx-answer correct>Lizenzhinweise</lsx-answer>
+                        <lsx-answer correct>URL-Präfix des Webservices</lsx-answer>
+                        <lsx-answer>Stylesheets der Webanwendung</lsx-answer>
+                        <lsx-answer correct>HTTP-Endpunkte</lsx-answer>
+                        <lsx-answer correct>URL-Parameter</lsx-answer>
+                        <lsx-answer correct>Query-Parameter</lsx-answer>
+                        <lsx-answer>Performance-Optionen</lsx-answer>
+                        <lsx-answer correct>HTTP-Statuscodes</lsx-answer>
+                        <lsx-answer correct>Schemadefinitionen</lsx-answer>
+                        <lsx-answer correct>Beispiel-Anfragen</lsx-answer>
+                        <lsx-answer correct>Beispiel-Antworten</lsx-answer>
+                    </lsx-question>
+                </lsx-exercise>
+            </lsx-quiz>
         </article>
         <aside>
             <p>
