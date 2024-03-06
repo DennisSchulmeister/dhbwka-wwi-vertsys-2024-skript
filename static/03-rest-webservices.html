@@ -743,20 +743,100 @@
         <article>
             <lsx-quiz>
                 <lsx-exercise>
-                    <!--
-                        Wofür steht die Abkürzung CORS?
+                    <lsx-question
+                        type = "single-choice"
+                        text = "Wofür steht die Abkürzung CORS?"
+                    >
+                        <lsx-answer>Content Oriented Remote Service</lsx-answer>
+                        <lsx-answer>Content On Remote Server</lsx-answer>
+                        <lsx-answer correct>Cross-Origin Resource Sharing</lsx-answer>
+                    </lsx-question>
 
-                        Welche URL-Bestandteile bilden die „Origin” einer Webseite?
+                    <lsx-question
+                        type = "multiple-choice"
+                        text = "Welche URL-Bestandteile bilden die „Herkunft” (Origin) einer Webseite?"
+                    >
+                        <lsx-answer correct>Protokoll</lsx-answer>
+                        <lsx-answer correct>Hauptdomain des Hostnamens</lsx-answer>
+                        <lsx-answer>Der komplette Hostname</lsx-answer>
+                        <lsx-answer correct>Portnummer</lsx-answer>
+                        <lsx-answer>Pfad</lsx-answer>
+                        <lsx-answer>URL-Parameter</lsx-answer>
+                        <lsx-answer>Anker</lsx-answer>
+                    </lsx-question>
 
-                        Warum sind Anfragen an einen anderen Host als die „Origin“ einer Seite potentiell gefährlich?
+                    <lsx-question
+                        type = "multiple-choice"
+                        text = "Warum sind Anfragen an einen anderen Host als die „Herkunft” (Origin) einer Seite potentiell gefährlich?"
+                    >
+                        <lsx-answer>Weil der fremde Host den Inhalt der Anfragen nicht verarbeiten kann.</lsx-answer>
+                        <lsx-answer correct>Weil der Aufruf aus Sicht des Servers möglicherweise gar nicht erwünscht ist.</lsx-answer>
+                        <lsx-answer correct>Weil Angreifer die Originalseite optisch nachbauen und die Benutzer so zu unerwünschten Aktionen verleiten könnten.</lsx-answer>
+                        <lsx-answer>Weil die aufrufende Seite vom selben Entwicklerteam wie der Server entwickelt werden sollte.</lsx-answer>
+                        <lsx-answer correct>Weil XSS-Attacken häufig auf den Aufruf fremder Hosts, auf denen man bereits eingeloggt ist, abzielen.</lsx-answer>
+                    </lsx-question>
 
-                        Welches sind „sichere“ HTTP-Verben, die keinen OPTIONS Pre-Flight auslösen? (MULTIPLE-CHOICE)
+                    <lsx-question
+                        type = "multiple-choice"
+                        text = "Welches sind „sichere“ HTTP-Verben, die nie einen <tt>OPTIONS</tt> Pre-Flight auslösen?"
+                    >
+                        <lsx-question-line>
+                            <lsx-answer correct><tt>GET</tt></lsx-answer>
+                            <lsx-answer><tt>PUT</tt></lsx-answer>
+                            <lsx-answer><tt>POST</tt></lsx-answer>
+                            <lsx-answer><tt>PATCH</tt></lsx-answer>
+                            <lsx-answer><tt>DELETE</tt></lsx-answer>
+                            <lsx-answer correct><tt>HEAD</tt></lsx-answer>
+                        </lsx-question-line>
+                    </lsx-question>
 
-                        Welche Aussage verbirgt sich hinter dem Header Field <scr-code language="http">Vary: Origin</src-code>?
+                    <lsx-question
+                        type = "single-choice"
+                        text = "Welche Aussage verbirgt sich hinter dem Header Field <src-code language='http'>Vary: Origin</src-code>?"
+                    >
+                        <lsx-answer correct>Der Server signalisiert damit, dass der Inhalt seiner Antwort vom Header Field „Origin“ in der Anfrage abhängig ist.</lsx-answer>
+                        <lsx-answer>Der Server gibt in diesem Header Field die URLs der erlaubten Herkünfte“ (Origins) für entfernte Aufrufe an.</lsx-answer>
+                        <lsx-answer>Der Client frägt damit beim Server an, ob ein geplanter Zugriff auf eine Ressource zulässig wäre.</lsx-answer>
+                        <lsx-answer>Der Client teilt dem Server damit mit, dass die aktuelle Anfrage keine „Herkunft“ (Origin) besitzt.</lsx-answer>
+                    </lsx-question>
 
-                        Ordnen Sie den folgenden Header Fields die jeweils richtige Bedeutung zu.
-                        -> HTTP-Anfrage: xxxx, HTTP-Antwort: yyyy
-                    -->
+                    <lsx-question
+                        type         = "assignment"
+                        text         = "Unter anderem die folgenden Header Fields werden beim OPTIONS Pre-Flight zwischen Browser und Webserver ausgetauscht. Ordnen Sie ihnen die jeweils richtige Bedeutung zu:"
+                        label-length = "20em"
+                    >
+                        <lsx-assignment answer="Anfrage: HTTP-Verb der tatsächlich geplanten Anfrage">
+                            <tt>Access-Control-Request-Method</tt>
+                        </lsx-assignment>
+                        <lsx-assignment answer="Anfrage: Zusätzlicher Header Fields der geplanten Anfrage">
+                            <tt>Access-Control-Request-Headers</tt>
+                        </lsx-assignment>
+                        <lsx-assignment answer="Antwort: Erlaubte Herkunft („Origin“) beim Zugriff auf die angefragte Ressource">
+                            <tt>Access-Control-Allow-Origin</tt>
+                        </lsx-assignment>
+                        <lsx-assignment answer="Antwort: Erlaubte HTTP-Verben beim Zugriff auf die angefragte Ressource">
+                            <tt>Access-Control-Allow-Methods</tt>
+                        </lsx-assignment>
+                    </lsx-question>
+
+                    <lsx-question
+                        type = "single-choice"
+                        text = "Im Header Field <tt>Access-Control-Allow-Origin</tt> kann eine Liste aller erlaubten „Herkünfte“ (Origins) enthalten sein."
+                    >
+                        <lsx-quesiton-line>
+                            <lsx-answer>Wahr</lsx-answer>
+                            <lsx-answer correct>Falsch</lsx-answer>
+                        </lsx-quesiton-line>
+                    </lsx-question>
+
+                    <lsx-question
+                        type = "single-choice"
+                        text = "Welche besagt das Header Field <src-code language='http'>Access-Control-Allow-Origin: *</src-code> in einer HTTP-Antwort?"
+                    >
+                        <lsx-answer>Dass entfernte Zugriff auf die angefragte Ressource prinzipiell nicht zulässig sind.</lsx-answer>
+                        <lsx-answer>Dass der Zugriff geschützt ist und die erlaubten „Herkünfte“ (Origins) beim Server angefragt werden müssen.</lsx-answer>
+                        <lsx-answer correct>Dass Webseiten jeglicher „Herkunft“ (Origin) auf die anfragte Ressource zugreifen können.</lsx-answer>
+                    </lsx-question>
                 </lsx-exercise>
             </lsx-quiz>
         </article>
