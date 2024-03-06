@@ -231,8 +231,9 @@
         
                     <h3>Service Discovery</h3>
                     <p>
-                        Über den Domainnamen <span class="fn">mongo</span> kann der
-                        Backend-Service die interne IP-Adresse des Datenbank-Containers ermitteln.
+                        In unterschiedlichen Container laufende Services müssen nur den Namen der anderen Container
+                        kennen, um mit ihnen über das virtuelle Netzwerk kommunizieren zu können. Hierfür führen
+                        sie einen einfachen DNS Lookup mit den Namen der anderen Container durch.
                     </p>
         
                     <h3>Load Balancing</h3>
@@ -552,10 +553,10 @@
                                 type = "single-choice"
                                 text = "Welche Aufgabe erfüllt Docker Compose?"
                             >
-                                <lsx-answer>Es vereinfacht die Erstellung komplexer Container Images</lsx-answer>
-                                <lsx-answer>Es vereinfacht die Ausführung temporärer Einmal-Container</lsx-answer>
-                                <lsx-answer correct>Es vereinfacht die Ausführung mehrerer, zusammengehöriger Container</lsx-answer>
-                                <lsx-answer>Es vereinfacht die Archivierung historischer Prokollausgaben</lsx-answer>
+                                <lsx-answer>Es vereinfacht die Erstellung komplexer Container Images.</lsx-answer>
+                                <lsx-answer>Es vereinfacht die Ausführung temporärer Einmal-Container.</lsx-answer>
+                                <lsx-answer correct>Es vereinfacht die Ausführung mehrerer, zusammengehöriger Container.</lsx-answer>
+                                <lsx-answer>Es vereinfacht die Archivierung historischer Prokollausgaben.</lsx-answer>
                             </lsx-question>
 
                             <lsx-question
