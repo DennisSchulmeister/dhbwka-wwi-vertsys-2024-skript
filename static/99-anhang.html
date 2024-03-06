@@ -456,16 +456,136 @@
             <lsx-tab-pages>
                 <lsx-tab-page title="Aufgabe 1.1">
                     <lsx-quiz>
-                        <lsx-exercise title="XXX">
-                            xxx
+                        <lsx-exercise title="Docker">
+                            <lsx-question
+                                type = "single-choice"
+                                text = "Docker ist eine native Technologie welches Betriebssystems?"
+                            >
+                                <lsx-question-line>
+                                    <lsx-answer>Windows</lsx-answer>
+                                    <lsx-answer>Mac OS</lsx-answer>
+                                    <lsx-answer correct>Linux</lsx-answer>
+                                    <lsx-answer>FreeRTOS</lsx-answer>
+                                    <lsx-answer>QNX</lsx-answer>
+                                </lsx-question-line>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "Docker bietet die Möglichkeit, virtuelle Maschinen mit virtueller Hardware zu betrieben."
+                            >
+                                <lsx-question-line>
+                                    <lsx-answer>Wahr</lsx-answer>
+                                    <lsx-answer correct>Falsch</lsx-answer>
+                                </lsx-question-line>
+                            </lsx-question>
+
+                            <lsx-question
+                                type         = "assignment"
+                                text         = "Ordnen Sie den beiden Begriffen die richtige Definition zu:"
+                                label-length = "8em"
+                            >
+                                <lsx-assignment answer="Laufzeitinstanz, die durch Ausführung eines Images entsteht">Container</lsx-assignment>
+                                <lsx-assignment answer="Laufzeitinstanz, die durch Ausführung eines Images entsteht">Container Image</lsx-assignment>
+                            </lsx-question>
+                            
+                            <lsx-question
+                                type = "single-choice"
+                                text = "Welche Aufgabe erfüllen virtuelle Netze in Docker?"
+                            >
+                                <lsx-answer>Sie vereinfachen das Deployment mehrerer Container-Instanzen.</lsx-answer>
+                                <lsx-answer correct>Sie bilden ein virtuelles LAN ab, in dem zusammengehörige Container kommunizieren können.</lsx-answer>
+                                <lsx-answer>Sie stellen Lastverteilung und Ausfallsicherheit eines Containers sicher.</lsx-answer>
+                                <lsx-answer>Sie stellen Speicherplatz über das Netzwerk (sog. Network Attached Storage) zur Verfügung.</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "Laufzeitänderungen am Dateisystem eines Containers bleiben dauerhaft erhalten."
+                            >
+                                <lsx-question-line>
+                                    <lsx-answer>Wahr</lsx-answer>
+                                    <lsx-answer correct>Falsch</lsx-answer>
+                                </lsx-question-line>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "Das zur vorherigen Frage gehörende Prinzip nennt man ..."
+                            >
+                                <lsx-question-line>
+                                    <lsx-answer correct>Immutabilität</lsx-answer>
+                                    <lsx-answer>Immunität</lsx-answer>
+                                    <lsx-answer>Fakultät</lsx-answer>
+                                    <lsx-answer>Sozietät</lsx-answer>
+                                    <lsx-answer>Speichergerät</lsx-answer>
+                                </lsx-question-line>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "gap-text"
+                                text = "Vervollständigen Sie den folgenden Lückentext eines Dockerfiles zum Bauen von Docker Images:"
+                                mode = "split-lines"
+                            >
+                                <lsx-gap answer="FROM" ignore-case ignore-spaces></lsx-gap> <code>node:21-alpine</code>
+
+                                <tt># Arbeitsverzeichnis /app einstellen</tt>
+                                <lsx-gap answer="WORKDIR" ignore-case ignore-spaces></lsx-gap> <code>/app</code>
+
+                                <tt># Dateien package.json und package-lock.json kopieren</tt>
+                                <lsx-gap answer="COPY" ignore-case ignore-spaces></lsx-gap> <code>package.json package-lock.json ./</code>
+
+                                <tt># Startskript "install" ausführen</tt>
+                                <lsx-gap answer="NPM" ignore-case ignore-spaces></lsx-gap> <tt>run install</tt>
+
+                                <code>COPY src ./src</code>
+                                <code>ENTRYPOINT ["node", "src/main.js"]</code>
+                            </lsx-question>
                         </lsx-exercise>
                     </lsx-quiz>
                 </lsx-tab-page>
 
                 <lsx-tab-page title="Aufgabe 1.2">
                     <lsx-quiz>
-                        <lsx-exercise title="XXX">
-                            xxx
+                        <lsx-exercise title="Docker Compose">
+                            <lsx-question
+                                type = "single-choice"
+                                text = "Welche Aufgabe erfüllt Docker Compose?"
+                            >
+                                <lsx-answer>Es vereinfacht die Erstellung komplexer Container Images</lsx-answer>
+                                <lsx-answer>Es vereinfacht die Ausführung temporärer Einmal-Container</lsx-answer>
+                                <lsx-answer correct>Es vereinfacht die Ausführung mehrerer, zusammengehöriger Container</lsx-answer>
+                                <lsx-answer>Es vereinfacht die Archivierung historischer Prokollausgaben</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "Wie heißt typischerweise die Datei zur Beschreibung eines Docker Compose Setups?"
+                            >
+                                <lsx-answer correct><tt>docker-compose.yml</tt></lsx-answer>
+                                <lsx-answer><tt>docker-compose.json</tt></lsx-answer>
+                                <lsx-answer><tt>docker-compose.xml</tt></lsx-answer>
+                                <lsx-answer><tt>Dockerfile</tt></lsx-answer>
+                                <lsx-answer><tt>DockerComposeFile</tt></lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "Mit welchem Befehl kann ein Docker Compose Setup gestartet werden?"
+                            >
+                                <lsx-answer><tt>docker compose run</tt></lsx-answer>
+                                <lsx-answer><tt>docker compose start</tt></lsx-answer>
+                                <lsx-answer correct><tt>docker compose up</tt></lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "Mit welchem Befehl kann ein Docker Compose Setup wieder beendet werden?"
+                            >
+                                <lsx-answer correct><tt>docker compose down</tt></lsx-answer>
+                                <lsx-answer><tt>docker compose stop</tt></lsx-answer>
+                                <lsx-answer><tt>docker compose end</tt></lsx-answer>
+                            </lsx-question>
                         </lsx-exercise>
                     </lsx-quiz>
                 </lsx-tab-page>
