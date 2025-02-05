@@ -3,115 +3,24 @@
         ### Dieses Kapitel beschreibt …
         
         * Welche Inhalte wir in der Vorlesung behandeln werden.
-        * Welche Kompetenzziele die Modulbeschreibung der DHBW hierfür vorgibt.
+        * Welche Lernziele die Vorlesung besitzt.
         * Wie sich die Prüfungsleistung der Vorlesung zusammensetzt.
         * Welche Software Sie für die Bearbeitung der Übungen benötigen.
     </article>
     <aside class="markdown">
         Willkommen zur Vorlesung „Verteilte Systeme” im vierten Semester Wirtschaftsinformatik.
-        An dieser Stelle im Studium angelangt, haben Sie bereits viel Programmiererfahrung
-        gesammelt und können durchaus schon eigene Programme bis hin zu kleineren Webanwendungen
-        komplett eigenständig entwickeln. Diese Kenntnisse wollen wir nun vertiefen und dabei die
-        Architektur kennenlernen, die heute fast alle Anwendungen des Alltags definiert: Die
-        Architektur verteilter Systeme. Denn egal ob wir im Internet surfen, Musik oder Videos
-        streamen, E-Mails schreiben, Kurznachrichten versenden, soziale Medien checken, online
-        an Vorlesungen teilnehmen oder einfach nur dieses Vorlesungsskript bearbeiten: Immer
-        kommen dabei verteilte Systeme zum Einsatz, die meiste Zeit ohne, dass wir dies bemerken.
+        Inzwischen können Sie schon eigene Programme schreiben und sogar Webenwendungen gestalten
+        und realisieren. Die meiste Zeit haben Sie diese aber nur auf Ihrem eigenen Computer laufen
+        lassen, was heute beinahe schon aus der Zeit gefallen ist. Denn Smartphones, Tables, Computer,
+        IoT-Devices, Smart TVs, ja selbst Fahrzeuge sind heute ganz selbstverständlich vernetzt und
+        mit dem Internet verbunden. Wir surfendamit im Internet, streamen Musik und Videos, plaudern
+        mit KI-Chatbots, schreiben E-Mails und Kurznachrichten, checken soziale Media und vieles
+        mehr und merken dabei gar nicht, wie all das im Hintergrund funktioniert.
 
-        Smartphones, Tables, Arbeitscomputer, IoT-Devices, ja selbst Fahrzeuge sind heute wie
-        selbstverständlich unterneinder vernetzt und mit dem Internet verbunden. Und beinahe
-        täglich tun sich weitere Anwendungsgebiete auf. Hinter diesen Vorhang wollen wir daher
-        nun schauen und verstehen, wie solche Anwendungen funktionieren. Und natürlich wollen
-        wir sie auch selbst bauen können. Diese Vorlesung hilft Ihnen dabei. Und dieses Kapitel
-        zeigt, was Sie dabei erwartet.
+        Diesen Vorhange wollen wir nun lüften. Wir tauchen ein in die spannende Welt der verteilten
+        System und verteilten Anwendungen, lernen wie diese Funktionieren und wie wir eigene Anwendungen
+        programmieren können. Es wird eine interessante Reise. Viel Spaß dabei!
 </section>
-
-<!--
-<section data-title="Kompetenzziele">
-    <article class="markdown">
-        ## Fachkompetenz
-
-        <small>Welches neue Wissen eigne ich mir an?</small>
-
-        * Definition und Einsatzgebiete von verteilten Anwendungen
-        * Typische Kommunikations- und Architekturmuster verteilter Systeme
-        * Synchrone Webservice-Kommunikation mit REST-Webservices
-        * Asynchroner Nachrichtenaustausch mit Apache Kafka und anderen
-
-        ## Methodenkompetenz
-
-        <small>Welche neuen Werkzeuge und Methoden kann ich anwenden?</small>
-
-        * Verteilte Anwendungen ganzheitlich konzipieren und umsetzen
-        * Alternative Architekturmuster abwägen und anhand der Anforderungen auswählen
-        * Entwicklungswerkzeuge wie Kommandozeilentools, IDEs und Debugger bedienen
-        * Frontend- und Backendprogrammierung mit JavaScript, Browser und Node.js
-
-        ## Personale und soziale Kompetenz
-
-        <small>Wie entwickele ich mich nicht nur fachlich sondern auch persönlich weiter?</small>
-
-        * Aktuelle Konzepte in der Entwicklung verteilter Anwendungen kennen und diskutieren
-        * Eigene Entwürfe verständlich kommunizieren und argumentieren
-        * Eventuelle Programmfehler erkennen und deren Behebung erklären können
-
-        ## Übergreifende Handlungskompetenz
-
-        <small>Welche allgemeinen Fähigkeiten erwerbe ich durch diese Vorlesung?</small>
-                
-        * Trends und Entwicklungen im größeren Bereich der Anwendungsentwicklung bewerten
-        * Sich in Diskussionen einbringen und Lösungsvorschläge unterbreiten
-        * Sich eigenständig in neue Themengebiete der Anwendungsentwicklung einarbeiten
-    </article>
-    <aside>
-        <p>
-            Zur Erinnerung hier noch einmal die Beschreibung aus dem Modulhandbuch
-            der DHBW. Es handelt sich um denselben Auszug, den wir auch am Anfang
-            von Webprogrammierung gezeigt haben, da beide Vorlesungen zusammen das
-            Modul “Entwicklung verteilter Systeme“ bilden:
-        </p>
-        <div style="font-size:85%" class="markdown">
-            ##### Fachkompetenz
-
-            Die Studierenden kennen die grundlegenden Kernkonzepte der Nebenläufigkeit
-            und Internet-Kommunikation und die darauf aufbauenden aktuellen Technologien
-            und Werkzeuge für den Entwurf und für die Implementierung von Web-Anwendungen.
-            Die Studierenden kennen die technischen Grundlagen, Konzepte, Architekturen
-            und Technologien verteilter Systeme und Anwendungen sowie die gängigen Methoden,
-            Werkzeuge, Frameworks und Entwurfsmuster für die Entwicklung verteilter Anwendungen.
-
-            ##### Methodenkompetenz
-
-            Die Studierenden können die Konzepte, Werkzeuge und Methoden der Web-Programmierung
-            anwenden und autonom Web-Anwendungen entwerfen, implementieren und testen. Die Studierenden
-            können die Konzepte, Werkzeuge und Methoden der verteilten Systementwicklung anwenden und
-            unter Einsatz von Frameworks und Entwurfsmustern einfache verteilte Anwendungen entwerfen,
-            implementieren und testen.
-
-            ##### Personale und soziale Kompetenz
-
-            Die Studierenden können eigenständig verteilte Anwendungsarchitekturen erarbeiten.
-            Sie können stichhaltig und sachangemessen über Konzepte, eigene Entwürfe und deren
-            Implementierungen sowie die damit verbundenen Probleme argumentieren, eigene Umsetzungen
-            plausibel darstellen und eventuelle Fehler nachvollziehbar gegenüber anderen begründen.
-
-
-            ##### Übergreifende Handlungskompetenz
-
-            Die Studierenden können eigenständig aktuelle Methoden der Analyse, des Entwurfs und
-            der Implementierung verteilter Systeme und Anwendungen für betriebliche Problemstellungen
-            diskutieren, bewerten und anwenden.
-        </div>
-        <p>
-            Da diese Beschreibung zwar den inhaltlichen Rahmen vorgibt, bei seiner Ausgestaltung
-            aber viele Freiheiten bietet, findet sich rechts unsere Auslegung am Standort Karlsruhe.
-            Diese lehnt sich an die Lernzeile von „Webprogrammierung” an und deckt sich an vielen
-            Stellen mit dieser. Inhaltlich wird das Bild jedoch nun zur ganzheitlichen Konzeptionierung
-            und Entwicklung moderner Anwendungen (nicht nur clientseitige Webanwendungen) hin erweitert.
-        </p>
-    </aside>
-</section>
--->
 
 <section data-title="Vorlesungsinhalte">
     <article>
@@ -169,226 +78,239 @@
 
         1. Architektur verteilter Anwendungen
         1. Backendprogrammierung mit JavaScript
-        1. Synchrone Webservice-Kommunikation
-        1. Asynchroner Nachrichtenaustausch
+        1. REST-Webservices und OpenAPI
+        1. Publish/Subscribe am Beispiel MQTT
 
-        Das erste legt dabei den Grundstein für alle weiteren Inhalte und liefert neben wichtigen
+        Das erste Kapitel legt den Grundstein für alle weiteren Inhalte und liefert neben wichtigen
         Begriffsdefinitionen (Was ist überhaupt ein „Verteiltes System“?) auch einen Überblick über
-        die wichtigsten Architekturbausteine, Struktur- und Kommunikationsmuster. Im zweiten Kapitel
-        führen wir dann die Programmierschiene fort und legen die Grundstein dafür, die vorgestellten
-        Muster am Beispiel von Node.js und JavaScript in konkreten Anwendungen umsetzen zu können.
-        Kapitel drei und vier liefern hierzu dann das notwendige Hintergrund- und Detailwissen anhand
-        vieler Fallbeispiele und Beispielquellcodes.
-    </aside>
-</section>
-
-<section data-title="Didaktisches Modell">
-    <article>
-        <lsx-tab-pages>
-            <lsx-tab-page title="Ablauf der Vorlesung">
-                <p>
-                    Abweichend zum dritten Semester folgt die Vorlesung einem  reduzierten „Inverted Classroom Model“:
-                </p>
-                <lsx-ul class="mb-3">
-                    <li>
-                        Wie in Webprogrammierung begleitet das Onlineskript die Präsenztermine.
-                    </li>
-                    <li>
-                        Es muss jedoch nicht jeder Termin durch ein Selbststudium vorbereitet werden.
-                    </li>
-                    <li>
-                        Dementsprechend fehlen auch die Vorwissensabfrage und Lernkontrollen in Moodle.
-                    </li>
-                    <li>
-                        Es gibt teilweise jedoch verbindliche Hausaufgaben, die auch der Vorbereitung dienen.
-                    </li>
-                    <li>
-                        Insbesondere die Programmieraufgaben fließen als Leistungsnachweis in die Prüfung ein.
-                    </li>
-                </lsx-ul>
-
-                <lsx-grid-fluid class="p-0">
-                    <lsx-row>
-                        <lsx-col size="md">
-                            <img src="01-intro/didaktisches-modell1.png" class="img-thumbnail d-block w-100" />
-                        </lsx-col>
-                        <lsx-col size="md">
-                            <img src="01-intro/didaktisches-modell2.png" class="img-thumbnail d-block w-100" />
-                        </lsx-col>
-                    </lsx-row>
-                </lsx-grid-fluid>
-            </lsx-tab-page>
-            <lsx-tab-page title="Moodle">
-                <img src="01-intro/moodle1.png" class="img-fluid img-thumbnail mx-auto d-block" />
-            </lsx-tab-page>
-            <lsx-tab-page title="Vorlesungsmaterialien">
-                <p>
-                    Die Vorlesungsmaterialien werden laufend aktuell gehalten. Bitte haben Sie deshalb Verständnis
-                    dafür, wenn sich die Inhalte innerhalb des Semesters kurzfristig ändern oder neue Inhalte erst
-                    unter dem Semester nachgereicht werden.
-                </p>
-                <p>
-                    <b>Bild:</b> Gestern Nacht beim Schreiben des Onlineskripts. 🥱
-                </p>
-
-                <img src="01-intro/mad-professor.jpg" class="img-fluid img-thumbnail mx-auto d-block" />
-
-                <p>
-                    <small>
-                        <small>
-                            OpenAI DALL-E, Prompt: Mad professor working late at night at his computer
-                        </small>
-                    </small>
-                </p>
-            </lsx-tab-page>
-        </lsx-tab-pages>
-    </article>
-    <aside class="markdown">
-        ##### Ablauf der Vorlesung
-
-        Die Vorlesung im vierten Semester folgt demselben Inverted-Classroom-Modell wie die Vorgängerveranstaltung
-        des dritten Semesters. Aufgrund das allgemein höheren Workloads im vierten Semester wird das Model jedoch
-        angepasst, so dass nur ein Teil der Präsenzveranstaltungen im Selbststudium vorbereitet werden muss. Dies
-        spiegelt sich auch in den fehlenden Vorwissensabfragen und Lernkontrollen in Moodle wieder.
+        die wichtige Konzepte und Architekturmuster. Im zweiten Kapitel geht es dann auch schon ans
+        Eingemachte und wir lernen, mit Node.js und JavaScript eigene Serveranwendungen zu programmieren.
+        Dies bildet die Grundlage für das nächste Kapitel über Webservices, die wir – wer hätte es
+        anders erwartet – in JavaScript programmieren werden (auch wenn nahezu jede Programiersprache
+        hierfür geeignet ist).
         
-        Was bleibt ist jedoch das semesterbegleitende Onlineskript, anhand dessen die Inhalte über die Vorlesungen
-        hinaus eigenständig verinnerlicht werden müssen. Neben inhaltlichen Erklärungen finden sich hier insbesondere
-        auch verbindliche Programmierübungen, die als Leistungsnachweis in die Prüfungsnote einfließen. Denn die Übungen
-        sind ausschlaggebend dafür, die vermittelten Konzepte anhand praktischer Fallbeispiele nachvollziehen und
-        anwenden zu können.
-
-        ##### Materialien in Moodle
-
-        Der Screenshot auf der zweiten Seite zeigt den Moodleraum dieser Vorlesung. Jeder Kurs besitzt einen eigenen
-        Moodleraum, der von der jeweiligen Lehrperson mit Inhalten bestückt wird. Neben allgemeinen Punkten wie der
-        Anwesenheitsliste (siehe unten) sind hier vor allem das Onlineskript und die Quellcodes zur Vorlesung verlinkt.
-        Hinzu kommen ggf. zusätzliche Materialien für die Präsenzveranstaltungen unterhalb der jeweiligen Überschriften.
-        Neben den fehlenden Vorwissensabfragen und Lernkontrollen gibt es allerdings eine weitere Abweichung zum Vorsemester:
-        Die Übungen, Fallbeispiele und Quizze sind nun in das Onlineskript integriert und werden nicht mehr separat in
-        Moodle hochgeladen. Dadurch werden die Inhalte noch besser verzahnt und können nicht mehr so leicht übersehen
-        oder vergessen werden.
-
-        ##### Elektronische Anwesenheitsliste
-
-        Im vierten Semester führen wie wieder eine elektronische Anwesenheitsliste in Moodle. Wie gewohnt wird hierfür
-        am Anfang der Stunde ein QR-Code gezeigt, über den sich die Teilnehmer*innnen während der Stunde selbst eintragen
-        können.
+        Bis dahin haben wir uns überwiegend mit synchroner Punkt-zu-Punkt-Kommunikation beschäftigt.
+        Da sich aber viele Anwendungsfälle damit nur umständlich umsetzen lassen, lernen wir im letzten
+        Kapitel mit dem asynchronen Publish/Subscribe-Modell eine mehr als interessante und vor allem
+        auch leicht einsetzbare Alternative kennen. Als Fallbeispiel schauen wir Hierzu auf das besonders
+        leichtgewichtige MQTT-Protkoll, dass insbesondere im IoT-Kontext häufig anzutreffen ist. Die Konzepte
+        sind dabei allerdings allgemeingültig.
     </aside>
 </section>
 
-<section data-title="Prüfungsaufgabe">
-    <article>
-        <lsx-tab-pages>
-            <lsx-tab-page title="Allgemeines">
-                <lsx-ul>
-                    <li>Ähnliches Prinzip wie in Webprogrammierung im dritten Semester</li>
-                    <li>Anstelle der Lernkontrollen gibt es jedoch Leistungsnachweise zu den Übungen</li>
-                    <li>Und das Aufgabenblatt enthält abgeschlossene Aufgaben zu den jeweiligen Kapiteln</li>
-                </lsx-ul>
+<section data-title="Lernziele">
+    <div class="d-flex w-100 flex-column flex-lg-row gap-5">
+        <!-- QR-Code -->
+        <div style="width: 10em; max-width: 100%;">
+            <div class="d-none d-lg-block position-fixed bottom-0 start-0 p-3">
+                <img src="01-intro/lernziele-umfrage-qrcode.svg" alt="" class="d-block" style="width: 100%; max-width: 15em;">
+                <a href="https://www.empirio.de/s/lWbXdcVJ=1" target="_blank">Link zur Umfrage</a>
+            </div>
+            <div class="d-block d-lg-none">
+                <a href="https://www.empirio.de/s/lWbXdcVJ=1" target="_blank">Link zur Umfrage</a>
+            </div>
+        </div>
 
-                <table class="w-100 dhbw-fontsize-small dhbw-table-border" style="margin: 1.2rem 0 1.75rem 0;">
-                    <thead>
-                        <tr>
-                            <th>Semester</th>
-                            <th>Portfolioanteil</th>
-                            <th>Abgabefrist</th>
-                            <th>Gewichtung</th>
-                        </tr>
-                    </thead>
-
-                    <!-- Drittes Semester -->
-                    <tr style="background-color: #eaeaea; color: #888888;">
-                        <td>3</td>
-                        <td><b>Lernkontrollen in Moodle</b> ✔️</td>
-                        <td>Nach der ersten Vorlesung eines Kapitels</td>
-                        <td>2</td>
-                    </tr>
-                    <tr style="background-color: #eaeaea; color: #888888;">
-                        <td>3</td>
-                        <td><b>Aufgabenblatt mit Programmierprojekt</b> ✔️</td>
-                        <td>Vor Beginn der Klausurphase</td>
-                        <td>4</td>
-                    </tr>
-
-                    <!-- Viertes Semester -->
-                    <tr style="background-color: white;">
-                        <td>4</td>
-                        <td><b>Leistungsnachweise der Übungsaufgaben</b></td>
-                        <td>Nach Abschluss des jeweiligen Kapitels</td>
-                        <td>1</td>
-                    </tr>
-                    <tr style="background-color: white;">
-                        <td>4</td>
-                        <td><b>Aufgabenblatt mit Einzelaufgaben</b></td>
-                        <td>Vor Beginn der Klausurphase</td>
-                        <td>3</td>
-                    </tr>
-                </table>
-
-                <lsx-info-box>
-                    Jeder in der Tabelle genannte Prüfungsanteil wird mit einer Punktzahl bewertet,
-                    die in Prozent umgerechnet wird. Anhand der Teilprozente wird dann ein gewichteter
-                    Mittelwert gebildet, um die Note zu ermitteln.
-                </lsx-info-box>
-            </lsx-tab-page>
-
-            <lsx-tab-page title="Unterlagen in Moodle">
-                <img src="01-intro/pf-moodle.png" class="img-fluid img-thumbnail mx-auto d-block" />
-            </lsx-tab-page>
-
-            <lsx-tab-page title="Aufgabenblatt">
-                <!--
-                <lsx-info-box type="warning">
-                    <b>09.02.2024:</b> Das Aufgabenblatt wird gerade erstellt und mit den anderen beiden Dozenten
-                    abgestimmt. Bis zur nächsten Vorlesung in einer Woche wird es fertig sein.
-                </lsx-info-box>
-                -->
-
-                <div class="d-flex w-100" style="gap: 0.5em;">
-                    <div class="flex-grow-1 flex-shrink-1">
-                        <img src="01-intro/pf-blatt1.png" class="img-thumbnail d-block w-100" />
-                    </div>
-                    <div class="flex-grow-1 flex-shrink-1">
-                        <img src="01-intro/pf-blatt2.png" class="img-thumbnail d-block w-100" />
-                    </div>
-                    <div class="flex-grow-1 flex-shrink-1">
-                        <img src="01-intro/pf-blatt3.png" class="img-thumbnail d-block w-100" />
-                    </div>
+        <!-- Lernziele -->
+        <div class="flex-grow-1">
+            <!-- Architektur -->
+            <div class="d-flex lsx-timeline gap-3">
+                <!-- Termin 1: Begriffsdefinitionen, Anforderungen, Architekturmuster -->
+                <h5 class="lsx-timeline-label">
+                    <span>Architektur</span>
+                </h5>
+                <div class="flex-grow-1">
+                    <lsx-grid-fluid>
+                        <lsx-row>
+                            <lsx-col size="lg-4">
+                                <lsx-card class="lsx-timeline-card" title="Begriffsdefinitionen" bold>
+                                    Die Bedeutung <i>verteilter Systeme</i> und <i>verteilter Anwendungen</i> kennen
+                                </lsx-card>
+                            </lsx-col>
+                            <lsx-col size="lg-4">
+                                <lsx-card class="lsx-timeline-card" title="Konzepte" bold>
+                                    Theoretische Konzepte wie das <i>CAP-Theorem</i> auf praktische Fallbeispiele anwenden können
+                                </lsx-card>
+                            </lsx-col>
+                            <lsx-col size="lg-4">
+                                <lsx-card class="lsx-timeline-card" title="Architektur" bold>
+                                    Architekturprinzipien wie <i>Client/Server</i> oder <i>Microservices</i> verstehen
+                                </lsx-card>
+                            </lsx-col>
+                        </lsx-row>
+                    </lsx-grid-fluid>
+                    <hr>
                 </div>
-            </lsx-tab-page>
-        </lsx-tab-pages>
-    </article>
-    <aside class="markdown">
-        ##### Portfolioaufgaben im vierten Semester
+            </div>
+        
+            <!-- Programmierung -->
+            <div class="d-flex lsx-timeline gap-3">
+                <!-- Termin 2: Node.js-Grundlagen, Express Web-Framework -->
+                <h5 class="lsx-timeline-label">
+                    <span>Programmierung</span>
+                </h5>
+                <div class="flex-grow-1">
+                    <lsx-grid-fluid>
+                        <lsx-row>
+                            <lsx-col size="lg-4">
+                                <lsx-card class="lsx-timeline-card" title="Node.js" bold>
+                                    Node.js-Projekte anlegen, bearbeiten und ausführen sowie deren Abhängigkeiten verwalten können
+                                </lsx-card>
+                            </lsx-col>
+                            <lsx-col size="lg-4">
+                                <lsx-card class="lsx-timeline-card" title="Express.js" bold>
+                                    Den Funktionsumfang von Express mit anderen Web Frameworks vergleichen können
+                                </lsx-card>
+                            </lsx-col>
+                            <lsx-col size="lg-4">
+                                <lsx-card class="lsx-timeline-card" title="Beispielprogramme" bold>
+                                    Einfache HTTP-Clients und HTTP-Server programmieren können
+                                </lsx-card>
+                            </lsx-col>
+                        </lsx-row>
+                    </lsx-grid-fluid>
+                    <hr>
+                </div>
+            </div>
+        
+            <!-- Webservices -->
+            <div class="d-flex lsx-timeline gap-3">
+                <!-- Termin 3: Theorie zu Webservices allgemein und REST-Webservices -->
+                <h5 class="lsx-timeline-label">
+                    <span>Webservices</span>
+                </h5>
+                <div class="flex-grow-1">
+                    <lsx-grid-fluid>
+                        <lsx-row>
+                            <lsx-col size="lg-4">
+                                <lsx-card class="lsx-timeline-card" title="Begriffsdefinitionen" bold>
+                                    Die Begriffe <i>Webserver</i>, <i>Webservice</i> und <i>Webanwendung</i> abgrenzen
+                                </lsx-card>
+                            </lsx-col>
+                            <lsx-col size="lg-4">
+                                <lsx-card class="lsx-timeline-card" title="HTTP" bold>
+                                    HTTP-Methoden, Header Fields und Statuscodes korrekt anwenden
+                                </lsx-card>
+                            </lsx-col>
+                            <lsx-col size="lg-4">
+                                <lsx-card class="lsx-timeline-card" title="REST-Webservices" bold>
+                                    REST-Webservices entwerfen und von anderen Webservice-Arten unterscheiden können
+                                </lsx-card>
+                            </lsx-col>
+                        </lsx-row>
+                    </lsx-grid-fluid>
+                </div>
+            </div>
+        
+            <div class="d-flex lsx-timeline gap-3">
+                <!-- Termin 4: REST-Webservices programmieren und mit OpenAPI dokumentieren -->
+                <h5 class="lsx-timeline-label"></h5>
+                <div class="flex-grow-1">
+                    <lsx-grid-fluid>
+                        <lsx-row>
+                            <lsx-col size="lg-4">
+                                <lsx-card class="lsx-timeline-card" title="Programmierung" bold>
+                                    REST-Webservices entwickeln und den Quellcode hierfür strukturieren können
+                                </lsx-card>
+                            </lsx-col>
+                            <lsx-col size="lg-4">
+                                <lsx-card class="lsx-timeline-card" title="OpenAPI" bold>
+                                    REST-Webservices mit OpenAPI dokumentieren und testen können
+                                </lsx-card>
+                            </lsx-col>
+                        </lsx-row>
+                    </lsx-grid-fluid>
+                    <hr>
+                </div>
+            </div>
+        
+            <!-- Publish/Subscribe -->
+            <div class="d-flex lsx-timeline gap-3">
+                <h5 class="lsx-timeline-label">
+                    <span>Publish/Subscribe</span>
+                </h5>
+                <!-- Termin 5: Theorie zu Publish/Subscribe und MQTT -->
+                <div class="flex-grow-1">
+                    <lsx-grid-fluid>
+                        <lsx-row>
+                            <lsx-col size="lg-4">
+                                <lsx-card class="lsx-timeline-card" title="Aynchrone Kommunikation" bold>
+                                    Unterschiede zu synchronen Kommunikationsmodellen verstehen
+                                </lsx-card>
+                            </lsx-col>
+                            <lsx-col size="lg-4">
+                                <lsx-card class="lsx-timeline-card" title="Systemarchitektur" bold>
+                                    Die Systemarchitektur event-basierter Systeme verstehen
+                                </lsx-card>
+                            </lsx-col>
+                            <lsx-col size="lg-4">
+                                <lsx-card class="lsx-timeline-card" title="Anwendungsfälle" bold>
+                                    Typische Anwendungsfälle für die asynchrone Kommunukation kennen
+                                </lsx-card>
+                            </lsx-col>
+                        </lsx-row>
+                    </lsx-grid-fluid>
+                </div>
+            </div>
+        
+            <div class="d-flex lsx-timeline gap-3">
+                <!-- Termin 6: Programmieren mit MQTT -->
+                <h5 class="lsx-timeline-label"></h5>
+                <div class="flex-grow-1">
+                    <lsx-grid-fluid>
+                        <lsx-row>
+                            <lsx-col size="lg-4">
+                                <lsx-card class="lsx-timeline-card" title="MQTT" bold>
+                                    Den Funktionsumfang von MQTT zu anderen Messaging-Systemen vergleichen können
+                                </lsx-card>
+                            </lsx-col>
+                            <lsx-col size="lg-4">
+                                <lsx-card class="lsx-timeline-card" title="Programmierung" bold>
+                                    Event-basierte Systeme auf Basis von MQTT entwickeln können
+                                </lsx-card>
+                            </lsx-col>
+                        </lsx-row>
+                    </lsx-grid-fluid>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-        Auch im vierten Semester werden wir wieder ein Aufgabenblatt mit Portfolioaufgaben haben, das zusammen mit
-        den Aufgaben des dritten Semesters ein Prüfungsportfolio bildet. Die Vorgehensweise ist im Grunde dieselbe.
-        An folgenden Stellen gibt es jedoch Abweichungen:
+<section data-title="Prüfungsaufgabe" class="centered-content">
+    <div class="d-flex flex-column flex-md-row justify-content-center gap-md-5">
+        <div class="flex-grow-1" style="width: 20em; max-width: 100%;">
+            <h3 class="dhbw-lightblue text-md-center">Lernkontrollen</h3>
+            <p class="text-md-center mb-5">Prüfung der deskriptiven Lernziele</p>
 
-        * Anstelle der Lernkontrollen müssen Leistungsnachweise für die Übungsaufgaben in Moodle hochgeladen werden.
-        Diese bestehen für jede der prüfungsrelevanten Übungen aus einem ca. ein bis zwei minütigen Video (ungeschnitten),
-        in dem die Lösung vorgeführt und erklärt werden muss.
+            <img src="01-intro/pf-moodle.png" alt="Screenshot eines Moodle-Quizzes" class="d-block img-thumbnail shadow mb-5">
 
-        * Anstelle einer großen Programmieraufgabe besteht das Aufgabenblatt aus kleineren, in sich geschlossenen
-        Aufgaben zu jedem Kapitel. Zwar muss auch hier programmiert werden. Im Fokus liegt dabei aber jeweils nur
-        ein Konzept wie z.B. REST-Webservices, das anhand eines überschaubaren Fallbeispiels praktisch angewendet
-        werden soll.
+            <lsx-ul emoji="📝">
+                <li>Begriffsdefinitionen</li>
+                <li>Anforderungen</li>
+                <li>Architektur</li>
+                <li>Node.js-Projekte</li>
+                <li>Web-Framework Express.js</li>
+                <li>Webservices allgemein</li>
+                <li>REST-Webservices</li>
+                <li>Publish/Subscribe</li>
+                <li>MQTT mit Node.js</li>
+            </lsx-ul>
+        </div>
 
-        Grundsätzlich sind alle Aufgaben in Eigenleistung zu bearbeiten. Die Aufgaben sind daher so gestellt,
-        dass Fallbeispiele und Lösungswege frei gewählt werden können.
+        <div style="border: 0px dashed lightgrey; border-right-width: 1px"></div>
 
-        ##### Berechnung der Note
+        <div class="flex-grow-1" style="width: 20em; max-width: 100%;">
+            <h3 class="dhbw-lightblue text-md-center">Aufgabenblatt</h3>
+            <p class="text-md-center mb-5">Prüfung der methodischen Lernziele</p>
 
-        Ähnlich wie in den meisten anderen Modulen gibt es für das Modul „Entwicklung verteilter Systeme“ eine
-        Modulnote im vierten Semester. Der Portfolioanteil des dritten Semesters erhält keine eigene Note, sondern
-        wird mit dem vierten Semester verrechnet. Die Studienordnung schreibt dabei vor, dass die beiden Vorlesungen
-        entsprechend ihrer Anzahl Vorlesungsstunden in die Note einfließen müssen. Konkret bedeutet das, dass das
-        dritte Semester zu 60% und das vierte Semester zu 40% die Note bilden.
-
-        Zur Berechnung der Note werden die Portfolioartefakte einzeln mit Punkten bewertet. Aus diesen ergibt sich
-        eine Prozentzahl der erreichten Punkte. Die Prozentzahlen werden dann einfach in einem gewichteten Durschnitt
-        miteinander verrechnet. Anhand der Notenskala der DHBW ergibt sich daraus die eigentliche Note.
-    </aside>
+            <div style="width: 85%;">
+                <img src="01-intro/pf-blatt3.png" alt="Erste Seite des Aufgabenblatts in Moodle" class="d-block img-thumbnail shadow" style="transform: rotate(-5deg); margin-left: 10em;">
+                <img src="01-intro/pf-blatt2.png" alt="Erste Seite des Aufgabenblatts in Moodle" class="d-block img-thumbnail shadow" style="transform: rotate(2deg); margin-top: -140%; margin-left: 5em;">
+                <img src="01-intro/pf-blatt1.png" alt="Erste Seite des Aufgabenblatts in Moodle" class="d-block img-thumbnail shadow" style="transform: rotate(4deg); margin-top: -135%;">
+            </div>
+        </div>
+    </div>
 </section>
 
 <section data-title="Benötigte Software">

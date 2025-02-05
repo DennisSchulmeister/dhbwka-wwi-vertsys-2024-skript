@@ -114,6 +114,51 @@
         </div>
     </section>
 
+    <section data-title="Verteilte Systeme vs. verteilte Anwendungen" class="centered-content">
+        <article class="markdown">
+            <!-- TODO: ChatGPT-Text besser aufbereiten, nachfolgende Beispiele anpassen! -->
+            Die Begriffe **"Verteiltes System"** und **"Verteilte Anwendung"**
+            sind eng miteinander verwandt, haben aber unterschiedliche Bedeutungen:
+    
+            1. **Verteiltes System**
+               Ein verteiltes System ist eine über mehrere physische oder
+               virtuelle Knoten (z. B. Server, Computer, IoT-Geräte) verteilte
+               Infrastruktur, die als eine Einheit funktioniert. Es besteht aus
+               mehreren unabhängigen, aber miteinander verbundenen Komponenten, die
+               über ein Netzwerk kommunizieren. Ein verteiltes System stellt
+               Ressourcen, Rechenleistung oder Dienste zur Verfügung und sorgt für
+               Skalierbarkeit, Redundanz und Fehlertoleranz.
+    
+               **Beispiele:** Cloud-Plattformen (z. B. AWS, Google Cloud),
+               Blockchain-Netzwerke, Microservices-Architekturen.
+    
+            2. **Verteilte Anwendung**
+               Eine verteilte Anwendung ist eine spezifische Software, die auf
+               einem verteilten System läuft. Sie nutzt die Ressourcen des verteilten
+               Systems, um ihre Funktionen bereitzustellen, kann also auf mehreren
+               Rechnern oder Servern ausgeführt werden, wobei die Komponenten
+               miteinander kommunizieren. Eine verteilte Anwendung ist also eine Art
+               von Software, während ein verteiltes System die zugrunde liegende
+               Architektur darstellt.
+    
+               **Beispiele:** Webanwendungen mit Frontend und Backend auf
+               verschiedenen Servern, Messaging-Dienste (z. B. WhatsApp), verteilte
+               Datenbankanwendungen.
+    
+            ### **Zusammenfassung der Abgrenzung:**
+    
+            - **Verteiltes System:** Die Infrastruktur bzw. Plattform (Hardware,
+              Netzwerk, Middleware), die verteiltes Rechnen ermöglicht.
+    
+            - **Verteilte Anwendung:** Eine Software, die diese Infrastruktur
+              nutzt, um über mehrere Rechner verteilt zu laufen.
+    
+            Eine verteilte Anwendung setzt immer ein verteiltes System voraus,
+            aber ein verteiltes System kann existieren, ohne dass eine spezifische
+            verteilte Anwendung darauf läuft.
+        </article>
+    </section>
+
     <section data-title="Fallbeispiele" class="centered-content">
         <div class="centered-content flex-row flex-wrap gap-3">
             <!-- Das Internet -->
@@ -1007,6 +1052,66 @@
                     </lsx-tab-page>
 
                     <lsx-tab-page title="Microservices">
+                        <!-- Eigene Folie hieraus machen und die anderen Architekturmuster zurückstellen? -->
+                        <!--
+                        ChatGPT:
+
+                        Die Definition deckt viele zentrale Aspekte ab, insbesondere die
+                        Entkopplung eines Monolithen in eigenständige, fachlich fokussierte
+                        Services sowie die Bedeutung von Automatisierung und
+                        teamübergreifender Verantwortung. Dennoch könnten einige Punkte noch
+                        ergänzt oder präzisiert werden:
+
+                        Dezentrale Datenhaltung und Zuständigkeiten:
+                        Microservices sollten idealerweise auch ihre eigene Datenhaltung
+                        haben, um enge Kopplungen und Abhängigkeiten zu vermeiden. Jeder
+                        Service ist für seinen eigenen Datenbestand verantwortlich, was die
+                        Unabhängigkeit und Skalierbarkeit erhöht.
+
+                        Kommunikation und Schnittstellendesign:
+                        Neben der gut dokumentierten und versionierten API ist es wichtig,
+                        dass die Kommunikation zwischen den Services über leichtgewichtige
+                        Protokolle (z. B. HTTP/REST, gRPC oder Messaging-Systeme) erfolgt.
+                        Dies fördert die lose Kopplung und ermöglicht flexible Interaktionen.
+
+                        Fehlertoleranz und Resilienz:
+                        Da Microservices in einer verteilten Umgebung betrieben werden, sind
+                        Konzepte wie Circuit Breaker, Wiederholungsmechanismen und
+                        Service-Discovery essenziell, um Ausfälle einzelner Services
+                        abzufedern und das Gesamtsystem robust zu gestalten.
+
+                        Unabhängige Deployment-Zyklen:
+                        Ein wesentlicher Vorteil von Microservices ist die Möglichkeit,
+                        einzelne Komponenten unabhängig voneinander zu entwickeln, zu testen
+                        und bereitzustellen. Dies erfordert entsprechende Infrastruktur, z. B.
+                        Containerisierung (wie Docker) und Orchestrierung (wie Kubernetes).
+
+                        Technologische Heterogenität:
+                        Teams haben oft die Freiheit, für jeden Microservice die am besten
+                        geeigneten Technologien, Programmiersprachen oder Datenbanksysteme zu
+                        wählen, was zur Optimierung der jeweiligen Funktionalität beiträgt.
+
+                        Domain-Driven Design (DDD) und Business-Fokus:
+                        Häufig werden Microservices um sogenannte „bounded contexts“ herum
+                        entworfen, was bedeutet, dass jeder Service einen klar definierten
+                        Geschäftsbereich abdeckt. Dies fördert ein besseres Verständnis der
+                        Geschäftslogik und erleichtert die Modellierung komplexer Systeme.
+
+                        Betriebsüberwachung und Logging:
+                        In einer verteilten Architektur ist es besonders wichtig, umfassende
+                        Monitoring-, Logging- und Tracing-Lösungen zu implementieren, um den
+                        Überblick über die Interaktionen und den Zustand der einzelnen
+                        Services zu behalten.
+
+                        Zusammengefasst:
+                        Die Definition trifft den Kern von Microservices, könnte aber um
+                        Aspekte wie dezentrale Datenhaltung, spezifische
+                        Kommunikationsmechanismen, Resilienzstrategien, unabhängige
+                        Deployment-Prozesse sowie den geschäftsorientierten Ansatz (bspw.
+                        durch Domain-Driven Design) erweitert werden. Diese Ergänzungen helfen
+                        dabei, das volle Potenzial und die Herausforderungen von Microservices
+                        in der Praxis besser zu verstehen.
+                        -->
                         <p class="dhbw-text-columns mb-4" detail-content>
                             Microservices zerlegen eine große, monolithische Anwendung in viele kleine Teilanwendungen. Jeder Microservice hat
                             ein klar umrissenes Aufgabengebiet, besitzt eine gut dokumentierte und versionierte Schnittstelle und wird in der
@@ -2320,7 +2425,7 @@
                                     voneinenader <lsx-gap answer="unabhängigen"></lsx-gap> Computern befinden können,
                                     und nur über den Austausch von <lsx-gap answer="Nachrichten"></lsx-gap> kommunizieren,
                                     um eine gemeinsame  Aufgabe zu bearbeiten.
-                                    
+
                                     Aus Anwendersicht verhalten Sie sich wie ein einzelner, großer <lsx-gap answer="Computer"></lsx-gap>.
                                 </lsx-question-line>
                             </lsx-question>
@@ -2451,7 +2556,7 @@
                                     <lsx-answer>4294967295</lsx-answer>
                                 </lsx-question-line>
                             </lsx-question>
-                            
+
                             <lsx-question
                                 type = "single-choice"
                                 text = "f) Ein Programm, das auf einem TCP-Port lauscht, kann nur mit Admin-Rechten gestartet werden."
@@ -2501,39 +2606,39 @@
                                     hinzugefügt. An den bereits vorhandenen Computern sowie den darauf laufenden Programmen
                                     müssen hierfür keine nennenswerten Änderungen vorgenommen werden.
                                 </lsx-assignment>
-        
+
                                 <lsx-assignment answer="Zugriffstransparenz">
                                     Egal ob man als Anwender oder als Entwickler auf eine Ressource zugreift, es sollte
                                     keinen Unterschied machen, ob diese sich auf dem eigenen oder einem anderen Computer
                                     befindet. Der Zugriff erfolgt immer auf dieselbe Weise.
                                 </lsx-assignment>
-        
+
                                 <lsx-assignment answer="Erweiterbarkeit">
                                     Sowohl die Systemarchitektur als auch die Softwarearchitektur sind flexibel genug,
                                     um jederzeit weitere Funktionen hinzufügen zu können, ohne gleich alles auseinander
                                     nehmen zu müssen. Denn nichts ist so beständig wie der Wandel.
                                 </lsx-assignment>
-        
+
                                 <lsx-assignment answer="Fehler vermeiden">
                                     Beim Programmieren darf man auf keinen Fall am falschen Ende sparen. Lieber investiert
                                     man etwas mehr Arbeit und bietet dafür zum Beispiel eine komfortable, selbsterklärende
                                     Benutzeroberfläche oder achtet darauf, selbst die eher unwahrscheinlichen Ausnahmen
                                     sauber zu behandeln als einen Programmabsturz zu riskieren.
                                 </lsx-assignment>
-        
+
                                 <lsx-assignment answer="CAP-Theorem">
                                     Wie schön wäre eine Welt, in der jede verteilte Anwendung stets mit konsistenten Daten arbeiten
                                     könnte, hochverfügbar wäre und selbst der Ausfall einzelner Komponenten keine wirkliche Störung
                                     wäre. Doch leider kann eine Anwendung maximal zwei dieser Kriterien vollständig erfüllen.
                                 </lsx-assignment>
-        
+
                                 <lsx-assignment answer="Ortstransparenz">
                                     <i><a href="https://www.youtube.com/watch?v=MWF7HTOT8BU" target="_blank">Heute hier, morgen dort</a>,
                                     bin kaum da, muss ich fort. So vergeht Jahr um Jahr, und es ist mir längst klar, dass nichts bleibt
                                     wie es war.</i> Dieser Songtext von Hannes Wader beschreibt auch eine wichtige Anforderung an
                                     verteilte Anwendungen.
                                 </lsx-assignment>
-        
+
                                 <lsx-assignment answer="Fehler maskieren">
                                     Geht mal was schief ist das oft eigentlich gar nicht so schlimm. Nicht jeder Fehler erfordert gleich
                                     die volle Aufmerksamkeit des Anwenders. Oft kann das System die fehlgeschlagene Aktion einfach nochmal
@@ -4064,7 +4169,7 @@
             </div>
 
             <img src="02-architektur/naas-screenshot1.png" class="img-thumbnail d-block w-100 mb-4" alt="Weboberfläche">
-            
+
             <lsx-tab-pages>
                 <lsx-tab-page title="Beschreibung" class="markdown">
                     Das Notebook-as-a-Service-Beispiel wurde auf den vorangegangenen Seiten immer wieder als
@@ -4075,16 +4180,16 @@
                     HTML, CSS und JavaScript-Dateien zur Verfügung stellt. Serverseitig gibt es keine Logik,
                     obwohl dies im Sinne des „Backend for Frontend“ (BFF) Architekturansatzes durchaus
                     möglich wäre.
-                    
+
                     * __API-Gateway (Port 8010):__ Dies ist ein einfacher HTTP Reverse Proxy, der die Backendservices
                     nach außen hin verschattet. Die Backend-Server können dadurch über eine einheitliche
                     URL aufgerufen werden, ohne die genaue Backendstruktur kennen zu müssen. Im Idealfall
                     sorgt die Ausführumgebung durch ein virtuelles, privates Netzwerk sogar dafür, dass
                     die Backendservices aus dem öffentlichen Internet gar nicht erreichbar sind.
-                    
+
                     * __Katalog-Backend (Port 8020):__ Stellt eine einfache Datenbank für den Produktkatalog zur Verfügung.
                     In der Beispielanwendung verwaltet dieser Service die ausleihbaren Geräte.
-                    
+
                     * __Auftrags-Backend (Port 8030):__ Wickelt den Bestellvorgang ab und verwaltet die Bestellungen
                     in seiner eigenen kleinen Datenbank. Kommuniziert hierfür mit dem Katalog-Backend,
                     um zu prüfen, ob die bestellten Geräte tatsächlich vorhanden sind.
@@ -4182,7 +4287,7 @@
                                 In wiefern bestätigen sich Ihre Antworten zum letzten Schritt hierdurch?
                             </lsx-info-box>
                         </lsx-accordion-page>
-                        
+
                         <lsx-accordion-page title="<b>Schritt 6:</b>&nbsp; Konfiguration anpassen">
                             <div class="markdown">
                                 Schließen Sie sich in Zweiergruppen zusammen und versuchen Sie, die Services auf mehreren
@@ -4203,7 +4308,7 @@
                             <div class="markdown">
                                 Starten Sie nun auf dem eigenen Rechner Frontend und API-Gateway, und auf dem anderen Rechner
                                 die Backend-Services:
-                                
+
                                 <table>
                                     <tr>
                                         <td colspan="4"><b>Rechner 1</b>
@@ -4242,15 +4347,15 @@
                                         </td>
                                     </tr>
                                 </table>
-                                
+
                                 Im Gegensatz zu bisher sollten Sie auf dem zweiten Rechner nun drei Instanzen des
                                 Katalog-Services laufen haben, die auf den Ports 8020, 8021 und 8022 aufrufbar sind.
-                                
+
                                 **HINWEISE:** Wenn Sie Frontend und API-Gateway auf unterschiedlichen Rechnern laufen
                                 lassen wollen, müssen Sie in der Datei `frontend/.env` die Zieladresse des API-Gateways
                                 anpassen. Wenn Sie Katalog- und Auftrags-Service auf unterschiedlichen Rechnern
                                 laufen lassen wollen, müssen Sie in der Datei `order-service/.env` die Zieladresse
-                                des Katalog-Services anpassen.                                
+                                des Katalog-Services anpassen.
                             </div>
                         </lsx-accordion-page>
 
