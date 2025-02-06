@@ -1,17 +1,79 @@
 <section data-chapter="h1" data-title="Architektur verteilter Systeme" data-background-color="rgb(210,190,210)">
     <article class="markdown">
-        ### Nach Abschluss dieses Kapitels können Sie …
+        #### Grundlagen verteilter Systeme {.dhbw-lightblue}
 
-        * den Begriff verteiltes System erklären und von ähnlichen Begriffen abgrenzen.
-        * Beispiele für verteilte Anwendungen nennen und von normalen Anwendungen abgrenzen.
-        * die wichtigsten Gründe für die Entwicklung verteilter Systeme nennen. 💰
-        * die Begriffe Client, Server und Peer definieren und voneinander abgrenzen.
-        * die gängigsten Architekturmuster verteilter Anwendungen beschreiben.
-        * die Bedeutung des CAP-Theorem verstehen und seine Bedeutung wiedergeben.
-        * die Schwierigkeiten zeitlicher Wechselwirkungen verteilter Anwendungen erkennen.
+        <table>
+            <tbody>
+                <tr>
+                    <td class="lernziel-art">Verstehen</td>
+                    <td>Die Begriffe <i>verteiltes System</i> und <i>verteilte Anwendung</i> definieren und abgrenzen</td>
+                </tr>
+                <tr>
+                    <td class="lernziel-art">Wissen</td>
+                    <td>Typische Anforderungen wie <i>Transparenz</i>, <i>Skalierbarkeit</i> und <i>Sicherheit</i> benennen</td>
+                </tr>
+                <tr>
+                    <td class="lernziel-art">Können</td>
+                    <td>Das <i>CAP-Theorem</i> auf praktische Fallbeispiele anwenden können</td>
+                </tr>
+            </tbody>
+        </table>
+
+        #### Typische Architekturmuster {.dhbw-lightblue .mt-4}
+
+        <table>
+            <tbody>
+                <tr>
+                    <td class="lernziel-art">Wissen</td>
+                    <td>Den Aufbau und die Bedeutung des TCP/IP-Protokollstapels erklären</td>
+                </tr>
+                <tr>
+                    <td class="lernziel-art">Verstehen</td>
+                    <td>Die Rolle von <i>Client</i>, <i>Server</i> und <i>Peer</i> in verteilten Architekturen abgrenzen</td>
+                </tr>
+                <tr>
+                    <td class="lernziel-art">Verstehen</td>
+                    <td>Die Besonderheiten und Vorteile einer <i>Microservice-Architektur</i> erklären</td>
+                </tr>
+                <tr>
+                    <td class="lernziel-art">Wissen</td>
+                    <td>Typische Anforderungen und die Funktionsweise eines <i>API-Gateways</i> kennen</td>
+                </tr>
+            </tbody>
+        </table>
 
         <span style="font-size: 240px; color: white;" class="dhbw-text-shadow" >🏁</span>
     </article>
+    <aside class="markdown">
+        In einer immer stärker vernetzten Welt spielen verteilte Systeme eine zentrale Rolle.
+        Ob Cloud-Dienste, soziale Netzwerke oder Online-Shops – all diese Systeme sind auf eine
+        kluge Architektur angewiesen, um zuverlässig, sicher und skalierbar zu funktionieren.
+        In diesem Kapitel tauchen wir deshalb in die Grundlagen und Architekturmuster verteilter
+        Systeme ein, um zu verstehen, wie moderne Anwendungen aufgebaut sind und welche Herausforderungen
+        sie meistern müssen.  
+        
+        Gleich zu Beginn klären wir die entscheidende Frage: Was unterscheidet ein verteiltes System von einer
+        verteilten Anwendung? Woran erkennt man eine verteilte Architektur, und warum setzen so viele moderne
+        Anwendungen auf diesen Ansatz? Dabei werden wir nicht nur die Definition betrachten, sondern auch zentrale
+        Anforderungen wie *Transparenz*, *Skalierbarkeit* und *Sicherheit* verstehen. Dabei werden wir auch das
+        *CAP-Theorem* betrachten und anhand praktischer Beispiele sehen, welche strategischen Entscheidungen
+        Entwickler*innen treffen müssen.
+        
+        Nach den Grundlagen widmen wir uns typischen *Architekturmustern*. Eine verteilte Anwendung besteht aus mehreren
+        Komponenten, die über Netzwerke miteinander kommunizieren. Aber wie genau funktioniert das? Ein Schlüsselkonzept
+        ist der *TCP/IP-Protokollstapel*, der als Grundlage fast aller modernen Netzwerkanwendungen dient. Aber nicht nur
+        die technische Kommunikation ist wichtig. Auch die Struktur der Systeme selbst ist entscheidend. Wir werden uns
+        daher kurz mit verschiedenen Rollen und dann mit der *Microservice-Architektur* beschäftigen. Insbesondere werden
+        wir sehen, warum sich Unternehmen zunehmend für diesen Ansatz entscheiden und welche Vorteile er gegenüber monolithischen
+        Systemen hat.
+        
+        ##### Warum ist dieses Kapitel wichtig?
+
+        Die Architektur eines verteilten Systems ist entscheidend für dessen Erfolg. Wer die Mechanismen dahinter versteht,
+        kann leistungsfähige und robuste Anwendungen entwerfen, die auch unter hoher Last zuverlässig funktionieren. Dieses
+        Kapitel gibt Ihnen das Wissen und die Werkzeuge an die Hand, um verteilte Systeme nicht nur zu verstehen, sondern auch
+        aktiv mitzugestalten. 🚀
+    </aside>
 </section>
 
 <!-- ===================== -->
@@ -19,7 +81,7 @@
 <!-- ===================== -->
 <section data-use-template="teilkapitel" data-titel="Technische Grundlagen"></section>
 
-<section data-title="Was ist ein verteiltes System?" data-background-image="02-architektur/definition-hintergrund.jpg" data-background-blur="5px">
+<section data-title="Verteilte Systeme und Anwendungen">
     <section data-title="Alltäglicher Sprachgebrauch" class="centered-content">
         <lsx-grid-fluid class="p-0 limited-width2">
             <lsx-row>
@@ -48,7 +110,7 @@
         </lsx-grid-fluid>
     </section>
 
-    <section data-title="System" class="centered-content">
+    <section data-title="Der Systembegriff allgemein" class="centered-content">
         <div class="limited-width">
             <blockquote class="blockquote fst-italic">
                 <p>
@@ -74,92 +136,88 @@
         </div>
     </section>
 
-    <section data-title="Verteiltes System" class="centered-content">
+    <section data-title="Definition: Verteiltes System" class="centered-content">
         <div class="limited-width2">
-            <lsx-grid-fluid class="p-0 mb-4">
+            <lsx-grid-fluid class="p-0 mb-5">
                 <lsx-row>
-                    <lsx-col size="md">
-                        <blockquote class="blockquote fst-italic card p-2">
-                            <p>
-                                A distributed system stops you from getting any work done because computer crashed
-                                that you didn't even know it existed.
-                            </p>
-                            <figcaption class="blockquote-footer">
-                                <cite>Scherzhafte Definition nach Leslie Lamport</cite>
-                            </figcaption>
-                        </blockquote>
+                    <lsx-col size="md-5">
+                        <lsx-card title="Bekannte Definitionen" bold class="h-100">
+                            <blockquote class="blockquote fst-italic mb-4 fs-6">
+                                <p>
+                                    A distributed system stops you from getting any work done because computer crashed
+                                    that you didn't even know it existed.
+                                </p>
+                                <figcaption class="blockquote-footer">
+                                    <cite>Scherzhafte Definition nach Leslie Lamport</cite>
+                                </figcaption>
+                            </blockquote>
+    
+                            <blockquote class="blockquote fst-italic fs-6">
+                                <p>
+                                    A distributed system is a collection of [computers] that appears to its users as a single
+                                    coherent system.
+                                </p>
+                                <figcaption class="blockquote-footer">
+                                    <cite>Steen & Tanenbaum</cite>
+                                </figcaption>
+                            </blockquote>
+                        </lsx-card>
                     </lsx-col>
-
+    
                     <lsx-col size="md">
-                        <blockquote class="blockquote fst-italic card p-2">
-                            <p>
-                                A distributed system is a collection of [computers] that appears to its users as a single
-                                coherent system.
-                            </p>
-                            <figcaption class="blockquote-footer">
-                                <cite>Steen & Tanenbaum</cite>
-                            </figcaption>
-                        </blockquote>
+                        <lsx-card title="Merkmale verteilter Systeme" bold class="h-100">
+                            <lsx-ul emoji="☑️">
+                                <li>Infrastruktur bestehend aus Hardware und Software für verteiltes Rechnen.</li>
+                                <li>Bestehend aus mehreren, voneinander unabhängig agierenden Computern.</li>
+                                <li>Datenaustausch über ein Netzwerk ohne geteilten Hauptspeicher.</li>
+                                <li>Die Knoten arbeiten zusammen, um eine übergeordnete Aufgabe zu erfüllen.</li>
+                                <li>Das System stellt Ressourcen, Rechenleistung oder Dienste zur Verfügung.</li>
+                                <li>Das System sorgt zusätzlich für Skalierbarkeit, Redundanz und Fehlertoleranz.</li>
+                            </lsx-ul>
+                        </lsx-card>
                     </lsx-col>
                 </lsx-row>
             </lsx-grid-fluid>
+        </div>
 
-            <h4>Arbeitsdefinition für diese Vorlesung</h4>
-
-            <lsx-ul emoji="☑️">
-                <li>Mehrere, voneinander unabhängig agierende Computer (muss zumindest möglich sein)</li>
-                <li>Datenaustausch über ein Netzwerk ohne geteilten Hauptspeicher</li>
-                <li>Die Knoten arbeiten zusammen, um eine übergeordnete, gemeinsame Aufgabe zu erfüllen</li>
-            </lsx-ul>
+        <div class="limited-width">
+            <img src="02-architektur/verteiltes-system.jpg" alt="" class="d-block w-100">
         </div>
     </section>
 
-    <section data-title="Verteilte Systeme vs. verteilte Anwendungen" class="centered-content">
-        <article class="markdown">
-            <!-- TODO: ChatGPT-Text besser aufbereiten, nachfolgende Beispiele anpassen! -->
-            Die Begriffe **"Verteiltes System"** und **"Verteilte Anwendung"**
-            sind eng miteinander verwandt, haben aber unterschiedliche Bedeutungen:
-    
-            1. **Verteiltes System**
-               Ein verteiltes System ist eine über mehrere physische oder
-               virtuelle Knoten (z. B. Server, Computer, IoT-Geräte) verteilte
-               Infrastruktur, die als eine Einheit funktioniert. Es besteht aus
-               mehreren unabhängigen, aber miteinander verbundenen Komponenten, die
-               über ein Netzwerk kommunizieren. Ein verteiltes System stellt
-               Ressourcen, Rechenleistung oder Dienste zur Verfügung und sorgt für
-               Skalierbarkeit, Redundanz und Fehlertoleranz.
-    
-               **Beispiele:** Cloud-Plattformen (z. B. AWS, Google Cloud),
-               Blockchain-Netzwerke, Microservices-Architekturen.
-    
-            2. **Verteilte Anwendung**
-               Eine verteilte Anwendung ist eine spezifische Software, die auf
-               einem verteilten System läuft. Sie nutzt die Ressourcen des verteilten
-               Systems, um ihre Funktionen bereitzustellen, kann also auf mehreren
-               Rechnern oder Servern ausgeführt werden, wobei die Komponenten
-               miteinander kommunizieren. Eine verteilte Anwendung ist also eine Art
-               von Software, während ein verteiltes System die zugrunde liegende
-               Architektur darstellt.
-    
-               **Beispiele:** Webanwendungen mit Frontend und Backend auf
-               verschiedenen Servern, Messaging-Dienste (z. B. WhatsApp), verteilte
-               Datenbankanwendungen.
-    
-            ### **Zusammenfassung der Abgrenzung:**
-    
-            - **Verteiltes System:** Die Infrastruktur bzw. Plattform (Hardware,
-              Netzwerk, Middleware), die verteiltes Rechnen ermöglicht.
-    
-            - **Verteilte Anwendung:** Eine Software, die diese Infrastruktur
-              nutzt, um über mehrere Rechner verteilt zu laufen.
-    
-            Eine verteilte Anwendung setzt immer ein verteiltes System voraus,
-            aber ein verteiltes System kann existieren, ohne dass eine spezifische
-            verteilte Anwendung darauf läuft.
-        </article>
+    <section data-title="Definition: Verteilte Anwendung" class="centered-content">
+        <div class="limited-width2">
+            <lsx-grid-fluid class="p-3 mb-4">
+                <lsx-row>
+                    <lsx-col size="md-7">
+                        <lsx-card title="Merkmale verteilter Anwendungen" bold class="h-100">
+                            <lsx-ul emoji="☑️">
+                                <li>Fachspezifische Software, die auf einem verteilten System läuft.</li>
+                                <li>Nutzt die Ressourcen des verteilten Systems, um ihre Funktionen bereitzustellen.</li>
+                                <li>Kann hierfür prinzipiell auf mehreren Rechnern ausgeführt werden.</li>
+                                <li>Die Software-Komponenten kommunizieren über den Austausch von Nachrichten.</li>
+                            </lsx-ul>
+                        </lsx-card>
+                    </lsx-col>
+                    <lsx-col size="md">
+                        <lsx-card title="Zusammenfassung der Abgrenzung" bold class="h-100 markdown">
+                          **Verteiltes System:** Die Infrastruktur (Hardware, Netzwerk, Software, Middleware),
+                          die verteiltes Rechnen ermöglicht.
+                  
+                          **Verteilte Anwendung:** Eine Software, die diese Infrastruktur
+                          nutzt, um über mehrere Rechner verteilt zu laufen. {.mb-0}
+                        </lsx-card>
+                    </lsx-col>
+                </lsx-row>
+            </lsx-grid-fluid>
+        </div>
+
+        <div class="limited-width">
+            <img src="02-architektur/verteilte-anwendung.svg" alt="" class="d-block w-100">
+        </div>
     </section>
 
-    <section data-title="Fallbeispiele" class="centered-content">
+    <section data-title="Beispiele für verteilte Systeme" class="centered-content">
         <div class="centered-content flex-row flex-wrap gap-3">
             <!-- Das Internet -->
             <lsx-modal>
@@ -189,11 +247,9 @@
                     <lsx-card title="Webanwendungen" bold class="mh-100">
                         <lsx-card-body class="overflow-scroll">
                             <p class="lead mb-4" style="text-align: justify;">
-                                Webanwendungen mit Serverbackend sind ebenfalls verteilte Systeme (bzw. verteilte Anwendungen,
-                                je nachdem wie genau man diese beiden Begriffe unterscheiden will). Ausschlaggebend hierfür ist
-                                das Zusammenspiel von Browser, Webserver und weiteren Komponenten. Man kann es sich aber auch
-                                so herleiten, dass Webanwendungen ein Teilausschnitt des größten verteilten Systems, nämlich
-                                des Internets, sind.
+                                Webanwendungen laufen zwar wie die meisten verteilten Anwendungen über das Internet, nutzen
+                                aber als Teil davon ein sehr spezielles verteiltes System bestehend aus Load Balancern,
+                                Web-Servern, Datenbanken und weiteren Komponenten.
                             </p>
                             <img src="02-architektur/webapp.png" class="d-block m-auto mw-100" style="max-height: 80vh;"/>
                         </lsx-card-body>
@@ -210,10 +266,10 @@
                     <lsx-card title="Internet of Things" bold class="mh-100">
                         <lsx-card-body class="overflow-scroll">
                             <p class="lead mb-4" style="text-align: justify;">
-                                IoT-Anwendungen zählen ebenfalls zu den größten verteilten Systemen (bzw. verteilten
-                                Anwendungen) weltweit, da oft viele tausend physische Geräte über das Internet miteinander
-                                verbunden sind. Hinzu kommen meist große Serverbackends zur Überwachung und Steuerung der
-                                Geräte sowie der Datensammlung und Auswertung.
+                                IoT-Installationen zählen ebenfalls zu den größten verteilten Systemen (bzw. die darauf
+                                laufenden Anwendungen zu den größten, verteilten Anwendungen) weltweit, da oft viele tausend
+                                physische Geräte verbunden sind. Hinzu kommen meist große Serverbackends zur Überwachung und
+                                Steuerung der Geräte sowie der Datensammlung und Auswertung.
                             </p>
                             <div class="d-flex flex-wrap justify-content-center align-items-center gap-3">
                                 <img src="02-architektur/iot.jpg" class="d-block h-100 mw-100" style="max-height: 40vh;"/>
@@ -284,7 +340,7 @@
         </div>
     </section>
 
-    <section data-title="Alltägliche Beispiele" class="centered-content">
+    <section data-title="Beispiele für verteilte Anwendungen" class="centered-content">
         <div class="limited-width2">
             <p class="dhbw-text-columns mb-5" detail-content>
                 Auch wenn wir es inzwischen kaum noch merken, begleiten verteilte Systeme und Anwendungen
@@ -537,7 +593,7 @@
                             <lsx-tab-page title="Schritte">
                                 <lsx-ul>
                                     <li>
-                                        <code>Spcket</code>-Objekt erzeugen mit <src-code language="javascript">net.createConnection()</src-code>
+                                        <code>Socket</code>-Objekt erzeugen mit <src-code language="javascript">net.createConnection()</src-code>
                                     </li>
                                     <li>
                                         Callback-Funktion zur Abwicklung der Kommunikation mit einem Server übergeben
