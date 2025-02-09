@@ -1,0 +1,1960 @@
+<section data-chapter="h1" data-title="Entwicklung verteilter Systeme" data-background-color="rgb(210,190,210)">
+    <article class="markdown">
+        ### Nach Abschluss dieses Kapitels können Sie …
+
+        * Die Vorteile von Node.js und des Node Package Managers für die Webentwicklung verstehen
+        * Eigene Node.js-Projekte anlegen und bearbeiten können
+        * Benötigte Bibliotheken auf npmjs.com suchen und einem Node.js-Projekt hinzufügen können
+        * Node.js-Projekte mit npm-Skripten lokal starten und bearbeiten können
+        <!-- -->
+        * Das Zusammenspiel von Node.js und Docker im Backendprojekt verstehen
+        * Die wichtigsten für die Programmierung benötigten Dokumentationen kennen
+        * Sich innerhalb der Quellcodeverzeichnisse zurechtfinden können
+        * Die Codestruktur eines mit Restify entwickelten nachvollziehen können
+        * Den Unterschied zwischen Controller und Serviceklasse erklären können
+        * Die Bedeutung von OpenAPI im Backendprojekt einordnen können
+        * Einfache Datenbankzugriffe mit MongoDB programmieren können
+        <!-- -->
+        * Das Zusammenspiel von Node.js und Docker im Frontendprojekt verstehe
+        * Sich in der Klassenstruktur der Single Page App zurecht finden
+        * Die Unterschiede zur Vorlageanwendung aus dem Vorsemester kennen
+        * Der Single Page App eine neue Unterseite hinzufügen können
+        * Die Grundlagen der Fetch API zum Auslösen von HTTP-Anfragen kennen
+        * Die in der Vorlage enthaltene Klasse <code>Backend</code> anwenden können
+
+        <span style="font-size: 240px; color: white;" class="dhbw-text-shadow" >🏁</span>
+    </article>
+</section>
+
+<!-- TODO: Fallbeispiele: Golfcard,  Golfcard Plus, was noch? -->
+
+<!-- ========================= -->
+<!-- Programmieren mit Node.js -->
+<!-- ========================= -->
+<section data-use-template="teilkapitel" data-titel="Programmieren mit Node.js"></section>
+
+<section data-title="Was ist Node.js?">
+    <article class="centered-content">
+        <div>
+            <div class="markdown">
+                * JavaScript-Laufzeitumgebung zur Nutzung von JavaScript außerhalb des Browsers.
+                * Kapselt die „V8 Engine” von Google Chrome als eigenständiges Programm.
+                * Dient der traditionell der Entwicklung performanter Serveranwendungen.
+                * Keine direkte Möglichkeit, die grafische Oberfläche des Betriebssystems zu verwenden.
+                * Dies ist eher die Aufgabe von Spezialframeworks wie Electron oder Cordova.
+            </div>
+        
+            <div class="d-flex align-items-stretch" style="gap: 1em;">
+                <img src="03-entwicklung/nodejs-1.png" class="d-block w-100 img-thumbnail"/>
+                <img src="03-entwicklung/nodejs-2.png" class="d-block w-100 img-thumbnail"/>
+            </div>
+        </div>
+    </article>
+</section>
+
+<section data-title="Definition eines Node.js-Pakets">
+    <article class="centered-content">
+        <div class="limited-width2">
+            <div class="markdown">
+                Ein Quellcodeverzeichnis wird durch die Datei `package.json` zu einem Node.js-Paket.
+                Als solches kann es …
+        
+                * Auf npmjs.com oder eine anderen Registry veröffentlicht werden.
+                * Abhängige Bibliotheken herunterladen und deren Abhängigkeiten auflösen.
+                * Mit npm-Skripten einfache Aufgaben wie die Ausführung von Werkzeugen automatisieren.
+        
+                Darüber hinaus gibt es nichts besonderes zu beachten.
+            </div>
+    
+            <terminal-cast url="03-entwicklung/meet-nodejs.cast" poster="npt:3.0" style="height: 30em;"></terminal-cast>
+        </div>
+    </article>
+</section>
+
+<section data-title="Abhängigkeiten suchen auf npmjs.com">
+    <article class="centered-content">
+        <div class="limited-width2">
+            <img src="03-entwicklung/npmjs.com.png" class="d-block img-thumbnail" style="max-width: 80em;"/>
+        
+            <div class="markdown mt-3">
+                Installation mit folgenden Befehlen:
+        
+                * <span class="cmd">npm add &lt;paket&gt;</span>: Als Laufzeitabhängigkeit (Laufzeitbibliotheken usw.)
+                * <span class="cmd">npm add -D &lt;paket&gt;</span>: Als Entwicklungsabhängigkeit (Build-Werkzeuge usw.)
+            </div>
+        </div>
+    </article>
+</section>
+
+<section data-title="Verwendung der Bibliotheken im Quellcode">
+    <article class="centered-content">
+        <div class="limited-width">
+            <div class="mb-4">
+                <p>
+                    Mit <span class="cmd">npm add</span> hinzugefügte Bibliotheken werden in die
+                    Datei <span class="fn">package.json</span> aufgenommen und anschließend in
+                    das Unterverzeichnis <span class="fn">node_modules</span> installiert. Von
+                    dort können sie mit der ganz normalen <code>import</code>-Anweisung von JavaScript
+                    importiert werden:
+                </p>
+                <ul class"mb-0">
+                    <li>
+                        <src-code language="javascript">import "./verzeichnis/datei.js"</src-code>: <br />
+                        Import einer Quellcodedatei innerhalb der eigenen Anwendung
+                    </li>
+                    <li>
+                        <src-code language="javascript">import "paket/modul.js"</src-code>: <br />
+                        Import einer externen Quellcodedatei aus dem <span class="fn">node_modules</span>-Verzeichnis
+                    </li>
+                </ul>
+            </div>
+            <div class="card w-100">
+                <div class="card-header fw-bold">
+                    Beispiel aus dieser Webanwendung
+                </div>
+                <div class="card-body p-3">
+                    <source-code language="javascript">
+                        // Externe Bibliotheken
+                        import $ from "jquery";
+                        import Hammer from "hammerjs";
+                        import ObservableValue from "@dschulmeis/ls-utils/observable_value.js";
+        
+                        // Eigene Quellcodedateien
+                        import plugins from "./plugins/"; // entspricht ./plugins/index.js
+                        import Presentation from "./presentation.js";
+                        import Slide from "./slide.js";
+                    </source-code>
+                </div>
+            </div>
+        </div>
+    </article>
+</section>
+
+<section data-title="Typische Befehle zur Verwendung von Node.js">
+    <article class="centered-content">
+        <div class="limited-width2">
+            <div class="markdown">
+                * <span class="cmd">npm init</span>: Datei `package.json` im aktuellen Codeverzeichnis neu anlegen
+                * <span class="cmd">npm add &lt;paket&gt;</span>: Weitere Bibliothek aus der Registry hinzufügen
+                * <span class="cmd">npm install</span>: Abhängige Bibliotheken und Werkzeuge installieren
+                * <span class="cmd">npm update</span>: Abhängigkeiten auf ihre erlaubte neuste Version aktualisieren
+                * <span class="cmd">npm audit fix</span>: Abhängigkeiten mit bekannten Sicherheitslücken aktualisieren
+                * <span class="cmd">npm start</span>: Hauptdatei des Quellcodes ausführen, um die Anwendung zu starten
+                * <span class="cmd">npm run &lt;skript&gt;</span>: Ausführen eines in der `package.json` definierten „Run-Skripts”
+            </div>
+        
+            <terminal-cast url="03-entwicklung/npm.cast" poster="npt:2.0" style="height: 30em;"></terminal-cast>
+        </div>
+    </article>
+</section>
+
+<section data-title="Aufgabe: Wir erkunden Node.js" data-background-color="rgb(231, 221, 141)">
+    <article>
+        <div class="markdown">
+            Öffnen Sie den folgenden Link auf eine Online IDE zum Bearbeiten eines einfachen Node.js-Projekts.
+            Es öffnet sich eine die GitPod Online IDE, die im Grunde genommen einer Browser-Version von Visual
+            Studio Code entspricht mit dem Quellcode eines einfachen Online-Wörterbuchs. Zusätzlich steht Ihnen
+            hier eine cloud-gehostete Linux-Umgebung mit typischen Entwicklungswerkzeugen und vor allem auch
+            Node.js zur Verfügung.
+        
+            <a href="https://www.gitpod.io/#https://github.com/DennisSchulmeister/whb-web-mobidict" target="_blank" class="fw-bold">Online IDE: MobiDict Quellcode</a>
+        
+            ![Gitpod](03-entwicklung/gitpod-1.png){.img-thumbnail img-responsive}
+        </div>
+
+        <lsx-tab-pages>
+            <lsx-tab-page title="Anwendung starten" class="markdown">
+                Am unteren Bildschirmrand finden Sie das Terminal. Führen Sie darin folgende Kommandos aus:
+            
+                * `npm install` zum Installieren aller benötigten Bibliotheken
+                * `npm start` zum Starten der Anwendung
+            
+                Am unteren Bildschirmrand sollte nun eine Benachrichtigung erscheinen, dass die Serveranwendung
+                einen TCP-Port geöffnet hat und Sie fragen, wie Sie damit verfahren wollen. Klicken Sie hier
+                auf <b>„Open Preview”</b>. Dadurch sollte sich am rechten Bildschirmrand ein Vorschaufenster
+                mit der Benutzeroberfläche der Webanwendung öffnen. Dort finden Sie dann auch die öffentliche
+                URL, mit der Sie die Webanwendung in einem neuen Browser-Tab aufrufen können. Erkunden Sie die
+                Webanwendung ein wenig.
+            </lsx-tab-page>
+
+            <lsx-tab-page title="Fragen" class="markdown">
+                Nachdem Sie die Anwendung ausprobiert haben, beantworten Sie folgende Fragen:
+            
+                1. Woran erkennt man, dass es sich um ein Node.js-Projekt handelt?
+                1. Welche Abhängigkeiten besitzt die Anwendung und wo sind sie definiert?
+                1. Wo befindet sich der **serverseitige** JavaScript-Code der Anwendung?
+                1. Und wo befindet sich der **clientseitige** JavaScript-Code?
+                1. Wie wird sichergestellt, dass der Servercode nicht im Browser ausgeführt wird?
+            </lsx-tab-page>
+
+            <lsx-tab-page title="Quellcode anpassen">
+                Nehmen Sie anschließend eine kleine Änderung an der Datei `server.js` vor,
+                indem Sie z.B. die Konsolenausgabe ganz am Ende verändern. Sie sollten im
+                Terminal sehen, dass sich die Anwendung dank `nodemon` dadurch neustartet.
+                Mit <kbd>Strg</kbd>+<kbd>C</kbd> können Sie die Anwendung verlassen.
+            </lsx-tab-page>
+        </lsx-tab-pages>
+    </article>
+    <aside>
+        <p>
+            Auf den vorherigen Seiten haben wir die wichtigsten Eigenheiten von Node.js kennengelernt.
+            Letztlich muss man es aber einfach oft genug verwenden, um seine Funktionsweise zu verinnerlichen.
+            Diese Aufgaben bietet ein kleines Praxisbeispiel hierzu.
+        </p>
+        <img src="shared/github_atom.png" class="img-fluid d-block"/>
+        <p>
+            <small>
+                Bildnachweis:
+                <a href="https://atom.io/" target="_blank">Atom Webseite</a>
+            </small>
+        </p>
+    </aside>
+</section>            
+
+<!-- ============================== -->
+<!-- Programmierung der Serverseite -->
+<!-- ============================== -->
+<section data-use-template="teilkapitel" data-titel="Programmieren der Serverseite"></section>
+
+<section data-title="12-Faktor-Apps / Cloud Native Apps">
+    <article class="centered-content">
+        <div class="limited-width2">
+            <div class="markdown">
+                Eine elastische Skalierung setzt voraus, dass jederzeit weitere Instanzen eines Services gestartet
+                oder nicht mehr benötigte Instanzen gestoppt werden können. Um dies zu vereinfachen, haben die Macher
+                der Heroku-Cloud auf der Webseite [12factor.net](https://12factor.net){target=_blank} das 12-Faktor-Manifest
+                mit zwölf Regeln für **Cloud Native Apps** (auch **12-Faktor-Apps** genannt) veröffentlicht. Diese lassen
+                sich wie folgt zusammenfassen:
+            </div>
+
+            <lsx-tab-pages>
+                <lsx-tab-page title="Entwicklung">
+                    <div class="markdown">
+                        * Zentral verwalteter Quellcode
+                        * Abhängigkeiten explizit deklarieren
+                        * Getrennte Build-, Release- und Run-Phasen
+                        * Vergleichbare Entwicklungs- und Produktivumgebungen
+
+                        Microservices werden mit modernen Werkzeugen und modernen Programmierpraktiken entwickelt. Ihr Quellcode
+                        wird deshalb mit Werkzeugen wie Git versioniert, so dass jede Änderung daran nachvollziehbar ist. Werkzeuge
+                        wie `npm`, `pip` oder `maven` verwalten darüber hinaus die Abhängigkeiten zu externen Bibliotheken und sorgen
+                        für automatisierte Build- und Releaseprozesse.
+                        
+                        Zusätzlich finden Entwicklung und Test und vergleichbaren Bedingungen wie der spätere Produktiveinsatz statt,
+                        wofür die Produktivumgebung auf den Entwicklungs- und Testmaschinen so gut wie möglich nachgebildet wird.
+                    </div>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Konfiguration">
+                    <div class="markdown">
+                        * Nutzung fremder Dienste über das Netzwerk
+                        * Unterstützende Dienste sind Ressourcen
+                        * Konfiguration durch Umgebungsvariablen
+                        * Adminprozesse sind einmalige Vorgänge
+
+                        Microservices kommunizieren grundsätzlich über das Netzwerk bzw. das Internet mit anderen Microservices.
+                        Andere Schnittstellen sind nicht vorgesehen, um die Microservices auf getrennten virtuellen Maschinen und
+                        oft sogar getrennten physischen Maschinen betreiben zu können. Über die Konfiguration der Services, welche
+                        innerhalb der Cloudumgebung vorgenommen wird, werden jedem Microservice die Netzadressen der von ihm benötigten
+                        anderen Services mitgeteilt. Diese stehen dann zur Laufzeit als Umgebungsvariablen des Betriebssystems zur
+                        Verfügung, da es sich hierbei um eine universale, einfache Möglichkeit handelt.
+
+                        Falls administrative Aktionen wie die Reorganisation einer Datenbank oder das Löschen veralteter Daten
+                        notwendig sind, erfolgen diese durch einmalig aufgerufene, vom eigentlichen Microservice getrennt laufende
+                        Werkzeugprogramme.
+                    </div>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Ausführung">
+                    <div class="markdown">
+                        * Ausführung als einzelner Betriebssystemprozess
+                        * Parallelität durch weitere Betriebssystemprozesse
+                        * Robuster und schneller Start bzw. Stopp der Prozesse
+                        * Protokollierung durch zeitbezogene Ereignisse
+
+                        Microservices sind immer in sich geschlossen und bringen sämtliche Laufzeitumgebungen, Bibliotheken und
+                        Hilfsprogramme mit, um ausgeführt werden zu können. Sie können dadurch als einzelner Betriebssystemprozess
+                        leicht gestartet und gestoppt werden, beispielsweise indem sie in ein Container-Image verpackt werden.
+                        Start und Stopp müssen besonders schnell gehen, damit die Skalierung jederzeit elastisch angpasst werden
+                        kann.
+
+                        Für die Fehlersuche schreiben Microservices umfangreiche Protokollmeldungen in die Konsole (ihre Standardausgabe).
+                        Jede Meldung wird dabei mit einem eindeutigen Zeitstempel am Anfang versehen, so dass die Protokollmeldungen
+                        von der Cloud wie ein kontinuierlicher Datenstrom von zeitpunktbezogenen Ereignissen behandelt und archiviert
+                        werden können.
+                    </div>
+                </lsx-tab-page>
+            </lsx-tab-pages>
+
+            <!-- <img src="03-entwicklung/12factor.net.png" class="d-block dhbw-border limited-width m-auto"> -->
+        </div>
+    </article>
+</section>
+
+<section data-title="Vorbereitungen zur Entwicklung">
+    <article class="centered-content">
+        <div class="limited-width2">
+            <div class="markdown mb-5">
+                Für unsere Backend-Microservices benötigten wir **Node.js** als JavaScript-Laufzeitumgebung
+                sowie eine **Mongo-Datenbank**. Das Frontend nutzt ebenfalls Node.js, allerdings nur zum
+                Bauen der Quellcodes. Hinzu kommt **nginx** als einfacher HTTP Reverse Proxy, der als simples
+                API-Gateway dient.
+        
+                Mit **Docker** lassen sich alle benötigten Programme automatisch herunterladen und in einem
+                isolierten Linux-Betriebssystemcontainer ausführen. Hierfür muss lediglich mit **Docker Compose**
+                die Datei <span class="fn">docker-compose.dev.yml</span> ausgeführt werden. Alternativ kann
+                unter Linux und Mac das Startskript <span class="fn">start-docker-dev.sh</span> sowie unter
+                Windows das Skript <span class="fn">start-docker-dev.bat</span> ausgeführt werden.
+            </div>
+    
+            <div>
+                <div class="dropdown mb-3">
+                    <button
+                        id             = "terminal-docker1-dropdown"
+                        class          = "btn btn-outline-secondary dropdown-toggle"
+                        style          = "font-size: 0.9rem;"
+                        type           = "button"
+                        data-bs-toggle = "dropdown"
+                        aria-haspopup  = "true"
+                        aria-expanded  = "false"
+                    >
+                        Vereinfachtes Startskript
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <button
+                                class          = "dropdown-item"
+                                type           = "button"
+                                data-dropdown  = "#terminal-docker1-dropdown"
+                                data-container = "#terminal-docker1"
+                                data-show      = "#terminal-docker1-1"
+                                onclick        = "change_example(event)"
+                            >
+                                Vereinfachtes Startskript
+                            </button>
+                        </li>
+                        <li>
+                            <button
+                                class          = "dropdown-item"
+                                type           = "button"
+                                data-dropdown  = "#terminal-docker1-dropdown"
+                                data-container = "#terminal-docker1"
+                                data-show      = "#terminal-docker1-2"
+                                onclick        = "change_example(event)"
+                            >
+                                Docker Compose
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            
+                <div id="terminal-docker1">
+                    <terminal-cast id="terminal-docker1-1" url="03-entwicklung/docker1.cast" poster="npt:5.0" style="height: 30em;"></terminal-cast>
+                    <terminal-cast id="terminal-docker1-2" url="03-entwicklung/docker2.cast" poster="npt:8.5" style="height: 30em;" class="hidden"></terminal-cast>
+                </div>
+            </div>
+        </div>
+    </article>
+</section>
+
+<section data-title="Benötigte Dokumentationen">
+    <article>
+        <div class="markdown limited-width m-auto">
+            In Node.js implementierte serverseitige Webanwendungen und Webservices nutzen traditionell das
+            [Express Framework](https://expressjs.com/). Dieses baut auf den eingebauten HTTP-Funktionalitäten
+            von Node.js auf, um einen stand-alone Webserver zu implementieren. Dieser führt für jede HTTP-Anfrage
+            eine JavaScript-Funktion aus, um eine Antwort zu generieren. In der Vorlesung nutzen wir allerdings
+            das an Express angelehnte Framework [Restify](http://restify.com), da dieses in manchen Punkten besser
+            auf die Erstellung von REST-Webservices abgestimmt ist.
+    
+            Zu dessen Dokumentation kommt dann lediglich noch das Onlinehandbuch des MongoDB Node.js-Konnektors hinzu.
+    
+            * [Node.js Dokumentation](https://nodejs.org/en/docs/)
+            * [Restify Dokumentation](http://restify.com/docs/home/)
+            * [MongoDB Node.js-Konnektor](https://www.mongodb.com/docs/drivers/node/current/)
+        </div>
+    
+        <div class="d-flex align-items-stretch" style="gap: 1em;">
+            <img src="03-entwicklung/restify.png" class="d-block w-100 img-thumbnail"/>
+            <img src="03-entwicklung/mongodb.png" class="d-block w-100 img-thumbnail"/>
+        </div>
+    </article>
+</section>
+
+<section data-title="Inhalt des Quellcodeverzeichnises" id="section-codeverzeichnis">
+    <article class="centered-content">
+        <div class="limited-width">
+            <p>
+                Das Vorlageprojekt teilt sich in drei Hauptbereiche auf: <b>Frontend</b>, <b>Backend</b>
+                und <b>Gateway-Server</b>. Die Verzeichnisse und Dateien haben dabei folgende Bedeutung:
+            </p>
+        
+            <table class="dhbw-filetable mb-3"></table>
+        
+            <p>
+                Bei Klick auf ein Verzeichnis wird unten sein Inhalt mit einer kurzen Erklärung dargestellt.
+                Die für das Projekt anzupassenden Verzeichnisse und Dateien sind in der rechten Spalte
+                hervorgehoben.
+            </p>
+        </div>
+
+        <script>
+            const DIRECTORY = 1, FILE = 2;
+        
+            let files = {
+                name: "Hauptverzeichnis",
+                type: DIRECTORY,
+                tree: [{
+                    name: "Backend",
+                    type: DIRECTORY,
+                    desc: "Quellcode des Backend-Services",
+                    edit: true,
+                    tree: [{
+                        name: "node_modules",
+                        type: DIRECTORY,
+                        desc: "Installationsverzeichnis für Node.js-Module",
+                        edit: false,
+                        tree: [],
+                    },{
+                        name: "src",
+                        type: DIRECTORY,
+                        desc: "JavaScript-Quellcodes des Servers",
+                        edit: true,
+                        tree: [{
+                            name: "api",
+                            type: DIRECTORY,
+                            desc: "",
+                            edit: true,
+                            tree: [{
+                                name: "openapi.yaml",
+                                type: FILE,
+                                desc: "Formale Spezifikation des Webservices im OpenAPI-Format",
+                                edit: true,
+                            }],
+                        },{
+                            name: "controller",
+                            type: DIRECTORY,
+                            desc: "Klassen zur technischen Behandlung der HTTP-Anfragen",
+                            edit: true,
+                            tree: [{
+                                name: "root.controller.js",
+                                type: FILE,
+                                desc: "HTTP-Handlerklasse für die Wurzeladresse des Webservices",
+                                edit: true,
+                            }],
+                        },{
+                            name: "service",
+                            type: DIRECTORY,
+                            desc: "Klassen für die fachliche, nicht-technische Anwendungslogik",
+                            edit: true,
+                            tree: [{
+                                name: ".gitkeep",
+                                type: FILE,
+                                desc: "Dummy-Datei, damit Git das zunächst noch leere Verzeichnis nicht löscht",
+                                edit: false,
+                            }],
+                        },{
+                            name: "database.js",
+                            type: FILE,
+                            desc: "Singleton-Klasse zum Zugriff auf die Mongo-Datenbank",
+                            edit: true,
+                        },{
+                            name: "index.js",
+                            type: FILE,
+                            desc: "Hauptdatei zum Starten des Backend-Services",
+                            edit: true,
+                        },{
+                            name: "utils.js",
+                            type: FILE,
+                            desc: "Sonstige Hilfsfunktionen",
+                            edit: false,
+                        }],
+                    },{
+                        name: "Dockerfile",
+                        type: FILE,
+                        desc: "Docker File zum Bauen eines produktiven Docker Images",
+                        edit: false,
+                    },{
+                        name: "package.json",
+                        type: FILE,
+                        desc: "Beschreibung des Node.js-Modules und seiner Abhängigkeiten",
+                        edit: false,
+                    },{
+                        name: "package-lock.json",
+                        type: FILE,
+                        desc: "Von Node.js erzeugte Datei mit der exakten Version aller Abhängigkeiten",
+                        edit: false,
+                    },{
+                        name: "README.md",
+                        type: FILE,
+                        desc: "Dokumentation und wichtige Hinweise zum Backend",
+                        edit: true,
+                    }],
+                },{
+                    name: "Frontend",
+                    type: DIRECTORY,
+                    desc: "Quellcode der SPA-Benutzeroberfläche",
+                    edit: true,
+                    tree: [{
+                        name: "build",
+                        type: DIRECTORY,
+                        desc: "Gebauter Quellcode für das Deployment auf einem Webserver",
+                        edit: false,
+                        tree: [],
+                    },{
+                        name: "node_modules",
+                        type: DIRECTORY,
+                        desc: "Installationsverzeichnis für Node.js-Module",
+                        edit: false,
+                        tree: [],
+                    },{
+                        name: "scripts",
+                        type: DIRECTORY,
+                        desc: "Hilfsskripte zum Bauen der Webanwendung",
+                        edit: false,
+                        tree: [{
+                            name: "build-static.sh",
+                            type: FILE,
+                            desc: "Kopiert die statischen Webdateien in das Build-Verzeichnis",
+                            edit: false,
+                        },{
+                            name: "clean.sh",
+                            type: FILE,
+                            desc: "Löscht alle Inhalte des Build-Verzeichnisses",
+                            edit: false,
+                        },{
+                            name: "esbuild-bundle.js",
+                            type: FILE,
+                            desc: "Baut die JavaScript-Dateien und übernimmt sie ins Build-Verzeichnis",
+                            edit: false,
+                        },{
+                            name: "esbuild-serve.js",
+                            type: FILE,
+                            desc: "Startet einen lokalen Entwicklungswebserver zum Testen der App",
+                            edit: false,
+                        }],
+                    },{
+                        name: "src",
+                        type: DIRECTORY,
+                        desc: "JavaScript-Quellcodes des Backends (Input für den Bundler)",
+                        edit: true,
+                        tree: [{
+                            name: "img",
+                            type: DIRECTORY,
+                            desc: "In den Stylesheets verwendete Bilder",
+                            edit: false,
+                            tree: [{
+                                name: "background.png",
+                                type: FILE,
+                                desc: "Hintergrundbild der Seite",
+                                edit: false,
+                            }]
+                        },{
+                            name: "page-list",
+                            type: DIRECTORY,
+                            desc: "Beispielhafte Unterseite zur Darstellung einer Übersichtsliste",
+                            edit: true,
+                            tree: [{
+                                name: "page-list.html",
+                                type: FILE,
+                                desc: "HTML/CSS-Template der Unterseite",
+                                edit: true,
+                            },{
+                                name: "page-list.js",
+                                type: FILE,
+                                desc: "JavaScript-Klasse mit der Anwendungslogik der Seite",
+                                edit: true,
+                            }]
+                        },{
+                            name: "app.css",
+                            type: FILE,
+                            desc: "Globales Stylesheet der Webanwendung",
+                            edit: false,
+                        },{
+                            name: "app.js",
+                            type: FILE,
+                            desc: "Hauptklasse, in der die SPA-Routen definiert und alle anderen Klassen instantiiert werden",
+                            edit: true,
+                        },{
+                            name: "backend.js",
+                            type: FILE,
+                            desc: "Hilfsklasse zur Vereinfachung der Backend-Webserviceaufrufe",
+                            edit: false,
+                        },{
+                            name: "page.js",
+                            type: FILE,
+                            desc: "Basisklasse für Unterseiten der Single Page App",
+                            edit: false,
+                        },{
+                            name: "router.js",
+                            type: FILE,
+                            desc: "Single Page Router zur Navigation innerhalb der App",
+                            edit: false,
+                        }],
+                    },{
+                        name: "static",
+                        type: DIRECTORY,
+                        desc: "Statische Webdateien des Backends (werden unverändert kopiert)",
+                        edit: true,
+                        tree: [{
+                            name: "api.url",
+                            type: FILE,
+                            desc: "Von Docker überschriebene Datei mit der URL das Backend-Services",
+                            edit: false,
+                        },{
+                            name: "favicon.svg",
+                            type: FILE,
+                            desc: "Im Kopfbereich des Browsers angezeigtes Icon der Webanwendung",
+                            edit: false,
+                        },{
+                            name: "index.html",
+                            type: FILE,
+                            desc: "HTML-Grundgerüst der Single Page App (enthält u.a. das Navigationsmenü)",
+                            edit: true,
+                        }],
+                    },{
+                        name: "Dockerfile",
+                        type: FILE,
+                        desc: "Docker File zum Bauen eines produktiven Docker Images",
+                        edit: false,
+                    },{
+                        name: "package.json",
+                        type: FILE,
+                        desc: "Beschreibung des Node.js-Modules und seiner Abhängigkeiten",
+                        edit: false,
+                    },{
+                        name: "package-lock.json",
+                        type: FILE,
+                        desc: "Von Node.js erzeugte Datei mit der exakten Version aller Abhängigkeiten",
+                        edit: false,
+                    },{
+                        name: "README.md",
+                        type: FILE,
+                        desc: "Dokumentation und wichtige Hinweise zum Frontend",
+                        edit: true,
+                    },{
+                        name: "save-api-url.js",
+                        type: FILE,
+                        desc: "Im Docker Container ausgeführtes Skript zum Übernehmen der API-URL in die Datei <code>static/api.url</code>",
+                        edit: false,
+                    }],
+                },{
+                    name: "Gateway",
+                    type: DIRECTORY,
+                    desc: "Konfiguration des Gateway-Servers",
+                    edit: false,
+                    tree: [{
+                        name: "default.conf",
+                        type: FILE,
+                        desc: "Konfiguration für den nginx-Webserver",
+                        edit: false,
+                    },{
+                        name: "Dockerfile",
+                        type: FILE,
+                        desc: "Docker File zum Bauen eines produktiven Docker Images",
+                        edit: false,
+                    },{
+                        name: "README.md",
+                        type: FILE,
+                        desc: "Dokumentation und wichtige Hinweise zum Gateway-Server",
+                        edit: false,
+                    }],
+                },{
+                    name: "README.md",
+                    type: FILE,
+                    desc: "Dokumentation des Projekts und wichtige Hinweise",
+                    edit: true,
+                },{
+                    name: "docker-compose.dev.yml",
+                    type: FILE,
+                    desc: "Docker Compose File (Entwicklungsversion)",
+                    edit: false,
+                },{
+                    name: "docker-compose.prod.yml",
+                    type: FILE,
+                    desc: "Docker Compose File (Produktiversion)",
+                    edit: false,
+                },{
+                    name: "start-docker-dev.sh",
+                    type: FILE,
+                    desc: "Linux/Mac-Skript zum Starten der Docker-Container",
+                    edit: false,
+                },{
+                    name: "start-docker-dev.bat",
+                        type: FILE,
+                        desc: "Windows.Skript zum Starten der Docker-Container",
+                        edit: false,
+                },{
+                    name: "stop-docker-dev.sh",
+                    type: FILE,
+                    desc: "Linux/Mac-Skript zum Stoppen der Docker-Container",
+                    edit: false,
+                },{
+                    name: "stop-docker-dev.bat",
+                        type: FILE,
+                        desc: "Windows.Skript zum Stoppen der Docker-Container",
+                        edit: false,
+                }],
+            };
+        
+            window.render_filetable = function (table, tree, breadcrumb) {
+                // Alte Inhalte entfernen
+                table.innerHTML = "";
+        
+                // Kopfzeile mit Breadcrumb generieren
+                if (breadcrumb) {
+                    let thead = document.createElement("thead");
+                    table.appendChild(thead);
+        
+                    let tr = document.createElement("tr");
+                    thead.appendChild(tr);
+        
+                    let th = document.createElement("th");
+                    tr.appendChild(th);
+                    th.colSpan = 4;
+        
+                    for (let i in breadcrumb) {
+                        let breadcrumbEntry = breadcrumb[i];
+                        let el = null;
+        
+                        if (i == (breadcrumb.length - 1)) {
+                            el = document.createElement("b");
+                        } else {
+                            el = document.createElement("a");
+                            el.href = "";
+        
+                            el.addEventListener("click", event => {
+                                // Ersatz für breadcrumb.slice(0, i+1), das nicht funktioniert?!
+                                let newBreadcrumb = [... breadcrumb];
+        
+                                for (let j = breadcrumb.length - 1; j > i; j--) {
+                                    newBreadcrumb.pop();
+                                }
+        
+                                render_filetable(table, breadcrumbEntry.tree, newBreadcrumb);
+                                event.preventDefault();
+                            });
+                        }
+        
+                        el.textContent = breadcrumbEntry.name;
+                        th.appendChild(el);
+                        th.appendChild(document.createTextNode(" / "));
+                    }
+                }
+        
+                // Einträge der Verzeichnisinhalte erzeugen
+                for (let node of tree) {
+                    let tr = document.createElement("tr");
+                    table.appendChild(tr);
+        
+                    let tdIcon = document.createElement("td");
+                    tr.appendChild(tdIcon);
+                    tdIcon.textContent = node.type === FILE ? "📝" : "📂";
+        
+                    let tdName = document.createElement("td");
+                    tr.appendChild(tdName);
+        
+                    if (node.type === FILE || !node.tree) {
+                        tdName.textContent = node.name;
+                    } else {
+                        let link = document.createElement("a");
+                        tdName.appendChild(link);
+                        link.href = "";
+                        link.textContent = node.name;
+        
+                        link.addEventListener("click", event => {
+                            render_filetable(table, node.tree, [...breadcrumb, node]);
+                            event.preventDefault();
+                        });
+                    }
+        
+                    let tdDescription = document.createElement("td");
+                    tr.appendChild(tdDescription);
+                    tdDescription.innerHTML = node.desc;
+        
+                    let tdEdit = document.createElement("td");
+                    tr.appendChild(tdEdit);
+                    tdEdit.classList.add("red");
+                    tdEdit.textContent = node.edit ? "(anpassen)" : "";
+                }
+            };
+        
+            
+            window.addEventListener("ls-slide-changed", () => {
+                window.setTimeout(function() {                    
+                    for (let table of document.querySelectorAll(".dhbw-filetable")) {
+                        render_filetable(table, files.tree, [files]);
+                    }
+                }, 1000);
+            });
+        </script>
+    </article>
+</section>
+
+<section data-title="Grundgerüst einer Restify-Anwendung">
+    <article class="centered-content">
+        <div class="limited-width">
+            <div class="markdown">
+                Zentraler Einsteigspunkt ist die Datei <span class="fn">index.js</span>, in welcher der
+                eingebaute **Webserver konfiguriert und gestartet** wird. Dies erfolgt typischerweise durch
+                Registrieren von **Rückruffunktionen**, die beispielsweise bei Eintreffen einer HTTP-Anfrage
+                aufgerufen werden. Der Quellcode hierfür sieht bei den meisten Node.js-Webframeworks
+                sehr ähnlich aus.
+    
+                Die folgenden Beispiele zeigen Schritt für Schritt, wie sich die Startdatei für unseren auf
+                dem Restify-Framework aufbauende Backendserver zusammensetzt.
+            </div>
+            
+            <lsx-accordion>
+                <lsx-accordion-page title="Ein Server, der nichts tut">
+                    <lsx-tab-pages>
+                        <lsx-tab-page title="Quellcode">
+                            <source-code language="javascript">
+                                import restify from "restify";
+                                const server = restify.createServer();
+                                server.listen(3000);
+                            </source-code>
+                        </lsx-tab-page>
+                        <lsx-tab-page title="Erklärung">
+                            <div class="markdown">
+                                Die einfachste Version einer Restify-Serveranwendung besteht aus
+                                gerade mal drei Zeilen. Diese importieren das Hauptobjekt des
+                                Frameworks, erzeugen eine neue Server-Instanz und starten den
+                                Server. Jedoch macht dieser nichts sinnvolles, da hierfür mindestens
+                                noch HTTP-Handler-Funktionen registriert werden müssen.
+                            </div>
+                        </lsx-tab-page>
+                    </lsx-tab-pages>
+                </lsx-accordion-page>
+    
+                <lsx-accordion-page title="Grundgerüst mit Handler-Funktionen">
+                    <lsx-tab-pages>
+                        <lsx-tab-page title="Quellcode">
+                            <source-code language="javascript">
+                                // Hauptobjekt des Frameworks importieren
+                                import restify from "restify";
+    
+                                // Server-Instanz erzeugen
+                                const server = restify.createServer();
+    
+                                // HTTP-Handler registrieren
+                                server.get("/address", function(req, res, next) {
+                                    res.send(200, "Hallo, Welt!");
+                                    next();
+                                });
+    
+                                server.post("/address", function(req, res, next)) {
+                                    ...
+                                }
+    
+                                server.get("/address/:id", function(req, res, next)) {
+                                    ...
+                                }
+    
+                                // Server starten
+                                server.listen(3000);
+                            </source-code>
+                        </lsx-tab-page>
+                        <lsx-tab-page title="Erklärung">
+                            <div class="markdown">
+                                Das <code>server</code>-Objekt besitzt für jedes HTTP-Verb eine Methode, mit der
+                                Callback-Funktionen zur Verarbeitung eintreffender HTTP-Anfrage registriert
+                                werden können. Sie erwarten hierfür den URL-Pfad sowie die aufzurufende
+                                Funktion als Parameter. Das Framework prüft daraufhin bei jeder Anfrage das
+                                Verb sowie die URL, um die damit verknüpfte Handlerfunktion zu ermitteln.
+    
+                                Die Handler (die im Falle mehrerer zutreffender Handler immer in der Reihenfolge
+                                ihrer Registrierung durchlaufen werden), bekommen hierfür drei Parameter übergeben:
+    
+                                1. <code>req</code>: Ein Objekt mit den Daten der HTTP-Anfrage
+                                2. <code>res</code>: Ein Objekt zur Generierung der HTTP-Antwort
+                                3. <code>next</code>: Funktion, zur Bestätigung der Verarbeitung
+    
+                                Eine besondere Bedeutung kommt dabei dem Parameter <code>next</code> zu. Es handelt
+                                sich um eine als Objekt übergebene Methode, die explizit aufgerufen werden muss,
+                                um die Kontrolle an das Framework zurückzugeben und somit den Aufruf weiterer
+                                Handler-Funktionen und das Zurückschicken der Antwort an den Client zu ermöglichen.
+                            </div>
+                        </lsx-tab-page>
+                    </lsx-tab-pages>
+                </lsx-accordion-page>
+    
+                <lsx-accordion-page title="Abweichende Konfigurationswerte zulassen">
+                    <lsx-tab-pages>
+                        <lsx-tab-page title="Quellcode">
+                            <source-code language="javascript">
+                                import restify from "restify";
+    
+                                // Auslesen der Umgebungsvariablen zur Konfiguration des Servers
+                                const config = {
+                                    port:    parseInt(process.env.PORT) || 3000,
+                                    host:    process.env.HOST           || "localhost",
+                                };
+    
+                                // Erzeugen der Server-Instanz
+                                const server = restify.createServer();
+    
+                                // Registrierung der HTTP-Handler
+                                server.get("/", function(req, res, next) {
+                                    res.send(200, "Hallo, Welt!");
+                                    next();
+                                });
+    
+                                ...
+    
+                                // Server starten
+                                server.listen(config.port, config.host, function() {
+                                    console.log("Server wurde erfolgreich gestartet.");
+                                    console.log("Ausführung mit folgender Konfiguration:");
+                                    console.log();
+                                    console.log(config);
+                                    console.log();
+                                });
+                            </source-code>
+                        </lsx-tab-page>
+                        <lsx-tab-page title="Erklärung">
+                            <div class="markdown">
+                                In dieser Version wird die Portnummer des Servers nicht hart-codiert
+                                sondern am Anfang des Programms anhand von Umgebungsvariablen zur
+                                Laufzeit ermittelt. Für die lokale Entwicklung werden hier dieselben
+                                Standardwerte wie zuvor vorgegeben. In der Produktion können sie durch
+                                Setzen der Umgebungsvariablen im Betriebssystems jedoch leicht überschrieben
+                                werden.
+    
+                                Außerden wird hier eine weitere Rückruffunktion aufgerufen, sobald der
+                                Server erfolgreich gestartet wurde. Sie gibt eine Statusmeldung auf der
+                                Konsole sowie die verwendeten Konfigurationswerte auf der Konsole aus.
+                            </div>
+                        </lsx-tab-page>
+                    </lsx-tab-pages>
+                </lsx-accordion-page>
+    
+                <lsx-accordion-page title="Registrierung üblicher Middleware-Funktionen">
+                    <lsx-tab-pages>
+                        <lsx-tab-page title="Quellcode">
+                            <source-code language="javascript">
+                                import restify from "restify";
+    
+                                // Auslesen der Umgebungsvariablen zur Konfiguration des Servers
+                                const config = {
+                                    port:    parseInt(process.env.PORT) || 3000,
+                                    host:    process.env.HOST           || "localhost",
+                                };
+    
+                                // Erzeugen der Server-Instanz
+                                const server = restify.createServer();
+    
+                                // Registrierung eingebauter Middleware-Funktionen für gägngie HTTP-Praktiken
+                                server.use(restify.plugins.acceptParser(server.acceptable));
+                                server.use(restify.plugins.authorizationParser());
+                                server.use(restify.plugins.dateParser());
+                                server.use(restify.plugins.queryParser());
+                                server.use(restify.plugins.jsonp());
+                                server.use(restify.plugins.gzipResponse());
+                                server.use(restify.plugins.bodyParser());
+                                server.use(restify.plugins.throttle({burst: 100, rate: 50, ip: true}));
+                                server.use(restify.plugins.conditionalRequest());
+    
+                                // Registrierung der HTTP-Handler
+                                ...
+    
+                                // Server starten
+                                server.listen(config.port, config.host, function() {
+                                    console.log("Server wurde erfolgreich gestartet.");
+                                    ...
+                                });
+                            </source-code>
+                        </lsx-tab-page>
+                        <lsx-tab-page title="Erklärung">
+                            <div class="markdown">
+                                Ein Vorteil von Restify ist, dass jeder Aspekt konfiguriert werden kann. Das Framework macht nichts,
+                                was nicht explizit konfiguriert wurde. Da bestimmte Funktionen wie das Parsen des Request Body oder
+                                die Komprimierung der HTTP-Nachrichten aber sehr oft benötigt werden, können diese durch vordefinierte
+                                „Middleware”-Funktionen nachgerüstet werden. (Middleware bezeichnet hier eine oder mehrere Funktionen,
+                                die vor der eigentlichen Handler-Funktion einer URL-Route durchlaufen werden).
+    
+                                Die Registrierung einer Middleware erfolgt mit der  Methode <src-code language="javascript">server.use()</src-code>.
+                                Folgende Features werden dadurch nachgerüstet:
+    
+                                1. <code>acceptParser</code>: Auswertung des <code>Accept</code> Header Fields, um andere
+                                Datenformate außer JSON zu ermöglichen.
+    
+                                1. <code>authorizationParser</code>: Auswertung des <code>Authorization</code> Header Fields,
+                                um personalisierte Anmeldedaten empfangen zu können.
+    
+                                1. <code>dateParser</code>: Auswertung des <code>Date</code> Header Fields und Prüfung,
+                                dass dieses nicht zu sehr von der Uhrzeit des Servers abweicht.
+    
+                                1. <code>queryParser</code>: Auswertung von URL-Parametern, die als Teil der URL an den
+                                Server geschickt werden.
+    
+                                1. <code>jsonp</code>: Unterstützung für den alten JSONP-Standard zum Abruf von Daten.
+    
+                                1. <code>gzipResponse</code>: Komprimierung der Antwort vor ihrem Versand, sofern
+                                dies vom Client unterstützt wird.
+    
+                                1. <code>bodyParser</code>: Parsen verschiedener Datenformate, die als Teil der
+                                HTTP-Anfrage empfangen werden können.
+    
+                                1. <code>throttle</code>: Maximale Anzahl von Verbindungen je IP begrenzen, um somit
+                                der Verwendung des Mail-Servers zum Versand von Span entgegenzuwirken.
+    
+                                1. <code>conditionalRequest</code>: Auswertung des <code>ETag</code> Header Fields,
+                                zur Vermeidung überflüssiger Abrufe unveränderter Daten.
+                            </div>
+                        </lsx-tab-page>
+                    </lsx-tab-pages>
+                </lsx-accordion-page>
+    
+                <lsx-accordion-page title="Definition nützlicher Default-Handler">
+                    <lsx-tab-pages>
+                        <lsx-tab-page title="Quellcode">
+                            <source-code language="javascript">
+                                "use strict"
+    
+                                import restify from "restify";
+    
+                                // Auslesen der Umgebungsvariablen zur Konfiguration des Servers
+                                ...
+                                // Erzeugen der Server-Instanz
+                                const server = restify.createServer();
+    
+                                // Registrierung eingebauter Middleware-Funktionen für gägngie HTTP-Praktiken
+                                server.use(restify.plugins.acceptParser(server.acceptable));
+                                ...
+    
+                                // Protokollzeile für jede HTTP-Anfrage auf der Konsole ausgeben
+                                server.pre((req, res, next) => {
+                                    console.log(new Date(), req.method, req.url, `HTTP ${req.httpVersion}`);
+                                    return next();
+                                });
+    
+                                // Exceptions ebenfalls auf der Konsole protokollieren, um die betroffene
+                                // Quellcodestelle identifizieren zu können.
+                                server.on("restifyError", function(req, res, err, callback) {
+                                    console.error(`${err.stack}\n`);
+                                    return callback();
+                                });
+    
+                                // CORS-Header setzen, um Zugriffe von anderen URLs außer der Backend-URL zuzulassen.
+                                // Außerdem OPTIONS-Anfragen (sog. CORS-Preflight) immer mit Status 200 beantworten,
+                                // damit die Browser ändernde Aufrufe tatsächlich durchführen.
+                                server.use((req, res, next) => {
+                                    res.header("Access-Control-Allow-Origin", req.header("Origin"));
+                                    res.header("Access-Control-Allow-Methods", req.header("Access-Control-Request-Method"));
+                                    res.header("Access-Control-Allow-Headers", req.header("Access-Control-Request-Headers"));
+                                    res.header("Access-Control-Allow-Credentials", "true");
+                                    res.header("Vary", "Origin");
+                                    return next();
+                                });
+    
+                                server.opts("*", (req, res, next) => {
+                                    res.status(200);
+                                    res.send({});
+                                    next();
+                                });
+    
+                                // HTTP-Controller registrieren
+                                ...
+    
+                                // Server tatsächlich starten
+                                server.listen(config.port, config.host, function() {
+                                    console.log("Server wurde erfolgreich gestartet.");
+                                    ...
+                                });
+                            </source-code>
+                        </lsx-tab-page>
+                        <lsx-tab-page title="Erklärung">
+                            <div class="markdown">
+                                In dieser Variante werden die speziell in Restify enthaltenen Methoden
+                                <src-code language="javascript">server.pre()</src-code> und
+                                <src-code language="javascript">server.on()</src-code> verwendet,
+                                um für jede HTTP-Anfrage eine Protokollzeile auf der Konsole auszugeben
+                                bzw. nicht abgefangene Exceptions zu protokollieren.
+    
+                                Darüber hinaus werden zwei Handler-Funktionen zur Umgehung typischer
+                                CORS-Restriktionen im Web registriert
+                                (vgl. <a href="https://en.wikipedia.org/wiki/Cross-origin_resource_sharing" target="_blank">Wikipedia</a>).
+                            </div>
+                        </lsx-tab-page>
+                    </lsx-tab-pages>
+                </lsx-accordion-page>
+            </lsx-accordion>
+        </div>
+        
+        <div class="limited-width2">
+            <terminal-cast url="03-entwicklung/server-index.cast" poster="npt:3.0" rows="58" class="mt-3" style="height: 50em;"></terminal-cast>
+        </div>
+    </article>
+</section>
+
+<section data-title="Integration der OpenAPI-Spezifikation">
+    <article>
+        <div class="limited-width m-auto mb-3">
+            <div class="markdown">
+                Da die Generierung von Serveranwendungen mit OpenAPI noch in den Kinderschuhen steckt,
+                bzw. oft eher unzufriedenstellenden Quellcode liefert, wird die OpenAPI-Spezifikation
+                im Vorlageprojekt hauptsächlich genutzt, um die **HTTP-Anfragen und Antworten zu validieren**.
+                Die URL-Routen und Callback-Funktionen des Webservices müssen daher trotz Verwendung der
+                OpenAPI-Beschreibung komplett selbst entwickelt werden. Anfragen oder Antworten, die nicht
+                der Spezifikation entsprechen, werdem vom Server jedoch abgelehnt.
+    
+                Die OpenAPI-Spezifikation kann darüber hinaus vom Server abgerufen werden und der Server
+                implementiert eine einfache Form des **HATEOAS-Prinzips**, um seine Struktur zu dokumentieren.
+                Hierfür können die Clients unter der Wurzeladresse des Webservices sowohl die OpenAPI-Spezifikation
+                hertunerladen als auch eine Auflistung aller „Collections” mitsamt der erlaubten URLs und HTTP-Verben
+                abrufen. Jede Collection und jede Ressource beinhaltet darüber hinaus ebenfalls relevante **Verlinkungen**
+                auf andere Teile des Webservices.
+            </div>
+    
+            <lsx-accordion>
+                <lsx-accordion-page title="Validierung der HTTP-Anfragen und Antworten">
+                    <lsx-tab-pages>
+                        <lsx-tab-page title="Quellcode">
+                            <source-code language="javascript">
+                                import restify from "restify";
+                                import OpenApiEnforcer from "openapi-enforcer";
+                                import OpenApiEnforcerMiddleware from "@dschulmeis/restify-openapi-enforcer-middleware";
+    
+                                // Verzeichnisnamen der Quellcodedatei ermitteln
+                                import path from "path";
+                                import { fileURLToPath } from "url";
+                                const __dirname = path.dirname(fileURLToPath(import.meta.url));
+    
+                                // Auslesen der Umgebungsvariablen zur Konfiguration des Servers
+                                ...
+                                // Erzeugen der Server-Instanz
+                                ...
+                                // Protokollzeile für jede HTTP-Anfrage auf der Konsole ausgeben
+                                ...
+                                // Exceptions ebenfalls auf der Konsole protokollieren
+                                ...
+                                // CORS-Header setzen
+                                ...
+    
+                                // Anfragen und Antworten gegen die OpenAPI-Spezifikation prüfen und dabei
+                                // fehlerhafte Anfragen oder Antworten mit einer Exception ablehnen.
+                                const openApiFile = path.relative("", path.join(__dirname, "api", "openapi.yaml"));
+                                const openApiValidation = await OpenApiEnforcer(openApiFile, {fullResult: true});
+    
+                                const openApiEnforcer = await OpenApiEnforcer(openApiFile, {
+                                    hideWarnings: true,
+                                    componentOptions: {
+                                        production: process.env.NODE_ENV === "production"
+                                    },
+                                });
+    
+                                server.use(OpenApiEnforcerMiddleware(openApiEnforcer));
+    
+                                // HTTP-Controller registrieren
+                                ...
+    
+                                // Server tatsächlich starten
+                                server.listen(config.port, config.host, function() {
+                                    console.log("Server wurde erfolgreich gestartet.");
+                                    ...
+                                    console.log(`OpenAPI-Spezifikation: ${openApiFile}`)
+    
+                                    if (openApiValidation.error) {
+                                        console.error(`${openApiValidation.error}\n`);
+                                    }
+    
+                                    if (openApiValidation.warning) {
+                                        console.warn(`${openApiValidation.warning}\n`);
+                                    }
+                                });
+                            </source-code>
+                        </lsx-tab-page>
+    
+                        <lsx-tab-page title="Erklärung">
+                            <div class="markdown">
+                                Die Validierung der HTTP-Anfragen und Antworten erfolgt mit dem Node.js-Modul
+                                <span class="fn">openapi-enforcer</span>, das mit <span class="cmd">npm</span>
+                                als Abhängigkeit zum Vorlageprojekt installiert wird. Denn dieses kann nahezu
+                                alle Inhalte einer OpenAPI-Spezifikation auf ihre Einhaltung prüfen, wofür
+                                lediglich eine kleine, eigene Middleware namens
+                                <span class="fn">@dschulmeis/openapi-enforcer-middleware</span> geschrieben
+                                werden musste. Die Middleware fängt alle Anfragen und Antworten ab, wandelt
+                                sie in das von <span class="fn">openapi-enforcer</span> erwartete Format um
+                                und wirft eine Exception, wenn eine Abweichung erkannt wurde.
+    
+                                Hierfür muss der Inhalt der OpenAPI-Datei beim Start des Servers eingelesen
+                                und an das Node.js-Modul übergeben werden. Da dabei auch die OpenAPI-Spezifikation
+                                selbst überprüft wird, werden die dabei gefundenen Fehler und Warnungen zur Kontrolle
+                                nach dem Start des Servers auf der Konsole ausgegeben.
+                            </div>
+                        </lsx-tab-page>
+                    </lsx-tab-pages>
+                </lsx-accordion-page>
+    
+                <lsx-accordion-page title="Aufruf der Klasse RootController">
+                    <lsx-tab-pages>
+                        <lsx-tab-page title="Quellcode">
+                            <source-code language="javascript">
+                                import restify from "restify";
+    
+                                // OpenAPI-spezifische Importe
+                                ...
+                                // Verzeichnisnamen der Quellcodedatei ermitteln
+                                ...
+                                // Sonstige Klassen importieren
+                                import RootController from "./controller/root.controller.js";
+    
+                                // Auslesen der Umgebungsvariablen zur Konfiguration des Servers
+                                ...
+                                // Erzeugen der Server-Instanz
+                                const server = restify.createServer();
+    
+                                // Protokollzeile für jede HTTP-Anfrage auf der Konsole ausgeben
+                                ...
+                                // Exceptions ebenfalls auf der Konsole protokollieren
+                                ...
+                                // CORS-Header setzen
+                                ...
+                                // Anfragen und Antworten gegen die OpenAPI-Spezifikation prüfen
+                                ...
+    
+                                // HTTP-Controller registrieren
+                                new RootController(server, "/", openApiFile);
+    
+                                // Server tatsächlich starten
+                                server.listen(config.port, config.host, function() {
+                                    console.log("Server wurde erfolgreich gestartet.");
+                                    ...
+                                });
+                            </source-code>
+                        </lsx-tab-page>
+    
+                        <lsx-tab-page title="Erklärung">
+                            <div class="markdown">
+                                Zur Umsetzung des HATEOAS-Prinzips liefert der Webservice unter seiner Wurzeladresse
+                                eine Liste aller angebotenen Collections sowie der dazu passenden HTTP-Anfragen.
+                                Zusätzlich kann der Inhalt der OpenAPI-Beschreibung heruntergeladen werden. Diese
+                                Funktionen wurde in eine neue Klasse namens <span class="fn">RootController</span> ausgelagert,
+                                damit das Hauptprogramm nicht noch mehr anwächst. Das Wort <span class="fn">Controller</span>
+                                soll dabei andeuten, dass sich die Klasse um die Bearbeitung von HTTP-Anfragen kümmert.
+                            </div>
+                        </lsx-tab-page>
+                    </lsx-tab-pages>
+                </lsx-accordion-page>
+    
+                <lsx-accordion-page title="Inhalt der Klasse RootController">
+                    <lsx-tab-pages>
+                        <lsx-tab-page title="Quellcode">
+                            <source-code language="javascript">
+                                "use strict"
+    
+                                import {wrapHandler} from "shared/utils.js";
+                                import path from "path";
+                                import { readFile } from "fs/promises";
+    
+                                // Konstruktor
+                                export default class RootController {
+                                    constructor(server, prefix, openApiFile) {
+                                        this._openApiFile = openApiFile;
+    
+                                        server.get(prefix, wrapHandler(this, this.index));
+                                        server.get(prefix + "/openapi.yaml", wrapHandler(this, this.openApi));
+                                    }
+    
+                                    // GET /: Abruf einer HATEOAS-Übersicht aller Collections
+                                    async index(req, res, next) {
+                                        res.sendResult([
+                                            {
+                                                _name: "address",
+                                                query: {url: "/address", method: "GET", query_params: ["search", "first_name", "last_name", "phone", "email"]},
+                                                create: {url: "/address", method: "POST"},
+                                            }
+                                        ]);
+    
+                                        next();
+                                    }
+    
+                                    // OpenAPI-Beschreibung des Webservices zurückliefern
+                                    async openApi(req, res, next) {
+                                        if (req.query.openapi !== undefined) {
+                                            let filecontent = await readFile(this._openApiFile);
+    
+                                            res.status(200);
+                                            res.header("content-type", "application/openapi+yaml");
+                                            res.sendRaw(filecontent);
+                                        } else {
+                                            res.send();
+                                        }
+    
+                                        next();
+                                    }
+                                }
+                            </source-code>
+                        </lsx-tab-page>
+    
+                        <lsx-tab-page title="Erklärung">
+                            <div class="markdown">
+                                Viele Webframeworks bieten die Möglichkeit, zusammengehörige Handler-Funktionen in einer
+                                Klasse zu bündeln und der Klasse dabei einen URL-Prefix zuzuweisen. Alle durch die Klasse
+                                behandelten URL-Routen fangen dann immer mit derselben Zeichenkette an. Leider fehlt diese
+                                Möglichkeit in Restify, weshalb sie hier im Konstruktor der Klasse einfach nachgebaut wird.
+    
+                                Im Konstruktor werden zwei Methoden als HTTP-Handlerfunktion registriert, um unter der
+                                Wurzeladresse <code>/</code> des Webservices eine Übersicht zu seiner Struktur sowie unter
+                                der Adresse <code>/openapi.yaml</code> seine OpenAPI-Beschreibung zurückzuliefern.
+                            </div>
+                        </lsx-tab-page>
+                    </lsx-tab-pages>
+                </lsx-accordion-page>
+            </lsx-accordion>
+        </div>
+    
+        <terminal-cast url="03-entwicklung/server-rootcontroller.cast" poster="npt:9.0" style="height: 30em;"></terminal-cast>
+    </article>
+</section>
+
+<section data-title="Aufteilung in Controller und Services">
+    <article>
+        <div class="limited-width m-auto mb-5">
+            <div class="markdown">
+                Die Vorlageanwendung nutzt eine **objekt-orientierte Struktur** zur Gliederung des Quellcodes.
+                Zwar gehen immer mehr JavaScript-Entwickler zu einem traditionellen Programmierstil ohne Klassen
+                über. Die objekt-orientierte Struktur ermöglicht jedoch das Prinzip **Separation of Concerns**,
+                bei dem jeder Programmteil genau eine festgelegte Aufgabe haben soll, klarer umzusetzen.
+    
+                Innerhalb des <span class="fn">controller/</span>-Verzeichnisses befindet sich daher **je URL-Prefix
+                eine Controller-Klasse**, die für das **technische HTTP-Handling** zuständig ist. Sie beinhaltet die
+                vom Restify-Framework aufgerufenen Callback-Methoden, mit denen eine HTTP-Anfrage empfangen und eine
+                HTTP-Antwort generiert werden kann. In ihre Zuständigkeit fallen daher alle Tätigkeiten, die mit dem
+                Interpretieren einer HTTP-Anfrage sowie dem technischen Generieren einer HTTP-Antwort zusammen hängen.
+                Sie wird in der Datei <span class="fn">index.js</span> instantiiert und an Restify übergeben.
+    
+                Die **fachliche Anwendungslogik**, also das was der Webservice aus Anwendersicht eigentlich tun soll,
+                ist jedoch an anderer Stelle implementiert. Dies ist Aufgabe der in <span class="fn">service/</span>
+                abgelegten **Serviceklassen**. Sie besitzen rein fachliche Methoden, die vollkommen losgelöst von der
+                Bereitstellung als REST-Webservice, die eigentliche Geschäftslogik implementieren. Sie werden daher
+                von den Controllerklassen aufgerufen.
+            </div>
+    
+            <lsx-accordion>
+                <lsx-accordion-page title="Grundstruktur einer Controller-Klasse">
+                    <source-code language="javascript">
+                        import AddressService from "shared/service/address.service.js";
+    
+                        /**
+                        * HTTP-Controller-Klasse für einen einfachen REST-Webservice.
+                        */
+                        export default class AddressController {
+                            /**
+                            * Konstruktor. Hier werden die URL-Handler registriert.
+                            *
+                            * @param {Object} server Restify Serverinstanz
+                            * @param {String} prefix Gemeinsamer Prefix aller URLs
+                            */
+                            constructor(server, prefix) {
+                                this._service = new AddressService();
+                                this._prefix = prefix;
+    
+                                // HTTP-Handlermethoden registrieren
+                                server.get(prefix, wrapHandler(this, this.search));
+                                ...
+                            }
+    
+                            /**
+                            * Hilfsmethode zum Einfügen von HATEOAS-Links in einen Datensatz.
+                            * @param {Object} entity Zu verändernder Datensatz
+                            */
+                            _insertHateoasLinks(entity) {
+                                ...
+                            }
+    
+                            /**
+                            * GET /address
+                            * Adressen suchen
+                            */
+                            async search(req, res, next) {
+                                // Aufruf der Serviceklasse
+                                let result = await this._service.search(req.query);
+    
+                                // HTTP-Antwort generieren
+                                result.forEach(entity => this._insertHateoasLinks(entity));
+                                res.sendResult(result);
+                                return next();
+                            }
+    
+                            // Weitere Methoden
+                        }
+                    </source-code>
+                </lsx-accordion-page>
+    
+                <lsx-accordion-page title="Grundstruktur einer Service-Klasse">
+                    <source-code language="javascript">
+                        import DatabaseFactory from "shared/database.js";
+    
+                        /**
+                        * Geschäftslogik zur Verwaltung von Adressen.
+                        */
+                        export default class AddressService {
+                            /**
+                            * Konstruktor.
+                            */
+                            constructor() {
+                                this._addresses = DatabaseFactory.database.collection("addresses");
+                            }
+    
+                            /**
+                            * Adressen suchen. Unterstützt wird lediglich eine ganz einfache Suche,
+                            * bei der einzelne Felder auf exakte Übereinstimmung geprüft werden.
+    
+                            * @param {Object} query Optionale Suchparameter
+                            * @return {Promise} Liste der gefundenen Adressen
+                            */
+                            async search(query) {
+                                let cursor = this._addresses.find(query, {
+                                    sort: {
+                                        first_name: 1,
+                                        last_name: 1,
+                                    }
+                                });
+    
+                                return cursor.toArray();
+                            }
+    
+                            // Weitere Methoden
+                        }
+                    </source-code>
+                </lsx-accordion-page>
+            </lsx-accordion>
+        </div>
+    
+        <img src="03-entwicklung/http-ablauf.svg" class="d-block limited-width2 m-auto mb-4">
+        <terminal-cast url="03-entwicklung/server-services.cast" poster="npt:9.0" style="height: 30em;"></terminal-cast>
+    </article>
+</section>
+
+<section data-title="Integration der Mongo-Datenbank">
+    <article class="centered-content">
+        <div class="limited-width2">
+            <div class="markdown mb-4">
+                Der Backendservice des Adressbuchbeispiels nutzt mit **MongoDB** eine nicht-relationale NoSQL-Datenbank
+                zur Speicherung seiner Daten. Dabei handelt es sich um eine **dokumentenbasierte Datenbank** (engl.
+                document store), die in sog. **Collections** JSON-artige, komplexe Objekte (hier **Dokument** genannt)
+                ablegen kann. Gegenüber einer relationellen Datenbank bietet sie den Vorteil, dass die Einträge einer
+                Collection  keinem festen Schema entsprechen müssen und auch tief geschachtelte Datenstrukturen beinhalten
+                können.
+            </div>
+
+            <lsx-tab-pages>
+                <lsx-tab-page title="Hinweise zur Programmierung">
+                    <lsx-accordion>
+                        <lsx-accordion-page title="Zugriff auf eine Collection erhalten">
+                            <source-code language="javascript">
+                                import DatabaseFactory from "shared/database.js";
+                                this._addresses = DatabaseFactory.database.collection("addresses");
+                            </source-code>
+                        </lsx-accordion-page>
+            
+                        <lsx-accordion-page title="Was dabei im Hintergrund passiert">
+                            <source-code language="javascript">
+                                import { MongoClient } from "mongodb";
+            
+                                // Verbindung mit dem Datenbankserver herstellen
+                                let client = new MongoClient("mongodb://localhost:27017");
+                                await this.client.connect();
+            
+                                // Datenbank öffnen
+                                let database = this.client.db("adressbook");
+            
+                                // Collection innerhalb der Datenbank öffnen
+                                let addresses = this.database.collection("addresses");
+                            </source-code>
+                        </lsx-accordion-page>
+            
+                        <lsx-accordion-page title="Anzahl Dokument in einer Collection schätzen">
+                            <source-code language="javascript">
+                                let count = await addresses.estimatedDocumentCount();
+                            </source-code>
+                        </lsx-accordion-page>
+            
+                        <lsx-accordion-page title="Dokumente in einer Collection suchen">
+                            <source-code language="javascript">
+                                let query = {
+                                    first_name: "Willy",
+                                };
+            
+                                let cursor = addresses.find(query, {
+                                    sort: {
+                                        first_name: 1,
+                                        last_name: 1,
+                                    }
+                                });
+            
+                                let result = cursor.toArray();
+                            </source-code>
+                        </lsx-accordion-page>
+            
+                        <lsx-accordion-page title="Dokument anhand seiner ID suchen">
+                            <source-code language="javascript">
+                                let id = "47110815";
+                                let result = await addresses.findOne({_id: new ObjectId(id)});
+                            </source-code>
+                        </lsx-accordion-page>
+            
+                        <lsx-accordion-page title="Dokument anhand seiner ID löschen">
+                            <source-code language="javascript">
+                                let result = this._addresses.deleteOne({_id: new ObjectId(id)});
+                                let count = result.deletedCount;
+                            </source-code>
+                        </lsx-accordion-page>
+            
+                        <lsx-accordion-page title="Neues Dokument einfügen">
+                            <source-code language="javascript">
+                                let newAddress = {
+                                    first_name: address.first_name || "",
+                                    last_name:  address.last_name  || "",
+                                    phone:      address.phone      || "",
+                                    email:      address.email      || "",
+                                };
+            
+                                let result = await this._addresses.insertOne(newAddress);
+                            </source-code>
+                        </lsx-accordion-page>
+            
+                        <lsx-accordion-page title="Mehrere Dokumente einfügen">
+                            <source-code language="javascript">
+                                addresses.insertMany([
+                                    {
+                                        first_name: "Willy",
+                                        last_name: "Tanner",
+                                        phone: "+49 711 564412",
+                                        email: "willy.tanner@alf.com",
+                                    },
+                                    {
+                                        first_name: "Michael",
+                                        last_name: "Knight",
+                                        phone: "+49 721 554194",
+                                        email: "michael@knight-rider.com",
+                                    },
+                                ]);
+                            </source-code>
+                        </lsx-accordion-page>
+            
+                        <lsx-accordion-page title="Inhalt eines Dokuments ändern">
+                            <source-code language="javascript">
+                                let updateDoc = {
+                                    $set: {
+                                        first_name: "Willy",
+                                        last_name: "Tanner",
+                                    },
+                                }
+            
+                                await addresses.updateOne({_id: new ObjectId(id)}, updateDoc);
+                                let newEntry = addresses.findOne({_id: new ObjectId(id)});
+                            </source-code>
+                        </lsx-accordion-page>
+                    </lsx-accordion>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Dokumentenbasierte Datenbank">
+                    <img id="datenbank-1" src="03-entwicklung/datenbank-dokumentenbasiert.svg" class="d-block w-100">
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Traditionelle SQL-Datenbank">
+                    <img id="datenbank-2" src="03-entwicklung/datenbank-relational.svg" class="d-block w-100">
+                </lsx-tab-page>
+            </lsx-tab-pages>
+        </div>
+    </article>
+</section>
+
+<!-- ============================== -->
+<!-- Programmierung der Clientseite -->
+<!-- ============================== -->
+<section data-use-template="teilkapitel" data-titel="Programmieren der Clientseite"></section>
+
+<section data-title="Docker und Node.js im Frontend">
+    <article class="centered-content">
+        <div class="limited-width2">
+            <div class="markdown mb-5">
+                Das Frontendprojekt nutzt ebenfalls **Node.js**, um über den Node Package Manager externe
+                Bibliotheken installieren und nutzen zu können. Jedoch handelt es sich dabei um eine reine
+                Abhängigkeit zur **Entwicklungszeit**, da die Single Page App per Definition komplett im
+                Browser läuft. **Docker** hilft uns auch hier, die benötigte Node.js-Laufzeitumgebung zu
+                installieren  und zu starten. Innerhalb wird das Werkzeug [esbuild](https://esbuild.github.io/)
+                ausgeführt, um aus den eigenen und fremden Quellcodes die finale Version der Anwendung
+                zu bauen.
+            </div>
+        
+            <div class="dropdown mb-3">
+                <button
+                    id             = "terminal-docker2-dropdown"
+                    class          = "btn btn-outline-secondary dropdown-toggle"
+                    style          = "font-size: 0.9rem;"
+                    type           = "button"
+                    data-bs-toggle = "dropdown"
+                    aria-haspopup  = "true"
+                    aria-expanded  = "false"
+                >
+                    Vereinfachtes Startskript
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <button
+                            class          = "dropdown-item"
+                            type           = "button"
+                            data-dropdown  = "#terminal-docker2-dropdown"
+                            data-container = "#terminal-docker2"
+                            data-show      = "#terminal-docker2-1"
+                            onclick        = "change_example(event)"
+                        >
+                            Vereinfachtes Startskript
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            class          = "dropdown-item"
+                            type           = "button"
+                            data-dropdown  = "#terminal-docker2-dropdown"
+                            data-container = "#terminal-docker2"
+                            data-show      = "#terminal-docker2-2"
+                            onclick        = "change_example(event)"
+                        >
+                            Docker Compose
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        
+            <div id="terminal-docker2">
+                <terminal-cast id="terminal-docker2-1" url="03-entwicklung/docker1.cast" poster="npt:5.0" style="height: 30em;"></terminal-cast>
+                <terminal-cast id="terminal-docker2-2" url="03-entwicklung/docker2.cast" poster="npt:8.5" class="hidden" style="height: 30em;"></terminal-cast>
+            </div>
+        </div>
+    </article>
+</section>
+
+<section data-title="Klassenstruktur der Single Page App">
+    <article class="centered-content">
+        <div class="limited-width2">
+            <div class="markdown">
+                Da wir im dritten Semester nur clientseitig programmieren konnten und noch keine
+                Webservices kannten, teilt sich die **alte Version der Adressbuch-App** in folgende
+                Bestandteile auf:
+
+                * Ein minimales App-Framework für Single Page Apps
+                * Eine Datenbank für den Local Storage des Browsers
+                * Zwei Klassen für die Start- und Detailansicht der App
+
+                In der **neuen Version** fällt die selbstgestrickte Datenbank weg und wird stattdessen
+                durch eine Klasse namens <code>Backend</code> ersetzt. Diese bietet eine einfache Möglichkeit,
+                die Webservices des Backends aufzurufen. Auf diese Weise können Datenhaltung und einzelne
+                Teile der Anwendungslogik auf die Serverseite verlagert werden, um beispielsweise mehreren
+                Benutzern Zugriff auf die Daten zu geben.
+            </div>
+
+            <lsx-tab-pages>
+                <lsx-tab-page title="Alte Version mit clientseitiger Datenbank">
+                    <img id="spa-struktur-1" src="03-entwicklung/spa-struktur-alt.svg" class="d-block w-100">
+                </lsx-tab-page>
+                
+                <lsx-tab-page title="Neue Version mit Backendzugriff">
+                    <img id="spa-struktur-2" src="03-entwicklung/spa-struktur-neu.svg" class="d-block w-100">
+                </lsx-tab-page>
+            </lsx-tab-pages>
+        </div>
+    </article>
+</section>
+
+<!-- TODO: Links funktionieren nicht, da die Event Handler nicht mitkopiert werden -->
+<!-- <section data-clone="#section-codeverzeichnis"></section> -->
+
+<section data-title="Anlegen einer neuen SPA-Unterseite">
+    <article>
+        <div class="limited-width m-auto mb-3">
+            <div class="markdown mb-3">
+                Jede Unterseite der Single Page App besteht aus einer HTML-Vorlage und einer JavaScript-Datei
+                mit einer darin enthaltenen Klasse. Die folgenden fünf Schritte müssen dabei abgearbeitet werden,
+                um der Anwendung eine neue Unterseite hinzuzufügen.
+            </div>
+    
+            <lsx-accordion>
+                <lsx-accordion-page>
+                    <lsx-accordion-title>
+                        <div class="d-flex w-100 me-2">
+                            <span style="flex: 1;">Menü erweitern (optional)</span>
+                            <span class="fn">index.html</span>
+                        </div>
+                    </lsx-accordion-title>
+                    <lsx-accordion-content>
+                        <source-code language="html">
+                            &lt;!-- Kopfbereich mit Tabreitern --&gt;
+                            &lt;nav id="app-menu"&gt;
+                                &lt;ul&gt;
+                                    &lt;!-- Neuer Menüeintrag --&gt;
+                                    &lt;li data-page-name="copy"&gt;
+                                        &lt;a href="#/copy/"&gt;Eintrag kopieren&lt;/a&gt;
+                                    &lt;/li&gt;
+    
+                                    &lt;!-- Vorhandene Menüeinträge --&gt;
+                                    …
+                                &lt;/ul&gt;
+                            &lt;/nav&gt;
+                        </source-code>
+                    </lsx-accordion-content>
+                </lsx-accordion-page>
+    
+                <lsx-accordion-page>
+                    <lsx-accordion-title>
+                        <div class="d-flex w-100 me-2">
+                            <span style="flex: 1;">Neue Routingregel definieren</span>
+                            <span class="fn">app.js</span>
+                        </div>
+                    </lsx-accordion-title>
+                    <lsx-accordion-content>
+                        <source-code language="javascript">
+                            class App {
+                                /**
+                                * Konstruktor.
+                                */
+                                constructor() {
+                                    // Datenbank-Klasse zur Verwaltung der Datensätze
+                                    this.backend = new Backend();
+    
+                                    // Single Page Router zur Steuerung der sichtbaren Inhalte
+                                    this.router = new Router([
+                                        // Vorhandene Routingregeln
+                                        …
+    
+                                        // Neue Routing-Regel
+                                        {
+                                            url: "^/copy/(.*)$",
+                                            show: matches =&gt; this._gotoCopy(matches[1]),
+                                        },
+    
+                                        // Catch-All-Regel für nicht vorhandene Seiten
+                                        {
+                                            url: ".*",
+                                            show: () =&gt; this._gotoList()
+                                        },
+                                    ]);
+                                    …
+                                }
+                            }
+                        </source-code>
+                    </lsx-accordion-content>
+                </lsx-accordion-page>
+    
+                <lsx-accordion-page>
+                    <lsx-accordion-title>
+                        <div class="d-flex w-100 me-2">
+                            <span style="flex: 1;">Neue <code>_goto()</code>-Methode anlegen</span>
+                            <span class="fn">app.js</span>
+                        </div>
+                    </lsx-accordion-title>
+                    <lsx-accordion-content>
+                        <source-code language="javascript">
+                            /**
+                            * Seite zum Kopieren einer Adresse anzeigen.
+                            * @param {Number} id ID der zu bearbeitenden Adresse
+                            */
+                            async _gotoCopy(id) {
+                                try {
+                                    // Dynamischer Import, vgl. https://javascript.info/modules-dynamic-imports
+                                    let {default: PageCopy} = await import("./page-copy/page-copy.js");
+    
+                                    let page = new PageCopy(this, id);
+                                    await page.init();
+                                    this._showPage(page, "edit");
+                                } catch (ex) {
+                                    this.showException(ex);
+                                }
+                            }
+                        </source-code>
+                    </lsx-accordion-content>
+                </lsx-accordion-page>
+    
+                <lsx-accordion-page>
+                    <lsx-accordion-title>
+                        <div class="d-flex w-100 me-2">
+                            <span style="flex: 1;">HTML-Vorlage anlegen</span>
+                            <span class="fn">page-xyz/page-xyz.html</span>
+                        </div>
+                    </lsx-accordion-title>
+                    <lsx-accordion-content>
+                        <source-code language="html">
+                            &lt;!-- Stylesheet der Seite --&gt;
+                            &lt;style&gt;
+                                main ol {
+                                    list-style: none;
+                                    margin: 0;
+                                    padding: 0;
+                                }
+                                …
+                            &lt;/style&gt;
+    
+                            &lt;!-- Inhalt der Seite --&gt;
+                            &lt;main&gt;
+                                &lt;h3&gt;Eintrag kopieren&lt;/h3&gt;
+                                …
+                            &lt;/main&gt;
+                        </source-code>
+                    </lsx-accordion-content>
+                </lsx-accordion-page>
+    
+                <lsx-accordion-page>
+                    <lsx-accordion-title>
+                        <div class="d-flex w-100 me-2">
+                            <div class="d-flex w-100 me-2">
+                                <span style="flex: 1;">Anwendungslogik ausprogrammieren</span>
+                                <span class="fn">page-xyz/page-xyz.js</span>
+                            </div>
+                        </div>
+                    </lsx-accordion-title>
+                    <lsx-accordion-content>
+                        <source-code language="javascript">
+                            import Page from "shared/page.js";
+                            import HtmlTemplate from "./page-copy.html";
+    
+                            /**
+                            * Klasse PageCopy: Kopiert einen Eintrag
+                            */
+                            export default class PageCopy extends Page {
+                                /**
+                                * Konstruktor.
+                                * @param {App} app Instanz der App-Klasse
+                                */
+                                constructor(app) {
+                                    super(app, HtmlTemplate);
+                                }
+    
+                                /**
+                                * HTML-Inhalt und anzuzeigende Daten laden.
+                                *
+                                * HINWEIS: Durch die geerbte init()-Methode wird `this._mainElement` mit
+                                * dem &lt;main&gt;-Element aus der nachgeladenen HTML-Datei versorgt. 
+                                */
+                                async init() {
+                                    // HTML-Inhalt nachladen
+                                    await super.init();
+                                    this._title = "Übersicht";
+    
+                                    // Angezeigte Inhalte nacharbeiten
+                                    …
+                                }
+                            };
+                        </source-code>
+                    </lsx-accordion-content>
+                </lsx-accordion-page>
+            </lsx-accordion>
+        </div>
+    
+        <terminal-cast url="03-entwicklung/spa-neue-seite.cast" poster="npt:10.0" rows="58" style="height: 50em"></terminal-cast>
+    </article>
+</section>
+
+<section data-title="Webservices aufrufen mit der Fetch API">
+    <article class="centered-content">
+        <div class="limited-width">
+            <lsx-youtube video="Zp4L89oLrmE" aspect-ratio="16x9" style="width: 50em; max-width: 100%;"></lsx-youtube>
+            <a href="https://youtu.be/Zp4L89oLrmE" target="_blank">Link zum Video</a>
+        
+            <lsx-info-box type="warning" class="mt-3 mb-3">
+                Das Prinzip, innerhalb einer clientseitigen Webanwendung einen Webservice aufzurufen,
+                ohne dabei ein neue HTML-Seite vom Server anzufordern, wird AJAX (Asynchronous JavaScript
+                and XML) genannt, auch wenn heute in der Regel eher JSON als Datenformat gewählt wird.
+            </lsx-info-box>
+        
+            <p>
+                Mit der modernen <b>Fetch API</b> des Browsers lassen sich entfernte Webservices relativ
+                leicht aufrufen. Man benötigt lediglich die <b>URL des Webservices</b> und die zu verwendende
+                <b>HTTP-Methode</b>. Optional kommen dann noch <b>Header Fields</b> und die an den Server zu
+                schickenden <b>Anfragedaten</b> hinzu.
+            </p>
+        
+            <div class="mb-3">
+                <lsx-accordion>
+                    <lsx-accordion-page title="GET-Anfrage zum Abrufen von Daten">
+                        <source-code language="javascript">
+                            async function showExistingEntries() {
+                                let response = await fetch("http://localhost:3000/address");
+                                let entries = await response.json();
+        
+                                console.log("Empfangene Daten:", entries);
+                            }
+        
+                            showExistingEntries();
+                        </source-code>
+                    </lsx-accordion-page>
+        
+                    <lsx-accordion-page title="POST-Anfrage zum Anlegen von Daten">
+                        <source-code language="javascript">
+                            async function postNewEntry(entry) {
+                                let response = await fetch("http://localhost:3000/address", {
+                                    method: "POST",
+                                    headers: {"Content-Type": "application/json"},
+                                    body: JSON.stringify(entry)
+                                });
+        
+                                let savedEntry = await response.json();
+                                console.log("Gespeicherter Eintrag:", savedEntry);
+                            }
+        
+                            postNewEntry({
+                                first_name: "Dana",
+                                last_name: "Scully",
+                                email: "dana.scully@xfiles.fbi.gov",
+                            });
+                        </source-code>
+                    </lsx-accordion-page>
+                </lsx-accordion>
+            </div>
+        
+            <p>
+                Weitere Einzelheiten hierzu finden sich im Eintrag zur
+                <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank">Fetch API im Mozilla Developer Network</a>.
+            </p>
+        </div>
+    </article>
+</section>
+
+<section data-title="Verwendung der vorprogrammierten Backend-Klasse">
+    <article class="centered-content">
+        <div class="limited-width">
+            <div class="markdown mb-3">
+                Obwohl die Fetch API des Browsers relativ einfach zu benutzen ist, bietet die Beispielanwendung
+                mit der darin enthaltenen Klasse <code>Backend</code> nochmal eine einfachere Möglichkeit. Diese
+                Klasse kapselt die Fetch API, stellt dabei aber sicher, dass die richtigen Header Fields gesetzt
+                und die Daten immer im JSON-Format ausgetauscht werden. Zusätzlich erkennt sie vom Backend
+                gelieferte Fehlermeldungen und wandelt diese in eine Exception um.
+        
+                Über das globale <code>App</code>-Objekt steht eine Instanz der <code>Backend</code>-Klasse zur Verfügung.
+                Diese besitzt eine Methode namens <src-code language="javascript">fetch()</src-code> zur Kommunikation
+                mit dem Backend. Folgende Parameter müssen hierfür mitgegeben werden:
+        
+                1. URL des aufzurufenden Webservices (ohne Hostname)
+                2. Zusätzliche Konfigurationswerte für die Fetch API (optional)
+                3. Objekt mit den an den Server zu schickenden Daten (optional)
+        
+                Das im dritten Parameter übergebene Objekt wird dabei automatisch ins JSON-Format konvertiert
+                und vom Server empfangene JSON-Daten werden automatisch in JavaScript-Objekte zurückgewandelt.
+                Die meisten Backendzugriffe erfordern daher nur eine Zeile Quellcode:
+            </div>
+        
+            <lsx-accordion>
+                <lsx-accordion-page title="GET-Anfrage zum Abrufen von Daten">
+                    <source-code language="javascript">
+                        let data = await this._app.backend.fetch("GET", "/address");
+                    </source-code>
+                </lsx-accordion-page>
+        
+                <lsx-accordion-page title="POST-Anfrage zum Anlegen von Daten">
+                    <source-code language="javascript">
+                        let new_address = {
+                            first_name: "Fox",
+                            last_name:  "Mulder",
+                            email:      "fox.mulder@xfiles.fbi.gov",
+                        };
+        
+                        await this._app.backend.fetch("POST", "/address", {body: new_address});
+                    </source-code>
+                </lsx-accordion-page>
+            </lsx-accordion>
+        </div>
+    </article>
+</section>
