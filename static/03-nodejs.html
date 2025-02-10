@@ -216,7 +216,7 @@
                     }
     
                     async function commandDir() {
-                        _println(` Datenträger in Laufwerk ${environment.drive}: ist`);
+                        _println(` Datenträger in Laufwerk ${environment.drive}: ist Festplatte`);
                         _println(" Volumenseriennummer: 008E-4711");
                         _println();
                         _println( `Verzeichnis von ${environment.drive}:${environment.directory}`);
@@ -284,7 +284,7 @@
                         _println("        632 KB freier konventioneller Speicher");
                         _println("         63 KB freier oberer Speicher in 1 Blöcken (größter UMB 63 KB)");
                         _println("      14912 KB freier zusätzlicher Speicher");
-                        _println("      14912 kb freier erweiterter Speicher");
+                        _println("      14912 KB freier erweiterter Speicher");
                         _println();
                     }
     
@@ -399,7 +399,7 @@
     </section>
 
     <section data-title="Wo ein Terminal ist, ist ein Weg" class="centered-content">
-        <div class="markdown limited-width mb-5">
+        <div class="markdown limited-width mb-5" detail-content>
             Obwohl heutige Betriebssysteme längst über komfortable, grafische Benutzeroberflächen
             verfügen, besitzen sie immer noch ein klassisches Terminal für Power-User. Insbesondere
             unter Linux (sowie allen anderen von [Unix](https://de.wikipedia.org/wiki/Unix){target="_blank"}
@@ -407,6 +407,12 @@
             auf eine seit Jahrzehnten gepflegte Werzkzeugsammlung zurückgegriffen werden kann. Die
             Grundbefehle haben sich dabei unter allen Betriebssystemen seit den frühen Tagen nicht
             verändert!
+
+            Die meisten Entwicklungswerkzeuge werden heute nach wie vor im Terminal ausgeführt.
+            Der Grund hierfür ist, dass die früheren Betriebssysteme von Programmierer*innen für
+            Programmierer*innen geschrieben wurden. Die Programme können dadurch aber auch über
+            Shell-Skripte automatisiert oder in CI/CD-Pipelines integriert werden. Und schlussendlich
+            sind Konsolenausgaben deutlich einfacher zu programmieren, als grafische Benutzeroberflächen.
 
             ### Windows {.dhbw-lightblue}
 
@@ -422,7 +428,7 @@
             Bei den anderen Betriebssystemen gibt es keinen einheitlichen Mechanismus zum Starten
             eines Terminals. Meistens findet man es aber vorinstalliert in der Programmübersicht.
         </div>
-        <div class="centered-content flex-row flex-wrap gap-3">
+        <div class="centered-content flex-row flex-wrap gap-3 mb-5">
             <!-- Windows CMD -->
             <lsx-modal>
                 <lsx-thumbnail style="height: 15em;" class="mw-100">
@@ -513,6 +519,314 @@
     </section>
 </section>
 
+<section data-title="Unser erstes Node.js-Projekt" class="centered-content">
+    <section data-title="Was ist Node.js?">
+        <div>
+            <lsx-ul>
+                <li>JavaScript wurde 1995 als Sprache zur Ausführung im Browser entwickelt.</li>
+                <li>Daraus wurde 2009 Node.js als plattformunabhängige Laufzeitumgebung außerhalb des Browsers abgeleitet.</li>
+                <li>Haupteinsatzgebiet ist die leichtgewichtige Entwicklung skalierbarer Server-Programme.</li>
+                <li>Node.js besitzt daher keine eingebauten Funktionen für grafische Benutzeroberflächen.</li>
+                <li>Durch externe Bibliotheken lässt sich diese Funktion allerdings nachrüsten.</li>
+                <li>Node.js kommt daher auch vermehrt zur Entwicklung von Desktop-Applikationen zum Einsatz.</li>
+            </lsx-ul>
+        
+            <div class="d-flex align-items-stretch" style="gap: 1em;">
+                <img src="03-nodejs/nodejs-1.png" class="d-block w-100 img-thumbnail"/>
+                <img src="03-nodejs/nodejs-2.png" class="d-block w-100 img-thumbnail"/>
+            </div>
+        </div>        
+    </section>
+
+    <section data-title="Ein neues Projekt anlegen">
+        <div class="limited-width">
+            <div class="markdown mb-4">
+                Einfache JavaScript-Quellcodes ohne externe Abhängigkeiten können ganz ohne ein Projekt hierfür
+                anzulegen ausgeführt werden. In den wenigsten Fällen kommt man damit aber sehr weit, da auf diese
+                Weise weder externe Bibliotheken eingebunden werden, noch Start-Skripte definiert, noch das Projekt
+                als Code-Bibliothek auf [npmjs.com](https://www.npmjs.com/){target=_blank} veröffentlicht werden kann.
+    
+                Erfreulicherweise benötigt ein Node.js-Projekt nicht sehr viel. Lediglich eine Datei mit dem Namen
+                <span class="fn">package.json</span> und ein paar festen Inhalten muss vorhanden sein, wobei die
+                Datei mit dem Konsolenbefehl <span class="cmd">npm init</span> leicht angelegt werden kann.
+            </div>
+
+            <lsx-accordion class="dhbw-fontsize-small">
+                <lsx-accordion-page title="Datei anlegen mit&nbsp;<span class='cmd'>npm init</span>">
+                    <lsx-ul>
+                        <li>
+                            Ein neues Node.js-Projekt wird mit dem Befehl <span class="cmd">npm init</span> angelegt.
+                        </li>
+                        <li>
+                            Das Arbeitsverzeichnis darf noch keine Datei mit dem Namen <span class="fn">package.json</span> beinhalten.
+                        </li>
+                        <li>
+                            Das Skript fragt ein paar allgemeine Parameter ab und legt die <span class="fn">package.json</span> damit an.
+                        </li>
+                        <li>
+                            Dadurch können dann alle Funktionen von Node.js vollumfänglich genutzt werden.
+                        </li>
+                    </lsx-ul>
+
+                    <img src="03-nodejs/anlegen-npm-init.png" alt="Screenshot von npm init" class="d-block w-100 img-thumbnail">
+                </lsx-accordion-page>
+
+                <lsx-accordion-page title="Inhalt des Projektverzeichnisses">
+                    <lsx-ul>
+                        <li>
+                            Der Konsolenbefehlt legt tatsächlich nur die eine Datei an.
+                        </li>
+                        <li>
+                            Später kommen lediglich noch Verzeichnis namens <span class="fn">node_modules</span> hinzu.
+                        </li>
+                        <li>
+                            Alle anderen Dateien schreiben wir selbst.
+                        </li>
+                    </lsx-ul>
+                    <img src="03-nodejs/anlegen-verzeichnisinhalt.png" alt="Projektverzeichnis kurz nach der Anlage" class="d-block w-100 img-thumbnail">
+                </lsx-accordion-page>
+
+                <lsx-accordion-page title="Inhalt der neuen Datei&nbsp;<spn class='fn'>package.json</span>">
+                    <source-code language="JSON">
+                    {
+                        "name": "@dschulmeis/hallo-welt",
+                        "version": "1.0.0",
+                        "description": "Hallo Welt für Node.js",
+                        "main": "index.js",
+                        "scripts": {
+                          "test": "echo \"Error: no test specified\" && exit 1"
+                        },
+                        "repository": {
+                          "type": "git",
+                          "url": "git+https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2024-quellcodes.git"
+                        },
+                        "author": "Dennis Schulmeister-Zimolong &lt;dhbw@windows3.de&gt;",
+                        "license": "CC-BY-4.0",
+                        "bugs": {
+                          "url": "https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2024-quellcodes/issues"
+                        },
+                        "homepage": "https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2024-quellcodes#readme"
+                    }                      
+                    </source-code>
+                </lsx-accordion-page>
+
+                <lsx-accordion-page title="Dieselbe Datei aufgeräumt und erweitert">
+                    <lsx-ul>
+                        <li>
+                            Die Datei <span class="fn">package.json</span> sieht noch etwas unaufgeräumt aus.
+                        </li>
+                        <li>
+                            Außerdem wollen wir die „neue“ <code>import</code>/<code>export</code>-Syntax für JavaScript-Module verwenden.
+                        </li>
+                        <li>
+                            Das erste Problem lösen wir durch verschieben von ein paar Zeilen.
+                        </li>
+                        <li>
+                            Das zweite Problem durch hinzufügen des Werts <code>"type": "module"</code>.
+                        </li>
+                    </lsx-ul>
+
+                    <source-code language="JSON">
+                    {
+                        "name": "@dschulmeis/hallo-welt",
+                        "version": "1.0.0",
+                        "description": "Hallo Welt für Node.js",
+                        "author": "Dennis Schulmeister-Zimolong &lt;dhbw@windows3.de&gt;",
+                        "license": "CC-BY-4.0",
+
+                        "repository": {
+                          "type": "git",
+                          "url": "git+https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2024-quellcodes.git"
+                        },
+
+                        "type": "module",
+
+                        "scripts": {
+                            "test": "echo \"Error: no test specified\" && exit 1"
+                        }
+                    }                      
+                    </source-code>
+                </lsx-accordion-page>
+            </lsx-accordion>
+        </div>
+    </section>
+
+    <section data-title="Typische Verzeichnisse und Dateien">
+        <div class="limited-width">
+            <p class="mb-4 dhbw-text-columns">
+                Über die Datei <span class="fn">package.json</span> und das automatisch verwaltete
+                Verzeichnise <span class="fn">node_modules</span> hinaus schreibt Node.js keine
+                feste Verzeichnisstruktur vor. Häufig findet sich aber folgende Aufteilung. Natürlich
+                können beliebig weiter Dateien, Verzeichnisse und Unterverzeichnisse hinzu kommen.
+            </p>
+            <table class="dhbw-filetable mb-3">
+                <tbody>
+                    <tr class="text-muted">
+                        <td>📂</td>
+                        <td>node_modules</td>
+                        <td>Installationsverzeichnis für externe Abhängigkeiten</td>
+                    </tr>
+                    <tr>
+                        <td>📂</td>
+                        <td>src</td>
+                        <td>Ausführbare Quellcodes des Projekts</td>
+                    </tr>
+                    <tr>
+                        <td>📂</td>
+                        <td>test</td>
+                        <td>Unit Tests zum Durchtesten des Quellcodes</td>
+                    </tr>
+                    <tr>
+                        <td>📝</td>
+                        <td>package.json</td>
+                        <td>Projekt-Konfiguration</td>
+                    </tr>
+                    <tr>
+                        <td>📝</td>
+                        <td>README.md</td>
+                        <td>Beschreibung und Hinweise zum Projekt</td>
+                    </tr>
+                    <tr>
+                        <td>📝</td>
+                        <td>LICENSE.md</td>
+                        <td>Lizenztext des Projekts</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section data-title="Unsere erste Quellcode-Datei">
+        <div class="limited-width">
+            <p>
+                Unsere erste Quellcodedatei fällt noch ganz bescheiden aus. Lediglich eine Zeile: 🙃
+            </p>
+            <lsx-card title="<span class='fn'>src/main.js</span>" class="mt-4 mb-4">
+                <source-code language="javascript">
+                    console.log("Hallo Node.js");
+                </source-code>
+            </lsx-card>
+            <p>
+                Ausführen können wir die Datei mit folgendem Befehl:
+            </p>
+            <p>
+                <span class="cmd">node src/main.js</span>
+            </p>
+
+            <img src="03-nodejs/hallo-nodejs.png" alt="Ergebnis des obigen Befehls" class="d-block img-thumbnail">
+        </div>
+    </section>
+    
+    <section data-title="Definition von NPM Run Skripten">
+        <div class="limited-width">
+            <lsx-ul>
+                <li>Häufig benötigte Konsolenbefehle lassen sich mit NPM Run Skripten automatisieren.</li>
+                <li>Hierfür muss lediglich das <code>scripts</code>-Objekt in der Datei <span class="fn">package.json</span> erweitert werden.</li>
+            </lsx-ul>
+
+            <lsx-accordion class="dhbw-fontsize-small mt-4 mb-4">
+                <lsx-accordion-page title="Anpassungen an der&nbsp;<span class='fn'>package.json</span>">
+                    <p class="dhbw-text-columns">
+                        Das <code>scripts</code>-Objekt beinhaltet eine Menge von Kurzbefehlen, die über ihren
+                        Namen links vom Doppelpunkt angesprochen werden können, um die Befehle rechts davon
+                        auszuführen. Erlaubt ist alles, was in der Kommandozeile des eigenen Betriebssystems
+                        auch erlaubt ist. Best Practice ist jedoch, die Run-Skripte plattformunabhängig zu halten
+                        und daher nur einfache Konsolenbefehle oder in JavaScript programmierte Hilfsfunktionen
+                        aufzurufen. Mit Hilfe der Zeichenkette <span class="screen">&amp;&amp;</span> können unter
+                        alle Betriebssystemen sequentiell (hintereinander) ausgeführt weredn.
+                    </p>
+                    <source-code language="json">
+                    "scripts": {
+                        "start": "node src/main.js",
+                        "git-auto-commit": "git add . && git commit -m 'Code-Änderungen' && git push"
+                    }
+                    </source-code>
+                    <p class="dhbw-text-columns">
+                        Das obige Beispiel definiert ein Start-Skript mit dem fest vorgegebenen Namen
+                        <code>start</code> und ein <code>git-auto-commit</code> genanntes Skript, das
+                        automatisch alle Quellcodeänderungen in Git eincheckt und auf GitHub hochlädt.
+                    </p>
+                    <lsx-info-box style="warning">
+                        <p>Achtung!</p> Macht das nicht zuhause nach, liebe Kinder. Ein Commit sollte
+                        immer eine eindeutige Nachricht besitzen, damit man die Änderungen besser
+                        nachvollziehen kann.
+                    </lsx-info-box>
+                </lsx-accordion-page>
+
+                <lsx-accordion-page title="Ausführen mit&nbsp;<span class='cmd'>npm run …</span>">
+                    <p>
+                        Die in der Datei <span class="fn">package.json</span> definierten Skripte können
+                        mit dem Konsolenbefehl <span class="cmd">npm run …</span> ausgeführt werden. Die
+                        drei Punkte müssen dabei mit dem Namen des Skripts, exakt so, wie es links vom
+                        Doppelpunkt innerhalb des <code>scripts</code>-Block genannt wurde.
+                    </p>
+                    <img src="03-nodejs/hallo-npm-run-start.png" alt="" class="d-block w-100 shadow">
+                </lsx-accordion-page>
+
+                <lsx-accordion-page title="Ausführen mit&nbsp;<span class='cmd'>npm start</span>">
+                    <p>
+                        Für das <cmd>start</cmd> genannte Start-Skript gibt es einen Shortcut. Es kann statt
+                        mit <span class="cmd">npm run start</span> auch einfach mit <span class="cmd">npm start</span>
+                        ausgeführt werden.
+                    </p>
+                    <img src="03-nodejs/hallo-npm-start.png" alt="" class="d-block w-100 shadow">
+                </lsx-accordion-page>
+            </lsx-accordion>
+
+            <img src="03-nodejs/hallo-run-scripts.png" alt="Angepasste Datei package.jspn" class="d-block img-thumbnail">
+        </div>
+    </section>
+</section>
+
+<section data-title="Externe Abhängigkeiten" class="centered-content"></section>
+
+<section data-title="Quellcode modularisieren" class="centered-content"></section>
+
+<section data-title="Debugging mit Visual Studio Code" class="centered-content"></section>
+
+<section data-title="Vertiefungen" class="centered-content"></section>
+
+<section data-title="Übungsaufgaben" data-background-color="rgb(231, 221, 141)">
+    <section data-title="Aufgabe 1: Ein kleines Node.js-Quiz">
+        <article>
+            TODO
+        </article>
+        <aside>
+            <p>
+                Bevor du dich auf die benoteten Lernkontrollen stürzt, löse erst einmal dieses
+                Quiz. Das ist eine Super-Übung für den großen Test. 📝
+            </p>
+            <img src="shared/quiz.png" class="img-fluid d-block" style="max-width: 20em;"/>
+            <p>
+                <small>
+                    Bildnachweis:
+                    <a href="https://pixabay.com/illustrations/quiz-tiles-letters-red-game-test-2058883/" target="_blank">Pixabay: 905513</a>
+                </small>
+            </p>
+        </aside>
+    </section>
+
+    <section data-title="Aufgabe 2: Textzeilen sortieren">
+        <article>
+            TODO
+        </article>
+        <aside>
+            <p>
+                Ah, endlich wieder programmieren. 😎 Dieses mal bauen wir ein nützliches kleines
+                Werkzeug nach, dass es unter Unix schon von Anfang an gab. Ein Sortierprogramm für
+                beliebige Textdaten.
+            </p>
+            <img src="shared/github_atom.png" class="img-fluid d-block"/>
+            <p>
+                <small>
+                    Bildnachweis:
+                    <a href="https://atom.io/" target="_blank">Atom Webseite</a>
+                </small>
+            </p>
+        </aside>
+    </section>
+</section>
+
 <!-- ======================= -->
 <!-- HTTP-Server mit Express -->
 <!-- ======================= -->
@@ -525,6 +839,12 @@
 
 <section data-title="Aufgabe 1: Personen im Weltall" data-background-color="rgb(179, 202, 223)">
     <article>
+        <!-- <section data-title="Haiku 1: Node.js-Projekte anlegen"></section>
+        <section data-title="Haiku 2: Externe Abhängigkeiten"></section>
+        <section data-title="Haiku 3: Quellcode modularisieren"></section>
+        <section data-title="Haiku 5: Vertiefungen"></section> -->
+        <section data-title="Haiku 4: Debugging mit Visual Studio Code"></section>
+
         <!-- <lsx-ul emoji="📕" class="mb-4">
             <li>Schließt euch ein kleine Gruppen zusammen und setzt euch an eine Tischinsel.</li>
             <li>Bearbeitet anschließend für ca. 10 Minuten eines der unten stehenden Themen.</li>
