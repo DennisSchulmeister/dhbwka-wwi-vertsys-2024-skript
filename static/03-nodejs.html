@@ -776,9 +776,354 @@
             <img src="03-nodejs/hallo-run-scripts.png" alt="Angepasste Datei package.jspn" class="d-block img-thumbnail">
         </div>
     </section>
+
+    <section data-title="Weitere typische NPM-Kommandos">
+        <div class="limited-width2">
+            <table class="table table-striped border limited-width mb-4">
+                <tbody>
+                    <tr>
+                        <td>
+                            <span class="cmd">npm init</span>
+                        </td>
+                        <td>
+                            Datei <span class="fn">package.json</span> im aktuellen Codeverzeichnis neu anlegen
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="cmd">npm add …</span>
+                        </td>
+                        <td>
+                            Weitere Bibliothek aus der Registry hinzufügen
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="cmd">npm install</span>
+                        </td>
+                        <td>
+                            Abhängige Bibliotheken und Werkzeuge installieren
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="cmd">npm update</span>
+                        </td>
+                        <td>
+                            Abhängigkeiten auf ihre erlaubte neuste Version aktualisieren
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="cmd">npm audit fix</span>
+                        </td>
+                        <td>
+                            Abhängigkeiten mit bekannten Sicherheitslücken aktualisieren
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="cmd">npm start</span>
+                        </td>
+                        <td>
+                            Ausführen eines in der <span class="fn">package.json</span> definierten <code>start</code>-Skripts
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="cmd">npm run …</span>
+                        </td>
+                        <td>
+                            Ausführen beliebiger in der <span class="fn">package.json</span> definierter Run-Skripte
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <terminal-cast url="03-nodejs/npm.cast" poster="npt:2.0" style="height: 30em;"></terminal-cast>
+        </div>
+    </section>
 </section>
 
-<section data-title="Externe Abhängigkeiten" class="centered-content"></section>
+<section data-title="Externe Abhängigkeiten" class="centered-content">
+    <section data-title="Bibliotheken suchen auf npmjs.com">
+        <div class="limited-width markdown mb-4">
+            [npmjs.org](https://npmjs.org){target="_blank"} ist das offizielle Package Repository für
+            Node.js, auf dem sogut wie alle mit Node.js kompatiblen Open-Source Bibliotheken abgelegt
+            sind. Die Verwendung einer neuen Bibliothek beginnt daher meistens auf dieser Seite, um
+            nach geeigneten Kandidaten zu suchen.
+        </div>
+
+        <img src="03-nodejs/npmjs.com.png" class="d-block img-thumbnail limited-width"/>
+    </section>
+
+    <section data-title="Abhängigkeiten installieren und deinstallieren">
+        <div class="limited-width">
+            <lsx-tab-pages>
+                <lsx-tab-page title="Allgemeines Vorgehen">
+                    <div class="markdown mb-4">
+                        Kennt man den Namen einer Bibliothek, kann sie ganz einfach mit dem Befehl <span class="cmd">npm add …</span>
+                        bzw. <span class="cmd">npm install …</span> einem Projekt hinzugefügt werden. Dies bewirkt zwei Dinge:
+            
+                        1. Die Bibliothek wird mit ihrer aktuellen Versionsnummer in der Datei <span class="fn">package.json</span>
+                           als Abhängigkeit des Projekts registriert. Dadurch kann die Installation auf einem anderen Computer
+                           jederzeit wiederholt werden.
+            
+                        1. Die Bibliothek wird heruntergeladen und innerhalb des <span class="fn">node_modules</span>-Verzeichnisses
+                           entpackt. Dadurch findet Node.js den Quellcode, wenn die Bibliothek innerhalb des Projekts verwendet wird.
+                        
+                        Auf einem anderen Computer, oder nachdem das <span class="fn">node_modules</span>-Verzeichnis gelöscht wurde,
+                        kann die Installation mit einem einfach <span class="cmd">npm install</span> ohne weitere Angaben jederzeit
+                        wiederholt werden.
+                    </div>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Abhängigkeitsarten">
+                    <div class="markdown">
+                        Node.js unterscheidet verschiedene Arten von Abhängigkeiten, je nachdem, zu welchem
+                        Zeitpunkt eine Bibliothek benötigt wird:
+
+                        #### Laufzeitabhängigkeiten {.dhbw-lightblue}
+    
+                        Dies ist der Normalfall. Es handelt sich dabei um Bibliotheken, die zur <i>Ausführung</i>
+                        des Projekts benötigt werden und daher bei einer Produktivinstallation ebenfalls installiert
+                        werden müssen.
+    
+                        #### Entwicklungsabhängigkeiten {.dhbw-lightblue}
+                        
+                        Diese werden nur auf der Entwicklermaschine benötigt. Bei einer Produktivinstallation werden
+                        sie, um Speicherplatz und Bandbreite zu sparen, nicht mitinstalliert. Meistens handelt es sich
+                        hierbei um Entwicklungswerkzeuge wie CSS-Präprozessoren, Code-Checker, Compiler usw.
+                    </div>
+                </lsx-tab-page>
+            </lsx-tab-pages>
+
+            <table class="table table-striped border limited-width">
+                <tbody>
+                    <tr>
+                        <td>
+                            <span class="cmd">npm add</span>
+                        </td>
+                        <td>
+                            Alias für <span class="cmd">npm install</span>. Versteht daher dieselben Parameter.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="cmd">npm install</span>
+                        </td>
+                        <td>
+                            Installation aller in der <span class="fn">package.json</span> aufgelisteten Bibliotheken
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="cmd">npm install …</span>
+                        </td>
+                        <td>
+                            Hinzufügen einer Bibliothek als <i>Laufzeitabhängigkeit</i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="cmd">npm install -D …</span>
+                        </td>
+                        <td>
+                            Hinzufügen einer Bibliothek als <i>Entwicklungsabhängigkeit</i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="cmd">npm install --save-dev …</span>
+                        </td>
+                        <td>
+                            Langform des Befehls <span class="cmd">npm install -D …</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="cmd">npm remove …</span>
+                        </td>
+                        <td>
+                            Deinstallation einer Bibliothek
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section data-title="Manuelle Änderung der Datei package.json">
+        <lsx-ul>
+            <li>
+                Abhängigkeiten können problemlos auch manuell in die Datei <span class="fn">package.json</span> eingetragen werden.
+            </li>
+            <li>
+                Dies kann insbesondere sinnvoll sein, um die Versionsnummer vorhandener Bibliotheken hochzusetzen.
+            </li>
+            <li>
+                Anschließend muss <span class="cmd">npm install</span> ausgeführt werden, um die
+                Änderungen wirksam werden zu lassen.
+            </li>
+        </lsx-ul>
+
+        <div class="limited-width">
+            <lsx-card title="<span class='fn'>package.json</span>" class="mb-4">
+                <source-code language="json">
+                {
+                    "name": "@dschulmeis/express-tutorial",
+                    …,
+                    "dependencies": {
+                        "dotenv": "^16.4.7",
+                        "express": "^5.0.1",
+                        "logging": "^3.3.0"
+                    },
+                    "devDependencies": {
+                        "nodemon": "^3.1.9"
+                    }
+                }              
+                </source-code>
+            </lsx-card>
+
+            <lsx-info-box>
+                Laufzeitabhängigkeiten stehen im Block <code>dependencies</code>.
+            </lsx-info-box>
+            
+            <lsx-info-box>
+                Entwicklungsabhängigkeiten stehen im Block <code>devDependencies</code>.
+            </lsx-info-box>
+        </div>
+    </section>
+
+    <section data-title="Fallbeispiel: Formatierte Konsolenausgabe">
+        <div class="limited-width">
+            <p>
+                An dieser Stelle wollen wir unser kleines Programm erweitern und dabei auf eine
+                externe Bibliothek zugreifen. Am Ende soll das Programm öffentlich zugängliche
+                Daten aus dem Internet abrufen und als formatierte Ausgabe auf der Konsole ausgeben.
+                Mache mit, um den Umgang mit Node.js zu üben! 🧑‍💻
+            </p>
+
+            <lsx-carousel class="mb-5">
+                <lsx-carousel-page>
+                    <div class="markdown">
+                        Für dieses Beispiel benötigen wir eine Bibliothek, die ein Datenobjekt oder
+                        Array für die Anzeige auf der Konsole leserlich formatieren kann. Nach einer
+                        kleinen Weile finden wir hierfür auf [npmjs.org](https://npmjs.org){target="_blank"}
+                        die Bibliothek [prettyoutput](https://www.npmjs.com/package/prettyoutput){target="_blank"}.
+                    </div>
+
+                    <lsx-info-box title="Du bist dran!" class="markdown">
+                        Schaue dir die Informationen zur Bibliothek
+                        [prettyoutput](https://www.npmjs.com/package/prettyoutput){target="_blank"}
+                        an. Was kannst du alles entdecken?
+                    </lsx-info-box>
+
+                    <img src="03-nodejs/dependencies-npmjs.png" alt="" class="d-block w-100 border shadow">
+                </lsx-carousel-page>
+                <lsx-carousel-page>
+                    <p>
+                        Als nächstes drücke <kbd>Strg</kbd>+<kbd>ö</kbd>, um das Terminal in Visual Studio Code
+                        zu öffnen und gebe folgenden Befehl ein: <span class="cmd">npm add prettyoutput</span>
+                    </p>
+                    <p>
+                        Dadurch wird die Bibliothek installiert und in die <span class="fn">package.json</span>
+                        eingetragen. Wo wir schon dabei sind: Füge der <span class="fn">package.json</span> noch
+                        die Zeile <code>"type": "module"</code> hinzu, damit wir die neurere
+                        <code>import</code>/<code>export</code>-Syntax in JavaScript nutzen können.
+                    </p>
+
+                    <lsx-info-box type="warning" title="Merke">
+                        Visual Studio Code wird in der Schweiz entwickelt. Das Ö in <kbd>Strg</kbd>+<kbd>ö</kbd>
+                        steht für „Törminal”. 🇨🇭
+                    </lsx-info-box>
+
+                    <img src="03-nodejs/dependencies-npm-install.png" alt="" class="d-block w-100 shadow">
+                </lsx-carousel-page>
+                <lsx-carousel-page>
+                    <div class="markdown">
+                        Nun können wir die Bibliothek nutzen. Zuvor suchen wir uns aber auf
+                        https://github.com/jdorfman/awesome-json-datasets eine API mit interessanten
+                        Daten aus.
+                    </div>
+                    <img src="03-nodejs/dependencies-json-datasets.png" alt="" class="d-block w-100 border shadow">
+                </lsx-carousel-page>
+                <lsx-carousel-page>
+                    <p>
+                        Weiter geht es mit der Datei <span class="fn">src/main.js</span>. Gebe dort folgenden
+                        Quellcode ein. Dieser importiert die Bibliothek in der ersten Zeile und ruft die von
+                        ihr zur Verfügung gestellte Funktion <code>prettyoutput()</code> auf, um die abgerufenen
+                        Daten vor der Ausgabe zu formatieren.
+                    </p>
+                    <source-code language="javascript">
+                        import prettyoutput from "prettyoutput";
+
+                        try {
+                            console.log("People in Space");
+                            console.log("===============");
+                            console.log();
+                        
+                            // Daten abrufen
+                            let response = await fetch("http://api.open-notify.org/astros.json");
+                            let peopleInSpace = await response.json();
+                        
+                            // Daten formatieren mit der prettyoutput-Bibliothek
+                            let formatedOutput = prettyoutput(peopleInSpace);
+                            console.log(formatedOutput);
+                        } catch (error) {
+                            console.error("Fehler beim Abruf der Daten!");
+                            console.error(error);
+                        }
+                    </source-code>
+                </lsx-carousel-page>
+                <lsx-carousel-page>
+                    <p>
+                        Zum Testen öffne nun das Tööörminal und gebe <span class="cmd">npm start</span> ein.
+                        Mit etwas Glück sollten kurz darauf die abgerufenen Daten erscheinen. 🥴
+                    </p>
+                    <img src="03-nodejs/dependencies-vscode2.png" alt="" class="d-block w-100 border shadow">
+                </lsx-carousel-page>
+                <lsx-carousel-page>
+                    <p>
+                        Das war es schon. So einfach ist das! 🤷‍♂️
+                    </p>
+                    <img class="active d-block w-25 m-auto" src="shared/finish.svg" />
+                    <p>
+                        <small>
+                            <small>
+                                Bildnachweis: <a href="https://pixabay.com/en/symbol-gui-internet-internet-page-2480163/" target="_blank">Pixabay: janf93</a>
+                            </small>
+                        </small>
+                    </p>
+                </lsx-carousel-page>
+            </lsx-carousel>
+        </div>
+
+        <div class="centered-content flex-row flex-wrap gap-3 mb-5">
+            <!-- Quellcode -->
+            <lsx-modal>
+                <lsx-thumbnail style="height: 15em;" class="mw-100">
+                    <img src="03-nodejs/dependencies-vscode1.png" class="d-block h-100 mw-100 dhbw-thumbnail p-1"/>
+                    <span class="lsx-modal-image-thumbnail">Quellcode in Visual Studio Code</span>
+                </lsx-thumbnail>
+                <lsx-content>
+                    <img src="03-nodejs/dependencies-vscode1.png" class="img-responsive img-thumbnail"/>
+                </lsx-content>
+            </lsx-modal>
+
+            <!-- Konsolenausgabe -->
+            <lsx-modal>
+                <lsx-thumbnail style="height: 15em;" class="mw-100">
+                    <img src="03-nodejs/dependencies-vscode2.png" class="d-block h-100 mw-100 dhbw-thumbnail p-1"/>
+                    <span class="lsx-modal-image-thumbnail">Konsolenausgabe des Programms</span>
+                </lsx-thumbnail>
+                <lsx-content>
+                    <img src="03-nodejs/dependencies-vscode2.png" class="img-responsive img-thumbnail"/>
+                </lsx-content>
+            </lsx-modal>
+        </div>
+    </section>
+</section>
 
 <section data-title="Quellcode modularisieren" class="centered-content"></section>
 
@@ -806,7 +1151,108 @@
         </aside>
     </section>
 
-    <section data-title="Aufgabe 2: Textzeilen sortieren">
+    <section data-title="Aufgabe 2: 12-Faktor Apps">
+        <article>
+            <lsx-tab-pages>
+                <lsx-tab-page title="Aufgabe">
+                    <lsx-ul>
+                        <li>
+                            <p>
+                                Besuche die Seite <a href="https://www.12factor.net/" target="_blank">12factor.net</a>
+                                und lese dir das Manifest und die 12 Faktoren durch.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Die Reihenfolge der 12 Faktoren ist leider etwas chaotisch. Versuche sie daher in folgende Kategorien
+                                einzuteilen:
+                            </p>
+                            <ol class="mb-3">
+                                <li>Entwicklung</li>
+                                <li>Konfiguration</li>
+                                <li>Ausführung</li>
+                            </ol>
+                        </li>
+                        <li>
+                            <p>
+                                Frage anschließen einen KI-Chatassistenten nach der Bedeutung der 12 Faktoren und wie
+                                diese mit Node.js umgesetzt werden können.
+                            </p>
+                        </li>
+                    </lsx-ul>
+
+                    <img src="03-nodejs/12factor.net.png" class="d-block w-100 dhbw-border shadow">
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Lösung: Entwicklung" class="markdown">
+                    * Zentral verwalteter Quellcode
+                    * Abhängigkeiten explizit deklarieren
+                    * Getrennte Build-, Release- und Run-Phasen
+                    * Vergleichbare Entwicklungs- und Produktivumgebungen
+
+                    Microservices werden mit modernen Werkzeugen und modernen Programmierpraktiken entwickelt. Ihr Quellcode
+                    wird deshalb mit Werkzeugen wie Git versioniert, so dass jede Änderung daran nachvollziehbar ist. Werkzeuge
+                    wie `npm`, `pip` oder `maven` verwalten darüber hinaus die Abhängigkeiten zu externen Bibliotheken und sorgen
+                    für automatisierte Build- und Releaseprozesse.
+                    
+                    Zusätzlich finden Entwicklung und Test und vergleichbaren Bedingungen wie der spätere Produktiveinsatz statt,
+                    wofür die Produktivumgebung auf den Entwicklungs- und Testmaschinen so gut wie möglich nachgebildet wird.
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Lösung: Konfiguration" class="markdown">
+                    * Nutzung fremder Dienste über das Netzwerk
+                    * Unterstützende Dienste sind Ressourcen
+                    * Konfiguration durch Umgebungsvariablen
+                    * Adminprozesse sind einmalige Vorgänge
+
+                    Microservices kommunizieren grundsätzlich über das Netzwerk bzw. das Internet mit anderen Microservices.
+                    Andere Schnittstellen sind nicht vorgesehen, um die Microservices auf getrennten virtuellen Maschinen und
+                    oft sogar getrennten physischen Maschinen betreiben zu können. Über die Konfiguration der Services, welche
+                    innerhalb der Cloudumgebung vorgenommen wird, werden jedem Microservice die Netzadressen der von ihm benötigten
+                    anderen Services mitgeteilt. Diese stehen dann zur Laufzeit als Umgebungsvariablen des Betriebssystems zur
+                    Verfügung, da es sich hierbei um eine universale, einfache Möglichkeit handelt.
+
+                    Falls administrative Aktionen wie die Reorganisation einer Datenbank oder das Löschen veralteter Daten
+                    notwendig sind, erfolgen diese durch einmalig aufgerufene, vom eigentlichen Microservice getrennt laufende
+                    Werkzeugprogramme.
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Lösung: Ausführung" class="markdown">
+                    * Ausführung als einzelner Betriebssystemprozess
+                    * Parallelität durch weitere Betriebssystemprozesse
+                    * Robuster und schneller Start bzw. Stopp der Prozesse
+                    * Protokollierung durch zeitbezogene Ereignisse
+
+                    Microservices sind immer in sich geschlossen und bringen sämtliche Laufzeitumgebungen, Bibliotheken und
+                    Hilfsprogramme mit, um ausgeführt werden zu können. Sie können dadurch als einzelner Betriebssystemprozess
+                    leicht gestartet und gestoppt werden, beispielsweise indem sie in ein Container-Image verpackt werden.
+                    Start und Stopp müssen besonders schnell gehen, damit die Skalierung jederzeit elastisch angpasst werden
+                    kann.
+
+                    Für die Fehlersuche schreiben Microservices umfangreiche Protokollmeldungen in die Konsole (ihre Standardausgabe).
+                    Jede Meldung wird dabei mit einem eindeutigen Zeitstempel am Anfang versehen, so dass die Protokollmeldungen
+                    von der Cloud wie ein kontinuierlicher Datenstrom von zeitpunktbezogenen Ereignissen behandelt und archiviert
+                    werden können.
+                </lsx-tab-page>
+            </lsx-tab-pages>
+        </article>
+        <aside>
+            <p>
+                Skalierbare Anwendungen, die dafür gemacht sind, in einer automatisierten Cloud-Umgebung
+                ausgeführt zu werden, werden meistens nach dem Prinzip der 12-Faktor-Apps programmiert.
+                In dieser Aufgabe findest du heraus, was damit gemeint ist. 🥳
+            </p>
+            <img src="shared/ai-assistant.png" class="img-fluid d-block" style="width: 15em; margin-bottom: 0.5em;"/>
+            <p>
+                <small>
+                    Bildnachweis:
+                    <a href="https://pixabay.com/illustrations/robot-drawing-art-job-money-8614567/" target="_blank">pixabay: Comic-Generator-Pro</a>
+                </small>
+            </p>
+        </aside>
+    </section>
+
+    <section data-title="Aufgabe 3: Textzeilen sortieren">
         <article>
             TODO
         </article>
