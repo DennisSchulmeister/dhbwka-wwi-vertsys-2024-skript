@@ -125,6 +125,7 @@
                         font-size: 100%;
                         margin: 0;
                         padding: 0;
+                        overflow: hidden;
                     }
                 }
             </style>
@@ -206,7 +207,7 @@
                         _println("   A:        Zu Laufwerk A wechseln");
                         _println("   B:        Zu Laufwerk B wechseln");
                         _println("   C:        Zu Laufwerk C wechseln");
-                        _println("   D:        Zu Laufwerk C wechseln");
+                        _println("   D:        Zu Laufwerk D wechseln");
                         _println();
                     }
     
@@ -366,44 +367,155 @@
         <aside class="markdown">
             Ganz früher vor vielen Jahrzehnten hatten die meisten Computer noch keine grafische
             Benutzeroberfläche. Teilweise konnten die Computer neben einer einfachen Textausgabe
-            auch gar keine Grafiken erzeugen und auch eine Maus war nicht immer vorhanden.
+            auch gar keine Grafiken erzeugen und selbst eine Maus war nicht immer vorhanden.
             Stattdessen erfolgte die Bedienung ausschließlich über die Tastatur durch die Eingabe
             von Befehlen.
 
             Heute mag uns das eigenartig erscheinen. Doch die Bedienung war in vierlerlei Hinsicht
             effektiver als heute. Mit wenigen Befehlen konnte man zwischen Laufwerken und Verzeichnissen
             navigieren und die wichtigsten Aufgaben wie das Anlegen oder Löschen von Dateien erledigen.
-            Um ein Programm zu starten, musste man nur seinen Namen eingeben und <kbd>Enter</kbd> drücken.
-            Und nicht zuletzt boten die einegbauten Befehlsinterpreter der Betriebssysteme eine eingebaute
-            Programmiersprache, mit der selbst komplexe Aufgaben vollständig automatisiert werden konnten.
+            Um ein Programm zu starten, musste man lediglich seinen Namen eingeben und <kbd>Enter</kbd>
+            drücken. Und nicht zuletzt beinhalteten die eingebauten Befehlsinterpreter der Betriebssysteme
+            eine vollwertige Programmiersprache, mit der selbst komplexe Aufgaben vollständig automatisiert
+            werden konnten.
 
             Wir wir gleich sehen werden, ist diese Art der Bedienung nie verschwunden. Sie versteckt sich
-            heute nur mehr wie früher. Doch gerade in der Softwareentwicklung ist das sog. Terminal (auch
-            Konsole oder Eingabeaufforderung genannt) immer noch unerlässlich.
+            heute nur besser. Doch gerade in der Softwareentwicklung ist das Terminal (auch Konsole oder
+            Eingabeaufforderung genannt) immer noch unerlässlich!
 
-            #### Probiere aus aus!
+            #### Probiere es aus
 
             Auf dieser Seite kannst du mit einem einfachen Remake von MS-DOS, dem Vorläufer der heutigen
-            Windows-Betriebssysteme spielen. Probier es gleich einmal aus:
+            Windows-Betriebssysteme spielen. Probier es gleich einmal aus!
 
             1. Klicke auf den rechten Bereich, um Tastatureingaben zu ermöglichen.
             1. Gib den Befehl <code>help</code> ein und drücke <kbd>Enter</kbd>.
             1. Probiere die eingebauten Befehle aus und beobachte, was passiert.
             1. Versuche, zwischen den Verzeichnissen zu wechseln und ihre Inhalte auszugeben.
 
-            Achte dabei auf die Zeichen vor dem blinkenden Cursor. Dort siehst du immer, in welchem
-            Laufwerk und Verzeichnis du dich gerade befindest. Dies werden wir ab sofort immer benötigen!
+            Achte dabei auf die Zeichen vor dem blinkenden Cursor. In diesem sog. Prompt siehst du immer,
+            in welchem wo du dich gerade befindest. Dies werden wir ab sofort immer benötigen!
         </aside>
     </section>
 
     <section data-title="Wo ein Terminal ist, ist ein Weg" class="centered-content">
-        ...
+        <div class="markdown limited-width mb-5">
+            Obwohl heutige Betriebssysteme längst über komfortable, grafische Benutzeroberflächen
+            verfügen, besitzen sie immer noch ein klassisches Terminal für Power-User. Insbesondere
+            unter Linux (sowie allen anderen von [Unix](https://de.wikipedia.org/wiki/Unix){target="_blank"}
+            abgeleiteten Betriebssystemen) gehört das Terminal zu den unverzichtbaren Werkzeugen, da hier
+            auf eine seit Jahrzehnten gepflegte Werzkzeugsammlung zurückgegriffen werden kann. Die
+            Grundbefehle haben sich dabei unter allen Betriebssystemen seit den frühen Tagen nicht
+            verändert!
+
+            ### Windows {.dhbw-lightblue}
+
+            Unter Windows kann das Terminal aufgerufen werden, indem man im Startmenü nach einem
+            der Begriffe <i>cmd</i>, <i>Eingabeaufforderung</i> oder <i>PowerShell</i> sucht und
+            dann <kbd>Enter</kbd> drückt. Das Terminalfenster startet dabei immer mit dem
+            Benutzerverzeichnis als Arbeitsverzeichnis. Alternativ kann man in die Adresszeile
+            des Explorers <span class="cmd">cmd</span> eingeben, um innerhalb des aktuellen
+            Verzeichnisses ein Terminal zu öffnen.
+
+            ### Andere Betriebssysteme {.dhbw-lightblue}
+
+            Bei den anderen Betriebssystemen gibt es keinen einheitlichen Mechanismus zum Starten
+            eines Terminals. Meistens findet man es aber vorinstalliert in der Programmübersicht.
+        </div>
+        <div class="centered-content flex-row flex-wrap gap-3">
+            <!-- Windows CMD -->
+            <lsx-modal>
+                <lsx-thumbnail style="height: 15em;" class="mw-100">
+                    <img src="03-nodejs/terminal-windows-cmd.png" class="d-block h-100 mw-100 dhbw-thumbnail p-1"/>
+                    <span class="lsx-modal-image-thumbnail">Die traditionalle Windows-Eingabeaufforderung</span>
+                </lsx-thumbnail>
+                <lsx-content>
+                    <img src="03-nodejs/terminal-windows-cmd.png" class="img-responsive img-thumbnail"/>
+                </lsx-content>
+            </lsx-modal>
+
+            <!-- Windows PowerShell -->
+            <lsx-modal>
+                <lsx-thumbnail style="height: 15em;" class="mw-100">
+                    <img src="03-nodejs/terminal-windows-powershell.png" class="d-block h-100 mw-100 dhbw-thumbnail p-1"/>
+                    <span class="lsx-modal-image-thumbnail">Die moderne Windows PowerShell</span>
+                </lsx-thumbnail>
+                <lsx-content>
+                    <img src="03-nodejs/terminal-windows-powershell.png" class="img-responsive img-thumbnail"/>
+                </lsx-content>
+            </lsx-modal>
+
+            <!-- Linux -->
+            <lsx-modal>
+                <lsx-thumbnail style="height: 15em;" class="mw-100">
+                    <img src="03-nodejs/terminal-gnome.png" class="d-block h-100 mw-100 dhbw-thumbnail p-1"/>
+                    <span class="lsx-modal-image-thumbnail">Typisches Terminalfenster unter Linux</span>
+                </lsx-thumbnail>
+                <lsx-content>
+                    <img src="03-nodejs/terminal-gnome.png" class="img-responsive img-thumbnail"/>
+                </lsx-content>
+            </lsx-modal>
+             
+            <!-- VS Code-->
+            <lsx-modal>
+                <lsx-thumbnail style="height: 15em;" class="mw-100">
+                    <img src="03-nodejs/terminal-vscode.png" class="d-block h-100 mw-100 dhbw-thumbnail p-1"/>
+                    <span class="lsx-modal-image-thumbnail">Eingebautes Terminal in Visual Studio Code</span>
+                </lsx-thumbnail>
+                <lsx-content>
+                    <img src="03-nodejs/terminal-vscode.png" class="img-responsive img-thumbnail"/>
+                </lsx-content>
+            </lsx-modal>
+        </div>
+    </section>
+
+    <section data-title="Aufgabe: Deine neue Superkraft!" data-background-color="rgb(231, 221, 141)">
+        <article>
+            <p>
+                Besuche deinen Lieblings-Chatbot und gib folgenden Prompt ein. Den farblich hervorgehobenen
+                Platzhalter musst du natürlich durch den Namen deines Betriebssystems ersetzen. Lasse dir
+                auf diese Weise die grundlegende Bedienung des Terminals erklären und vor allem, wie du darin
+                zwischen Laufwerken und Verzeichnissen wechseln, sowie Programme ausführen kannst. Probiere
+                die Tipps sogleich in einem Konsolenfesnter auf deinem Rechner aus.
+            </p>
+            <lsx-card class="mb-4">
+                <p class="fst-italic text-muted m-0">
+                    Wo ein Terminal ist, ist ein Weg. Bitte hilf mir, diese neue Super-Power zu erlangen und mich im
+                    Terminal unter <span class="red text-decoration-underline">Betriebssystem</span> zurecht zu finden.
+                </p>
+            </lsx-card>
+            
+            <lsx-grid-fluid class="p-0">
+                <lsx-row>
+                    <lsx-col size="md">
+                        <lsx-modal-image src="03-nodejs/terminal-chatgpt.png" caption="Beispiel-Unterhaltung mit ChatGPT" style="width: auto;"></lsx-modal-image>
+                    </lsx-col>
+                    <lsx-col size="md">
+                        <lsx-modal-image src="03-nodejs/terminal-tldr.png" caption="Ausgabe des <code>tldr</code>-Befehls unter Linux" style="width: auto;"></lsx-modal-image>
+                    </lsx-col>
+                </lsx-row>
+            </lsx-grid-fluid>
+        </article>
+        <aside>
+            <p>
+                Bist du bereit für deine neue Superkraft? Dein freundlicher KI-Chatbot steht schon
+                zur Stelle. Öffne ein neues Fenster mit deinem Lieblings-Chatbot und lass dir zeigen,
+                was du im Terminal alles anstellen kannst. 🤖
+            </p>
+            <img src="shared/ai-assistant.png" class="img-fluid d-block" style="width: 15em; margin-bottom: 0.5em;"/>
+            <p>
+                <small>
+                    Bildnachweis:
+                    <a href="https://pixabay.com/illustrations/robot-drawing-art-job-money-8614567/" target="_blank">pixabay: Comic-Generator-Pro</a>
+                </small>
+            </p>
+        </aside>
     </section>
 </section>
 
-<!-- =======================-->
+<!-- ======================= -->
 <!-- HTTP-Server mit Express -->
-<!-- =======================-->
+<!-- ======================= -->
 <section data-use-template="teilkapitel" data-titel="HTTP-Server mit Express"></section>
 
 <!-- =============== -->
