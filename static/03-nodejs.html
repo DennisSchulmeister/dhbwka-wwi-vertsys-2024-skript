@@ -1055,26 +1055,28 @@
                         ihr zur Verfügung gestellte Funktion <code>prettyoutput()</code> auf, um die abgerufenen
                         Daten vor der Ausgabe zu formatieren.
                     </p>
-                    <source-code language="javascript">
-                        import prettyoutput from "prettyoutput";
-
-                        try {
-                            console.log("People in Space");
-                            console.log("===============");
-                            console.log();
-                        
-                            // Daten abrufen
-                            let response = await fetch("http://api.open-notify.org/astros.json");
-                            let peopleInSpace = await response.json();
-                        
-                            // Daten formatieren mit der prettyoutput-Bibliothek
-                            let formatedOutput = prettyoutput(peopleInSpace);
-                            console.log(formatedOutput);
-                        } catch (error) {
-                            console.error("Fehler beim Abruf der Daten!");
-                            console.error(error);
-                        }
-                    </source-code>
+                    <lsx-card title="<span class='fn'>src/main.js</span>">
+                        <source-code language="javascript">
+                            import prettyoutput from "prettyoutput";
+    
+                            try {
+                                console.log("People in Space");
+                                console.log("===============");
+                                console.log();
+                            
+                                // Daten abrufen
+                                let response = await fetch("http://api.open-notify.org/astros.json");
+                                let peopleInSpace = await response.json();
+                            
+                                // Daten formatieren mit der prettyoutput-Bibliothek
+                                let formatedOutput = prettyoutput(peopleInSpace);
+                                console.log(formatedOutput);
+                            } catch (error) {
+                                console.error("Fehler beim Abruf der Daten!");
+                                console.error(error);
+                            }
+                        </source-code>
+                    </lsx-card>
                 </lsx-carousel-page>
                 <lsx-carousel-page>
                     <p>
@@ -1125,14 +1127,410 @@
     </section>
 </section>
 
-<section data-title="Quellcode modularisieren" class="centered-content"></section>
+<section data-title="Quellcode modularisieren" class="centered-content">
+    <section data-title="Vorsicht, Falle!">
+        <div class="limited-width">
+            <div class="markdown mb-4">
+                Bereits im letzten Semester haben wir gelernt, dass JavaScript aufgrund seines Alters einige
+                Design-Schwächen besitzt, die einen schnell beißen können, wenn man sie nicht kennt. 🐊
+                Der Grund ist wie immer, dass JavaScript ursprünglich als einfache Skript-Sprache zur
+                Ausführung kleiner Code-Schnippsel im Browser, eigentlich aber gar nicht als große
+                Allzweck-Programmiersprache entworfen wurde.
+    
+                Eines dieser Probleme ist die globale Sichtbarkeit aller Dinge, die nicht innerhalb einer
+                Funktion oder eines anderen mit geschweiften Klammern abgegrenzten Code-Blocks definiert
+                werden. Stellen wir uns hierfür eine Webseite mit zwei JavaScript-Dateien vor.
+            </div>
 
-<section data-title="Debugging mit Visual Studio Code" class="centered-content"></section>
+            <lsx-tab-pages>
+                <lsx-tab-page title="Beispiel">
+                    <lsx-card title="<span class='fn'>index.html</span>" class="w-100 mb-4">
+                        <source-code language="html">
+                            &lt;!DOCTYPE html&gt;
+                            &lt;html lang="de"&gt;
+                                &lt;head&gt;
+                                    &lt;meta charset="utf-8"&gt;
+                                    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                                    &lt;title&gt;Beispiel&lt;/title&gt;
+            
+                                    &lt;!-- Zwei JavaScript-Dateien --&gt;
+                                    &lt;script src="script1.js"&gt;&lt;/script&gt;
+                                    &lt;script src="script2.js"&gt;&lt;/script&gt;
+        
+                                    &lt;!-- Aufruf der Funktion, die in beiden JavaScript-Dateien definiert ist --&gt;
+                                    &lt;script&gt;
+                                        meineFunktion();
+                                    &lt;/script&gt;
+                                &lt;/head&gt;
+                            &lt;/html&gt;
+                        </source-code>
+                    </lsx-card>
+            
+                    <lsx-grid-fluid class="p-0">
+                        <lsx-row>
+                            <lsx-col size="lg">
+                                <lsx-card title="<span class='fn'>script1.js</span>" class="w-100 h-100">
+                                    <source-code language="javascript">
+                                        function meineFunktion() {
+                                            alert('Hallo aus script1.js');
+                                        }
+                                    </source-code>
+                                </lsx-card>
+                            </lsx-col>
+                            <lsx-col size="lg">
+                                <lsx-card title="<span class='fn'>script2.js</span>" class="w-100 h-100">
+                                    <source-code language="javascript">
+                                        function meineFunktion() {
+                                            alert('Hallo aus script2.js');
+                                        }
+                                    </source-code>
+                                </lsx-card>
+                            </lsx-col>
+                        </lsx-row>
+                    </lsx-grid-fluid>
+                </lsx-tab-page>
 
-<section data-title="Vertiefungen" class="centered-content"></section>
+                <lsx-tab-page title="Problem">
+                    <div class="markdown">
+                        Das Problem ist, dass in beiden Dateien eine Funktion mit demselben Namen definiert wird.
+                        Da die im Top-Level einer Datei definierten Dinge aber immer global (in allen Code-Dateien)
+                        sichtbar und benutzbar sind, überschreibt die eine Funktion die andere mit demselben Namen.
+                        Technisch gesehen, weil sie beide als <code>window.meineFunktion</code> an das globale
+                        <code>window</code>-Objekt angehängt werden.
+
+                        #### Die große Preisfrage {.dhbw-lightblue .mt-5}
+
+                        Die große Frage ist nun: Welche Funktion wird beim Start der Seite ausgeführt?
+                    </div>
+
+                    <button onclick="alert('Hallo aus script2.js')">Probiere es aus!</button>
+
+                    <img src="03-nodejs/preisfrage.jpg" alt="" class="d-block w-100 mt-4">
+                    <p>
+                        <small>
+                            <small>
+                                Bildnachweis:
+                                <a href="https://pixabay.com/illustrations/ai-generated-trophy-cup-award-8248632/" target="_blank">Pixabay: TheDigitalArtist</a>
+                            </small>
+                        </small>
+                    </p>
+                </lsx-tab-page>
+            </lsx-tab-pages>
+        </div>
+    </section>
+
+    <section data-title="ES6-Module mit import/export">
+        <div class="limited-width">
+            <div class="markdown mb-4">
+                Wie so oft, haben die Macher*innen hinter JavaScript das Problem erkannt und eine neue
+                Syntax eingeführt, die das Problem löst. Auf diese Weise funktionieren alte Programme
+                weiter wie gewohnt, neue Programme können die Stolperfalle aber umgehen. In diesem Fall
+                heißt das Zauberwort: Module 🎩 Indem wir dem Browser sagen, dass es sich bei den Skripten
+                um Module handelt, wird der Namenskonflikt vermieden. Denn die Inhalte eines Moduls werden
+                niemals automatisch im globalen Namensraum angelegt!
+
+                Die Kehrseite ist allerdings, dass wir uns mit den Schlüsselwörtern <code>export</code> und
+                <code>import</code> auseinander setzen müssen, um zu entscheiden, welche Teile einer Code-Datei
+                sozusagen „öffentlich“ und somit auch aus anderen Code-Dateien heraus sichtbar sein sollen und
+                welche Teile einer anderen Code-Datei in der eigenen Datei genutzt werden sollen. Klingt kompliziert?
+                Ist es am Ende gar nicht, löst aber sehr viele Probleme. 🥹
+            </div>
+
+            <lsx-accordion>
+                <lsx-accordion-page title="ES6-Module im Browser nutzen">
+                    <div class="markdown mb-4">
+                        Natürlich können die Browser ihr Standardverhalten nicht rückwärtskompatibel ändern.
+                        Um ES6-Module zu aktivieren, müssen die verwendeten Skript-Blöcker daher explizit
+                        mit <code>type="module"</code> gekennzeichnet werden. Dies bewirkt, dass
+                        keine Inhalte des Skript-Blocks unwillentlich global geteilt werden.
+
+                        Geteilt wird dann nur, was explizit mit dem Schlüsselwort <code>export</code> gekennzeichnet
+                        wurde. Alle anderen Inhalte sind nur innerhalb derselben Datei sichtbar. Umgekehrt müssen
+                        die in einer Datei exportieren Inhalte in einer anderen Datei mit <code>import</code> explizit
+                        importiert werden, um tatsächlich genutzt werden zu können. Das Beispiel unten zeigt, wie es geht.
+                    </div>
+
+                    <div class="mb-4">
+                        <button onclick="alert('Hallo aus script1.js')">Probiere es aus!</button>
+                    </div>
+
+                    <lsx-card title="<span class='fn'>index.html</span>" class="w-100 mb-4">
+                        <source-code language="html">
+                            &lt;!DOCTYPE html&gt;
+                            &lt;html lang="de"&gt;
+                                &lt;head&gt;
+                                    &lt;meta charset="utf-8"&gt;
+                                    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                                    &lt;title&gt;Beispiel&lt;/title&gt;
+            
+                                    &lt;!-- Die Skript-Dateien werden hier nicht mehr eingebunden!      --&gt;        
+                                    &lt;!-- Dafür ist dieser Skript-Block nun als Modul gekennzeichnet. --&gt;
+                                    &lt;script type="module"&gt;
+                                        // Bevor die Funktion genutzt werden kann, muss sie importiert werden.
+                                        import {meineFunktion} from "./script1.js";
+                                        
+                                        // Hier wird die zuvor importierte Funktion aufgerufen.
+                                        meineFunktion();
+                                    &lt;/script&gt;
+                                &lt;/head&gt;
+                            &lt;/html&gt;
+                        </source-code>
+                    </lsx-card>
+            
+                    <lsx-grid-fluid class="p-0">
+                        <lsx-row>
+                            <lsx-col size="lg">
+                                <lsx-card title="<span class='fn'>script1.js</span>" class="w-100">
+                                    <source-code language="javascript">
+                                    // Beachte das export-Schlüsselwort!
+                                    export function meineFunktion() {
+                                        alert('Hallo aus script1.js');
+                                    }
+                                    </source-code>
+                                </lsx-card>
+                            </lsx-col>
+                            <lsx-col size="lg">
+                                <lsx-card title="<span class='fn'>script2.js</span>" class="w-100">
+                                    <source-code language="javascript">
+                                    // Beachte das export-Schlüsselwort!
+                                    export function meineFunktion() {
+                                        alert('Hallo aus script2.js');
+                                    }
+                                    </source-code>
+                                </lsx-card>
+                            </lsx-col>
+                        </lsx-row>
+                    </lsx-grid-fluid>
+                </lsx-accordion-page>
+
+                <lsx-accordion-page title="ES6-Module mit Node.js nutzen">
+                    <div class="makrdown mb-4">
+                        Die Lösung für Node.js sieht genau so aus, wie die für den Browser. Es fällt lediglich
+                        die HTML-Datei weg und wir müssen in der <span class="fn">package.json</span> angeben,
+                        dass wir mit ES6-Modulen arbeiten wollen. Denn traditionall besitzt Node.js seit jeher
+                        sein eigenes Modulsystem, da ES6-Module erst später spezifiziert wurden.
+                    </div>
+
+                    <lsx-card title="<span class='fn'>package.json</span>" class="w-100 mb-4">
+                        <source-code language="json">
+                            {
+                                "type": "module",
+                                …,
+                            }
+                        </source-code>
+                    </lsx-card>
+            
+                    <lsx-grid-fluid class="p-0">
+                        <lsx-row>
+                            <lsx-col size="lg">
+                                <lsx-card title="<span class='fn'>script1.js</span>" class="w-100 h-100">
+                                    <source-code language="javascript">
+                                    // Beachte das export-Schlüsselwort!
+                                    export function meineFunktion() {
+                                        alert('Hallo aus script1.js');
+                                    }
+                                    </source-code>
+                                </lsx-card>
+                            </lsx-col>
+                            <lsx-col size="lg">
+                                <lsx-card title="<span class='fn'>script2.js</span>" class="w-100 h-100">
+                                    <source-code language="javascript">
+                                    import {meineFunktion} from "./script1.js";
+                                    meineFunktion();
+                                    </source-code>
+                                </lsx-card>
+                            </lsx-col>
+                        </lsx-row>
+                    </lsx-grid-fluid>
+                </lsx-accordion-page>
+
+                <lsx-accordion-page title="Beide Funktionen gleichzeitig importieren">
+                    <p>
+                        Was, wenn ich beide Funktionen importieren will? Kein Problem! Die importierten Objekte können
+                        beim Import einfach lokal umbenannt werden, um Namenskonflikte aufzulösen.
+                    </p>
+                    <source-code language="javascript">
+                        import {meineFunktion as funktion1} from "./script1.js";
+                        import {meineFunktion as funktion2} from "./script2.js";
+
+                        funktion1();
+                        funktion2();
+                    </source-code>
+                </lsx-accordion-page>
+
+                <lsx-accordion-page title="Import ohne geschweifte Klammern">
+                    <p>
+                        Warum haben manche Import geschweifte Klammern und andere nicht? Ganz einfach:
+                    </p>
+
+                    <h4 class="dhbw-lightblue mt-4">Mit geschweiften Klammern</h4>
+                    <p>
+                        Import eines einzelnen Objekts aus der anderen Datei. Der Name des zu importierenden Objekts
+                        steht in den Klammern und muss exakt dem Namen in der anderen Datei entsprechen.
+                    </p>
+                    <lsx-grid-fluid class="p-0">
+                        <lsx-row>
+                            <lsx-col size="lg">
+                                <lsx-card title="<span class='fn'>script1.js</span>" class="w-100 h-100">
+                                    <source-code language="javascript">
+                                        export function meineFunktion() {
+                                            alert('Hallo aus script1.js');
+                                        }
+                                    </source-code>
+                                </lsx-card>
+                            </lsx-col>
+                            <lsx-col size="lg">
+                                <lsx-card title="<span class='fn'>script2.js</span>" class="w-100 h-100">
+                                    <source-code language="javascript">
+                                        import {meineFunktion} from "./script1.js";
+                                    </source-code>
+                                </lsx-card>
+                            </lsx-col>
+                        </lsx-row>
+                    </lsx-grid-fluid>
+
+                    <h4 class="dhbw-lightblue mt-4">Ohne geschweifte Klammern</h4>
+                    <p>
+                        Es wird der sog. Default Export der anderen Datei importiert. Dabei handelt es sich oft um ein
+                        Objekt mit mehreren Methoden. Tatsächlich kann aber alles als Default Export exportiert werden,
+                        was auch normal exportiert werden kann. Eine Datei kann auch beide Export-Arten gleichzeitig
+                        nutzen.
+                    </p>
+                    
+                    <lsx-card title="<span class='fn'>utils.js</span>" class="w-100 h-100 mb-4">
+                        <source-code language="javascript">
+                            function sayHello() { … };
+                            function sayGoodbye() { … };
+
+                            export default {sayHello, sayGoodbye};
+                        </source-code>
+                    </lsx-card>
+
+                    <lsx-card title="<span class='fn'>script2.js</span>" class="w-100 h-100">
+                        <source-code language="javascript">
+                            // Der Name myUtils kann frei gewählt werden
+                            import myUtils from "./utils.js";
+                        </source-code>
+                    </lsx-card>
+                </lsx-accordion-page>
+            </lsx-accordion>
+        </div>
+    </section>
+
+    <section data-title="Fallbeispiel: Abruf von JSON-Daten">
+        <div class="limited-width">
+            <div class="markdown mb-4">
+                Im nächsten Schritt wollen wir das eben Gelernte gleich in unserem Beispielprogramm einsetzen
+                und eine kleine Funktion schreiben, die den Abruf der JSON-Daten vereinfacht. Diese lagern wir
+                in eine neue Quellcode-Datei mit dem Namen <span class="fn">utils/fetch.js</span> aus.
+            </div>
+
+            <lsx-carousel class="mb-5">
+                <lsx-carousel-page>
+                    <p>
+                        Lege im <span class="fn">src</span>-Verzeichnis ein neues Unterverzeichnis namens
+                        <span class="fn">utils</span> und darin eine neue Datei mit dem Namen
+                        <span class="fn">fetch.js</span> an. Folgenden Quellcode soll die Datei beinhalten.
+                        Beachte insbesondere die <code>export</code>-Anweisung.
+                    </p>
+
+                    <lsx-card title="<span class='fn'>src/utils/fetch.js</span>">
+                        <source-code language="javascript">
+                            /**
+                             * Kleine Hilfsfunktion zum Abruf von JSON-Daten aus dem Internet. Zwar müsste
+                             * man hierfür keine neue Funktion definieren. Auf diese Weise können wir jedoch
+                             * zeigen, wie "größere" JavaScript-Programme in einzelne Module (Quellcode-Dateien)
+                             * aufgeteilt werden können.
+                             * 
+                             * @param {string} url Abzurufende URL
+                             * @returns Die abgerufenen, deserialisierten Daten
+                             * @throws Dieselben Exceptions wie fetch() bei einem Fehler
+                             */
+                            export async function fetchJson(url) {
+                                let response = await fetch(url);
+                                return await response.json();
+                            }
+                        </source-code>
+                    </lsx-card>
+                </lsx-carousel-page>
+                <lsx-carousel-page>
+                    <p>
+                        Passe nun die Datei <span class="fn">src/main.js</span> wie folgt an, um die neue Funktion
+                        zu importieren und zu nutzen.
+                    </p>
+
+                    <lsx-card title="<span class='fn'>src/main.js</span>">
+                        <source-code language="javascript">
+                            import {fetchJson}  from "./utils/fetch.js";
+                            import prettyoutput from "prettyoutput";
+                        
+                            try {
+                                console.log("People in Space");
+                                console.log("===============");
+                                console.log();
+                        
+                                // Daten abrufen (zweite Version mit Modulen)
+                                let peopleInSpace = await fetchJson("http://api.open-notify.org/astros.json");
+                        
+                                // Daten formatieren mit der prettyoutput-Bibliothek
+                                let formatedOutput = prettyoutput(peopleInSpace);
+                                console.log(formatedOutput);
+                            } catch (error) {
+                                console.error("Fehler beim Abruf der Daten!");
+                                console.error(error);
+                            }
+                        </source-code>
+                    </lsx-card>
+                </lsx-carousel-page>
+                <lsx-carousel-page>
+                    <p>
+                        Das war auch schon alles. Na das war ja einfach! 🤫
+                    </p>
+                    <img class="active d-block w-25 m-auto" src="shared/finish.svg" />
+                    <p>
+                        <small>
+                            <small>
+                                Bildnachweis: <a href="https://pixabay.com/en/symbol-gui-internet-internet-page-2480163/" target="_blank">Pixabay: janf93</a>
+                            </small>
+                        </small>
+                    </p>
+                </lsx-carousel-page>
+            </lsx-carousel>
+        </div>
+
+        <div class="centered-content flex-row flex-wrap gap-3 mb-5">
+            <!-- main.js -->
+            <lsx-modal>
+                <lsx-thumbnail style="height: 15em;" class="mw-100">
+                    <img src="03-nodejs/module-main.png" class="d-block h-100 mw-100 dhbw-thumbnail p-1"/>
+                    <span class="lsx-modal-image-thumbnail">Die angepasste Datei <span class="fn">main.js</span></span>
+                </lsx-thumbnail>
+                <lsx-content>
+                    <img src="03-nodejs/module-main.png" class="img-responsive img-thumbnail"/>
+                </lsx-content>
+            </lsx-modal>
+
+            <!-- utils/fetch.js -->
+            <lsx-modal>
+                <lsx-thumbnail style="height: 15em;" class="mw-100">
+                    <img src="03-nodejs/module-fetch.png" class="d-block h-100 mw-100 dhbw-thumbnail p-1"/>
+                    <span class="lsx-modal-image-thumbnail">Die neue Datei <span class="fn">utils/fetcj.js</span></span>
+                </lsx-thumbnail>
+                <lsx-content>
+                    <img src="03-nodejs/module-fetch.png" class="img-responsive img-thumbnail"/>
+                </lsx-content>
+            </lsx-modal>
+        </div>
+    </section>
+</section>
+
+<!--
+<section data-title="#Debugging mit Visual Studio Code" class="centered-content"></section>
+-->
 
 <section data-title="Übungsaufgaben" data-background-color="rgb(231, 221, 141)">
-    <section data-title="Aufgabe 1: Ein kleines Node.js-Quiz">
+    <!--
+    <section data-title="#Aufgabe 1: Ein kleines Node.js-Quiz">
         <article>
             TODO
         </article>
@@ -1150,8 +1548,9 @@
             </p>
         </aside>
     </section>
+    -->
 
-    <section data-title="Aufgabe 2: 12-Faktor Apps">
+    <section data-title="Aufgabe 1: 12-Faktor Apps">
         <article>
             <lsx-tab-pages>
                 <lsx-tab-page title="Aufgabe">
@@ -1252,7 +1651,8 @@
         </aside>
     </section>
 
-    <section data-title="Aufgabe 3: Textzeilen sortieren">
+    <!--
+    <section data-title="#Aufgabe 3: Textzeilen sortieren">
         <article>
             TODO
         </article>
@@ -1271,25 +1671,111 @@
             </p>
         </aside>
     </section>
+    -->
+    
+    <section data-title="Aufgabe 2: Vertiefungen" data-background-color="rgb(231, 221, 141)">
+        <article>
+            <lsx-ul emoji="🪩" class="mb-4">
+                <li>Öffne dienen Lieblings KI-Chatbot und unterhalte dich mit ihm über folgende Themen.</li>
+                <li>Suche dir eines oder mehrere Themen aus, die dich interessieren und lasse sie dir erklären.</li>
+                <li>Frage den Chatbot auch, wie du das ein oder andere üben bzw. ausprobieren kanns.</li>
+            </lsx-ul>
+
+            <lsx-accordion class="mb-4">
+                <lsx-accordion-page title="Promises vs.&nbsp;<code>async</code>/<code>await</code>" class="markdown">
+                    JavaScript besitzt kein Multi-Threading, wie die meisten anderen Programmiersprachen.
+                    Stattdessen bezieht es seine Performance aus der ereignisgesteuerten Programmierung,
+                    was bedeutet, dass im Hintergrund ablaufende Aktivitäten ein <code>Promise</code>-Objekt
+                    zurückliefern, dem man wiederum eine Callback-Funktion mitgeben kann, die aufgerufen wird,
+                    sobald die Aktion zu Ende gelaufen ist.
+
+                    Das ist jedoch nicht immer leicht zu durchschauen. Man spricht hier auch von der <i>Callback Hell</i>,
+                    wenn sich viele Callback-Funktion ineinander verschachteln und man keinen Überblick mehr darüber
+                    hat, wann welcher Code-Ausschnitt eigentlich ausgeführt wird.
+
+                    Lasse dir von der KI das Prinzip hinter den <code>Promise</code>-Objekten erklären und wie
+                    die Programmierung mit <code>async</code>/<code>await</code> dabei vereinfacht wird.
+                </lsx-accordion-page>
+
+                <lsx-accordion-page title="Fehlerbehandlung mit&nbsp;<code>try</code>/<code>catch</code>" class="markdown">
+                    JavaScript besitzt eine ähnliche Syntax zur Anahmebehandlung wie Java. Auch hier werden
+                    Excpetions geworfen, die in einem <code>try</code>/<code>catch</code>-Block abgefangen
+                    werden können. Doch JavaScript ist eine dynamisch typisierte Programmiersprache. Man weiß
+                    daher im Vorfeld nicht, _welche_ Exception man abfägnt und welche man lieber nicht abfangen
+                    will.
+
+                    Lasse dir von der KI erklären, wie Exceptions in JavaScript funktionieren und wie eine
+                    saubere Fehlerbehandlung umgesetzt wird. Frage sie auch, wie du eigene Exceptions definieren,
+                    werfen und abfangen kannst.
+                </lsx-accordion-page>
+
+                <lsx-accordion-page title="Typsichere Programme schreiben mit TypeScript" class="markdown">
+                    Die dynamische Natur von JavaScript erlaubt es, im Vergleich zu statisch typisierten
+                    Sprachen wie Java, bereits mit wenigen Code-Zeilen viel zu bewirken. Doch die Stärke
+                    ist, ebenfalls wie bei allen dynamisch typisierten Sprachen, gleichzeitig seine größte
+                    Schwäche. Schnell schleichen sich fatale Tippfehler ein, die ein Programm abstürzen
+                    lassen oder zu versteckten Fehlern führen. Genauso schnell passiert es, dass man versucht,
+                    eine Methode von einem Objekt aufzurufen, die es gar nicht gibt. Beispielsweise, weil das
+                    Objekt andere Methoden vorsieht, oder selbst gar nicht existiert.
+
+                    Microsoft ist dem TypeScript-Compiler angetreten, dieses Problem für JavaScript zu lösen.
+                    Dabei handelt es sich um eine Programmiersprache, die eine strikte Obermenge von JavaScript
+                    ist und durch den Compiler in natives JavaScript zurück-compiliert wird. Der Vorteil:
+                    Jedes JavaScript-Programm ist auch ein gültiges TypeScript-Programm, so dass man nicht
+                    gleich seinen ganzen Quellcode umschreiben muss. Der TypeScript-Compiler (und auch IDEs
+                    wie Visual Studio Code) weißen einen aber frühzeitig auf sehr viele Programmierfehler hin,
+                    die sonst erst zur Laufzeit (wenn überhaupt) aufgefallen wären.
+
+                    Lasse dir von der KI die Funktionsweise von TypeScript erklären. Frage sie auch, wie du
+                    eine bestehende Anwendung, wie eine unserer Beispielanwendungen und Übungen auf TypeScript
+                    umstellen kannst. Es ist gar nicht so schwer …
+                </lsx-accordion-page>
+            </lsx-accordion>
+
+            <p>
+                Fasse die wichtigsten Erkenntnisse in einer Mind Map oder einer kleinen Präsentation zu sammen
+                und teile sie mit uns im Kurs. Denn: Wer schreibt der bleibt! Deshalb unbedingt selbst schreiben
+                und diese Aufgabe <u>nicht</u> an die KI delegieren. ✒️
+            </p>
+        </article>
+        <aside>
+            <p>
+                Das läuft ja schon richtig gut mit Node.js. Doch es gibt noch so viel zu entdecken.
+                Unmöglich, das alles in einem Semester zu behandeln. Aber zum Glück kann uns der
+                freundliche KI-Chatbot von Nebenan ein wenig unter die Arme greifen. Auf dieser Seite
+                findest du ein paar Themen, die sich auf jeden Fall lohnen, sich in einem Chat erklären
+                zu lassen. 💬
+            </p>
+            <img src="shared/ai-assistant.png" class="img-fluid d-block" style="width: 15em; margin-bottom: 0.5em;"/>
+            <p>
+                <small>
+                    Bildnachweis:
+                    <a href="https://pixabay.com/illustrations/robot-drawing-art-job-money-8614567/" target="_blank">pixabay: Comic-Generator-Pro</a>
+                </small>
+            </p>
+        </aside>
+    </section>
 </section>
 
 <!-- ======================= -->
 <!-- HTTP-Server mit Express -->
 <!-- ======================= -->
+<!--
 <section data-use-template="teilkapitel" data-titel="HTTP-Server mit Express"></section>
+-->
 
 <!-- =============== -->
 <!-- Gruppenarbeiten -->
 <!-- =============== -->
 <section data-use-template="teilkapitel" data-titel="Gruppenarbeiten"></section>
 
-<section data-title="Aufgabe 1: Personen im Weltall" data-background-color="rgb(179, 202, 223)">
+<section data-title="#Aufgabe 1: Personen im Weltall" data-background-color="rgb(179, 202, 223)">
     <article>
         <!-- <section data-title="Haiku 1: Node.js-Projekte anlegen"></section>
         <section data-title="Haiku 2: Externe Abhängigkeiten"></section>
         <section data-title="Haiku 3: Quellcode modularisieren"></section>
         <section data-title="Haiku 5: Vertiefungen"></section> -->
-        <section data-title="Haiku 4: Debugging mit Visual Studio Code"></section>
+        <!-- <section data-title="Haiku 4: Debugging mit Visual Studio Code"></section> -->
 
         <!-- <lsx-ul emoji="📕" class="mb-4">
             <li>Schließt euch ein kleine Gruppen zusammen und setzt euch an eine Tischinsel.</li>
@@ -1485,7 +1971,7 @@
     </aside>
 </section>
 
-<section data-title="Aufgabe 2: Logbuch des Captains" data-background-color="rgb(179, 202, 223)">
+<section data-title="#Aufgabe 2: Logbuch des Captains" data-background-color="rgb(179, 202, 223)">
     <article>
         <lsx-github-edit
             class        = "mb-3"
