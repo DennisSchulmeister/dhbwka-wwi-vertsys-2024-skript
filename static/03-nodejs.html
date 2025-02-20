@@ -1580,7 +1580,7 @@
             <lsx-modal>
                 <lsx-thumbnail style="height: 15em;" class="mw-100">
                     <img src="03-nodejs/module-fetch.png" class="d-block h-100 mw-100 dhbw-thumbnail p-1"/>
-                    <span class="lsx-modal-image-thumbnail">Die neue Datei <span class="fn">utils/fetcj.js</span></span>
+                    <span class="lsx-modal-image-thumbnail">Die neue Datei <span class="fn">utils/fetch.js</span></span>
                 </lsx-thumbnail>
                 <lsx-content>
                     <img src="03-nodejs/module-fetch.png" class="img-responsive img-thumbnail"/>
@@ -1717,10 +1717,141 @@
         </aside>
     </section>
 
-    <!--
-    <section data-title="#Aufgabe 3: Textzeilen sortieren">
+    <section data-title="Aufgabe 2: Textzeilen sortieren">
         <article>
-            TODO
+            <lsx-github-edit
+                class        = "mb-3"
+                url          = "Aufgaben/Zeilen%20sortieren/Aufgabe"
+                download     = "Aufgaben/Zeilen%20sortieren"
+            >
+            </lsx-github-edit>
+
+            <lsx-tab-pages>
+                <lsx-tab-page title="Hintergrundwissen">
+                    <p>
+                        Die Unix-Kommandozeilentools folgenden dem Prinzip „Do one thing and do it well“.
+                        Gemeint ist, dass jedes Programm möglichst einfach gehalten ist und nur ein kleines
+                        Problem lösen kann. Die Programme können aber in einer Befehlskette so kombiniert werden,
+                        dass nahezu jede größere Aufgabe damit gelöst werden kann. Ein typisches Kommando ist
+                        daher <span class="cmd">sort</span>, dass Textzeilen entgegennimmt und alphabetisch
+                        sortiert wieder ausgibt. Zum Beispiel ein einer Befehlskette wie dieser:
+                    </p>
+                    <p class="cmd">
+                        cat textdatei.txt | sort | less
+                    </p>
+                    <p>
+                        Dies funktioniert, weil jedes Programm automatisch drei Datenströme mit folgenden Funktionen
+                        besitzt:
+                    </p>
+                    <lsx-ul>
+                        <li>
+                            <b>Standard Input:</b> Eingabe des Programms, standardmäßig über die Tastatur
+                        </li>
+                        <li>
+                            <b>Standard Output:</b> Ausgabe das Programms, standardmäßig im Konsolenfenster
+                        </li>
+                        <li>
+                            <b>Standard Error:</b> Fehlermeldungen des Programms, standardmäßig ebenfalls im Konsolenfenster
+                        </li>
+                    </lsx-ul>
+                    <p>
+                        Durch das Pipe-Symbol <span class="cmd">|</span> werden die Programme so miteinander verknüpft,
+                        dass die Ausgabe das linken Programms als Einagbe für das rechte Programm dient, wodurch beliebig
+                        komplexe Prozessketten definiert werden können. <span class="cmd">cat</span> gibt hier den Inhalt
+                        einer Datei aus, der mit <span class="cmd">sort</span> sortiert und anschließend mit
+                        <span class="cmd">less</span> gepuffert ausgegeben wird, so dass man gerade bei sehr großen Dateien,
+                        deren Inhalt nicht auf eine Bildschirmseite passt, hin und her blättern kann.
+                    </p>
+
+                    <img src="03-nodejs/aufgabe-sort.png" alt="Visualisierung der Befehlskette" class="d-block mw-100 mx-auto mt-4 mb-4" style="width: 60em;">
+
+                    <p>
+                        Klingt nach schwarzer Magie? 🎩 Nun, wo ein Terminal ist, ist ein Weg. 🧙‍♀️
+                    </p>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Aufgabe">
+                    <p>
+                        Schreiben Sie ein Programm, dass den <span class="cmd">sort</span>-Befehl aus dem
+                        vorherigen Beispiel ersetzt. Das Programm soll über seinen Standard Input so
+                        lange Textzeilen einlesen und in einem Array ablegen, bis das sendende Programm
+                        den Datenstrom schließt. Anschließend soll das Array sortiert und mit
+                        <src-code language="javascript">console.log()</src-code> zeilenweise auf dem
+                        Standard Output ausgegeben werden.
+                    </p>
+                    <p>
+                        Hier sind die wichtigsten Schritte für die Umsetzung:
+                    </p>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row">1.</th>
+                                <th scope="row" style="width: 20em;">Einlesen von Daten über <code>stdin</code></th>
+                                <td>
+                                    <p>
+                                        Das Programm soll zeilenweise Text einlesen, ähnlich wie <span class="cmd">sort</span> unter Unix.
+                                    </p>
+                                    <p class="mb-0">
+                                        Dazu nutzen wir <src-code language="javascript">process.stdin.on("data", callback)</src-code>.
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2.</th>
+                                <th scope="row">Speicherung der Zeilen in einem Array</th>
+                                <td>
+                                    Die eingelesenen Daten müssen in einem Array zwischengespeichert werden.
+                                    Dabei muss beachtet werden, dass die Daten als Zeichenstrom angeliefert
+                                    werden, der bei jedem Zeilenendezeichen <src-code language="javascript">"\n"</src-code>
+                                    in Einzelzeilen aufgetrennt werden muss. Die Einzelzeilen müssen dann,
+                                    da die Daten in mehreren Blöcken ankommen können, dem eigentlichen Array
+                                    angehängt werden. Leerzeilen sollen ignoriert werden.
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3.</th>
+                                <th scope="row">Sortierung der Zeilen</th>
+                                <td>
+                                    Nach vollständigem Einlesen soll das Array mit
+                                    <src-code language="javascript">meinArray.sort()</src-code>
+                                    sortiert werden.
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">4.</th>
+                                <th scope="row">Ausgabe auf <code>stdout</code></th>
+                                <td>
+                                    Die sortierten Zeilen sollen zeilenweise auf <code>stdout</code> ausgegeben werden.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Lösung">
+                    <source-code language="javascript">
+                        #!/usr/bin/env node
+
+                        let nonEmptyLines = [];
+                        
+                        process.stdin.setEncoding("utf8");
+                        
+                        process.stdin.on("data", (chunk) => {
+                            lines = chunk.split("\n");
+
+                            for (let line of lines) {
+                                if (!line) continue;
+                                nonEmptyLines.push(line);
+                            }
+                        });
+                        
+                        process.stdin.on("end", () => {
+                            nonEmptyLines.sort();
+                            nonEmptyLines.forEach(console.log);
+                        });
+                    </source-code>
+                </lsx-tab-page>
+            </lsx-tab-pages>
         </article>
         <aside>
             <p>
@@ -1737,9 +1868,8 @@
             </p>
         </aside>
     </section>
-    -->
 
-    <section data-title="Aufgabe 2: Vertiefungen" data-background-color="rgb(231, 221, 141)">
+    <section data-title="Aufgabe 3: Vertiefungen" data-background-color="rgb(231, 221, 141)">
         <article>
             <lsx-ul emoji="🪩" class="mb-4">
                 <li>Öffne dienen Lieblings KI-Chatbot und unterhalte dich mit ihm über folgende Themen.</li>
