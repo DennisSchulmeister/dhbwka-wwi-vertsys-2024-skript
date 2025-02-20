@@ -1,849 +1,1944 @@
 <section data-chapter="h1" data-title="REST-Webservices" data-background-color="rgb(210,190,210)">
     <article class="markdown">
-        ### Nach Abschluss dieses Kapitels können Sie …
+        #### Webservices allgemein {.dhbw-lightblue}
 
-        * Den Unterschied zwischen Webanwendungen und Webservices verstehen.
-        * Typische Einsatzgebiete von REST-Webservices erkennen.
-        * Die wirtschaftliche Bedeutung von REST APIs und offener Schnittstellen verstehen.
-        * Die Funktionsweise von HTTP als Übertragungsprotokoll beschreiben.
-        * Zustandslose von zustandsbehafteter Programmierung abgrenzen.
-        * Die Umsetzung der REST-Prinzipien mit HTTP und JSON erklären.
-        <!-- -->
-        <!--
-        TODO
-        -->
+        <table>
+            <tbody>
+                <tr>
+                    <td class="lernziel-art">Verstehen</td>
+                    <td>Die Begriffe <i>Webserver</i>, <i>Webservice</i> und <i>Webanwendung</i> beschreiben und abgrenzen</td>
+                </tr>
+                <tr>
+                    <td class="lernziel-art">Verstehen</td>
+                    <td>Typische Anwendungsfälle für Webservices benennen</td>
+                </tr>
+                <tr>
+                    <td class="lernziel-art">Verstehen</td>
+                    <td>Die grobe technische Funktionsweise von Webservices beschreiben</td>
+                </tr>
+                <tr>
+                    <td class="lernziel-art">Wissen</td>
+                    <td>Verschiedene, gängige Webservice-Arten zumindest vom Namen her kennen</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        #### REST-Webservices {.dhbw-lightblue .mt-4}
+   
+        <table>
+            <tbody>
+                <tr>
+                    <td class="lernziel-art">Verstehen</td>
+                    <td>Die grundsätzlichen Eigenheiten von REST-Webservices beschreiben</td>
+                </tr>
+                <tr>
+                    <td class="lernziel-art">Können</td>
+                    <td>Vorhandene Webservices anhand dem Richardson Maturity Model bewerten</td>
+                </tr>
+                <tr>
+                    <td class="lernziel-art">Verstehen</td>
+                    <td>Die typische URL-Struktrur, gängige HTTP-Methoden, Header Fields und Status Codes kennen</td>
+                </tr>
+                <tr>
+                    <td class="lernziel-art">Können</td>
+                    <td>Zu einem Datenmodell einen REST-Webservice entwerfen und  in Prosa dokumentieren</td>
+                </tr>
+                <tr>
+                    <td class="lernziel-art">Wissen</td>
+                    <td>Den OpenAPI-Standard zur maschinenlesbaren Dokumentation von REST-Webservices kennen</td>
+                </tr>
+                <tr>
+                    <td class="lernziel-art">Erstellen</td>
+                    <td>Programmierung eines REST-Webservices mit Node.js + Express mit sauberer Code-Struktur</td>
+                </tr>
+                <tr>
+                    <td class="lernziel-art">Erstellen</td>
+                    <td>Erstellen einer OpenAPI-Beschreibung, Einbindung als HTML-Dokumentation</td>
+                </tr>
+            </tbody>
+        </table>
 
         <span style="font-size: 240px; color: white;" class="dhbw-text-shadow" >🏁</span>
     </article>
+    <aside class="markdown">
+        In einer zunehmend vernetzten Welt sind Webservices das Rückgrat moderner Anwendungen. Sie ermöglichen
+        den Datenaustausch zwischen Systemen, unabhängig von Plattform oder Programmiersprache. Doch was genau
+        unterscheidet einen Webservice von einer Webanwendung oder einem Webserver? In diesem Kapitel lernen wir
+        die grundlegenden Konzepte und Einsatzmöglichkeiten von Webservices kennen und erfahren, welche unterschiedlichen
+        Arten existieren.
+
+        Ein besonderer Fokus liegt auf _REST-Webservices_, einer der am weitesten verbreiteten Architekturen für Web-APIs.
+        Wir lernen die Prinzipien von REST, die Bedeutung einer sauberen URL-Struktur sowie die wichtigsten HTTP-Methoden,
+        Header und Status Codes. Das _Richardson Maturity Model_ hilft uns dabei, bestehende Webservices zu bewerten und
+        ein Gespür für gut designte Schnittstellen zu entwickeln. Zudem erlangen wir erste Einblicke in den _OpenAPI-Standard_,
+        der eine standardisierte und maschinenlesbare Dokumentation von APIs ermöglicht.
+
+        Praktisch setzen wir das Gelernte mit _Node.js und Express_ um. Wir entwerfen und programmieren einen eigene REST-Webservices
+        mit sauberer Code-Struktur und dokumentieren diese mit OpenAPI. Dadurch erwerben wir nicht nur unser theoretisches Wissen,
+        sondern auch praxisnahe Fähigkeiten, die in der Softwareentwicklung von hoher Relevanz sind. Am Ende dieses Kapitels sind
+        Sie in der Lage, Webservices gezielt zu analysieren, zu entwerfen und umzusetzen – eine essenzielle Kompetenz für moderne
+        verteilte Systeme.
+
+        ##### Warum ist dieses Kapitel wichtig?
+
+        REST-Webservices sind ein zentraler Bestandteil moderner Softwarearchitekturen. Sie ermöglichen es,
+        Anwendungen flexibel zu vernetzen – von mobilen Apps über Webplattformen bis hin zu IoT-Geräten.
+        Ein solides Verständnis von REST ist daher essenziell, um skalierbare, wartbare und gut dokumentierte
+        APIs zu entwickeln. In der Praxis erwarten Unternehmen von Entwicklern nicht nur, dass sie Webservices
+        nutzen, sondern auch, dass sie diese selbst entwerfen, implementieren und dokumentieren können.
+        Dieses Kapitel vermittelt Ihnen genau diese Fähigkeiten und bereitet Sie optimal auf die Arbeit mit
+        vielen verteilten Anwendungen vor.
+    </aside>
 </section>
 
-<!-- ========================= -->
-<!-- THEORETISCHE HINTERGRÜNDE -->
-<!-- ========================= -->
+<!--
+    TODO: Ergänzungen
+     - Richardson Maturity Model
+     - Fehlende Quizze und Übungsaufgaben
+     - Folien zur Programmierung, insb. gute Quellcode-Struktur
+     - Folien zur Einbindung der OpenAPI in das Node.js-Projekt
+     - Übersicht zu HTTP Header Fields und Status Codes speziell für REST ??
+-->
+     
+<!-- ==================== -->
+<!-- Praktische Bedeutung -->
+<!-- ==================== -->
+<section data-use-template="teilkapitel" data-titel="Praktische Bedeutung"></section>
 
-<section data-use-template="teilkapitel" data-titel="Theoretische Hintergründe"></section>
-
-<section data-title="Was ist ein Webservice?">
-    <section data-title="Server, Service, Webservice">
-        <!--
-            Service: Softwarekomponente stellt Funktion in einem System zur Verfügung
-            Server: Bietet entfernten Zugriff (meist über das Internet) auf einen Service -> M2M!
-            Webservice: Nutzt die Webtechnologien HTTP (und ggf. XML, JSON) zur Implementierung des Servers (basiert also auf einem Webserver)
-        -->
+<section data-title="Wichtige Begriffsdefinitionen">
+    <section data-title="Was ist eine Anwendung?" class="centered-content">
+        <div class="limited-width2">
+            <div class="card bg-light mb-3">
+                <div class="card-body">
+                    <blockquote class="blockquote markdown">
+                        Als **Anwendungssoftware** werden Computerprogramme bezeichnet, die genutzt werden, um eine nützliche,
+                        nicht systemtechnische Funktionalität zu unterstützen. Sie dienen der **Lösung von Benutzerproblemen**.
+                        Beispiele für Anwendungsgebiete sind: Bildbearbeitung, E-Mail-Programme, Webbrowser, …
+        
+                        In information technology, an **application (app)** is a computer program **designed to help people
+                        perform an activity**.
+        
+                        <figcaption class="blockquote-footer">
+                            <cite>Deutsche und englische Wikipedia zum Begriff „Anwendung”</cite>
+                        </figcaption>
+                    </blockquote>
+                </div>
+            </div>
+        
+            <div class="card">
+                <div class="card-header fw-bold dhbw-lightblue">
+                    Schlussfolgerungen
+                </div>
+                <div class="card-body markdown">
+                    * Anwendungen besitzen eine Benutzeroberfläche
+                    * Apps sind kleine Anwendungen (App vs. Application)
+                    * Webanwendungen sind mit den Webtechnologien realisierte Anwendungen
+                </div>
+            </div>
+        </div>
     </section>
-
-    <section data-title="Webanwendung vs. Webservice">
-        <!--
-            Definition Anwendung mit
-            Beispielen für Anwendungen anhand Bildern
-            Webanwendung: Anwendung auf Basis der Webtechnologien HTML, CSS, JS
-            Nutzen im Hintergrund oft Webservices um Daten zu beschaffen oder zu verschicken
-        -->
+    
+    <section data-title="Was ist ein Service?" class="centered-content">
+        <div class="limited-width2">
+            <div class="card bg-light mb-3">
+                <div class="card-body">
+                    <blockquote class="blockquote markdown">
+                        Der Begriff **Dienst** (auch Service oder Daemon) beschreibt in der Informatik eine **technische, autarke Einheit**,
+                        die **zusammenhängende Funktionalitäten** zu einem Themenkomplex bündelt und über eine **klar definierte Schnittstelle**
+                        zur Verfügung stellt. Typische Beispiele sind hier Webservices, die Funktionalitäten für Dritte über das Internet
+                        verfügbar machen, Netzwerkdienste oder Systemdienste.
+            
+                        <figcaption class="blockquote-footer">
+                            <cite>Wikipedia zum Begriff „Dienst (Service)”</cite>
+                        </figcaption>
+                    </blockquote>
+                </div>
+            </div>
+            <div class="card bg-light mb-3">
+                <div class="card-body">
+                    <blockquote class="blockquote markdown">
+                        A service is a mechanism to enable access to one or more capabilities, where the access is provided using a prescribed
+                        interface, consistent with constraints and policies as specified by the service description.
+            
+                        <figcaption class="blockquote-footer">
+                            <cite>OASIS-Definition des Begriffs „Service“</cite>
+                        </figcaption>
+                    </blockquote>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header fw-bold dhbw-lightblue">
+                    Schlussfolgerungen
+                </div>
+                <div class="card-body markdown">
+                    * Services besitzen in der Regel keine Benutzeroberfläche sondern laufen im Hintergrund
+                    * Ein Server stellt Services über das Netzwerk bzw. das Internet zur Verfügung
+                    * Services können aber auch auf andere Weise, beispielsweise als Betriebssystemfunktion realisiert werden
+                    * Webservices nutzen die Webtechnologien, um Services über das Internet verfügbar zu machen
+                    * Microservices kapseln größere Anwendungsfunktionen und bieten hierfür meist eine Webservice-Schnittstelle
+                </div>
+            </div>
+        </div>
     </section>
-
-    <section data-title="Das HTTP-Übertragungsprotokoll">
-        <!--
-                HTTP-Folie ohne Randtext
-                Dafür kleiner Text obendrüber oder darunter
-                Alles mittig zentriert
-        -->
-    </section>
-
-    <section data-title="Gängige Webservice-Arten">
-        <!--
-            Grundidee schon sehr alt. Spätestens 1999.
-            1998 XML-RPC (Microsoft)
-            1999 SOAP (Microsoft, IBM und andere)
-            2000 REST (seit 2014 nennenswerte Verbreitung)
-            2007 Webhooks (nicht-standardisiert, nur ein User Defined HTTP-Callback für asynchrone Ereignisse)
-
-            Je mit kurzer Zusammenfassung der Funktionsweise und Mini-Beispiel
-
-            Weitere: 2014 OData, 2012 GraphQL
-        -->
-    </section>
-
-    <section data-title="SOAP vs. REST">
-        <!--
-            Comic-Bild: Get Coffee!
-            Alter Vergleich aus den Folien mit Pferdewagen?
-        -->
-    </section>
-
-    <section data-title="Webservice oder API?">
-        <!--
-            Ggf. kürzer / besser formulieren?
-            Screenshot oder Beispiel für traditionelle API: WIN32 C
-        -->
-    </section>
-</section>
-
-<section data-title="Einsatzgebiete von Webservices">
-    <section data-title="Fallbeispiel: Reiseportal">
-        <!-- Bild mit kurzer Erklärung -->
-    </section>
-
-    <section data-title="Fallbeispiel: Business-to-Business">
-        <!-- Bild mit kurzer Erklärung -->
-    </section>
-
-    <section data-title="Fallbeispiel: Serviceorientierte Architektur">
-        <!-- Neues Bild -->
-    </section>
-
-    <section data-title="Weitere Beispiele">
-        <!-- Alte Seite: Beispiele für öffentliche Webservices -->
-    </section>
-</section>
-
-<section data-title="REST-Webservices im Detail">
-    <section data-title="Representational State Transfer">
-        <!--
-            Erklärungstext als alter Folie
-            Representational: Content Negotation für Datenformate
-                - HTTP Anfrage und Antwort zeigen
-                - Mit enthaltenem Beispiel für JSON-Daten
-            State Transfer: Zustandsloser Server, gesamtes Objekt hin- und her schicken
-                -> Auch hier ggf. mit Beispiel-Anfrage/Antwort (Objekt anlegen -> ID + Location Header)
-        -->
-    </section>
-
-    <section data-title="Ressourcen">
-    </section>
-
-    <section data-title="Collections">
-        <!--
-            Mit Bild analog zu Michaels Folien: Collection enthält die Ressourcen
-        -->
-    </section>
-
-    <section data-title="Stores">
-        <!--
-            Eher selten anzutreffen aber möglich
-        -->
-    </section>
-
-    <section data-title="Actions">
-        <!-- Eigentlich Controller genannt, Begriff aber zweideutig! -->
-    </section>
-</section>
-
-<section data-title="Fallbeispiel: Wastebin">
-    <section data-title="Funktionsumfang der App">
-        <!--
-            Screenshots als LibreOffice-Folien mit Kurzbeschreibung aus README
-        -->
-    </section>
-
-    <section data-title="Datenmodell">
-        <!--
-            Aus README übernehmen
-        -->
-    </section>
-
-    <section data-title="REST-Webservice">
-        <!--
-            Aus README übernehmen
-        -->
-    </section>
-
-    <section data-title="Typische HTTP-Anfragen">
-        <!--
-            Alte Skriptseite dazu, aber neu strukturiert und angepasst an das Beispiel
-            Screenshots aus HTTPie vorne anstellen unter Erklärtext
-        -->
+    
+    <section data-title="Abgrenzung aus technischer Sicht" class="centered-content">
+        <div class="markdown mb-5 limited-width2">
+            * **Webanwendung:** Wird über HTTP aufgerufen und nutzt HTML/CSS/JavaScript zur
+              Erzeugung der Benutzeroberfläche.
+    
+            * **Webservice:** Nutzt ebenfalls HTTP als Transportprotokoll, überträgt jedoch
+              weitgehend nur Rohdaten darüber.
+    
+            * **Webserver:** Serversoftware, die das HTTP-Protokoll umsetzt und hierdurch
+              eine Webanwendung oder eine Webservices zur Verfügung stellt.
+              
+            * Moderne (clientseitige) Webanwendungen nutzen in der Regel Webservices
+              Kommunikation mit dem Backend.
+        </div>
+    
+        <div class="d-flex align-items-stretch" style="gap: 1em;">
+            <div>
+                <h5>Webanwendung</h5>
+                <img src="04-rest-webservices/webanwendung.png" class="d-block w-100 img-thumbnail"/>
+            </div>
+    
+            <div>
+                <h5>Webservice</h5>
+                <img src="04-rest-webservices/webservice.png" class="d-block w-100 img-thumbnail"/>
+            </div>
+        </div>
     </section>
 </section>
 
-<section data-title="Übungsaufgaben" data-background-color="rgb(231, 221, 141)">
-    <!-- TODO Vervollständigen -->
-    <section data-title="Aufgabe 1: Ein kleines Webservice-Quiz">
-        <article>
+<section data-title="Praktische Anwendungsfälle">
+    <section data-title="Typische Einsatzgebiete für Webservices" class="centered-content">
+        <div class="markdown dhbw-limited-width m-auto mb-5 limited-width">
+            Im Gegensatz zu früher ist es heute üblich, dass viele Anwendungen und Apps
+            auf Dienste im Internet zugreifen. Dies reicht vom einfachen Auslagern einzelner
+            Funktionen bis zu Anwendungen, bei denen die komplette Anwendungslogik entfernt
+            wurde und der verbleibende Teil lediglich die Benutzeroberfläche implementiert.
+    
+            * Clientseitige Webanwendungen
+            * Mobile Applikationen
+            * Desktop-Programme mit „Cloudfunktionen”
+            * Smart TV Apps
+            * …
+    
+            Im Falle von Webanwendungen ist es heute üblich, fachliche Logik und Oberfläche
+            zu  trennen, so dass derselbe Webservice auch für Mobile Clients und andere
+            Benutzeroberflächen verwendet werden kann. Aber auch um B2B-Kontext oder zur
+            Kommunikation mehrerer Anwendungen untereinander kommen REST-Webservices häufig
+            zum Einsatz.
+        </div>
+    
+        <div class="d-flex flex-wrap align-items-stretch" style="gap: 1em;">
+            <!-- https://github.com/grote/Transportr -->
+            <img src="04-rest-webservices/screenshot-maps.png" class="d-block img-thumbnail" style="width: 30em;"/>
+            <img src="04-rest-webservices/screenshot-mobidict.png" class="d-block img-thumbnail" style="width: 30em;"/>
+            <img src="04-rest-webservices/screenshot-ui5.png" class="d-block img-thumbnail" style="width: 30em;"/>
+            <img src="04-rest-webservices/screenshot-transportr1.png" class="d-block img-thumbnail" style="width: 12em;"/>
+        </div>
+    </section>
+    
+    <section data-title="Ökonomische Bedeutung von Webservices" class="centered-content">
+        <div class="markdown limited-width m-auto mb-5">
+            Ist ein Webservice dafür gemacht, von unterschiedlichen Anwendungen aufgerufen zu werden,
+            spricht man heute auch von einer API. Gemeint ist damit ein **Application Programming Interface**,
+            das seine Funktionen verschiedenen Anwendungen zur Verfügung stellt. Ursprünglich kommt dieser
+            Begriff aus der Betriebssystementwicklung, wo er für die Systembibliotheken zur Nutzung der
+            Betriebssystemfunktionen steht:
+    
+            * **WIN32-API:** Interne API von Microsoft Windows zur Erstellung von Windows-Anwendungen
+            * **Java API:** Die mitgelieferte und sehr umfangreiche Klassenbibliothek der Programmiersprache Java
+            * **Android API:** Aus der Java API abgeleitete Schnittstellen zur Programmierung von Android Apps
+    
+            In der objektorientierten Programmierung wird auch die öffentliche Schnittstelle einer Klasse
+            gelegentlich als API bezeichnet.
+            
+            Im Rahmen des **API-driven Business** gehen heute immer Firmen dazu über, ihre Produkte und Dienstleistungen
+            per **REST API** zur Verfügung zu stellen. Durch die Integration der APIs in fremde Webseiten, Anwendungen und
+            Mobile Apps eröffnet sich auf diese Weise einen zusätzlicher Vertriebskanal.
+    
+            <div class="d-flex align-items-stretch" style="gap: 1em; margin-bottom: 1em;">
+                <!-- https://www.creditsafe.com/de/de/risiko-und-kreditmanagement/systemanbindungen/api-dokumentation.html -->
+                <!-- https://www.bisnode.de/apis-und-integration/ -->
+                <img src="04-rest-webservices/api-creditsafe.png" class="d-block w-100 img-thumbnail"/>
+                <img src="04-rest-webservices/api-bisnode.png" class="d-block w-100 img-thumbnail"/>
+            </div>
+            <div class="d-flex align-items-stretch" style="gap: 1em;">
+                <!-- https://developers.google.com/products -->
+                <!-- https://de.wikipedia.org/wiki/Spezial:ApiSandbox -->
+                <img src="04-rest-webservices/api-google.png" class="d-block w-100 img-thumbnail"/>
+                <img src="04-rest-webservices/api-wikipedia.png" class="d-block w-100 img-thumbnail"/>
+            </div>
+        </div>
+    </section>
+    
+    <section data-title="Fallbeispiele für Webservice-Architekturen">
+        <lsx-tab-pages class="w-100">
+            <lsx-tab-page title="Reiseportal">
+                <img src="04-rest-webservices/anwendungen-reiseportal.png" class="b-block img-fluid" />
+            </lsx-tab-page>
+            <lsx-tab-page title="Business-to-Business">
+                <img src="04-rest-webservices/anwendungen-b2b.png" class="b-block img-fluid" />
+            </lsx-tab-page>
+        </lsx-tab-pages>
+    </section>
+
+    <section data-title="Beispiele für öffentliche Webservices" class="centered-content">
+        <div class="limited-width">
+            <p>
+                <a href="https://github.com/public-apis/public-apis" target="_blank">https://github.com/public-apis/public-apis</a> <br />
+                Eine kuratierte Liste mit öffentlich zugänglichen Webservices
+            </p>
+        
+            <img src="04-rest-webservices/public-apis.png" class="img-thumbnail w-100" />
+        </div>
+    </section>
+</section>
+
+
+<!-- ======================= -->
+<!-- Technische Hintergründe -->
+<!-- ======================= -->
+<section data-use-template="teilkapitel" data-titel="Technische Hintergründe"></section>
+
+<section data-title="Serverseitige Webprogrammierung">
+    <section data-title="Webanwendungen im Detail">
+        <div class="dropdown mb-3">
+            <button
+                id             = "webapp-architektur-dropdown"
+                class          = "btn btn-outline-secondary dropdown-toggle"
+                style          = "font-size: 0.9rem;"
+                type           = "button"
+                data-bs-toggle = "dropdown"
+                aria-haspopup  = "true"
+                aria-expanded  = "false"
+            >
+                Statische Webseite
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                    <button
+                        class          = "dropdown-item"
+                        type           = "button"
+                        data-dropdown  = "#webapp-architektur-dropdown"
+                        data-container = "#webapp-architektur"
+                        data-show      = "#webapp-architektur-1"
+                        onclick        = "change_example(event)"
+                    >
+                        Statische Webseite
+                    </button>
+                </li>
+                <li>
+                    <button
+                        class          = "dropdown-item"
+                        type           = "button"
+                        data-dropdown  = "#webapp-architektur-dropdown"
+                        data-container = "#webapp-architektur"
+                        data-show      = "#webapp-architektur-2"
+                        onclick        = "change_example(event)"
+                    >
+                        Multi Page App (serverseitige Webanwendung)
+                    </button>
+                </li>
+                <li>
+                    <button
+                        class          = "dropdown-item"
+                        type           = "button"
+                        data-dropdown  = "#webapp-architektur-dropdown"
+                        data-container = "#webapp-architektur"
+                        data-show      = "#webapp-architektur-3"
+                        onclick        = "change_example(event)"
+                    >
+                        Single Page App (clientseitige Webanwendung)
+                    </button>
+                </li>
+                <li>
+                    <button
+                        class          = "dropdown-item"
+                        type           = "button"
+                        data-dropdown  = "#webapp-architektur-dropdown"
+                        data-container = "#webapp-architektur"
+                        data-show      = "#webapp-architektur-4"
+                        onclick        = "change_example(event)"
+                    >
+                        Single Page App mit Backend
+                    </button>
+                </li>
+            </ul>
+        </div>
+    
+        <div id="webapp-architektur">
+            <img id="webapp-architektur-1" src="04-rest-webservices/wiederholung_spa-1.svg" class="b-block w-100" />
+            <img id="webapp-architektur-2" src="04-rest-webservices/wiederholung_spa-2.svg" class="b-block w-100 hidden" />
+            <img id="webapp-architektur-3" src="04-rest-webservices/wiederholung_spa-3.svg" class="b-block w-100 hidden" />
+            <img id="webapp-architektur-4" src="04-rest-webservices/wiederholung_spa-4.svg" class="b-block w-100 hidden" />
+        </div>
+    </section>
+    
+    <section data-title="Eine kurze Wiederholung zu HTTP" class="centered-content">
+        <style>
+            #http-nachricht1 table {
+                color: rgb(80,80,80);
+            }
+    
+            #http-nachricht1 td {
+                vertical-align: top;
+                padding: 0;
+                padding: 0 0.3em 0 0.3em;
+            }
+    
+            #http-nachricht1 .http-nachricht {
+                font-family: monospace;
+                color: black;
+                background-color: rgba(0,0,0, 0.07);
+            }
+    
+            #http-nachricht1 .http-verb       { color: darkred; }
+            #http-nachricht1 .http-url        { color: darkgreen; }
+            #http-nachricht1 .http-version    { color: darkcyan; }
+            #http-nachricht1 .http-header     { color: darkblue; }
+            #http-nachricht1 .http-statuscode { color: darkred; }
+            #http-nachricht1 .http-statustext { color: darkgreen; }
+            #http-nachricht1 .http-optional   { color: red; }
+        </style>
+    
+        <div class="limited-width">
+            <div id="http-nachricht1" class="dhbw-limited-width" style="margin-bottom: 1em;">
+                <lsx-tab-pages id="http-daten">
+                    <lsx-tab-page title="Anfrage">
+                        <table>
+                            <tr>
+                                <td>
+                                    Verb
+                                </td>
+                                <td>
+                                    Pfad
+                                </td>
+                                <td>
+                                    HTTP-Version
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="http-nachricht http-verb">
+                                    POST
+                                </td>
+                                <td class="http-nachricht http-url">
+                                    /feedback/save.php
+                                </td>
+                                <td class="http-nachricht http-version">
+                                    HTTP/1.1
+                                </td>
+                                <td>
+                                    Anfragezeile
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="http-nachricht http-header" colspan="3" >
+                                    Host: www.wpvs.de <br />
+                                    Content-Type: text/json <br />
+                                    Accept: text/json <br />
+                                    Connection: keep-alive <br />
+                                </td>
+                                <td>
+                                    Header Fields
+                                    <span class="http-optional">¹</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="http-nachricht" colspan="3">
+                                    &nbsp;
+                                </td>
+                                <td>
+                                    Leerzeile
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="http-nachricht http-body" colspan="3">
+                                    { <br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;"course": "vertsys", <br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;"year": 2023, <br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;"text": "Vielen Dank für diese tolle Vorlesung!" <br />
+                                    }
+                                </td>
+                                <td>
+                                    Request Body
+                                    <span class="http-optional">¹</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </lsx-tab-page>
+        
+                    <lsx-tab-page title="Antwort">
+                        <table>
+                            <tr>
+                                <td>
+                                    HTTP-Version
+                                </td>
+                                <td>
+                                    Statuscode
+                                </td>
+                                <td>
+                                    Bezeichnung
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="http-nachricht http-version">
+                                    HTTP/1.1
+                                </td>
+                                <td class="http-nachricht http-statuscode">
+                                    200
+                                </td>
+                                <td class="http-nachricht http-statustext">
+                                    Ok
+                                </td>
+                                <td>
+                                    Antwortzeile
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="http-nachricht http-header" colspan="3" >
+                                    Content-Type: text/json <br />
+                                    Content-Length: 55 <br />
+                                    Date: Sun, 15 Oct 2017 20:18:17 GMT
+                                </td>
+                                <td>
+                                    Header Fields
+                                    <span class="http-optional">¹</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="http-nachricht" colspan="3">
+                                    &nbsp;
+                                </td>
+                                <td>
+                                    Leerzeile
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="http-nachricht http-body" colspan="3">
+                                    { <br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;"type": "success", <br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;"message": "Feedback wurde gespeichert", <br />
+                                    }
+                                </td>
+                                <td>
+                                    Response Body
+                                    <span class="http-optional">¹</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </lsx-tab-page>
+        
+                    <lsx-tab-page title="Beispiel">
+                        <lsx-carousel id="http-beispiel">
+                            <lsx-carousel-page>
+                                <p>
+                                    Hier wollen wir uns anschauen, welche Daten beim Senden einer HTTP-Anfrage „über die Leitung gehen”.
+                                    Wir starten mit einer leeren Konsole. Du kennst doch die Konsole deines Betriebssystems, oder? 🐒
+                                </p>
+                                <img class="active d-block w-100" src="04-rest-webservices/http_demo_01.gif" />
+                            </lsx-carousel-page>
+                            <lsx-carousel-page>
+                                <p>
+                                    Mit <tt>telnet</tt> stellen wir eine <a href="https://de.wikipedia.org/wiki/Socket_(Software)"
+                                    target="_blank">TCP/IP-Verbindung</a> zum Webserver her.
+                                </p>
+                                <img class="active d-block w-100" src="04-rest-webservices/http_demo_02.gif" />
+                            </lsx-carousel-page>
+                            <lsx-carousel-page>
+                                <p>
+                                    Daraufhin meldet <tt>telnet</tt>, dass die Verbindung erfolgreich aufgebaut wurde und der Server wartet
+                                    auf Eingaben.
+                                </p>
+                                <img class="active d-block w-100" src="04-rest-webservices/http_demo_03.gif" />
+                            </lsx-carousel-page>
+                            <lsx-carousel-page>
+                                <p>
+                                    Wir schicken eine <tt>GET</tt>-Anfrage zum Abruf der Datei <tt>/webprog/hallo-http.txt</tt>.
+                                </p>
+                                <img class="active d-block w-100" src="04-rest-webservices/http_demo_04.gif" />
+                            </lsx-carousel-page>
+                            <lsx-carousel-page>
+                                <p>
+                                    Als nächstes folgt das Header Field <tt>Host</tt>, da es mehrere Domains mit derselben IP-Adresse gibt.
+                                </p>
+                                <img class="active d-block w-100" src="04-rest-webservices/http_demo_05.gif" />
+                            </lsx-carousel-page>
+                            <lsx-carousel-page>
+                                <p>
+                                    Das war es dann auch schon mit den Header Fields. Zum Abschluss folgt deshalb eine Leerzeile.
+                                </p>
+                                <img class="active d-block w-100" src="04-rest-webservices/http_demo_06.gif" />
+                            </lsx-carousel-page>
+                            <lsx-carousel-page>
+                                <p>
+                                    Und schon schickt uns der Server die Antwort und trennt die Verbindung.
+                                </p>
+                                <img class="active d-block w-100" src="04-rest-webservices/http_demo_07.gif" />
+                            </lsx-carousel-page>
+                            <lsx-carousel-page>
+                                <p>
+                                    So einfach ist das. 👍🏻 Allerdings nur mit HTTP/1, denn HTTP/2 kodiert die Nachrichten in einer kompakteren
+                                    Binärform. Schaue dir deshalb gleich das Video auf dem nächsten Tabreiter an, um zu erfahren, wie HTTP-Aufrufe
+                                    richtig getestet werden.
+                                </p>
+                                <img class="active d-block w-25 m-auto" src="../shared/finish.svg" />
+                                <p>
+                                    <small>
+                                        <small>
+                                            Bildnachweis: <a href="https://pixabay.com/en/symbol-gui-internet-internet-page-2480163/" target="_blank">Pixabay: janf93</a>
+                                        </small>
+                                    </small>
+                                </p>
+                            </lsx-carousel-page>
+                        </lsx-carousel>
+                    </lsx-tab-page>
+        
+                    <lsx-tab-page title="Testprogramme">
+                        <lsx-youtube video="qnPutbEmkWA"></lsx-youtube>
+                        <lsx-ul emoji="❇️">
+                            <li>
+                                Browser sind nicht die einzigen Programme, die HTTP-Anfragen versenden.
+                            </li>
+                            <li>
+                                Eine beliebte, grafische Anwendung zum Testen von HTTP-Anfragen ist
+                                <a href="https://www.postman.com/" target="_blank">Postman</a>.
+                            </li>
+                            <li>
+                                In Scripts und auf der Kommandozeile wird häufig <a href="https://curl.haxx.se/" target="_blank">curl</a>
+                                verwendet.
+                            </li>
+                            <li>
+                                <a href="https://httpie.org/" target="_blank">HTTPie</a> ist jedoch einfacher zu nutzen
+                                und genauso leistungsfähig.
+                            </li>
+                        </lsx-ul>
+                    </lsx-tab-page>
+                </lsx-tab-pages>
+        
+                <p>
+                    <small>
+                        <small>
+                            <span class="http-optional">¹</span> Optional
+                        </small>
+                    </small>
+                </p>
+            </div>
+        
+            <div id="http-nachricht2" class="dhbw-limited-width">
+                <lsx-tab-pages id="http-listen">
+                    <lsx-tab-page title="Verben">
+                        <h4 class="dhbw-lightblue">GET</h4>
+                        <ul>
+                            <li>
+                                Inhalte vom Server abrufen
+                            </li>
+                            <li>
+                                Die Anfrage darf keinen Request Body enthalten
+                            </li>
+                            <li>
+                                Der Server antwortet mit dem gewünschten Inhalt oder einer Fehlerbeschreibung
+                            </li>
+                        </ul>
+        
+                        <h4 class="dhbw-lightblue">POST</h4>
+                        <ul>
+                            <li>
+                                Daten zur Verarbeitung an den Server schicken
+                            </li>
+                            <li>
+                                Wird häufig dazu verwende, neue Inhalte auf dem Server abzulegen
+                            </li>
+                            <li>
+                                Der Server antwortet mit dem gespeicherten Inhalt oder einer Fehlerbeschreibung
+                            </li>
+                        </ul>
+        
+                        <h4 class="dhbw-lightblue">PUT</h4>
+                        <ul>
+                            <li>
+                                Wird häufig verwendet, um vorhandene Daten auf dem Server zu aktualisieren
+                            </li>
+                            <li>
+                                Der Inhalt der Datei muss im Request Body mitgeschickt werden
+                            </li>
+                            <li>
+                                Der Server antwortet mit dem gespeicherten Inhalt oder einer Fehlerbeschreibung
+                            </li>
+                        </ul>
+        
+                        <h4 class="dhbw-lightblue">DELETE</h4>
+                        <ul>
+                            <li>
+                                Daten auf dem Server löschen
+                            </li>
+                            <li>
+                                Die Anfrage darf keinen Request Body enthalten
+                            </li>
+                            <li>
+                                Der Server antwortet mit einer Bestätigung oder einer Fehlberbeschreibung
+                            </li>
+                        </ul>
+        
+                        <h4 class="dhbw-lightblue">Seltener verwendete Verben</h4>
+                        <p>
+                            <tt>HEAD</tt>, <tt>OPTIONS</tt>, <tt>TRACE</tt>, <tt>PATCH</tt>
+                        </p>
+                    </lsx-tab-page>
+        
+                    <lsx-tab-page title="Statuscodes">
+                        <h4 class="dhbw-lightblue">1xx: Informationen</h4>
+                        <ul>
+                            <li>
+                                Zwischenmeldung, um die Verbindung aufrecht zu erhalten
+                            </li>
+                            <li>
+                                Verhindert, dass die Verbindung durch einen Timeout vorzeitig beendet wird
+                            </li>
+                        </ul>
+        
+                        <h4 class="dhbw-lightblue">2xx: Erfolgreicher Abschluss</h4>
+                        <ul>
+                            <li>
+                                Die Anfrage wurde erfolgreich bearbeitet
+                            </li>
+                            <li>
+                                <tt>200 OK</tt>: Alles roger! Der Response Body beinhaltet die gewünschten Daten 👌🏼
+                            </li>
+                            <li>
+                                <tt>201 Created</tt>: Der an den Server gesendete Datensatz wurde erfolgreich angelegt
+                            </li>
+                            <li>
+                                <tt>202 Accepted</tt>: Die Anfrage wurde empfangen, wird aber erst später bearbeitet
+                            </li>
+                            <li>
+                                <tt>204 No Content</tt>: Alles in Ordnung. Der Body enthält jedoch keine Daten
+                            </li>
+                            <li>
+                                …
+                            </li>
+                        </ul>
+        
+                        <h4 class="dhbw-lightblue">3xx: Umleitung</h4>
+                        <ul>
+                            <li>
+                                Es sind weitere Aktionen vom Client notwendig
+                            </li>
+                            <li>
+                                <tt>300 Multiple Choice</tt>: Die Anfrage war nicht eindeutig genug
+                            </li>
+                            <li>
+                                <tt>301 Moved Permanently</tt>: Umleitung des Clients auf eine andere URL
+                            </li>
+                            <li>
+                                …
+                            </li>
+                        </ul>
+        
+                        <h4 class="dhbw-lightblue">4xx: Client Fehler</h4>
+                        <ul>
+                            <li>
+                                Der Client hat etwas falsch gemacht; die Verarbeitung wird abgelehnt
+                            </li>
+                            <li>
+                                <tt>400 Bad Request</tt>: Ungültige bzw. fehlerhafte Anfrage
+                            </li>
+                            <li>
+                                <tt>401 Unauthorized</tt>: Keine Berechtigung für diese Aktion
+                            </li>
+                            <li>
+                                <tt>403 Forbidden</tt>: Die Aktion ist prinzipiell nicht erlaubt
+                            </li>
+                            <li>
+                                <tt>404 Not Found</tt>: Der gesuchte Inhalt wurde nicht gefunden
+                            </li>
+                            <li>
+                                <tt>409 Conflict</tt>: Der übermittelte Inhalt wiederspricht anderen Daten
+                            </li>
+                            <li>
+                                …
+                            </li>
+                        </ul>
+        
+                        <h4 class="dhbw-lightblue">5xx: Server Fehler</h4>
+                        <ul>
+                            <li>
+                                Anfrage kann aufgrund eines Serverfehlers nicht bearbeitet werden
+                            </li>
+                            <li>
+                                <tt>500 Internal Server Error</tt>: Schwerer technischer Fehler, alles ist kaputt! 🗑️
+                            </li>
+                            <li>
+                                <tt>501 Not Implemented</tt>: Die Funktion ist nicht verfügbar
+                            </li>
+                            <li>
+                                <tt>503 Service Unavailable</tt>: Temporärer Fehler, bitte später nochmal versuchen
+                            </li>
+                            <li>
+                                …
+                            </li>
+                        </ul>
+                    </lsx-tab-page>
+        
+                    <lsx-tab-page title="Header Fields">
+                        <!-- Anfrage -->
+                        <h4 class="dhbw-lightblue">Anfrage</h4>
+        
+                        <h5>Host</h5>
+                        <p>
+                            Domain des aufgerufenen Servers, um zwischen mehreren Domains mit derselben IP-Adresse unterscheiden zu können
+                        </p>
+        
+                        <h5>User-Agent</h5>
+                        <p>
+                            Name, Version und Betriebssystem des Clients, wobei die Angaben meistens nicht stimmen
+                        </p>
+        
+                        <h5>Content-Type</h5>
+                        <p>
+                            MIME-Type und ggf. Zeichensatz der im Body enthaltenen Daten
+                        </p>
+        
+                        <h5>Accept</h5>
+                        <p>
+                            MIME-Type der erwarteten Antwort
+                        </p>
+        
+                        <h5>Accept-Language</h5>
+                        <p>
+                            Erwartete Sprachen (deutsch, englisch, …) der Antwort
+                        </p>
+        
+                        <h5>Connection</h5>
+                        <p>
+                            Hinweise zur Aufrechterhaltung der TCP/IP-Verbindung für weitere Anfragen
+                        </p>
+        
+                        <!-- Antwort -->
+                        <h4 class="dhbw-lightblue">Antwort</h4>
+        
+                        <h5>Content-Type</h5>
+                        <p>
+                            MIME-Type und ggf. Zeichensatz der im Body enthaltenen Daten
+                        </p>
+        
+                        <h5>Location</h5>
+                        <p>
+                            Umleitung auf eine neue URL bzw. URL der gespeicherten Daten
+                        </p>
+        
+                        <h5>Cache-Control</h5>
+                        <p>
+                            Hinweise zur Pufferung der Antwort im Browsercache
+                        </p>
+        
+                        <h5>Last-Modified</h5>
+                        <p>
+                            Datum und Uhrzeit der letzten Änderung an den Daten
+                        </p>
+                    </lsx-tab-page>
+        
+                    <lsx-tab-page title="Versionen">
+                        <h4 class="dhbw-lightblue">HTTP/0.9</h4>
+                        <p>
+                            Dies war die ursprüngliche von Tim Berners-Lee entwickelte HTTP-Version, wie sie 1991 veröffentlicht wurde.
+                            In dieser Version gab es nur GET-Anfragen und noch keine Header Fields. Eine Anfrage bestand daher lediglich
+                            aus einer Zeile:
+                        </p>
+                        <source-code language="http">
+                            GET /index.html
+                        </source-code>
+                        <p>
+                            Die Antwort des Servers beinhalte nur den Inhalt der abgerufenen Datei, sonst nichts.
+                        </p>
+        
+                        <h4 class="dhbw-lightblue mt-4">HTTP/1.0</h4>
+                        <p>
+                            1996 wurde HTTP/1.0 veröffentlicht. Ab hier haben die HTTP-Nachrichten den oben gezeigten Aufbau.
+                        </p>
+        
+                        <h4 class="dhbw-lightblue mt-4">HTTP/1.1</h4>
+                        <p>
+                            Diese Version wurde 1999 veröffentlicht und brachte weitreichende Verbesserungen. Unter anderem
+                            die Möglichkeit, die Verbindung zwischen zwei Anfragen offen zu halten. Denn zuvor wurde die Verbindung
+                            nach jeder Antwort automatisch getrennt. Da aber gerade der Verbindungsaufbau bei TCP/IP sehr langsam ist,
+                            führte dies zu langen Wartezeiten, wenn mehrere Dateien vom selben Server abgerufen werden mussten.
+                        </p>
+        
+                        <h4 class="dhbw-lightblue mt-4">HTTP/2</h4>
+                        <p>
+                            2015 wurde HTTP/2 offiziell verabschiedet. In seinen Grundzügen basiert es auf dem von Google entwickelten
+                            SPDY-Protokoll. Die Inhalte der HTTP-Nachrichten sind weitgehend gleich geblieben, jedoch werden sie nicht
+                            mehr in der oben gezeigten Textform kodiert. Stattdessen kommt ein kompaktes und in vielen Dingen eindeutiger
+                            spezifiziertes Binärformat zum Einsatz.¹
+                        </p>
+                        <p>
+                            Als weitere größere Neuerung führt HTTP/2 <b>Server Push</b> ein, wodurch der Server beim Abruf einer
+                            HTML-Seite selbstständig weitere Dateien an den Browser schicken kann. Somit können Stylesheets, Skripte
+                            und Bilder schon an den Browser geschickt werden, bevor dieser überhaupt weiß, dass er sie benötigen wird.
+                        </p>
+                        <p>
+                            Stand 2020 hat sich HTTP/2 noch nicht vollständig gegen HTTP/1 durchgesetzt. Sehr viele Webseiten verwenden
+                            weiterhin HTTP/1. Inzwischen unterstützen aber alle Server, Browser und Frameworks das neue Protokoll.
+                        </p>
+                        <p>
+                            <small>
+                                <small>
+                                    ¹ Beispielsweise war bei HTTP/1.x nie definiert, welche Bytefolge ein Zeilenende markiert.
+                                </small>
+                            </small>
+                        </p>
+                    </lsx-tab-page>
+                </lsx-tab-pages>
+            </div>
+        </div>
+    </section>
+</section>
+
+<section data-title="Gängige Webservice-Arten">
+    <section data-title="Grundprinzipien einfacher SOAP-Webservices" class="centered-content">
+        <div class="limited-width">
+            <div class="markdown mb-5">
+                Angeleitet vom Konzept des **entfernten Methodenaufrufs** entwickelte sich Anfang der
+                2000er-Jahre **SOAP** zu einem weit verbreiteten Standard. Die Abkürzung stand dabei
+                ursprünglich für **Simple Object Access Protocol*, wobei das Protokoll weder simpel
+                noch objekt-orientiert ist. Denn anstelle von Objekten definiert ein Webservice hier
+                eine Reihe von Funktionen, die mit einer **HTTP/POST-Anfrage** entfernt aufgerufen
+                werden können. Anfrage und Antwort werden dabei im **XML-Format** kodiert und enthalten
+                neben dem Namen der gerufenen Funktion auch alle Anfrageparameter und Rückgabewerte.
+                
+                Heute nimmt die Bedeutung von SOAP immer mehr ab, so dass SOAP in vielen Fällen durch
+                REST verdrängt wurde. Die Grundidee eines Webservice-Aufrufs lässt sich daran aber immer
+                noch gut erklären.
+            </div>
+    
             <lsx-tab-pages>
-                <lsx-tab-page title="Aufgabe 1.1">
-                    <lsx-quiz>
-                        <lsx-exercise title="HTTP-Verben">
-                            <lsx-question
-                                type = "single-choice"
-                                text = "a) Was bewirkt das HTTP-Verb POST?"
-                            >
-                                <lsx-answer>
-                                    Es werden bereits vorhandene Daten vom Server abgerufen.
-                                </lsx-answer>
-                                <lsx-answer>
-                                    Es werden Daten auf dem Server gelöscht (POST = Postpone).
-                                </lsx-answer>
-                                <lsx-answer correct>
-                                    Es werden Daten werden zur Verarbeitung an den Server geschickt.
-                                </lsx-answer>
-                            </lsx-question>
-                
-                            <lsx-question
-                                type = "single-choice"
-                                text = "b) Was bewirkt das HTTP-Verb DELETE?"
-                            >
-                                <lsx-answer>
-                                    Die ausgewählten Daten werden im Browser gelöscht.
-                                </lsx-answer>
-                                <lsx-answer correct>
-                                    Die ausgewählten Daten werden auf dem Server gelöscht.
-                                </lsx-answer>
-                                <lsx-answer>
-                                    Es wird geprüft, ob die Daten gelöscht werden können.
-                                </lsx-answer>
-                            </lsx-question>
-                
-                            <lsx-question
-                                type = "single-choice"
-                                text = "c) Was bewirkt das HTTP-Verb GET?"
-                            >
-                                <lsx-answer correct>
-                                    Es werden Daten vom Server abgerufen (zum Beispiel der HTML-Code einer Webseite).
-                                </lsx-answer>
-                                <lsx-answer>
-                                    Es wird eine Dateiliste vom Server mit den Namen aller Dateien einer Webseite abgerufen.
-                                </lsx-answer>
-                                <lsx-answer>
-                                    Der Inhalt einer Datei wird vom Browser an den Server übertragen.
-                                </lsx-answer>
-                            </lsx-question>
-                        </lsx-exercise>
-                    </lsx-quiz>
+                <lsx-tab-page title="Webservice-Anfrage">
+                    <img src="04-rest-webservices/soap-request.svg" alt="" class="d-block w-100" />
                 </lsx-tab-page>
-
-                <lsx-tab-page title="Aufgabe 1.2">
-                    <lsx-quiz>
-                        <lsx-exercise title="HTTP-Statuscodes">
-                            <lsx-question
-                                type = "single-choice"
-                                text = "a) Was bedeutet der Statuscode 401 Unauthorized?"
-                            >
-                                <lsx-answer>
-                                    Die gesuchten Daten wurden nicht gefunden.
-                                </lsx-answer>
-                                <lsx-answer>
-                                    Die gewünschte Funktion wurde nicht ausprogrammiert.
-                                </lsx-answer>
-                                <lsx-answer correct>
-                                    Die gewünschte Funktion darf nicht ausgeführt werden.
-                                </lsx-answer>
-                            </lsx-question>
-                
-                            <lsx-question
-                                type = "single-choice"
-                                text = "b) Was bedeutet der Statuscode 503 Service Unavailble?"
-                            >
-                                <lsx-answer correct>
-                                    Es ist ein temporärer Fehler aufgetreten, bitte später nochmal versuchen.
-                                </lsx-answer>
-                                <lsx-answer>
-                                    Es ist ein schwerwiegender Fehler aufgetreten. Nichts geht mehr.
-                                </lsx-answer>
-                                <lsx-answer>
-                                    Die gesuchte Information wurde nicht gefunden. Bitte anders suchen.
-                                </lsx-answer>
-                            </lsx-question>
-                
-                            <lsx-question
-                                type = "single-choice"
-                                text = "c) Welcher Statuscode signalisiert, dass eine Seite nicht gefunden wurde?"
-                            >
-                                <lsx-answer>
-                                    200
-                                </lsx-answer>
-                                <lsx-answer>
-                                    301
-                                </lsx-answer>
-                                <lsx-answer correct>
-                                    404
-                                </lsx-answer>
-                            </lsx-question>
-                
-                            <lsx-question
-                                type = "single-choice"
-                                text = "d) Welcher Statuscode wird geschickt, wenn alles okay ist?"
-                            >
-                                <lsx-answer>
-                                    100
-                                </lsx-answer>
-                                <lsx-answer correct>
-                                    200
-                                </lsx-answer>
-                                <lsx-answer>
-                                    300
-                                </lsx-answer>
-                            </lsx-question>
-                        </lsx-exercise>
-                    </lsx-quiz>
+                <lsx-tab-page title="Webservice-Antwort">
+                    <img src="04-rest-webservices/soap-response.svg" alt="" class="d-block w-100" />
                 </lsx-tab-page>
-
-                <lsx-tab-page title="Aufgabe 1.3">
-                    <lsx-quiz>
-                        <lsx-exercise title="REST-Webservices">
-                            <lsx-question
-                                type = "single-choice"
-                                text = "a) Wofür steht die Abkürzung REST?"
-                            >
-                                <lsx-answer>
-                                    <a href="https://www.youtube.com/watch?v=qx9HEn8aq1c" target="_blank">Rest in Peace</a>
-                                </lsx-answer>
-                                <lsx-answer correct>
-                                    Representational State Transfer
-                                </lsx-answer>
-                                <lsx-answer>
-                                    Representational Standard Transfer
-                                </lsx-answer>
-                                <lsx-answer>
-                                    Represent Every State Through HTTP
-                                </lsx-answer>
-                            </lsx-question>
+            </lsx-tab-pages>
+        </div>
+    </section>
+    
+    <section data-title="Grundprinzipien moderner REST-Webservices" class="centered-content">
+        <div class="limited-width">
+            <div class="markdown">
+                Im Gegensatz zu SOAP orientiert sich REST vollständig an den Möglichkeiten von HTTP und überträgt
+                diese konzeptionell vom Abruf einer Webseite auf die **Verwaltung beliebiger „Ressourcen”**, wobei
+                Ressourcen in diesem Zusammenhang nahezu alle Dinge sein können, deren Inhalt in einer geeigneten
+                Form zwischen Client und Server ausgetauscht werden kann. Oft handelt es sich deshalb um Einträge
+                in einer Datenbank. Aber auch IoT-Anwendungsfälle, bei denen jede Ressource für ein dingliches Objekt
+                der realen Welt steht, sind denkbar.
                 
-                            <lsx-question
-                                type = "single-choice"
-                                text = "b) Eine Ressource sollte immer einer Collection oder einem Store angehören?"
-                            >
-                                <lsx-answer correct>
-                                    Wahr
-                                </lsx-answer>
-                                <lsx-answer>
-                                    Falsch
-                                </lsx-answer>
-                            </lsx-question>
+                Jede Ressource besitzt hierfür eine eindeutige URL, die mit den üblichen HTTP-Methoden (<tt>GET</tt>,
+                <tt>PUT</tt>, <tt>POST</tt>, <tt>DELETE</tt>, …) angesprochen wird. Die Abkürzung REST steht dabei für
+                **Representational State Transfer**, was wie folgt zu lesen ist:
+        
+                * **Representational:** Grundsätzlich ist REST nicht auf ein bestimmtes Datenformat festgelegt.
+                Am häufigsten werden die Daten zwar im JSON-Format übertragen. Viele Server unterstützen darüber
+                hinaus aber noch weitere Formate wie XML, zwischen denen der Client wählen kann.
                 
-                            <lsx-question
-                                type = "single-choice"
-                                text = "c) Worin unterscheiden sich Collections und Stores?"
-                            >
-                                <lsx-answer>
-                                    Bei einer Collection werden neue Ressourcen vom Client eingefügt, bei einem Store vom Server.
-                                </lsx-answer>
-                                <lsx-answer correct>
-                                    Bei einer Collection legt der Server fest, welche URL die Ressourcen erhalten, bei einem Store der Client.
-                                </lsx-answer>
-                                <lsx-answer>
-                                    In eine Collection können nur gleichartige Ressourcen eingefügt werden, in einen Store alle Arten.
-                                </lsx-answer>
-                                <lsx-answer>
-                                    In einer Collection besitzen alle Ressourcen eine natürliche Reihenfolge, in einem Store nicht.
-                                </lsx-answer>
-                                <lsx-answer>
-                                    In einer Collection werden die Ressourcen dauerhaft gespeichert, in einem Store nicht.
-                                </lsx-answer>
-                            </lsx-question>
+                * **State Transfer:** Von der Nutzung einer Datenbank abgesehen ist die Serverseite eines REST-Webservices
+                immer zustandslos. Auf Serverseite können daher keine Daten im Hauptspeicher temporär abgelegt werden,
+                um diese bei einer Folgeanfrage weiterzubearbeiten. Temporäre Daten müssen entweder direkt in einer
+                angeschlossenen Datenbank persistiert oder vom Client bei jeder Anfrage mitgesendet werden. Dies hat
+                u.a. auch zur Folge, dass fast jede Anfrage bzw. Antwort den kompletten Inhalt einer Ressource beinhaltet.
                 
-                            <lsx-question
-                                type = "single-choice"
-                                text = "d) Welches HTTP-Verb wird typischerweise zum Anlegen neuer Ressourcen genutzt?"
-                            >
-                                <lsx-answer correct>
-                                    POST
-                                </lsx-answer>
-                                <lsx-answer>
-                                    PUT
-                                </lsx-answer>
-                                <lsx-answer>
-                                    PATCH
-                                </lsx-answer>
-                                <lsx-answer>
-                                    HEAD
-                                </lsx-answer>
-                            </lsx-question>
-                
-                            <lsx-question
-                                type = "single-choice"
-                                text = "e) Welches HTTP-Verb wird typischerweise zum Ändern einer Ressource genutzt?"
-                            >
-                                <lsx-answer>
-                                    POST
-                                </lsx-answer>
-                                <lsx-answer correct>
-                                    PUT
-                                </lsx-answer>
-                                <lsx-answer>
-                                    PATCH
-                                </lsx-answer>
-                                <lsx-answer>
-                                    HEAD
-                                </lsx-answer>
-                            </lsx-question>
-                
-                            <lsx-question
-                                type = "single-choice"
-                                text = "f) Welche Aufgabe besitzt das HTTP-Verb PATCH?"
-                            >
-                                <lsx-answer>
-                                    Anlegen einer neuen Collection.
-                                </lsx-answer>
-                                <lsx-answer>
-                                    Anlegen einer neuen Ressource.
-                                </lsx-answer>
-                                <lsx-answer>
-                                    Ändern der URL einer Ressource.
-                                </lsx-answer>
-                                <lsx-answer correct>
-                                    Ändern einzelner Felder einer Ressource.
-                                </lsx-answer>
-                            </lsx-question>
-                
-                            <lsx-question
-                                type = "single-choice"
-                                text = "g) Warum sollten Actions niemals mit einer GET-Anfrage ausgelöst werden?"
-                            >
-                                <lsx-answer correct>
-                                    Weil GET-Anfragen keine Seiteneffekte haben dürfen.
-                                </lsx-answer>
-                                <lsx-answer>
-                                    Weil es mit DO ein besser geeignetes HTTP-Verb dafür gibt.
-                                </lsx-answer>
-                                <lsx-answer>
-                                    Man darf schon, aber nur wenn die Action ein Ergebnis liefert.
-                                </lsx-answer>
-                            </lsx-question>
-                
-                            <lsx-question
-                                type = "single-choice"
-                                text = "h) Welche der folgenden Antworten entspricht nicht dem HATEOAS-Prinzip?"
-                            >
-                                <lsx-answer correct>
-                                    <source-code language="json">
-                                        {
-                                            "id": 3110,
-                                            "first_name": "Gilian",
-                                            "last_name": "Anderson",
-                                        }
-                                    </source-code>
-                                </lsx-answer>
-                                <lsx-answer>
-                                    <source-code language="json">
-                                        {
-                                            "id": 2512,
-                                            "first_name": "David",
-                                            "last_name": "Duchovny",
-                                            "_links": {
-                                                "as-actor": {
-                                                    "href": "/actors/3686/credited-as-actor"
-                                                },
-                                                "as-director": {
-                                                    "href": "actors/3686/credited-as-director"
+                Bei den URLs wird zwischen Ressourcen, Collections, Stores und Actions unterschieden.
+            </div>
+        
+            <lsx-tab-pages>
+                <lsx-tab-page title="Ressourcen">
+                    <p>
+                        Ein einzelner Datensatz wird <b>Ressource</b> genannt. Jede Ressource besitzt eine eindeutige URL,
+                        unter der sie aufgerufen werden kann.
+                    </p>
+                    <p class="tt">
+                        https://example.com/api/<span style="font-weight: bold; color: darkmagenta;">{resource}</span>/<span style="font-weight: bold; color: darkred;">{id}</span> <br />
+                        https://example.com/api/<span style="color: darkmagenta;">customers</span>/<span style="color: darkred;">47110815</span>
+                    </p>
+                    <source-code language="json">
+                        {
+                            "id": "47110815",
+                            "first_name": "Martina",
+                            "last_name": "Musterfrau",
+                            "registration_date": "2023-02-09"
+                        }
+                    </source-code>
+                    <table class="table bg-light border" style="table-layout: fixed;">
+                        <thead>
+                            <tr>
+                                <th>GET</th>
+                                <th>PUT</th>
+                                <th class="dhbw-gray">POST</th>
+                                <th>PATCH</th>
+                                <th>DELETE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ressource lesen</td>
+                                <td>Ressource überschreiben</td>
+                                <td class="dhbw-gray">–––</td>
+                                <td>Einzelne Werte ändern</td>
+                                <td>Ressource löschen</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </lsx-tab-page>
+        
+                <lsx-tab-page title="Collections">
+                    <p>
+                        Mehrere Datensätze werden in einer <b>Collection</b> gesammelt, ähnlich wie die Tabellen einer
+                        SQL-Datenbank.
+                    </p>
+                    <p class="tt">
+                        https://example.com/api/<span style="font-weight: bold; color: darkmagenta;">{collection}</span> <br />
+                        https://example.com/api/<span style="color: darkmagenta;">customers</span>
+                    </p>
+                    <source-code language="json">
+                        [
+                            {"id": "47110815", "name": "Martina Musterfrau"},
+                            {"id": "47110816", "name": "Toll Es Beispiel"},
+                            {"id": "47110817", "name": "Klaus Kunde"}
+                        ]
+                    </source-code>
+                    <table class="table bg-light border" style="table-layout: fixed;">
+                        <thead>
+                            <tr>
+                                <th>GET</th>
+                                <th class="dhbw-gray">PUT</th>
+                                <th>POST</th>
+                                <th class="dhbw-gray">PATCH</th>
+                                <th class="dhbw-gray">DELETE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Alle Ressourcen Lesen</td>
+                                <td class="dhbw-gray">–––</td>
+                                <td>Neue Ressource anlegen</td>
+                                <td class="dhbw-gray">–––</td>
+                                <td class="dhbw-gray">Alle Ressourcen löschen</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </lsx-tab-page>
+        
+                <lsx-tab-page title="Stores">
+                    <p>
+                        Im Gegensatz zu Collections speichern <b>Stores</b> zwar ebenfalls mehrere Datensätze, die URL
+                        wird jedoch vom Client festgelegt bzw. ist fest vorgegeben und daher vorab bekannt.
+                    </p>
+                    <p class="tt">
+                        https://example.com/api/<span style="font-weight: bold; color: darkmagenta;">{collection}</span>/<span style="font-weight: bold; color: darkred;">{id}</span>/<span style="font-weight: bold; color: darkblue;">{store}</span> <br />
+                        https://example.com/api/<span style="color: darkmagenta;">customers</span>/<span style="color: darkred;">47110815</span>/<span style="color: darkblue;">favorites</span>
+                    </p>
+                    <source-code language="json">
+                        [
+                            {"article": "9573387", "date_added": "2023-01-02"},
+                            {"article": "5975741", "date_added": "2023-01-14"},
+                            {"article": "1572246", "date_added": "2023-02-07"}
+                        ]
+                    </source-code>
+                    <table class="table bg-light border" style="table-layout: fixed;">
+                        <thead>
+                            <tr>
+                                <th>GET</th>
+                                <th>PUT</th>
+                                <th class="dhbw-gray">POST</th>
+                                <th>PATCH</th>
+                                <th>DELETE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Inhalte auslesen</td>
+                                <td>Einträg hinzufügen</td>
+                                <td class="dhbw-gray">–––</td>
+                                <td>Einzelne Werte ändern</td>
+                                <td>Eintrag löschen</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </lsx-tab-page>
+        
+                <lsx-tab-page title="Actions">
+                    <p>
+                        Prozedurale Aktionen, die nicht dem üblichen Lesen und Schreiben entsprechen, werden <b>Controller</b>¹
+                        oder auch <b>Actions</b> genannt.
+                    </p>
+                    <p class="dhbw-tt">
+                        https://example.com/api/<span style="font-weight: bold; color: darkmagenta;">{collection}</span>/<span style="font-weight: bold; color: darkred;">{id}</span>/<span style="font-weight: bold; color: darkblue;">{action}</span> <br />
+                        https://example.com/api/<span style="color: darkmagenta;">customers</span>/<span style="color: darkred;">47110815</span>/<span style="color: darkblue;">checkout</span>
+                    </p>
+                    <p>
+                        ¹
+                        <small>
+                            Der Name <b>Controller</b> ist unglücklich gewählt, weil die serverseitigen Klassen zur Implementierung
+                            eines REST-Webservices in den meisten Frameworks auch Controller genannt werden. In der Vorlesung verwenden
+                            wir daher lieber den Begriff <b>Action</b>.
+                        </small>
+                    </p>
+                    <table class="table bg-light border" style="table-layout: fixed;">
+                        <thead>
+                            <tr>
+                                <th class="dhbw-gray">GET</th>
+                                <th>PUT</th>
+                                <th>POST</th>
+                                <th class="dhbw-gray">PATCH</th>
+                                <th class="dhbw-gray">DELETE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="dhbw-gray">–––</td>
+                                <td>Aktion ausführen</td>
+                                <td>Aktion ausführen</td>
+                                <td class="dhbw-gray">–––</td>
+                                <td class="dhbw-gray">–––</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </lsx-tab-page>
+            </lsx-tab-pages>
+        </div>
+    </section>
+    
+    <section data-title="Vergleich von SOAP und REST" class="centered-content">
+        <div class="limited-width">
+            <p>
+                Jedes HTTP-Verb und jeder Stautscode besitzt in REST eine genau definierte Semantik.
+                Bei einer Anfrage muss daher immer das passende HTTP-Verb gesendet werden. Ebenso muss
+                der empfangene Statuscode ausgewertet werden, um den Erfolg der Anfrage zu prüfen.
+            </p>
+        
+            <div class="d-flex align-items-stretch" style="gap: 1em; margin-bottom: 1em;">
+                <div class="card bg-light" style="flex: 1;">
+                    <div class="card-header dhbw-lightblue fw-bold">
+                        HTTP-Verben
+                    </div>
+                    <div class="card-body">
+                        <table>
+                            <tr> <td>GET</td>      <td>Daten lesen</td> </tr>
+                            <tr> <td>POST</td>     <td>Daten unter einer vom Server generierten URL speichern</td> </tr>
+                            <tr> <td>PUT</td>      <td>Daten unter einer bereits bekannten URL speichern</td> </tr>
+                            <tr> <td>PATCH</td>    <td>Einzelne Felder eines vorhandenen Datensatzes ändern</td> </tr>
+                            <tr> <td>DELETE</td>   <td>Daten löschen</td> </tr>
+                            <tr> <td>POST/PUT</td> <td>Aufruf einer prozeduralen Aktion</td> </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="card bg-light">
+                    <div class="card-header dhbw-lightblue fw-bold">
+                        Statuscodes
+                    </div>
+                    <div class="card-body">
+                        <table>
+                            <tr> <td>200</td> <td>Ok</td> </tr>
+                            <tr> <td>201</td> <td>Created</td> </tr>
+                            <tr> <td>204</td> <td>No Content</td> </tr>
+                            <tr> <td>401</td> <td>Unauthorized</td> </tr>
+                            <tr> <td>403</td> <td>Forbidden</td> </tr>
+                            <tr> <td>404</td> <td>Not Found</td> </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        
+            <lsx-tab-pages>
+                <lsx-tab-page title="Typische HTTP-Anfragen">
+                    <lsx-accordion>
+                        <!-- GET – Collection abrufen -->
+                        <lsx-accordion-page>
+                            <lsx-accordion-title>
+                                <b><tt>GET</tt></b>
+                                <span style="position: absolute; right: 3em;">Liste abrufen</span>
+                            </lsx-accordion-title>
+                            <lsx-accordion-content>
+                                <p>
+                                    <tt>GET</tt>-Anfragen an einer Collection oder einen Store führen in der Regel dazu,
+                                    dass eine Zusammenfassung aller enthaltenen Daten gesendet wird. Oftmals können Anzahl,
+                                    Umfang und Sortierung der Daten über URL-Parameter gesteuert werden.
+                                </p>
+        
+                                <div class="container-fluid p-0">
+                                    <div class="row">
+                                        <div class="col-md">
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Anfrage</h3>
+                                            <source-code language="http">
+                                                GET /api/xfiles2018?sort_by=episode HTTP/1.1
+                                                Host: example.com
+                                                Accept: application/json
+                                            </source-code>
+                                        </div>
+                                        <div class="col-md">
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Antwort</h3>
+                                            <source-code language="http">
+                                                HTTP/1.1 200 Ok
+                                                Content-Type: application/json; charset=utf-8
+                                            </source-code>
+                                            <source-code language="json">
+                                                [{ "episode": "2AYW01", "title": "My Struggle III" },
+                                                    { "episode": "2AYW02", "title": "This" },
+                                                    { "episode": "2AYW03", "title": "Plus One" },
+                                                    { "episode": "2AYW04", "title": "The Lost Art of Forehead Sweat" },
+                                                    { "episode": "2AYW05", "title": "Ghouli" },
+                                                    { "episode": "2AYW06", "title": "Kitten" },
+                                                    { "episode": "2AYW07", "title": "Rm9sbG93ZXJz" },
+                                                    { "episode": "2AYW08", "title": "Familiar" },
+                                                    { "episode": "2AYW09", "title": "Nothing Lasts Forever" },
+                                                    { "episode": "2AYW10", "title": "My Struggle IV" }]
+                                            </source-code>
+                                        </div>
+                                    </div>
+                                </div>
+                            </lsx-accordion-content>
+                        </lsx-accordion-page>
+        
+                        <!-- GET – Ressource abrufen -->
+                        <lsx-accordion-page>
+                            <lsx-accordion-title>
+                                <b><tt>GET</tt></b>
+                                <span style="position: absolute; right: 3em;">Ressource abrufen</span>
+                            </lsx-accordion-title>
+                            <lsx-accordion-content>
+                                <p class="mb-4">
+                                    <tt>GET</tt>-Anfragen an eine einzelne Ressourcen führen dazu, dass der komplette
+                                    Datensatz übermittelt wird. Manche Webservices erlauben auch hier, über URL-Parameter
+                                    nur bestimmte Felder anzufordern. Die meisten Webservices liefern aber einfach die
+                                    komplette Ressource.
+                                </p>
+        
+                                <div class="container-fluid p-0">
+                                    <div class="row">
+                                        <div class="col-md">
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Anfrage</h3>
+                                            <source-code language="http">
+                                                GET /api/xfiles2018/2AYW04 HTTP/1.1
+                                                Host: example.com
+                                                Accept: application/json
+                                            </source-code>
+                                        </div>
+                                        <div class="col-md">
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Antwort</h3>
+                                            <source-code language="http">
+                                                HTTP/1.1 200 Ok
+                                                Content-Type: application/json; charset=utf-8
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "episode": "2AYW04",
+                                                    "title": "The Lost Art of Forehead Sweat",
+                                                    "directed_by": "Darin Morgan",
+                                                    "written_by": "Darin Morgan",
+                                                    "usa_air_date": "January 24, 2018",
+                                                    "de_air_date": "March 15, 2018",
+                                                    "running_time": 43,
+                                                    "guest_starts": [
+                                                        "Brian Huskey",
+                                                        "Stuart Margolin"
+                                                    ]
                                                 }
-                                            }
+                                            </source-code>
+                                        </div>
+                                    </div>
+                                </div>
+                            <lsx-accordion-content>
+                        </lsx-accordion-page>
+        
+        
+                        <!-- POST – Ressource anlegen -->
+                        <lsx-accordion-page>
+                            <lsx-accordion-title>
+                                <b><tt>POST</tt></b>
+                                <span style="position: absolute; right: 3em;">Ressource anlegen</span>
+                            </lsx-accordion-title>
+                            <lsx-accordion-content>
+                                <p class="mb-4">
+                                    <tt>POST</tt>-Anfragen werden in der Regel an eine Collection geschickt, um neue Daten
+                                    anzulegen. Der Server vergibt daraufhin eine neue URL und teilt diese zusammen mit einer
+                                    Kopie der gespeicherten Daten mit. Stellt der Server fest, dass der anzulegende Datensatz
+                                    bereits vorhanden ist, kann er diesen entweder überschreiben oder dies mit dem Statuscode
+                                    <tt>409 Conflict</tt> ablehnen.
+                                </p>
+        
+                                <div class="container-fluid p-0">
+                                    <div class="row">
+                                        <div class="col-md">
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Anfrage</h3>
+                                            <source-code language="http">
+                                                POST /api/xfiles2018/2AYW04/reviews HTTP/1.1
+                                                Host: example.com
+                                                Content-Type: application/json; charset=utf-8
+                                                Accept: application/json
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "star_rating": 10,
+                                                    "text": "One of the funniest episodes …"
+                                                }
+                                            </source-code>
+                                        </div>
+                                        <div class="col-md">
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Antwort</h3>
+                                            <source-code language="http">
+                                                HTTP/1.1 201 Created
+                                                Location: /api/xfiles2018/2AYW04/reviews/42
+                                                Content-Type: application/json; charset=utf-8
+                                                Cache-Control: no-cache
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "id": 42,
+                                                    "episode": "2AYW04",
+                                                    "star_rating": 10,
+                                                    "text": "One of the funniest episodes …"
+                                                }
+                                            </source-code>
+                                        </div>
+                                    </div>
+                                </div>
+                            <lsx-accordion-content>
+                        </lsx-accordion-page>
+        
+                        <!-- PUT – Ressource austauschen -->
+                        <lsx-accordion-page>
+                            <lsx-accordion-title>
+                                <b><tt>PUT</tt></b>
+                                <span style="position: absolute; right: 3em;">Ressource aktualisieren</span>
+                            </lsx-accordion-title>
+                            <lsx-accordion-content>
+                                <p class="mb-4">
+                                    Bei einer <tt>PUT</tt>-Anfrage kennt der Client die URL der abzuspeichernden Daten bereits, so dass
+                                    die Anfrage direkt an die Ressource geschickt werden kann. Meistens wird dies zum Überschreiben
+                                    vorhandener Datensätze genutzt. Es gibt aber auch Services, welche eine Neuanlage auf diese
+                                    Weise erlauben. Manche Webservices liefern auch hier als Antwort eine Kopie der gespeicherten
+                                    Daten. Üblich ist aber auch, einfach mit Status <tt>204 No Content</tt> zu antworten und davon
+                                    auszugehen, dass der Client due vollständigen Daten entweder bereits kennt oder mit einer
+                                    nachfolgenden GET-Anfrage abrufen kann.
+                                </p>
+        
+                                <div class="container-fluid p-0">
+                                    <div class="row">
+                                        <div class="col-md">
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Anfrage</h3>
+                                            <source-code language="http">
+                                                PUT /api/xfiles2018/2AYW07 HTTP/1.1
+                                                Host: example.com
+                                                Content-Type: application/json; charset=utf-8
+                                                Accept: application/json
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "episode": "2AYW07",
+                                                    "title": "Rm9sbG93ZXJz",
+                                                    "directed_by": "Glen Morgan",
+                                                    "written_by": "Shannon Hamblin & Kristen Cloke",
+                                                    "usa_air_date": "February 28, 2018",
+                                                    "de_air_date": "April 4, 2018",
+                                                    "running_time": 43,
+                                                    "guest_starts": [
+                                                        "Candus Churchill"
+                                                    ]
+                                                }
+                                            </source-code>
+                                        </div>
+                                        <div class="col-md">
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Antwort</h3>
+                                            <source-code language="http">
+                                                HTTP/1.1 204 No Content
+                                                Location: /api/xfiles2018/2AYW07
+                                            </source-code>
+                                        </div>
+                                    </div>
+                                </div>
+                            <lsx-accordion-content>
+                        </lsx-accordion-page>
+        
+        
+                        <!-- PATCH – Einzelne Felder aktualisieren -->
+                        <lsx-accordion-page>
+                            <lsx-accordion-title>
+                                <b><tt>PATCH</tt></b>
+                                <span style="position: absolute; right: 3em;">Einzelne Felder aktualisieren</span>
+                            </lsx-accordion-title>
+                            <lsx-accordion-content>
+                                <p class="mb-4">
+                                    Soll ein vorhandener Datensatz aktualisiert werden, kann häufig eine <tt>PATCH</tt>-Anfrage gesendet
+                                    werden, in welcher nur die zu überschreibenden Felder enthalten sind. Auf diese Weise wird unnötiger
+                                    Traffic zwischen Client und Server vermieden.
+                                </p>
+        
+                                <div class="container-fluid p-0">
+                                    <div class="row">
+                                        <div class="col-md">
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Anfrage</h3>
+                                            <source-code language="http">
+                                                PATCH /api/xfiles2018/2AYW09 HTTP/1.1
+                                                Host: example.com
+                                                Content-Type: application/json; charset=utf-8
+                                                Accept: application/json
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "directed_by": "James Wong",
+                                                    "written_by": "Karen Nielsen"
+                                                }
+                                            </source-code>
+                                        </div>
+                                        <div class="col-md">
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Antwort</h3>
+                                            <source-code language="http">
+                                                HTTP/1.1 200 Ok
+                                                Location: /api/xfiles2018/2AYW09
+                                                Content-Type: application/json; charset=utf-8
+                                                Cache-Control: no-cache
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "episode": "2AYW09",
+                                                    "title": "Nothing Lasts Forever",
+                                                    "directed_by": "James Wong",
+                                                    "written_by": "Karen Nielsen",
+                                                    "usa_air_date": "March 14, 2018",
+                                                    "de_air_date": "April 11, 2018",
+                                                    "running_time": 44,
+                                                    "guest_starts": [
+                                                        "Fiona Vroom",
+                                                        "Carlena Britch",
+                                                        "Jere Burns"
+                                                    ]
+                                                }
+                                            </source-code>
+                                        </div>
+                                    </div>
+                                </div>
+                            <lsx-accordion-content>
+                        </lsx-accordion-page>
+        
+                        <!-- DELETE – Ressource löschen -->
+                        <lsx-accordion-page>
+                            <lsx-accordion-title>
+                                <b><tt>DELETE</tt></b>
+                                <span style="position: absolute; right: 3em;">Ressource löschen</span>
+                            </lsx-accordion-title>
+                            <lsx-accordion-content>
+                                <p class="mb-4">
+                                    Eine <tt>DELETE</tt>-Anfrage dient, wie der Name bereits sagt, dem Löschen von Daten.
+                                    Sie wird daher in der Regel an eine einzelne Ressource geschickt, kann aber auch an
+                                    eine Collection oder einen Store geschickt werden, um alle Daten auf einmal zu löschen.
+                                    Als Antwort wird häufig nur eine Bestätigung ohne Dateninhalt geliefert.
+                                </p>
+        
+                                <div class="container-fluid p-0">
+                                    <div class="row">
+                                        <div class="col-md">
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Anfrage</h3>
+                                            <source-code language="http">
+                                                DELETE /api/reviews/13 HTTP/1.1
+                                                Host: example.com
+                                            </source-code>
+                                        </div>
+                                        <div class="col-md">
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Antwort</h3>
+                                            <source-code language="http">
+                                                HTTP/1.1 204 No Content
+                                            </source-code>
+                                        </div>
+                                    </div>
+                                </div>
+                            <lsx-accordion-content>
+                        </lsx-accordion-page>
+        
+        
+                        <!-- PUT – Aktion ausführen -->
+                        <lsx-accordion-page>
+                            <lsx-accordion-title>
+                                <b><tt>PUT</tt></b>
+                                <span style="position: absolute; right: 3em;">Aktion ausführen</span>
+                            </lsx-accordion-title>
+                            <lsx-accordion-content>
+                                <p class="mb-4">
+                                    Prozedurale Aktionen werden durch eine <tt>PUT</tt>- oder <tt>POST</tt>-Anfrage ausgelöst,
+                                    keinesfalls durch <tt>GET</tt>!¹ Viele Webservices verwenden <tt>POST</tt>, weil dies auch
+                                    bei SOAP-Webservices (dem zweiten großen Standard neben REST) praktiziert wird, <tt>PUT</tt>
+                                    wäre aber eigentlich logischer, da der Client die aufzurufende URL ja genau kennt.
+                                </p>
+                                <p>
+                                    ¹
+                                    <small>
+                                        <tt>GET</tt> ist nur zum Abruf bereits vorhandener Daten gedacht und darf deshalb
+                                        keine Seiteneffekte haben.
+                                    </small>
+                                </p>
+        
+                                <div class="container-fluid p-0">
+                                    <div class="row">
+                                        <div class="col-md">
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Anfrage</h3>
+                                            <source-code language="http">
+                                                PUT /api/xfiles2018/2AYW01/stream HTTP/1.1
+                                                Host: example.com
+                                                Content-Type: application/json; charset=utf-8
+                                                Accept: application/json
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "to_device": "smart_tv1",
+                                                    "start_at_timecode": 0,
+                                                    "audio": "english"
+                                                }
+                                            </source-code>
+                                        </div>
+                                        <div class="col-md">
+                                            <h3 class="dhbw-lightblue mt-4">HTTP-Antwort</h3>
+                                            <source-code language="http">
+                                                HTTP/1.1 200 Ok
+                                                Content-Type: application/json; charset=utf-8
+                                            </source-code>
+                                            <source-code language="json">
+                                                {
+                                                    "stream_id": "2AYW01.smart_tv1.english"
+                                                }
+                                            </source-code>
+                                        </div>
+                                    </div>
+                                </div>
+                            <lsx-accordion-content>
+                        </lsx-accordion-page>
+                    </lsx-accordion>
+                </lsx-tab-page>
+        
+                <lsx-tab-page title="Vergleich mit SOAP">
+                    <img src="04-rest-webservices/soap-rest.png" alt="SOAP is so much more polite than REST" class="img-fluid img-thumbnail mw-100 mx-auto" style="width: 30em;" />
+                    <p>
+                        <small>
+                            <small>
+                                Bildnachweis:
+                                <a href="http://geek-and-poke.com/geekandpoke/2009/11/30/service-calling-made-easy-part-1.html" target="_blank">Geek &amp; Poke: 30.11.2009</a>
+                            </small>
+                        </small>
+                    </p>
+                </lsx-tab-page>
+            </lsx-tab-pages>
+        </div>
+    </section>
+    
+    <section data-title="Hypermedia-driven Anwendungen mit HATEOAS" class="centered-content">
+        <div class="limited-width">
+            <div class="markdown">
+                Entsprechend den Empfehlungen von Roy Fielding, dem Erfinder von REST, verhalten sich einige
+                REST-Webservices **hypermedia driven**, indem Sie das **HATEOAS-Prinzip** (Hypertext is the
+                engine of the application state) berücksichtigen. Dieses sieht vor, dass ein entfernter Client
+                die Struktur eines Webservices durch Verlinkungen innerhalb der Antworten komplett dynamisch
+                entdecken kann. Jede Antwort beinhaltet hierfür neben den eigentlichen Nutzdaten zusätzlich
+                eine Liste mit Hyperlinks für alle zulässigen Folgeaktionen.
+        
+                Zur Verdeutlichung soll hier eine einfache Onlinebanking-Anwendung betrachtet werden. Über
+                die Verlinkungen kann das Frontend erkennen, ob eine Konto beispielsweise ausreichend Deckung
+                zum Tätigen von Überweisungen besitzt. Ohne Verlinkungen muss der Client „wissen“, wann welche
+                Aktion zulässig ist.
+            </div>
+        
+            <div class="d-flex justify-content-center" style="margin-bottom: 1em;">
+                <img src="04-rest-webservices/hateoas-beispiel.svg" alt="Zustandsdiagramm für Bankkonten" class="img-fluid"/>
+            </div>
+        
+            <lsx-tab-pages class="w-100 mb-4">
+                <lsx-tab-page title="Ohne Hyperlinks">
+                    <p>
+                        Es werden zwar die richtigen Daten zu einem Konto geliefert. Das Backend
+                        teilt aber nicht mit, wann welche Aktion erlaubt ist.
+                    </p>
+        
+                    <lsx-accordion>
+                        <lsx-accordion-page title="Abruf einer Kontenübersicht">
+                            <source-code language="json">
+                                [
+                                    {
+                                        "number": 3699623,
+                                        "type": "giro"
+                                    }, {
+                                        "number": 1013699623,
+                                        "type": "savings"
+                                    }
+                                ]
+                            </source-code>
+                        </lsx-accordion-page>
+        
+                        <lsx-accordion-page title="Informationen zum Kunden">
+                            <source-code language="json">
+                                {
+                                    "account_number": 3699623,
+                                    "bank_name": "Parkbank",
+                                    "currency": "EUR",
+                                    "amount": "2411.83",
+                                    "state": "covered"
+                                }
+                            </source-code>
+                        </lsx-accordion-page>
+                    </lsx-accordion>
+                </lsx-tab-page>
+        
+                <lsx-tab-page title="Mit Hyperlinks">
+                    <p>
+                        Durch Verlinkungen innerhalb der REST-Antworten teilt das Backend mit,
+                        wann welche Aktion erlaubt ist und wie diese aufzurufen ist.
+                    </p>
+        
+                    <lsx-accordion>
+                        <lsx-accordion-page title="Gedecktes Konto">
+                            <p>
+                                Es stehen sämtliche Links zum Tätigen von Überweisungen, Schließen des Kontos usw.
+                                zur Verfügung.
+                            </p>
+                            <source-code language="json">
+                                {
+                                    "account_number": 3699623,
+                                    "bank_name": "Parkbank",
+                                    "currency": "EUR",
+                                    "amount": "2411.83",
+                                    "state": "covered",
+                                    "_links": {
+                                        "self": {
+                                            "href": "/account/3699623"
+                                        },
+                                        "deposit": {
+                                            "href": "/account/3699623/deposit"
+                                        },
+                                        "pay": {
+                                            "href": "/account/3699623/pay"
+                                        },
+                                        "cash-transfer": {
+                                            "href": "/account/3699623/transfer"
+                                        },
+                                        "close": {
+                                            "href": "/account/3699623/close"
                                         }
-                                    </source-code>
-                                </lsx-answer>
-                            </lsx-question>
-                        </lsx-exercise>
-                    </lsx-quiz>
+                                    }
+                                }
+                            </source-code>
+                        </lsx-accordion-page>
+        
+                        <lsx-accordion-page title="Überzogenes Konto">
+                            <p>
+                                Es stehen nicht alle Links zur Verfügung, da für ein überzogenes Konto nicht alle
+                                Aktionen erlaubt sind.
+                            </p>
+                            <source-code language="json">
+                                {
+                                    "account_number": 3699623,
+                                    "bank_name": "Parkbank",
+                                    "currency": "EUR",
+                                    "amount": "0.00",
+                                    "state": "not-covered",
+                                    "_links": {
+                                        "self": {
+                                            "href": "/account/3699623"
+                                        },
+                                        "deposit": {
+                                            "href": "/account/3699623/deposit"
+                                        }
+                                    }
+                                }
+                            </source-code>
+                        </lsx-accordion-page>
+                    </lsx-accordion>
                 </lsx-tab-page>
             </lsx-tab-pages>
-        </article>
-        <aside>
+        
             <p>
-                It's Quiz Time! Hier können Sie Ihr neues Wissen rund um HTTP und seine
-                Verwendung in Webservices testen. Viel Erfolg dabei! 🐧
+                Trotz der augenscheinlichen Vorteile, hat sich das HATEOAS-Prinzip jedoch nicht als allgemeingültig
+                herausgestellt. Eine überwiegende Vielzahl von Webservices und Clients implementiert es nicht
+                oder nur unvollständig, da sich mit vollständig generisch implementierten Clientanwendungen nur
+                schwer eine ansprechende Benutzerführung realisieren lässt.
             </p>
-            <img src="shared/quiz.png" class="img-fluid d-block" style="max-width: 20em;"/>
-            <p>
-                <small>
-                    Bildnachweis:
-                    <a href="https://pixabay.com/illustrations/quiz-tiles-letters-red-game-test-2058883/" target="_blank">Pixabay: 905513</a>
-                </small>
-            </p>
-        </aside>
-    </section>
-
-    <section data-title="Aufgabe 2: Vorsicht, Falle!">
-        <!--
-            Kleines Spiel: Code-Beispiele (URL/HTTP-Methode + Beispieldaten) zu Webservice-Art zuordnen
-            Beispiele werden hierfür in einem Karussell eins nach dem anderen gezeigt
-            Zuordnung über eine Button-Leiste darunter: REST, SOAP, XML-RPC, Kein Webservice
-            Am Ende eine Übersicht der richtigen/falschen Antworten ggf. mit Erklärung
-
-            Neues Tag in lsx-extra-tags
-        -->
-    </section>
-
-    <section data-title="Aufgabe 3: Art Institute of Chicago">
-    </section>
-
-    <section data-title="Aufgabe 4: Circle of Life">
-    </section>
-
-    <section data-title="Aufgabe 5: Kleiderkreisel">
-    </section>
-
-    <section data-title="Aufgabe 6: Wir eröffnen ein Kino">
+        </div>
     </section>
 </section>
 
-<!-- ========================== -->
-<!-- PROGRAMMIERUNG MIT NODE.JS -->
-<!-- ========================== -->
-
-<section data-use-template="teilkapitel" data-titel="Programmierung mit Node.js"></section>
-
-<section data-title="Erste Schritte mit Node.js">
-    <section data-title="JavaScript außerhalb des Browsers">
-        <!--
-            Was ist Node.js (V8 Engine, ...)
-            REPL mit node CLI (Screenshot / Screencast)
-            Ausführung von Quellcodes mit "node datei.js"
-            Laufzeitumgebung für nebenläufige Programme
-            Gemacht für Netzwerkprogramme (Clients, Server)
-            Aber auch Desktop-Anwendungen z.B. mit Electron (Screenshots?)
-        -->
-    </section>
-
-    <section data-title="Deklaration von Node Packages">
-        <!--
-            package.json: Bedeutung, Beispiel, Aufbau
-            npm init (Screencast)
-        -->
-    </section>
-
-    <section data-title="Abhängigkeiten verwalten">
-        <!--
-            npmjs.org
-            npm add / install
-            Verzeichnis node_modules                
-            Arten von Dependencies: Runtime und Dev (Peer auch?)
-            Beispiel in package.json
-            Semantische Versionierung
-        -->
-    </section>
-
-    <section data-title="Verwendung von NPM-Skripten">
-        <!--
-            Definition in der package.json
-            Ausführung mit "npm run ..." bzw. "npm start" (Screencast)
-            Hinweis: Umgebungsvariablen setzen (cross-env)
-            Hinweis: Mehrere Befehlen nacheinander
-            Hinweis: Mehrere Programme gleichzeitig (concurrently)
-        -->
-    </section>
-</section>
-
-<section data-title="Serverseitige Webentwicklung mit Express">
-    <section data-title="Funktionsumfang von Express">
-        <!--
-            Screenshot von Webseite
-            Kleine Beschreibung zu Ansatz und Funktionen von Express
-            Kurzaufzählung der Funktionen
-        -->
-    </section>
-
-    <section data-title="Grundgerüst einer Express-Anwendung">
-        <!--
-            Installation
-            main.js: app-Objekt
-            Middleware-Funktionen
-            Mini-Beispiel für GET-Request
-            HINWEIS: Anwendung ist hier etwas doof. Gemeint ist "Webanwendung" mit serverseitigem HTML-Rendering. Wir machen aber Webservices!
-        -->
-    </section>
-
-    <section data-title="Graceful Shutdown ermöglichen">
-    </section>
-
-    <section data-title="Statische Dateien bereitstellen">
-    </section>
-
-    <section data-title="Häufig benötigte Middleware-Funktionen">
-        <!--
-            express.json()
-            Anfragen loggen
-            Fehler behandeln
-        -->
-    </section>
-
-    <section data-title="Typische Request-Handler-Funktionen">
-        <!--
-            Code-Strukturierung: Controller-Module
-            Registrierung der HTTP Endpunkte (Verb + URL mit Platzhaltern)
-            Beispiele für typische GET/POST/... - Handler
-            Hinweis zu generischem Fehler-Handler etc.
-            Alternative: Mehrere Middleware-Funktionen als Array
-        -->
-    </section>
-</section>
-
-<section data-title="Nützliche Werkzeuge und Zusatzbibliotheken">
-    <section data-title="nodemon">
-    </section>
-
-    <section data-title="dotenv">
-    </section>
-
-    <section data-title="logging">
-    </section>
-
-    <section data-title="lowdb">
-    </section>
-</section>
-
-<!-- Fallbeispiel wie Stückeln? Wäre eine Code Tour möglich? -->
-<section data-title="Fallbeispiel: Wastebin">
-    <section data-title="Funktionsumfang des Beispiels">
-    </section>
-
-    <section data-title="Datenmodell und REST-Webservice">
-    </section>
-
-    <section data-title="Strukturierung des Quellcodes">
-        <!-- Bild aus Folien -->
-    </section>
-
-    <section data-title="Start des Webservers">
-    </section>
-
-    <section data-title="Datenbank">
-    </section>
-
-    <section data-title="Service-Schicht">
-    </section>
-
-    <section data-title="HTTP-Controller">
-    </section>
-</section>
-
-<!-- Vgl 2020er-Folien (abgespeckt) -->
-<section data-title="Verwendung von REST-APIs im Browser">
-    <section data-title="Asynchronous JavaScript and XML (AJAX)">
-    </section>
-
-    <section data-title="Anfragen senden mit XMLHttpRequest">
-    </section>
-
-    <section data-title="Anfragen senden mit der Fetch API">
-    </section>
-</section>
-
-<!-- Vgl 2020er-Folien (abgespeckt) -->
-<section data-title="Fallbeispiel: Gästebuch">
-    <section data-title="Funktionsumfang der Webanwendung">
-    </section>
-
-    <section data-title="HTTP-Endpunkte des Webservices">
-    </section>
-
-    <section data-title="Quellcode der Single Page App">
-    </section>
-</section>
-
-<section data-title="Übungsaufgaben" data-background-color="rgb(231, 221, 141)">
-    <section data-title="Aufgabe 1: Ein kleines Node.js-Quiz">
-        <article>
-            <lsx-tab-pages>
-                <lsx-tab-page title="Aufgabe 1.1">
-                    <lsx-quiz>
-                        <lsx-exercise title="XXX">
-                            xxx
-                        </lsx-exercise>
-                    </lsx-quiz>
-                </lsx-tab-page>
-
-                <lsx-tab-page title="Aufgabe 1.2">
-                    <lsx-quiz>
-                        <lsx-exercise title="XXX">
-                            xxx
-                        </lsx-exercise>
-                    </lsx-quiz>
-                </lsx-tab-page>
-            </lsx-tab-pages>
-        </article>
-        <aside>
-            <p>
-                Das war ein ganz schön umfangreicher Crash Kurs zur Programmierung mit Node.js.
-                Lassen Sie uns die wichtigsten Inhalte hier nochmal Revue passieren.
-            </p>
-            <img src="shared/quiz.png" class="img-fluid d-block" style="max-width: 20em;"/>
-            <p>
-                <small>
-                    Bildnachweis:
-                    <a href="https://pixabay.com/illustrations/quiz-tiles-letters-red-game-test-2058883/" target="_blank">Pixabay: 905513</a>
-                </small>
-            </p>
-        </aside>
-    </section>
-
-    <section data-title="Aufgabe 2: Mein erster Webservice">
-        <!--
-            Neues Node-Projekt anlegen
-            Webservice ausprogrammieren, der die Hauptstadt eines Bundeslands liefern kann
-                - Liste vorgegeben, Bundesland als Abkürzung, z.B. BW
-                - Mit Mallorca als Fun-Eintrag
-            Webservice im Browser testen
-            Webservice in Tool wie HTTPie testen
-        -->
-    </section>
-
-    <section data-title="Aufgabe 3: MfG, KSC, Oh je mine!">
-        <!--
-            Aufgabe von Michael: DELETE-Endpunkt ergänzen
-        -->
-    </section>
-
-    <section data-title="Aufgabe 4: Golfcard">
-        <!--
-            Webservice-Aufruf in Frontend einbauen
-            Dummy-Methode mit statischen Daten hierfür durch fetch() ersetzen
-        -->
-    </section>
-</section>
-
-<!-- ================ -->
-<!-- VERTIEFUNG: CORS -->
-<!-- ================ -->
-
-<section data-use-template="teilkapitel" data-titel="Vertiefung: CORS"></section>
-
-<section data-title="Cross-Origin-Resource-Sharing (CORS)">
-    <section data-title="Cross-Site-Scripting-Attacken ">
-        <!--
-        XSS-Attacken
-        CORS als clientseitiger Sicherheitsmechanismus
-        -->
-    </section>
-
-    <section data-title="Funktionsweise von CORS">
-        <!--
-        Generelle überlegungen zur Funktionsweise
-        OPTIONS PreFlight im Detail anhand Beispiel
-        -->
-    </section>
-
-    <section data-title="Zusätzliche Header Fields">
-        <!--
-        HTTP Header Fields für CORS
-        -->
-    </section>
-</section>
-
-<section data-title="Fallbeispiel: Notebook-as-a-Service">
-    <section data-title="Probleme bei fehlender CORS-Unterstützung">
-        <!--
-            Architekturskizze -> CORS-Relevant weil Gateway eine andere Origin hat
-            Screenshot des abgebrochenen Requests, wenn CORS-Reglen im Gateway fehlen
-            JavaScript-Code bekommt aus Sicherheitsgründen nur einen generischen Fehler gemeldet
-        -->
-    </section>
-
-    <section data-title="CORS-Regeln in der Gateway-Konfiguration">
-        <!--
-            Auszug aus der Gateway-Konfiguration
-            Erklärung der Regeln
-        -->
-    </section>
-
-    <section data-title="Erfolgreicher OPTIONS Pre-Flight">
-    </section>
-</section>
-
-<section data-title="Übungsaufgaben" data-background-color="rgb(231, 221, 141)">
-    <section data-title="Aufgabe 1: Ein kleines CORS-Quiz">
+<section data-title="Übungsaufgaben" class="centered-content" data-background-color="rgb(231, 221, 141)">
+    <section data-title="Aufgabe 1: Ein kleines HTTP- und REST-Quiz" class="limited-width">
         <article>
             <lsx-quiz>
-                <lsx-exercise>
+                <lsx-exercise title="HTTP-Verben">
                     <lsx-question
                         type = "single-choice"
-                        text = "Wofür steht die Abkürzung CORS?"
+                        text = "a) Was bewirkt das HTTP-Verb POST?"
                     >
-                        <lsx-answer>Content Oriented Remote Service</lsx-answer>
-                        <lsx-answer>Content On Remote Server</lsx-answer>
-                        <lsx-answer correct>Cross-Origin Resource Sharing</lsx-answer>
+                        <lsx-answer>
+                            Es werden bereits vorhandene Daten vom Server abgerufen.
+                        </lsx-answer>
+                        <lsx-answer>
+                            Es werden Daten auf dem Server gelöscht (POST = Postpone).
+                        </lsx-answer>
+                        <lsx-answer correct>
+                            Es werden Daten werden zur Verarbeitung an den Server geschickt.
+                        </lsx-answer>
                     </lsx-question>
-
-                    <lsx-question
-                        type = "multiple-choice"
-                        text = "Welche URL-Bestandteile bilden die „Herkunft” (Origin) einer Webseite?"
-                    >
-                        <lsx-answer correct>Protokoll</lsx-answer>
-                        <lsx-answer correct>Hauptdomain des Hostnamens</lsx-answer>
-                        <lsx-answer>Der komplette Hostname</lsx-answer>
-                        <lsx-answer correct>Portnummer</lsx-answer>
-                        <lsx-answer>Pfad</lsx-answer>
-                        <lsx-answer>URL-Parameter</lsx-answer>
-                        <lsx-answer>Anker</lsx-answer>
-                    </lsx-question>
-
-                    <lsx-question
-                        type = "multiple-choice"
-                        text = "Warum sind Anfragen an einen anderen Host als die „Herkunft” (Origin) einer Seite potentiell gefährlich?"
-                    >
-                        <lsx-answer>Weil der fremde Host den Inhalt der Anfragen nicht verarbeiten kann.</lsx-answer>
-                        <lsx-answer correct>Weil der Aufruf aus Sicht des Servers möglicherweise gar nicht erwünscht ist.</lsx-answer>
-                        <lsx-answer correct>Weil Angreifer die Originalseite optisch nachbauen und die Benutzer so zu unerwünschten Aktionen verleiten könnten.</lsx-answer>
-                        <lsx-answer>Weil die aufrufende Seite vom selben Entwicklerteam wie der Server entwickelt werden sollte.</lsx-answer>
-                        <lsx-answer correct>Weil XSS-Attacken häufig auf den Aufruf fremder Hosts, auf denen man bereits eingeloggt ist, abzielen.</lsx-answer>
-                    </lsx-question>
-
-                    <lsx-question
-                        type = "multiple-choice"
-                        text = "Welches sind „sichere“ HTTP-Verben, die nie einen <tt>OPTIONS</tt> Pre-Flight auslösen?"
-                    >
-                        <lsx-question-line>
-                            <lsx-answer correct><tt>GET</tt></lsx-answer>
-                            <lsx-answer><tt>PUT</tt></lsx-answer>
-                            <lsx-answer><tt>POST</tt></lsx-answer>
-                            <lsx-answer><tt>PATCH</tt></lsx-answer>
-                            <lsx-answer><tt>DELETE</tt></lsx-answer>
-                            <lsx-answer correct><tt>HEAD</tt></lsx-answer>
-                        </lsx-question-line>
-                    </lsx-question>
-
+        
                     <lsx-question
                         type = "single-choice"
-                        text = "Welche Aussage verbirgt sich hinter dem Header Field <src-code language='http'>Vary: Origin</src-code>?"
+                        text = "b) Was bewirkt das HTTP-Verb DELETE?"
                     >
-                        <lsx-answer correct>Der Server signalisiert damit, dass der Inhalt seiner Antwort vom Header Field „Origin“ in der Anfrage abhängig ist.</lsx-answer>
-                        <lsx-answer>Der Server gibt in diesem Header Field die URLs der erlaubten Herkünfte“ (Origins) für entfernte Aufrufe an.</lsx-answer>
-                        <lsx-answer>Der Client frägt damit beim Server an, ob ein geplanter Zugriff auf eine Ressource zulässig wäre.</lsx-answer>
-                        <lsx-answer>Der Client teilt dem Server damit mit, dass die aktuelle Anfrage keine „Herkunft“ (Origin) besitzt.</lsx-answer>
+                        <lsx-answer>
+                            Die ausgewählten Daten werden im Browser gelöscht.
+                        </lsx-answer>
+                        <lsx-answer correct>
+                            Die ausgewählten Daten werden auf dem Server gelöscht.
+                        </lsx-answer>
+                        <lsx-answer>
+                            Es wird geprüft, ob die Daten gelöscht werden können.
+                        </lsx-answer>
                     </lsx-question>
-
-                    <lsx-question
-                        type         = "assignment"
-                        text         = "Unter anderem die folgenden Header Fields werden beim OPTIONS Pre-Flight zwischen Browser und Webserver ausgetauscht. Ordnen Sie ihnen die jeweils richtige Bedeutung zu:"
-                        label-length = "20em"
-                    >
-                        <lsx-assignment answer="Anfrage: HTTP-Verb der tatsächlich geplanten Anfrage">
-                            <tt>Access-Control-Request-Method</tt>
-                        </lsx-assignment>
-                        <lsx-assignment answer="Anfrage: Zusätzlicher Header Fields der geplanten Anfrage">
-                            <tt>Access-Control-Request-Headers</tt>
-                        </lsx-assignment>
-                        <lsx-assignment answer="Antwort: Erlaubte Herkunft („Origin“) beim Zugriff auf die angefragte Ressource">
-                            <tt>Access-Control-Allow-Origin</tt>
-                        </lsx-assignment>
-                        <lsx-assignment answer="Antwort: Erlaubte HTTP-Verben beim Zugriff auf die angefragte Ressource">
-                            <tt>Access-Control-Allow-Methods</tt>
-                        </lsx-assignment>
-                    </lsx-question>
-
+        
                     <lsx-question
                         type = "single-choice"
-                        text = "Im Header Field <tt>Access-Control-Allow-Origin</tt> kann eine Liste aller erlaubten „Herkünfte“ (Origins) enthalten sein."
+                        text = "c) Was bewirkt das HTTP-Verb GET?"
                     >
-                        <lsx-quesiton-line>
-                            <lsx-answer>Wahr</lsx-answer>
-                            <lsx-answer correct>Falsch</lsx-answer>
-                        </lsx-quesiton-line>
+                        <lsx-answer correct>
+                            Es werden Daten vom Server abgerufen (zum Beispiel der HTML-Code einer Webseite).
+                        </lsx-answer>
+                        <lsx-answer>
+                            Es wird eine Dateiliste vom Server mit den Namen aller Dateien einer Webseite abgerufen.
+                        </lsx-answer>
+                        <lsx-answer>
+                            Der Inhalt einer Datei wird vom Browser an den Server übertragen.
+                        </lsx-answer>
                     </lsx-question>
-
+                </lsx-exercise>
+        
+                <lsx-exercise title="HTTP-Statuscodes">
                     <lsx-question
                         type = "single-choice"
-                        text = "Welche besagt das Header Field <src-code language='http'>Access-Control-Allow-Origin: *</src-code> in einer HTTP-Antwort?"
+                        text = "a) Was bedeutet der Statuscode 401 Unauthorized?"
                     >
-                        <lsx-answer>Dass entfernte Zugriff auf die angefragte Ressource prinzipiell nicht zulässig sind.</lsx-answer>
-                        <lsx-answer>Dass der Zugriff geschützt ist und die erlaubten „Herkünfte“ (Origins) beim Server angefragt werden müssen.</lsx-answer>
-                        <lsx-answer correct>Dass Webseiten jeglicher „Herkunft“ (Origin) auf die anfragte Ressource zugreifen können.</lsx-answer>
+                        <lsx-answer>
+                            Die gesuchten Daten wurden nicht gefunden.
+                        </lsx-answer>
+                        <lsx-answer>
+                            Die gewünschte Funktion wurde nicht ausprogrammiert.
+                        </lsx-answer>
+                        <lsx-answer correct>
+                            Die gewünschte Funktion darf nicht ausgeführt werden.
+                        </lsx-answer>
+                    </lsx-question>
+        
+                    <lsx-question
+                        type = "single-choice"
+                        text = "b) Was bedeutet der Statuscode 503 Service Unavailble?"
+                    >
+                        <lsx-answer correct>
+                            Es ist ein temporärer Fehler aufgetreten, bitte später nochmal versuchen.
+                        </lsx-answer>
+                        <lsx-answer>
+                            Es ist ein schwerwiegender Fehler aufgetreten. Nichts geht mehr.
+                        </lsx-answer>
+                        <lsx-answer>
+                            Die gesuchte Information wurde nicht gefunden. Bitte anders suchen.
+                        </lsx-answer>
+                    </lsx-question>
+        
+                    <lsx-question
+                        type = "single-choice"
+                        text = "c) Welcher Statuscode signalisiert, dass eine Seite nicht gefunden wurde?"
+                    >
+                        <lsx-answer>
+                            200
+                        </lsx-answer>
+                        <lsx-answer>
+                            301
+                        </lsx-answer>
+                        <lsx-answer correct>
+                            404
+                        </lsx-answer>
+                    </lsx-question>
+        
+                    <lsx-question
+                        type = "single-choice"
+                        text = "d) Welcher Statuscode wird geschickt, wenn alles okay ist?"
+                    >
+                        <lsx-answer>
+                            100
+                        </lsx-answer>
+                        <lsx-answer correct>
+                            200
+                        </lsx-answer>
+                        <lsx-answer>
+                            300
+                        </lsx-answer>
+                    </lsx-question>
+                </lsx-exercise>
+        
+                <lsx-exercise title="REST-Webservices">
+                    <lsx-question
+                        type = "single-choice"
+                        text = "a) Wofür steht die Abkürzung REST?"
+                    >
+                        <lsx-answer>
+                            <a href="https://www.youtube.com/watch?v=qx9HEn8aq1c" target="_blank">Rest in Peace</a>
+                        </lsx-answer>
+                        <lsx-answer correct>
+                            Representational State Transfer
+                        </lsx-answer>
+                        <lsx-answer>
+                            Representational Standard Transfer
+                        </lsx-answer>
+                        <lsx-answer>
+                            Represent Every State Through HTTP
+                        </lsx-answer>
+                    </lsx-question>
+        
+                    <lsx-question
+                        type = "single-choice"
+                        text = "b) Eine Ressource sollte immer einer Collection oder einem Store angehören?"
+                    >
+                        <lsx-answer correct>
+                            Wahr
+                        </lsx-answer>
+                        <lsx-answer>
+                            Falsch
+                        </lsx-answer>
+                    </lsx-question>
+        
+                    <lsx-question
+                        type = "single-choice"
+                        text = "c) Worin unterscheiden sich Collections und Stores?"
+                    >
+                        <lsx-answer>
+                            Bei einer Collection werden neue Ressourcen vom Client eingefügt, bei einem Store vom Server.
+                        </lsx-answer>
+                        <lsx-answer correct>
+                            Bei einer Collection legt der Server fest, welche URL die Ressourcen erhalten, bei einem Store der Client.
+                        </lsx-answer>
+                        <lsx-answer>
+                            In eine Collection können nur gleichartige Ressourcen eingefügt werden, in einen Store alle Arten.
+                        </lsx-answer>
+                        <lsx-answer>
+                            In einer Collection besitzen alle Ressourcen eine natürliche Reihenfolge, in einem Store nicht.
+                        </lsx-answer>
+                        <lsx-answer>
+                            In einer Collection werden die Ressourcen dauerhaft gespeichert, in einem Store nicht.
+                        </lsx-answer>
+                    </lsx-question>
+        
+                    <lsx-question
+                        type = "single-choice"
+                        text = "d) Welches HTTP-Verb wird typischerweise zum Anlegen neuer Ressourcen genutzt?"
+                    >
+                        <lsx-answer correct>
+                            POST
+                        </lsx-answer>
+                        <lsx-answer>
+                            PUT
+                        </lsx-answer>
+                        <lsx-answer>
+                            PATCH
+                        </lsx-answer>
+                        <lsx-answer>
+                            HEAD
+                        </lsx-answer>
+                    </lsx-question>
+        
+                    <lsx-question
+                        type = "single-choice"
+                        text = "e) Welches HTTP-Verb wird typischerweise zum Ändern einer Ressource genutzt?"
+                    >
+                        <lsx-answer>
+                            POST
+                        </lsx-answer>
+                        <lsx-answer correct>
+                            PUT
+                        </lsx-answer>
+                        <lsx-answer>
+                            PATCH
+                        </lsx-answer>
+                        <lsx-answer>
+                            HEAD
+                        </lsx-answer>
+                    </lsx-question>
+        
+                    <lsx-question
+                        type = "single-choice"
+                        text = "f) Welche Aufgabe besitzt das HTTP-Verb PATCH?"
+                    >
+                        <lsx-answer>
+                            Anlegen einer neuen Collection.
+                        </lsx-answer>
+                        <lsx-answer>
+                            Anlegen einer neuen Ressource.
+                        </lsx-answer>
+                        <lsx-answer>
+                            Ändern der URL einer Ressource.
+                        </lsx-answer>
+                        <lsx-answer correct>
+                            Ändern einzelner Felder einer Ressource.
+                        </lsx-answer>
+                    </lsx-question>
+        
+                    <lsx-question
+                        type = "single-choice"
+                        text = "g) Warum sollten Actions niemals mit einer GET-Anfrage ausgelöst werden?"
+                    >
+                        <lsx-answer correct>
+                            Weil GET-Anfragen keine Seiteneffekte haben dürfen.
+                        </lsx-answer>
+                        <lsx-answer>
+                            Weil es mit DO ein besser geeignetes HTTP-Verb dafür gibt.
+                        </lsx-answer>
+                        <lsx-answer>
+                            Man darf schon, aber nur wenn die Action ein Ergebnis liefert.
+                        </lsx-answer>
+                    </lsx-question>
+        
+                    <lsx-question
+                        type = "single-choice"
+                        text = "h) Welche der folgenden Antworten entspricht nicht dem HATEOAS-Prinzip?"
+                    >
+                        <lsx-answer correct>
+                            <source-code language="json">
+                                {
+                                    "id": 3110,
+                                    "first_name": "Gilian",
+                                    "last_name": "Anderson",
+                                }
+                            </source-code>
+                        </lsx-answer>
+                        <lsx-answer>
+                            <source-code language="json">
+                                {
+                                    "id": 2512,
+                                    "first_name": "David",
+                                    "last_name": "Duchovny",
+                                    "_links": {
+                                        "as-actor": {
+                                            "href": "/actors/3686/credited-as-actor"
+                                        },
+                                        "as-director": {
+                                            "href": "actors/3686/credited-as-director"
+                                        }
+                                    }
+                                }
+                            </source-code>
+                        </lsx-answer>
                     </lsx-question>
                 </lsx-exercise>
             </lsx-quiz>
         </article>
         <aside>
             <p>
-                Bei CORS dreht sich alles darum, Inhalte zu teilen. Hier können Sie stattdessen
-                Ihr <i>Wissen</i> teilen und überprüfen.
+                Es heißt mal wieder „Quiz Time!“. Testen Sie hier Ihr Wissen zum Transportprotokoll
+                HTTP und seinem Nutzen für REST-Webservices. Schaffen Sie es, alle Fragen richtig
+                zu beantworten?
             </p>
             <img src="shared/quiz.png" class="img-fluid d-block" style="max-width: 20em;"/>
             <p>
@@ -855,21 +1950,131 @@
         </aside>
     </section>
 
-    <section data-title="Aufgabe 2: Versuche am lebenden Objekt">
-        <!-- 
-            Anhand NaaS:
-            OPTIONS Pre-Flight im Browser anschauen
-            Header Fields interpretieren
-            Änderungen an der Gateway-Konfiguration vornehmen -> Kaputt machen und wieder reparieren
-        -->
+    <!--
+    <section data-title="Aufgabe 2: Vorsicht, Falle!">
+        Kleines Spiel: Code-Beispiele (URL/HTTP-Methode + Beispieldaten) zu Webservice-Art zuordnen
+        Beispiele werden hierfür in einem Karussell eins nach dem anderen gezeigt
+        Zuordnung über eine Button-Leiste darunter: REST, SOAP, XML-RPC, Kein Webservice
+        Am Ende eine Übersicht der richtigen/falschen Antworten ggf. mit Erklärung
+
+        Neues Tag in lsx-extra-tags
     </section>
+    -->
+
+    <section data-title="Aufgabe 2: Hey, Mr. Postman!">
+        <div class="container-fluid limited-width">
+            <div class="row">
+                <div class="col-md">
+                    <lsx-github-edit url="Aufgabe%20Mr.%20Postman" download="Aufgabe%20Mr.%20Postman"></lsx-github-edit>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col-md">
+                    <p>
+                        Nun, welche Musik hören Sie gerne? 🎼 Hier kommt die einmalige Gelegenheit, sie über einen REST-Webservice
+                        in eine Datenbank einzutragen. Hierfür muss lediglich der oben verlinkte Beispielservice zum Laufen gebracht
+                        werden. Anfangs kann zum Test die Adresse <a href="http://localhost:3000/" target="_blank">http://localhost:3000/</a>
+                        im Browser aufgerufen werden. Da auf diese Weise aber nur GET-Anfragen ausgelöst werden können, muss der
+                        Webservice eigentlich mit einem Werkzeug wie Postman analysiert werden. Führen Sie hierzu die folgenden
+                        Schritte in Postman aus:
+                    </p>
+                    <ol>
+                        <li>
+                            Senden Sie eine <tt>GET</tt>-Anfrage an die Startadresse des Webservices.
+                        </li>
+                        <li>
+                            Navigieren Sie von der Antwort zur Songliste und von dort zum ersten Song.
+                        </li>
+                        <li>
+                            Gehen Sie zurück zur Startseite und finden heraus, welcher Link für Suchanfragen benutzt wird.
+                        </li>
+                        <li>
+                            Suchen Sie anschließend alle Songs von den Dire Straits.
+                        </li>
+                        <li>
+                            <p>
+                                Senden Sie eine <tt>POST</tt>-Anfrage an die Song-Collection, um folgenden Song anzulegen:
+                            </p>
+                            <source-code language="json">
+                                {
+                                    "artist": "Elton John",
+                                    "name": "Circle of Life",
+                                    "releaseYear": 1994
+                                    "songwriters": "Tim Rice",
+                                }
+                            </source-code>
+                        </li>
+                        <li>
+                            Ändern Sie anschließend mit einer <tt>PATCH</tt>-Anfrage die Songwriter auf „Elton John, Tim Rice”.
+                        </li>
+                        <li>
+                            Ändern Sie mit einer <tt>PUT</tt>-Anfrage den Songtitel auf „Circle of Life (from Lion King)”.
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <img src="04-rest-webservices/aufgabe1-browser.png" alt="Screenshot des Webservices im Browser" class="d-block" style="width: 100%; border: 1px solid grey;" />
+                </div>
+                <div class="col-md">
+                    <img src="04-rest-webservices/aufgabe1-postman.png" alt="Screenshot des Webservices in Postman" class="d-block" style="width: 100%; border: 1px solid grey;" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section data-title="Aufgabe 3: Art Institute of Chicago" class="centered-content">
+        <div class="limited-width">
+            <div class="markdown">
+                Nach ein wenig Stöbern in der zuvor gezeigten Liste öffentlicher Webservices
+                finden wir die API des „Art Institute of Chicago”, einem 1879 gegründeten,
+                international bekannten Kunstmuseum. In der Liste wird auf die Schnittstellenbeschreibung
+                unter <a href="https://api.artic.edu/" target="_blank">api.artic.edu</a> verwiesen.
+                Stöbern Sie ein wenig in der Dokumentation und beantworten Sie anschließend
+                folgende Fragen:
+        
+                1. Warum kann man hier tatsächlich von einer API und nicht einfach nur von
+                einem Webservice sprechen?
+        
+                1. Welche Collections (in der Dokumentation „Endpoints” genannt) unterstützt die API?
+        
+                1. Unterstützt der Webservice das HATEOAS-Prinzip?
+        
+                1. Werden tatsächlich alle für REST-Webservices typischen HTTP-Verben unterstützt?
+        
+                1. Fall nicht alle HTTP-Verben unterstützt werden: Was könnte der Grund hierfür sein?
+        
+                1. Welche Informationen liefert die API zu einem einzelnen Bild?
+        
+                1. Wie kann man die URL zur Verwendung des Bilds in einer Webseite oder App erzeugen?
+            </div>
+        
+            <img src="04-rest-webservices/artic-api.png" class="img-thumbnail w-100" />
+        </div>
+    </section>
+
+    <!--
+    <section data-title="Aufgabe 4: Circle of Life">
+    </section>
+    -->
+
+    <!--
+    <section data-title="Aufgabe 5: Kleiderkreisel">
+    </section>
+    -->
+
+    <!--
+    <section data-title="Aufgabe 6: Wir eröffnen ein Kino">
+    </section>
+    -->
 </section>
 
-<!-- =================== -->
-<!-- VERTIEFUNG: OPENAPI -->
-<!-- =================== -->
-
-<section data-use-template="teilkapitel" data-titel="Vertiefung: OpenAPI"></section>
+<!-- ======================== -->
+<!-- Beschreibung mit OpenAPI -->
+<!-- ======================== -->
+<section data-use-template="teilkapitel" data-titel="Beschreibung mit OpenAPI"></section>
 
 <section data-title="OpenAPI-Spezifikationen">
     <section data-title="Wie beschreibt man einen Webservice?">
@@ -894,9 +2099,9 @@
             </div>
         
             <div class="d-flex align-items-stretch" style="gap: 1em;">
-                <img src="03-rest-webservices/openapi/openapi-beispiel.png" class="d-block img-thumbnail" style="width: 30em;"/>
-                <img src="03-rest-webservices/openapi/api-creditsafe.png" class="d-block img-thumbnail" style="width: 30em;"/>
-                <img src="03-rest-webservices/openapi/api-wikipedia.png" class="d-block img-thumbnail" style="width: 30em;"/>
+                <img src="04-rest-webservices/openapi-beispiel.png" class="d-block img-thumbnail" style="width: 30em;"/>
+                <img src="04-rest-webservices/api-creditsafe.png" class="d-block img-thumbnail" style="width: 30em;"/>
+                <img src="04-rest-webservices/api-wikipedia.png" class="d-block img-thumbnail" style="width: 30em;"/>
             </div>
         </article>
     </section>
@@ -926,15 +2131,15 @@
             <div class="d-flex flex-row gap-3">
                 <div class="fw-bold flex-fill">
                     <a href="https://editor.swagger.io" target="_blank">Swagger Editor</a> (Nur Quellcode)
-                    <img src="03-rest-webservices/openapi/openapi-beispiel.png" class="img-thumbnail d-block w-100" />
+                    <img src="04-rest-webservices/openapi-beispiel.png" class="img-thumbnail d-block w-100" />
                 </div>
                 <div class="fw-bold flex-fill">
                     <a href="https://www.apicur.io" target="_blank">Apicurio Studio</a> (grafischer Editor, open-source)
-                    <img src="03-rest-webservices/openapi/apicurio-1.png" class="img-thumbnail d-block w-100" />
+                    <img src="04-rest-webservices/apicurio-1.png" class="img-thumbnail d-block w-100" />
                 </div>
                 <div class="fw-bold flex-fill">
                     Live-Vorschau in Apicurio Studio
-                    <img src="03-rest-webservices/openapi/apicurio-2.png" class="img-thumbnail d-block w-100" />
+                    <img src="04-rest-webservices/apicurio-2.png" class="img-thumbnail d-block w-100" />
                 </div>
             </div>
         </article>
@@ -1884,36 +3089,36 @@
     
     <section data-title="Erstellen der OpenAPI-Spezifikation">
         <article class="d-flex flex-wrap justify-content-center align-items-center gap-3">
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-01.png" caption="1. Neue API anlegen"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-02.png" caption="2. Allgemeine Informationen eintragen"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-03.png" caption="3. Wechsel in den Änderungsmodus"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-04.png" caption="4. Live-Dokumentation zur Ergebniskontrolle öffnen"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-05.png" caption="5. Kontaktdaten und Lizenz ausfüllen"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-06.png" caption="6. Je Entität ein neues Tag anlegen"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-07.png" caption="7. Benötigte Datentypen anlegen"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-08.png" caption="8. Datentyp Address beschreiben"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-09.png" caption="9. URL-Endpunkte für Adressen generieren lassen"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-10.png" caption="10. Weitere Datentypen anlegen"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-11.png" caption="11. Schemadefinition HATEOAS_Link"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-12.png" caption="12. Für die HATEOAS-Typen keine URL-Endpunkte generieren"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-14.png" caption="13. Vorläufige Schemadefinition HATEOAS_Collection"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-13.png" caption="14. Vorläufige Schemadefinition HATEOAS_Resource"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-15.png" caption="15. Finale Schemadefinition HATEOAS_Collection"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-16.png" caption="16. Finale Schemadefinition HATEOAS_Resource"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-17.png" caption="17. Schemadefinition Address erweitern"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-18.png" caption="18. HATEOAS-Informationen zum Address-Schema hinzufügen"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-19.png" caption="19. URL /addresses umbenennen"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-20.png" caption="20. Ergebnis der manuellen Anpassungen"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-21.png" caption="21. Query-Parameter zum Suchen von Adressen anlegen"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-22.png" caption="22. Neu angelegte Query-Parameter zum Suchen von Adressen"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-23.png" caption="23. PATCH-Anfragen ergänzen"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-24.png" caption="24. HTTP-Anfrage für PATCH"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-25.png" caption="25. HTTP-Antwort für PATCH"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-26.png" caption="26. Live-Vorschau der Dokumentation öffnen"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-27.png" caption="27. Dokumentation des Webservices"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-28.png" caption="28. Zurück zur Startseite des Webservices"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-29.png" caption="29. OpenAPI-Beschreibung herunterladen"></lsx-modal-image>
-            <lsx-modal-image src="03-rest-webservices/openapi/fallbeispiel-apicurio-30.png" caption="30. Format YAML auswählen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-01.png" caption="1. Neue API anlegen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-02.png" caption="2. Allgemeine Informationen eintragen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-03.png" caption="3. Wechsel in den Änderungsmodus"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-04.png" caption="4. Live-Dokumentation zur Ergebniskontrolle öffnen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-05.png" caption="5. Kontaktdaten und Lizenz ausfüllen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-06.png" caption="6. Je Entität ein neues Tag anlegen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-07.png" caption="7. Benötigte Datentypen anlegen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-08.png" caption="8. Datentyp Address beschreiben"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-09.png" caption="9. URL-Endpunkte für Adressen generieren lassen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-10.png" caption="10. Weitere Datentypen anlegen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-11.png" caption="11. Schemadefinition HATEOAS_Link"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-12.png" caption="12. Für die HATEOAS-Typen keine URL-Endpunkte generieren"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-14.png" caption="13. Vorläufige Schemadefinition HATEOAS_Collection"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-13.png" caption="14. Vorläufige Schemadefinition HATEOAS_Resource"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-15.png" caption="15. Finale Schemadefinition HATEOAS_Collection"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-16.png" caption="16. Finale Schemadefinition HATEOAS_Resource"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-17.png" caption="17. Schemadefinition Address erweitern"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-18.png" caption="18. HATEOAS-Informationen zum Address-Schema hinzufügen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-19.png" caption="19. URL /addresses umbenennen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-20.png" caption="20. Ergebnis der manuellen Anpassungen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-21.png" caption="21. Query-Parameter zum Suchen von Adressen anlegen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-22.png" caption="22. Neu angelegte Query-Parameter zum Suchen von Adressen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-23.png" caption="23. PATCH-Anfragen ergänzen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-24.png" caption="24. HTTP-Anfrage für PATCH"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-25.png" caption="25. HTTP-Antwort für PATCH"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-26.png" caption="26. Live-Vorschau der Dokumentation öffnen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-27.png" caption="27. Dokumentation des Webservices"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-28.png" caption="28. Zurück zur Startseite des Webservices"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-29.png" caption="29. OpenAPI-Beschreibung herunterladen"></lsx-modal-image>
+            <lsx-modal-image src="04-rest-webservices/fallbeispiel-apicurio-30.png" caption="30. Format YAML auswählen"></lsx-modal-image>
         </article>
     </section>
     
@@ -1929,7 +3134,7 @@
                     </a>
                 </p>
         
-                <img src="03-rest-webservices/openapi/fallbeispiel-swagger-editor.png" class="img-responsive img-thumbnail" />
+                <img src="04-rest-webservices/fallbeispiel-swagger-editor.png" class="img-responsive img-thumbnail" />
             </div>
         </article>
     </section>
@@ -2045,8 +3250,8 @@
                 </div>
             
                 <div class="d-flex align-items-stretch" style="gap: 1em; margin-bottom: 1em;">
-                    <img src="03-rest-webservices/openapi/status-100.avif" class="d-block w-100"/>
-                    <img src="03-rest-webservices/openapi/status-101.avif" class="d-block w-100"/>
+                    <img src="04-rest-webservices/status-100.avif" class="d-block w-100"/>
+                    <img src="04-rest-webservices/status-101.avif" class="d-block w-100"/>
                 </div>
             </div>
         </article>
@@ -2068,7 +3273,7 @@
                     1. Welchen Aufbau haben die verwalteten Daten der API?
                 </div>
             
-                <img src="03-rest-webservices/openapi/openapi-beispiel.png" class="img-thumbnail w-100" />
+                <img src="04-rest-webservices/openapi-beispiel.png" class="img-thumbnail w-100" />
             </div>
         </article>
     </section>
@@ -2106,7 +3311,7 @@
                     * Falls ja, in welcher Form sollen die Links zurückgeliefert werden?
                 </div>
             
-                <img src="03-rest-webservices/openapi/apicurio-1.png" class="img-thumbnail w-100" />
+                <img src="04-rest-webservices/apicurio-1.png" class="img-thumbnail w-100" />
             </div>
         </article>
     </section>
