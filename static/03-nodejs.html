@@ -538,6 +538,72 @@
         </div>        
     </section>
 
+    <section data-title="Troubleshooting">
+        <div class="limited-width">
+            <p class="mb-4">
+                Öffnen Sie ein Terminal-Fenster und versuchen Sie, den Befehl <code>npm --version</code> auszuführen.
+                Im Idealfall erscheint dann die installierte Version des Node Package Managers. In vielen Fällen
+                erscheint stattdessen aber eine der unten gezeigten Fehlermeldungen. In diesem Fall soll Ihnen dieses
+                Seite einen Hinweis zur Fehlerbehebung geben.
+            </p>
+
+            <lsx-accordion>
+                <lsx-accordion-page title="Skript-Ausführung nicht erlaubt" class="dhbw-fontsize-small">
+                    <p>
+                        Unter Windows kommt es meistens vor, dass die Fehlermeldung <span class="dhbw-tt fst-italic">Die Datei …
+                        kann nicht geladen werden, da die Ausführung von Skripts auf diesem System deaktiviert ist</span>
+                        erscheint. Dies ist eine Sicherheitseinstellung von Windows, die normale DAUs¹ davor bewahren soll,
+                        sich in den Fuß zu schießen oder ausversehen Mallware auszuführen.
+                    </p>
+                    <img src="03-nodejs/troubleshooting-powershell1.png" alt="" class="d-block w-100 mb-2">
+
+                    <p>
+                        Zur Behebung des Problems müssen Sie im Windows-Startmenü nach „PowerShell” suchen und diese mit
+                        Administrator-Rechten ausführen. Dort geben Sie dann folgenden Befehl ein und bestätigen die daraufhin
+                        erscheinende Rückfrage mit <kbd>J</kbd> für „Ja“:
+                    </p>
+                    <p class="cmd">
+                        Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+                    </p>
+
+                    <img src="03-nodejs/troubleshooting-powershell2.png" alt="" class="d-block w-100">
+
+                    <small>
+                        ¹
+                        <small>
+                            Dümmste*r anzunehmender User*in 😲
+                        </small>
+                    </small>
+                </lsx-accordion-page>
+    
+                <lsx-accordion-page title="Konflikt mit OpenJDK" class="dhbw-fontsize-small">
+                    <p>
+                        Falls Sie auf Ihrem Windows-Rechner das OpenJDK installiert haben, kann der Versuch,
+                        <span class="cmd">npm</span> auszuführen zu folgender Fehlermeldung führen:
+                    </p>
+                    <p class="dhbw-tt fst-italic">
+                        Der Befehl "CALL …\\node.exe ist entweder falsch geschrieben oder konnte nicht gefunden werden.
+                    </p>
+                    <img src="03-nodejs/troubleshooting-openjdk1.png" alt="" class="d-block img-thumbnail w-100 mb-2">
+                    <p>
+                        Die Ursache liegt darin, dass das OpenJDK die System-Umgebungsvariable <span class="fn">ComSpec</span>
+                        überschreibt. Diese steuert unter Windows, welches Programm ausgeführt wird, wenn ein neues Terminal-Fenster
+                        geöffnet wird. Genauer gesagt definiert Sie den Kommandozeileninterpreter, der innerhalb des Terminals
+                        ausgeführt wird, um die Benutzereingaben zu verarbeiten. Der vom OpenJDK eingesetzte Kommandozeileninterpreter
+                        übersteuert aber die <span class="fn">Path</span>-Umgebungsvariable, die wiederum steuert, in welchen Verzeichnissen
+                        nach ausführbaren Programmen gesucht wird …
+                    </p>
+                    <img src="03-nodejs/troubleshooting-openjdk2.png" alt="" class="d-block img-thumbnail w-100 mb-2">
+                    <p>
+                        Lange Reder kurzer Sinn. Suchen Sie im Windows-Startmenü nach „Umgebungsvariable“ und prüfen Sie, ob die
+                        Umgebungsvariable <span class="fn">ComSpec</span> überschrieben wurde. Falls ja, löschen Sie den Eintrag.
+                        Tatsächlich funktioniert das OpenJDK auch ohne die Variable, Node.js aber nicht, wenn sie gesetzt ist.
+                    </p>
+                </lsx-accordion-page>
+            </lsx-accordion>
+        </div>
+    </section>
+
     <section data-title="Ein neues Projekt anlegen">
         <div class="limited-width">
             <div class="markdown mb-4">
