@@ -1567,8 +1567,8 @@
         <div class="centered-content flex-row flex-wrap gap-3 mb-5">
             <!-- main.js -->
             <lsx-modal>
-                <lsx-thumbnail style="height: 15em;" class="mw-100">
-                    <img src="03-nodejs/module-main.png" class="d-block h-100 mw-100 dhbw-thumbnail p-1"/>
+                <lsx-thumbnail class="mw-100">
+                    <img src="03-nodejs/module-main.png" class="d-block mw-100 dhbw-thumbnail p-1" style="height: 15em;"/>
                     <span class="lsx-modal-image-thumbnail">Die angepasste Datei <span class="fn">main.js</span></span>
                 </lsx-thumbnail>
                 <lsx-content>
@@ -1578,8 +1578,8 @@
 
             <!-- utils/fetch.js -->
             <lsx-modal>
-                <lsx-thumbnail style="height: 15em;" class="mw-100">
-                    <img src="03-nodejs/module-fetch.png" class="d-block h-100 mw-100 dhbw-thumbnail p-1"/>
+                <lsx-thumbnail class="mw-100">
+                    <img src="03-nodejs/module-fetch.png" class="d-block mw-100 dhbw-thumbnail p-1" style="height: 15em;"/>
                     <span class="lsx-modal-image-thumbnail">Die neue Datei <span class="fn">utils/fetch.js</span></span>
                 </lsx-thumbnail>
                 <lsx-content>
@@ -1590,9 +1590,287 @@
     </section>
 </section>
 
-<!--
-<section data-title="#Debugging mit Visual Studio Code" class="centered-content"></section>
--->
+<section data-title="Debugging mit Visual Studio Code" class="centered-content">
+    <section data-title="Fehlersuche im eigenen Quellcode">
+        <div class="limited-width mb-4">
+            <lsx-info-box class="mb-4">
+                <blockquote class="blockquote fst-italic">
+                    <p>
+                        Einen Quellcode zu debuggen ist wie einen Krimi zu lösen, bei dem man gleichzeitig
+                        auch der Mörder ist.
+                    </p>
+                    <figcaption class="blockquote-footer">
+                        <cite>Programmiererweisheit</cite>
+                    </figcaption>
+                </blockquote>
+            </lsx-info-box>
+
+            <p>
+                Egal, wie sehr man sich anstregt. Beim Programmieren schleichen sich immer wieder kleine
+                und große Fehler ein. Oft fallen sie beim Testen direkt auf und man weiß sofort, wo sie
+                zu beheben sind. Es gibt aber auch hartnäckige Fehler, die nicht sofort auffallen bzw.
+                bei denen nicht auf Anhieb klar ist, wie sie zustande kommen. In diesem Fall hilft uns der
+                <i>Debugger</i> bei der Fehlersuche. 🔍
+            </p>
+        </div>
+
+        <div class="d-flex align-items-stretch" style="gap: 1em;">
+            <img src="03-nodejs/debugging-comic1.png" class="d-block w-100 img-thumbnail"/>
+            <img src="03-nodejs/debugging-comic2.jpg" class="d-block w-100 img-thumbnail"/>
+            <img src="03-nodejs/debugging-comic3.jpg" class="d-block w-100 img-thumbnail"/>
+        </div>
+        <p class="w-100">
+            <small>
+                <small>
+                    Bildnachweise:
+                    <a href="https://geek-and-poke.com/geekandpoke/2017/8/13/just-happened" target="_blank">Geek&Poke: Just Happened</a>,
+                    <a href="https://geek-and-poke.com/geekandpoke/2013/12/3/yesterdays-regex" target="_blank">Geek&Poke: Yesterdays Regex</a>,
+                    <a href="https://geek-and-poke.com/geekandpoke/2013/8/13/coders-part-213" target="_blank">Geek&Poke: Coders (Part 213)</a>
+                </small>
+            </small>
+        </p>
+    </section>
+
+    <section data-title="Video-Tutorial für Visual Studio Code">
+        <div class="limited-width">
+            <p class="mb-4">
+                Den Ablauf einer Codestelle mit dem Debugger nachvollziehen zu können ist eine der
+                wichtigsten Fähigkeiten bei der Software-Entwicklung. Das nachfolgende Video zeigt
+                in weniger als sechs Minuten, wie es für Node.js-Anwendungen mit Visual Studio Code geht.
+            </p>
+
+            <lsx-youtube video="o-L1OCmWPDA"></lsx-youtube>
+            <a href="https://www.youtube.com/watch?v=o-L1OCmWPDA" target="_blank">Link zum Video</a>
+        </div>
+    </section>
+
+    <section data-title="Den Debugger in Visual Studio Code starten">
+        <div class="limited-width">
+            <div class="markdown mb-5">
+                ![Breakpoint setzen in VS Code](03-nodejs/breakpoint-setzen.png){.float-start .me-4 .mb-4 .shadow}
+
+                <span class="red">1)</span>
+                Haben wir eine Codezeile in Verdacht, dass hier ein Fehler stecken könnte, oder wollen
+                wir den Ablauf des Quellcodes an dieser Stelle aus einem anderen Grund untersuchen,
+                muss hierfür zunächst ein _Breakpoint_ (deutsch: Haltepunkt) gesetzt werden, damit das
+                Programm im Debugger an dieser Stelle stehen bleibt.
+
+                <span class="red">2)</span>
+                In Visual Studio Code und den meisten anderen IDEs reicht es aus, hierfür einfach in den
+                leeren Bereich links der Zeilennummer zu klicken. Ein roter Punkt symbolisiert daraufhin
+                den Breakpoint an dieser Stelle.
+
+                <span class="red">3)</span>
+                Anschließend muss der Debugger noch mit dem laufenden Programm verbunden werden. Hierfür
+                gibt es mehrere Möglichkeiten in Visual Studio Code.
+            </div>
+
+            <lsx-accordion style="clear: both;">
+                <lsx-accordion-page title="<b>Alternative 1:</b>&nbsp;An laufenden Prozess anhängen">
+                    <p>
+                        Bei langlaufenden Server-Programmen sitzen die Breakpoints meistens in einer Handler-Funktion,
+                        die bestimmte Client-Anfragen bearbeiten soll. Die Codezeilen werden daher nur ausgeführt, wenn
+                        eine entsprechende Anfrage an den Server geschickt wird. In diesem Fall genügt es, das Programm
+                        wie gewohnt über das Terminal zu starten, wenn es nicht sowieso schon läuft, und den Debugger mit
+                        dem laufenden Prozess zu verbinden.
+                    </p>
+
+                    <img src="03-nodejs/debugger-attach-1.png" alt="" class="dhbw-border w-100 mb-2">
+                    <img src="03-nodejs/debugger-attach-2.png" alt="" class="dhbw-border w-100 mb-3">
+
+                    <p>
+                        Hierfür öffnen wir mit <kbd>F1</kbd> die <i>Command Palette</i> und wählen dort <span class="cmd">Debug:
+                        Attach to Node Process</span> und dann den passenden Node.js-Prozess aus. Handelt es sich um den richtigen
+                        Prozess, erscheint im Terminal daraufhin eine Meldung, dass der Debugger verbunden ist.
+                    </p>
+                </lsx-accordion-page>
+
+                <lsx-accordion-page title="<b>Alternative 2:</b>&nbsp;Start der Anwendung im Debugger">
+                    <p>
+                        Soll eine Codestelle überprüft werden, die direkt nach dem Programmstart ausgeführt wird,
+                        funktioniert es natürlich nicht, den Debugger nachträglich mit dem laufenden Prozess zu
+                        verbinden. Stattdessen muss der Debugger zusammen mit dem Programm gestartet werden. In
+                        Visual Studio Code kann hierfür im Debug Panel der Button <span class="cmd">Run and Debug</span>
+                        verwendet werden.
+                    </p>
+
+                    <img src="03-nodejs/run-and-debug.png" alt="" class="dhbw-border w-100">
+                </lsx-accordion-page>
+
+                <lsx-accordion-page title="<b>Alternative 3:</b>&nbsp;Anlegen einer Launch-Konfiguration">
+                    <p>
+                        Besitzt ein Projekt mehrere ausführbare Dateien oder benötigt eine besondere Konfiguration,
+                        bietet es sich an, im Debug Panel auf <span class="cmd">create launch.json file</span> und
+                        dann auf <span class="cmd">Node.js</span> zu klicken, um eine Launch-Konfiguration für
+                        Visual Studio Code anzulegen.
+                    </p>
+
+                    <img src="03-nodejs/debugger-launch-config-1.png" alt="" class="dhbw-border w-100 mb-2">
+                    <img src="03-nodejs/debugger-launch-config-2.png" alt="" class="dhbw-border w-100 mb-3">
+
+                    <p>
+                        Hierdurch entsteht eine <span class="file">.vscode/launch.json</span> genannte Datei, in
+                        der alle Befehl zum Starten der einzelnen Programme hinterlegt werden können. Beim Aufruf
+                        des Debug Panel erscheint dadurch gleich die Debugger-Ansicht, in der das Programm mit dem
+                        grünen Play-Button oben neben <span class="cmd">RUN AND DEBUG</span> gestartet werden kann.
+                    </p>
+                </lsx-accordion-page>
+            </lsx-accordion>
+        </div>
+    </section>
+
+    <section data-title="Bedienung des Debuggers in Visual Studio Code">
+        <div class="limited-width">
+            <p class="mb-4">
+                Die Debugging-Ansicht von Visual Studio Code bietet alle wichtigen Funktionen auf
+                einen Blick. Hier siehst du, welche Informationen die einzelnen Bereiche zeigen.
+            </p>
+
+            <lsx-carousel>
+                <lsx-carousel-page>
+                    <p>
+                        Durch den Start des Debuggers wechselt Visual Studio Code in die Debugging-Ansicht.
+                    </p>
+                    <img src="03-nodejs/debugger-vscode-01.png" alt="" class="img-thumbnail w-100">
+                </lsx-carousel-page>
+                <lsx-carousel-page>
+                    <p>
+                        Das Programm bleibt beim nächsten Breakpoint stehen, wobei die aktuelle Zeile
+                        farblich hervorgehoben wird. Die Hervorhebung bedeutet, dass die Zeile noch nicht
+                        oder – wenn Sie mehrere Teilanweisungen beinhaltet – noch nicht vollständig
+                        ausgeführt wurde.
+                    </p>
+                    <img src="03-nodejs/debugger-vscode-02.png" alt="" class="img-thumbnail w-100">
+                </lsx-carousel-page>
+                <lsx-carousel-page>
+                    <p>
+                        Links oben sind die Variablen des aktuellen Codeblocks sichtbar. Dort sehen wir,
+                        welche Variablen an der aktuellen Stelle des Programms existieren und welchen
+                        Wert sie derzeit haben. Der Wert kann per Doppelklick auf eine Zeile überschrieben
+                        werden.
+                    </p>
+                    <img src="03-nodejs/debugger-vscode-03.png" alt="" class="img-thumbnail w-100">
+                </lsx-carousel-page>
+                <lsx-carousel-page>
+                    <p>
+                        Im Watch-Panel können beliebige Ausdrücke und Variablen hinterlegt werden, deren
+                        aktueller Wert überwacht werden soll. Auf diese Weise sieht man immer den aktuellen
+                        Wert, den ein Ausdruck oder eine Variable gerade hat.
+                    </p>
+                    <img src="03-nodejs/debugger-vscode-04.png" alt="" class="img-thumbnail w-100">
+                </lsx-carousel-page>
+                <lsx-carousel-page>
+                    <p>
+                        Der „Call Stack“ zeigt die Aufrufkette, wie die aktuelle Codezeile erreicht wurde.
+                        Ruft eine Funktion beispielsweise eine andere Funktion auf, wird dies hier durch
+                        eine geschachtelte Baumstruktur sichtbar gemacht.
+                    </p>
+                    <img src="03-nodejs/debugger-vscode-05.png" alt="" class="img-thumbnail w-100">
+                </lsx-carousel-page>
+                <lsx-carousel-page>
+                    <p>
+                        Links unten befindet sich eine Liste der Breakpoints. Hier können einzelne Breakpoints
+                        temporär abgeschaltet oder komplett entfernt werden.
+                    </p>
+                    <img src="03-nodejs/debugger-vscode-06.png" alt="" class="img-thumbnail w-100">
+                </lsx-carousel-page>
+                <lsx-carousel-page>
+                    <p>
+                        Der Programmablauf wird über die Buttons in der Floating Toolbar gesteuert.
+                        Die Buttons haben folgende Bedeutung (von links nach rechts):
+                    </p>
+                    <ol>
+                        <li>Ausführung bis zum nächsten Breakpoint fortsetzen</li>
+                        <li>Nächste Anweisung ausführen ohne im Debugger hineinzuspringen</li>
+                        <li>Nächste Anweisung ausführen und hineinspringen, falls es eine Funktion ist</li>
+                        <li>Aktuelle Funktion zu Ende ausführen und kurz vor dem Verlassen wieder anhalten</li>
+                        <li>Programm neustarten</li>
+                        <li>Programm stoppen</li>
+                    </ol>
+                    <img src="03-nodejs/debugger-vscode-07.png" alt="" class="img-thumbnail w-100">
+                </lsx-carousel-page>
+                <lsx-carousel-page>
+                    <p>
+                        Unten in der <span class="cmd">Debug Console</span> gibt es noch eine kleine Überraschung.
+                        Am rechten Rand wird dort jeweils angezeigt, welche Codezeile eine bestimmte Konsolenausgabe
+                        erzeugt hat. Die Codestalle kann per Klick auf den Link direkt aufgerufen werden.
+                    </p>
+                    <img src="03-nodejs/debugger-vscode-08.png" alt="" class="img-thumbnail w-100">
+                </lsx-carousel-page>
+                <lsx-carousel-page>
+                    <p>
+                        Das war es schon. Jetzt kannst du direkt loslegen und dein erstes Programm debuggen. ✨
+                    </p>
+                    <img class="active d-block w-25 m-auto" src="shared/finish.svg" />
+                    <p>
+                        <small>
+                            <small>
+                                Bildnachweis: <a href="https://pixabay.com/en/symbol-gui-internet-internet-page-2480163/" target="_blank">Pixabay: janf93</a>
+                            </small>
+                       </small>
+                    </p>
+                </lsx-carousel-page>
+            </lsx-carousel>
+        </div>
+    </section>
+
+    <section data-title="Aufgabe: Wo ist die ISS?" data-background-color="rgb(231, 221, 141)">
+        <article>
+            <lsx-github-edit
+                class        = "mb-4"
+                url          = "Beispiele/Erste%20Schritte%20mit%20Node.js"
+                download     = "Beispiele/Erste%20Schritte%20mit%20Node.js"
+            >
+            </lsx-github-edit>
+            <p>
+                Starte das Beispiel „Erste Schritte mit Node.js“ im Debugger und sorge dafür, dass anstelle der
+                Personen im Weltall die aktuelle Position der ISS abgerufen und auf der Konsole ausgegeben wird.
+                Folgende Schritte sind hierzu notwendig.
+            </p>
+            <ol class="mb-4">
+                <li>
+                    Öffne das Beispiel „Erste Schritte mit Node.js“ in Visual Studio Code.
+                </li>
+                <li>
+                    Setze einen Breakpoint auf die Zeile <src-code language="javascript">let peopleInSpace = await …</src-code>.
+                </li>
+                <li>
+                    Starte das Programm im Debugger, damit die Ausführung an der markierten Zeile unterbrochen wird.
+                </li>
+                <li>
+                    Springe mit den Buttons in der Floating Toolbar in die Funktion hinein.
+                </li>
+                <li>
+                    Ändere dort den Wert der Variablen <code>url</code> auf <src-code language="javascript">'http://api.open-notify.org/iss-now.json'</src-code>.
+                </li>
+                <li>
+                    Lasse das Programm anschließend zu Ende laufen.
+                </li>
+            </ol>
+            <div class="d-flex gap-2 align-items-center justify-content-center mt-4 mb-4 flex-column flex-md-row align-items-md-end">
+                <lsx-modal-image src="03-nodejs/debugger-aufgabe-1.png" caption="Quellcode mit gesetztem Breakpoint"></lsx-modal-image>
+                <lsx-modal-image src="03-nodejs/debugger-aufgabe-2.png" caption="Überschreiben der URL im Debugger"></lsx-modal-image>
+                <lsx-modal-image src="03-nodejs/debugger-aufgabe-3.png" caption="Veränderte Konsolenausgabe"></lsx-modal-image>
+            </div>
+        </article>
+        <aside>
+            <p>
+                Debuggen ist eine der wichtigsten Aktivitäten beim Programmieren. Du solltest dich
+                daher auf jeden Fall mit dem Debugger in Visual Studio Code vertraut machen, um
+                Fehler schnell und sicher auffinden zu können. In dieser Aufgabe kannst du es anhand
+                eines einfachen Beispiels üben.
+            </p>
+            <img src="03-nodejs/inspector.png" class="img-fluid d-block" style="max-width: 17em;"/>
+            <p>
+                <small>
+                    Bildnachweis:
+                    <a href="https://pixabay.com/illustrations/ai-generated-spy-detective-9352970/" target="_blank">Pixabay: olenchic</a>
+                </small>
+            </p>
+            <lsx-youtube video="afDo-MnNyBg"></lsx-youtube>
+        </aside>
+    </section>
+</section>
 
 <section data-title="Übungsaufgaben" data-background-color="rgb(231, 221, 141)">
     <!--
