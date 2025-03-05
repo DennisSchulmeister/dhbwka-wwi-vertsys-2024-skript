@@ -1873,15 +1873,323 @@
 </section>
 
 <section data-title="Übungsaufgaben" data-background-color="rgb(231, 221, 141)">
-    <!--
-    <section data-title="#Aufgabe 1: Ein kleines Node.js-Quiz">
+    <section data-title="Aufgabe 1: Ein kleines Node.js-Quiz">
         <article>
-            TODO
+            <lsx-tab-pages>
+                <lsx-tab-page title="Aufgabe 1.1">
+                    <lsx-quiz>
+                        <lsx-exercise title="Nutzung der Kommandozeile">
+                            <lsx-question
+                                type = "single-choice"
+                                text = "a) Woher stammt die Idee der Kommandozeile ursprünglich?"
+                            >
+                                <lsx-answer>Aus grafischen Benutzeroberflächen (GUIs) von Smartphones</lsx-answer>
+                                <lsx-answer correct>Aus frühen Betriebssystemen ohne grafische Oberfläche</lsx-answer>
+                                <lsx-answer>Aus Textverarbeitungsprogrammen der 1990er-Jahre</lsx-answer>
+                                <lsx-answer>Aus Webbrowsern der ersten Generation</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "multiple-choice"
+                                text = "b) Welche Aussagen beschreiben den Hauptzweck der Kommandozeile am besten?"
+                            >
+                                <lsx-answer>Die Kommandozeile dient ausschließlich der Eingabe von Passwörtern.</lsx-answer>
+                                <lsx-answer>Die Kommandozeile dient der Fernsteuerung grafischer Anwendungsoberflächen.</lsx-answer>
+                                <lsx-answer correct>Die Kommandozeile dient zum Ausführen von Befehlen und Programmen über Tastatureingaben.</lsx-answer>
+                                <lsx-answer>Die Kommandozeile ist überwiegend dazu da, um Retro-Spiele zu spielen.</lsx-answer>
+                                <lsx-answer>Die Kommandozeile dient ausschließlich der System-Konfiguration.</lsx-answer>
+                                <lsx-answer correct>Die Kommandozeile dient die Automatisierung häufiger Aktionen mit Hilfe von Skripten.</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "c) Warum ist es hilfreich, die Kommandozeile zu kennen, auch wenn moderne Betriebssysteme grafische Oberflächen besitzen?"
+                            >
+                                <lsx-answer correct>Viele Aufgaben lassen sich damit effizienter oder automatisiert erledigen.</lsx-answer>
+                                <lsx-answer>Moderne Endgeräte verfügen nicht immer über eine grafische Benutzeroberfläche.</lsx-answer>
+                                <lsx-answer>Viele Webanwendungen lassen sich statt über den Browser mit der Kommandozeile bedienen.</lsx-answer>
+                                <lsx-answer>Die Kommandozeile kann hervorragend zum Debuggen von Hardwarefehlern genutzt werden.</lsx-answer>
+                                <lsx-answer>Weil sie ein veraltetes Überbleibsel ist, das kaum noch verwendet wird.</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "d) Die Prompt zeigt (oft zusätzlich zu anderen Informationen), in welchem Arbeitsverzeichnis man sich gerade befindet."
+                            >
+                                <lsx-question-line>
+                                    <lsx-answer correct>Wahr</lsx-answer>
+                                    <lsx-answer>Falsch</lsx-answer>
+                                </lsx-question-line>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "e) Was bedeutet der Befehl <code>cd ..</code> in den meisten Kommandozeilensystemen?"
+                            >
+                                <lsx-answer>Der Befehl macht eine Sicherungskopie des aktuellen Verzeichnisses.</lsx-answer>
+                                <lsx-answer>Der Befehl zeigt eine Liste aller Dateien im aktuellen Verzeichnis an.</lsx-answer>
+                                <lsx-answer correct>Der Befehl wechselt ins übergeordnete Verzeichnis (eine Ebene nach oben).</lsx-answer>
+                                <lsx-answer>Der Befehl zeigt verborgene Dateien und Verzeichnisse an.</lsx-answer>
+                                <lsx-answer>Der Befehl prüft, ob eine CD im Laufwerk liegt und spielt diese ab.</lsx-answer>
+                                <lsx-answer>Der Befehl versetzt den Rechner in den erweiterten Stromsparmodus.</lsx-answer>
+                                <lsx-answer>Den Befehl gibt es gar nicht.</lsx-answer>
+                            </lsx-question>
+                        </lsx-exercise>
+                    </lsx-quiz>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Aufgabe 1.2">
+                    <lsx-quiz>
+                        <lsx-exercise title="Erst Schritte mit Node.js">
+                            <lsx-question
+                                type = "single-choice"
+                                text = "a) Was ist Node.js?"
+                            >
+                                <lsx-answer>Eine Laufzeitumgebung von JavaScript innerhalb des Browsers</lsx-answer>
+                                <lsx-answer correct>Eine Laufzeitumgebung von JavaScript außerhalb des Browsers</lsx-answer>
+                                <lsx-answer>Eine Laufzeitumgebung zur Entwicklung von Mobile Apps</lsx-answer>
+                                <lsx-answer>Eine Laufzeitumgebung zur Ausführung verschiedener Programmiersprachen</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "b) Was bewirkt der Konsolenbefehl <span class="cmd">npm init</span>?"
+                            >
+                                <lsx-answer>Der Befehl löscht den Inhalt des aktuellen Verzeichnisses.</lsx-answer>
+                                <lsx-answer>Der Befehl legt eine neue Quellcode-Datei für Node.js an.</lsx-answer>
+                                <lsx-answer correct>Der Befehl legt die Datei <span class="fn">package.json</span> an.</lsx-answer>
+                                <lsx-answer>Der Befehl installiert die Abhängigkeiten des Projekts.</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "multiple-choice"
+                                text = "c) Welchen Zweck erfüllt die Datei <span class='fn'>package.json</span>?"
+                            >
+                                <lsx-answer correct>Sie definiert allgemeine Metadaten wie Name und Version des Projekts.</lsx-answer>
+                                <lsx-answer correct>Sie verweist auf des Online-Repository mit dem Quellcode des Projekts.</lsx-answer>
+                                <lsx-answer correct>Sie definiert Skripte zur Automatisierung häufiger Aufgaben.</lsx-answer>
+                                <lsx-answer correct>Sie listet die Abhängigkeiten eines Node.js-Projekts auf.</lsx-answer>
+                                <lsx-answer correct>Sie definiert die erlaubten Versionen der installierten Abhängigkeiten.</lsx-answer>
+                                <lsx-answer correct>Sie ermöglicht es, das Projekt auf npmjs.org zu veröffentlichen.</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "d) In welches Verzeichnis werden die externe Abhängigkeiten eines Projekts installiert?"
+                            >
+                                <lsx-question-line>
+                                    <lsx-answer correct><code>node_modules</code></lsx-answer>
+                                    <lsx-answer><code>node_libraries</code></lsx-answer>
+                                    <lsx-answer><code>external_modules</code></lsx-answer>
+                                    <lsx-answer><code>packages</code></lsx-answer>
+                                    <lsx-answer><code>environment</code></lsx-answer>
+                                </lsx-question-line>
+                            </lsx-question>
+
+                            <lsx-question
+                                type          = "assignment"
+                                text          = "e) Ordne den folgenden Aufgaben den richtigen Konsolenbefehl zu."
+                                label-length  = "28em"
+                            >
+                                <lsx-assignment answer="npm install">Installation aller Abhängigkeiten eines Projekts</lsx-assignment>
+                                <lsx-assignment answer="npm start">Ausführen des Start-Skripts, um das Projekt zu starten</lsx-assignment>
+                                <lsx-assignment answer="npm run …">Ausführen eines in der <span class="fn">package.json</span> definierten Skripts</lsx-assignment>
+                                <lsx-assignment answer="npm add -D …">Hinzufügen einer weiteren Entwicklungsabhängigkeit</lsx-assignment>
+                                <lsx-assignment answer="npm remove …">Entfernen und Deinstallation einer Abhängigkeit</lsx-assignment>
+                                <lsx-assignment answer="npm update">Aktualisierung aller installierten Abhängikeiten</lsx-assignment>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "f) Worin unterscheiden sich normale Abhängigkeiten von Entwicklungsabhängigkeiten in Node.js?"
+                            >
+                                <lsx-answer correct>Entwicklungsabhängigkeiten werden zur Entwicklung aber nicht zur Ausführung benötigt.</lsx-answer>
+                                <lsx-answer>Normale Ahängigkeiten werden zur Ausführung aber nicht während der Entwicklung benötigt.</lsx-answer>
+                                <lsx-answer>Es gibt keinen Unterschied. Beide verhalten sich exakt gleich.</lsx-answer>
+                            </lsx-question>
+                        </lsx-exercise>
+                    </lsx-quiz>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Aufgabe 1.3">
+                    <lsx-quiz>
+                        <lsx-exercise title="Quellcode modularisieren">
+                            <lsx-question
+                                type = "single-choice"
+                                text = "a) Was passiert in JavaScript ohne ES6-Module, wenn zwei Dateien dieselbe Funktion definieren?"
+                            >
+                                <lsx-answer correct>Die Funktion der einen Datei überschreibt die gleichnamige Funktion der anderen Datei.</lsx-answer>
+                                <lsx-answer>Innerhalb jeder Datei wird die gleichnamige Funktion der anderen Datei ausgeführt.</lsx-answer>
+                                <lsx-answer>Nichts. Die Inhalte beider Dateien existieren völlig unabhängig voneinander.</lsx-answer>
+                                <lsx-answer>Das Programm bricht mit einem Laufzeitfehler ab, da dieser Fall nicht erlaubt ist.</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "b) Welche der folgenden Zeilen bindet eine Quellcode-Datei als ES6-Modul in HTML ein?"
+                            >
+                                <lsx-answer><src-code language="html">&lt;script src="file.js"&gt;&lt;/script&gt;</src-code></lsx-answer>
+                                <lsx-answer correct><src-code language="html">&lt;script src="file.js" type="module"&gt;&lt;/script&gt;</src-code></lsx-answer>
+                                <lsx-answer><src-code language="html">&lt;script src="file.js" format="es6"&gt;&lt;/script&gt; </src-code></lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "c) Welche der folgenden Zeilen innerhalb der package.json aktiviert ES6-Module in Node.js?"
+                            >
+                                <lsx-question-line>
+                                    <lsx-answer correct><src-code language="json">"type": "module"</src-code></lsx-answer>
+                                    <lsx-answer><src-code language="json">"format": "es6"</src-code></lsx-answer>
+                                    <lsx-answer><src-code language="json">"version": "nodejs-next"</src-code></lsx-answer>
+                                </lsx-question-line>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "d) Die Inhalte eines ES6-Moduls werden automatisch exportiert und anderen Modulen sichtbar gemacht?"
+                            >
+                                <lsx-question-line>
+                                    <lsx-answer>Wahr</lsx-answer>
+                                    <lsx-answer correct>Falsch</lsx-answer>
+                                </lsx-question-line>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "e) Welche der folgenden Zeilen importiert den Default Export des angegebenen Moduls?"
+                            >
+                                <lsx-answer correct><src-code language="javascript">import routes from "./routes.js";</src-code></lsx-answer>
+                                <lsx-answer><src-code language="javascript">import {routes} from "./routes.js";</src-code></lsx-answer>
+                                <lsx-answer><src-code language="javascript">import [routes] from "./routes.js";</src-code></lsx-answer>
+                                <lsx-answer><src-code language="javascript">import (routes) from "./routes.js";</src-code></lsx-answer>
+                                <lsx-answer><src-code language="javascript">import &lt;routes&gt; from "./routes.js";</src-code></lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = 'f) Was bewirken die geschweiften Klammern im Befehl <src-code language="javascript">import {logWarning} from "./logging.js"</src-code>?'
+                            >
+                                <lsx-answer>Der Default Export des genannten Moduls wird importiert.</lsx-answer>
+                                <lsx-answer>Es werden alle Inhalte des genannten Moduls importiert.</lsx-answer>
+                                <lsx-answer corret>Es wird eine Funktion oder eine Variable mit dem Namen <code>logWarning</code> importiert.</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "g) Mit welchem Schlüsselwort lassen sich Funktionen und Variablen in einem Modul exportieren?"
+                            >
+                                <lsx-question-line>
+                                    <lsx-answer><src-code language="javascript">public</src-code></lsx-answer>
+                                    <lsx-answer><src-code language="javascript">extends</src-code></lsx-answer>
+                                    <lsx-answer><src-code language="javascript">import</src-code></lsx-answer>
+                                    <lsx-answer correct><src-code language="javascript">export</src-code></lsx-answer>
+                                    <lsx-answer><src-code language="javascript">share</src-code></lsx-answer>
+                                </lsx-question-line>
+                            </lsx-question>
+                        </lsx-exercise>
+                    </lsx-quiz>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Aufgabe 1.4">
+                    <lsx-quiz>
+                        <lsx-exercise title="Fehlersuche">
+                            <lsx-question
+                                type = "single-choice"
+                                text = "a) Wofür benötigt man einen Debugger?"
+                            >
+                                <lsx-answer>Zum Anzeigen der Onlinedokumentation</lsx-answer>
+                                <lsx-answer>Zum Auffinden von Fehlern durch statische Codeanalyse</lsx-answer>
+                                <lsx-answer>Zum Überwachen des Speicherverbrauchs eines Programms</lsx-answer>
+                                <lsx-answer>Zum Messen der Laufzeit eines Programms</lsx-answer>
+                                <lsx-answer correct>Zum schrittweisen Nachvollziehen des Programmablaufs</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "b) Was ist ein Breakpoint?"
+                            >
+                                <lsx-answer correct>Ein Haltepunkt, an dem das Programm im Debugger unterbrochen wird</lsx-answer>
+                                <lsx-answer>Eine Sollbruchstelle im Programm, um es beim Auftreten von Fehler geordnet zu beenden</lsx-answer>
+                                <lsx-answer>Eine Codestelle, an der der aktuelle Speicherverbrauch des Programms gemessen wird</lsx-answer>
+                                <lsx-answer>Eine Codestelle, bis zu deren Ereichen die Laufzeit gemessen wird</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "c) Wie wird ein Breakpoint in Visual Studio Code gesetzt?"
+                            >
+                                <lsx-answer>Durch Doppelklicken der Zeilennummer</lsx-answer>
+                                <lsx-answer correct>Durch Anklicken des Bereichs links der Zeilennummer</lsx-answer>
+                                <lsx-answer>Durch Rechtsklick auf dei entsprechende Codezeile</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "d) Um ein Node.js-Programm zu debuggen, muss es zwingend im Debugger neu gestartet werden."
+                            >
+                                <lsx-question-line>
+                                    <lsx-answer>Wahr</lsx-answer>
+                                    <lsx-answer correct>Falsch</lsx-answer>
+                                </lsx-question-line>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "e) Der Wert einer Variable kann im Debugger nicht verändert werden."
+                            >
+                                <lsx-question-line>
+                                    <lsx-answer>Wahr</lsx-answer>
+                                    <lsx-answer correct>Falsch</lsx-answer>
+                                </lsx-question-line>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "single-choice"
+                                text = "f) Was zeigt der Call Stack innerhalb der Debugging-Ansicht?"
+                            >
+                                <lsx-answer>Die an der aktuelle Codestelle sichtbaren Variablen</lsx-answer>
+                                <lsx-answer>Den aktuellen Wert frei definierbarer Ausdrücke und Variablen</lsx-answer>
+                                <lsx-answer correct>Die Aufrufkette bis zur Ausführung der aktuellen Codezeile</lsx-answer>
+                                <lsx-answer>Den aktuellen Speicherverbrauch des Programms</lsx-answer>
+                                <lsx-answer>Die aktuelle Laufzeit des Programms</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question
+                                type = "assignment"
+                                text = "g) Ordne den folgenden Buttons ihre jeweilige Funktion in Visual Studio Code zu."
+                            >
+                                <lsx-question-line>
+                                    <lsx-assignment answer="Ausführung fortsetzen">
+                                        <img src="03-nodejs/debugger-button-1.png" alt="" class="img-thumbnail">
+                                    </lsx-assignment>
+                                    <lsx-assignment answer="Anweisung ausführen und überspringen">
+                                        <img src="03-nodejs/debugger-button-2.png" alt="" class="img-thumbnail">
+                                    </lsx-assignment>
+                                    <lsx-assignment answer="Anweisung ausführen und hineinspringen">
+                                        <img src="03-nodejs/debugger-button-3.png" alt="" class="img-thumbnail">
+                                    </lsx-assignment>
+                                </lsx-question-line>
+                                <lsx-question-line>
+                                    <lsx-assignment answer="Aktuelle Funktion verlassen">
+                                        <img src="03-nodejs/debugger-button-4.png" alt="" class="img-thumbnail">
+                                    </lsx-assignment>
+                                    <lsx-assignment answer="Programm neustarten">
+                                        <img src="03-nodejs/debugger-button-5.png" alt="" class="img-thumbnail">
+                                    </lsx-assignment>
+                                    <lsx-assignment answer="Programm stoppen">
+                                        <img src="03-nodejs/debugger-button-6.png" alt="" class="img-thumbnail">
+                                    </lsx-assignment>
+                                </lsx-question-line>
+                            </lsx-question>
+                        </lsx-exercise>
+                    </lsx-quiz>
+                </lsx-tab-page>
+            </lsx-tab-pages>
         </article>
         <aside>
             <p>
                 Bevor du dich auf die benoteten Lernkontrollen stürzt, löse erst einmal dieses
-                Quiz. Das ist eine Super-Übung für den großen Test. 📝
+                Quiz. Das ist eine super Übung für den großen Test. 📝
             </p>
             <img src="shared/quiz.png" class="img-fluid d-block" style="max-width: 20em;"/>
             <p>
@@ -1892,9 +2200,8 @@
             </p>
         </aside>
     </section>
-    -->
 
-    <section data-title="Aufgabe 1: 12-Faktor Apps">
+    <section data-title="Aufgabe 2: 12-Faktor Apps">
         <article>
             <lsx-tab-pages>
                 <lsx-tab-page title="Aufgabe">
@@ -1995,7 +2302,7 @@
         </aside>
     </section>
 
-    <section data-title="Aufgabe 2: Textzeilen sortieren">
+    <section data-title="Aufgabe 3: Textzeilen sortieren">
         <article>
             <lsx-github-edit
                 class        = "mb-3"
@@ -2147,7 +2454,7 @@
         </aside>
     </section>
 
-    <section data-title="Aufgabe 3: Vertiefungen">
+    <section data-title="Aufgabe 4: Vertiefungen">
         <article>
             <lsx-ul emoji="🪩" class="mb-4">
                 <li>Öffne dienen Lieblings KI-Chatbot und unterhalte dich mit ihm über folgende Themen.</li>
