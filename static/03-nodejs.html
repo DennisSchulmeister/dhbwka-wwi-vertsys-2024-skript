@@ -606,7 +606,7 @@
 
     <section data-title="Ein neues Projekt anlegen">
         <div class="limited-width">
-            <div class="markdown mb-4">
+            <div class="markdown mb-4" detail-content>
                 Einfache JavaScript-Quellcodes ohne externe Abhängigkeiten können ganz ohne ein Projekt hierfür
                 anzulegen ausgeführt werden. In den wenigsten Fällen kommt man damit aber sehr weit, da auf diese
                 Weise weder externe Bibliotheken eingebunden werden, noch Start-Skripte definiert, noch das Projekt
@@ -719,7 +719,7 @@
 
     <section data-title="Typische Verzeichnisse und Dateien">
         <div class="limited-width">
-            <p class="mb-4 dhbw-text-columns">
+            <p class="mb-4 dhbw-text-columns" detail-content>
                 Über die Datei <span class="fn">package.json</span> und das automatisch verwaltete
                 Verzeichnise <span class="fn">node_modules</span> hinaus schreibt Node.js keine
                 feste Verzeichnisstruktur vor. Häufig findet sich aber folgende Aufteilung. Natürlich
@@ -1037,11 +1037,11 @@
             <lsx-card title="<span class='fn'>package.json</span>" class="mb-4">
                 <source-code language="json">
                 {
-                    "name": "@dschulmeis/express-tutorial",
+                    "name": "@dschulmeis/Express-tutorial",
                     …,
                     "dependencies": {
                         "dotenv": "^16.4.7",
-                        "express": "^5.0.1",
+                        "Express": "^5.0.1",
                         "logging": "^3.3.0"
                     },
                     "devDependencies": {
@@ -1063,7 +1063,7 @@
 
     <section data-title="Fallbeispiel: Formatierte Konsolenausgabe">
         <div class="limited-width">
-            <p>
+            <p detail-content>
                 An dieser Stelle wollen wir unser kleines Programm erweitern und dabei auf eine
                 externe Bibliothek zugreifen. Am Ende soll das Programm öffentlich zugängliche
                 Daten aus dem Internet abrufen und als formatierte Ausgabe auf der Konsole ausgeben.
@@ -1196,7 +1196,7 @@
 <section data-title="Quellcode modularisieren" class="centered-content">
     <section data-title="Vorsicht, Falle!">
         <div class="limited-width">
-            <div class="markdown mb-4">
+            <div class="markdown mb-4" detail-content>
                 Bereits im letzten Semester haben wir gelernt, dass JavaScript aufgrund seines Alters einige
                 Design-Schwächen besitzt, die einen schnell beißen können, wenn man sie nicht kennt. 🐊
                 Der Grund ist wie immer, dass JavaScript ursprünglich als einfache Skript-Sprache zur
@@ -1287,7 +1287,7 @@
 
     <section data-title="ES6-Module mit import/export">
         <div class="limited-width">
-            <div class="markdown mb-4">
+            <div class="markdown mb-4" detail-content>
                 Wie so oft, haben die Macher*innen hinter JavaScript das Problem erkannt und eine neue
                 Syntax eingeführt, die das Problem löst. Auf diese Weise funktionieren alte Programme
                 weiter wie gewohnt, neue Programme können die Stolperfalle aber umgehen. In diesem Fall
@@ -1485,7 +1485,7 @@
 
     <section data-title="Fallbeispiel: Abruf von JSON-Daten">
         <div class="limited-width">
-            <div class="markdown mb-4">
+            <div class="markdown mb-4" detail-content>
                 Im nächsten Schritt wollen wir das eben Gelernte gleich in unserem Beispielprogramm einsetzen
                 und eine kleine Funktion schreiben, die den Abruf der JSON-Daten vereinfacht. Diese lagern wir
                 in eine neue Quellcode-Datei mit dem Namen <span class="fn">utils/fetch.js</span> aus.
@@ -1605,7 +1605,7 @@
                 </blockquote>
             </lsx-info-box>
 
-            <p>
+            <p detail-content>
                 Egal, wie sehr man sich anstregt. Beim Programmieren schleichen sich immer wieder kleine
                 und große Fehler ein. Oft fallen sie beim Testen direkt auf und man weiß sofort, wo sie
                 zu beheben sind. Es gibt aber auch hartnäckige Fehler, die nicht sofort auffallen bzw.
@@ -1633,7 +1633,7 @@
 
     <section data-title="Video-Tutorial für Visual Studio Code">
         <div class="limited-width">
-            <p class="mb-4">
+            <p class="mb-4" detail-content>
                 Den Ablauf einer Codestelle mit dem Debugger nachvollziehen zu können ist eine der
                 wichtigsten Fähigkeiten bei der Software-Entwicklung. Das nachfolgende Video zeigt
                 in weniger als sechs Minuten, wie es für Node.js-Anwendungen mit Visual Studio Code geht.
@@ -1721,7 +1721,7 @@
 
     <section data-title="Bedienung des Debuggers in Visual Studio Code">
         <div class="limited-width">
-            <p class="mb-4">
+            <p class="mb-4" detail-content>
                 Die Debugging-Ansicht von Visual Studio Code bietet alle wichtigen Funktionen auf
                 einen Blick. Hier siehst du, welche Informationen die einzelnen Bereiche zeigen.
             </p>
@@ -2541,62 +2541,447 @@
 <!-- ======================= -->
 <!-- HTTP-Server mit Express -->
 <!-- ======================= -->
-<!--
 <section data-use-template="teilkapitel" data-titel="HTTP-Server mit Express"></section>
 
 <section data-title="Kurzvorstellung von Express">
-    <section data-title="# Aufgabe: Funktionsumfang von Express" data-background-color="rgb(231, 221, 141)">
+    <section data-title="Client- vs. serverseitige Webframeworks" class="centered-content">
+        <div class="limited-width2">
+            <div class="markdown mb-4" detail-content>
+                In diesem Kapitel lernen wir mit Express ein sog. **serverseitiges Webframework** kennen.
+                Da es noch andere Arten von Webframeworks gibt, die in der Entwicklung web-basierter
+                Anwendungen oft genutzt werden, zeigt diese Seite einen kurzen Vergleich.
+            </div>
+
+            <div class="d-flex gap-3 flex-column flex-md-row">
+                <div class="card flex-grow-1 w-100">
+                    <img src="03-nodejs/framework-clientseitig.jpg" class="card-img-top">
+                    <div class="card-header border-top fw-bold">
+                        Clientseitige Webframeworks
+                    </div>
+                    <div class="card-body markdown small">
+                        Diese laufen im Browser und sind darauf ausgelegt, die Entwicklung interaktiver
+                        Benutzeroberflächen zu vereinfachen. Meist handelt es sich bei den damit entwickelten
+                        Anwendungen um Single Page Apps, bei denen große Teile der Anwendungslogik im Browser
+                        liegen, serverseitige Funktionen aber beispielsweise via REST-Webservices integriert
+                        werden können.
+
+                        #### Typische Funktionen {.dhbw-lightblue}
+
+                        1. HTML-Rendering mit Templates
+                        2. Entwicklung eigener HTML-Komponenten
+                        3. Datenbindung und Rendering
+                        4. Clientseitiges URL-Routing
+                        5. State-Management
+
+                        #### Verbreitete Beispiele {.dhbw-lightblue}
+
+                        [React](https://react.dev/){target=_blank},
+                        [Vue.js](https://vuejs.org/){target=_blank},
+                        [Angular](https://angular.io/){target=_blank},
+                        [Svelte](https://svelte.dev/){target=_blank}, …
+                    </div>
+                </div>
+
+                <div class="card flex-grow-1 w-100">
+                    <img src="03-nodejs/framework-serverseitig.jpg" class="card-img-top">
+                    <div class="card-header border-top fw-bold">
+                        Serverseitige Webframeworks
+                    </div>
+                    <div class="card-body markdown small">
+                        Diese laufen auf dem Server und verarbeiten HTTP-Anfragen, entweder durch einen in das
+                        Framework integrierten Webserver oder mit Hilfe dedizierter Webserver wie
+                        [Apache](https://httpd.apache.org/){target=_blank},
+                        [nginx](https://nginx.org/){target=_blank} oder
+                        [Caddy](https://caddyserver.com/){target=_blank}.
+                        Der serverseitige Code reagiert auf HTTP-Anfragen, holt Daten aus Datenbanken oder
+                        externen Quellen und rendert das Ergebnis häufig als HTML zurück an den Client.
+
+                        #### Typische Funktionen {.dhbw-lightblue}
+
+                        1. Routing und URL-Handling
+                        2. HTML-Rendering mit Templates
+                        3. Datenbankzugriffe
+                        4. Sicherheitsfunktionen
+                        5. Session-Verwaltung
+
+                        #### Verbreitete Beispiele {.dhbw-lightblue}
+
+                        __[Express](https://expressjs.com/){target=_blank}__,
+                        [Django](https://www.djangoproject.com/){target=_blank},
+                        [Ruby on Rails](https://rubyonrails.org/){target=_blank},
+                        [Lavarel](https://laravel.com/){target=_blank}, …
+                    </div>
+                </div>
+
+                <div class="card flex-grow-1 w-100">
+                    <img src="03-nodejs/framework-fullstack.jpg" class="card-img-top">
+                    <div class="card-header border-top fw-bold">
+                        Full-Stack Frameworks
+                    </div>
+                    <div class="card-body markdown small">
+                        Diese kombinieren sowohl Client als auch Server in einem durchgängigen Framework. Client- und
+                        Serverteil sind hierbei optimal aufeinander abgestimmt, so dass UI-Komponenten beim Page Load
+                        auf dem Server vorgerendert und dann im Browser weiterlaufen können. Darüber hinausgehende
+                        Anwendungslogik kann frei zwischen Client und Server aufgeteilt werden.
+
+                        #### Typische Funktionen {.dhbw-lightblue}
+
+                        1. Gemeinsame Codebasis für Client und Server
+                        2. Serverseitiges Rendering mit Hydration
+                        3. Aufruf serverseitiger Funktionen im Client
+                        4. Authentifizierung und Autorisierung
+                        5. Datenbankzugriffe
+
+                        #### Verbreitete Beispiele {.dhbw-lightblue}
+
+                        [Next.js](https://nextjs.org/){target=_blank},
+                        [Nuxt.js](https://nuxt.com/){target=_blank},
+                        [Meteor](https://www.meteor.com/){target=_blank},
+                        [RedwoodJS](https://redwoodjs.com/){target=_blank}, …
+                    </div>
+                </div>
+            </div>
+
+            <small>
+                <small>
+                    ¹ Bildnachweise:
+                    <a href="https://pixabay.com/photos/server-drive-bay-hard-drives-4393370/" target="_blank">Pixabay: Bru-nO</a>,
+                    <a href="https://pixabay.com/illustrations/responsive-web-web-design-websites-2044921/" target="_blank">Pixabay: Templune</a>,
+                    <a href="https://pixabay.com/illustrations/monitor-binary-binary-system-6962816/" target="_blank">Pixabay: geralt</a>,
+                </small>
+            </small>
+        </div>
+    </section>
+
+    <section data-title="Funktionsumfang von Express" class="centered-content">
+        <lsx-grid-fluid class="p-0">
+            <lsx-row>
+                <lsx-col size="md-9">
+                    <div detail-content>
+                        Express ist ein minimalistisches, „unopinionated“ Webframework für Node.js. Das heißt, es macht nur wenige Vorgaben,
+                        wie eine Anwendung strukturiert sein soll, bietet aber gleichzeitig alle notwendigen Funktionen, um einen eigenen
+                        HTTP-Server zur Implementierung von Webanwendungen oder Webservices zu erstellen.
+                    </div>
+                </lsx-col>
+            </lsx-row>
+            <lsx-row>
+                <lsx-col size="md-9" class="mb-3">
+                    <img src="03-nodejs/express-webseite.png" alt="Screenshot der Webseite zu Express" class="shadow d-block w-100 mb-2">
+                </lsx-col>
+                <lsx-col size="md" class="d-flex flex-column gap-3">
+                    <lsx-card title="Routing" bold class="small">
+                        Express ermöglicht eine einfache Definition von URL-Routen als Kombination aus HTTP-Methode und URL-Pfad,
+                        die mit einer Handler Funktion zur Verarbeitung der HTTP-Anfragen verknüpft werden.
+                    </lsx-card>
+
+                    <lsx-card title="Middlewares" bold class="small">
+                        Nahezu alles in Express basiert auf Middleware-Funktionen, die nacheinander Requests und Responses verarbeiten.
+                        Typische Aufgaben sind dabei Logging, Parsen des HTTP-Body, Verarbeitung von Cookies oder Session-Verwaltung.                    
+                    </lsx-card>
+
+                    <lsx-card title="Hohe Flexibilität und Erweiterbarkeit" bold class="small">
+                        Da das Framework selbst seht leichtgewichtig ist, kann nahezu jede gewünschte Funktionalität wie z.B.
+                        CORS-Handling, File-Uploads, Session Management oder Authentifizierung durch zusätzliche Pakete
+                        hinzugefügt werden.
+                    </lsx-card>
+
+                    <a href="https://expressjs.com/" target="_blank">Link zur Webseite</a>
+                </lsx-col>
+            </lsx-row>
+        </lsx-grid-fluid>
+    </section>
+
+    <section data-title="Erste Schritte mit Express" class="centered-content">
+        <div class="limited-width">
+            <div class="markdown" detail-content>
+                Aufgrund seines minimalen Charakters lässt sich Express mit nur wenigen Zeilen
+                Code nutzen. Eine zu installierende Bibliothek und eine JavaScript-Datei reichen
+                schon aus. Diese Seite zeigt, wie es geht.
+            </div>
+
+            <lsx-accordion class="mb-4">
+                <lsx-accordion-page title="Express installieren">
+                    <p>
+                        Folgender Befehl fügt Express einem Projekt hinzu:
+                    </p>
+                    <p class="cmd">
+                        npm add express@next
+                    </p>
+
+                    <img src="03-nodejs/express-installation.png" alt="" class="img-thumbnail w-100 mb-4">
+
+                    <lsx-info-box>
+                        Achte bei der Installation darauf, <span class="cmd">express@next</span> und
+                        nicht <span class="cmd">express</span> zu installieren. Denn sonst wird derzeit
+                        noch die alte Version 4 installiert, die nicht gut mit <code>async</code> und
+                        <code>await</code> bzw. mit <code>Promise</code>-Objekten umgehen kann.
+                    </lsx-info-box>
+                </lsx-accordion-page>
+
+                <lsx-accordion-page title="Ein minimaler Webserver">
+                    <p>
+                        Das folgende Beispiel zeigt eine ganz minimale Express-Anwendung, die einfach
+                        bei einer GET-Anfrage an den Pfad <code>/</code> den Text <span class="dhbw-tt">Hallo Express</span>
+                        zurückliefert.
+                    </p>
+
+                    <lsx-card title="Datei <span class='fn'>src/main.js</span>" class="mb-4">
+                        <source-code language="javascript">
+                            import express from "express";
+                            const app = express();
+                            
+                            app.get("/", (req, res) => {
+                                res.status(200);
+                                res.send("Hallo Express");
+                            });
+                        
+                            app.listen("9000", "localhost");
+                        </source-code>
+                    </lsx-card>
+
+                    <p>
+                        In den ersten beiden Zeilen wird die Hauptfunktion von Express importiert und aufgerufen,
+                        um eine neue App-Instanz zu erzeugen. Diese stellt den eigentlichen Webserver dar, der
+                        in der letzten Zeile gestartet wird, um HTTP-Anfragen zu bearbeiten. In der Mitte wird
+                        hierfür eine Handler Funktion für GET-Anfrage an den Pfad <code>/</code> registriert.
+                        Natürlich könnten hier noch weitere Handler registriert werden. Das Beispiel verwendet
+                        aber nur einen.
+                    </p>
+                </lsx-accordion-page>
+
+                <lsx-accordion-page title="Ein besserer Webserver">
+                    <p>
+                        Das folgende Beispiel zeigt eine stark verbesserte Version des Servers.
+                    </p>
+                    <lsx-ul class="mb-4">
+                        <li>Konfiguration des Servers über Umgebungsvariablen</li>
+                        <li>Protokollierung aller Anfragen auf der Konsole</li>
+                        <li>Log-Ausgabe, sobald der Server gestartet wurde</li>
+                        <li>Sauberes Beenden des Servers (Graceful Shutdown)</li>
+                    </lsx-ul>
+
+                    <lsx-card title="Datei <span class='fn'>src/main.js</span>" class="mb-4">
+                        <source-code language="javascript">
+                            import dotenv  from "dotenv";
+                            import express from "express";
+                            import logging from "logging";
+                            import process from "node:process";
+
+                            // Programmname ausgeben
+                            console.log("Erste Schritte mit Express");
+                            console.log("==========================");
+                            console.log();
+
+                            // Konfigurationsvariablen einlesen. Streng genommen gehört dies nicht zu Express.
+                            // Um das Deployment in einer Cloud-Umgebung zu vereinfachen, ist es heute aber
+                            // für Server-Anwendungen üblich, Konfigurationswerte aus den Umgebungsvariablen
+                            // des Betriebssystems zu bezeiehen. Vgl. https://www.12factor.net/
+                            dotenv.config();
+
+                            const config = {
+                                host: process.env.LISTEN_HOST || "",
+                                port: process.env.LISTEN_PORT || 9000,
+                            };
+
+                            // Hilfsobjekt für formatierte Log-Ausgaben
+                            const logger = logging.default("main");
+
+                            // Zentrales App-Objekt der Express-Anwendung.
+                            // Dies ist der eigentliche Webserver.
+                            const app = express();
+
+                            // Protokollierung aller Anfragen auf der Konsole
+                            app.use((req, res, next) => {
+                                logger.info(`${req.method} ${req.originalUrl}`);
+                                next();
+                            });
+
+                            // Request Handler Funkion für GET-Anfragen an die URL "/"
+                            app.get("/", (req, res) => {
+                                res.status(200);
+                                res.send("Hallo Express");
+                            });
+
+                            // Webserver starten. Die Callback-Funktion wird aufgefufen, sobald der Webserver
+                            // bereit ist, Anfragen zu bearbeiten.
+                            const server = app.listen(config.port, config.host, () => {
+                                logger.info(`Server lauscht auf ${config.host}:${config.port}`);
+                            });
+
+                            // Graceful Shutdown: Aktive Requests zu Ende bearbeiten, aber keine neuen Requests
+                            // mehr akzeptieren, wenn der Server beendet werden soll.
+                            process.on("SIGTERM", () => {
+                                console.log("SIGTERM empfangen. Beende Server.");
+                                server.close();
+                            });
+
+                            process.on("SIGINT", () => {
+                                console.log("\nSIGINT empfangen. Beende Server.");
+                                server.close();
+                            });
+                        </source-code>
+                    </lsx-card>
+                </lsx-accordion-page>
+            </lsx-accordion>
+    
+            <lsx-info-box type="warning" title="Macht das nicht zuhause nach, liebe Kinder!">
+                In diesem Beispiel befindet sich der gesamte Quellcode in einer überschaubaren JavaScript-Datei.
+                Da dies aber schnell unübersichtlich wird und gegen das
+                <a href="https://de.wikipedia.org/wiki/Open-Closed-Prinzip" target="blank">Offen/Geschlossen-Prinzip</a>
+                verstößt, teilt sich der Quellcode echter Anwendungen in mehrere Module mit unterschiedlichen
+                Zuständigkeiten auf.
+            </lsx-info-box>
+        </div>
+
+        <div class="centered-content flex-row flex-wrap gap-3 mb-5">
+            <lsx-modal>
+                <lsx-thumbnail class="mw-100">
+                    <img src="03-nodejs/hallo-express-code.png" class="d-block mw-100 dhbw-thumbnail p-1" style="height: 15em;"/>
+                    <span class="lsx-modal-image-thumbnail">Erweiterter Quellcode des Beispiels</span>
+                </lsx-thumbnail>
+                <lsx-content>
+                    <img src="03-nodejs/hallo-express-code.png" class="img-responsive img-thumbnail"/>
+                </lsx-content>
+            </lsx-modal>
+
+            <lsx-modal>
+                <lsx-thumbnail class="mw-100">
+                    <img src="03-nodejs/hallo-express-browser.png" class="d-block mw-100 dhbw-thumbnail p-1" style="height: 15em;"/>
+                    <span class="lsx-modal-image-thumbnail">Ergebnis im Browser</span>
+                </lsx-thumbnail>
+                <lsx-content>
+                    <img src="03-nodejs/hallo-express-browser.png" class="img-responsive img-thumbnail"/>
+                </lsx-content>
+            </lsx-modal>
+        </div>
+    </section>
+
+    <section data-title="Aufgabe: Mein erster Webserver" data-background-color="rgb(231, 221, 141)">
         <article>
-            <p>
-                Besuche deinen Lieblings-Chatbot und gib folgenden Prompt ein. Den farblich hervorgehobenen
-                Platzhalter musst du natürlich durch den Namen deines Betriebssystems ersetzen. Lasse dir
-                auf diese Weise die grundlegende Bedienung des Terminals erklären und vor allem, wie du darin
-                zwischen Laufwerken und Verzeichnissen wechseln, sowie Programme ausführen kannst. Probiere
-                die Tipps sogleich in einem Konsolenfesnter auf deinem Rechner aus.
-            </p>
-            <lsx-card class="mb-4">
-                <p class="fst-italic text-muted m-0">
-                    Wo ein Terminal ist, ist ein Weg. Bitte hilf mir, diese neue Super-Power zu erlangen und mich im
-                    Terminal unter <span class="red text-decoration-underline">Betriebssystem</span> zurecht zu finden.
-                </p>
-            </lsx-card>
-            
-            <lsx-grid-fluid class="p-0">
-                <lsx-row>
-                    <lsx-col size="md">
-                        <lsx-modal-image src="03-nodejs/terminal-chatgpt.png" caption="Beispiel-Unterhaltung mit ChatGPT" style="width: auto;"></lsx-modal-image>
-                    </lsx-col>
-                    <lsx-col size="md">
-                        <lsx-modal-image src="03-nodejs/terminal-tldr.png" caption="Ausgabe des <code>tldr</code>-Befehls unter Linux" style="width: auto;"></lsx-modal-image>
-                    </lsx-col>
-                </lsx-row>
-            </lsx-grid-fluid>
+            <lsx-github-edit
+            class        = "mb-3"
+            url          = "Aufgaben/Mein%20erster%20Webserver/Aufgabe"
+            download     = "Aufgaben/Mein%20erster%20Webserver"
+        >
+        </lsx-github-edit>
+
+            <lsx-tab-pages>
+                <lsx-tab-page title="Aufgabe">
+                    <p>
+                        Übung macht den Meister! Führe deshalb die folgenden Schritte aus, um eine kleine
+                        Express-Anwendung auszuprogrammieren:
+                    </p>
+                    <ol class="mb-4">
+                        <li>
+                            Lege ein neues Node.js-Projekt an und installiere Express darin.
+                        </li>
+                        <li>
+                            Lege eine Datei namens <span class="fn">src/main.js</span> an.
+                        </li>
+                        <li>
+                            Kopiere den erweiterten Beispielcode der vorherigen Seite in die Datei.
+                        </li>
+                        <li>
+                            Starte den Server und rufe die Adresse <a href="http://localhost:9000/" target="_blank">http://localhost:9000/</a> im Browser auf.
+                        </li>
+                        <li>
+                            Füge anschließend eine zweite Handler Funktion für <code>GET /bye</code> hinzu, die
+                            „Auf Wiedersehen!” an den Client sendet.
+                        </li>
+                    </ol>
+
+                    <div class="d-flex gap-2 align-items-end justify-content-center mt-4 mb-4">
+                        <lsx-modal-image src="03-nodejs/hallo-express-code.png" caption="Quellcode des Beispiels"></lsx-modal-image>
+                        <lsx-modal-image src="03-nodejs/erster-webserver-hallo.png" caption="Aufruf von <tt>/</tt>"></lsx-modal-image>
+                        <lsx-modal-image src="03-nodejs/erster-webserver-bye.png" caption="Aufruf von <tt>/bye</tt>"></lsx-modal-image>
+                    </div>
+                </lsx-tab-page>
+                <lsx-tab-page title="Lösung">
+                    <source-code language="javascript">
+                    import dotenv  from "dotenv";
+                    import express from "express";
+                    import logging from "logging";
+                    import process from "node:process";
+
+                    // Programmname ausgeben
+                    console.log("Erste Schritte mit Express");
+                    console.log("==========================");
+                    console.log();
+
+                    // Konfigurationsvariablen einlesen. Streng genommen gehört dies nicht zu Express.
+                    // Um das Deployment in einer Cloud-Umgebung zu vereinfachen, ist es heute aber
+                    // für Server-Anwendungen üblich, Konfigurationswerte aus den Umgebungsvariablen
+                    // des Betriebssystems zu bezeiehen. Vgl. https://www.12factor.net/
+                    dotenv.config();
+
+                    const config = {
+                        host: process.env.LISTEN_HOST || "",
+                        port: process.env.LISTEN_PORT || 9000,
+                    };
+
+                    // Hilfsobjekt für formatierte Log-Ausgaben
+                    const logger = logging.default("main");
+
+                    // Zentrales App-Objekt der Express-Anwendung.
+                    // Dies ist der eigentliche Webserver.
+                    const app = express();
+
+                    // Protokollierung aller Anfragen auf der Konsole
+                    app.use((req, res, next) => {
+                        logger.info(`${req.method} ${req.originalUrl}`);
+                        next();
+                    });
+
+                    // Request Handler Funkion für GET-Anfragen an die URL "/"
+                    app.get("/", (req, res) => {
+                        res.status(200);
+                        res.send("Hallo Express");
+                    });
+
+                    // Zusätzliche Request Handler für GET /bye
+                    app.get("/bye", (req, res) => {
+                        res.status(200);
+                        res.send("Auf Wiedersehen!");
+                    });
+
+                    // Webserver starten. Die Callback-Funktion wird aufgefufen, sobald der Webserver
+                    // bereit ist, Anfragen zu bearbeiten.
+                    const server = app.listen(config.port, config.host, () => {
+                        logger.info(`Server lauscht auf ${config.host}:${config.port}`);
+                    });
+
+                    // Graceful Shutdown: Aktive Requests zu Ende bearbeiten, aber keine neuen Requests
+                    // mehr akzeptieren, wenn der Server beendet werden soll.
+                    process.on("SIGTERM", () => {
+                        console.log("SIGTERM empfangen. Beende Server.");
+                        server.close();
+                    });
+
+                    process.on("SIGINT", () => {
+                        console.log("\nSIGINT empfangen. Beende Server.");
+                        server.close();
+                    });
+                    </source-code>
+                </lsx-tab-page>
+            </lsx-tab-pages>
         </article>
         <aside>
             <p>
-                Bist du bereit für deine neue Superkraft? Dein freundlicher KI-Chatbot steht schon
-                zur Stelle. Öffne ein neues Fenster mit deinem Lieblings-Chatbot und lass dir zeigen,
-                was du im Terminal alles anstellen kannst. 🤖
+                Nach dieser kurzen Vorstellung von Express wird es Zeit, sich die Hände schmutzig zu machen.
+                Hier kannst du die Installation und Verwendung von Express anhand eines kleinen Beispiels üben. 🎭
             </p>
-            <img src="shared/ai-assistant.png" class="img-fluid d-block" style="width: 15em; margin-bottom: 0.5em;"/>
+            <img src="shared/github_atom.png" class="img-fluid d-block"/>
             <p>
                 <small>
                     Bildnachweis:
-                    <a href="https://pixabay.com/illustrations/robot-drawing-art-job-money-8614567/" target="_blank">pixabay: Comic-Generator-Pro</a>
+                    <a href="https://atom.io/" target="_blank">Atom Webseite</a>
                 </small>
             </p>
         </aside>
     </section>
-
-    <section data-title="Express 4.x vs. Express 5.x" class="centered-content">
-        ...
-    </section>
-
-    <section data-title="Hallo Welt mit Express" class="centered-content">
-        ...
-    </section>
 </section>
 
+<!--
 <section data-title="Strukturierung des Quellcodes" class="centered-content">
     <section data-title="Handler-Funktionen im Detail">
         ...
@@ -2610,7 +2995,9 @@
         ...
     </section>
 </section>
+-->
 
+<!--
 <section data-title="Übungsaufgaben" data-background-color="rgb(231, 221, 141)">
     <section data-title="Aufgabe 1: Ein kleines Express-Quiz">
         ...
@@ -2852,7 +3239,6 @@
                             <img src="03-nodejs/aufgabe-logbuch3.png" class="img-responsive img-thumbnail"/>
                         </lsx-content>
                     </lsx-modal>
-        
                 </lsx-col>
             </lsx-row>
             <lsx-row>
