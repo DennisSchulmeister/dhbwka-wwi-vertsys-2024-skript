@@ -2904,8 +2904,8 @@
                     import process from "node:process";
 
                     // Programmname ausgeben
-                    console.log("Erste Schritte mit Express");
-                    console.log("==========================");
+                    console.log("Mein erster Webserver");
+                    console.log("=====================");
                     console.log();
 
                     // Konfigurationsvariablen einlesen. Streng genommen gehört dies nicht zu Express.
@@ -2938,7 +2938,7 @@
                         res.send("Hallo Express");
                     });
 
-                    // Zusätzliche Request Handler für GET /bye
+                    // Zusätzlicher Request Handler für GET /bye
                     app.get("/bye", (req, res) => {
                         res.status(200);
                         res.send("Auf Wiedersehen!");
@@ -2981,20 +2981,482 @@
     </section>
 </section>
 
-<!--
-<section data-title="Strukturierung des Quellcodes" class="centered-content">
-    <section data-title="Handler-Funktionen im Detail">
-        ...
+<section data-title="HTTP-Anfragen bearbeiten" class="centered-content">
+    <section data-title="Registrieren der Handler-Funktionen">
+        <div class="limited-width">
+            <p detail-content>
+                Handler Funktionen sind Rückrüffunktionen, die bei bestimmten HTTP-Anfragen aufgerufen werden,
+                um die Anfragen zu bearbeiten. Innerhalb der Handler Funktionen wird daher oft das Request-Objekt
+                ausgewertet, um beispielsweise über die URL übergene Parameter oder Cookies auszulesen. Zusätzlich
+                wird hier die Antwort generiert, die an den Client zurückgeschickt wird.
+            </p>
+            <lsx-tab-pages>
+                <lsx-tab-page title="Vorhandene Methoden">
+                    <p>
+                        Auf den vorherigen Seiten haben wir gesehen, wie mit <src-code language="javascript">app.get(pfad, handler)</src-code>
+                        eine Handler Funktion für GET-Anfragen registriert werden kann. Dasselbe Prinzip funktioniert auch für alle
+                        anderen HTTP-Methoden:
+                    </p>
+        
+                    <table class="table table-striped border mb-4">
+                        <tbody>
+                            <tr>
+                                <td><code>app.get(…)</code></td>
+                                <td>Daten abrufen</td>
+                            </tr>
+                            <tr>
+                                <td><code>app.put(…)</code></td>
+                                <td>Neue Daten an den Server schicken</td>
+                            </tr>
+                            <tr>
+                                <td><code>app.post(…)</code></td>
+                                <td>Vorhandene Daten auf dem Server überschreiben</td>
+                            </tr>
+                            <tr>
+                                <td><code>app.patch(…)</code></td>
+                                <td>Einzelne Daten aktualisieren</td>
+                            </tr>
+                            <tr>
+                                <td><code>app.delete(…)</code></td>
+                                <td>Vorhandene Daten löschen</td>
+                            </tr>
+                            <tr>
+                                <td>…</td>
+                                <td>Sonstige Methoden</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Beispiel">
+                    <p>
+                        Das nachfolgende Beispiel zeigt einen kleinen Webservice, der auf GET- und POST-Anfragen reagiert.
+                    </p>
+        
+                    <source-code language="javascript">
+                        /**
+                         * HTTP-Endpunkt zum Abrufen aller vorhandenen Einträge
+                         */
+                        app.get("/api/guestbook", async (req, res) => {
+                            const data = …; // Daten einlesen
+        
+                            res.status(200);
+                            res.send(data);
+                        });
+                    
+                        /**
+                         * HTTP-Endpunkt zum Anlegen eines neuen Eintrags
+                         */
+                        app.post("/api/buestbook", async (req, res) => {
+                            if (!req.body?.text) {
+                                // Statuscodes siehe https://http.dog/
+                                res.status(400);
+                                res.send({error: "Bitte Text eingeben!"});
+                            } else {
+                                // Neuen Eintrag in die Datenbank schreiben
+                                const newEntry = …;
+                        
+                                res.status(201);
+                                res.send(newEntry);
+                            }
+                        });
+                    </source-code>
+                </lsx-tab-page>
+            </lsx-tab-pages>            
+        </div>
     </section>
 
-    <section data-title="Middleware-Funktionen">
-        ...
+    <section data-title="Pfade mit Platzhaltern">
+        <div class="limited-width">
+            <div detail-content>
+                <p>
+                    Nicht immer lassen sich die URL-Pfade wie in den bisherigen Beispielen hart-codieren.
+                    Bei den REST-Webservices werden wir noch sehen, dass wir über die URL mehrere Ressourcen,
+                    also Instanzen derselben Entität, unterscheiden können müssen. Hierfür brauchen wir eine
+                    Möglichkeit, ein Identifikationsmerkmal wie einen Datenbankschlüssel in der URL zu codieren.
+                </p>
+
+                <lsx-tab-pages>
+                    <lsx-tab-page title="Vorgehensweise">
+                        <lsx-ul class="mb-4">
+                            <li>
+                                URL-Pfade setzen sich aus durch <code>/</code> getrennten Teilen zusammen.
+                            </li>
+                            <li>
+                                Normalerweise müssen die Teile exakt wie im Code definiert in er URL enthalten sein.
+                            </li>
+                            <li>
+                                Ein Doppelpunkt am Anfang kennzeichnet stattdessen Platzhalter für beliebige Werte.
+                            </li>
+                        </lsx-ul>
+        
+                        <table class="table table-striped border dhbw-fontsize-small mb-4">
+                            <thead>
+                                <tr>
+                                    <th>URL-Pfad</th>
+                                    <th>Bedeutung</th>
+                                    <th>Erlaubte Beispiele</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><tt>/api/songs</tt></td>
+                                    <td>Festwert ohne Platzhalter</td>
+                                    <td>Nur <tt>/api/songs</tt></td>
+                                </tr>
+                                <tr>
+                                    <td><tt>/api/songs/<span class="red">:id</span></tt></td>
+                                    <td>Platzhalter am Ende</td>
+                                    <td><tt>/api/songs/1985</tt> <br> <tt>/api/songs/your-latest-trick</tt> <br> …</td>
+                                </tr>
+                                <tr>
+                                    <td><tt>/api/songs/<span class="red">:id</span>/lyrics</tt></td>
+                                    <td>Platzhalter in der Mitte</td>
+                                    <td><tt>/api/songs/1977/lyrics</tt> <br> <tt>/api/songs/wild-west-end/lyrics</tt> <br> …</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p>
+                            Die tatsächlichen Werte der Platzhalter können mit <code>req.params</code>
+                            innerhalb der Handler Funktionen ermittelt werden. Zum Beispiel: <code>req.params.id</code>
+                        </p>
+                    </lsx-tab-page>
+
+                    <lsx-tab-page title="Beispiel">
+                        <p>
+                            Das folgende Beispiel zeigt die Grundstruktur eines einfachen REST-Webservices
+                            zur Verwaltung von Songs in einer Musikdatenbank.
+                        </p>
+
+                        <source-code language="javascript">
+                            // Ganze Collection
+                            app.get("/songs",        (req, res) => { /* Songs suchen                      */ });
+                            app.post("/songs",       (req, res) => { /* Neuen Song anlegen                */ });
+                        
+                            // Einzelne Ressource
+                            app.get("/songs/:id",    (req, res) => { /* Einzelnen Song auslesen           */ };
+                            app.put("/songs/:id",    (req, res) => { /* Song komplett überschreiben       */ });
+                            app.patch("/songs/:id",  (req, res) => { /* Einzelne Werte eines Songs ändern */ });
+                            app.delete("/songs/:id", (req, res) => { /* Song löschen                      */ });
+                        </source-code>
+                    </lsx-tab-page>
+                </lsx-tab-pages>
+            </div>
+        </div>
     </section>
 
-    <section data-title="Graceful Shutdown ermöglichen">
-        ...
+    <section data-title="Query-Parameter für optionale Werte">
+        <div class="limited-width">
+            <div class="dhbw-text-columns mb-4">
+                <p>
+                    Anstelle von Platzhaltern im URL-Pfad können auch Query Parameter verwendet werden,
+                    um variable Daten an den Server zu übergeben. Diese werden als Name/Wert-Paare an
+                    den Pfad angehängt und durch <code>?</code> vom Pfad bzw. <code>&</code> untereinander
+                    getrennt. Häufig wird dies genutzt, um optionale Parameter zu übergeben, die das Verhalten
+                    der Handler Funktion zusätzlich beeinflussen. Zum Beispiel:
+                </p>
+                <p class="cmd">
+                    /api/songs?sortBy=name&sortOrder=asc
+                </p>
+                <p>
+                    Query-Parameter müssen nicht explizit deklariert werden. Sie werden einfach mit
+                    <code>req.query</code> abgefragt. Zum Beispiel: <code>req.query.sortBy</code>,
+                    wobei das Ergebnis den Wert <code>undefined</code> liefert, wenn der Query Parameter
+                    nicht in der URL enthalten ist.
+                </p>
+            </div>
+
+            <lsx-card title="Beispiel" bold>
+                <source-code language="javascript">
+                    app.get("/api/songs", (req, res) => {
+                        let search = {
+                            filter: {},
+                            sort:   {},
+                        };
+
+                        if (req.query.search)    search.filter.title = {"$contains": req.query.search};
+                        if (req.query.sortBy)    search.sort.by      = req.query.sortBy;
+                        if (req.query.sortOrder) search.sort.order   = req.query.sortOrder;
+
+                        const foundSongs = …;    // Datenkbank-Suche ausführen
+
+                        res.status(200);
+                        res.send(foundSoungs);
+                    })
+                </source-code>
+            </lsx-card>
+        </div>
     </section>
 </section>
+
+<section data-title="Middleware-Funktionen für alle HTTP-Anfragen" class="centered-content">
+    <section data-title="Was ist eine Middleware?">
+        <div class="limited-width2">
+            <p>
+                Middleware kann sinngemäß mit „Software in der Mitte“ übersetzt werden. Im Kontext der
+                meisten Web Frameworks sind damit Funktionen gemeint, die für jede HTTP-Anfrage ausgeführt
+                werden, bevor der eigentliche Request Handler läuft. Auf diese Weise können sie:
+            </p>
+            <lsx-ul class="mb-5">
+                <li>
+                    Die Anfrage filtern bzw. verändern, bevor die Handler Funktion aufgerufen wird,
+                </li>
+                <li>
+                    Die von der Handler Funktion generierte Antwort nachträglich verändern,
+                </li>
+                <li>
+                    Zusätzliche Funktionalität wie Benutzerauthentifizierung hinzufügen,
+                </li>
+                <li>
+                    Anfragen bearbeiten, die die Handler Funktion nicht bearbeiten kann,
+                </li>
+                <li>
+                    Und vieles mehr.
+                </li>
+            </lsx-ul>
+
+            <img src="03-nodejs/middleware-prinzip.png" alt="" class="d-block w-100 mb-5">
+
+            <p>
+                Middleware-Funktionen werden in Express typischerweise mit <src-code language="javascript">app.use(funktion)</src-code>
+                registriert, um wirklich alle HTTP-Anfragen abzufangen. Sie sehen aus wie normale Request Handler Funktionen,
+                besitzen aber noch einen dritten Parameter namens <code>next</code>. Dieser beinhaltet eine Funktion, die manuell
+                aufgerufen werden muss, wenn die HTTP-Anfrage an die nächste Middleware bzw. die Handler Funktion weitergereicht
+                werden soll.
+            </p>
+            <lsx-info-box class="mb-5">
+                Middleware-Funktionen werden immer in der Reihenfolge durchlaufen, wie sie registriert wurden. Ggf. muss daher auf
+                die Reihenfolge der Registrierung geachtet werden, wenn logische Abhängigkeiten zwischen den einzelnen Middleware
+                Funktionen bestehen.
+            </lsx-info-box>
+
+            <lsx-accordion>
+                <lsx-accordion-page title="Beispiel" bold>
+                    <source-code language="javascript">
+                        import express from "express";
+                        const app = express();
+
+                        // Middleware zum Loggen aller HTTP-Anfragen (immer aufgerufen)
+                        app.use((req, res) => {
+                            console.log(`${req.method} ${req.originalUrl}`);
+                            next();
+                        });
+
+                        // Request Handler für GET /
+                        app.get("/", (req, res) => {
+                            res.status(200);
+                            res.send("Hallo Express");
+                        });
+
+                        // Request Handler für GET /bye
+                        app.get("/bye", (req, res) => {
+                            res.status(200);
+                            res.send("Auf Wiedersehen!");
+                        });
+
+                        // Server starten
+                        app.listen(9000);
+                    </source-code>
+                </lsx-accordion-page>
+            </lsx-accordion>
+        </div>
+    </section>
+
+    <section data-title="Oft benötigte Middleware-Funktionen">
+        <div class="limited-width">
+            <p>
+                Diese Seite stellt ein paar Middleware-Funktionen vor, die in so gut wie jedem Express-Projekt
+                benötigt werden. Teilweise werden sie bereits mit Express mitgeliefert. Teilweise müssen sie
+                selbst entwickelt oder aus Drittpaketen bezogen werden.
+            </p>
+            <lsx-tab-pages>
+                <lsx-tab-page title="Eingebaute Middlewares">
+                    <p class="mb-4">
+                        Express besitzt eine kleine Anzahl mitgelieferter Middleware-Funktionen, die sehr häufig
+                        benötigte Funktionalitäten abbilden. Namentlich das Verarbeiten von JSON-Daten im HTTP-Body
+                        von Anfrage und Antwort sowie das Bereitstellen statischer Dateien für eine Single Page App
+                        oder dergleichen.
+                    </p>
+        
+                    <lsx-accordion>
+                        <lsx-accordion-page title="JSON-Daten verarbeiten">
+                            <p class="dhbw-fontsize-small">
+                                REST-Webservices arbeiten sehr häufig mit JSON-Daten in der Anfrage und der Antwort.
+                                Oftmals handelt es sich dabei um das einzige unterstützte Datenformat. In diesem Fall
+                                kann die eingebaute JSON-Middleware in Express die Programmierung deutlich vereinfachen.
+                            </p>
+        
+                            <source-code language="javascript">
+                                // JSON-Middleware
+                                app.use(express.json());
+        
+                                // Eigene Handler Funktion
+                                app.put("/api/songs", (req, res) => {
+                                    // req.body enthält die deserialisierten JSON-Daten
+                                    const newSong = req.body;
+        
+                                    if (!newSong.title) {
+                                        res.status(406)
+                                        res.send({error: "Songtitel fehlt"});
+                                    } else {
+                                        …;    // Song speichern
+        
+                                        res.status(200);
+                                        res.send(newSong);
+                                    }
+        
+                                    // res.send: Die übergebenen Daten werden automatisch als JSON-String kodiert.
+                                });
+                            </source-code>
+                        </lsx-accordion-page>
+        
+                        <lsx-accordion-page title="Statische Dateien bereitstellen">
+                            <div class="limited-width mb-4 dhbw-fontsize-small">
+                                Oftmals soll ein mit Express entwickelter Webserver stand-alone ohne zusätzlichen
+                                Webserver zum Auslieferung statischer Dateien funktionieren. Dies kann mit der
+                                eingebauten Static-Middleware leicht erreicht werden, ist aber im Gegenzu aber weniger
+                                Performant als die Verwendung eines dedizierten Webservers nur für die statischen Daten.
+                            </div>
+                            <source-code language="javascript">
+                                import express from "express;"
+                                import path    from "node:path";
+                                import url     from "node:url";
+        
+                                const sourceDir = path.dirname(url.fileURLToPath(import.meta.url));
+                                const staticDir = path.join(sourceDir, "..", "static");
+        
+                                // Static Middleware
+                                app.use(express.static(staticDir));
+        
+                                // Sonstige Middlewares und Request Handler hier …
+        
+                                // Server starten
+                                app.listen(3000);
+                            </source-code>
+                        </lsx-accordion-page>
+                    </lsx-accordion>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Selbst-definierte Middlewares">
+                    <p class="mb-4">
+                        Weitere Anforderungen, die so gut wie immer bestehen, sind die Protokollierung aller
+                        Anfragen auf der Konsole (um die Nutzung des Webservers nachvollziehen zu können) sowie
+                        eine einheitliche Fehlerbehandlung, die sicherstellt, dass Fehlermeldungen in einem
+                        einheitlichen Format an den Client gesendet werden. Diese Funktionen müssen allerdings
+                        selbst entwickelt oder aus Drittpaketen bezogen werden.
+                    </p>
+        
+                    <lsx-accordion>
+                        <lsx-accordion-page title="Logging">
+                            <p class="dhbw-fontsize-small">
+                                Die Logging-Middleware sollte die allererste Middleware sein, die registriert wird,
+                                damit wirklich alle Anfragen protokolliert werden. In der hier gezeigten Version
+                                schreibt sie einfach die HTTP-Methode sowie die URL auf die Konsole. Denkbar wäre
+                                aber auch, weitere Informationen wie die IP-Adresse des Clients zu protokollieren.
+                            </p>
+                            <source-code language="javascript">
+                                import express from "express";
+                                import logging from "logging";
+
+                                // Hilfsobjekt für formatierte Log-Ausgaben
+                                const logger = logging.default("main");
+
+                                // Protokollierung aller Anfragen
+                                app.use((req, res, next) => {
+                                    logger.info(`${req.method} ${req.originalUrl}`);
+                                
+                                    // Wichtig: Mit next() wird die "nächste" Middleware-Funktion bzw. die
+                                    // tatsächlich zuständige Handler-Funktion aufgerufen. Nach dieser Zeile
+                                    // finden wir im `res`-Objekt die von der Handler-Funktion generierten
+                                    // Antwortdaten, so dass wir diese hier nochmal anpassen könnten.
+                                    next();
+                                });
+
+                                // Weitere Middlewared und Request Handler hier …
+
+                                // Server starten
+                                app.listen(3000);
+                            </source-code>
+                        </lsx-accordion-page>
+        
+                        <lsx-accordion-page title="Fehlerbehandlung">
+                            <p class="dhbw-fontsize-small">
+                                Gerade bei Webservices, deren Antworten auf Clientseite so gut wie immer maschinell
+                                ausgewertet werden, ist es wichtig, dass Fehlersituationen einheitlich zurückgemeldet
+                                werden. Dies lässt sich mit einer „Error Handling Middleware”, die alle nicht explizit
+                                abgefangenen Ausnahmen (Exceptions) behandelt, leicht bewerkstelligen. Als positiven
+                                Nebeneffekt daraus, kann in den Handler Funktionen später einfach eine Exception
+                                geworfen werden, wenn ein Fehler an den Client gemeldet werden soll.
+                            </p>
+                            <source-code language="javascript">
+                                import express from "express";
+                                import logging from "logging";
+
+                                // Hilfsobjekt für formatierte Log-Ausgaben
+                                const logger = logging.default("main");
+
+                                // Protokollierung aller Anfragen
+                                app.use((req, res, next) => {
+                                    logger.info(`${req.method} ${req.originalUrl}`);
+                                    next();
+                                });
+
+                                // Einheitliche Fehlerbehandlung
+                                app.use((err, req, res, next) => {
+                                    // Fehler auf der Konsole protokollieren
+                                    logger.error(err);
+                                    if (!err.httpStatus) console.error(err);
+                            
+                                    // Fehlermeldung an den Client senden
+                                    res.status(err.httpStatus || 500);
+                                    
+                                    res.send({
+                                        error:   err.name    || "Error",
+                                        message: err.message || "",
+                                    });
+                            
+                                    next();
+                                });
+
+                                // Weitere Middlewared und Request Handler hier …
+
+                                // Server starten
+                                app.listen(3000);
+                            </source-code>
+
+                            <lsx-info-box>
+                                Eine „Error Handling Middleware” sieht genauso aus, wie die anderen Middleware-Funktionen
+                                auch. Sie besitzt als ersten Parameter zusätzlich aber noch den behandelten Fehler.
+                            </lsx-info-box>
+                        </lsx-accordion-page>
+                    </lsx-accordion>
+                </lsx-tab-page>
+            </lsx-tab-pages>
+        </div>
+    </section>
+</section>
+
+<!-- TODO: Ab hier weiter -->
+<section data-title="Strukturierung des Quellcodes" class="centered-content">
+    <div class="limited-width2">
+        <img src="03-nodejs/struktur-app.png" alt="Strukturierung der App-Bestandteile" class="d-block w-100 mb-4">
+        <img src="03-nodejs/struktur-code.png" alt="Strukturierung des Quellcodes" class="d-block w-100 mb-4">
+    </div>
+
+    <!--
+    <section data-title="Aufteilung in Controller und Services">
+        ...
+    </section>
+
+    <section data-title="Kapselung von Datenbankzugriffen">
+        ...
+    </section>
+    -->
+</section>
+<!--
+Strukturierung des Quellcodes mit Controller und Service
+Ausblick auf lowdb bzw. echte Datenbank?
 -->
 
 <!--
