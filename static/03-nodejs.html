@@ -3402,7 +3402,11 @@
                                     next();
                                 });
 
+                                // Weitere Middlewared und Request Handler hier …
+
                                 // Einheitliche Fehlerbehandlung
+                                // ACHTUNG: Muss nach allen anderen Middlewares und Request Handlern registriert
+                                // werden. Sonst wird die Middleware bei einem Fehler nicht durchlaufen!
                                 app.use((err, req, res, next) => {
                                     // Fehler auf der Konsole protokollieren
                                     logger.error(err);
@@ -3419,8 +3423,6 @@
                                     next();
                                 });
 
-                                // Weitere Middlewared und Request Handler hier …
-
                                 // Server starten
                                 app.listen(3000);
                             </source-code>
@@ -3428,6 +3430,13 @@
                             <lsx-info-box>
                                 Eine „Error Handling Middleware” sieht genauso aus, wie die anderen Middleware-Funktionen
                                 auch. Sie besitzt als ersten Parameter zusätzlich aber noch den behandelten Fehler.
+                            </lsx-info-box>
+
+                            <lsx-info-box type="warning">
+                                Die „Error Handling Middleware” muss immer ganz zum Schluss nach allen anderen Middlewares
+                                und Request Handlern registriert werden, damit sie bei einem Fehler auch tatsächlich
+                                durchlaufen wird. Denn die Middlewares und Request Handler werden in Express immer in der
+                                Reihenfolge ihrer Registrierung ausgeführt.
                             </lsx-info-box>
                         </lsx-accordion-page>
                     </lsx-accordion>
