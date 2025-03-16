@@ -2691,6 +2691,173 @@
         </lsx-grid-fluid>
     </section>
 
+    <section data-title="Videos: Logbuch des Captains" class="centered-content">
+        <div class="limited-width mb-5">
+            <lsx-github-edit
+                class        = "mb-3"
+                url          = "Aufgaben/Logbuch%20des%20Captains/Aufgabe"
+                download     = "Aufgaben/Logbuch%20des%20Captains"
+            >
+            </lsx-github-edit>
+    
+            <p>
+                Dieses Kapitel wird von einer Reihe Videos begleitet, in denen die Entwicklung eines Fallbeispiels
+                Schritt für Schritt erklärt wird. Schaue dir erst die Videos an, um sowohl das Fallbeispiel als
+                auch das Vorgehen bei der Entwicklung zu verstehen. Danach kannst du hier im Skript die Details
+                nachlesen.
+            </p>
+        </div>
+
+        <div class="centered-content flex-row flex-wrap gap-3">
+            <!-- Vorestellung des Webservices -->
+            <lsx-modal>
+                <lsx-thumbnail style="height: 18em;" class="mw-100">
+                    <img src="03-nodejs/video-vorstellung.png" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                </lsx-thumbnail>
+                <lsx-content>
+                    <lsx-card title="Musical Instrument Digital Interface" bold class="mh-100 limited-width">
+                        <lsx-card-body class="overflow-auto">
+                            <p class="mb-4" style="text-align: justify;">
+                                Los geht's mit der Entwicklung eigener Webservices mit Node.js und dem Express Web Framework.
+                                Hierfür bauen wir eine kleine Anwendung, die jedem Star Trek Fan bekannt vorkommen sollte:
+                                Das Logbuch des Captains. Dieses Video stellt die Anwendung vor als auch den Webservice, 
+                                den wir zusammen bauen wollen.
+                            </p>
+                            <!-- <lsx-youtube class="img-thumbnail embed-responsive" video="wamyiQl9mCo"></lsx-youtube> -->
+                            <div class="centered-content">
+                                <div class="embed-responsive ratio ratio-16x9 limited-width border">
+                                    <iframe class="d-block" src="https://www.youtube-nocookie.com/embed/wamyiQl9mCo?rel=0&amp;showinfo=0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </lsx-card-body>
+                    </lsx-card>
+                </lsx-content>
+            </lsx-modal>
+
+            <!-- Konfiguration mit dotenv -->
+            <lsx-modal>
+                <lsx-thumbnail style="height: 18em;" class="mw-100">
+                    <img src="03-nodejs/video-dotenv.png" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                </lsx-thumbnail>
+                <lsx-content>
+                    <lsx-card title="Musical Instrument Digital Interface" bold class="mh-100 limited-width">
+                        <lsx-card-body class="overflow-auto">
+                            <p class="mb-4" style="text-align: justify;">
+                                Auf unserem eigenen Rechner lassen wir unseren Server auf Port 9000 lauschen, um HTTP-Anfragen
+                                zu beantworten. Für den Echtbetrieb ist das aber nicht so toll, weil Webserver normalerweise
+                                auf Port 80 reagieren und wir auch nicht sicher sein können, dass der von uns verwendete Port
+                                auf derselben Maschine nicht schon anders belegt ist. Wir müssen die Portnummer daher
+                                konfigurierbar machen. Dank den Umgebungsvariablen des Betriebssystems und
+                                <a href="https://www.npmjs.com/package/dotenv" target="_blank">dotenv</a> kein Problem.
+                            </p>
+                            <!-- <lsx-youtube class="img-thumbnail embed-responsive" video="wzfYKa2N4Ws"></lsx-youtube> -->
+                            <div class="centered-content">
+                                <div class="embed-responsive ratio ratio-16x9 limited-width border">
+                                    <iframe class="d-block" src="https://www.youtube-nocookie.com/embed/wzfYKa2N4Ws?rel=0&amp;showinfo=0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </lsx-card-body>
+                    </lsx-card>
+                </lsx-content>
+            </lsx-modal>
+
+            <!-- HTTP-Anfragen verarbeiten -->
+            <lsx-modal>
+                <lsx-thumbnail style="height: 18em;" class="mw-100">
+                    <img src="03-nodejs/video-express.png" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                </lsx-thumbnail>
+                <lsx-content>
+                    <lsx-card title="Musical Instrument Digital Interface" bold class="mh-100 limited-width">
+                        <lsx-card-body class="overflow-auto">
+                            <p class="mb-4" style="text-align: justify;">
+                                Jetzt geht es los. Unser Server lernt, HTTP-Anfragen zu beantworten. Hierfür integrieren wir
+                                Express und lernen, wie damit ein einfacher Webserver gebaut werden kann. Zusätzlich lernen wir,
+                                wie Express mit HTTP-Anfragen umgeht und wie wir Logik zur Bearbeitung bestimmter Anfragen
+                                programmieren können.
+                            </p>
+                            <!-- <lsx-youtube class="img-thumbnail embed-responsive" video="_UNb3xXkS1c"></lsx-youtube> -->
+                            <div class="centered-content">
+                                <div class="embed-responsive ratio ratio-16x9 limited-width border">
+                                    <iframe class="d-block" src="https://www.youtube-nocookie.com/embed/_UNb3xXkS1c?rel=0&amp;showinfo=0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </lsx-card-body>
+                    </lsx-card>
+                </lsx-content>
+            </lsx-modal>
+        </div>
+    </section>
+
+    <section data-title="Allgemeine Geschäftsbedingungen" class="centered-content">
+        <div class="limited-width2">
+            <div class="d-flex flex-column flex-lg-row align-items-center gap-4 mb-5">
+                <div>
+                    <img src="03-nodejs/polizei-stop.jpg" alt="" class="d-block img-thumbnail mw-100" style="width: 12em;">
+                    <small>
+                        <small>
+                            Bildnachweis:
+                            <a href="https://pixabay.com/photos/police-trowel-stop-boy-disguise-4596933/" target="_blank">Pixabay: guvo59</a>
+                        </small>
+                    </small>
+                </div>
+
+                <div style="flex: 1">
+                    <p style="font-size: 105%">
+                        Die Videos sind wesentlich für den Lernerfolg dieses Kapitels.
+                        Bitte bestätige, dass du sie wirklich angeschaut hast und
+                        dir auch die nächsten Videos vollständig anschauen wirst.
+                    </p>
+        
+                    <div class="mb-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="video-confirm" id="videos-confirm-none" checked>
+                            <label class="form-check-label" for="videos-confirm-none">🫤 Ich habe die Videos nicht angeschaut.</label>
+                        </div>
+            
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="video-confirm" id="videos-confirm-partial">
+                            <label class="form-check-label" for="videos-confirm-partial">🥴 Ich habe einen Teil der Videos angeschaut.</label>
+                        </div>
+            
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="video-confirm" id="videos-confirm-complete">
+                            <label class="form-check-label" for="videos-confirm-complete">🙂 Ich habe die Videos vollständig angeschaut.</label>
+                        </div>
+                    </div>
+        
+                    <div>
+                        <button type="button" class="btn btn-secondary" style="font-size: 90%" onclick="videos_confirm()">Bestätigen</button>
+                    </div>
+                </div>
+            </div>
+
+            <blockquote class="blockquote fst-italic text-end">
+                <p>
+                    Die größte Lüge im Internet? Ich habe die AGBs gelesen und verstanden.
+                </p>
+                <figcaption class="blockquote-footer">
+                    <cite>Autor unbekannt</cite>
+                </figcaption>
+            </blockquote>
+        </div>
+
+        <script>
+            window.videos_confirm = function() {
+                let confirmNone     = document.getElementById("videos-confirm-none");
+                let confirmPartial  = document.getElementById("videos-confirm-partial");
+                let confirmComplete = document.getElementById("videos-confirm-complete");
+
+                if (confirmNone.checked) {
+                    alert("Das ist aber schade. Ohne die Videos kann man das Kapitel zwar auch lernen, mit den Videos geht es aber sehr viel leichter. Versprochen. 🤞");
+                } else if (confirmPartial.checked) {
+                    alert("Immerhin. 😀 Vielleicht willst du die Videos aber trotzdem komplett anschauen. Das Kapitel lässt sich dadurch viel leichter lernen.");
+                } else if (confirmComplete.checked) {
+                    alert("Super! Dann kannst du direkt weiter machen. 👍");
+                }
+            }
+        </script>
+    </section>
+
     <section data-title="Erste Schritte mit Express" class="centered-content">
         <div class="limited-width">
             <div class="markdown" detail-content>
@@ -3037,7 +3204,7 @@
                         /**
                          * HTTP-Endpunkt zum Abrufen aller vorhandenen Einträge
                          */
-                        app.get("/api/guestbook", async (req, res) => {
+                        app.get("/api/logbook", async (req, res) => {
                             const data = …; // Daten einlesen
         
                             res.status(200);
@@ -3047,7 +3214,7 @@
                         /**
                          * HTTP-Endpunkt zum Anlegen eines neuen Eintrags
                          */
-                        app.post("/api/buestbook", async (req, res) => {
+                        app.post("/api/logbook", async (req, res) => {
                             if (!req.body?.text) {
                                 // Statuscodes siehe https://http.dog/
                                 res.status(400);
@@ -3191,6 +3358,97 @@
 </section>
 
 <section data-title="Middleware-Funktionen für alle HTTP-Anfragen" class="centered-content">
+    <section data-title="Videos: Logbuch des Captains">
+        <p class="limited-width mb-5">
+            Hier folgt ein weiterer Schwung an Videos zu Middleware-Funktionen in Express. Die Videos
+            zeigen anhand praktischer Beispiele, wie man eigene Middlware-Funktionen programmiert und
+            welche nützlichen Funktionen Express bereits eingebaut hat. Gleichzeitg vervollständigt sich
+            dadurch die in den Videos aufgebaute Vorlage für deine eigenen Projekte.
+        </p>
+
+        <div class="centered-content flex-row flex-wrap gap-3">
+            <!-- Statische Dateien bereitstellen -->
+            <lsx-modal>
+                <lsx-thumbnail style="height: 18em;" class="mw-100">
+                    <img src="03-nodejs/video-static.png" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                </lsx-thumbnail>
+                <lsx-content>
+                    <lsx-card title="Musical Instrument Digital Interface" bold class="mh-100 limited-width">
+                        <lsx-card-body class="overflow-auto">
+                            <p class="mb-4" style="text-align: justify;">
+                                Unser Fallbeispiel besitzt eine kleine Besonderheit: Derselbe Webserver, den wir im letzten
+                                Video programmiert haben, stellt sowohl eine Single Page App für die Benutzeroberfläche als
+                                auch einen Webservice für die Backend-Funktionalitäten zur Verfügung. Hierfür müssen wir dem
+                                Server allerdings beibringen, die statischen Dateien der Single Page App auch tatsächlich
+                                abrufbar zu machen.
+                            </p>
+                            <!-- <lsx-youtube class="img-thumbnail embed-responsive" video="OFgs7Lt669o"></lsx-youtube> -->
+                            <div class="centered-content">
+                                <div class="embed-responsive ratio ratio-16x9 limited-width border">
+                                    <iframe class="d-block" src="https://www.youtube-nocookie.com/embed/OFgs7Lt669o?rel=0&amp;showinfo=0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </lsx-card-body>
+                    </lsx-card>
+                </lsx-content>
+            </lsx-modal>
+
+            <!-- JSON-Daten verarbeiten -->
+            <lsx-modal>
+                <lsx-thumbnail style="height: 18em;" class="mw-100">
+                    <img src="03-nodejs/video-json.png" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                </lsx-thumbnail>
+                <lsx-content>
+                    <lsx-card title="Musical Instrument Digital Interface" bold class="mh-100 limited-width">
+                        <lsx-card-body class="overflow-auto">
+                            <p class="mb-4" style="text-align: justify;">
+                                Das JSON-Datenformat hat sich in den letzten Jahren zur Lingua Franca für den Datenaustausch über
+                                das Web entwickelt. Insbesondere bei den so genanntenn REST-Webservies kommt es sehr häufig zum
+                                Einsatz. In diesem Video integrieren wir daher die in Express mitgelieferten JSON-Middleware,
+                                um den Empfang und die Erzeugung von JSON-Daten zu vereinfachen.
+
+                            </p>
+                            <!-- <lsx-youtube class="img-thumbnail embed-responsive" video="GmD81Hj6NBs"></lsx-youtube> -->
+                            <div class="centered-content">
+                                <div class="embed-responsive ratio ratio-16x9 limited-width border">
+                                    <iframe class="d-block" src="https://www.youtube-nocookie.com/embed/GmD81Hj6NBs?rel=0&amp;showinfo=0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </lsx-card-body>
+                    </lsx-card>
+                </lsx-content>
+            </lsx-modal>
+
+            <!-- Einheitliche Fehlerbehandlung -->
+            <lsx-modal>
+                <lsx-thumbnail style="height: 18em;" class="mw-100">
+                    <img src="03-nodejs/video-fehlerbehandlung.png" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                </lsx-thumbnail>
+                <lsx-content>
+                    <lsx-card title="Musical Instrument Digital Interface" bold class="mh-100 limited-width">
+                        <lsx-card-body class="overflow-auto">
+                            <p class="mb-4" style="text-align: justify;">
+                                Da haben wir unseren Webservice im letzten Video dazu gebracht, JSON-Daten mit dem
+                                Client auszutauschen, schon finden wir in diesem Video einen Fall, in dem das nicht
+                                gelingt. Nämlich immer dann, wenn die Bearbeitung einer HTTP-Anfrage auf einen Fehler
+                                läuft. Doch nicht nur das: Die standardmäßig von Express erzeugte Fehlerantwort offenbart
+                                darüber hinaus auch noch sensible Daten, die eigentlich gar nicht an den Client gesendet
+                                werden sollten. Beides bekommen wir mit einer Error Handling Middleware zum Glück leicht
+                                in den Griff.
+                            </p>
+                            <!-- <lsx-youtube class="img-thumbnail embed-responsive" video="4gkeigdy_8Q"></lsx-youtube> -->
+                            <div class="centered-content">
+                                <div class="embed-responsive ratio ratio-16x9 limited-width border">
+                                    <iframe class="d-block" src="https://www.youtube-nocookie.com/embed/4gkeigdy_8Q?rel=0&amp;showinfo=0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </lsx-card-body>
+                    </lsx-card>
+                </lsx-content>
+            </lsx-modal>
+        </div>
+    </section>
+
     <section data-title="Was ist eine Middleware?">
         <div class="limited-width2">
             <p>
@@ -3446,12 +3704,182 @@
     </section>
 </section>
 
-<!-- TODO: Ab hier weiter -->
 <section data-title="Strukturierung des Quellcodes" class="centered-content">
-    <div class="limited-width2">
-        <img src="03-nodejs/struktur-app.png" alt="Strukturierung der App-Bestandteile" class="d-block w-100 mb-4">
-        <img src="03-nodejs/struktur-code.png" alt="Strukturierung des Quellcodes" class="d-block w-100 mb-4">
-    </div>
+    <!-- TODO: Quellcode strukturieren -->
+    <section data-title="Videos: Logbuch des Captains">
+        <p class="limited-width mb-5">
+            Endlich können wir die Logbuch-Funktion ausprogrammieren. Die folgenden Videos zeigen,
+            wie es geht und wie der Quellcode dabei auch für größere Projekte ordentlich strukturiert
+            werden kann.
+        </p>
+
+        <div class="centered-content flex-row flex-wrap gap-3">
+            <!-- Funktionale Implementierung -->
+            <lsx-modal>
+                <lsx-thumbnail style="height: 18em;" class="mw-100">
+                    <img src="03-nodejs/video-implementierung.png" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                </lsx-thumbnail>
+                <lsx-content>
+                    <lsx-card title="Musical Instrument Digital Interface" bold class="mh-100 limited-width">
+                        <lsx-card-body class="overflow-auto">
+                            <p class="mb-4" style="text-align: justify;">
+                                Nachdem wir uns in den letzten Videos eine sehr gute Vorlage für die Entwicklung eigener
+                                Webservices mit Node.js und Express erarbeitet haben, wird es nun Zeit, die eigentliche
+                                Funktionalität unseres Beispiels zu programmieren. Im Video lernen wir daher neben den
+                                anderen Quellcode-Dateien der Vorlage vor allem die Bibliothek lowdb zur Simulation einer
+                                einfachen Datenbank kennen und sehen, wie damit die benötigten Endpunkte unseres Webservices
+                                implementiert werden können.
+                            </p>
+                            <!-- <lsx-youtube class="img-thumbnail embed-responsive" video="uST0svw5Nfk"></lsx-youtube> -->
+                            <div class="centered-content">
+                                <div class="embed-responsive ratio ratio-16x9 limited-width border">
+                                    <iframe class="d-block" src="https://www.youtube-nocookie.com/embed/uST0svw5Nfk?rel=0&amp;showinfo=0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </lsx-card-body>
+                    </lsx-card>
+                </lsx-content>
+            </lsx-modal>
+        </div>
+    </section>
+
+    <section data-title="Die SOLID-Design-Prinzipien">
+        <div class="limited-width2">
+            <p class="mb-4">
+                In den bisherigen Beispielen haben wir den gesamten Code in eine große Datei geschrieben.
+                Das ist aber nur selten eine gute Idee. Je größer ein Projekt wird, desto unübersichtlicher
+                wird der Code und desto mehr Fehler schleichen sich ein. Die folgenden Seiten zeigen daher,
+                wie dieses Problem durch Anwendung der SOLID-Prinzipien (die ursprünglich aus der
+                Objekt-Orientierung stammen) vermieden werden kann.
+            </p>
+
+            <lsx-grid-fluid class="p-0">
+                <lsx-row>
+                    <lsx-col size="md-4" class="mb-3 mb-md-0">
+                        <lsx-card title="Single Responsibility" bold img="03-nodejs/solid1.jpg" class="h-100">
+                            <div class="d-flex flex-column h-100">
+                                <p class="flex-fill">
+                                    Jede Quellcode-Einheit darf nur für eine Aufgabe zuständig sein.
+                                </p>
+                                <lsx-modal>
+                                    <lsx-thumbnail>
+                                        <a href="" onclick="event.preventDefault()">Erklärung …</a>
+                                    </lsx-thumbnail>
+                                    <lsx-content>
+                                        <lsx-card title="Single Responsibility" bold class="limited-width">
+                                            ...
+                                        </lsx-card>
+                                    </lsx-content>
+                                </lsx-modal>
+                            </div>
+                        </lsx-card>
+                    </lsx-col>
+
+                    <lsx-col size="md-4" class="mb-3 mb-md-0">
+                        <lsx-card title="Open/Closed" bold img="03-nodejs/solid2.jpg" class="h-100">
+                            <div class="d-flex flex-column h-100">
+                                <p class="flex-fill">
+                                    Der Quellcode sollte für Erweiterungen offen aber für Veränderungen geschlossen sein.
+                                </p>
+                                <lsx-modal>
+                                    <lsx-thumbnail>
+                                        <a href="" onclick="event.preventDefault()">Erklärung …</a>
+                                    </lsx-thumbnail>
+                                    <lsx-content>
+                                        <lsx-card title="Open/Closed" bold class="limited-width">
+                                            ...
+                                        </lsx-card>
+                                    </lsx-content>
+                                </lsx-modal>
+                            </div>
+                        </lsx-card>
+                    </lsx-col>
+                </lsx-row>
+
+                <lsx-row>
+                    <lsx-col size="md-4" class="mb-3 mb-md-0">
+                        <lsx-card title="Liskov Substitution" bold img="03-nodejs/solid3.jpg" class="h-100">
+                            <div class="d-flex flex-column h-100">
+                                <p class="flex-fill">
+                                    Alle Implementierungen einer Schnittstelle sollten vergleichbares Verhalten zeigen und somit austauschbar sein.
+                                </p>
+                                <lsx-modal>
+                                    <lsx-thumbnail>
+                                        <a href="" onclick="event.preventDefault()">Erklärung …</a>
+                                    </lsx-thumbnail>
+                                    <lsx-content>
+                                        <lsx-card title="Liskov Substitution" bold class="limited-width">
+                                            ...
+                                        </lsx-card>
+                                    </lsx-content>
+                                </lsx-modal>
+                            </div>
+                        </lsx-card>
+                    </lsx-col>
+
+                    <lsx-col size="md-4" class="mb-3 mb-md-0">
+                        <lsx-card title="Interface Segregation" bold img="03-nodejs/solid4.jpg" class="h-100">
+                            <div class="d-flex flex-column h-100">
+                                <p class="flex-fill">
+                                    Die öffentliche Schnittstelle einer Code-Einheit sollte möglichst klein sein.
+                                </p>
+                                <lsx-modal>
+                                    <lsx-thumbnail>
+                                        <a href="" onclick="event.preventDefault()">Erklärung …</a>
+                                    </lsx-thumbnail>
+                                    <lsx-content>
+                                        <lsx-card title="Interface Segregation" bold class="limited-width">
+                                            ...
+                                        </lsx-card>
+                                    </lsx-content>
+                                </lsx-modal>
+                            </div>
+                        </lsx-card>
+                    </lsx-col>
+
+                    <lsx-col size="md-4" class="mb-3 mb-md-0">
+                        <lsx-card title="Dependency Inversion" bold img="03-nodejs/solid5.jpg" class="h-100">
+                            <div class="d-flex flex-column h-100">
+                                <p class="flex-fill">
+                                    Die Abhängigkeiten zwischen den Code-Einheiten sollten eine klare Struktur haben. 
+                                </p>
+                                <lsx-modal>
+                                    <lsx-thumbnail>
+                                        <a href="" onclick="event.preventDefault()">Erklärung …</a>
+                                    </lsx-thumbnail>
+                                    <lsx-content>
+                                        <lsx-card title="Dependency Inversion" bold class="limited-width">
+                                            ...
+                                        </lsx-card>
+                                    </lsx-content>
+                                </lsx-modal>
+                            </div>
+                        </lsx-card>
+                    </lsx-col>
+                </lsx-row>
+            </lsx-grid-fluid>
+
+            <p>
+                <small>
+                    <small>
+                        Bildnachweise:
+                        <a href="https://pixabay.com/photos/sunset-field-tree-grass-grassland-6303965/" target="_blank">Pixabay: denfran</a>,
+                        <a href="https://pixabay.com/photos/door-entrance-front-door-223399/" target="_blank">Pixabay: falco</a>,
+                        <a href="https://pixabay.com/photos/pear-lightbulb-biogl%C3%BChbirne-idea-2264962/" target="_blank">Pixabay: adege</a>,
+                        <a href="https://pixabay.com/photos/audio-interface-button-player-3673105/" target="_blank">Pixabay: D_Van_Rensburg</a>,
+                        <a href="https://pixabay.com/photos/rope-sea-barcelona-port-harbor-1314964/" target="_blank">Pixabay: JeryGórecki</a>
+                    </small>
+                </small>
+            </p>
+        </div>
+    </section>
+
+    <section data-title="Übersichtsgrafik">
+        <div class="limited-width2">
+            <img src="03-nodejs/struktur-app.png" alt="Strukturierung der App-Bestandteile" class="d-block w-100 mb-4">
+            <img src="03-nodejs/struktur-code.png" alt="Strukturierung des Quellcodes" class="d-block w-100 mb-4">
+        </div>
+    </section>
 
     <!--
     <section data-title="Aufteilung in Controller und Services">
@@ -3463,6 +3891,7 @@
     </section>
     -->
 </section>
+
 <!--
 Strukturierung des Quellcodes mit Controller und Service
 Ausblick auf lowdb bzw. echte Datenbank?
