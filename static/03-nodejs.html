@@ -3631,7 +3631,7 @@
                                     next();
                                 });
 
-                                // Weitere Middlewared und Request Handler hier …
+                                // Weitere Middlewares und Request Handler hier …
 
                                 // Server starten
                                 app.listen(3000);
@@ -3745,9 +3745,9 @@
 
     <section data-title="Die SOLID-Design-Prinzipien">
         <div class="limited-width2">
-            <p class="mb-4">
+            <p class="mb-4" detail-content>
                 In den bisherigen Beispielen haben wir den gesamten Code in eine große Datei geschrieben.
-                Das ist aber nur selten eine gute Idee. Je größer ein Projekt wird, desto unübersichtlicher
+                Das ist aber nur selten eine gute Idee. Denn je größer ein Projekt wird, desto unübersichtlicher
                 wird der Code und desto mehr Fehler schleichen sich ein. Die folgenden Seiten zeigen daher,
                 wie dieses Problem durch Anwendung der SOLID-Prinzipien (die ursprünglich aus der
                 Objekt-Orientierung stammen) vermieden werden kann.
@@ -3767,7 +3767,32 @@
                                     </lsx-thumbnail>
                                     <lsx-content>
                                         <lsx-card title="Single Responsibility" bold class="limited-width">
-                                            ...
+                                            <div class="overflow-auto markdown dhbw-justified">
+                                                Jede Quellcode-Einheit darf nur für eine Aufgabe zuständig sein.
+                                                {.lead}
+                                                
+                                                Selbst unsere bisherigen Beispiele zeigen bei näherer Betrachtung,
+                                                dass dieselbe Quellcode-Datei verschiedene Aufgaben abdeckt:
+
+                                                <lsx-ul>
+                                                    <li>Den Express-Webserver starten und stoppen</li>
+                                                    <li>Globale Middleware-Funktionen registrieren</li>
+                                                    <li>Verschiedene Arten von HTTP-Anfragen bearbeiten</li>
+                                                    <li>etc.</li>
+                                                </lsx-ul>
+
+                                                Für die Abgrenzung gibt es keine harten Regeln und man kann den Quellcode
+                                                auch anders einteilen. Benötigen die einzelnen Teile aber mehr als ein paar
+                                                Codezeilen, sollten sie besser in eigene Dateien ausgelagert werden. Dies
+                                                hält den Code übersichtlich und sorgt für eine logische Struktur.
+
+                                                In der Objekt-Orientierten Programmierung bezieht sich das Prinzip auf die
+                                                Aufgaben einer Klasse und propagiert hier vor allem viele kleine Klassen
+                                                anstatt weniger großer. Das Prinzip kann genauso aber auch auf alle anderen
+                                                Arten den Quellcode zu strukturieren angewandt werden: Quellcode-Dateien,
+                                                Module, Klassen, Methoden, Funktionen, … sollten im weitesten Simme immer
+                                                für eine klar definierte Sache zuständig sein.
+                                            </div>
                                         </lsx-card>
                                     </lsx-content>
                                 </lsx-modal>
@@ -3779,7 +3804,7 @@
                         <lsx-card title="Open/Closed" bold img="03-nodejs/solid2.jpg" class="h-100">
                             <div class="d-flex flex-column h-100">
                                 <p class="flex-fill">
-                                    Der Quellcode sollte für Erweiterungen offen aber für Veränderungen geschlossen sein.
+                                    Der Code sollte für Erweiterungen offen aber für Veränderungen geschlossen sein.
                                 </p>
                                 <lsx-modal>
                                     <lsx-thumbnail>
@@ -3787,7 +3812,29 @@
                                     </lsx-thumbnail>
                                     <lsx-content>
                                         <lsx-card title="Open/Closed" bold class="limited-width">
-                                            ...
+                                            <div class="overflow-auto markdown dhbw-justified">
+                                                Der Code sollte für Erweiterungen offen aber für Veränderungen geschlossen sein.
+                                                {.lead}
+
+                                                Software ist eigentlich nie fertig. So lange sie genutzt und gepflegt wird,
+                                                gibt es neue Features, die umgesetzt werden sollen. Dies soll möglichst einfach
+                                                möglich sein, ohne vorhandene Funktionen kapput zu machen und neue Fehler zu
+                                                produzieren.
+
+                                                Der Quellcode sollte daher so strukturiert sein, dass Erweiterungen im Sinne
+                                                von neuer Funktionalität leicht hinzugefügt werden können. Gleichzeitig sollte er
+                                                aber gegen Veränderungen geschlossen sein, was bedeutet, dass der schon vorhandene
+                                                Quellcode hierfür möglichst wenig (oder im Idealfall gar nicht) verändert werden muss.
+
+                                                <lsx-info-box title="Merke">
+                                                    Neuen Quellcode hinzufügen ist in Ordnung. Den vorhandenen Quellcode
+                                                    zu verändern, nicht.
+                                                </lsx-info-box>
+
+                                                Auch hier gibt es keine festen Regeln. Es handelt sich aber um eine sehr gute
+                                                Leitfrage, die beim Programmieren immer mitgedacht werden sollte. Auf den folgenden
+                                                Seiten sehen wir, wie das Prinzip in JavaScript umgesetzt werden kann.
+                                            </div>
                                         </lsx-card>
                                     </lsx-content>
                                 </lsx-modal>
@@ -3809,7 +3856,35 @@
                                     </lsx-thumbnail>
                                     <lsx-content>
                                         <lsx-card title="Liskov Substitution" bold class="limited-width">
-                                            ...
+                                            <div class="overflow-auto markdown dhbw-justified">
+                                                Alle Implementierungen einer Schnittstelle sollten vergleichbares Verhalten zeigen und somit austauschbar sein.
+                                                {.lead}
+
+                                                Ein Grundprinzip der Objekt-Orientierung lautet „Programmiere gegen Schnittstellen
+                                                und nicht gegen Implementierungen”. Damit ist gemeint, dass wenn es mehre Varianten
+                                                derselben Sache geben kann, benötigt man eine Schnittstelle, die ihre Verwendung
+                                                verallgemeinert. Beispiele hierfür könnten sein:
+
+                                                <lsx-ul>
+                                                    <li>Mehrere Zahlungsarten in einem Webshop</li>
+                                                    <li>Die verschiedenen Gegner in einem Computerspiel</li>
+                                                    <li>Mehrere Request Handler in einer Express-Anwendung</li>
+                                                    <li>etc.</li>
+                                                </lsx-ul>
+
+                                                Um ihre Verwendung zu vereinfachen, besitzen alle Varianten dieselbe Schnittstelle.
+                                                Diese kann, wie in Java oder TypeScript, explizit durch eine Basisklasse oder ein
+                                                Interface beschrieben werden oder, wie in JavaScript, eine implizite Konvention sein.
+                                                Auf jeden Fall besitzen alle Varianten dieselbe Struktur, so dass sie beliebig austauschbar
+                                                sind. Doch dabei gilt: Alle Varianten sollten sich grundsätzlich ähnlich und nicht anders
+                                                als durch die Schnittstelle angedeutet verhalten.
+
+                                                Beispielsweise können die Enten in einer Ententeichsimulation alle schwimmen und
+                                                schnattern. Man würde daher eine Schnittstelle <code>Ente</code> definieren und
+                                                diese mehrfach ausprogrammieren, beispielsweise für Stockenten, Wildenden und
+                                                Schwäne. Aber nicht für Pekingenten, da diese zwar gut schmecken, aber eben nicht
+                                                (mehr) schwimmen und schnattern.
+                                            </div>
                                         </lsx-card>
                                     </lsx-content>
                                 </lsx-modal>
@@ -3829,7 +3904,33 @@
                                     </lsx-thumbnail>
                                     <lsx-content>
                                         <lsx-card title="Interface Segregation" bold class="limited-width">
-                                            ...
+                                            <div class="overflow-auto">
+                                                <div class="markdown dhbw-justified">
+                                                    Die öffentliche Schnittstelle einer Code-Einheit sollte möglichst klein sein.
+                                                    {.lead}
+    
+                                                    Häufig unterscheiden wir beim Programmieren zwischen der internen Implementierung
+                                                    von etwas und seiner öffentlichen Schnittstelle – also, wie es an anderen Stellen
+                                                    im Quellcode genutzt werden kann. In objekt-orientierten Programmiersprachen wird
+                                                    hierfür oft zwischen den privaten und öffentlichen Eigenschaften einer Klasse
+                                                    unterschieden. Doch auch, wenn wir nicht objekt-orientiert programmieren, können
+                                                    wir beispielsweise in JavaScript entscheiden, welche Teile einer Quellcode-Datei
+                                                    exportiert und somit für die Verwendung in anderen Dateien freigegeben werden
+                                                    und welche nicht. Die öffentlichen bzw. freigegebenen Teile nennen wir Schnittstelle.
+    
+                                                    Doch was ist eine gute Schnittstelle? Eine gute Schnittstelle ist die, die leicht
+                                                    zu verstehen ist und nur schwer falsch verwendet werden kann. Hierfür sollte die
+                                                    Schnittstelle möglichst klein und selbsterklärend sein. Dabei sollte sie so gut
+                                                    wie möglich, die interne Implementierung verstecken und nur die absolut notwendigen
+                                                    Dinge öffentlich machen.
+    
+                                                    Schauen wir uns als Beispiel an, wie Request Handler in Express definiert werden.
+                                                    Express bietet hierfür eine Schnittstelle, da die Request Handler beim Eintreffen
+                                                    einer HTTP-Anfrage vom Framework aufgerufen werden müssen. Diese besteht aber nur
+                                                    aus einer einzelnen Callback-Funktion mit gerade mal zwei Parametern: Request und
+                                                    Response. Einfach und gut.
+                                                </div>
+                                            </div>
                                         </lsx-card>
                                     </lsx-content>
                                 </lsx-modal>
@@ -3841,7 +3942,7 @@
                         <lsx-card title="Dependency Inversion" bold img="03-nodejs/solid5.jpg" class="h-100">
                             <div class="d-flex flex-column h-100">
                                 <p class="flex-fill">
-                                    Die Abhängigkeiten zwischen den Code-Einheiten sollten eine klare Struktur haben. 
+                                    Die Abhängigkeiten im Quellcode sollten eine klare Struktur haben.
                                 </p>
                                 <lsx-modal>
                                     <lsx-thumbnail>
@@ -3849,7 +3950,12 @@
                                     </lsx-thumbnail>
                                     <lsx-content>
                                         <lsx-card title="Dependency Inversion" bold class="limited-width">
-                                            ...
+                                            <div class="overflow-auto markdown dhbw-justified">
+                                                Die Abhängigkeiten im Quellcode sollten eine klare Struktur haben.
+                                                {.lead}
+
+                                                ...
+                                            </div>
                                         </lsx-card>
                                     </lsx-content>
                                 </lsx-modal>
