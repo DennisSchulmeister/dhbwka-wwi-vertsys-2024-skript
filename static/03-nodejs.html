@@ -4233,8 +4233,20 @@
             <!-- Interaktive Grafik -->
             <div style="flex: 5;" class="h-100 border p-3">
                 <div id="code-struktur-texte" class="mb-4">
+                    <div class="d-flex flex-row justify-content-between dhbw-fontsize-small mb-4">
+                        <div>
+                            Schritt <span id="code-struktur-schritt">1</span> / 5
+                        </div>
+                        <div class="d-block d-lg-none">
+                            Passender Quellcode siehe unten
+                        </div>
+                        <div class="d-none d-lg-block">
+                            Passender Quellcode siehe rechts
+                        </div>
+                    </div>
+
                     <!-- Bild 1: Ursprüngliche Version -->
-                    <div class="markdown active" visible-tabs="1" goto-tab="1">
+                    <div class="markdown active" step visible-tabs="1, 9, 10" goto-tab="1">
                         ![](03-nodejs/code-struktur-1.png){.d-block .w-100 .mb-4}
 
                         Bisher besteht der Server im Wesentlichen nur aus der Datei <span class="fn">main.js</span>,
@@ -4258,7 +4270,7 @@
                     </div>
     
                     <!-- Bild 2: HTTP-Handler separat -->
-                    <div class="markdown hidden" visible-tabs="2, 3" goto-tab="2">
+                    <div class="markdown hidden" step visible-tabs="2, 3, 9, 10" goto-tab="2">
                         ![](03-nodejs/code-struktur-2.png){.d-block .w-100 .mb-4}
 
                         Um eine bessere __Trennung der Verantwortlichkeiten__ zu erhalten, lagern wir die Request
@@ -4291,7 +4303,7 @@
                     </div>
     
                     <!-- Bild 3: Eigene Controller-Dateien -->
-                    <div class="markdown hidden" visible-tabs="2, 4, 5, 6" goto-tab="4">
+                    <div class="markdown hidden" step visible-tabs="2, 4, 5, 6, 9, 10" goto-tab="4">
                         ![](03-nodejs/code-struktur-3.png){.d-block .w-100 .mb-4}
 
                         Die letzte Änderung hat zwar die __Trennung der Verantwortlichkeiten__ und auch die Einhaltung
@@ -4327,7 +4339,7 @@
                     </div>
     
                     <!-- Bild 4: Trennung von Controller und Services -->
-                    <div class="markdown hidden" visible-tabs="2, 4, 5, 7, 8, 9, 10" goto-tab="7">
+                    <div class="markdown hidden" step visible-tabs="2, 4, 5, 7, 8, 9, 10" goto-tab="7">
                         ![](03-nodejs/code-struktur-4.png){.d-block .w-100 .mb-4}
 
                         Zum Schluss nehmen wir uns noch einmal die __Trennung der Verantwortlichkeiten__ vor und schauen
@@ -4359,8 +4371,9 @@
                         aber auch einfacher in [Unit Tests](https://de.wikipedia.org/wiki/Modultest){target=_blank} getestet
                         oder bei einem kompletten Wechsel des Kommunikationsprotokolls beibehalten werden.
                     </div>
-
-                    <div class="markdown hidden" visible-tabs="2, 4, 5, 7, 8, 9, 10" goto-tab="7">
+                    
+                    <!-- Bild 5: Ausblick -->
+                    <div class="markdown hidden" step visible-tabs="2, 4, 5, 7, 8, 9, 10" goto-tab="2">
                         ##### Ausblick {.dhbw-lightblue}
 
                         Die SOLID-Prinzipien anzuwenden ist nicht immer leicht und es gibt auch kein Geheimrezept hierfür.
@@ -4406,12 +4419,6 @@
                     </a>
                 </div>
 
-                <style>
-                    #code-struktur-links .disabled {
-                        color: grey !important;
-                    }
-                </style>
-
                 <script>
                     window.codeStruktur_onclick = function(event) {
                         event.preventDefault();
@@ -4420,31 +4427,32 @@
                         let texteParent = document.getElementById("code-struktur-texte");
                         let linksParent = document.getElementById("code-struktur-links");
                         let tabsParent  = document.getElementById("code-struktur-tabs");
+                        let schrittSpan = document.getElementById("code-struktur-schritt");
 
                         let gotoNext    = linksParent.querySelector(".goto-next");
                         let gotoPrev    = linksParent.querySelector(".goto-prev");
                         let gotoStart   = linksParent.querySelector(".goto-start");
 
-                        let allTabs     = tabsParent.querySelectorAll("*[data-bs-toggle='tab']");
-
                         // Sichtbaren Erklärungstext umschalten
-                        let activeText  = texteParent.querySelector(".active");
-                        let activeIndex = [...texteParent.children].indexOf(activeText);
+                        let allSteps    = [...texteParent.querySelectorAll("[step]")];
+                        let activeStep  = texteParent.querySelector(".active");
+                        let activeIndex = allSteps.indexOf(activeStep);
                         
-                        activeText.classList.remove("active");
-                        activeText.classList.add("hidden");
+                        activeStep.classList.remove("active");
+                        activeStep.classList.add("hidden");
 
                         if (event.target === gotoNext)       activeIndex++;
                         else if (event.target === gotoPrev)  activeIndex--;
                         else if (event.target === gotoStart) activeIndex = 0;
 
-                        if (activeIndex < 0) activeIndex = texteParent.children.length - 1;
-                        else if (activeIndex >= texteParent.children.length) activeIndex = 0;
+                        if (activeIndex < 0) activeIndex = allSteps.length - 1;
+                        else if (activeIndex >= allSteps.length) activeIndex = 0;
 
-                        activeText = texteParent.children[activeIndex];
-                        activeText.classList.add("active");
-                        activeText.classList.remove("hidden");
+                        activeStep = allSteps[activeIndex];
+                        activeStep.classList.add("active");
+                        activeStep.classList.remove("hidden");
 
+                        schrittSpan.textContent = activeIndex + 1;
                         window.scrollTo(0, 0);
 
                         // Steuerelemente aktualisieren
@@ -4462,18 +4470,15 @@
                         }
 
                         // Quellcode-Tabreiter ein- und ausblenden
-                        // TODO: Öffentliche API in ls-plugin-extra-tags
-                        let visibleTabs = (activeText.getAttribute("visible-tabs") || []).split(",").map(entry => parseInt(entry.trim()));
-                        let gotoTabNr   = parseInt(activeText.getAttribute("goto-tab") || 0);
+                        let visibleTabs = (activeStep.getAttribute("visible-tabs") || "").split(",").map(entry => parseInt(entry.trim()));
+                        let gotoTabNr   = parseInt(activeStep.getAttribute("goto-tab") || 0);
 
-                        for (let i = 1; i++; i <= allTabs.length) {
-                            let tabElement = allTabs[i - 1];
-
-                            if (i in visibleTabs) tabElement.classList.remove("hidden");
-                            else tabElement.classList.add("hidden");
-
-                            if (i === gotoTabNr) bootstrap.Tab.getInstance(tabElement).show();
+                        for (let tabNumber = 1; tabNumber <= tabsParent.lsxNumberPages; tabNumber++) {
+                            if (visibleTabs.includes(tabNumber)) tabsParent.lsxEnableTab(tabNumber);
+                            else tabsParent.lsxDisableTab(tabNumber, false);
                         }
+
+                        if (gotoTabNr) tabsParent.lsxGotoTab(gotoTabNr);
                     }
                 </script>
             </div>
@@ -5033,7 +5038,7 @@
                     </lsx-tab-page>
     
                     <!-- Tab 9: database.js -->
-                    <lsx-tab-page title="database.js" hidden>
+                    <lsx-tab-page title="database.js">
                         <lsx-info-box class="markdown mb-4">
                             <span class="dhbw-gray">Projektverzeichnis</span> /
                             <span class="fn">database.js</span>
@@ -5072,7 +5077,7 @@
                     </lsx-tab-page>
     
                     <!-- Tab 10: utils.js -->
-                    <lsx-tab-page title="utils.js" hidden>
+                    <lsx-tab-page title="utils.js">
                         <lsx-info-box class="markdown mb-4">
                             <span class="dhbw-gray">Projektverzeichnis</span> /
                             <span class="fn">utils.js</span>
