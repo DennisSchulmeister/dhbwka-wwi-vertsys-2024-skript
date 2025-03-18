@@ -22,6 +22,10 @@
     text-shadow: 1px 1px 1px lightgrey;
 }
 
+.dhbw-box-shadow {
+    box-shadow: 1px 1px 3px rgba(0,0,0, 0.5);
+}
+
 .dhbw-fontsize-tiny {
     font-size: 70%;
 }
@@ -54,27 +58,6 @@
         margin-right: 0;
     }
 }
-
-// .dhbw-wortluecke,
-// .dhbw-langer-strich {
-//     display: inline-block;
-//     width: 11em;
-//     border: 0px solid black;
-//     border-bottom-width: 1px;
-
-//     &.dhbw-langer-strich {
-//         width: 25em;
-//     }
-// }
-
-// .dhbw-begriffswolke {
-//     font-size: 90%;
-//     margin: 1.5em 0 1.5em 0;
-
-//     td {
-//         padding-bottom: 0.5em;
-//     }
-// }
 
 .dhbw-liste-mit-viel-text {
     font-size: 80%;
@@ -255,4 +238,20 @@ blockquote {
 // Kein Abstand unterhalb Quellcode in card
 .card pre {
     margin-bottom: 0 !important;
+}
+
+// Einheitliche Schriftart für Code, Dateinamen und Kommandos
+.fn,
+.cmd {
+    font-size: .875em;
+    font-family: var(--bs-font-monospace) !important;
+    font-weight: bold;
+}
+
+// Dirty Hack für Code-Ausschnitte in Flexbox-Containern. Diese erhöhen die Breite
+// des Flex Items, wenn sie zu breit sind. Die Lösung ist, das Flex Item und alle
+// Kinder bis runter zum <pre> eine Mindesbreite von 0 zu geben, um dieses Verhalten
+// zu umgehen. Vgl. https://stackoverflow.com/a/32038209
+* {
+    min-width: 0;
 }
