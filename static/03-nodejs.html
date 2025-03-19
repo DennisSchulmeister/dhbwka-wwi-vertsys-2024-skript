@@ -58,7 +58,7 @@
         einbinden, um diese in unserem Programmen nutzen zu können.
 
         Ein großer Teil dieser Vorlesung dreht sich um die Bereitstellung und Nutzung von Webservices,
-        wofür wir ein serverseitiges Webframework benötigten. Unsere Wahl fällt dabei auf Express, dem
+        wofür wir ein serverseitiges Web Framework benötigten. Unsere Wahl fällt dabei auf Express, dem
         vermutlich am weitesten verbreiteten Web Framework für Node.js überhaupt. Denn es ist, genau wie
         Node.js, leichtgewichtig und leistungsstark und vereinfacht die Entwicklung somit enorm. Im zweiten
         Teil werden wir daher alle die wichtigsten Funktionen von Express kennenlernen und im Handumdrehen
@@ -3741,8 +3741,7 @@
                 </lsx-content>
             </lsx-modal>
 
-            <!-- TODO: Den Quellcode strukturieren -->
-            <!-- 
+            <!-- TODO: Den Quellcode strukturieren -->            
             <lsx-modal>
                 <lsx-thumbnail style="height: 18em;" class="mw-100">
                     <img src="03-nodejs/video-implementierung.png" class="d-block h-100 mw-100 dhbw-thumbnail"/>
@@ -3751,19 +3750,20 @@
                     <lsx-card title="Den Quellcode strukturieren" bold class="mh-100 limited-width">
                         <lsx-card-body class="overflow-auto">
                             <p class="mb-4" style="text-align: justify;">
-                                XYZ
+                                Das Video befindet sich momentan noch in Arbeit.
                             </p>
-                            < !-- <lsx-youtube class="img-thumbnail embed-responsive" video="uST0svw5Nfk"></lsx-youtube> -- >
+                            <!-- <lsx-youtube class="img-thumbnail embed-responsive" video="uST0svw5Nfk"></lsx-youtube> -->
                             <div class="centered-content">
-                                <div class="embed-responsive ratio ratio-16x9 limited-width border">
+                                <img src="03-nodejs/video-implementierung.png" class="d-block w-100"/>
+                                <!-- <div class="embed-responsive ratio ratio-16x9 limited-width border">
                                     <iframe class="d-block" src="https://www.youtube-nocookie.com/embed/uST0svw5Nfk?rel=0&amp;showinfo=0" allowfullscreen></iframe>
-                                </div>
+                                </div> -->
                             </div>
                         </lsx-card-body>
                     </lsx-card>
                 </lsx-content>
             </lsx-modal>
-            -->
+           
         </div>
     </section>
 
@@ -4312,7 +4312,7 @@
                         werden. Das Problem wurde aber nur in die Datei <span class="fn">controllers/index.js</span>,
                         die ja immer noch sämtliche Request Handler beinhaltet, verschoben.
 
-                        Im nächsten Schritt lagern wie die Request Handler daher in eigene Dateien aus, wodurch sich
+                        In diesem Schritt lagern wie die Request Handler daher in eigene Dateien aus, wodurch sich
                         folgende Trennung ergibt:
 
                         * <span class="fn">controllers/hello.controller.js</span>: <br>
@@ -4351,7 +4351,7 @@
                             <li>
                                 <p>
                                     <b>Technisches HTTP-Handling:</b> Alles was mit Express, HTTP-Anfragen, HTTP-Antworten,
-                                    der JSON-Codierung usw. zu tun hat
+                                    JSON-Codierung usw. zu tun hat
                                 </p>
                             </li>
                             <li>
@@ -4370,6 +4370,12 @@
                         raus, die somit beispielsweise in mehreren Controllern genutzt werden kann. Die Fachlogik kann dadurch
                         aber auch einfacher in [Unit Tests](https://de.wikipedia.org/wiki/Modultest){target=_blank} getestet
                         oder bei einem kompletten Wechsel des Kommunikationsprotokolls beibehalten werden.
+
+                        <lsx-info-box title="Wichtig">
+                            Der Begriff „Service“ bezieht sich hier nicht darauf, dass wir einen Web Service programmieren.
+                            Stattdessen haben wir uns hier wieder der Begriffswelt anderer Frameworks bedient, bei denen
+                            Services die Fachlogik einer Anwendung kapseln.
+                        </lsx-info-box>
                     </div>
                     
                     <!-- Bild 5: Ausblick -->
@@ -4377,14 +4383,14 @@
                         ##### Ausblick {.dhbw-lightblue}
 
                         Die SOLID-Prinzipien anzuwenden ist nicht immer leicht und es gibt auch kein Geheimrezept hierfür.
-                        Am ehesten können sie als Leitfragen beim Nachdenken über die Code-Struktur verstanden werden, über
-                        die es sich lohnt, intensiv nachzudenken. In vier einfachen Schritten konnten wir die Struktur des
-                        Fallbeispiels dadurch wesentlich tragfähiger machen. Der Code ist einfacher zu pflegen und typische
-                        Weiterentwicklungen (insb. das Hinzufügen weiterer Request Handler) können leichter durchgeführt werden,
-                        ohne alte Funktionen kaputt zu machen.
+                        Am ehesten können sie als Leitgedanken zur Code-Struktur verstanden werden, über die es sich lohnt,
+                        intensiv nachzudenken. In drei einfachen Schritten konnten wir die Struktur des Fallbeispiels dadurch
+                        wesentlich tragfähiger machen. Der Code ist einfacher zu pflegen und typische Weiterentwicklungen
+                        (insb. das Hinzufügen weiterer Request Handler) können leichter durchgeführt werden, ohne alte Funktionen
+                        kaputt zu machen.
 
                         Würde man den Web Service aber tatsächlich um weitere Entitäten wie Außenmissionen, Crew-Mitglieder
-                        etc. erweitern, würde sich schnell ein weiteres Problem bemerkbar machen: Code-Duplizierung. Denn
+                        etc. erweitern, würde sich schnell ein weiteres Problem bemerkbar machen: __Code-Duplizierung__. Denn
                         die Controller und Services zur Umsetzung der typischen CRUD-Funktionen (Create, Read, Update und Delete)
                         würden sehr wahrscheinlich nahezu den gleichen Quellcode minus ganz weniger Unterschiede hinsichtlich
                         der jeweiigen Entität beinhalten.
@@ -4460,7 +4466,7 @@
                         gotoPrev.classList.add("disabled");
                         gotoStart.classList.add("disabled");
 
-                        if (activeIndex < (texteParent.children.length - 1)) {
+                        if (activeIndex < (allSteps.length - 1)) {
                             gotoNext.classList.remove("disabled");
                         }
 
@@ -4852,7 +4858,7 @@
                         </source-code>
                     </lsx-tab-page>
 
-                    <!-- Tab 6: controllers/logbook.controller.js (nur HTTP-Handling) -->
+                    <!-- Tab 6: controllers/logbook.controller.js (vorläufig) -->
                     <lsx-tab-page title="logbook.controller.js" hidden>
                         <lsx-info-box class="markdown">
                             <span class="dhbw-gray">Projektverzeichnis</span> /
@@ -4863,11 +4869,6 @@
                             Diese Datei stellt einen HTTP-Controller für Logbuch-Einträge zur Verfügung,
                             indem die entsprechenden Request Handler in der Express-App registriert werden.
                             {.mb-0}
-                        </lsx-info-box>
-                        <lsx-info-box type="critical" class="mb-4">
-                            Es handelt sich hierbei lediglich um
-                            die technische Ebene, auf der HTTP-Anfragen empfangen und beantwortet werden.
-                            Die davon unabhängige Fachlogik befindet sich in einer getrennten Service-Datei.
                         </lsx-info-box>
                         <source-code language="javascript" highlight="[4,13]">
                             import {db}           from "../database.js";
@@ -5124,11 +5125,11 @@
 <!-- TODO: Übungen -->
 <!--
 <section data-title="Übungsaufgaben" data-background-color="rgb(231, 221, 141)">
-    <section data-title="#Aufgabe 1: Ein kleines Express-Quiz">
+    <section data-title="Aufgabe 1: Ein kleines Express-Quiz">
         ...
     </section>
 
-    <section data-title="#Aufgabe 2: Der Hallo Welt Webservice">
+    <section data-title="Aufgabe 2: Der Hallo Welt Webservice">
         ...
     </section>
 </section>
