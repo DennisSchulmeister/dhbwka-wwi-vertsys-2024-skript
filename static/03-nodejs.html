@@ -2318,8 +2318,8 @@
                         Gemeint ist, dass jedes Programm möglichst einfach gehalten ist und nur ein kleines
                         Problem lösen kann. Die Programme können aber in einer Befehlskette so kombiniert werden,
                         dass nahezu jede größere Aufgabe damit gelöst werden kann. Ein typisches Kommando ist
-                        daher <span class="cmd">sort</span>, dass Textzeilen entgegennimmt und alphabetisch
-                        sortiert wieder ausgibt. Zum Beispiel ein einer Befehlskette wie dieser:
+                        daher <span class="cmd">sort</span>, das Textzeilen alphabetisch sortiert. Zum Beispiel
+                        ein einer Befehlskette wie dieser:
                     </p>
                     <p class="cmd">
                         cat textdatei.txt | sort | less
@@ -2344,8 +2344,7 @@
                         dass die Ausgabe das linken Programms als Einagbe für das rechte Programm dient, wodurch beliebig
                         komplexe Prozessketten definiert werden können. <span class="cmd">cat</span> gibt hier den Inhalt
                         einer Datei aus, der mit <span class="cmd">sort</span> sortiert und anschließend mit
-                        <span class="cmd">less</span> gepuffert ausgegeben wird, so dass man gerade bei sehr großen Dateien,
-                        deren Inhalt nicht auf eine Bildschirmseite passt, hin und her blättern kann.
+                        <span class="cmd">less</span> benutzerfreundlich angezeigt wird.
                     </p>
 
                     <img src="03-nodejs/aufgabe-sort.png" alt="Visualisierung der Befehlskette" class="d-block mw-100 mx-auto mt-4 mb-4" style="width: 60em;">
@@ -2357,12 +2356,12 @@
 
                 <lsx-tab-page title="Aufgabe">
                     <p>
-                        Schreiben Sie ein Programm, dass den <span class="cmd">sort</span>-Befehl aus dem
+                        Schreibe ein Programm, das den <span class="cmd">sort</span>-Befehl aus dem
                         vorherigen Beispiel ersetzt. Das Programm soll über seinen Standard Input so
-                        lange Textzeilen einlesen und in einem Array ablegen, bis das sendende Programm
-                        den Datenstrom schließt. Anschließend soll das Array sortiert und mit
-                        <src-code language="javascript">console.log()</src-code> zeilenweise auf dem
-                        Standard Output ausgegeben werden.
+                        lange Textzeilen einlesen und in einem Array ablegen, bis der Sender den
+                        Datenstrom schließt. Anschließend soll das Array sortiert und mit
+                        <src-code language="javascript">console.log()</src-code> zeilenweise an
+                        Standard Output geschickt werden.
                     </p>
                     <p>
                         Hier sind die wichtigsten Schritte für die Umsetzung:
@@ -2373,12 +2372,8 @@
                                 <th scope="row">1.</th>
                                 <th scope="row" style="width: 20em;">Einlesen von Daten über <code>stdin</code></th>
                                 <td>
-                                    <p>
-                                        Das Programm soll zeilenweise Text einlesen, ähnlich wie <span class="cmd">sort</span> unter Unix.
-                                    </p>
-                                    <p class="mb-0">
-                                        Dazu nutzen wir <src-code language="javascript">process.stdin.on("data", callback)</src-code>.
-                                    </p>
+                                    Das Programm soll mit <src-code language="javascript">process.stdin.on("data", callback)</src-code>
+                                    mehrere Textzeilen einlesen.
                                 </td>
                             </tr>
                             <tr>
@@ -4373,7 +4368,7 @@
                         oder bei einem kompletten Wechsel des Kommunikationsprotokolls beibehalten werden.
 
                         <lsx-info-box title="Wichtig">
-                            Der Begriff „Service“ bezieht sich hier nicht darauf, dass wir einen Web Service programmieren.
+                            Der Begriff „Service“ bezieht sich hier nicht darauf, dass wir einen Webservice programmieren.
                             Stattdessen haben wir uns hier wieder der Begriffswelt anderer Frameworks bedient, bei denen
                             Services die Fachlogik einer Anwendung kapseln.
                         </lsx-info-box>
@@ -4390,7 +4385,7 @@
                         (insb. das Hinzufügen weiterer Request Handler) können leichter durchgeführt werden, ohne alte Funktionen
                         kaputt zu machen.
 
-                        Würde man den Web Service aber tatsächlich um weitere Entitäten wie Außenmissionen, Crew-Mitglieder
+                        Würde man den Webservice aber tatsächlich um weitere Entitäten wie Außenmissionen, Crew-Mitglieder
                         etc. erweitern, würde sich schnell ein weiteres Problem bemerkbar machen: __Code-Duplizierung__. Denn
                         die Controller und Services zur Umsetzung der typischen CRUD-Funktionen (Create, Read, Update und Delete)
                         würden sehr wahrscheinlich nahezu den gleichen Quellcode minus ganz weniger Unterschiede hinsichtlich
@@ -5401,10 +5396,77 @@
         </aside>
     </section>
 
-    <!--
     <section data-title="Aufgabe 2: Planet Express">
         <article>
-            ...
+            <lsx-github-edit
+                class        = "mb-3"
+                url          = "Aufgaben/Planet%20Express/Aufgabe"
+                download     = "Aufgaben/Planet%20Express"
+            >
+            </lsx-github-edit>
+            
+            <p>
+                Lege ein neues Node.js-Projekt an und übernehme hierfür die letzte Version des Logbuch-Beispiels aus diesem Kapitel.
+                Achte darauf, die Version zu nehmen, bei der die SOLID-Prinzipien vollständig eingehalten werden. Die statischen Dateien
+                für die Single Page App musst du nicht übernehmen, da wir hier nur den Webservice programmieren wollen. Programmiere
+                das Beispiel anschließend so um, dass folgende Daten über den Webservice abgerufen und angelegt werden können. Bei
+                der konkreten Umsetzung des Datenmodells hast du freie Wahl.
+            </p>
+            <img src="03-nodejs/planet-express-datenmodell.png" alt="Datenmodell" class="d-block mw-100 mt-4 mb-4 m-auto" style="width: 50em;">
+            <p>
+                Folgende HTTP-Endpunkte soll der Webservice besitzen. Teste ihre Funktion mit einem HTTP-Testwerkzeug
+                wie <a href="https://httpie.io/" target="_blank">httpie</a>.
+            </p>
+
+            <div class="d-flex flex-column flex-md-row gap-3">
+                <lsx-card title="Lieferungen" bold class="flex-fill">
+                    <lsx-card-body class="p-0">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td class="dhbw-tt dhbw-lightblue">GET</td>
+                                    <td class="dhbw-tt">/api/parcel</td>
+                                    <td>Eine Liste abrufen</td>
+                                </tr>
+                                <tr>
+                                    <td class="dhbw-tt dhbw-lightblue">GET</td>
+                                    <td class="dhbw-tt">/api/parcel/<span class="red">:id</span></td>
+                                    <td>Details eines Eintrags abrufen</td>
+                                </tr>
+                                <tr>
+                                    <td class="dhbw-tt dhbw-lightblue">POST</td>
+                                    <td class="dhbw-tt">/api/parcel</td>
+                                    <td>Neuen Eintrag anlegen</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </lsx-card-body>
+                </lsx-card>
+
+                <lsx-card title="Frachflüge" bold class="flex-fill">
+                    <lsx-card-body class="p-0">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td class="dhbw-tt dhbw-lightblue">GET</td>
+                                    <td class="dhbw-tt">/api/flight</td>
+                                    <td>Eine Liste abrufen</td>
+                                </tr>
+                                <tr>
+                                    <td class="dhbw-tt dhbw-lightblue">GET</td>
+                                    <td class="dhbw-tt">/api/flight/<span class="red">:id</span></td>
+                                    <td>Details eines Eintrags abrufen</td>
+                                </tr>
+                                <tr>
+                                    <td class="dhbw-tt dhbw-lightblue">POST</td>
+                                    <td class="dhbw-tt">/api/flight</td>
+                                    <td>Neuen Eintrag anlegen</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </lsx-card-body>
+                </lsx-card>
+            </div>
         </article>
         <aside>
             <p>
@@ -5421,7 +5483,6 @@
             <lsx-youtube video="xncmm-KAWGo"></lsx-youtube>
         </aside>
     </section>
-    -->
 </section>
 
 <!-- =============== -->
