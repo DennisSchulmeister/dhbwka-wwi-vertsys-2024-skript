@@ -2544,7 +2544,7 @@
 <section data-use-template="teilkapitel" data-titel="HTTP-Server mit Express"></section>
 
 <section data-title="Kurzvorstellung von Express">
-    <section data-title="Client- vs. serverseitige Webframeworks" class="centered-content">
+    <section data-title="Client- vs. serverseitige Web Frameworks" class="centered-content">
         <div class="limited-width2">
             <div class="markdown mb-4" detail-content>
                 In diesem Kapitel lernen wir mit Express ein sog. **serverseitiges Webframework** kennen.
@@ -2556,7 +2556,7 @@
                 <div class="card flex-grow-1 w-100">
                     <img src="03-nodejs/framework-clientseitig.jpg" class="card-img-top">
                     <div class="card-header border-top fw-bold">
-                        Clientseitige Webframeworks
+                        Clientseitige Web Frameworks
                     </div>
                     <div class="card-body markdown small">
                         Diese laufen im Browser und sind darauf ausgelegt, die Entwicklung interaktiver
@@ -2585,7 +2585,7 @@
                 <div class="card flex-grow-1 w-100">
                     <img src="03-nodejs/framework-serverseitig.jpg" class="card-img-top">
                     <div class="card-header border-top fw-bold">
-                        Serverseitige Webframeworks
+                        Serverseitige Web Frameworks
                     </div>
                     <div class="card-body markdown small">
                         Diese laufen auf dem Server und verarbeiten HTTP-Anfragen, entweder durch einen in das
@@ -3144,6 +3144,7 @@
                     <a href="https://atom.io/" target="_blank">Atom Webseite</a>
                 </small>
             </p>
+            <lsx-youtube video="rblYSKz_VnI"></lsx-youtube>
         </aside>
     </section>
 </section>
@@ -5122,18 +5123,306 @@
     </section>
 </section>
 
-<!-- TODO: Übungen -->
-<!--
 <section data-title="Übungsaufgaben" data-background-color="rgb(231, 221, 141)">
     <section data-title="Aufgabe 1: Ein kleines Express-Quiz">
-        ...
+        <article>
+            <lsx-tab-pages>
+                <lsx-tab-page title="Aufgabe 1.1">
+                     <lsx-quiz>
+                        <lsx-exercise title="Allgemeines zu Express">
+                            <lsx-question type="single-choice" text="a) Um welche Art von Web Framework handelt es sich bei Express?">
+                                <lsx-question-line>
+                                    <lsx-answer correct>Clientseitiges Framework</lsx-answer>
+                                    <lsx-answer>Serverseitiges Framework</lsx-answer>
+                                    <lsx-answer>Full-Stack Framework</lsx-answer>
+                                </lsx-question-line>
+                            </lsx-question>
+
+                            <lsx-question type="multiple-choice" text="b) Welches sind typische Funktionen von Frameworks wie Express?">
+                                <lsx-answer>Gemeinsame Codebasis für Client und Server</lsx-answer>
+                                <lsx-answer>Entwicklung eigener HTML-Komponenten</lsx-answer>
+                                <lsx-answer>Clientseitiges URL-Routing</lsx-answer>
+                                <lsx-answer correct>Routing und URL-Handling</lsx-answer>
+                                <lsx-answer>HTML-Hydration vom Server zum Client</lsx-answer>
+                                <lsx-answer correct>HTML-Rendering mit Templates</lsx-answer>
+                                <lsx-answer correct>Session-Verwaltung</lsx-answer>
+                                <lsx-answer>Aufruf serverseitiger Funktionen im Client</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question type="single-choice" text="c) Mit welchen Vorteilen hebt sich Express von anderen Frameworks ab?">
+                                <lsx-answer>Das Framework ist besonders performant.</lsx-answer>
+                                <lsx-answer correct>Das Framework ist sehr leichtgewichtig.</lsx-answer>
+                                <lsx-answer correct>Das Framework kann sehr flexibel genutzt werden.</lsx-answer>
+                                <lsx-answer>Das Framework fördert einen objekt-orientierten Programmierstil.</lsx-answer>
+                            </lsx-question>
+                        </lsx-exercise>                        
+                     </lsx-quiz>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Aufgabe 1.2">
+                    <lsx-quiz>
+                        <lsx-exercise title="Erste Schritte mit Express">
+                            <lsx-question type="single-choice" text="a) Mit welchem Befehl wird Express einem Projekt hinzugefügt?">
+                                <lsx-question-line>
+                                    <lsx-answer><code>npm init</code></lsx-answer>
+                                    <lsx-answer><code>npm require express</code></lsx-answer>
+                                    <lsx-answer correct><code>npm add express@next</code></lsx-answer>
+                                </lsx-question-line>
+                            </lsx-question>
+
+                            <lsx-question type="multiple-choice" text="b) Welche Aufgaben hat das App-Objekt einer Express-Anwendung?">
+                                <lsx-answer correct>Es beinhaltet die technische Implementierung des HTTP-Servers.</lsx-answer>
+                                <lsx-answer correct>Es öffnet einen Server-Socket, mit dem sich Clients verbinden können.</lsx-answer>
+                                <lsx-answer correct>Es hält den Node.js-Prozess am Laufen.</lsx-answer>
+                                <lsx-answer>Es protokolliert alle HTTP-Anfragen auf der Konsole.</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question type="single-choice" text="c) Was bewirkt der Aufruf von <src-code language='javascript'>app.listen(8888)</src-code> in Express?">
+                                <lsx-answer>Der Prozess reagiert für 8888 Sekunden auf Client-Anfragen.</lsx-answer>
+                                <lsx-answer>Der Prozess reagiert 8888 mal auf Client-Anfragen.</lsx-answer>
+                                <lsx-answer correct>Der Prozess lauscht auf Port 8888 nach Client-Anfragen.</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question type="single-choice" text="d) Was ist ein Graceful Shutdown?">
+                                <lsx-answer correct>Ein Ende des Servers, bei dem laufende Anfragen noch zu Ende bearbeitet werden</lsx-answer>
+                                <lsx-answer>Ein Absturz des Servers wegen einer nicht abgefangenen Ausnahme</lsx-answer>
+                                <lsx-answer>Ein fehlerfreies Ende des Servers ohne Fehler oder Warnungen</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question type="multiple-choice" text="e) Wie wird ein Graceful Shutdown für Express programmiert?">
+                                <lsx-answer>Abfangen und Protokollieren aller Ausnahmen</lsx-answer>
+                                <lsx-answer correct>Abfangen der Signale <code>SIGINT</code> und <code>SIGTERM</code></lsx-answer>
+                                <lsx-answer>Abschicken der restlichen HTTP-Antworten</lsx-answer>
+                                <lsx-answer correct>Schließen des Servers mit der <code>close()</code>-Methoode</lsx-answer>
+                            </lsx-question>
+                        </lsx-exercise>
+                    </lsx-quiz>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Aufgabe 1.3">
+                    <lsx-quiz>
+                        <lsx-exercise title="Request Handler">
+                            <lsx-question type="single-choice" text="a) Welche der folgenden URLs enthält Query-Parameter?">
+                                <lsx-answer><span class="dhbw-tt">https://beispiel.de/</span></lsx-answer>
+                                <lsx-answer><span class="dhbw-tt">https://beispiel.de/api/hello</span></lsx-answer>
+                                <lsx-answer><span class="dhbw-tt">https://beispiel.de/api/hello/Dana</span></lsx-answer>
+                                <lsx-answer correct><span class="dhbw-tt">https://beispiel.de/api/hello?name=Dana</span></lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question type="single-choice" text="b) Wie können Query-Parameter in Express abgefragt werden?">
+                                <lsx-answer correct>Als Attribute des Objekts <code>req.query</code></lsx-answer>
+                                <lsx-answer>Als Attribute des Objekts <code>req.param</code></lsx-answer>
+                                <lsx-answer>Als Einträge des Arrays <code>req.urlParams</code></lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question type="single-choice" text="c) Welche Syntax definiert in Express einen Platzhalter im URL-Pfad?">
+                                <lsx-answer><span class="dhbw-tt">/api/hello/{name}</span></lsx-answer>
+                                <lsx-answer correct><span class="dhbw-tt">/api/hello/:name</span></lsx-answer>
+                                <lsx-answer><span class="dhbw-tt">/api/hello/?name</span></lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question type="single-choice" text="d) Welche Syntax definiert einen Request Handler in Express?">
+                                <lsx-answer>
+                                    <src-code language="javascript">app.handle("/api/hello", function(req, res) { … });</src-code>
+                                </lsx-answer>
+                                <lsx-answer>
+                                    <src-code language="javascript">app.use("/api/hello", class C extends HTTPHandler { … });</src-code>
+                                </lsx-answer>
+                                <lsx-answer correct>
+                                    <src-code language="javascript">app.get("/api/hello", function(req, res) { … });</src-code>
+                                </lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question type="gap-text" mode="source-code" text="e) Vervollständige den Quellcode entsprechend der eingebauten Kommentare.">
+                                // App-Objekt erzeugen
+                                import express from "express";
+                                let app = <lsx-gap answer="express"></lsx-gap>();
+                                &nbsp;
+
+                                // GET-Anfragen an Pfad /api/songs bearbeiten
+                                app.<lsx-gap answer="get"></lsx-gap>("<lsx-gap answer="/api/songs" ignore-case></lsx-gap>", (req, res) => {
+                                    // Daten einlesen, Status-Code setzen und Ergebnis an den Client schicken
+                                    let <lsx-gap answer="result"></lsx-gap> = getAllSongs();
+                                    app.<lsx-gap answer="status"></lsx-gap>(200);
+                                    app.<lsx-gap answer="send"></lsx-gap>(result);
+                                });
+                                &nbsp;
+
+                                app.listen(8888);
+                            </lsx-question>
+                        </lsx-exercise>
+                     </lsx-quiz>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Aufgabe 1.4">
+                    <lsx-quiz>
+                        <lsx-exercise title="Middleware-Funktionen">
+                            <lsx-question type="single-choice" text="a) Was ist eine Middleware-Funktion in Express?">
+                                <lsx-answer correct>Eine Funktion, die für jede HTTP-Anfrage ausgeführt wird</lsx-answer>
+                                <lsx-answer>Eine Funktion zur Bearbeitung von <span class="dhbw-tt">GET</span>-Anfragen</lsx-answer>
+                                <lsx-answer>Eine Funktion für die Benutzerauthentifizierung und Autorisierung</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question type="single-choice" text="b) Mit welcher Methode des App-Objekts werden Middlewares registriert?">
+                                <lsx-question-line>
+                                    <lsx-answer><code>set()</code></lsx-answer>
+                                    <lsx-answer><code>get()</code></lsx-answer>
+                                    <lsx-answer correct><code>use()</code></lsx-answer>
+                                    <lsx-answer><code>call()</code></lsx-answer>
+                                </lsx-question-line>
+                            </lsx-question>
+
+                            <lsx-question type="single-choice" text="c) Warum ist die Reihenfolge bei der Registrierung von Middlewares entscheidend?">
+                                <lsx-answer>Weil parallel eintreffende HTTP-Anfragen sonst in der falschen Reihenfolge bearbeitet werden</lsx-answer>
+                                <lsx-answer correct>Weil Middlewares und Request Handler in der Reihenfolge ihrer Registrierung ausgeführt werden</lsx-answer>
+                                <lsx-answer>Die Reihenfolge ist nur für Error Handling Middlewares wichtig</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question type="single-choice" text="d) Was passiert, wenn innerhalb einer Middleware die <code>next()</code>-Funktion nicht aufgerufen wird?">
+                                <lsx-answer>Nichts passiert. Die aktuelle HTTP-Anfrage wird korrekt zu Ende bearbeitet.</lsx-answer>
+                                <lsx-answer correct>Nachfolgende Middlewares und der Request Handler werden nicht aufgerufen.</lsx-answer>
+                                <lsx-answer>Nachfolgende Middlewares und der Request Handler werden in der falschen Reihenfolge aufgerufen.</lsx-answer>
+                                <lsx-answer>Die Anfrage wird zu Ende bearbeitet, es fehlen aber die Daten im HTTP Response Body.</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question type="single-choice" text="e) Eine HTTP-Antwort kann nach Aufruf der <code>next()</code>-Funktion nicht verändert werden.">
+                                <lsx-question-line>
+                                    <lsx-answer correct>Wahr</lsx-answer>
+                                    <lsx-answer>Falsch</lsx-answer>
+                                </lsx-question-line>
+                            </lsx-question>
+
+                            <lsx-question type="single-choice" text="f) Eine Error Handling Middleware sollte immer ganz zum Schluss registriert werden.">
+                                <lsx-question-line>
+                                    <lsx-answer correct>Wahr</lsx-answer>
+                                    <lsx-answer>Falsch</lsx-answer>
+                                </lsx-question-line>
+                            </lsx-question>
+                        </lsx-exercise>
+                    </lsx-quiz>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Aufgabe 1.5">
+                    <lsx-quiz>
+                        <lsx-exercise title="Die SOLID-Design-Prinzipien">
+                            <lsx-question type="single-choice" text="a) Bei den SOLID-Prinzipien handelt es sich um die bekannten Entwurfsmuster der Gang of Four.">
+                                <lsx-question-line>
+                                    <lsx-answer>Wahr</lsx-answer>
+                                    <lsx-answer correct>Falsch</lsx-answer>
+                                </lsx-question-line>
+                            </lsx-question>
+
+                            <lsx-question type="multiple-choice" text="b) Welche der folgenden Beispiele sind SOLID-Design-Prinzipien?">
+                                <lsx-answer>Singleton</lsx-answer>
+                                <lsx-answer correct>Single Responsibility</lsx-answer>
+                                <lsx-answer correct>Offen/Geschlossen-Prinzip</lsx-answer>
+                                <lsx-answer>Lisa Simpson Substitution</lsx-answer>
+                                <lsx-answer correct>Interface Segregation</lsx-answer>
+                                <lsx-answer>Dependency Injection</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question type="single-choice" text="c) Was ist mit der Trennung von Verantwortlichkeiten gemeint?">
+                                <lsx-answer>Jede Code-Einheit sollte möglichst wenige Zeilen besitzen.</lsx-answer>
+                                <lsx-answer>Jede Code-Einheit sollte sich ähnlich die meisten anderen Code-Stellen verhalten.</lsx-answer>
+                                <lsx-answer correct>Jede Code-Einheit sollte genau eine klar definierte Aufgabe erfüllen.</lsx-answer>
+                                <lsx-answer>Jede Code-Einheit sollte klare Abhängigkeiten zu anderen Code-Einheiten haben.</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question type="single-choice" text="d) Welche Aussage beschreibt das Offen/Geschlossen-Prinzip?">
+                                <lsx-answer correct>Der Quellcode sollte für Erweiterungen offen aber für Veränderungen geschlossen sein.</lsx-answer>
+                                <lsx-answer>Der Quellcode sollte für Veränderungen offen aber für Erweiterungen geschlossen sein.</lsx-answer>
+                                <lsx-answer>Der Quellcode sollte für Erweiterungen und Veränderungen entweder offen oder geschlossen sein.</lsx-answer>
+                            </lsx-question>
+                            
+                            <lsx-question type="multiple-choice" text="e) Warum sollte die öffentliche Schnittstelle einer Code-Einheit möglichst klein sein?">
+                                <lsx-answer correct>Damit sie möglichst selbsterklärend und leicht zu nutzen ist.</lsx-answer>
+                                <lsx-answer correct>Damit sie weniger Möglichkeiten für eine falsche Benutzungen bietet.</lsx-answer>
+                                <lsx-answer>Damit sie weniger Angriffsfläche für potentielle Angreifer bietet.</lsx-answer>
+                                <lsx-answer>Weil kleine Schnittstellen ein besseres Laufzeitverhalten bieten.</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question type="single-choice" text="f) In welchem der folgenden Fälle wird gegen das Dependency Inversion Principle verstoßen?">
+                                <lsx-answer>Quellcode A importiert eine Funktion aus B</lsx-answer>
+                                <lsx-answer>Quellcode A importiert eine Funktion aus B und B eine Funktion aus C</lsx-answer>
+                                <lsx-answer>Quellcode A importiert Funktionen sowohl aus B und C</lsx-answer>
+                                <lsx-answer correct>Quellcode A importert eine Funktion aus B,  B aus C, und C aus A</lsx-answer>
+                            </lsx-question>
+                        </lsx-exercise>                        
+                     </lsx-quiz>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Aufgabe 1.6">
+                    <lsx-quiz>
+                        <lsx-exercise title="Strukturierung des Quellcodes">
+                            <lsx-question type="single-choice" text="a) Welche Aufgabe haben die Controller in gängigen Web Frameworks?">
+                                <lsx-answer>Die implementieren das HTML-Rendering.</lsx-answer>
+                                <lsx-answer correct>Sie implementieren das technische HTTP-Handling.</lsx-answer>
+                                <lsx-answer>Sie implementieren die fachliche Anwendungslogik.</lsx-answer>
+                                <lsx-answer>Die implementieren das Datenmodell.</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question type="single-choice" text="b) Welche Aufgabe haben die Services in gängigen Web Frameworks?">
+                                <lsx-answer>Die implementieren das HTML-Rendering.</lsx-answer>
+                                <lsx-answer>Sie implementieren das technische HTTP-Handling.</lsx-answer>
+                                <lsx-answer correct>Sie implementieren die fachliche Anwendungslogik.</lsx-answer>
+                                <lsx-answer>Die implementieren das Datenmodell.</lsx-answer>
+                            </lsx-question>
+
+                            <lsx-question type="single-choice" text="c) In der Beispielanwendung rufen die Services Funktionen der Controller auf.">
+                                <lsx-question-line>
+                                    <lsx-answer>Wahr</lsx-answer>
+                                    <lsx-answer correct>Falsch</lsx-answer>
+                                </lsx-question-line>
+                            </lsx-question>
+
+                            <lsx-question type="single-choice" text="d) Die Programmierung mit Express erfolgt bevorzugt mit Klassen und Vererbung.">
+                                <lsx-question-line>
+                                    <lsx-answer>Wahr</lsx-answer>
+                                    <lsx-answer correct>Falsch</lsx-answer>
+                                </lsx-question-line>
+                            </lsx-question>
+                        </lsx-exercise>
+                    </lsx-quiz>
+                </lsx-tab-page>
+            </lsx-tab-pages>
+        </article>
+        <aside>
+            <p>
+                Inzwischen solltest du dich in Express schon sehr gut zurecht finden. Dieses
+                Quiz hilft dir, die wichtigsten Punkte zu wiederholen. 🎓
+            </p>
+            <img src="shared/quiz.png" class="img-fluid d-block" style="max-width: 20em;"/>
+            <p>
+                <small>
+                    Bildnachweis:
+                    <a href="https://pixabay.com/illustrations/quiz-tiles-letters-red-game-test-2058883/" target="_blank">Pixabay: 905513</a>
+                </small>
+            </p>
+        </aside>
     </section>
 
-    <section data-title="Aufgabe 2: Der Hallo Welt Webservice">
-        ...
+    <!--
+    <section data-title="Aufgabe 2: Planet Express">
+        <article>
+            ...
+        </article>
+        <aside>
+            <p>
+                Programmieren lernt man nur durch Übung. In dieser Aufgabe kannst du deshalb
+                das zuvor Gelernte praktisch anwenden und vertiefen. Viel Spaß dabei. 🙂
+            </p>
+            <img src="shared/github_atom.png" class="img-fluid d-block"/>
+            <p>
+                <small>
+                    Bildnachweis:
+                    <a href="https://atom.io/" target="_blank">Atom Webseite</a>
+                </small>
+            </p>
+            <lsx-youtube video="xncmm-KAWGo"></lsx-youtube>
+        </aside>
     </section>
+    -->
 </section>
--->
 
 <!-- =============== -->
 <!-- Gruppenarbeiten -->
