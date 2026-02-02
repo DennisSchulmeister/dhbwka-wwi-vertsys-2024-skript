@@ -23,538 +23,626 @@
 </section>
 
 <section data-title="Vorlesungsinhalte">
-    <article>
-        <lsx-accordion>
-            <lsx-accordion-page title="<b>3. Semester:</b>&nbsp;Webprogrammierung" active>
-                <p>
-                    <small>
-                        Von der ersten Webseite bis zur eigenen Webanwendung
-                    </small>
-                </p>
+    <section data-title="Webprogrammierung und Verteilte Systeme">
+        <article>
+            <lsx-accordion>
+                <lsx-accordion-page title="<b>3. Semester:</b>&nbsp;Webprogrammierung" active>
+                    <p>
+                        <small>
+                            Von der ersten Webseite bis zur eigenen Webanwendung
+                        </small>
+                    </p>
+    
+                    <lsx-ul emoji="✅" class="mb-4">
+                        <li>Grundlagen des Web</li>
+                        <li>Webdesign mit HTML und CSS</li>
+                        <li>Responsive Webdesign</li>
+                        <li>JavaScript im Browser</li>
+                    </lsx-ul>
+    
+                    <img src="01-intro/vorlesungsinhalte-webprog.png" class="d-block w-100">
+                </lsx-accordion-page>
+    
+                <lsx-accordion-page title="<b>4. Semester:</b>&nbsp;Verteilte Systeme">
+                    <p>
+                        <small>
+                            Von Microservices bis zum Internet of Things
+                        </small>
+                    </p>
+    
+                    <lsx-ul emoji="✅" class="mb-4">
+                        <li>Architektur verteilter Systeme</li>
+                        <li>Backendprogrammierung mit JavaScript</li>
+                        <li>Synchrone Webservice-Kommunikation</li>
+                        <li>Asynchroner Nachrichtenaustausch</li>
+                    </lsx-ul>
+    
+                    <img src="01-intro/vorlesungsinhalte-vertsys.png" class="d-block w-100">
+                </lsx-accordion-page>
+            </lsx-accordion>
+        </article>
+        <aside class="markdown">
+            Die Vorlesung „Verteilte Systeme“ des vierten Semesters baut auf der Vorgängervorlesung
+            „Webprogrammierung“ im dritten Semester auf und vervollständigt das Bild zur Entwicklung
+            gesamter Anwendungen. Haben wir uns im dritten Semester überwiegend um die Clientseite
+            und hier vor allem um das Web als Anwendungsplattform gekümmert, greifen wir im vierten
+            Semester nochmal den Grundgedanken auf, verteilte Anwendungen zu entwickeln, die aus
+            mehr Komponenten als dem auf dem eigenen Computer ausgeführten Quellcode bestehen und
+            komplettieren das Bild um unterschiedliche Backendstrukturen und Kommunikationsarten.
+            
+            Doch nicht nur Webanwendungen wollen wir entwickeln. Benutzeroberflächen mit HTML und CSS
+            laufen heute zwar auch außerhalb des Browsers. Die vorgestellten Architekturmuster und
+            Techniken sind jedoch an keine UI-Technologie gebunden. Mobile Anwendungen, Desktop Apps,
+            IoT-Devices uvm. kommen genauso in Frage wie clientseitige Webanwendungen. Hin und wieder
+            werden wir daher einen kurzen Blick auch auf diese Anwendungsfälle werfen. Konkret werden
+            wir daher folgende Inhalte behandeln:
+    
+            1. Architektur verteilter Anwendungen
+            1. Backendprogrammierung mit JavaScript
+            1. REST-Webservices und OpenAPI
+            1. Publish/Subscribe am Beispiel MQTT
+    
+            Das erste Kapitel legt den Grundstein für alle weiteren Inhalte und liefert neben wichtigen
+            Begriffsdefinitionen (Was ist überhaupt ein „Verteiltes System“?) auch einen Überblick über
+            die wichtige Konzepte und Architekturmuster. Im zweiten Kapitel geht es dann auch schon ans
+            Eingemachte und wir lernen, mit Node.js und JavaScript eigene Serveranwendungen zu programmieren.
+            Dies bildet die Grundlage für das nächste Kapitel über Webservices, die wir – wer hätte es
+            anders erwartet – in JavaScript programmieren werden (auch wenn nahezu jede Programiersprache
+            hierfür geeignet ist).
+            
+            Bis dahin haben wir uns überwiegend mit synchroner Punkt-zu-Punkt-Kommunikation beschäftigt.
+            Da sich aber viele Anwendungsfälle damit nur umständlich umsetzen lassen, lernen wir im letzten
+            Kapitel mit dem asynchronen Publish/Subscribe-Modell eine mehr als interessante und vor allem
+            auch leicht einsetzbare Alternative kennen. Als Fallbeispiel schauen wir Hierzu auf das besonders
+            leichtgewichtige MQTT-Protkoll, dass insbesondere im IoT-Kontext häufig anzutreffen ist. Die Konzepte
+            sind dabei allerdings allgemeingültig.
+        </aside>
+    </section>
+    
+    <section data-title="Lernziele im vierten Semester">
+        <div class="d-flex w-100 flex-column flex-lg-row gap-5">
+            <!-- QR-Code -->
+            <!--
+            <div style="width: 10em; max-width: 100%;">
+                <div class="d-none d-lg-block position-fixed bottom-0 start-0 p-3">
+                    <img src="01-intro/lernziele-umfrage-qrcode.svg" alt="" class="d-block" style="width: 100%; max-width: 15em;">
+                    <a href="https://www.empirio.de/s/lWbXdcVJ=1" target="_blank">Link zur Umfrage</a>
+                </div>
+                <div class="d-block d-lg-none">
+                    <a href="https://www.empirio.de/s/lWbXdcVJ=1" target="_blank">Link zur Umfrage</a>
+                </div>
+            </div>
+            -->
+    
+            <!-- Lernziele -->
+            <div class="flex-grow-1">
+                <!-- Architektur -->
+                <div class="d-flex lsx-timeline gap-3">
+                    <!-- Termin 1: Begriffsdefinitionen, Anforderungen, Architekturmuster -->
+                    <h5 class="lsx-timeline-label">
+                        <span>Architektur</span>
+                    </h5>
+                    <div class="flex-grow-1">
+                        <lsx-grid-fluid>
+                            <lsx-row>
+                                <lsx-col size="lg-4">
+                                    <lsx-card class="lsx-timeline-card" title="Begriffsdefinitionen" bold>
+                                        Die Bedeutung <i>verteilter Systeme</i> und <i>verteilter Anwendungen</i> kennen
+                                    </lsx-card>
+                                </lsx-col>
+                                <lsx-col size="lg-4">
+                                    <lsx-card class="lsx-timeline-card" title="Konzepte" bold>
+                                        Theoretische Konzepte wie das <i>CAP-Theorem</i> auf praktische Fallbeispiele anwenden können
+                                    </lsx-card>
+                                </lsx-col>
+                                <lsx-col size="lg-4">
+                                    <lsx-card class="lsx-timeline-card" title="Architektur" bold>
+                                        Architekturprinzipien wie <i>Client/Server</i> oder <i>Microservices</i> verstehen
+                                    </lsx-card>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
+                        <hr>
+                    </div>
+                </div>
+            
+                <!-- Programmierung -->
+                <div class="d-flex lsx-timeline gap-3">
+                    <!-- Termin 2: Node.js-Grundlagen, Express Web-Framework -->
+                    <h5 class="lsx-timeline-label">
+                        <span>Programmierung</span>
+                    </h5>
+                    <div class="flex-grow-1">
+                        <lsx-grid-fluid>
+                            <lsx-row>
+                                <lsx-col size="lg-4">
+                                    <lsx-card class="lsx-timeline-card" title="Node.js" bold>
+                                        Node.js-Projekte anlegen, bearbeiten und ausführen sowie deren Abhängigkeiten verwalten können
+                                    </lsx-card>
+                                </lsx-col>
+                                <lsx-col size="lg-4">
+                                    <lsx-card class="lsx-timeline-card" title="Express.js" bold>
+                                        Den Funktionsumfang von Express mit anderen Web Frameworks vergleichen können
+                                    </lsx-card>
+                                </lsx-col>
+                                <lsx-col size="lg-4">
+                                    <lsx-card class="lsx-timeline-card" title="Beispielprogramme" bold>
+                                        Einfache HTTP-Clients und HTTP-Server programmieren können
+                                    </lsx-card>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
+                        <hr>
+                    </div>
+                </div>
+            
+                <!-- Webservices -->
+                <div class="d-flex lsx-timeline gap-3">
+                    <!-- Termin 3: Theorie zu Webservices allgemein und REST-Webservices -->
+                    <h5 class="lsx-timeline-label">
+                        <span>Webservices</span>
+                    </h5>
+                    <div class="flex-grow-1">
+                        <lsx-grid-fluid>
+                            <lsx-row>
+                                <lsx-col size="lg-4">
+                                    <lsx-card class="lsx-timeline-card" title="Begriffsdefinitionen" bold>
+                                        Die Begriffe <i>Webserver</i>, <i>Webservice</i> und <i>Webanwendung</i> abgrenzen
+                                    </lsx-card>
+                                </lsx-col>
+                                <lsx-col size="lg-4">
+                                    <lsx-card class="lsx-timeline-card" title="HTTP" bold>
+                                        HTTP-Methoden, Header Fields und Statuscodes korrekt anwenden
+                                    </lsx-card>
+                                </lsx-col>
+                                <lsx-col size="lg-4">
+                                    <lsx-card class="lsx-timeline-card" title="REST-Webservices" bold>
+                                        REST-Webservices entwerfen und von anderen Webservice-Arten unterscheiden können
+                                    </lsx-card>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
+                    </div>
+                </div>
+            
+                <div class="d-flex lsx-timeline gap-3">
+                    <!-- Termin 4: REST-Webservices programmieren und mit OpenAPI dokumentieren -->
+                    <h5 class="lsx-timeline-label"></h5>
+                    <div class="flex-grow-1">
+                        <lsx-grid-fluid>
+                            <lsx-row>
+                                <lsx-col size="lg-4">
+                                    <lsx-card class="lsx-timeline-card" title="Programmierung" bold>
+                                        REST-Webservices entwickeln und den Quellcode hierfür strukturieren können
+                                    </lsx-card>
+                                </lsx-col>
+                                <lsx-col size="lg-4">
+                                    <lsx-card class="lsx-timeline-card" title="OpenAPI" bold>
+                                        REST-Webservices mit OpenAPI dokumentieren und testen können
+                                    </lsx-card>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
+                        <hr>
+                    </div>
+                </div>
+            
+                <!-- Publish/Subscribe -->
+                <div class="d-flex lsx-timeline gap-3">
+                    <h5 class="lsx-timeline-label">
+                        <span>Publish/Subscribe</span>
+                    </h5>
+                    <!-- Termin 5: Theorie zu Publish/Subscribe und MQTT -->
+                    <div class="flex-grow-1">
+                        <lsx-grid-fluid>
+                            <lsx-row>
+                                <lsx-col size="lg-4">
+                                    <lsx-card class="lsx-timeline-card" title="Aynchrone Kommunikation" bold>
+                                        Unterschiede zu synchronen Kommunikationsmodellen verstehen
+                                    </lsx-card>
+                                </lsx-col>
+                                <lsx-col size="lg-4">
+                                    <lsx-card class="lsx-timeline-card" title="Systemarchitektur" bold>
+                                        Die Systemarchitektur event-basierter Systeme verstehen
+                                    </lsx-card>
+                                </lsx-col>
+                                <lsx-col size="lg-4">
+                                    <lsx-card class="lsx-timeline-card" title="Anwendungsfälle" bold>
+                                        Typische Anwendungsfälle für die asynchrone Kommunukation kennen
+                                    </lsx-card>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
+                    </div>
+                </div>
+            
+                <div class="d-flex lsx-timeline gap-3">
+                    <!-- Termin 6: Programmieren mit MQTT -->
+                    <h5 class="lsx-timeline-label"></h5>
+                    <div class="flex-grow-1">
+                        <lsx-grid-fluid>
+                            <lsx-row>
+                                <lsx-col size="lg-4">
+                                    <lsx-card class="lsx-timeline-card" title="MQTT" bold>
+                                        Den Funktionsumfang von MQTT zu anderen Messaging-Systemen vergleichen können
+                                    </lsx-card>
+                                </lsx-col>
+                                <lsx-col size="lg-4">
+                                    <lsx-card class="lsx-timeline-card" title="Programmierung" bold>
+                                        Event-basierte Systeme auf Basis von MQTT entwickeln können
+                                    </lsx-card>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <lsx-ul emoji="✅" class="mb-4">
-                    <li>Grundlagen des Web</li>
-                    <li>Webdesign mit HTML und CSS</li>
-                    <li>Responsive Webdesign</li>
-                    <li>JavaScript im Browser</li>
+    <section data-title="Prüfungsaufgaben" class="centered-content">
+        <div class="d-flex flex-column flex-md-row justify-content-center gap-md-5">
+            <div class="flex-grow-1" style="width: 20em; max-width: 100%;">
+                <h3 class="dhbw-lightblue text-md-center">Lernkontrollen</h3>
+                <p class="text-md-center mb-5">Prüfung der deskriptiven Lernziele</p>
+    
+                <img src="01-intro/pf-moodle.png" alt="Screenshot eines Moodle-Quizzes" class="d-block img-thumbnail shadow mb-5">
+    
+                <lsx-ul emoji="📝">
+                    <li>Begriffsdefinitionen</li>
+                    <li>Anforderungen</li>
+                    <li>Architektur</li>
+                    <li>Node.js-Projekte</li>
+                    <li>Web-Framework Express.js</li>
+                    <li>Webservices allgemein</li>
+                    <li>REST-Webservices</li>
+                    <li>Publish/Subscribe</li>
+                    <li>MQTT mit Node.js</li>
                 </lsx-ul>
-
-                <img src="01-intro/vorlesungsinhalte-webprog.png" class="d-block w-100">
-            </lsx-accordion-page>
-
-            <lsx-accordion-page title="<b>4. Semester:</b>&nbsp;Verteilte Systeme">
-                <p>
-                    <small>
-                        Von Microservices bis zum Internet of Things
-                    </small>
-                </p>
-
-                <lsx-ul emoji="✅" class="mb-4">
-                    <li>Architektur verteilter Systeme</li>
-                    <li>Backendprogrammierung mit JavaScript</li>
-                    <li>Synchrone Webservice-Kommunikation</li>
-                    <li>Asynchroner Nachrichtenaustausch</li>
-                </lsx-ul>
-
-                <img src="01-intro/vorlesungsinhalte-vertsys.png" class="d-block w-100">
-            </lsx-accordion-page>
-        </lsx-accordion>
-    </article>
-    <aside class="markdown">
-        Die Vorlesung „Verteilte Systeme“ des vierten Semesters baut auf der Vorgängervorlesung
-        „Webprogrammierung“ im dritten Semester auf und vervollständigt das Bild zur Entwicklung
-        gesamter Anwendungen. Haben wir uns im dritten Semester überwiegend um die Clientseite
-        und hier vor allem um das Web als Anwendungsplattform gekümmert, greifen wir im vierten
-        Semester nochmal den Grundgedanken auf, verteilte Anwendungen zu entwickeln, die aus
-        mehr Komponenten als dem auf dem eigenen Computer ausgeführten Quellcode bestehen und
-        komplettieren das Bild um unterschiedliche Backendstrukturen und Kommunikationsarten.
-        
-        Doch nicht nur Webanwendungen wollen wir entwickeln. Benutzeroberflächen mit HTML und CSS
-        laufen heute zwar auch außerhalb des Browsers. Die vorgestellten Architekturmuster und
-        Techniken sind jedoch an keine UI-Technologie gebunden. Mobile Anwendungen, Desktop Apps,
-        IoT-Devices uvm. kommen genauso in Frage wie clientseitige Webanwendungen. Hin und wieder
-        werden wir daher einen kurzen Blick auch auf diese Anwendungsfälle werfen. Konkret werden
-        wir daher folgende Inhalte behandeln:
-
-        1. Architektur verteilter Anwendungen
-        1. Backendprogrammierung mit JavaScript
-        1. REST-Webservices und OpenAPI
-        1. Publish/Subscribe am Beispiel MQTT
-
-        Das erste Kapitel legt den Grundstein für alle weiteren Inhalte und liefert neben wichtigen
-        Begriffsdefinitionen (Was ist überhaupt ein „Verteiltes System“?) auch einen Überblick über
-        die wichtige Konzepte und Architekturmuster. Im zweiten Kapitel geht es dann auch schon ans
-        Eingemachte und wir lernen, mit Node.js und JavaScript eigene Serveranwendungen zu programmieren.
-        Dies bildet die Grundlage für das nächste Kapitel über Webservices, die wir – wer hätte es
-        anders erwartet – in JavaScript programmieren werden (auch wenn nahezu jede Programiersprache
-        hierfür geeignet ist).
-        
-        Bis dahin haben wir uns überwiegend mit synchroner Punkt-zu-Punkt-Kommunikation beschäftigt.
-        Da sich aber viele Anwendungsfälle damit nur umständlich umsetzen lassen, lernen wir im letzten
-        Kapitel mit dem asynchronen Publish/Subscribe-Modell eine mehr als interessante und vor allem
-        auch leicht einsetzbare Alternative kennen. Als Fallbeispiel schauen wir Hierzu auf das besonders
-        leichtgewichtige MQTT-Protkoll, dass insbesondere im IoT-Kontext häufig anzutreffen ist. Die Konzepte
-        sind dabei allerdings allgemeingültig.
-    </aside>
+            </div>
+    
+            <div style="border: 0px dashed lightgrey; border-right-width: 1px"></div>
+    
+            <div class="flex-grow-1" style="width: 20em; max-width: 100%;">
+                <h3 class="dhbw-lightblue text-md-center">Aufgabenblatt</h3>
+                <p class="text-md-center mb-5">Prüfung der methodischen Lernziele</p>
+    
+                <div style="width: 85%;">
+                    <img src="01-intro/pf-blatt3.png" alt="Erste Seite des Aufgabenblatts in Moodle" class="d-block img-thumbnail shadow" style="transform: rotate(-5deg); margin-left: 10em;">
+                    <img src="01-intro/pf-blatt2.png" alt="Erste Seite des Aufgabenblatts in Moodle" class="d-block img-thumbnail shadow" style="transform: rotate(2deg); margin-top: -140%; margin-left: 5em;">
+                    <img src="01-intro/pf-blatt1.png" alt="Erste Seite des Aufgabenblatts in Moodle" class="d-block img-thumbnail shadow" style="transform: rotate(4deg); margin-top: -135%;">
+                </div>
+            </div>
+        </div>
+    </section>
 </section>
 
-<section data-title="Lernziele">
-    <div class="d-flex w-100 flex-column flex-lg-row gap-5">
-        <!-- QR-Code -->
-        <div style="width: 10em; max-width: 100%;">
-            <div class="d-none d-lg-block position-fixed bottom-0 start-0 p-3">
-                <img src="01-intro/lernziele-umfrage-qrcode.svg" alt="" class="d-block" style="width: 100%; max-width: 15em;">
-                <a href="https://www.empirio.de/s/lWbXdcVJ=1" target="_blank">Link zur Umfrage</a>
-            </div>
-            <div class="d-block d-lg-none">
-                <a href="https://www.empirio.de/s/lWbXdcVJ=1" target="_blank">Link zur Umfrage</a>
-            </div>
-        </div>
-
-        <!-- Lernziele -->
-        <div class="flex-grow-1">
-            <!-- Architektur -->
-            <div class="d-flex lsx-timeline gap-3">
-                <!-- Termin 1: Begriffsdefinitionen, Anforderungen, Architekturmuster -->
-                <h5 class="lsx-timeline-label">
-                    <span>Architektur</span>
-                </h5>
-                <div class="flex-grow-1">
+<section data-title="Voraussetzungen">
+    <section data-title="Zu installierende Software">
+        <article>
+            <lsx-tab-pages>
+                <lsx-tab-page title="Visual Studio Code">
                     <lsx-grid-fluid>
+                        <lsx-row class="mb-0">
+                            <lsx-col size="md">
+                                <p>
+                                    Als Entwicklungsumgebung werden wir Visual Studio Code, da der Atom-Editor leider nicht mehr
+                                    weiterentwickelt wird. 🙁 Es handelt sich um eine weit verbreitete IDE mit Unterstützung für
+                                    alle gängigen Programmiersprachen und Betriebssysteme.
+                                </p>
+                            </lsx-col>
+                        </lsx-row>
+    
                         <lsx-row>
-                            <lsx-col size="lg-4">
-                                <lsx-card class="lsx-timeline-card" title="Begriffsdefinitionen" bold>
-                                    Die Bedeutung <i>verteilter Systeme</i> und <i>verteilter Anwendungen</i> kennen
-                                </lsx-card>
+                            <lsx-col size="md">
+                                <img src="01-intro/vscode-screenshot.png" class="img-thumbnail d-block" style="width: 100%; height: 100%;" />
                             </lsx-col>
-                            <lsx-col size="lg-4">
-                                <lsx-card class="lsx-timeline-card" title="Konzepte" bold>
-                                    Theoretische Konzepte wie das <i>CAP-Theorem</i> auf praktische Fallbeispiele anwenden können
-                                </lsx-card>
+                            <lsx-col size="md">
+                                <!-- <lsx-youtube class="img-thumbnail embed-responsive" video="KMxo3T_MTvY"></lsx-youtube> -->
+                                <div class="img-thumbnail embed-responsive" style="width: 100%; height: 100%;">
+                                    <iframe class="d-block" style="width: 100%; height: 100%;" src="https://www.youtube-nocookie.com/embed/KMxo3T_MTvY?rel=0&amp;showinfo=0" allowfullscreen></iframe>
+                                </div>
                             </lsx-col>
-                            <lsx-col size="lg-4">
-                                <lsx-card class="lsx-timeline-card" title="Architektur" bold>
-                                    Architekturprinzipien wie <i>Client/Server</i> oder <i>Microservices</i> verstehen
-                                </lsx-card>
+                        </lsx-row>
+    
+                        <lsx-row>
+                            <lsx-col size="md">
+                                <lsx-ul>
+                                    <li>
+                                        Weit verbreitete IDE für alle gängigen Betriebssysteme
+                                    </li>
+                                    <li>
+                                        Geschrieben in HTML und JavaScript (basierend auf der Chrome Webengine)
+                                    </li>
+                                    <li>
+                                        Open-Source von Microsoft (Made in Switzerland) 🇨🇭
+                                    </li>
+                                </lsx-ul>
                             </lsx-col>
                         </lsx-row>
                     </lsx-grid-fluid>
-                    <hr>
-                </div>
-            </div>
-        
-            <!-- Programmierung -->
-            <div class="d-flex lsx-timeline gap-3">
-                <!-- Termin 2: Node.js-Grundlagen, Express Web-Framework -->
-                <h5 class="lsx-timeline-label">
-                    <span>Programmierung</span>
-                </h5>
-                <div class="flex-grow-1">
+                </lsx-tab-page>
+    
+                <lsx-tab-page title="Node.js">
                     <lsx-grid-fluid>
+                        <lsx-row class="mb-0">
+                            <lsx-col size="md">
+                                <p>
+                                    Für die Backendprogrammierung werden wir Node.js als JavaScript-Laufzeitumgebung nutzen.
+                                    Es handelt sich um eine weit verbreitete Runtime für nebenläufige verteilte Anwendungen
+                                    auf Basis der V8-Enginge des Google Chrome Browsers.
+                                </p>
+                            </lsx-col>
+                        </lsx-row>
+    
                         <lsx-row>
-                            <lsx-col size="lg-4">
-                                <lsx-card class="lsx-timeline-card" title="Node.js" bold>
-                                    Node.js-Projekte anlegen, bearbeiten und ausführen sowie deren Abhängigkeiten verwalten können
-                                </lsx-card>
+                            <lsx-col size="md">
+                                <img src="01-intro/node.js-logo.svg" class="img-thumbnail d-block" style="width: 100%; height: 100%;" />
                             </lsx-col>
-                            <lsx-col size="lg-4">
-                                <lsx-card class="lsx-timeline-card" title="Express.js" bold>
-                                    Den Funktionsumfang von Express mit anderen Web Frameworks vergleichen können
-                                </lsx-card>
+                            <lsx-col size="md">
+                                <img src="01-intro/node.js-screenshot.png" class="img-thumbnail d-block" style="width: 100%; height: 100%;" />
                             </lsx-col>
-                            <lsx-col size="lg-4">
-                                <lsx-card class="lsx-timeline-card" title="Beispielprogramme" bold>
-                                    Einfache HTTP-Clients und HTTP-Server programmieren können
-                                </lsx-card>
+                        </lsx-row>
+    
+                        <lsx-row>
+                            <lsx-col size="md">
+                                <lsx-ul>
+                                    <li>
+                                        Beinhaltet den Node Package Manager zur einfachen Installation aller für ein Projekt benötigten Bibliotheken
+                                    </li>
+                                    <li>
+                                        Liefert uns alle Build- und Testwerkzeuge, die wir während der Entwicklung benötigen
+                                    </li>
+                                    <li>
+                                        Beinhaltet eine komplette JavaScript-Laufzeitumgebung für die serverseitige Programmierung
+                                    </li>
+                                </lsx-ul>
                             </lsx-col>
                         </lsx-row>
                     </lsx-grid-fluid>
-                    <hr>
-                </div>
-            </div>
-        
-            <!-- Webservices -->
-            <div class="d-flex lsx-timeline gap-3">
-                <!-- Termin 3: Theorie zu Webservices allgemein und REST-Webservices -->
-                <h5 class="lsx-timeline-label">
-                    <span>Webservices</span>
-                </h5>
-                <div class="flex-grow-1">
+                </lsx-tab-page>
+    
+                <lsx-tab-page title="API-Testwerkzeug">
                     <lsx-grid-fluid>
+                        <lsx-row class="mb-0">
+                            <lsx-col size="md">
+                                <p>
+                                    Während der Entwicklung kommt es immer wieder vor, dass wir sowohl unser eigenen als auch
+                                    fremden entfernte Services testen möchten. Hierfür benötigen wir einen beliebigen „API Client”,
+                                    der uns hierbei unterstützt.
+                                </p>
+                            </lsx-col>
+                        </lsx-row>
+    
                         <lsx-row>
-                            <lsx-col size="lg-4">
-                                <lsx-card class="lsx-timeline-card" title="Begriffsdefinitionen" bold>
-                                    Die Begriffe <i>Webserver</i>, <i>Webservice</i> und <i>Webanwendung</i> abgrenzen
-                                </lsx-card>
+                            <lsx-col size="md">
+                                <div class="img-thumbnail">
+                                    <lsx-youtube video="Fbzmi1Q5hQU"></lsx-youtube>
+                                </div>
                             </lsx-col>
-                            <lsx-col size="lg-4">
-                                <lsx-card class="lsx-timeline-card" title="HTTP" bold>
-                                    HTTP-Methoden, Header Fields und Statuscodes korrekt anwenden
-                                </lsx-card>
+                            <lsx-col size="md">
+                                <div class="img-thumbnail">
+                                    <lsx-youtube video="kPO8Km_EYd4"></lsx-youtube>
+                                </div>
                             </lsx-col>
-                            <lsx-col size="lg-4">
-                                <lsx-card class="lsx-timeline-card" title="REST-Webservices" bold>
-                                    REST-Webservices entwerfen und von anderen Webservice-Arten unterscheiden können
-                                </lsx-card>
+                        </lsx-row>
+    
+                        <lsx-row>
+                            <lsx-col size="md">
+                                <lsx-ul>
+                                    <li>
+                                        <a href="https://httpie.io/" target="_blank">httpie</a>:
+                                        Besonders leicht zu nutzen. Web-, Desktop- und Kommandozeilenversion verfügbar.
+                                    </li>
+                                    <li>
+                                        <a href="https://www.usebruno.com/" target="_blank">bruno</a>:
+                                        Newcommer unter den API-Clients. Collections können leicht mit Git versioniert werden.
+                                    </li>
+                                    <li>
+                                        <a href="https://hoppscotch.io/" target="_blank">hoppscotch</a>:
+                                        Besonders leistungsfähig vergleichbar mit den großen kommerziellen Anbietern.
+                                    </li>
+                                </lsx-ul>
+                                <p>
+                                    httpie und hoppscotch können direkt im Browser ausgeführt werden.
+                                    Sie haben die freie Wahl. Alle drei Clients sind für die Vorlesung geeignet.
+                                </p>
                             </lsx-col>
                         </lsx-row>
                     </lsx-grid-fluid>
-                </div>
-            </div>
-        
-            <div class="d-flex lsx-timeline gap-3">
-                <!-- Termin 4: REST-Webservices programmieren und mit OpenAPI dokumentieren -->
-                <h5 class="lsx-timeline-label"></h5>
-                <div class="flex-grow-1">
+                </lsx-tab-page>
+    
+                <lsx-tab-page title="GitHub Codespaces">
                     <lsx-grid-fluid>
-                        <lsx-row>
-                            <lsx-col size="lg-4">
-                                <lsx-card class="lsx-timeline-card" title="Programmierung" bold>
-                                    REST-Webservices entwickeln und den Quellcode hierfür strukturieren können
-                                </lsx-card>
+                        <lsx-row class="mb-0">
+                            <lsx-col size="md">
+                                <p>
+                                    Falls Sie auf Ihrem Computer keine zusätzliche Software installieren können oder sich bestimmte
+                                    Dienste über das DHBW-Netzwerk nicht erreichen lassen, können Sie auf GitHub Codespaces ausweichen.
+                                    Dort steht Ihnen Visual Studio Code mit einer vorkonfigurierten Linux-VM direkt im Browser zur Verfügung.
+                                </p>
                             </lsx-col>
-                            <lsx-col size="lg-4">
-                                <lsx-card class="lsx-timeline-card" title="OpenAPI" bold>
-                                    REST-Webservices mit OpenAPI dokumentieren und testen können
-                                </lsx-card>
+                        </lsx-row>
+    
+                        <lsx-row>
+                            <lsx-col size="md">
+                                <img src="01-intro/github-screenshot.png" class="img-thumbnail d-block" style="width: 100%; height: 100%;" />
+                            </lsx-col>
+                            <lsx-col size="md">
+                                <img src="01-intro/github-codespaces-screenshot.png" class="img-thumbnail d-block" style="width: 100%; height: 100%;" />
+                            </lsx-col>
+                        </lsx-row>
+    
+                        <lsx-row>
+                            <lsx-col size="md">
+                                <lsx-ul>
+                                    <li>
+                                        IDE und Linux-Umgebung mit vorinstallierten Werkzeugen komplett in der Cloud.
+                                    </li>
+                                    <li>
+                                        Keine Registrierung erforderlich, sofern Sie bereits einen GitHub Account besitzen.
+                                    </li>
+                                </lsx-ul>
+                            </lsx-col>
+                        </lsx-row>
+                        <lsx-row>
+                            <lsx-col size="md">
+                                <lsx-ul emoji="🔥">
+                                    <li>
+                                        <b>Die kostenlose Version besitzt ein begrenztes Kontingent von 120 Studen/Monat!</b>
+                                    </li>
+                                    <li>
+                                        <b>Die VM muss unter <a href="https://github.com/codespaces" target="_blank">https://github.com/codespaces</a> manuell gestoppt werden!</b>
+                                    </li>
+                                </lsx-ul>
                             </lsx-col>
                         </lsx-row>
                     </lsx-grid-fluid>
-                    <hr>
-                </div>
-            </div>
-        
-            <!-- Publish/Subscribe -->
-            <div class="d-flex lsx-timeline gap-3">
-                <h5 class="lsx-timeline-label">
-                    <span>Publish/Subscribe</span>
-                </h5>
-                <!-- Termin 5: Theorie zu Publish/Subscribe und MQTT -->
-                <div class="flex-grow-1">
-                    <lsx-grid-fluid>
-                        <lsx-row>
-                            <lsx-col size="lg-4">
-                                <lsx-card class="lsx-timeline-card" title="Aynchrone Kommunikation" bold>
-                                    Unterschiede zu synchronen Kommunikationsmodellen verstehen
-                                </lsx-card>
-                            </lsx-col>
-                            <lsx-col size="lg-4">
-                                <lsx-card class="lsx-timeline-card" title="Systemarchitektur" bold>
-                                    Die Systemarchitektur event-basierter Systeme verstehen
-                                </lsx-card>
-                            </lsx-col>
-                            <lsx-col size="lg-4">
-                                <lsx-card class="lsx-timeline-card" title="Anwendungsfälle" bold>
-                                    Typische Anwendungsfälle für die asynchrone Kommunukation kennen
-                                </lsx-card>
-                            </lsx-col>
-                        </lsx-row>
-                    </lsx-grid-fluid>
-                </div>
-            </div>
-        
-            <div class="d-flex lsx-timeline gap-3">
-                <!-- Termin 6: Programmieren mit MQTT -->
-                <h5 class="lsx-timeline-label"></h5>
-                <div class="flex-grow-1">
-                    <lsx-grid-fluid>
-                        <lsx-row>
-                            <lsx-col size="lg-4">
-                                <lsx-card class="lsx-timeline-card" title="MQTT" bold>
-                                    Den Funktionsumfang von MQTT zu anderen Messaging-Systemen vergleichen können
-                                </lsx-card>
-                            </lsx-col>
-                            <lsx-col size="lg-4">
-                                <lsx-card class="lsx-timeline-card" title="Programmierung" bold>
-                                    Event-basierte Systeme auf Basis von MQTT entwickeln können
-                                </lsx-card>
-                            </lsx-col>
-                        </lsx-row>
-                    </lsx-grid-fluid>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section data-title="Prüfungsaufgabe" class="centered-content">
-    <div class="d-flex flex-column flex-md-row justify-content-center gap-md-5">
-        <div class="flex-grow-1" style="width: 20em; max-width: 100%;">
-            <h3 class="dhbw-lightblue text-md-center">Lernkontrollen</h3>
-            <p class="text-md-center mb-5">Prüfung der deskriptiven Lernziele</p>
-
-            <img src="01-intro/pf-moodle.png" alt="Screenshot eines Moodle-Quizzes" class="d-block img-thumbnail shadow mb-5">
-
-            <lsx-ul emoji="📝">
-                <li>Begriffsdefinitionen</li>
-                <li>Anforderungen</li>
-                <li>Architektur</li>
-                <li>Node.js-Projekte</li>
-                <li>Web-Framework Express.js</li>
-                <li>Webservices allgemein</li>
-                <li>REST-Webservices</li>
-                <li>Publish/Subscribe</li>
-                <li>MQTT mit Node.js</li>
-            </lsx-ul>
-        </div>
-
-        <div style="border: 0px dashed lightgrey; border-right-width: 1px"></div>
-
-        <div class="flex-grow-1" style="width: 20em; max-width: 100%;">
-            <h3 class="dhbw-lightblue text-md-center">Aufgabenblatt</h3>
-            <p class="text-md-center mb-5">Prüfung der methodischen Lernziele</p>
-
-            <div style="width: 85%;">
-                <img src="01-intro/pf-blatt3.png" alt="Erste Seite des Aufgabenblatts in Moodle" class="d-block img-thumbnail shadow" style="transform: rotate(-5deg); margin-left: 10em;">
-                <img src="01-intro/pf-blatt2.png" alt="Erste Seite des Aufgabenblatts in Moodle" class="d-block img-thumbnail shadow" style="transform: rotate(2deg); margin-top: -140%; margin-left: 5em;">
-                <img src="01-intro/pf-blatt1.png" alt="Erste Seite des Aufgabenblatts in Moodle" class="d-block img-thumbnail shadow" style="transform: rotate(4deg); margin-top: -135%;">
-            </div>
-        </div>
-    </div>
-</section>
-
-<section data-title="Benötigte Software">
-    <article>
-        <lsx-tab-pages>
-            <lsx-tab-page title="Visual Studio Code">
-                <lsx-grid-fluid>
-                    <lsx-row class="mb-0">
-                        <lsx-col size="md">
-                            <p>
-                                Als Entwicklungsumgebung werden wir Visual Studio Code, da der Atom-Editor leider nicht mehr
-                                weiterentwickelt wird. 🙁 Es handelt sich um eine weit verbreitete IDE mit Unterstützung für
-                                alle gängigen Programmiersprachen und Betriebssysteme.
-                            </p>
-                        </lsx-col>
-                    </lsx-row>
-
-                    <lsx-row>
-                        <lsx-col size="md">
-                            <img src="01-intro/vscode-screenshot.png" class="img-thumbnail d-block" style="width: 100%; height: 100%;" />
-                        </lsx-col>
-                        <lsx-col size="md">
-                            <!-- <lsx-youtube class="img-thumbnail embed-responsive" video="KMxo3T_MTvY"></lsx-youtube> -->
-                            <div class="img-thumbnail embed-responsive" style="width: 100%; height: 100%;">
-                                <iframe class="d-block" style="width: 100%; height: 100%;" src="https://www.youtube-nocookie.com/embed/KMxo3T_MTvY?rel=0&amp;showinfo=0" allowfullscreen></iframe>
+                </lsx-tab-page>
+            </lsx-tab-pages>
+        </article>
+        <aside class="markdown">
+            Ein Handwerker braucht zum Arbeiten sein Werkzeug. Das ist beim Programmieren natürlich nicht anders.
+            Und genau wie beim Handwerkszeug gibt es eine geradezu unendliche Auswahl an Editoren, Frameworks,
+            Datenbanken und Servern, die man zur Entwicklung seiner Anwendungen nutzen kann. In der Vorlesung
+            haben wir uns daher auf folgende Werkzeuge festgelegt.
+    
+            ##### Visual Studio Code
+    
+            Visual Studio Code hat sich in den letzten Jahren zu einer der beliebtesten und flexibelsten IDEs
+            überhaupt entwickelt. Im Gegensatz zu klassischen IDEs wit Eclipse, NetBeans oder dem großen Bruder
+            Visual Studio, ist Visual Studio Code im Kern jedoch äußert kompakt und dank der durchgängigen Verwendung
+            von Web-Technologien leicht anpass- und erweiterbar. Ein Blick in den Extension Marketplace wird dies
+            bestätigen. 
+    
+            <lsx-info-box type="warning">
+                <b>Vorsichtig:</b> <i>A fool with a tool is still a fool.</i> Zu viele Extensions stören eher,
+                als dass Sie bei der Problemlösung helfen.
+            </lsx-info-box>
+    
+            [https://code.visualstudio.com/](https://code.visualstudio.com/){target=blank}
+    
+            ##### Node.js und npm
+    
+            Die in der Vorlesung besprochenen Konzepte sind an keine konkrete Programmiersprache gebunden.
+            Eine in jüngerer Zeit vor allem bei Webentwicklern zunehmend beliebte Sprache ist jedoch JavaScript,
+            die Node.js oder Bun inzwischen auch außeralb des Browsers läuft. In der Vorlesung werden wir daher
+            unsere jüngst erworbenen JavaScript-Kenntnisse vertiefen und JavaScript auch für die Backendprogrammierung
+            nutzen.
+    
+            [https://nodejs.org/](https://nodejs.org/){target=blank}
+    
+            ##### API-Testwerkzeug
+    
+            Während der Entwicklung ist es oft erforderlich, auf einem entfernten Host laufende Dienste zu
+            testen, noch bevor eine vollständige Clientanwendung dafür entwickelt wurde. Doch selbst wenn
+            ein dedizierter Client (der Begriff wird im nächsten Kapitel noch definiert) zur Verfügung steht,
+            kann es sinnvoll sein, einen entfernten Service direkt zu testen, um die ausgetauschten Daten
+            direkt sehen zu können. Hierfür gibt es eine Vielzahl von Werkzeugen, von denen Postman und Insomnia
+            die zwei beliebtesten, kommerziellen Varianten sind. Beide sind jedoch an ein Cloud-Abo des jeweiligen
+            Anbieters gebunden und werden inzwischen nicht mehr (Postman) oder nur sehr versteckt (Insomnia)
+            als Offline-Werkzeug angeboten.
+    
+            In der Vorlesung wollen wir uns nicht von derartigen Geschäftsgebahren abhängig machen und setzen
+            eher auf vollständig quelloffene und datenschutzkonforme Lösungen. Die folgenden Werkzeuge können
+            unter diesen Gesichtspunkten bedenkenlos empfohlen werden:
+    
+            * [httpie](https://httpie.io/){target=_blank}
+            * [bruno](https://www.usebruno.com/){target=_blank}
+            * [hoppscotch](https://hoppscotch.io/){target=_blank}
+    
+            Welches Werkzeug Sie verwenden spielt für die Vorlesung keine Rolle und hängt überwiegend von
+            persönlichen Anforderungen und Vorlieben ab. httpie und HOPPSCOTCH bieten den Vorteil, ohne
+            Installation auf der jeweiligen Seite direkt im Browser ausgeführt werden zu können. Wenn Sie
+            keine zusätzliche Software installieren wollen oder können, ist dies eine gute Wahl. Alle haben
+            jedoch gemeinsam, dass es eine vollwertige Desktopversion für alle gängigen Betriebssysteme gibt,
+            in der beliebig viele Projekte lokal verwaltet und dauerhaft gespeichert werden können. Postman
+            und Insomnia bieten diesen Vorteil leider nicht mehr.
+    
+            ##### GitHub Codespaces
+    
+            Rein optional aber durchaus eine Alternative, um die Installation lokaler Softwarepakete auf
+            Ihrem Computer zu vermeiden. Bei GitHub Codespaces handelt es sich um einen in der Cloud laufenden Ableger
+            von Visual Studio Code, der neben der IDE auch eine vollständige Linux-Umgebung mit vorinstallierten
+            Werkzeugen von Docker oder Node.js bietet. Einzige Voraussetzung hierfür ist, dass der zu bearbeitende
+            Quellcode in einem Git-Repository auf GitHub liegt. Die Anmeldung erfolgt mit dem persönlichen GitHub Account.
+            
+            Das kostenlose Kontingent umfasst 120 Stunden im Monat. Man muss aber darauf achten, die VM unter folgendem
+            Link manuell zu stoppen, damit die Zeit nicht ungenutzt abläuft!
+    
+            [https://github.com/codespaces](https://github.com/codespaces){target=blank}
+        </aside>
+    </section>
+    
+    <section data-title="Mitarbeit in der Vorlesung">
+        <article>
+            <lsx-grid-fluid>
+                <lsx-row>
+                    <lsx-col size="lg-6">
+                        <div style="height: 100%; display: flex; flex-direction: column; gap: 2em;">
+                            <lsx-info-box style="max-width: 58em;">
+                                Das didaktische Konzept der Vorlesung ist darauf ausgelegt, dass jede:r
+                                die Ziele erreichen und dabei eine (sehr) gute Note erreichen kann. Dies
+                                setzt jedoch Vorraus, die <b>Verantwortung für den eigenen Lernerfolg</b> zu übernehmen
+                                und sich sowohl in den Präsenzstunden einzubringen als auch das Selbststudium
+                                gewissenhaft zu bearbeiten. 🥴
+                            </lsx-info-box>
+                            <div>
+                                <h3 class="dhbw-lightblue">Anti-Patterns in der Vorlesung</h3>
+                                <lsx-ul emoji="💤">
+                                    <li>Nur passiv zuhören wollen</li>
+                                    <li>Erwarten, dass die Lehrperson alles vorbetet</li>
+                                    <li>Sich nicht trauen, sich zu melden bzw. mitzumachen</li>
+                                    <li>Übungszeit für Klatsch und Tratsch nutzen</li>
+                                </lsx-ul>
+                                <p style="font-style: italic">
+                                    Die Lehrperson ist kein Alleinunterhalter. 🤹 <br>
+                                    Die Vorlesung macht am meisten Spaß, wenn alle mitmachen.
+                                </p>
                             </div>
-                        </lsx-col>
-                    </lsx-row>
-
-                    <lsx-row>
-                        <lsx-col size="md">
-                            <lsx-ul>
-                                <li>
-                                    Weit verbreitete IDE für alle gängigen Betriebssysteme
-                                </li>
-                                <li>
-                                    Geschrieben in HTML und JavaScript (basierend auf der Chrome Webengine)
-                                </li>
-                                <li>
-                                    Open-Source von Microsoft (Made in Switzerland) 🇨🇭
-                                </li>
-                            </lsx-ul>
-                        </lsx-col>
-                    </lsx-row>
-                </lsx-grid-fluid>
-            </lsx-tab-page>
-
-            <lsx-tab-page title="Node.js">
-                <lsx-grid-fluid>
-                    <lsx-row class="mb-0">
-                        <lsx-col size="md">
-                            <p>
-                                Für die Backendprogrammierung werden wir Node.js als JavaScript-Laufzeitumgebung nutzen.
-                                Es handelt sich um eine weit verbreitete Runtime für nebenläufige verteilte Anwendungen
-                                auf Basis der V8-Enginge des Google Chrome Browsers.
-                            </p>
-                        </lsx-col>
-                    </lsx-row>
-
-                    <lsx-row>
-                        <lsx-col size="md">
-                            <img src="01-intro/node.js-logo.svg" class="img-thumbnail d-block" style="width: 100%; height: 100%;" />
-                        </lsx-col>
-                        <lsx-col size="md">
-                            <img src="01-intro/node.js-screenshot.png" class="img-thumbnail d-block" style="width: 100%; height: 100%;" />
-                        </lsx-col>
-                    </lsx-row>
-
-                    <lsx-row>
-                        <lsx-col size="md">
-                            <lsx-ul>
-                                <li>
-                                    Beinhaltet den Node Package Manager zur einfachen Installation aller für ein Projekt benötigten Bibliotheken
-                                </li>
-                                <li>
-                                    Liefert uns alle Build- und Testwerkzeuge, die wir während der Entwicklung benötigen
-                                </li>
-                                <li>
-                                    Beinhaltet eine komplette JavaScript-Laufzeitumgebung für die serverseitige Programmierung
-                                </li>
-                            </lsx-ul>
-                        </lsx-col>
-                    </lsx-row>
-                </lsx-grid-fluid>
-            </lsx-tab-page>
-
-            <lsx-tab-page title="API-Testwerkzeug">
-                <lsx-grid-fluid>
-                    <lsx-row class="mb-0">
-                        <lsx-col size="md">
-                            <p>
-                                Während der Entwicklung kommt es immer wieder vor, dass wir sowohl unser eigenen als auch
-                                fremden entfernte Services testen möchten. Hierfür benötigen wir einen beliebigen „API Client”,
-                                der uns hierbei unterstützt.
-                            </p>
-                        </lsx-col>
-                    </lsx-row>
-
-                    <lsx-row>
-                        <lsx-col size="md">
-                            <div class="img-thumbnail">
-                                <lsx-youtube video="Fbzmi1Q5hQU"></lsx-youtube>
+                            <div>
+                                <h3 class="dhbw-lightblue">Anti-Patterns im Selbststudium</h3>
+                                <lsx-ul emoji="📚">
+                                    <li>Erst kurz vor der nächsten Vorlesung lernen (wenn überhaupt)</li>
+                                    <li>Das Onlineskript nur grob überfliegen</li>
+                                    <li>Die Videos im Onlineskript nicht anschauen</li>
+                                    <li>Die Quizze im Onlineskript nicht machen</li>
+                                    <li>Die Aufgaben im Onlineskript nicht machen</li>
+                                    <li>Die Lernkontrollen in Moodle aufschieben</li>
+                                    <li>Das Feedbackformular in Moodle nicht ausfüllen</li>
+                                </lsx-ul>
+                                <p style="font-style: italic">
+                                    Natürlich können Sie nicht immer alle Materialien durcharbeiten. 💯 <br>
+                                    Planen Sie aber trotzdem bitte ausreichend Zeit für das Selbststudium ein.
+                                </p>
                             </div>
-                        </lsx-col>
-                        <lsx-col size="md">
-                            <div class="img-thumbnail">
-                                <lsx-youtube video="kPO8Km_EYd4"></lsx-youtube>
+                            <div>
+                                <h3 class="dhbw-lightblue">Anti-Patterns zur Portfolioprüfung</h3>
+                                <lsx-ul emoji="💻">
+                                    <li>Alle Aufgaben schon am Anfang des Semesters bearbeiten können wollen</li>
+                                    <li>Zu spät mit der Bearbeitung anfangen</li>
+                                    <li>Sich von den anderen Gruppenmitgliedern tragen lassen</li>
+                                    <li>Die Lösung der Aufgaben an ChatGPT & Co. abdrücken</li>
+                                </lsx-ul>
+                                <p style="font-style: italic">
+                                    Das Portfolio wird semesterbegleitend bearbeitet, um den Lernweg zu dokumentieren. <br>
+                                    Bei Fragen und Problemen können Sie sich jederzeit melden. Die Lehrperson beißt nicht. 🐶
+                                </p>
                             </div>
-                        </lsx-col>
-                    </lsx-row>
-
-                    <lsx-row>
-                        <lsx-col size="md">
-                            <lsx-ul>
-                                <li>
-                                    <a href="https://httpie.io/" target="_blank">httpie</a>:
-                                    Besonders leicht zu nutzen. Web-, Desktop- und Kommandozeilenversion verfügbar.
-                                </li>
-                                <li>
-                                    <a href="https://www.usebruno.com/" target="_blank">bruno</a>:
-                                    Newcommer unter den API-Clients. Collections können leicht mit Git versioniert werden.
-                                </li>
-                                <li>
-                                    <a href="https://hoppscotch.io/" target="_blank">hoppscotch</a>:
-                                    Besonders leistungsfähig vergleichbar mit den großen kommerziellen Anbietern.
-                                </li>
-                            </lsx-ul>
-                            <p>
-                                httpie und hoppscotch können direkt im Browser ausgeführt werden.
-                                Sie haben die freie Wahl. Alle drei Clients sind für die Vorlesung geeignet.
-                            </p>
-                        </lsx-col>
-                    </lsx-row>
-                </lsx-grid-fluid>
-            </lsx-tab-page>
-
-            <lsx-tab-page title="Gitpod">
-                <lsx-grid-fluid>
-                    <lsx-row class="mb-0">
-                        <lsx-col size="md">
-                            <p>
-                                Falls Sie auf Ihrem Computer keine zusätzliche Software installieren können oder sich bestimmte
-                                Dienste über das DHBW-Netzwerk nicht erreichen lassen, können Sie auf die Gitpod Online-IDE ausweichen.
-                                Diese bietet eine IDE und Linux-Umgebung direkt in Ihrem Browser.
-                            </p>
-                        </lsx-col>
-                    </lsx-row>
-
-                    <lsx-row>
-                        <lsx-col size="md">
-                            <img src="01-intro/github-screenshot.png" class="img-thumbnail d-block" style="width: 100%; height: 100%;" />
-                        </lsx-col>
-                        <lsx-col size="md">
-                            <img src="01-intro/gitpod-screenshot.png" class="img-thumbnail d-block" style="width: 100%; height: 100%;" />
-                        </lsx-col>
-                    </lsx-row>
-
-                    <lsx-row>
-                        <lsx-col size="md">
-                            <lsx-ul>
-                                <li>
-                                    IDE und Linux-Umgebung mit vorinstallierten Werkzeugen komplett in der Cloud.
-                                </li>
-                                <li>
-                                    Keine Registrierung erforderlich, sofern Sie bereits einen GitHub Account besitzen.
-                                </li>
-                                <li>
-                                    Quellcodes müssen in einem öffentlich sichtbare Git-Repository auf GitHub liegen.
-                                </li>
-                            </lsx-ul>
-                        </lsx-col>
-                    </lsx-row>
-                </lsx-grid-fluid>
-            </lsx-tab-page>
-        </lsx-tab-pages>
-    </article>
-    <aside class="markdown">
-        Ein Handwerker braucht zum Arbeiten sein Werkzeug. Das ist beim Programmieren natürlich nicht anders.
-        Und genau wie beim Handwerkszeug gibt es eine geradezu unendliche Auswahl an Editoren, Frameworks,
-        Datenbanken und Servern, die man zur Entwicklung seiner Anwendungen nutzen kann. In der Vorlesung
-        haben wir uns daher auf folgende Werkzeuge festgelegt.
-
-        ##### Visual Studio Code
-
-        Visual Studio Code hat sich in den letzten Jahren zu einer der beliebtesten und flexibelsten IDEs
-        überhaupt entwickelt. Im Gegensatz zu klassischen IDEs wit Eclipse, NetBeans oder dem großen Bruder
-        Visual Studio, ist Visual Studio Code im Kern jedoch äußert kompakt und dank der durchgängigen Verwendung
-        von Web-Technologien leicht anpass- und erweiterbar. Ein Blick in den Extension Marketplace wird dies
-        bestätigen. 
-
-        <lsx-info-box type="warning">
-            <b>Vorsichtig:</b> <i>A fool with a tool is still a fool.</i> Zu viele Extensions stören eher,
-            als dass Sie bei der Problemlösung helfen.
-        </lsx-info-box>
-
-        [https://code.visualstudio.com/](https://code.visualstudio.com/){target=blank}
-
-        ##### Node.js und npm
-
-        Die in der Vorlesung besprochenen Konzepte sind an keine konkrete Programmiersprache gebunden.
-        Eine in jüngerer Zeit vor allem bei Webentwicklern zunehmend beliebte Sprache ist jedoch JavaScript,
-        die Node.js oder Bun inzwischen auch außeralb des Browsers läuft. In der Vorlesung werden wir daher
-        unsere jüngst erworbenen JavaScript-Kenntnisse vertiefen und JavaScript auch für die Backendprogrammierung
-        nutzen.
-
-        [https://nodejs.org/](https://nodejs.org/){target=blank}
-
-        ##### API-Testwerkzeug
-
-        Während der Entwicklung ist es oft erforderlich, auf einem entfernten Host laufende Dienste zu
-        testen, noch bevor eine vollständige Clientanwendung dafür entwickelt wurde. Doch selbst wenn
-        ein dedizierter Client (der Begriff wird im nächsten Kapitel noch definiert) zur Verfügung steht,
-        kann es sinnvoll sein, einen entfernten Service direkt zu testen, um die ausgetauschten Daten
-        direkt sehen zu können. Hierfür gibt es eine Vielzahl von Werkzeugen, von denen Postman und Insomnia
-        die zwei beliebtesten, kommerziellen Varianten sind. Beide sind jedoch an ein Cloud-Abo des jeweiligen
-        Anbieters gebunden und werden inzwischen nicht mehr (Postman) oder nur sehr versteckt (Insomnia)
-        als Offline-Werkzeug angeboten.
-
-        In der Vorlesung wollen wir uns nicht von derartigen Geschäftsgebahren abhängig machen und setzen
-        eher auf vollständig quelloffene und datenschutzkonforme Lösungen. Die folgenden Werkzeuge können
-        unter diesen Gesichtspunkten bedenkenlos empfohlen werden:
-
-        * [httpie](https://httpie.io/){target=_blank}
-        * [bruno](https://www.usebruno.com/){target=_blank}
-        * [hoppscotch](https://hoppscotch.io/){target=_blank}
-
-        Welches Werkzeug Sie verwenden spielt für die Vorlesung keine Rolle und hängt überwiegend von
-        persönlichen Anforderungen und Vorlieben ab. httpie und HOPPSCOTCH bieten den Vorteil, ohne
-        Installation auf der jeweiligen Seite direkt im Browser ausgeführt werden zu können. Wenn Sie
-        keine zusätzliche Software installieren wollen oder können, ist dies eine gute Wahl. Alle haben
-        jedoch gemeinsam, dass es eine vollwertige Desktopversion für alle gängigen Betriebssysteme gibt,
-        in der beliebig viele Projekte lokal verwaltet und dauerhaft gespeichert werden können. Postman
-        und Insomnia bieten diesen Vorteil leider nicht mehr.
-
-        ##### Gitpod
-
-        Rein optional aber durchaus eine Alternative, um die Installation lokaler Softwarepakete auf
-        Ihrem Computer zu vermeiden. Bei Gitpod handelt es sich um einen in der Cloud laufenden Ableger
-        von Visual Studio Code, der neben der IDE auch eine vollständige Linux-Umgebung mit vorinstallierten
-        Werkzeugen von Docker oder Node.js bietet. Einzige Voraussetzung hierfür ist, dass der zu bearbeitende
-        Quellcode in einem öffentlich sichtbaren Git-Repository auf GitHub liegt. Denn dann kann Gitpod für
-        persönliche Projekte kostenlos genutzt werden. Die Anmeldung erfolgt mit dem persönlichen GitHub Account.
-        Zwar handelt es sich um ein kommerzielles Angebot, die Plattform ist jedoch vollständig quelloffen.
-
-        [https://gitpod.io/](https://gitpod.io/){target=blank}
-    </aside>
+                        </div>
+                    </lsx-col>
+                    <lsx-col size="lg">
+                        <img src="01-intro/fernsehen.jpg" class="d-block w-100" />
+    
+                        <small>
+                            <small>
+                                Bildnachweis:
+                                <a href="https://pixabay.com/illustrations/tv-watch-gawk-watch-tv-eve-1015426/" target="_blank">Pixabay: Peggy_Marco</a>
+                            </small>
+                        </small>
+                    </lsx-col>
+                </lsx-row>
+            </lsx-grid-fluid>
+        </article>
+    </section>
 </section>
