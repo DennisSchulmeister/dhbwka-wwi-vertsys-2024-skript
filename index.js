@@ -116,8 +116,9 @@ window.addEventListener("load", async () => {
                 labelQuizPoints: "{1} von {2}",
                 labelQuizEvaluate: "Bewerten",
                 labelQuizNewTry: "Neuer Versuch",
-                githubEditUrlPrefix: "https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2024-quellcodes/tree/main/",
+                githubEditUrlPrefix: "https://codespaces.new/DennisSchulmeister/dhbwka-wwi-vertsys-2024-quellcodes/tree/",
                 githubPagesUrlPrefix: "https://dennisschulmeister.github.io/dhbwka-wwi-vertsys-2024-quellcodes/",
+                githubEditOnOpen: url => {alert(`Der Quellcode befindet sich im Verzeichnis '${decodeURI(url)}'!`)},
             }),
             HighlightJs: new LsPluginHighlightJs({
                 languages: {
