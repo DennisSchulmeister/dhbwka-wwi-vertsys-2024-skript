@@ -50,15 +50,15 @@
         kluge Architektur angewiesen, um zuverlässig, sicher und skalierbar zu funktionieren.
         In diesem Kapitel tauchen wir deshalb in die Grundlagen und Architekturmuster verteilter
         Systeme ein, um zu verstehen, wie moderne Anwendungen aufgebaut sind und welche Herausforderungen
-        sie meistern müssen.  
-        
+        sie meistern müssen.
+
         Gleich zu Beginn klären wir die entscheidende Frage: Was unterscheidet ein verteiltes System von einer
         verteilten Anwendung? Woran erkennt man eine verteilte Architektur, und warum setzen so viele moderne
         Anwendungen auf diesen Ansatz? Dabei werden wir nicht nur die Definition betrachten, sondern auch zentrale
         Anforderungen wie *Transparenz*, *Skalierbarkeit* und *Sicherheit* verstehen. Dabei werden wir auch das
         *CAP-Theorem* betrachten und anhand praktischer Beispiele sehen, welche strategischen Entscheidungen
         Entwickler*innen treffen müssen.
-        
+
         Nach den Grundlagen widmen wir uns typischen *Architekturmustern*. Eine verteilte Anwendung besteht aus mehreren
         Komponenten, die über Netzwerke miteinander kommunizieren. Aber wie genau funktioniert das? Ein Schlüsselkonzept
         ist der *TCP/IP-Protokollstapel*, der als Grundlage fast aller modernen Netzwerkanwendungen dient. Aber nicht nur
@@ -66,7 +66,7 @@
         daher kurz mit verschiedenen Rollen und dann mit der *Microservice-Architektur* beschäftigen. Insbesondere werden
         wir sehen, warum sich Unternehmen zunehmend für diesen Ansatz entscheiden und welche Vorteile er gegenüber monolithischen
         Systemen hat.
-        
+
         ##### Warum ist dieses Kapitel wichtig?
 
         Die Architektur eines verteilten Systems ist entscheidend für dessen Erfolg. Wer die Mechanismen dahinter versteht,
@@ -82,142 +82,230 @@
 <section data-use-template="teilkapitel" data-titel="Allgemeine Konzepte"></section>
 
 <section data-title="Verteilte Systeme und Anwendungen">
-    <section data-title="Alltäglicher Sprachgebrauch" class="centered-content">
-        <lsx-grid-fluid class="p-0 limited-width2">
-            <lsx-row>
-                <lsx-col size="md-8">
-                    <lsx-youtube video="UWU14-EK9CE" aspect-ratio="16x9" class="w-100 mb-0"></lsx-youtube>
+    <section data-title="Begriffsdefinitionen" class="centered-content">
+        <div class="limited-width markdown fst-italic">
+            Ein **verteiltes System** ist ein System, in dem sich Hardware- und Software-Komponenten
+            auf **mehreren, voneinander unabhängigen Computern** befinden können, und nur über den
+            **Austausch von Nachrichten** miteinander kommunizieren, um ihre Aktionen zu koordinieren.
 
-                    <small>
-                        <small>
-                            Quelle: Filmausschnitt aus „Star Trek der Film (1979)”
-                        </small>
-                    </small>
-                </lsx-col>
-                <lsx-col size="md" class="markdown lead centered-content align-items-start">
-                    Jeden Tag sprechen wir von Systemen:
+            Eine **verteilte Anwendung** ist eine Anwendung, die ein verteiltes System zur Lösung des
+            Anwendungsproblems nutzt und aus **verschiedenen Software-Komponenten** besteht, die untereinander
+            und mit dem Benutzer kommunizieren.
+        </div>
 
-                    <lsx-ul emoji="🚀">
-                        <li><i>„Du musst dich am System anmelden.”</i></li>
-                        <li><i>„Das ist im System gespeichert.”</i></li>
-                        <li><i>„Mein Betriebssystem hängt mal wieder.”</i></li>
+        <div class="limited-width2">
+            <lsx-tab-pages>
+                <lsx-tab-page title="Ausgangslage">
+                    <lsx-grid-fluid class="p-0">
+                        <lsx-row>
+                            <lsx-col size="md-8">
+                                <lsx-youtube video="UWU14-EK9CE" aspect-ratio="16x9" class="w-100 mb-0"></lsx-youtube>
+
+                                <small>
+                                    <small>
+                                        Quelle: Filmausschnitt aus „Star Trek der Film (1979)”
+                                    </small>
+                                </small>
+                            </lsx-col>
+                            <lsx-col size="md" class="markdown lead centered-content align-items-start">
+                                Jeden Tag sprechen wir von Systemen:
+
+                                <lsx-ul emoji="🚀">
+                                    <li><i>„Du musst dich am System anmelden.”</i></li>
+                                    <li><i>„Das ist im System gespeichert.”</i></li>
+                                    <li><i>„Mein Betriebssystem hängt mal wieder.”</i></li>
+                                </lsx-ul>
+
+                                Doch was ist überhaupt ein „System“
+                                <span style="color: crimson; text-shadow: 1px 1px 1px rgba(0,0,0,0.5);">⁉️</span>
+                            </lsx-col>
+                        </lsx-row>
+                    </lsx-grid-fluid>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="System">
+                    <blockquote class="blockquote fst-italic">
+                        <p>
+                            Als System (altgriechisch sýstēma „aus mehreren Einzelteilen zusammengesetztes Ganzes“)
+                            wird im Allgemeinen ein abgrenzbares, natürliches oder künstliches „Gebilde“ bezeichnet,
+                            das aus verschiedenen Komponenten mit unterschiedlichen Eigenschaften besteht, die aufgrund
+                            bestimmter geordneter Beziehungen untereinander als gemeinsames Ganzes betrachtet werden
+                            (können).
+                        </p>
+                        <figcaption class="blockquote-footer">
+                            <cite>Wikipedia zum Begriff „System”</cite>
+                        </figcaption>
+                    </blockquote>
+
+                    <h4>Wichtige Stichworte dieser Definition</h4>
+
+                    <lsx-ul emoji="☑️">
+                        <li>Aus mehren Einzelteilen zusammengesetztes Ganzes</li>
+                        <li>Abgrenzbares Gebilde aus verschienden Komponenten</li>
+                        <li>Geordnete Beziehungen untereinander</li>
+                        <li>Als gemeinsames Ganzes betrachtet</li>
                     </lsx-ul>
+                </lsx-tab-page>
 
-                    Doch was ist überhaupt ein „System“
-                    <span style="color: crimson; text-shadow: 1px 1px 1px rgba(0,0,0,0.5);">⁉️</span>
-                </lsx-col>
-            </lsx-row>
-        </lsx-grid-fluid>
-    </section>
+                <lsx-tab-page title="Verteiltes System">
+                    <lsx-grid-fluid class="p-0 mb-5">
+                        <lsx-row>
+                            <lsx-col size="md-5">
+                                <lsx-card title="Bekannte Definitionen" bold class="h-100">
+                                    <blockquote class="blockquote fst-italic mb-4 fs-6">
+                                        <p>
+                                            A distributed system stops you from getting any work done because computer crashed
+                                            that you didn't even know it existed.
+                                        </p>
+                                        <figcaption class="blockquote-footer">
+                                            <cite>Scherzhafte Definition nach Leslie Lamport</cite>
+                                        </figcaption>
+                                    </blockquote>
 
-    <section data-title="Der Systembegriff allgemein" class="centered-content">
-        <div class="limited-width">
-            <blockquote class="blockquote fst-italic">
-                <p>
-                    Als System (altgriechisch sýstēma „aus mehreren Einzelteilen zusammengesetztes Ganzes“)
-                    wird im Allgemeinen ein abgrenzbares, natürliches oder künstliches „Gebilde“ bezeichnet,
-                    das aus verschiedenen Komponenten mit unterschiedlichen Eigenschaften besteht, die aufgrund
-                    bestimmter geordneter Beziehungen untereinander als gemeinsames Ganzes betrachtet werden
-                    (können).
-                </p>
-                <figcaption class="blockquote-footer">
-                    <cite>Wikipedia zum Begriff „System”</cite>
-                </figcaption>
-            </blockquote>
+                                    <blockquote class="blockquote fst-italic fs-6">
+                                        <p>
+                                            A distributed system is a collection of [computers] that appears to its users as a single
+                                            coherent system.
+                                        </p>
+                                        <figcaption class="blockquote-footer">
+                                            <cite>Steen & Tanenbaum</cite>
+                                        </figcaption>
+                                    </blockquote>
+                                </lsx-card>
+                            </lsx-col>
 
-            <h4>Wichtige Stichworte dieser Definition</h4>
+                            <lsx-col size="md">
+                                <lsx-card title="Merkmale verteilter Systeme" bold class="h-100">
+                                    <lsx-ul emoji="☑️">
+                                        <li>Infrastruktur bestehend aus Hardware und Software für verteiltes Rechnen.</li>
+                                        <li>Bestehend aus mehreren, voneinander unabhängig agierenden Computern.</li>
+                                        <li>Datenaustausch über ein Netzwerk ohne geteilten Hauptspeicher.</li>
+                                        <li>Die Knoten arbeiten zusammen, um eine übergeordnete Aufgabe zu erfüllen.</li>
+                                        <li>Das System stellt Ressourcen, Rechenleistung oder Dienste zur Verfügung.</li>
+                                        <li>Das System sorgt zusätzlich für Skalierbarkeit, Redundanz und Fehlertoleranz.</li>
+                                    </lsx-ul>
+                                </lsx-card>
+                            </lsx-col>
+                        </lsx-row>
+                    </lsx-grid-fluid>
+                </lsx-tab-page>
 
-            <lsx-ul emoji="☑️">
-                <li>Aus mehren Einzelteilen zusammengesetztes Ganzes</li>
-                <li>Abgrenzbares Gebilde aus verschienden Komponenten</li>
-                <li>Geordnete Beziehungen untereinander</li>
-                <li>Als gemeinsames Ganzes betrachtet</li>
-            </lsx-ul>
+                <lsx-tab-page title="Verteilte Anwendung">
+                    <lsx-grid-fluid class="p-3 mb-4">
+                        <lsx-row>
+                            <lsx-col size="md-7">
+                                <lsx-card title="Merkmale verteilter Anwendungen" bold class="h-100">
+                                    <lsx-ul emoji="☑️">
+                                        <li>Fachspezifische Software, die auf einem verteilten System läuft.</li>
+                                        <li>Nutzt die Ressourcen des verteilten Systems, um ihre Funktionen bereitzustellen.</li>
+                                        <li>Kann hierfür prinzipiell auf mehreren Rechnern ausgeführt werden.</li>
+                                        <li>Kommuniziert durch den Austausch von Nachrichten über ein Netzwerk.</li>
+                                    </lsx-ul>
+                                </lsx-card>
+                            </lsx-col>
+                            <lsx-col size="md">
+                                <lsx-card title="Zusammenfassung der Abgrenzung" bold class="h-100 markdown">
+                                **Verteiltes System:** Die Infrastruktur (Hardware, Netzwerk, Software, Middleware),
+                                die verteiltes Rechnen ermöglicht.
+
+                                **Verteilte Anwendung:** Eine Software, die diese Infrastruktur
+                                nutzt, um über mehrere Rechner verteilt zu laufen. {.mb-0}
+                                </lsx-card>
+                            </lsx-col>
+                        </lsx-row>
+                    </lsx-grid-fluid>
+
+                    <div class="limited-width">
+                        <img src="02-architektur/verteilte-anwendung.svg" alt="" class="d-block w-100">
+                    </div>
+                </lsx-tab-page>
+            </lsx-tab-pages>
         </div>
+
     </section>
 
-    <section data-title="Definition: Verteiltes System" class="centered-content">
+    <section data-title="Beispiele für verteilte Anwendungen" class="centered-content">
         <div class="limited-width2">
-            <lsx-grid-fluid class="p-0 mb-5">
+            <p class="dhbw-text-columns mb-5" detail-content>
+                Verteilte Anwendungen begegnen uns überall im Alltag. Egal ob World Wide Web, E-Mail, Chat,
+                Kurznachrichtendienst, File Sharing, Videostreaming, Internet of Things oder KI-Assistent.
+                Kaum eine Anwendung läuft heute noch vollständig stand-alone auf dem lokalen Endgerät.
+                Die Frage müsste heute daher eigentlich lauten: <b>„Was ist eigentlich keine verteilte Anwendung?”</b>
+                Ohne Zweifel leben wir in einer vernetzten Welt, in der immer mehr Computer, Smartphones,
+                Smart TVs und viele andere Gegenstände miteinander verbunden und permanent online sind.
+            </p>
+
+            <lsx-grid-fluid class="p-0">
                 <lsx-row>
-                    <lsx-col size="md-5">
-                        <lsx-card title="Bekannte Definitionen" bold class="h-100">
-                            <blockquote class="blockquote fst-italic mb-4 fs-6">
-                                <p>
-                                    A distributed system stops you from getting any work done because computer crashed
-                                    that you didn't even know it existed.
-                                </p>
-                                <figcaption class="blockquote-footer">
-                                    <cite>Scherzhafte Definition nach Leslie Lamport</cite>
-                                </figcaption>
-                            </blockquote>
-    
-                            <blockquote class="blockquote fst-italic fs-6">
-                                <p>
-                                    A distributed system is a collection of [computers] that appears to its users as a single
-                                    coherent system.
-                                </p>
-                                <figcaption class="blockquote-footer">
-                                    <cite>Steen & Tanenbaum</cite>
-                                </figcaption>
-                            </blockquote>
-                        </lsx-card>
-                    </lsx-col>
-    
                     <lsx-col size="md">
-                        <lsx-card title="Merkmale verteilter Systeme" bold class="h-100">
-                            <lsx-ul emoji="☑️">
-                                <li>Infrastruktur bestehend aus Hardware und Software für verteiltes Rechnen.</li>
-                                <li>Bestehend aus mehreren, voneinander unabhängig agierenden Computern.</li>
-                                <li>Datenaustausch über ein Netzwerk ohne geteilten Hauptspeicher.</li>
-                                <li>Die Knoten arbeiten zusammen, um eine übergeordnete Aufgabe zu erfüllen.</li>
-                                <li>Das System stellt Ressourcen, Rechenleistung oder Dienste zur Verfügung.</li>
-                                <li>Das System sorgt zusätzlich für Skalierbarkeit, Redundanz und Fehlertoleranz.</li>
-                            </lsx-ul>
-                        </lsx-card>
+                        <img src="02-architektur/alltag-internet.png" class="img-thumbnail d-block" style="width: 100%" />
+                        Sämtliche Internetdienste
+                        <p class="dhbw-fontsize-tiny">
+                            <small>
+                                Bildnachweis: <a href="https://pixabay.com/illustrations/email-newsletter-marketing-online-3249062/" target="_blank">Pixabay: ribkhan</a>
+                            </small>
+                        </p>
+                    </lsx-col>
+                    <lsx-col size="md">
+                        <img src="02-architektur/alltag-mobile.jpg" class="img-thumbnail d-block" style="width: 100%" />
+                        Mobile Kommunikation
+                        <p class="dhbw-fontsize-tiny">
+                            <small>
+                                Bildnachweis: <a href="https://pixabay.com/photos/communication-communicate-3095538/" target="_blank">Pixabay: Bru-nO</a>
+                            </small>
+                        </p>
+                    </lsx-col>
+                </lsx-row>
+                <lsx-row>
+                    <lsx-col size="md">
+                        <img src="02-architektur/alltag-forschung.jpg" class="img-thumbnail d-block" style="width: 100%" />
+                        Forschung und Wissenschaft
+                        <p class="dhbw-fontsize-tiny">
+                            <small>
+                                Bildnachweis: <a href="https://pixabay.com/photos/moon-landing-apollo-11-nasa-60582/" target="_blank">Pixabay: WikiImages</a>
+                            </small>
+                        </p>
+                    </lsx-col>
+                    <lsx-col size="md">
+                        <img src="02-architektur/alltag-vod.jpg" class="img-thumbnail d-block" style="width: 100%" />
+                        Video-on-Demand
+                        <p class="dhbw-fontsize-tiny">
+                            <small>
+                                Bildnachweis: <a href="https://unsplash.com/photos/ngMtsE5r9eI" target="_blank">Unsplash: jenskreuter</a>
+                            </small>
+                        </p>
+                    </lsx-col>
+                </lsx-row>
+                <lsx-row>
+                    <lsx-col size="md">
+                        <img src="02-architektur/alltag-autonomes-fahren.jpg" class="img-thumbnail d-block" style="width: 100%" />
+                        Autonomes Fahren
+                    </lsx-col>
+                    <lsx-col size="md">
+                        <img src="02-architektur/alltag-iot.jpg" class="img-thumbnail d-block" style="width: 100%" />
+                        Internet of Things
+                        <p class="dhbw-fontsize-tiny">
+                            <small>
+                                Bildnachweis: <a href="https://pixabay.com/photos/smarthome-smart-house-smart-4447520/" target="_blank">Pixabay: haus_automation</a>
+                            </small>
+                        </p>
                     </lsx-col>
                 </lsx-row>
             </lsx-grid-fluid>
-        </div>
-
-        <div class="limited-width">
-            <img src="02-architektur/verteiltes-system.jpg" alt="" class="d-block w-100">
-        </div>
-    </section>
-
-    <section data-title="Definition: Verteilte Anwendung" class="centered-content">
-        <div class="limited-width2">
-            <lsx-grid-fluid class="p-3 mb-4">
-                <lsx-row>
-                    <lsx-col size="md-7">
-                        <lsx-card title="Merkmale verteilter Anwendungen" bold class="h-100">
-                            <lsx-ul emoji="☑️">
-                                <li>Fachspezifische Software, die auf einem verteilten System läuft.</li>
-                                <li>Nutzt die Ressourcen des verteilten Systems, um ihre Funktionen bereitzustellen.</li>
-                                <li>Kann hierfür prinzipiell auf mehreren Rechnern ausgeführt werden.</li>
-                                <li>Die Software-Komponenten kommunizieren über den Austausch von Nachrichten.</li>
-                            </lsx-ul>
-                        </lsx-card>
-                    </lsx-col>
-                    <lsx-col size="md">
-                        <lsx-card title="Zusammenfassung der Abgrenzung" bold class="h-100 markdown">
-                          **Verteiltes System:** Die Infrastruktur (Hardware, Netzwerk, Software, Middleware),
-                          die verteiltes Rechnen ermöglicht.
-                  
-                          **Verteilte Anwendung:** Eine Software, die diese Infrastruktur
-                          nutzt, um über mehrere Rechner verteilt zu laufen. {.mb-0}
-                        </lsx-card>
-                    </lsx-col>
-                </lsx-row>
-            </lsx-grid-fluid>
-        </div>
-
-        <div class="limited-width">
-            <img src="02-architektur/verteilte-anwendung.svg" alt="" class="d-block w-100">
         </div>
     </section>
 
     <section data-title="Beispiele für verteilte Systeme" class="centered-content">
+        <div class="limited-width">
+            <p class="mb-5" detail-content>
+                Häufig werden die Begriffe „verteiltes System” und „verteilte Anwendung” synonym
+                als Bezeichnung für die Anwendung gebraucht. Streng genommen handelt es sich aber
+                nur bei der Anwendung um den für die Benutzer:innen sichtbaren Teil. Das verteilte
+                System stellt hingegen im weitesten Sinne die Infrastruktur, auf der verteilte
+                Anwendungen laufen.
+            </p>
+        </div>
+
         <div class="centered-content flex-row flex-wrap gap-3">
             <!-- Das Internet -->
             <lsx-modal>
@@ -309,199 +397,845 @@
                     </lsx-card>
                 </lsx-content>
             </lsx-modal>
-
-            <!-- MIDI -->
-            <lsx-modal>
-                <lsx-thumbnail style="height: 18em;" class="mw-100">
-                    <img src="02-architektur/midi.png" class="d-block h-100 mw-100 dhbw-thumbnail"/>
-                </lsx-thumbnail>
-                <lsx-content>
-                    <lsx-card title="Musical Instrument Digital Interface" bold class="mh-100">
-                        <lsx-card-body class="overflow-auto">
-                            <p class="lead mb-4" style="text-align: justify;">
-                                <a href="https://de.wikipedia.org/wiki/MIDI" target="_blank">MIDI</a>
-                                ist eine 1982 eingeführte Digitalschnittstelle zur Verbindung elektronischer Musikgeräte.
-                                Ursprünglich zur herstellerübergreifenden Verbindung von Synthesizern und Master-Keyboards vorgesehen,
-                                können damit heute alle möglichen Geräte gesteuert werden. Technisch gesehen beinhalten die Geräte
-                                hierfür einen eingebetteten Mikroprozessor, um MIDI-Nachrichten senden und empfangen zu können.
-                                Die Nachrichten selbst sind überwiegend drei Bytes lang und kodieren musikalische Ereignisse wie
-                                das Spielen einer Note oder Drücken des Haltepedals.
-                            </p>
-                            <!-- <lsx-youtube class="img-thumbnail embed-responsive" video="Kpzhh9_5iqB0"></lsx-youtube> -->
-                            <div class="centered-content">
-                                <div class="embed-responsive ratio ratio-16x9 limited-width border">
-                                    <iframe class="d-block" src="https://www.youtube-nocookie.com/embed/pzhh9_5iqB0?rel=0&amp;showinfo=0" allowfullscreen></iframe>
-                                </div>
-                            </div>
-                        </lsx-card-body>
-                    </lsx-card>
-                </lsx-content>
-            </lsx-modal>
-        </div>
-    </section>
-
-    <section data-title="Beispiele für verteilte Anwendungen" class="centered-content">
-        <div class="limited-width2">
-            <p class="dhbw-text-columns mb-5" detail-content>
-                Auch wenn wir es inzwischen kaum noch merken, begleiten verteilte Systeme und Anwendungen
-                schon seit langem unseren Alltag. Wie selbstverständlich surfen wir im Internet, teilen
-                Bilder online oder verschicken Kurznachrichten mit dem Smartphone. Abends streamen wir dann
-                die neuste Folge unserer Lieblingsserie und geht es nach dem Willen der Hersteller, steuern
-                wir schon bald sämtliche Haushaltsgeräte ganz bequem per Sprachbefehl vom Sofa aus, optimieren
-                den Straßenverkehr mit vernetzten Fahrzeugen und überwachen unsere Umwelt mit immer mehr IoT-Devices.
-                Ohne Zweifel leben wir in einer vernetzten Welt, in der immer mehr Computer, Smartphones,
-                Smart TVs und viele andere Gegenstände miteinander verbunden sind.
-            </p>
-
-            <lsx-grid-fluid class="p-0">
-                <lsx-row>
-                    <lsx-col size="md">
-                        <img src="02-architektur/alltag-internet.png" class="img-thumbnail d-block" style="width: 100%" />
-                        Sämtliche Internetdienste
-                        <p class="dhbw-fontsize-tiny">
-                            <small>
-                                Bildnachweis: <a href="https://pixabay.com/illustrations/email-newsletter-marketing-online-3249062/" target="_blank">Pixabay: ribkhan</a>
-                            </small>
-                        </p>
-                    </lsx-col>
-                    <lsx-col size="md">
-                        <img src="02-architektur/alltag-mobile.jpg" class="img-thumbnail d-block" style="width: 100%" />
-                        Mobile Kommunikation
-                        <p class="dhbw-fontsize-tiny">
-                            <small>
-                                Bildnachweis: <a href="https://pixabay.com/photos/communication-communicate-3095538/" target="_blank">Pixabay: Bru-nO</a>
-                            </small>
-                        </p>
-                    </lsx-col>
-                </lsx-row>
-                <lsx-row>
-                    <lsx-col size="md">
-                        <img src="02-architektur/alltag-forschung.jpg" class="img-thumbnail d-block" style="width: 100%" />
-                        Forschung und Wissenschaft
-                        <p class="dhbw-fontsize-tiny">
-                            <small>
-                                Bildnachweis: <a href="https://pixabay.com/photos/moon-landing-apollo-11-nasa-60582/" target="_blank">Pixabay: WikiImages</a>
-                            </small>
-                        </p>
-                    </lsx-col>
-                    <lsx-col size="md">
-                        <img src="02-architektur/alltag-vod.jpg" class="img-thumbnail d-block" style="width: 100%" />
-                        Video-on-Demand
-                        <p class="dhbw-fontsize-tiny">
-                            <small>
-                                Bildnachweis: <a href="https://unsplash.com/photos/ngMtsE5r9eI" target="_blank">Unsplash: jenskreuter</a>
-                            </small>
-                        </p>
-                    </lsx-col>
-                </lsx-row>
-                <lsx-row>
-                    <lsx-col size="md">
-                        <img src="02-architektur/alltag-autonomes-fahren.jpg" class="img-thumbnail d-block" style="width: 100%" />
-                        Autonomes Fahren
-                    </lsx-col>
-                    <lsx-col size="md">
-                        <img src="02-architektur/alltag-iot.jpg" class="img-thumbnail d-block" style="width: 100%" />
-                        Internet of Things
-                        <p class="dhbw-fontsize-tiny">
-                            <small>
-                                Bildnachweis: <a href="https://pixabay.com/photos/smarthome-smart-house-smart-4447520/" target="_blank">Pixabay: haus_automation</a>
-                            </small>
-                        </p>
-                    </lsx-col>
-                </lsx-row>
-            </lsx-grid-fluid>
         </div>
     </section>
 </section>
 
-<section data-title="Anforderungen an verteilte Systeme">
-    <section data-title="Allgemeine Anforderungen" class="centered-content">
-        <div class="limited-width2">
-            <p class="mb-4" detail-content>
-                Die Auswahl geeigneter Architektur-, Kommunikations- und Programmiermodelle hängt sehr stark
-                von den Anforderungen des jeweiligen Systems ab bzw. wie diese gewichtet werden. Die nachfolgende
-                Übersicht zeigt die wesentlichen Aspekte, die hierbei berücksichtigt werden müssen. Doch auch
-                mögliche Problemsituationen müssen, wie wir gleich noch sehen werden, in Betracht gezogen werden,
-                da jedes Modell wie so oft eine Verbesserung im einen und einen Kompromiss im anderen Bereich
-                mit sich bringt.
-            </p>
+<!--
+<section data-title="Ein Computer kommt selten alleine">
+    TODO
+</section>
+-->
 
-            <lsx-grid-fluid class="p-0">
-                <lsx-row>
-                    <lsx-col size="md" class="mb-3 mb-md-0">
-                        <lsx-card title="Optimale Ressourcennutzung" bold img="02-architektur/anforderung-ressourcennutzung.jpg" class="h-100">
-                            Das System muss effizient mit den Ressourcen umgehen und möglichst viele Ressourcen
-                            für die eigentliche Anwendung zur Verfügung stellen. Die Anwendung muss ebenfalls
-                            intelligent damit umgehen und sie gut nutzen.
-                        </lsx-card>
-                    </lsx-col>
-                    <lsx-col size="md">
-                        <lsx-card title="Stabilität und Fehlertoleranz" bold img="02-architektur/anforderung-stabilitaet.jpg" class="h-100">
-                            Programmabstürze und unvorhersehbares Verhalten sind unbedingt zu vermeiden.
-                            Beim Programmieren muss man daher neben den fachlichen Fehlern auch die Fehler
-                            berücksichtigen, die sich aus der Verteilung ergeben.
-                        </lsx-card>
-                    </lsx-col>
-                </lsx-row>
-                <lsx-row>
-                    <lsx-col size="md" class="mb-3 mb-md-0">
-                        <lsx-card title="Einfache Skalierbarkeit" bold img="02-architektur/anforderung-skalierbarkeit.jpg" class="h-100">
-                            Es muss einfach möglich sein, die Leistung des Systems zu erhöhen oder diese zu reduzieren,
-                            wenn sie nicht mehr benötigt wird. Dies kann je nach System automatisch oder manuell erfolgen.
-                        </lsx-card>
-                    </lsx-col>
-                    <lsx-col size="md">
-                        <lsx-card title="Einfache Nutzung (Transparenz)" bold img="02-architektur/anforderung-transparenz.jpg" class="h-100">
-                            Zumindest für den Anwender sollte die inheränte Komplexität des Systems verborgen bleiben.
-                            Entwickler und Administratoren freuen sich aber auch, wenn sie sich nicht um jede Kleinigkeit
-                            kümmern müssen.
-                        </lsx-card>
-                    </lsx-col>
-                </lsx-row>
-                <lsx-row>
-                    <lsx-col size="md" class="mb-3 mb-md-0">
-                        <lsx-card title="Einfache Erweiterbarkeit" bold img="02-architektur/anforderung-erweiterbarkeit.jpg" class="h-100">
-                            Die Architektur muss flexibel genug sein, um einzelne Teile jederzeit austauschen oder
-                            verbessern zu können.
-                        </lsx-card>
-                    </lsx-col>
-                    <lsx-col size="md">
-                        <lsx-card title="Sicherheit" bold img="02-architektur/anforderung-sicherheit.jpg" class="h-100">
-                            Die Vertraulichkeit, Integrität und Authentizität des Systems und seiner Daten muss
-                            gewährleistet bleiben.
-                        </lsx-card>
-                    </lsx-col>
-                </lsx-row>
-                <lsx-row>
-                    <lsx-col size="md">
-                        <small>
-                            <small>
-                                Bildnachweise:
-                                <a href="https://pixabay.com/en/wallet-tape-measure-economical-levy-2383496/" target="_blank">Pixabay: Myriams-Fotos</a>,
-                                <a href="https://pixabay.com/en/house-of-cards-fragile-patience-763246/" target="_blank">Pixabay: wilhei</a>,
-                                <a href="https://pixabay.com/en/mixer-fader-digital-console-1631398/" target="_blank">Pixabay: michaelmep</a>,
-                                <a href="https://pixabay.com/en/glass-water-napkin-sky-reflection-2875091/" target="_blank">Pixabay: Michael-T</a>,
-                                <a href="https://pixabay.com/en/floor-plan-blueprint-house-home-1474454/" target="_blank">Pixabay: ElasticComputerFarm</a>,
-                                <a href="https://pixabay.com/en/building-cctv-door-female-ladies-1839464/" target="_blank">Pixabay: Pexels</a>
-                            </small>
-                        </small>
-                    </lsx-col>
-                </lsx-row>
-            </lsx-grid-fluid>
-        </div>
+<!--
+<section data-title="Was bedeutet Nachrichtenaustausch?">
+    TODO
+</section>
+-->
+
+<section data-title="Kommunikation über das Internet">
+    <section data-title="Beteiligte Komponenten">
+        <article class="centered-content">
+            <div class="limited-width">
+                <div class="markdown mb-4" detail-content>
+                    Die überwiegende Mehrheit der verteilten Anwendungen laufen heute über das Internet oder nutzen zumindest
+                    den TCP/IP-Protokollstapel. Das verteilte System besteht in diesem Fall aus einer beliebigen Anzahl von
+                    Rechnerknoten mit einem netzwerkfähigen Betriebssystem, die über untereinander Nachrichten austauschen können.
+                    Die auf den Rechnern laufenden Programmkomponenten bilden in ihrer Gesamtheit die eigentliche verteilte
+                    Anwendung.
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" id="tcpip-details-switch">
+                            <label class="form-check-label" for="tcpip-details-switch">Details anzeigen</label>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <img src="02-architektur/tcpip-stack1.png" id="tcpip-stack1" class="d-block w-100" alt="Vereinfachter schematischer Aufbau eines verteilten Systems">
+                        <img src="02-architektur/tcpip-stack2.png" id="tcpip-stack2" class="d-block w-100 hidden" alt="Vereinfachter schematischer Aufbau eines verteilten Systems">
+                    </div>
+                </div>
+
+                <div id="tcpip-stack3" class="markdown hidden" detail-content>
+                    Der Netzwerk-Stack des Betriebssystems wird grob wie folgt unterteilt:
+
+                    * **Netzwerkschicht:** Dient der Anbindung an das physikalische Netzwerk, z.B. Ethernet oder WiFi.
+
+                    * **Vermittlungsschicht:** Dient der Adressierung der Rechnerknoten und dem Routing von Datenpaketen
+                      über lokale Netzwerkgrenzen hinweg. Auf dieser Ebene läuft das
+                      [Internet Protocol (IP)](https://de.wikipedia.org/wiki/Internet_Protocol){target=_blank}, das jedem
+                      Rechner eine (global) eindeutige IP-Adresse zuweist.
+
+                    * **Transportschicht:** Dient der Adressierung mehrerer Dienste auf einem Rechner und der optionalen
+                      Sicherstellung eine zuverlässigen Datenaustauschs. Auf dieser Ebene laufen das
+                      [Transport Control Protocol (TCP)](https://de.wikipedia.org/wiki/Transmission_Control_Protocol){target=_blank}
+                      und das [User Datagram Protocol (UDP)](https://de.wikipedia.org/wiki/User_Datagram_Protocol){target=_blank},
+                      welche die Portnummern verwalten.
+
+                    * **Anwendungsschicht:** Die eigentlichen auf dem Rechnerknoten laufenden Anwendungsprogramme.
+                      Im einfachsten Fall nutzen diese die unteren Schichten direkt, um untereinander Daten auszutauschen.
+                      Die meisten Betriebssysteme bzw. Programmiersprachen stellen hierfür
+                      [Streams und Sockets](https://de.wikipedia.org/wiki/Socket_%28Software%29){target=_blank}
+                      als Programmierschnittstelle bereit.
+
+                      In größeren Anwendungen kommen jedoch spezialisierte Anwendungsprotokolle zum Einsatz, die
+                      losgelöst vom fachlichen Anwendungscode entwickelt werden.
+                </div>
+
+                <script>
+                    window.toggle_tcpip_details = function() {
+                        let checkbox = document.querySelector("#tcpip-details-switch");
+                        let image1   = document.querySelector("#tcpip-stack1");
+                        let image2   = document.querySelector("#tcpip-stack2");
+                        let details  = document.querySelector("#tcpip-stack3");
+
+                        image1.classList.remove("hidden");
+                        image2.classList.remove("hidden");
+                        details.classList.remove("hidden");
+
+                        if (checkbox.checked) {
+                            image1.classList.add("hidden");
+                        } else {
+                            image2.classList.add("hidden");
+                            details.classList.add("hidden");
+                        }
+                    }
+
+                    window.addEventListener("ls-slide-changed", () => {
+                        window.setTimeout(function() {
+                            let checkbox = document.querySelector("#tcpip-details-switch");
+                            if (!checkbox) return;
+
+                            checkbox.addEventListener("change", toggle_tcpip_details);
+                        }, 1000);
+                    });
+                </script>
+            </div>
+        </article>
     </section>
 
-    <section data-title="Transparenz" class="centered-content">
+    <section data-title="Kommunikation zwischen zwei Rechnern">
+        <article class="centered-content">
+            <div class="limited-width">
+                <div class="markdown mb-4" detail-content>
+                    Auf der untersten Ebene werden über das Internet, vereinfacht gesagt, TCP/IP-Pakete
+                    als Nachrichten verschickt. Jedes TCP/IP-Paket besitzt dabei u.a. folgende Felder:
+
+                    * IP-Adresse des Senders
+                    * Portnummer des Senders
+                    * IP-Adresse des Empfängers
+                    * Portnummer des Empfängers
+                </div>
+
+                <img src="02-architektur/tcp_ip_verbindungsaufbau.png" alt="" class="d-block w-100"/>
+
+                <div class="markdown mt-4" detail-content>
+                    **(1)** Beim Verbindungsaufbau reserviert das Betriebssystems des Clients eine zufällige
+                    Portnummer aus dem oberen Adressbereich und nutzt diese, um eine Verbindung zur
+                    bekannten Portnummer des Servers herzustellen.
+
+                    **(2)** Der Server akzeptiert die Anfrage und reserviert ebenfalls eine zufällige Portnummber
+                    aus dem oberen Adressbereich für die Kommunikation mit dem Client. Die neue Portnummer
+                    wird dem Client in der Bestätigungsnachricht mitgeteilt.
+
+                    **(3)** Ab sofort kommunizieren Client und Server über die ausgehandelten Portnummern miteinander,
+                    so dass der Server auf seinem bekannten Port neue Verbindungsanfragen entgegennehmen kann.
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section data-title="Von Clients, Servern und Peers">
+        <article class="centered-content">
+            <div class="limited-width2">
+                <p class="mb-4" detail-content>
+                    Im Zusammenhang mit verteilten Netzwerkanwendungen haben sich bereits früh folgende Rollenbezeichnungen,
+                    etabliert. Die Begriffe haben dabei eine klar definierte Bedeutung, werden im Alltag aber leider oft sehr
+                    frei ausgelegt.
+                </p>
+
+                <lsx-grid-fluid class="p-0 mb-5">
+                    <lsx-row>
+                        <lsx-col size="md-8">
+                            <table class="w-100">
+                                <tr>
+                                    <td style="padding-right: 0.5em;">
+                                        💿
+                                    </td>
+                                    <td style="padding-right: 0.5em;">
+                                        <b>Server</b>
+                                    </td>
+                                    <td>
+                                        Langlaufendes Programm, das einen Dienst zur Verfügung stellt.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-right: 0.33em;">
+                                        💿
+                                    </td>
+                                    <td style="padding-right: 0.5em;">
+                                        <b>Client</b>
+                                    </td>
+                                    <td>
+                                        Kurzlebiges Programm, das den Dienst nutzt.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-right: 0.5em; padding-bottom: 1em;">
+                                        💿
+                                    </td>
+                                    <td style="padding-right: 0.5em; padding-bottom: 1em;">
+                                        <b>Peer</b>
+                                    </td>
+                                    <td style="padding-bottom: 1em;">
+                                        Spezielles Programm, das sowohl Client als auch Server für denselben Dienst ist.
+                                    </td>
+                                </tr>
+                                <tr style="border: 0px dashed grey; border-top-width: 1px;">
+                                    <td style="padding-top: 1em; padding-right: 0.5em;">
+                                                                                🖥
+                                    </td>
+                                    <td style="padding-top: 1em; padding-right: 0.5em;">
+                                        <b>Host</b>
+                                    </td>
+                                    <td style="padding-top: 1em;">
+                                        Der Rechner, auf dem eines der obigen Programme läuft.
+                                    </td>
+                                </tr>
+                            </table>
+                        </lsx-col>
+
+                        <lsx-col size="md">
+                            <lsx-info-box title="Merke">
+                                Ein Server erbringt einen Dienst, den Service.
+                            </lsx-info-box>
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
+
+
+                <div class="d-flex gap-3 justify-content-center">
+                    <lsx-card title="Client/Server-Architektur" bold>
+                        <img src="02-architektur/client-server.svg" alt="Skizze mit vielen Clients und einem Server in der Mitte" class="d-block w-100" />
+                    </lsx-card>
+                    <lsx-card title="Peer-to-Peer-Architektur" bold>
+                        <img src="02-architektur/peer-to-peer.svg" alt="Skizze mit vielen untereinander verbundenen Peers" class="d-block w-100" />
+                    </lsx-card>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section data-title="Grundlegende Architekturmodelle">
+        <article class="centered-content">
+            <div class="limited-width2">
+                <lsx-tab-pages class="w-100">
+                    <lsx-tab-page title="Client/Server">
+                        <div class="markdown dhbw-text-columns mb-4" detail-content>
+                            Dies ist die einfachste Architektur von allen. Sie besteht lediglich aus einem Server,
+                            der einen Dienst anbietet, und den Clients, die den Dienst konsumieren. Durch die TCP/IP-Sockets
+                            werden **zwei byteorienterte Datenströme** (einer in jede Richtung) zwischen Client und Server
+                            geöffnet. Häufig wird darüber aber ein **quasi-synchrones Request/Response-Verfahren** abgewickelt.
+                        </div>
+
+                        <lsx-grid-fluid class="p-0">
+                            <lsx-row>
+                                <lsx-col size="md" class="d-flex justify-content-center mb-4 mb-md-0">
+                                    <img src="02-architektur/architektur-client-server.svg" alt="Skizze eines Servers und dreier Clients" class="d-block m-auto" style="max-width: 45em;" />
+                                </lsx-col>
+                                <lsx-col size="md" class="d-flex justify-content-center align-items-center">
+                                    <lsx-card title="Fallbeispiele" style="flex: 1;">
+                                        <lsx-ul emoji="✅">
+                                            <li>
+                                                Browser und Webserver im World Wide Web
+                                            </li>
+                                            <li>
+                                                Browser App mit Zugriff auf den Server via Websockets
+                                            </li>
+                                            <li>
+                                                Wartungszugang auf einen Rechner per Secure Shell
+                                            </li>
+                                            <li>
+                                                Zugriff auf ein E-Mailpostfach mit IMAP
+                                            </li>
+                                            <li>
+                                                Zentrale Quellcodeverwaltung mit Subversion
+                                            </li>
+                                            <li>
+                                                WebDAV-Zugriff auf einen geteilten Onlineordner
+                                            </li>
+                                        </lsx-ul>
+                                    </lsx-card>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
+                    </lsx-tab-page>
+
+                    <lsx-tab-page title="Proxy">
+                        <p class="dhbw-text-columns mb-4" detail-content>
+                            Ein clientseitiger Proxy bildet die Schnittstelle eines entfernten Servers innerhalb
+                            des lokalen Netzwerks ab. Die Anfragen der Clients werden nicht direkt an den Server
+                            sondern an den lokalen Proxy gesendet, der daraufhin entscheiden kann, ob er die
+                            Anfragen weiterleitet oder selbst beantwortet.
+                        </p>
+
+                        <lsx-grid-fluid class="p-0">
+                            <lsx-row>
+                                <lsx-col size="md" class="d-flex justify-content-center mb-4 mb-md-0">
+                                    <img src="02-architektur/proxy-clientseitig.png" alt="Architekturskizze mit clientseitigem Proxy" style="max-height: 16em; max-width: 100%;" />
+                                </lsx-col>
+                                <lsx-col size="md" class="d-flex justify-content-center align-items-center">
+                                    <lsx-card title="Fallbeispiele" style="flex: 1;">
+                                        <lsx-ul emoji="✅">
+                                            <li>
+                                                Steigerung der Performance durch Caching häufig angefragter Daten
+                                            </li>
+                                            <li>
+                                                Implementierung von Zugangsbeschränkungen und Content Filtern
+                                            </li>
+                                            <li>
+                                                <u>Clientseitige</u> Lastverteilung
+                                            </li>
+                                        </lsx-ul>
+                                    </lsx-card>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
+                    </lsx-tab-page>
+
+                    <lsx-tab-page title="Reverse Proxy">
+                        <p class="dhbw-text-columns mb-4" detail-content>
+                            Serverseitig kann ein Reverse Proxy zum Beispiel als <b>API-Gateway</b> eingesetzt werden, um die
+                            eingehenden Anfragen unter einer Adresse zu bündeln. Dadurch werden die Backend-Server vor dem
+                            Client versteckt, da er sie weder kennen noch direkt darauf zugreifen können muss. Zusätzlich können
+                            an zentraler Stelle Sicherheitsprüfungen, Lastverteilung oder Caching implementiert werden.
+                        </p>
+
+                        <lsx-grid-fluid class="p-0">
+                            <lsx-row>
+                                <lsx-col size="md" class="d-flex justify-content-center mb-4 mb-md-0">
+                                    <img src="02-architektur/proxy-serverseitig.png" alt="Architekturskizze mit serverseitigem Proxy" style="max-height: 16em; max-width: 100%;" />
+                                </lsx-col>
+                                <lsx-col size="md" class="d-flex justify-content-center align-items-center">
+                                    <lsx-card title="Fallbeispiele" style="flex: 1;">
+                                        <lsx-ul emoji="✅">
+                                            <li>
+                                                Steigerung der Performance durch Caching häufig angefragter Daten
+                                            </li>
+                                            <li>
+                                                Implementierung von Zugangsbeschränkungen und Upload Filtern
+                                            </li>
+                                            <li>
+                                                Realisierung von Paywalls zum Ausfiltern kostenpflichtiger Inhalte
+                                            </li>
+                                            <li>
+                                                Sicherstellen einer vorgelagerten, zentralen Authentifizierung
+                                            </li>
+                                            <li>
+                                                Überlöastung vermeiden durch Rate Limiting / Throttling
+                                            </li>
+                                            <li>
+                                                Monitoring und statistische Aufzeichnung der Nutzung
+                                            </li>
+                                            <li>
+                                                <u>Serverseitige</u> Lastverteilung
+                                             </li>
+                                        </lsx-ul>
+                                    </lsx-card>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
+                    </lsx-tab-page>
+
+                    <lsx-tab-page title="Dreischichtenarchitektur">
+                        <p class="dhbw-text-columns mb-4" detail-content>
+                            Hierbei handelt es sich ebenfalls um eine Client/Server-Architektur, jedoch greift der Server zusätzlich
+                            auf eine Datenbank zu. Client, Server und Datenbank werden daher den drei Schichten <b>Darstellung</b>,
+                            <b>Anwendungslogik</b> und <b>Datenhaltung</b> zugeordnet. Für die Darstellung wurden früher ausschließlich
+                            native Clients verwendet, die heute zunehmend von Webanwendungen und mobilen Apps verdrängt werden. Die
+                            Schichten für die Anwendungslogik und Datenhaltung können hingegen auch mehrere Server umfassen.
+                        </p>
+
+                        <lsx-grid-fluid class="p-0">
+                            <lsx-row>
+                                <lsx-col size="md" class="d-flex justify-content-center mb-4 mb-md-0">
+                                    <img src="02-architektur/architektur-3schichten.svg" alt="Skizze einer Dreischichtenarchitektur" class="d-block limited-width m-auto" />
+                                </lsx-col>
+                                <lsx-col size="md" class="d-flex justify-content-center align-items-center">
+                                    <lsx-card title="Fallbeispiele" style="flex: 1;">
+                                        <lsx-ul emoji="✅">
+                                            <li>
+                                                Jede Webanwendung mit einer Datenbank im Hintergrund
+                                            </li>
+                                            <li>
+                                                Informationssysteme ohne eigenständigen Präsentationsserver
+                                            </li>
+                                            <li>
+                                                Die meisten ERP- und CRM-Systeme (SAP S/4HANA, Navision, …)
+                                            </li>
+                                            <li>
+                                                Per Webservice erreichbare Microservices
+                                            </li>
+                                        </lsx-ul>
+                                    </lsx-card>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
+                    </lsx-tab-page>
+
+                    <lsx-tab-page title="Vierschichtenarchitektur">
+                        <p class="dhbw-text-columns mb-4" detail-content>
+                            Hierbei handelt es sich um eine Variation der Dreischichtenarchitektur, bei der die mittlere Sicht
+                            in eine <b>Präsentations-</b> und eine <b>Anwendungsschicht</b> zerlegt wurde. Dieses Modell
+                            findet man häufig bei ERP-Systemen, die mehrere Clienttechnologien unterstützen müssen.
+                            Oder auch in modernen <b>Single Page Apps</b> unter der Bezeichnung <b>Backend for Frontend</b>.
+                        </p>
+
+                        <lsx-grid-fluid class="p-0">
+                            <lsx-row>
+                                <lsx-col size="md" class="d-flex justify-content-center mb-4 mb-md-0">
+                                    <img src="02-architektur/architektur-4schichten.svg" alt="Skizze einer Dreischichtenarchitektur" class="d-block limited-width m-auto" />
+                                </lsx-col>
+                                <lsx-col size="md" class="d-flex justify-content-center align-items-center">
+                                    <lsx-card title="Fallbeispiele" style="flex: 1;">
+                                        <lsx-ul emoji="✅">
+                                            <li>
+                                                ERP- und CRM-Systeme mit Präsentationsserver
+                                            </li>
+                                            <li>
+                                                Typische Single Page Apps mit Webservice-Backend
+                                            </li>
+                                        </lsx-ul>
+                                    </lsx-card>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
+                    </lsx-tab-page>
+                </lsx-tab-pages>
+            </div>
+        </article>
+    </section>
+
+    <section data-title="Fallbeispiel: Sockets in Node.js">
+        <article class="centered-content">
+            <div class="limited-width2 mb-4">
+                <div class="markdown dhbw-text-columns mb-4" detail-content>
+                    Das nachfolgende Beispiel zeigt eine kleine Client/Server-Anwendung mit Node.js und JavaScript.
+                    Client und Server setzen auf dem eben gezeigten TCP/IP-Protokollstapel auf und nutzen die Klassen
+                    [`net.Server`](https://nodejs.org/docs/latest/api/net.html#class-netserver){target=_blank} bzw.
+                    [`net.Socket`](https://nodejs.org/docs/latest/api/net.html#class-netsocket){target=_blank} für
+                    den Datenaustausch. Es handelt sich dabei um die niedrigste Ebene, auf der Netzwerkanwendungen
+                    mit [Node.js](https://nodejs.org/en){target=_blank} programmiert werden können.
+                </div>
+
+                <div class="d-flex flex-column gap-3 mb-4 fs-6">
+                    <div class="d-flex gap-3 align-items-center">
+                        <lsx-github-edit url="Beispiele/Socket-Minimalbeispiel"></lsx-github-edit>
+                        <div>Minimalbeispiel</div>
+                    </div>
+                    <div class="d-flex gap-3 align-items-center">
+                        <lsx-github-edit url="Beispiele/Socket-Sprachserver"></lsx-github-edit>
+                        <div>Sprachserver</div>
+                    </div>
+                </div>
+
+                <lsx-accordion class="mb-4">
+                    <lsx-accordion-page title="Grundgerüst der Serveranwendung" bold>
+                        <div class="markdown" detail-text>
+                            Innerhalb der Serveranwendung muss ein Server-Objekt erzeugt und dessen
+                            <src-code language="javascript">listen()</src-code>-Methode aufgerufen werden,
+                            um TCP/IP-Verbindungsanfragen behandeln zu können. Für jeden neuen Client wird
+                            eine Rückruffunktion zur Abwicklung des Datenaustauschs aufgerufen. Diese bekommt
+                            ein <code>Socket</code>-Objekt zum Senden und Empfangen der Daten übergeben.
+                        </div>
+
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Schritte">
+                                <lsx-ul>
+                                    <li>
+                                        <code>Server</code>-Objekt erzeugen mit <src-code language="javascript">net.createServer()</src-code>
+                                    </li>
+                                    <li>
+                                        <src-code language="javascript">listen()</src-code>-Methode aufrufen, um auf
+                                        Clientverbindungen zu warten
+                                    </li>
+                                    <li>
+                                        Callback-Funktion zur Abwicklung der Kommunikation mit einem Client übergeben
+                                    </li>
+                                    <li>
+                                       Innerhalb der Client-Funktionen die <code>Socket</code>-Events und Metoden verwenden
+                                    </li>
+                                </lsx-ul>
+                            </lsx-tab-page>
+
+                            <lsx-tab-page title="Quellcode">
+                                <source-code language="javascript">
+                                    import net from "net";
+
+                                    // Socket-Server starten
+                                    let server = net.createServer(socket => {
+                                        // Verbindung mit neuem Client hergestellt
+                                        log(socket, "Client verbunden");
+
+                                        socket.setEncoding("utf-8");
+                                        socket.setNoDelay();
+                                        socket.write("Hallo! Ich bin der Server.\n");
+
+                                        socket.on("error", err => log(socket, err));
+                                        socket.on("close", () => log(socket, "Client getrennt"));
+
+                                        socket.on("data", data => {
+                                            log(socket, "Empfangene Daten:", data);
+                                            socket.write(data);
+                                        });
+                                    });
+
+                                    server.listen("7000", "localhost");
+                                </source-code>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+                    </lsx-accordion-page>
+
+                    <lsx-accordion-page title="Grundgerüst der Clientanwendung" bold>
+                        <div class="markdown" detail-text>
+                            Die Programmierung der Clientseite erfolgt grundsätzlich gleich, nur dass hier die Methode
+                            <src-code language="javascript">net.createConnection()</src-code> verwendet werden muss, um
+                            eine Verbindung zum Server herzustellen. Analog zum Serverbeispiel erwartet diese eine
+                            Callback-Funktion innerhalb derer ein <code>Socket</code>-Objekt zur Abwicklung des
+                            Datenaustauschs verwendet werden kann. Was den hier gezeigten Quellcode allerdings komplexer
+                            als die Serverseite macht, ist dass hier mit Hilfe der Klasse <code>EventEmitter</code>
+                            eine Synchronisation zwische den vielen Event Handlern hergestellt werden muss, um die
+                            Reihenfolge aus Anfrage und Antwort korrekt einhalten zu können.
+                        </div>
+
+                        <lsx-tab-pages>
+                            <lsx-tab-page title="Schritte">
+                                <lsx-ul>
+                                    <li>
+                                        <code>Socket</code>-Objekt erzeugen mit <src-code language="javascript">net.createConnection()</src-code>
+                                    </li>
+                                    <li>
+                                        Callback-Funktion zur Abwicklung der Kommunikation mit einem Server übergeben
+                                    </li>
+                                    <li>
+                                        Innerhalb der Client-Funktionen die <code>Socket</code>-Events und Metoden verwenden
+                                    </li>
+                                    <li>
+                                        Ggf. Klassen wie <code>EventEmitter</code> nutzen, um die richtige Reihenfolge sicherzustellen
+                                    </li>
+                                </lsx-ul>
+                            </lsx-tab-page>
+
+                            <lsx-tab-page title="Quellcode">
+                                <source-code language="javascript">
+                                    import net                from "net";
+
+                                    import * as readline      from 'node:readline/promises';
+                                    import {stdin as input}   from 'node:process';
+                                    import {stdout as output} from 'node:process';
+
+                                    import {EventEmitter}     from 'node:events';
+                                    import {once}             from 'node:events';
+
+                                    let rl           = readline.createInterface({input, output});
+                                    let dataReceived = new EventEmitter();
+                                    let connected    = false;
+
+                                    // Verbindung mit Server herstellen und Protokoll abwickeln
+                                    let socket = net.createConnection({host: "localhost", port: 7000}, async () => {
+                                        socket.setNoDelay();
+                                        connected = true;
+
+                                        while (connected) {
+                                            let input = await rl.question("Ihre Eingabe: ");
+                                            if (!connected) break;
+
+                                            // Daten an den Server schicken
+                                            if (input) {
+                                                socket.write(input);
+
+                                                // Antwort vom Server anzeigen
+                                                let response = await once(dataReceived, "data");
+                                                console.log("Server:", response[0], "\n");
+                                            } else {
+                                                connected = false;
+                                            }
+                                        }
+
+                                        // Verbindung trennen
+                                        socket.end();
+                                        socket.destroy();
+
+                                        rl.close();
+                                    });
+
+
+                                    // Empfangene Daten an die Hauptschleife oben schicken
+                                    socket.on("data", data => {
+                                        data = data.toString();
+                                        dataReceived.emit("data", data);
+                                    });
+
+                                    socket.on("error", err => console.error("\n", err));
+                                    socket.on("end", () => connected = false);
+                                </source-code>
+                            </lsx-tab-page>
+                        </lsx-tab-pages>
+                    </lsx-accordion-page>
+
+                    <lsx-accordion-page title="Ausgetauschte Rohdaten" bold>
+                        <div class="markdown mb-4" detail-text>
+                            In der Tradition klassischer Internetdienste nutzt die Beispielanwendung ein einfach
+                            gestricktes, textbasiertes Protokoll zur Verständigung zwischen Client und Server.
+                            Der Screenshot zeigt die zwischen beiden Seiten ausgetauschten Daten, wobei die Sitzung
+                            immer mit einer `HELLO`-Nachricht vom Client an den Server beginnt. Für dieses Beispiel
+                            wurde mit dem Programm [netcat](https://de.wikipedia.org/wiki/Netcat){target=_blank}
+                            eine direkte Socketverbindung zum Server hergestellt, anstelle die JavaScript-Clientanwendung
+                            zu verwenden.
+                        </div>
+
+                        <img src="02-architektur/socket-netcat.png" class="d-block w-100" alt="Ausgetauschte Rohdaten">
+                    </lsx-accordion-page>
+                </lsx-accordion>
+
+                <div class="d-flex flex-column flex-md-row gap-3">
+                    <img src="02-architektur/socket-server.png" class="img-thumbnail d-block w-100" alt="Serverprogramm">
+                    <img src="02-architektur/socket-client.png" class="img-thumbnail d-block w-100" alt="Clientprogramm">
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section data-title="Benutzeroberfläche des Beispiels">
+        <article class="centered-content">
+            <div style="width: 35em; max-width: 100%;">
+                <img src="02-architektur/frontenders-and-backenders.jpeg" class="d-block w-100">
+                <small>
+                    <small>
+                        Bildnachweis:
+                        <a href="https://turnoff.us/geek/frontenders-and-backenders/" target="_blank">turnoff.us</a>
+                    </small>
+                </small>
+            </div>
+        </article>
+    </section>
+
+    <section data-title="Historische Entwicklung">
+        <article class="centered-content">
+            <div class="centered-content flex-row flex-wrap gap-3">
+                <!-- Host-to-Host -->
+                <lsx-modal>
+                    <lsx-thumbnail style="height: 14em;" class="mw-100">
+                        <img src="02-architektur/historie-abb1.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                    </lsx-thumbnail>
+                    <lsx-content>
+                        <lsx-card title="Host-to-Host" bold class="mh-100 mw-100" style="width: 35em;">
+                            <lsx-card-body class="overflow-auto">
+                                <p style="text-align: justify; hyphens: auto;">
+                                    Vor Erfindung des ARPANET und ähnlicher Computernetze in den 1960er-Jahren gab es noch kein
+                                    anerkanntes Modell, wie zwei Computer untereinander Daten austauschen können. Die einzige
+                                    Möglichkeit war, eine direkte Kabelverbindung „host-to-host” herzustellen, wobei hierfür
+                                    Hard- und Software auf beiden Seiten komplett selbst entwickelt werden mussten.
+                                </p>
+
+                                <lsx-ul emoji="🔌" class="mb-4">
+                                    <li>Direkte Kabelverbindung zwischen zwei Rechnern</li>
+                                    <li>Keine Unterstützung durch das Betriebssystem</li>
+                                </lsx-ul>
+
+                                <img src="02-architektur/historie-kabel.svg" alt="Zwei VS-Knoten mit direkter Kabelverbindung" style="width: 100%; margin-bottom: 1em;" />
+                                <img src="02-architektur/historie-abb1.jpg" alt="" style="width: 100%;" />
+                            </lsx-card-body>
+                        </lsx-card>
+                    </lsx-content>
+                </lsx-modal>
+
+                <!-- Packet Switching -->
+                <lsx-modal>
+                    <lsx-thumbnail style="height: 14em;" class="mw-100">
+                        <img src="02-architektur/historie-abb2.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                    </lsx-thumbnail>
+                    <lsx-content>
+                        <lsx-card title="Packet Switching" bold class="mh-100 mw-100" style="width: 35em;">
+                            <lsx-card-body class="overflow-auto">
+                                <p style="text-align: justify; hyphens: auto;">
+                                    In den ausgehenden 1960er-Jahren wurde für die neuentwickelten Computernetzwerke das auch heute
+                                    noch gültige Prinzip des Packet Switching erfunden. Die Idee dahinter ist, die zu versendenden
+                                    Daten in kleine Pakete zu zerlegen und jedes Paket seinen eigenen Weg durch das Netzwerk vom
+                                    Sender zum Empfänger suchen zu lassen. Heute haben wir Router für diese Aufgabe. Im ARPANET hießen
+                                    diese „Interface Message Processor” und waren so groß wie ein Schrank.
+                                </p>
+
+                                <lsx-ul emoji="📦" class="mb-4">
+                                    <li>NCP und später TCP als Vorläufer von TCP/IP</li>
+                                    <li>Weltweiter Datenaustausch zwischen allen Hosts</li>
+                                    <li>Anschluss des Computers hierfür an einen <a href="https://en.wikipedia.org/wiki/Interface_Message_Processor" target="_blank">IMP</a></li>
+                                </lsx-ul>
+
+                                <img src="02-architektur/imp-subnet.svg" alt="Netzwerktopologie des früheren ARPANET" style="width: 100%; margin-bottom: 1em;" />
+
+                                <!-- <lsx-youtube class="img-thumbnail embed-responsive" video="yU9oMOcRsuE"></lsx-youtube> -->
+                                <div class="centered-content">
+                                    <div class="embed-responsive ratio ratio-16x9 limited-width">
+                                        <iframe class="d-block" src="https://www.youtube-nocookie.com/embed/yU9oMOcRsuE?rel=0&amp;showinfo=0" allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </lsx-card-body>
+                        </lsx-card>
+                    </lsx-content>
+                </lsx-modal>
+
+                <!-- Sockets- und Middleware -->
+                <lsx-modal>
+                    <lsx-thumbnail style="height: 14em;">
+                        <img src="02-architektur/historie-abb3.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                    </lsx-thumbnail>
+                    <lsx-content>
+                        <lsx-card title="Streams und Sockets" bold class="mh-100 mw-100" style="width: 35em;">
+                            <lsx-card-body class="overflow-auto">
+                                <p style="text-align: justify; hyphens: auto;">
+                                    Obwohl die heute vorherrschenden Streams und Sockets noch nicht erfunden waren (dies geschah erst 1983 mit
+                                    Veröffentlichung der Socket API für BSD Unix), suchte man bereits in den 1970er-Jahren nach Möglichkeiten,
+                                    die Netzwerkprogrammierung zu vereinfachen. In dieser Zeit wurde der „entfernte Prozeduraufruf“ erfunden,
+                                    bei dem die Unterprogramme (bzw. Funktionen bzw. Methoden, je nach Programmiersprache) eines Serverprogramms
+                                    über das Netzwerk direkt aufgerufen werden können, ohne den konkreten Datenaustausch auf Byte-Ebene hierfür
+                                    kennen zu müssen.
+                                </p>
+
+                                <lsx-ul emoji="📃" class="mb-4">
+                                    <li><a href="https://de.wikipedia.org/wiki/Remote_Procedure_Call" target="_blank">Remote Procedure Call</a> ab den 1970ern</li>
+                                    <li>Zunächst konkurrierende Programmiermodelle</li>
+                                    <li>Streams und Sockets ab 1983 in BSD Unix</li>
+                                </lsx-ul>
+
+                                <img src="02-architektur/historie-sockets.svg" alt="Zwei VS-Knoten mit Middleware" style="width: 100%; margin-bottom: 1em;" />
+                                <img src="02-architektur/historie-abb3.jpg" alt="" style="width: 100%;" />
+                            </lsx-card-body>
+                        </lsx-card>
+                    </lsx-content>
+                </lsx-modal>
+
+                <!-- Applikationsserver -->
+                <lsx-modal>
+                    <lsx-thumbnail style="height: 14em;">
+                        <img src="02-architektur/historie-abb4.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
+                    </lsx-thumbnail>
+                    <lsx-content>
+                        <lsx-card title="Applikationsserver" bold class="mh-100 mw-100" style="width: 35em;">
+                            <lsx-card-body class="overflow-auto">
+                                <p style="text-align: justify; hyphens: auto;">
+                                    Mit zunehmendem Umfang der Anforderungen stieg spätestens ab Mitte der 1990er-Jahre auch die
+                                    Komplexität typischer verteilter Anwendungen deutlich an. In Folge daraus versuchte man über
+                                    den Datenaustauschs hinausgehende Querschnittsfunktionen typischer Informationssysteme in sog.
+                                    Applikationsserver auszugliedern, die als generische Laufzeitumgebung frei programmierbar an
+                                    den jeweiligen Anwendungsfall angepasst werden konnten.
+                                </p>
+                                <p style="text-align: justify; hyphens: auto;">
+                                    Aus heutiger Sicht vereinfacht das damit verbundene Programmiermodell die Erstellung neuer
+                                    Anwendungen zwar drastisch, wird aber dennoch als schwerfällig und komplex empfunden. Heute
+                                    geht der Trend stattdessen mehr in die Richtung, die ehemals vom Applikationsserver bereitgestellten
+                                    Funktionen in Form Quellcode-Bibliotheken oder Micro-Frameworks zu integrieren.
+                                </p>
+
+                                <lsx-ul emoji="🚢" class="mb-4">
+                                    <li>Große Applikationsserver ab den 1990ern</>
+                                    <li>Zunächst RPC später Webtechnologien</li>
+                                    <li>Heute eher leichtgewichtigere Micro-Frameworks</li>
+                                </lsx-ul>
+
+                                <img src="02-architektur/historie-appserver.svg" alt="Drei VS-Knoten von denen einer ein Applikationsserver ist" style="width: 100%; margin-bottom: 1em;" />
+                                <img src="02-architektur/historie-abb4.jpg" alt="" style="width: 100%;" />
+                            </lsx-card-body>
+                        </lsx-card>
+                    </lsx-content>
+                </lsx-modal>
+            </div>
+        </article>
+    </section>
+</section>
+
+<section data-title="Nachrichtenaustausch heute">
+    <section data-title="Heute übliche Programmiermodelle">
+        <article class="centered-content">
+            <div class="limited-width2">
+                <p class="mb-4">
+                    Die überwiegende Mehrheit an verteilten Anwendungen wird heute weit weniger low-level
+                    programmiert, als auf den vorherigen Seiten gezeigt. Die unteren Schichten der
+                    Netzwerkprogrammierung werden heute von leistungsstarken Bibliotheken und Middlewares
+                    weg abstrahiert. Meistens kommt dabei aus Sicht des Anwendungscodes eines der folgenden
+                    Programmiermodelle zum Einsatz.
+                </p>
+
+                <lsx-grid-fluid>
+                    <lsx-row>
+                        <lsx-col size="md">
+                            <lsx-card title="App-Server / Frameworks" bold class="h-100">
+                                <lsx-card-body class="h-100 d-flex flex-column">
+                                    <lsx-ul emoji="🎙️">
+                                        <li>Beinhalten für Business Apps übliche Grundfunktionen</li>
+                                        <li>Unterstützen verschieden Schnittstellentechnologien</li>
+                                        <li>Oft auf die Entwicklung von Webanwendungen ausgerichtet</li>
+                                    </lsx-ul>
+
+                                    <div style="flex: 1"></div>
+                                    <img src="02-architektur/arten-appserver.png" alt="" class="w-100" />
+                                </lsx-card-body>
+                            </lsx-card>
+                        </lsx-col>
+
+                        <lsx-col size="md">
+                            <lsx-card title="Entfernte Methodenaufrufe" bold class="h-100">
+                                <lsx-card-body class="h-100 d-flex flex-column">
+                                    <lsx-ul emoji="🎙️">
+                                        <li>Direkter Aufruf von Funktionen/Methoden des Servers</li>
+                                        <li>Sowohl prozedural als auch objekt-orientiert möglich</li>
+                                        <li>Teilweise auch zwischen verschiedenen Programmiersprachen</li>
+                                    </lsx-ul>
+
+                                    <div style="flex: 1"></div>
+                                    <img src="02-architektur/arten-methodenaufrufe.png" alt="" class="w-100" />
+                                </lsx-card-body>
+                            </lsx-card>
+                        </lsx-col>
+                    </lsx-row>
+
+                    <lsx-row>
+                        <lsx-col size="md">
+                            <lsx-card title="Webservices" bold class="h-100">
+                                <lsx-card-body class="h-100 d-flex flex-column">
+                                    <lsx-ul emoji="🎙️">
+                                        <li>Grundsätzlich dieselbe Idee wie bei entfernten Methodenaufrufen</li>
+                                        <li>Jedoch auf Basis von Webstandards wie HTTP, XML, JSON</li>
+                                        <li>Früher SOAP, heute überwiegend REST-Webservices</li>
+                                    </lsx-ul>
+
+                                    <div style="flex: 1"></div>
+                                    <img src="02-architektur/arten-webservices.png" alt="" class="w-100" />
+                                </lsx-card-body>
+                            </lsx-card>
+                        </lsx-col>
+
+                        <lsx-col size="md">
+                            <lsx-card title="Message Broker" bold class="h-100">
+                                <lsx-card-body class="h-100 d-flex flex-column">
+                                    <lsx-ul emoji="🎙️">
+                                        <li>Grundsätzlich asynchroner Nachrichtenaustausch</li>
+                                        <li>Mehrere Empfänger für eine Nachricht möglich und üblich</li>
+                                        <li>Store and Forward der Nachrichten in einer FIFO-Warteschlange</li>
+                                    </lsx-ul>
+
+                                    <div style="flex: 1"></div>
+                                    <img src="02-architektur/arten-pubsub.png" alt="" class="w-100" />
+                                </lsx-card-body>
+                            </lsx-card>
+                        </lsx-col>
+                    </lsx-row>
+                </lsx-grid-fluid>
+            </div>
+        </article>
+    </section>
+
+    <section data-title="Die neun Arten der Transparenz" class="centered-content">
         <lsx-grid-fluid class="limited-width2">
+            <p class="mb-4" detail-content>
+                Moderne Bibliotheken und Middlewares abstrahieren nicht nur die Netzwerkprogrammierung,
+                sondern sorgen auch darüber hinaus für eine hohe „Transparenz” beim Programmieren.
+                Gemeint ist, dass viele Dinge aus Anwendungssicht im Hintergrund automatisch passieren
+                und deshalb für den Anwendungscode nicht sichtbar sind. Dies ist eine etwas andere
+                Auslegung des Transparenzbegriffs, als sonst üblich.
+            </p>
+
             <!-- Vergleich Wirtschaft vs. Informatik -->
             <lsx-row style="margin-bottom: 0;">
                 <lsx-col size="md">
-                    <h3>Transparenz in der Wirtschaft</h3>
+                    <h3 class="dhbw-lightblue">Transparenz üblicherweise</h3>
                     <img src="02-architektur/transparenz1.jpg" alt="" class="img-thumbnail" style="width: 100%" />
                     Alle Informationen liegen offen.
                 </lsx-col>
                 <lsx-col size="md">
-                    <h3>Transparenz in der Informatik</h3>
+                    <h3 class="dhbw-lightblue">Transparenz in der Informatik</h3>
                     <img src="02-architektur/transparenz2.jpg" alt="" class="img-thumbnail" style="width: 100%" />
                     Ich muss nichts tun. Es läuft einfach.
                 </lsx-col>
@@ -718,7 +1452,7 @@
                                     </lsx-col>
                                     <lsx-col size="md">
                                         <b>Beispiel:</b>
-                                        Cloudbasierte Officepakete wie Google Docs besitzen keinen Menüeintrag zum Speichern
+                                        Cloud-basierte Officepakete wie Google Docs besitzen keinen Menüeintrag zum Speichern
                                         eines Dokuments. Jede Änderung wird mit einem kleinen Zeitversatz automatisch gespeichert,
                                         so dass man nie wieder etwas verlieren kann, wenn man Abends zu schnell aus dem Büro flieht.
                                     </lsx-col>
@@ -740,7 +1474,7 @@
                             <lsx-grid-fluid class="p-0">
                                 <lsx-row>
                                     <lsx-col size="md">
-                                        Aus Performancegründen oder zur Erhöhung der Ausfallsicherheit werden wichtige Daten auf
+                                        Aus Performance-Gründen oder zur Erhöhung der Ausfallsicherheit werden wichtige Daten auf
                                         mehrere Rechenknoten repliziert. Die Datenreplikation erfolgt vollautomatisch im Hintergrund,
                                         wobei das System bei jeder Änderung die Aktualisierung aller Kopien sicherstellt.
                                     </lsx-col>
@@ -751,7 +1485,7 @@
                                     </lsx-col>
                                     <lsx-col size="md">
                                         <b>Beispiel:</b>
-                                        Weltweit genutzte Anwendungen wie die Googlesuche, Facebook oder Instagram werden in global
+                                        Weltweit genutzte Anwendungen wie die Google-Suche, Facebook oder Instagram werden in global
                                         verteilten Rechenzentren betrieben, um die Ladezeiten zu verkürzen. Die innerhalb der Anwendung
                                         anfallenden Daten werden deshalb automatisch zwischen den Rechenzentren repliziert, damit jede*r
                                         Anwender*in möglichst dieselben Daten sieht.
@@ -814,7 +1548,7 @@
                                         Eine Wetterstation sammelt kontinuierlich Daten und sendet diese via UMTS an einen zentralen
                                         Server. Bei schlechtem Wetter besteht allerdings nur eine unzuverlässige Internetverbindung,
                                         so dass die Daten nicht immer sofort verschickt werden können. Sämtliche Daten werden daher
-                                        in einem internen Ringbuffer gesammelt und so lange an den Server geschickt, bis dieser den
+                                        in einem internen Ringpuffer gesammelt und so lange an den Server geschickt, bis dieser den
                                         Empfang bestätigt.
                                     </lsx-col>
                                 </lsx-row>
@@ -827,7 +1561,7 @@
                                         Bereits bei den Apollo-Mondmissionen waren alle Computersysteme mehrfach redundant ausgelegt,
                                         so dass bei Versagen eines Teilsystems dieses vollautomatisch ersetzt werden konnte. Der
                                         <a href="https://en.wikipedia.org/wiki/Saturn_Launch_Vehicle_Digital_Computer" target="_blank">Saturn
-                                        Launch Vehicle Digial Computer</a> führte sogar jede Berechnung dreifach redundant aus und
+                                        Launch Vehicle Digital Computer</a> führte sogar jede Berechnung dreifach redundant aus und
                                         arbeitete stets mit dem Mehrheitsergebnis weiter, um katastrophale Folgen aufgrund von
                                         Hardwarefehlern zu vermeiden.
                                     </lsx-col>
@@ -909,7 +1643,7 @@
                             <lsx-grid-fluid class="p-0">
                                 <lsx-row>
                                     <lsx-col size="md">
-                                        Verteilte Systeme und Anwendungen sollten immer skalierbar sein. Im Idealfall könnnen im
+                                        Verteilte Systeme und Anwendungen sollten immer skalierbar sein. Im Idealfall können im
                                         laufenden Betrieb Ressourcen hinzugefügt oder entfernt werden, um die Leistung anzupassen.
                                     </lsx-col>
                                 </lsx-row>
@@ -921,7 +1655,7 @@
                                         <b>Beispiel:</b>
                                         Unter Linux bildet der
                                         <a href="https://de.wikipedia.org/wiki/Logical_Volume_Manager" target="_blank">Logical Volume Manager</a>
-                                        eine Abstraktionsschicht zwsichen den tatsächlich auf einem Datenträger vorhandenen Partitionen und den
+                                        eine Abstraktionsschicht zwischen den tatsächlich auf einem Datenträger vorhandenen Partitionen und den
                                         für das Betriebssystem sichtbaren Dateisystemen. Dadurch wird es möglich, ein Dateisystem jederzeit durch
                                         Hinzufügen weiterer Datenträger zu vergrößern.
                                     </lsx-col>
@@ -967,7 +1701,7 @@
                                     </lsx-col>
                                     <lsx-col size="md">
                                         <b>Beispiel:</b>
-                                        Cloudangebote unterscheiden sich vom traditionallen Hosting insbesondere durch die automatische
+                                        Cloud-Angebote unterscheiden sich vom traditionellen Hosting insbesondere durch die automatische
                                         Skalierbarkeit und nutzungsabhängige Abrechnung aller Dienste. Die meisten Anbieter erlauben daher,
                                         Regeln zu definieren, bei welcher Auslastung weitere Kapazitäten hinzugefügt oder wieder entfernt
                                         werden sollen. Einrichtung, Start und Stopp der notwendigen Rechenknoten laufen hierfür komplett
@@ -980,9 +1714,9 @@
                                     </lsx-col>
                                     <lsx-col size="md">
                                         <b>Beispiel:</b>
-                                        Nicht nur in Forschung und Wissenschaft sondern auch in der Filmwirtschaft werden Clustersysteme
+                                        Nicht nur in Forschung und Wissenschaft sondern auch in der Filmwirtschaft werden Cluster-Systeme
                                         zur Bewerkstelligung der anfallenden Rechenaufgaben eingesetzt. Diese besitzen einen Job Scheduler
-                                        zum Einspiesen abzuarbeitender Aufgaben. Die zur Verfügung stehende Rechenleistung teilt der Scheduler
+                                        zum Einspeisen abzuarbeitender Aufgaben. Die zur Verfügung stehende Rechenleistung teilt der Scheduler
                                         automatisch auf alle aktiven Jobs auf. Sind zu einem Zeitpunkt nur wenige Jobs aktiv, laufen diese daher
                                         schneller durch, als wenn viele Jobs gleichzeitig laufen sollen.
                                     </lsx-col>
@@ -1004,6 +1738,221 @@
                 </lsx-col>
             </lsx-row>
         </lsx-grid-fluid>
+    </section>
+
+    <section data-title="Kommunikation ohne das Internet" class="centered-content">
+        <div class="limited-width2">
+            <div class="markdown -dhbw-text-columns mb-4" detail-content>
+                Nicht immer kommunizieren verteilte Anwendungen über das Internet.
+                In der Musikproduktion kommt zum Beispiel häufig das [MIDI-Protokoll](https://de.wikipedia.org/wiki/MIDI){target="_blank"}
+                zum Einsatz, das meist über eine USB- oder serielle MIDI-Verbindung übertragen wird.
+                Es handelt sich dabei um eine 1982 eingeführte Digitalschnittstelle zur Verbindung elektronischer Musikgeräte.
+                Die meisten Nachrichten sind drei Bytes lang und kodieren musikalische Ereignisse wie das Spielen einer Note
+                oder Drücken des Haltepedals.
+            </div>
+            <lsx-youtube class="img-thumbnail embed-responsive" video="pzhh9_5iqB0"></lsx-youtube>
+        </div>
+    </section>
+</section>
+
+<section data-title="Anforderungen an verteilte Systeme">
+    <section data-title="Allgemeine Anforderungen" class="centered-content">
+        <div class="limited-width2">
+            <p class="mb-4" detail-content>
+                Die Auswahl geeigneter Architektur-, Kommunikations- und Programmiermodelle hängt sehr stark
+                von den Anforderungen des jeweiligen Systems ab bzw. wie diese gewichtet werden. Die nachfolgende
+                Übersicht zeigt die wesentlichen Aspekte, die hierbei berücksichtigt werden müssen. Doch auch
+                mögliche Problemsituationen müssen, wie wir gleich noch sehen werden, in Betracht gezogen werden,
+                da jedes Modell wie so oft eine Verbesserung im einen und einen Kompromiss im anderen Bereich
+                mit sich bringt.
+            </p>
+
+            <lsx-grid-fluid class="p-0">
+                <lsx-row>
+                    <lsx-col size="md" class="mb-3 mb-md-0">
+                        <lsx-card title="Optimale Ressourcennutzung" bold img="02-architektur/anforderung-ressourcennutzung.jpg" class="h-100">
+                            Das System muss effizient mit den Ressourcen umgehen und möglichst viele Ressourcen
+                            für die eigentliche Anwendung zur Verfügung stellen. Die Anwendung muss ebenfalls
+                            intelligent damit umgehen und sie gut nutzen.
+                        </lsx-card>
+                    </lsx-col>
+                    <lsx-col size="md">
+                        <lsx-card title="Stabilität und Fehlertoleranz" bold img="02-architektur/anforderung-stabilitaet.jpg" class="h-100">
+                            Programmabstürze und unvorhersehbares Verhalten sind unbedingt zu vermeiden.
+                            Beim Programmieren muss man daher neben den fachlichen Fehlern auch die Fehler
+                            berücksichtigen, die sich aus der Verteilung ergeben.
+                        </lsx-card>
+                    </lsx-col>
+                </lsx-row>
+                <lsx-row>
+                    <lsx-col size="md" class="mb-3 mb-md-0">
+                        <lsx-card title="Einfache Skalierbarkeit" bold img="02-architektur/anforderung-skalierbarkeit.jpg" class="h-100">
+                            Es muss einfach möglich sein, die Leistung des Systems zu erhöhen oder diese zu reduzieren,
+                            wenn sie nicht mehr benötigt wird. Dies kann je nach System automatisch oder manuell erfolgen.
+                        </lsx-card>
+                    </lsx-col>
+                    <lsx-col size="md">
+                        <lsx-card title="Einfache Nutzung (Transparenz)" bold img="02-architektur/anforderung-transparenz.jpg" class="h-100">
+                            Zumindest für den Anwender sollte die inheränte Komplexität des Systems verborgen bleiben.
+                            Entwickler und Administratoren freuen sich aber auch, wenn sie sich nicht um jede Kleinigkeit
+                            kümmern müssen.
+                        </lsx-card>
+                    </lsx-col>
+                </lsx-row>
+                <lsx-row>
+                    <lsx-col size="md" class="mb-3 mb-md-0">
+                        <lsx-card title="Einfache Erweiterbarkeit" bold img="02-architektur/anforderung-erweiterbarkeit.jpg" class="h-100">
+                            Die Architektur muss flexibel genug sein, um einzelne Teile jederzeit austauschen oder
+                            verbessern zu können.
+                        </lsx-card>
+                    </lsx-col>
+                    <lsx-col size="md">
+                        <lsx-card title="Sicherheit" bold img="02-architektur/anforderung-sicherheit.jpg" class="h-100">
+                            Die Vertraulichkeit, Integrität und Authentizität des Systems und seiner Daten muss
+                            gewährleistet bleiben.
+                        </lsx-card>
+                    </lsx-col>
+                </lsx-row>
+                <lsx-row>
+                    <lsx-col size="md">
+                        <small>
+                            <small>
+                                Bildnachweise:
+                                <a href="https://pixabay.com/en/wallet-tape-measure-economical-levy-2383496/" target="_blank">Pixabay: Myriams-Fotos</a>,
+                                <a href="https://pixabay.com/en/house-of-cards-fragile-patience-763246/" target="_blank">Pixabay: wilhei</a>,
+                                <a href="https://pixabay.com/en/mixer-fader-digital-console-1631398/" target="_blank">Pixabay: michaelmep</a>,
+                                <a href="https://pixabay.com/en/glass-water-napkin-sky-reflection-2875091/" target="_blank">Pixabay: Michael-T</a>,
+                                <a href="https://pixabay.com/en/floor-plan-blueprint-house-home-1474454/" target="_blank">Pixabay: ElasticComputerFarm</a>,
+                                <a href="https://pixabay.com/en/building-cctv-door-female-ladies-1839464/" target="_blank">Pixabay: Pexels</a>
+                            </small>
+                        </small>
+                    </lsx-col>
+                </lsx-row>
+            </lsx-grid-fluid>
+        </div>
+    </section>
+
+    <section data-title="Verfügbarkeit und Leistung">
+        <article>
+            <lsx-grid-fluid>
+                <lsx-row>
+                    <lsx-col size="lg-7">
+                        <div style="height: 100%; display: flex; align-items: center;">
+                            <div class="markdown">
+                                #### Die acht Irrtümer verteilter Systeme
+
+                                1. Das Netzwerk ist immer verfügbar.
+                                1. Es gibt keine Latenzzeiten.
+                                1. Der Datendurchsatz ist unendlich schnell.
+                                1. Die Kommunikation ist automatisch sicher.
+                                1. Die Netzwerktopologie ist unveränderlich.
+                                1. Es gibt nur einen Administrator.
+                                1. Datentransfer kostet nichts.
+                                1. Das Netzwerk ist homogen.
+                            </div>
+                        </div>
+                    </lsx-col>
+                    <lsx-col size="lg">
+                        <img src="02-architektur/dilbert-1997-01-28.gif" class="d-block w-100 mb-3" />
+                        <img src="02-architektur/dilbert-1997-01-29.gif" class="d-block w-100 mb-3" />
+                        <img src="02-architektur/dilbert-2018-03-22.gif" class="d-block w-100 mb-3" />
+
+                        <small>
+                            <small>
+                                Bildnachweise:
+                                <a href="https://dilbert.com/strip/1997-01-28" target="_blank">Dilbert vom 28.01.1997</a>,
+                                <a href="https://dilbert.com/strip/1997-01-29" target="_blank">Dilbert vom 29.01.1997</a>,
+                                <a href="https://dilbert.com/strip/2018-03-22" target="_blank">Dilbert vom 22.03.2018</a>
+                            </small>
+                        </small>
+                    </lsx-col>
+                </lsx-row>
+            </lsx-grid-fluid>
+        </article>
+    </section>
+
+    <section data-title="Strategien zur Fehlerbehandlung" class="centered-content">
+        <lsx-grid-fluid class="limited-width2 p-0">
+            <lsx-row>
+                <lsx-col size="md-4" class="mb-3 mb-md-0">
+                    <lsx-card title="Fehler vermeiden" bold img="02-architektur/fehler-vermeiden.jpg" class="h-100">
+                        Zum Beispiel durch Eingabehilfen oder einen sauberen Programmierstil
+                    </lsx-card>
+                </lsx-col>
+                <lsx-col size="md-4" class="mb-3 mb-md-0">
+                    <lsx-card title="Fehler erkennen" bold img="02-architektur/fehler-erkennen.jpg" class="h-100">
+                        Zum Beispiel durch Checksummen, Plausiprüfungen oder Monitoring
+                    </lsx-card>
+                </lsx-col>
+                <lsx-col size="md">
+                    <lsx-card title="Fehler maskieren" bold img="02-architektur/fehler-maskieren.jpg" class="h-100">
+                        Zum Beispiel durch spätere Wiederholung des Vorgangs
+                    </lsx-card>
+                </lsx-col>
+            </lsx-row>
+            <lsx-row>
+                <lsx-col size="md-4" class="mb-3 mb-md-0">
+                    <lsx-card title="Fehler tolerieren" bold img="02-architektur/fehler-tolerieren.jpg" class="h-100">
+                        Zum Beispiel durch Speichern beider Versionen bei Schreibkonflikten
+                    </lsx-card>
+                </lsx-col>
+                <lsx-col size="md-4" class="mb-3 mb-md-0">
+                    <lsx-card title="Fehler beheben" bold img="02-architektur/fehler-beheben.jpg" class="h-100">
+                        Zum Beispiel durch automatisches Umschalten auf ein Hot-Standby
+                    </lsx-card>
+                </lsx-col>
+                <lsx-col size="md">
+                    <!-- Leer -->
+                </lsx-col>
+            </lsx-row>
+            <lsx-row>
+                <lsx-col size="md">
+                    <small>
+                        <small>
+                            Bildnachweise:
+                            <a href="https://pixabay.com/en/rappelling-rope-safety-security-755400/" target="_blank">Pixabay: cegoh</a>,
+                            <a href="https://pixabay.com/en/equipment-hospital-ecg-3089883/" target="_blank">Pixabay: hioahelsefag</a>,
+                            <a href="https://pixabay.com/en/redirect-shield-tree-attention-2257746/" target="_blank">Pixabay: Digitalpfade</a>,
+                            <a href="https://pixabay.com/en/home-single-family-home-on-the-head-2308799/" target="_blank">Pixabay: ulleo</a>,
+                            <a href="https://pixabay.com/en/first-aid-frog-medic-nurse-funny-1732708/" target="_blank">Pixabay: Alexas_Fotos</a>
+                        </small>
+                    </small>
+                </lsx-col>
+            </lsx-row>
+        </lsx-grid-fluid>
+    </section>
+
+    <section data-title="Beispiel: Cloud-Betrieb">
+        <article>
+            <lsx-grid-fluid class="p-0">
+                <lsx-row>
+                    <lsx-col size="md-9" class="mb-3">
+                        <img src="02-architektur/cloud-betriebsmodell.png" class="d-block w-100" />
+                    </lsx-col>
+                    <lsx-col size="md" class="d-flex flex-column gap-3">
+                        <lsx-card title="Automatisierung" bold class="small">
+                            Die Grundidee der Cloud ist, die Bereitstellung und den Betrieb verteilter
+                            Anwendungen so weit wie möglich zu automatisieren. Eine Cloudumgebung besteht
+                            daher aus einem großen Rechencluster, dessen Ressourcen auf viele Anwendungen
+                            aufgeteilt werden. Manuelle Installationsschritte sollen vermieden werden.
+                        </lsx-card>
+
+                        <lsx-card title="Skalierung und Elastizität" bold class="small">
+                            Über eine Cloud-Umgebung bereitgestellte Anwendungen können, zumindest bei den größeren
+                            Anbietern, vollkommen elastisch skaliert werden. Hierfür überwacht die Cloud-Plattform
+                            regelmäßig vorab definierte Kennzahlen einer Anwendung und fährt bei Bedarf weitere
+                            Service-Instanzen hoch oder runter.
+                        </lsx-card>
+
+                        <lsx-card title="Fehlertoleranz" bold class="small">
+                            Richtig zu Ende konfiguriert kann eine für den Cloud-Betrieb ausgelegt Anwendung somit
+                            skalierbar und fehlertolerant betrieben werden, da alle Komponenten redundant angelegt
+                            werden können (z.B. durch Starten mehrerer Instanzen parallel).
+                        </lsx-card>
+                    </lsx-col>
+                </lsx-row>
+            </lsx-grid-fluid>
+        </article>
     </section>
 
     <section data-title="Skalierbarkeit">
@@ -1113,7 +2062,6 @@
                                         in der Regel auch eigenem Massenspeicher. Die Einzelcomputer werden dabei in Storage Nodes zur
                                         Speicherung von Daten und in Compute Nodes zur Bereitstellung von Rechenleistung unterschieden.
                                     </p>
-                                    </lsx-ul>
                                     <div class="d-flex flex-wrap justify-content-center align-items-center gap-3">
                                         <img src="02-architektur/supercomputer1.svg" class="img-thumbnail d-block h-100" style="max-height: 30vh;"/>
                                         <img src="02-architektur/supercomputer2.jpg" class="img-thumbnail d-block h-100" style="max-height: 30vh;"/>
@@ -1162,126 +2110,9 @@
             </div>
         </article>
     </section>
-
-    <section data-title="Beispiel: Cloud-Betrieb">
-        <article>
-            <lsx-grid-fluid class="p-0">
-                <lsx-row>
-                    <lsx-col size="md-9" class="mb-3">
-                        <img src="02-architektur/cloud-betriebsmodell.png" class="d-block w-100" />
-                    </lsx-col>
-                    <lsx-col size="md" class="d-flex flex-column gap-3">
-                        <lsx-card title="Automatisierung" bold class="small">
-                            Die Grundidee der Cloud ist, die Bereitstellung und den Betrieb verteilter
-                            Anwendungen so weit wie möglich zu automatisieren. Eine Cloudumgebung besteht
-                            daher aus einem großen Rechencluster, dessen Ressourcen auf viele Anwendungen
-                            aufgeteilt werden. Manuelle Installationsschritte sollen vermieden werden.
-                        </lsx-card>
-
-                        <lsx-card title="Skalierung und Elastizität" bold class="small">
-                            Über eine Cloud-Umgebung bereitgestellte Anwendungen können, zumindest bei den größeren
-                            Anbietern, vollkommen elastisch skaliert werden. Hierfür überwacht die Cloud-Plattform
-                            regelmäßig vorab definierte Kennzahlen einer Anwendung und fährt bei Bedarf weitere
-                            Service-Instanzen hoch oder runter.
-                        </lsx-card>
-                    </lsx-col>
-                </lsx-row>
-            </lsx-grid-fluid>
-        </article>
-    </section>
 </section>
 
-<section data-title="Umgang mit Fehlersituationen">
-    <section data-title="Verfügbarkeit und Leistung">
-        <article>
-            <lsx-grid-fluid>
-                <lsx-row>
-                    <lsx-col size="lg-7">
-                        <div style="height: 100%; display: flex; align-items: center;">
-                            <div class="markdown">
-                                #### Die acht Irrtümer verteilter Systeme
-
-                                1. Das Netzwerk ist immer verfügbar.
-                                1. Es gibt keine Latenzzeiten.
-                                1. Der Datendurchsatz ist unendlich schnell.
-                                1. Die Kommunikation ist automatisch sicher.
-                                1. Die Netzwerktopologie ist unveränderlich.
-                                1. Es gibt nur einen Administrator.
-                                1. Datentransfer kostet nichts.
-                                1. Das Netzwerk ist homogen.
-                            </div>
-                        </div>
-                    </lsx-col>
-                    <lsx-col size="lg">
-                        <img src="02-architektur/dilbert-1997-01-28.gif" class="d-block w-100 mb-3" />
-                        <img src="02-architektur/dilbert-1997-01-29.gif" class="d-block w-100 mb-3" />
-                        <img src="02-architektur/dilbert-2018-03-22.gif" class="d-block w-100 mb-3" />
-
-                        <small>
-                            <small>
-                                Bildnachweise:
-                                <a href="https://dilbert.com/strip/1997-01-28" target="_blank">Dilbert vom 28.01.1997</a>,
-                                <a href="https://dilbert.com/strip/1997-01-29" target="_blank">Dilbert vom 29.01.1997</a>,
-                                <a href="https://dilbert.com/strip/2018-03-22" target="_blank">Dilbert vom 22.03.2018</a>
-                            </small>
-                        </small>
-                    </lsx-col>
-                </lsx-row>
-            </lsx-grid-fluid>
-        </article>
-    </section>
-
-    <section data-title="Strategien zur Fehlerbehandlung" class="centered-content">
-        <lsx-grid-fluid class="limited-width2 p-0">
-            <lsx-row>
-                <lsx-col size="md-4" class="mb-3 mb-md-0">
-                    <lsx-card title="Fehler vermeiden" bold img="02-architektur/fehler-vermeiden.jpg" class="h-100">
-                        Zum Beispiel durch Eingabehilfen oder einen sauberen Programmierstil
-                    </lsx-card>
-                </lsx-col>
-                <lsx-col size="md-4" class="mb-3 mb-md-0">
-                    <lsx-card title="Fehler erkennen" bold img="02-architektur/fehler-erkennen.jpg" class="h-100">
-                        Zum Beispiel durch Checksummen, Plausiprüfungen oder Monitoring
-                    </lsx-card>
-                </lsx-col>
-                <lsx-col size="md">
-                    <lsx-card title="Fehler maskieren" bold img="02-architektur/fehler-maskieren.jpg" class="h-100">
-                        Zum Beispiel durch spätere Wiederholung des Vorgangs
-                    </lsx-card>
-                </lsx-col>
-            </lsx-row>
-            <lsx-row>
-                <lsx-col size="md-4" class="mb-3 mb-md-0">
-                    <lsx-card title="Fehler tolerieren" bold img="02-architektur/fehler-tolerieren.jpg" class="h-100">
-                        Zum Beispiel durch Speichern beider Versionen bei Schreibkonflikten
-                    </lsx-card>
-                </lsx-col>
-                <lsx-col size="md-4" class="mb-3 mb-md-0">
-                    <lsx-card title="Fehler beheben" bold img="02-architektur/fehler-beheben.jpg" class="h-100">
-                        Zum Beispiel durch automatisches Umschalten auf ein Hot-Standby
-                    </lsx-card>
-                </lsx-col>
-                <lsx-col size="md">
-                    <!-- Leer -->
-                </lsx-col>
-            </lsx-row>
-            <lsx-row>
-                <lsx-col size="md">
-                    <small>
-                        <small>
-                            Bildnachweise:
-                            <a href="https://pixabay.com/en/rappelling-rope-safety-security-755400/" target="_blank">Pixabay: cegoh</a>,
-                            <a href="https://pixabay.com/en/equipment-hospital-ecg-3089883/" target="_blank">Pixabay: hioahelsefag</a>,
-                            <a href="https://pixabay.com/en/redirect-shield-tree-attention-2257746/" target="_blank">Pixabay: Digitalpfade</a>,
-                            <a href="https://pixabay.com/en/home-single-family-home-on-the-head-2308799/" target="_blank">Pixabay: ulleo</a>,
-                            <a href="https://pixabay.com/en/first-aid-frog-medic-nurse-funny-1732708/" target="_blank">Pixabay: Alexas_Fotos</a>
-                        </small>
-                    </small>
-                </lsx-col>
-            </lsx-row>
-        </lsx-grid-fluid>
-    </section>
-    
+<section data-title="Verteilte Transaktionen">
     <section data-title="Das CAP-Theorem" class="centered-content">
         <div class="limited-width2">
             <div class="dhbw-text-columns mb-4" detail-content>
@@ -1305,12 +2136,12 @@
                                     Alle Knoten sehen immer exakt dieselben, konsistenten Daten. Bei replizierten Datenbeständen
                                     werden die Änderungen daher erst sichtbar, wenn sie in allen Repliken nachgezogen wurden.
                                 </lsx-card>
-            
+
                                 <lsx-card title="Availability (Verfügbarkeit)" bold>
                                     Das System ist jederzeit erreichbar und überschreitet niemals die maximal zulässige
                                     Antwortzeit.
                                 </lsx-card>
-            
+
                                 <lsx-card title="Partition Tolerance (Partitionstoleranz)" bold>
                                     Die Anwendung funktioniert auch dann noch, wenn einzelne Teile ausgefallen sind.
                                 </lsx-card>
@@ -1326,12 +2157,12 @@
                         internet-basierten, verteilten Systemen zu. Häufig entscheidet man sich deshalb zu einer
                         aufgeweichten "quasi-konsistenz", bei der kurzzeitige Inkonsistenzen zu Gunsten einer erhöhten
                         Verfügbarkeit in Kauf genommen werden. Hierzu ein Beispiel und ein Gegenbeispiel:
-            
+
                         * __Quasi-Konsistenz (Verfügbarkeit vor Konsistenz):__ In weltweit genutzten, sozialen Netzwerken
                         wie Youtube oder Facebook kann es sicher vorkommen, dass ein Like oder Kommentar nicht sofort für
                         alle Seitenbesucher*innen sichtbar wird, da dieser erst in die geografisch verteilten Datenbanken
                         repliziert werden muss. Nach einer kurzen Weile ist der Like oder Kommentar jedoch weltweit sichtbar.
-            
+
                         * __Konsistenz vor Verfügbarkeit:__ Als Internetauktion auf eBay im Trend waren (und eBay noch
                         auf Privatverkäufe ausgelegt war), war es üblich, möglichst knapp vor Ende der Auktion zu bieten,
                         um anderen Mitbietern zuvor zu kommen. Die letzten Sekunden vor Auktionsschluss sind daher die
@@ -1345,9 +2176,7 @@
             </lsx-tab-pages>
         </div>
     </section>
-</section>
 
-<section data-title="Verteilte Transaktionen">
     <section data-title="Klassische Transaktionsalgorithmen" class="centered-content">
         <div class="limited-width2">
             <lsx-tab-pages>
@@ -1477,47 +2306,8 @@
             </div>
         </div>
     </section>
-
-    <section data-title="Grundregel verteilter Systeme" class="centered-content">
-        <div class="limited-width2">
-            <lsx-grid-fluid class="p-0">
-                <lsx-row>
-                    <lsx-col size="md">
-                        <img src="02-architektur/grundregel1.jpg" class="img-thumbnail d-block w-100" alt="First rule of distributed systems: Don't do it!">
-                    </lsx-col>
-                    <lsx-col size="md">
-                        <img src="02-architektur/grundregel2.jpg" class="img-thumbnail d-block w-100">
-                    </lsx-col>
-                </lsx-row>
-            </lsx-grid-fluid>
-            <p>
-                <small>
-                    <small>
-                        Bildnachweise: OpenAI DALL-E, Prompt: First rule of distributed systems: Don't do it
-                    </small>
-                </small>
-            </p>
-
-            <p>
-                Warum diese merkwürdig anmutende Regel? Weil Verteilte Systeme nicht die Lösung für alle Probleme sind
-                („mit dem Hammer in der Hand …”), jedoch ihre ganz eigenen Probleme mitbringen, die nicht immer leicht
-                zu lösen sind.
-            </p>
-
-            <lsx-ul emoji="⁉️">
-                <li>Aufteilung der Anwendungslogik in unabhängige Teilkomponenten</li>
-                <li>Definition passender Schnittstellen zwischen den Komponenten</li>
-                <li>Zuverlässiger Datenaustausch über ein unzuverlässiges Netzwerk</li>
-                <li>Sicherstellen der Datenkonsistenz in verteilten Transaktionen</li>
-                <li>Partitionierung, Replikation und Verfügbarkeit von Daten</li>
-                <li>Koordination vieler verschiedener Knoten (wer ist der Chef?)</li>
-                <li>Und viele mehr</li>
-            </lsx-ul>
-
-            <p>Natürlich gibt es dennoch viele sinnvolle Einsatzgebiete. Sonst würde es diese Vorlesung ja gar nicht geben. 😵‍💫</p>
-        </div>
-    </section>
 </section>
+
 
 <section data-title="Übungsaufgaben" data-background-color="rgb(231, 221, 141)">
     <section data-title="Aufgabe 1: Ein kleines Verteilte-Systeme-Quiz">
@@ -2012,7 +2802,6 @@
                         ebenfalls nachinstalliert werden muss.
                     </small>
                 </div>
-                </lsx-tab-page>
             </lsx-tab-pages>
         </article>
         <aside>
@@ -2378,909 +3167,10 @@
     </section>
 </section>
 
-<!-- ========================== -->
-<!-- Typische Architekturmuster -->
-<!-- ========================== -->
-<section data-use-template="teilkapitel" data-titel="Grundlegende Architekturmodelle"></section>
-
-<section data-title="Der TCP/IP-Protokollstapel">
-    <section data-title="Beteiligte Komponenten">
-        <article class="centered-content">
-            <div class="limited-width">
-                <div class="markdown mb-4" detail-content>
-                    Die überwiegende Mehrheit der verteilten Anwendungen laufen heute über das Internet oder nutzen zumindest
-                    den TCP/IP-Protokollstapel. Das verteilte System besteht in diesem Fall aus einer beliebigen Anzahl von
-                    Rechnerknoten mit einem netzwerkfähigen Betriebssystem, die über untereinander Nachrichten austauschen können.
-                    Die auf den Rechnern laufenden Programmkomponenten bilden in ihrer Gesamtheit die eigentliche verteilte
-                    Anwendung.
-                </div>
-
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="tcpip-details-switch">
-                            <label class="form-check-label" for="tcpip-details-switch">Details anzeigen</label>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <img src="02-architektur/tcpip-stack1.png" id="tcpip-stack1" class="d-block w-100" alt="Vereinfachter schematischer Aufbau eines verteilten Systems">
-                        <img src="02-architektur/tcpip-stack2.png" id="tcpip-stack2" class="d-block w-100 hidden" alt="Vereinfachter schematischer Aufbau eines verteilten Systems">
-                    </div>
-                </div>
-
-                <div id="tcpip-stack3" class="markdown hidden" detail-content>
-                    Der Netzwerk-Stack des Betriebssystems wird grob wie folgt unterteilt:
-
-                    * **Netzwerkschicht:** Dient der Anbindung an das physikalische Netzwerk, z.B. Ethernet oder WiFi.
-
-                    * **Vermittlungsschicht:** Dient der Adressierung der Rechnerknoten und dem Routing von Datenpaketen
-                      über lokale Netzwerkgrenzen hinweg. Auf dieser Ebene läuft das
-                      [Internet Protocol (IP)](https://de.wikipedia.org/wiki/Internet_Protocol){target=_blank}, das jedem
-                      Rechner eine (global) eindeutige IP-Adresse zuweist.
-
-                    * **Transportschicht:** Dient der Adressierung mehrerer Dienste auf einem Rechner und der optionalen
-                      Sicherstellung eine zuverlässigen Datenaustauschs. Auf dieser Ebene laufen das
-                      [Transport Control Protocol (TCP)](https://de.wikipedia.org/wiki/Transmission_Control_Protocol){target=_blank}
-                      und das [User Datagram Protocol (UDP)](https://de.wikipedia.org/wiki/User_Datagram_Protocol){target=_blank},
-                      welche die Portnummern verwalten.
-
-                    * **Anwendungsschicht:** Die eigentlichen auf dem Rechnerknoten laufenden Anwendungsprogramme.
-                      Im einfachsten Fall nutzen diese die unteren Schichten direkt, um untereinander Daten auszutauschen.
-                      Die meisten Betriebssysteme bzw. Programmiersprachen stellen hierfür
-                      [Streams und Sockets](https://de.wikipedia.org/wiki/Socket_%28Software%29){target=_blank}
-                      als Programmierschnittstelle bereit.
-
-                      In größeren Anwendungen kommen jedoch spezialisierte Anwendungsprotokolle zum Einsatz, die
-                      losgelöst vom fachlichen Anwendungscode entwickelt werden.
-                </div>
-
-                <script>
-                    window.toggle_tcpip_details = function() {
-                        let checkbox = document.querySelector("#tcpip-details-switch");
-                        let image1   = document.querySelector("#tcpip-stack1");
-                        let image2   = document.querySelector("#tcpip-stack2");
-                        let details  = document.querySelector("#tcpip-stack3");
-
-                        image1.classList.remove("hidden");
-                        image2.classList.remove("hidden");
-                        details.classList.remove("hidden");
-
-                        if (checkbox.checked) {
-                            image1.classList.add("hidden");
-                        } else {
-                            image2.classList.add("hidden");
-                            details.classList.add("hidden");
-                        }
-                    }
-
-                    window.addEventListener("ls-slide-changed", () => {
-                        window.setTimeout(function() {
-                            let checkbox = document.querySelector("#tcpip-details-switch");
-                            if (!checkbox) return;
-
-                            checkbox.addEventListener("change", toggle_tcpip_details);
-                        }, 1000);
-                    });
-                </script>
-            </div>
-        </article>
-    </section>
-
-    <section data-title="Von Clients, Servern und Peers">
-        <article class="centered-content">
-            <div class="limited-width2">
-                <p class="mb-4" detail-content>
-                    Im Zusammenhang mit verteilten Netzwerkanwendungen haben sich bereits früh folgende Rollenbezeichnungen,
-                    etabliert. Die Begriffe haben dabei eine klar definierte Bedeutung, werden im Alltag aber leider oft sehr
-                    frei ausgelegt.
-                </p>
-
-                <lsx-grid-fluid class="p-0 mb-5">
-                    <lsx-row>
-                        <lsx-col size="md-8">
-                            <table class="w-100">
-                                <tr>
-                                    <td style="padding-right: 0.5em;">
-                                        💿
-                                    </td>
-                                    <td style="padding-right: 0.5em;">
-                                        <b>Server</b>
-                                    </td>
-                                    <td>
-                                        Langlaufendes Programm, das einen Dienst zur Verfügung stellt.
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding-right: 0.33em;">
-                                        💿
-                                    </td>
-                                    <td style="padding-right: 0.5em;">
-                                        <b>Client</b>
-                                    </td>
-                                    <td>
-                                        Kurzlebiges Programm, das den Dienst nutzt.
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding-right: 0.5em; padding-bottom: 1em;">
-                                        💿
-                                    </td>
-                                    <td style="padding-right: 0.5em; padding-bottom: 1em;">
-                                        <b>Peer</b>
-                                    </td>
-                                    <td style="padding-bottom: 1em;">
-                                        Spezielles Programm, das sowohl Client als auch Server für denselben Dienst ist.
-                                    </td>
-                                </tr>
-                                <tr style="border: 0px dashed grey; border-top-width: 1px;">
-                                    <td style="padding-top: 1em; padding-right: 0.5em;">
-                                        🖥
-                                    </td>
-                                    <td style="padding-top: 1em; padding-right: 0.5em;">
-                                        <b>Host</b>
-                                    </td>
-                                    <td style="padding-top: 1em;">
-                                        Der Rechner, auf dem eines der obigen Programme läuft.
-                                    </td>
-                                </tr>
-                            </table>
-                        </lsx-col>
-                        
-                        <lsx-col size="md">
-                            <lsx-info-box title="Merke">
-                                Ein Server erbringt einen Dienst, den Service.
-                            </lsx-info-box>
-                        </lsx-col>
-                    </lsx-row>
-                </lsx-grid-fluid>
-
-
-                <div class="d-flex gap-3 justify-content-center">
-                    <lsx-card title="Client/Server-Architektur" bold>
-                        <img src="02-architektur/client-server.svg" alt="Skizze mit vielen Clients und einem Server in der Mitte" class="d-block w-100" />
-                    </lsx-card>
-                    <lsx-card title="Peer-to-Peer-Architektur" bold>
-                        <img src="02-architektur/peer-to-peer.svg" alt="Skizze mit vielen untereinander verbundenen Peers" class="d-block w-100" />
-                    </lsx-card>
-                </div>
-            </div>
-        </article>
-    </section>
-
-    <section data-title="Fallbeispiel: Sockets in Node.js">
-        <article class="centered-content">
-            <div class="limited-width2 mb-4">
-                <div class="markdown dhbw-text-columns mb-4" detail-content>
-                    Das nachfolgende Beispiel zeigt eine kleine Client/Server-Anwendung mit Node.js und JavaScript.
-                    Client und Server setzen auf dem eben gezeigten TCP/IP-Protokollstapel auf und nutzen die Klassen
-                    [`net.Server`](https://nodejs.org/docs/latest/api/net.html#class-netserver){target=_blank} bzw.
-                    [`net.Socket`](https://nodejs.org/docs/latest/api/net.html#class-netsocket){target=_blank} für
-                    den Datenaustausch. Es handelt sich dabei um die niedrigste Ebene, auf der Netzwerkanwendungen
-                    mit [Node.js](https://nodejs.org/en){target=_blank} programmiert werden können.
-                </div>
-
-                <div class="d-flex flex-column gap-3 mb-4 fs-6">
-                    <div class="d-flex gap-3 align-items-center">
-                        <lsx-github-edit url="Beispiele/Socket-Minimalbeispiel"></lsx-github-edit>
-                        <div>Minimalbeispiel</div>
-                    </div>
-                    <div class="d-flex gap-3 align-items-center">
-                        <lsx-github-edit url="Beispiele/Socket-Sprachserver"></lsx-github-edit>
-                        <div>Sprachserver</div>
-                    </div>
-                </div>
-
-                <lsx-accordion class="mb-4">
-                    <lsx-accordion-page title="Grundgerüst der Serveranwendung" bold>
-                        <div class="markdown" detail-text>
-                            Innerhalb der Serveranwendung muss ein Server-Objekt erzeugt und dessen
-                            <src-code language="javascript">listen()</src-code>-Methode aufgerufen werden,
-                            um TCP/IP-Verbindungsanfragen behandeln zu können. Für jeden neuen Client wird
-                            eine Rückruffunktion zur Abwicklung des Datenaustauschs aufgerufen. Diese bekommt
-                            ein <code>Socket</code>-Objekt zum Senden und Empfangen der Daten übergeben.
-                        </div>
-
-                        <lsx-tab-pages>
-                            <lsx-tab-page title="Schritte">
-                                <lsx-ul>
-                                    <li>
-                                        <code>Server</code>-Objekt erzeugen mit <src-code language="javascript">net.createServer()</src-code>
-                                    </li>
-                                    <li>
-                                        <src-code language="javascript">listen()</src-code>-Methode aufrufen, um auf
-                                        Clientverbindungen zu warten
-                                    </li>
-                                    <li>
-                                        Callback-Funktion zur Abwicklung der Kommunikation mit einem Client übergeben
-                                    </li>
-                                    <li>
-                                       Innerhalb der Client-Funktionen die <code>Socket</code>-Events und Metoden verwenden
-                                    </li>
-                                </lsx-ul>
-                            </lsx-tab-page>
-
-                            <lsx-tab-page title="Quellcode">
-                                <source-code language="javascript">
-                                    import net from "net";
-
-                                    // Socket-Server starten
-                                    let server = net.createServer(socket => {
-                                        // Verbindung mit neuem Client hergestellt
-                                        log(socket, "Client verbunden");
-
-                                        socket.setEncoding("utf-8");
-                                        socket.setNoDelay();
-                                        socket.write("Hallo! Ich bin der Server.\n");
-
-                                        socket.on("error", err => log(socket, err));
-                                        socket.on("close", () => log(socket, "Client getrennt"));
-
-                                        socket.on("data", data => {
-                                            log(socket, "Empfangene Daten:", data);
-                                            socket.write(data);
-                                        });
-                                    });
-
-                                    server.listen("7000", "localhost");
-                                </source-code>
-                            </lsx-tab-page>
-                        </lsx-tab-pages>
-                    </lsx-accordion-page>
-
-                    <lsx-accordion-page title="Grundgerüst der Clientanwendung" bold>
-                        <div class="markdown" detail-text>
-                            Die Programmierung der Clientseite erfolgt grundsätzlich gleich, nur dass hier die Methode
-                            <src-code language="javascript">net.createConnection()</src-code> verwendet werden muss, um
-                            eine Verbindung zum Server herzustellen. Analog zum Serverbeispiel erwartet diese eine
-                            Callback-Funktion innerhalb derer ein <code>Socket</code>-Objekt zur Abwicklung des
-                            Datenaustauschs verwendet werden kann. Was den hier gezeigten Quellcode allerdings komplexer
-                            als die Serverseite macht, ist dass hier mit Hilfe der Klasse <code>EventEmitter</code>
-                            eine Synchronisation zwische den vielen Event Handlern hergestellt werden muss, um die
-                            Reihenfolge aus Anfrage und Antwort korrekt einhalten zu können.
-                        </div>
-
-                        <lsx-tab-pages>
-                            <lsx-tab-page title="Schritte">
-                                <lsx-ul>
-                                    <li>
-                                        <code>Socket</code>-Objekt erzeugen mit <src-code language="javascript">net.createConnection()</src-code>
-                                    </li>
-                                    <li>
-                                        Callback-Funktion zur Abwicklung der Kommunikation mit einem Server übergeben
-                                    </li>
-                                    <li>
-                                        Innerhalb der Client-Funktionen die <code>Socket</code>-Events und Metoden verwenden
-                                    </li>
-                                    <li>
-                                        Ggf. Klassen wie <code>EventEmitter</code> nutzen, um die richtige Reihenfolge sicherzustellen
-                                    </li>
-                                </lsx-ul>
-                            </lsx-tab-page>
-
-                            <lsx-tab-page title="Quellcode">
-                                <source-code language="javascript">
-                                    import net                from "net";
-
-                                    import * as readline      from 'node:readline/promises';
-                                    import {stdin as input}   from 'node:process';
-                                    import {stdout as output} from 'node:process';
-
-                                    import {EventEmitter}     from 'node:events';
-                                    import {once}             from 'node:events';
-
-                                    let rl           = readline.createInterface({input, output});
-                                    let dataReceived = new EventEmitter();
-                                    let connected    = false;
-
-                                    // Verbindung mit Server herstellen und Protokoll abwickeln
-                                    let socket = net.createConnection({host: "localhost", port: 7000}, async () => {
-                                        socket.setNoDelay();
-                                        connected = true;
-
-                                        while (connected) {
-                                            let input = await rl.question("Ihre Eingabe: ");
-                                            if (!connected) break;
-
-                                            // Daten an den Server schicken
-                                            if (input) {
-                                                socket.write(input);
-
-                                                // Antwort vom Server anzeigen
-                                                let response = await once(dataReceived, "data");
-                                                console.log("Server:", response[0], "\n");
-                                            } else {
-                                                connected = false;
-                                            }
-                                        }
-
-                                        // Verbindung trennen
-                                        socket.end();
-                                        socket.destroy();
-
-                                        rl.close();
-                                    });
-
-
-                                    // Empfangene Daten an die Hauptschleife oben schicken
-                                    socket.on("data", data => {
-                                        data = data.toString();
-                                        dataReceived.emit("data", data);
-                                    });
-
-                                    socket.on("error", err => console.error("\n", err));
-                                    socket.on("end", () => connected = false);
-                                </source-code>
-                            </lsx-tab-page>
-                        </lsx-tab-pages>
-                    </lsx-accordion-page>
-
-                    <lsx-accordion-page title="Ausgetauschte Rohdaten" bold>
-                        <div class="markdown mb-4" detail-text>
-                            In der Tradition klassischer Internetdienste nutzt die Beispielanwendung ein einfach
-                            gestricktes, textbasiertes Protokoll zur Verständigung zwischen Client und Server.
-                            Der Screenshot zeigt die zwischen beiden Seiten ausgetauschten Daten, wobei die Sitzung
-                            immer mit einer `HELLO`-Nachricht vom Client an den Server beginnt. Für dieses Beispiel
-                            wurde mit dem Programm [netcat](https://de.wikipedia.org/wiki/Netcat){target=_blank}
-                            eine direkte Socketverbindung zum Server hergestellt, anstelle die JavaScript-Clientanwendung
-                            zu verwenden.
-                        </div>
-
-                        <img src="02-architektur/socket-netcat.png" class="d-block w-100" alt="Ausgetauschte Rohdaten">
-                    </lsx-accordion-page>
-                </lsx-accordion>
-
-                <div class="d-flex flex-column flex-md-row gap-3">
-                    <img src="02-architektur/socket-server.png" class="img-thumbnail d-block w-100" alt="Serverprogramm">
-                    <img src="02-architektur/socket-client.png" class="img-thumbnail d-block w-100" alt="Clientprogramm">
-                </div>
-            </div>
-        </article>
-    </section>
-
-    <section data-title="Benutzeroberfläche des Beispiels">
-        <article class="centered-content">
-            <div style="width: 35em; max-width: 100%;">
-                <img src="02-architektur/frontenders-and-backenders.jpeg" class="d-block w-100">
-                <small>
-                    <small>
-                        Bildnachweis:
-                        <a href="https://turnoff.us/geek/frontenders-and-backenders/" target="_blank">turnoff.us</a>
-                    </small>
-                </small>
-            </div>
-        </article>
-    </section>
-
-    <section data-title="Heute übliche Programmiermodelle">
-        <article class="centered-content">
-            <div class="limited-width2">
-
-                <lsx-grid-fluid>
-                    <lsx-row>
-                        <lsx-col size="md">
-                            <lsx-card title="App-Server / Frameworks" bold class="h-100">
-                                <lsx-card-body class="h-100 d-flex flex-column">
-                                    <lsx-ul emoji="🎙️">
-                                        <li>Beinhalten für Business Apps übliche Grundfunktionen</li>
-                                        <li>Unterstützen verschieden Schnittstellentechnologien</li>
-                                        <li>Oft auf die Entwicklung von Webanwendungen ausgerichtet</li>
-                                    </lsx-ul>
-
-                                    <div style="flex: 1"></div>
-                                    <img src="02-architektur/arten-appserver.png" alt="" class="w-100" />
-                                </lsx-card-body>
-                            </lsx-card>
-                        </lsx-col>
-
-                        <lsx-col size="md">
-                            <lsx-card title="Entfernte Methodenaufrufe" bold class="h-100">
-                                <lsx-card-body class="h-100 d-flex flex-column">
-                                    <lsx-ul emoji="🎙️">
-                                        <li>Direkter Aufruf von Funktionen/Methoden des Servers</li>
-                                        <li>Sowohl prozedural als auch objekt-orientiert möglich</li>
-                                        <li>Teilweise auch zwischen verschiedenen Programmiersprachen</li>
-                                    </lsx-ul>
-
-                                    <div style="flex: 1"></div>
-                                    <img src="02-architektur/arten-methodenaufrufe.png" alt="" class="w-100" />
-                                </lsx-card-body>
-                            </lsx-card>
-                        </lsx-col>
-                    </lsx-row>
-
-                    <lsx-row>
-                        <lsx-col size="md">
-                            <lsx-card title="Webservices" bold class="h-100">
-                                <lsx-card-body class="h-100 d-flex flex-column">
-                                    <lsx-ul emoji="🎙️">
-                                        <li>Grundsätzlich dieselbe Idee wie bei entfernten Methodenaufrufen</li>
-                                        <li>Jedoch auf Basis von Webstandards wie HTTP, XML, JSON</li>
-                                        <li>Früher SOAP, heute überwiegend REST-Webservices</li>
-                                    </lsx-ul>
-
-                                    <div style="flex: 1"></div>
-                                    <img src="02-architektur/arten-webservices.png" alt="" class="w-100" />
-                                </lsx-card-body>
-                            </lsx-card>
-                        </lsx-col>
-
-                        <lsx-col size="md">
-                            <lsx-card title="Message Broker" bold class="h-100">
-                                <lsx-card-body class="h-100 d-flex flex-column">
-                                    <lsx-ul emoji="🎙️">
-                                        <li>Grundsätzlich asynchroner Nachrichtenaustausch</li>
-                                        <li>Mehrere Empfänger für eine Nachricht möglich und üblich</li>
-                                        <li>Store and Forward der Nachrichten in einer FIFO-Warteschlange</li>
-                                    </lsx-ul>
-
-                                    <div style="flex: 1"></div>
-                                    <img src="02-architektur/arten-pubsub.png" alt="" class="w-100" />
-                                </lsx-card-body>
-                            </lsx-card>
-                        </lsx-col>
-                    </lsx-row>
-                </lsx-grid-fluid>
-            </div>
-        </article>
-    </section>
-
-    <section data-title="Historische Entwicklung">
-        <article class="centered-content">
-            <div class="centered-content flex-row flex-wrap gap-3">
-                <!-- Host-to-Host -->
-                <lsx-modal>
-                    <lsx-thumbnail style="height: 14em;" class="mw-100">
-                        <img src="02-architektur/historie-abb1.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
-                    </lsx-thumbnail>
-                    <lsx-content>
-                        <lsx-card title="Host-to-Host" bold class="mh-100 mw-100" style="width: 35em;">
-                            <lsx-card-body class="overflow-auto">
-                                <p style="text-align: justify; hyphens: auto;">
-                                    Vor Erfindung des ARPANET und ähnlicher Computernetze in den 1960er-Jahren gab es noch kein
-                                    anerkanntes Modell, wie zwei Computer untereinander Daten austauschen können. Die einzige
-                                    Möglichkeit war, eine direkte Kabelverbindung „host-to-host” herzustellen, wobei hierfür
-                                    Hard- und Software auf beiden Seiten komplett selbst entwickelt werden mussten.
-                                </p>
-
-                                <lsx-ul emoji="🔌" class="mb-4">
-                                    <li>Direkte Kabelverbindung zwischen zwei Rechnern</li>
-                                    <li>Keine Unterstützung durch das Betriebssystem</li>
-                                </lsx-ul>
-
-                                <img src="02-architektur/historie-kabel.svg" alt="Zwei VS-Knoten mit direkter Kabelverbindung" style="width: 100%; margin-bottom: 1em;" />
-                                <img src="02-architektur/historie-abb1.jpg" alt="" style="width: 100%;" />
-                            </lsx-card-body>
-                        </lsx-card>
-                    </lsx-content>
-                </lsx-modal>
-
-                <!-- Packet Switching -->
-                <lsx-modal>
-                    <lsx-thumbnail style="height: 14em;" class="mw-100">
-                        <img src="02-architektur/historie-abb2.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
-                    </lsx-thumbnail>
-                    <lsx-content>
-                        <lsx-card title="Packet Switching" bold class="mh-100 mw-100" style="width: 35em;">
-                            <lsx-card-body class="overflow-auto">
-                                <p style="text-align: justify; hyphens: auto;">
-                                    In den ausgehenden 1960er-Jahren wurde für die neuentwickelten Computernetzwerke das auch heute
-                                    noch gültige Prinzip des Packet Switching erfunden. Die Idee dahinter ist, die zu versendenden
-                                    Daten in kleine Pakete zu zerlegen und jedes Paket seinen eigenen Weg durch das Netzwerk vom
-                                    Sender zum Empfänger suchen zu lassen. Heute haben wir Router für diese Aufgabe. Im ARPANET hießen
-                                    diese „Interface Message Processor” und waren so groß wie ein Schrank.
-                                </p>
-
-                                <lsx-ul emoji="📦" class="mb-4">
-                                    <li>NCP und später TCP als Vorläufer von TCP/IP</li>
-                                    <li>Weltweiter Datenaustausch zwischen allen Hosts</li>
-                                    <li>Anschluss des Computers hierfür an einen <a href="https://en.wikipedia.org/wiki/Interface_Message_Processor" target="_blank">IMP</a></li>
-                                </lsx-ul>
-
-                                <img src="02-architektur/imp-subnet.svg" alt="Netzwerktopologie des früheren ARPANET" style="width: 100%; margin-bottom: 1em;" />
-
-                                <!-- <lsx-youtube class="img-thumbnail embed-responsive" video="yU9oMOcRsuE"></lsx-youtube> -->
-                                <div class="centered-content">
-                                    <div class="embed-responsive ratio ratio-16x9 limited-width">
-                                        <iframe class="d-block" src="https://www.youtube-nocookie.com/embed/yU9oMOcRsuE?rel=0&amp;showinfo=0" allowfullscreen></iframe>
-                                    </div>
-                                </div>
-                            </lsx-card-body>
-                        </lsx-card>
-                    </lsx-content>
-                </lsx-modal>
-
-                <!-- Sockets- und Middleware -->
-                <lsx-modal>
-                    <lsx-thumbnail style="height: 14em;">
-                        <img src="02-architektur/historie-abb3.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
-                    </lsx-thumbnail>
-                    <lsx-content>
-                        <lsx-card title="Streams und Sockets" bold class="mh-100 mw-100" style="width: 35em;">
-                            <lsx-card-body class="overflow-auto">
-                                <p style="text-align: justify; hyphens: auto;">
-                                    Obwohl die heute vorherrschenden Streams und Sockets noch nicht erfunden waren (dies geschah erst 1983 mit
-                                    Veröffentlichung der Socket API für BSD Unix), suchte man bereits in den 1970er-Jahren nach Möglichkeiten,
-                                    die Netzwerkprogrammierung zu vereinfachen. In dieser Zeit wurde der „entfernte Prozeduraufruf“ erfunden,
-                                    bei dem die Unterprogramme (bzw. Funktionen bzw. Methoden, je nach Programmiersprache) eines Serverprogramms
-                                    über das Netzwerk direkt aufgerufen werden können, ohne den konkreten Datenaustausch auf Byte-Ebene hierfür
-                                    kennen zu müssen.
-                                </p>
-
-                                <lsx-ul emoji="📃" class="mb-4">
-                                    <li><a href="https://de.wikipedia.org/wiki/Remote_Procedure_Call" target="_blank">Remote Procedure Call</a> ab den 1970ern</li>
-                                    <li>Zunächst konkurrierende Programmiermodelle</li>
-                                    <li>Streams und Sockets ab 1983 in BSD Unix</li>
-                                </lsx-ul>
-
-                                <img src="02-architektur/historie-sockets.svg" alt="Zwei VS-Knoten mit Middleware" style="width: 100%; margin-bottom: 1em;" />
-                                <img src="02-architektur/historie-abb3.jpg" alt="" style="width: 100%;" />
-                            </lsx-card-body>
-                        </lsx-card>
-                    </lsx-content>
-                </lsx-modal>
-
-                <!-- Applikationsserver -->
-                <lsx-modal>
-                    <lsx-thumbnail style="height: 14em;">
-                        <img src="02-architektur/historie-abb4.jpg" class="d-block h-100 mw-100 dhbw-thumbnail"/>
-                    </lsx-thumbnail>
-                    <lsx-content>
-                        <lsx-card title="Applikationsserver" bold class="mh-100 mw-100" style="width: 35em;">
-                            <lsx-card-body class="overflow-auto">
-                                <p style="text-align: justify; hyphens: auto;">
-                                    Mit zunehmendem Umfang der Anforderungen stieg spätestens ab Mitte der 1990er-Jahre auch die
-                                    Komplexität typischer verteilter Anwendungen deutlich an. In Folge daraus versuchte man über
-                                    den Datenaustauschs hinausgehende Querschnittsfunktionen typischer Informationssysteme in sog.
-                                    Applikationsserver auszugliedern, die als generische Laufzeitumgebung frei programmierbar an
-                                    den jeweiligen Anwendungsfall angepasst werden konnten.
-                                </p>
-                                <p style="text-align: justify; hyphens: auto;">
-                                    Aus heutiger Sicht vereinfacht das damit verbundene Programmiermodell die Erstellung neuer
-                                    Anwendungen zwar drastisch, wird aber dennoch als schwerfällig und komplex empfunden. Heute
-                                    geht der Trend stattdessen mehr in die Richtung, die ehemals vom Applikationsserver bereitgestellten
-                                    Funktionen in Form Quellcode-Bibliotheken oder Micro-Frameworks zu integrieren.
-                                </p>
-
-                                <lsx-ul emoji="🚢" class="mb-4">
-                                    <li>Große Applikationsserver ab den 1990ern</>
-                                    <li>Zunächst RPC später Webtechnologien</li>
-                                    <li>Heute eher leichtgewichtigere Micro-Frameworks</li>
-                                </lsx-ul>
-
-                                <img src="02-architektur/historie-appserver.svg" alt="Drei VS-Knoten von denen einer ein Applikationsserver ist" style="width: 100%; margin-bottom: 1em;" />
-                                <img src="02-architektur/historie-abb4.jpg" alt="" style="width: 100%;" />
-                            </lsx-card-body>
-                        </lsx-card>
-                    </lsx-content>
-                </lsx-modal>
-            </div>
-        </article>
-    </section>
-
-    <section data-title="Grundlegende Architekturmodelle">
-        <article class="centered-content">
-            <div class="limited-width2">
-                <lsx-tab-pages class="w-100">
-                    <lsx-tab-page title="Client/Server">
-                        <div class="markdown dhbw-text-columns mb-4" detail-content>
-                            Dies ist die einfachste Architektur von allen. Sie besteht lediglich aus einem Server,
-                            der einen Dienst anbietet und den Clients, welche den Dienst konsumieren. Die Kommunikation
-                            folgt dabei häufig einem einfachen **Request/Response**-Verfahren, obwohl Sockts prinzipiell
-                            jede Reihenfolge zulassen.
-
-                            Früher wurden die Aufrufe clientseitig synchron programmiert. Dies sollte das Konzept eines
-                            einfachen Methodenaufrufs simulieren, indem der rufende Thread für die Dauer einer Anfrage
-                            blockiert und erst nach Eintreffer der Serverantwort wieder aufgeweckt wurde. In etwa so:
-
-                            <src-code language="javascript">
-                                let response = send_http_request("GET", "http://localhost:8080/");
-                                // Hier geht es erst weiter, wenn die Antwort empfangen wurde
-                            </src-code>
-
-                            Da das aber sehr inneffizient ist, folgend moderne Bibliotheken einem asynchronen Ansatz, bei
-                            dem der Clientthread wahlweise warten oder parallel weiterarbeiten kann. {.mt-4}
-                        </div>
-
-
-                        <lsx-grid-fluid class="p-0">
-                            <lsx-row>
-                                <lsx-col size="md" class="d-flex justify-content-center mb-4 mb-md-0">
-                                    <img src="02-architektur/architektur-client-server.svg" alt="Skizze eines Servers und dreier Clients" class="d-block m-auto" style="max-width: 45em;" />
-                                </lsx-col>
-                                <lsx-col size="md" class="d-flex justify-content-center align-items-center">
-                                    <lsx-card title="Fallbeispiele" style="flex: 1;">
-                                        <lsx-ul emoji="✅">
-                                            <li>
-                                                Browser und Webserver im World Wide Web
-                                            </li>
-                                            <li>
-                                                Browser App mit Zugriff auf den Server via Websockets
-                                            </li>
-                                            <li>
-                                                Wartungszugang auf einen Rechner per Secure Shell
-                                            </li>
-                                            <li>
-                                                Zugriff auf ein E-Mailpostfach mit IMAP
-                                            </li>
-                                            <li>
-                                                Zentrale Quellcodeverwaltung mit Subversion
-                                            </li>
-                                            <li>
-                                                WebDAV-Zugriff auf einen geteilten Onlineordner
-                                            </li>
-                                        </lsx-ul>
-                                    </lsx-card>
-                                </lsx-col>
-                            </lsx-row>
-                        </lsx-grid-fluid>
-                    </lsx-tab-page>
-
-                    <lsx-tab-page title="Dreischichtenarchitektur">
-                        <p class="dhbw-text-columns mb-4" detail-content>
-                            Hierbei handelt es sich ebenfalls um eine Client/Server-Architektur, jedoch greift der Server zusätzlich
-                            auf eine Datenbank zu. Client, Server und Datenbank werden daher den drei Schichten <b>Darstellung</b>,
-                            <b>Anwendungslogik</b> und <b>Datenhaltung</b> zugeordnet. Für die Darstellung wurden früher ausschließlich
-                            native Clients verwendet, die heute zunehmend von Webanwendungen und mobilen Apps verdrängt werden. Die
-                            Schichten für die Anwendungslogik und Datenhaltung können hingegen auch mehrere Server umfassen.
-                        </p>
-
-                        <lsx-grid-fluid class="p-0">
-                            <lsx-row>
-                                <lsx-col size="md" class="d-flex justify-content-center mb-4 mb-md-0">
-                                    <img src="02-architektur/architektur-3schichten.svg" alt="Skizze einer Dreischichtenarchitektur" class="d-block limited-width m-auto" />
-                                </lsx-col>
-                                <lsx-col size="md" class="d-flex justify-content-center align-items-center">
-                                    <lsx-card title="Fallbeispiele" style="flex: 1;">
-                                        <lsx-ul emoji="✅">
-                                            <li>
-                                                Jede Webanwendung mit einer Datenbank im Hintergrund
-                                            </li>
-                                            <li>
-                                                Informationssysteme ohne eigenständigen Präsentationsserver
-                                            </li>
-                                            <li>
-                                                Die meisten ERP- und CRM-Systeme (SAP S/4HANA, Navision, …)
-                                            </li>
-                                            <li>
-                                                Per Webservice erreichbare Microservices
-                                            </li>
-                                        </lsx-ul>
-                                    </lsx-card>
-                                </lsx-col>
-                            </lsx-row>
-                        </lsx-grid-fluid>
-                    </lsx-tab-page>
-
-                    <lsx-tab-page title="Vierschichtenarchitektur">
-                        <p class="dhbw-text-columns mb-4" detail-content>
-                            Hierbei handelt es sich um eine Variation der Dreischichtenarchitektur, bei der die mittlere Sicht
-                            in eine <b>Präsentations-</b> und eine <b>Anwendungsschicht</b> zerlegt wurde. Dieses Modell
-                            findet man häufig bei ERP-Systemen, die mehrere Clienttechnologien unterstützen müssen.
-                        </p>
-
-                        <lsx-grid-fluid class="p-0">
-                            <lsx-row>
-                                <lsx-col size="md" class="d-flex justify-content-center mb-4 mb-md-0">
-                                    <img src="02-architektur/architektur-4schichten.svg" alt="Skizze einer Dreischichtenarchitektur" class="d-block limited-width m-auto" />
-                                </lsx-col>
-                                <lsx-col size="md" class="d-flex justify-content-center align-items-center">
-                                    <lsx-card title="Fallbeispiele" style="flex: 1;">
-                                        <lsx-ul emoji="✅">
-                                            <li>
-                                                ERP- und CRM-Systeme mit Präsentationsserver
-                                            </li>
-                                            <li>
-                                                Typische Single Page Apps mit Webservice-Backend
-                                            </li>
-                                        </lsx-ul>
-                                    </lsx-card>
-                                </lsx-col>
-                            </lsx-row>
-                        </lsx-grid-fluid>
-                    </lsx-tab-page>
-
-                    <lsx-tab-page title="Microservices">
-                        <!-- Eigene Folie hieraus machen und die anderen Architekturmuster zurückstellen? -->
-                        <!--
-                        ChatGPT:
-
-                        Die Definition deckt viele zentrale Aspekte ab, insbesondere die
-                        Entkopplung eines Monolithen in eigenständige, fachlich fokussierte
-                        Services sowie die Bedeutung von Automatisierung und
-                        teamübergreifender Verantwortung. Dennoch könnten einige Punkte noch
-                        ergänzt oder präzisiert werden:
-
-                        Dezentrale Datenhaltung und Zuständigkeiten:
-                        Microservices sollten idealerweise auch ihre eigene Datenhaltung
-                        haben, um enge Kopplungen und Abhängigkeiten zu vermeiden. Jeder
-                        Service ist für seinen eigenen Datenbestand verantwortlich, was die
-                        Unabhängigkeit und Skalierbarkeit erhöht.
-
-                        Kommunikation und Schnittstellendesign:
-                        Neben der gut dokumentierten und versionierten API ist es wichtig,
-                        dass die Kommunikation zwischen den Services über leichtgewichtige
-                        Protokolle (z. B. HTTP/REST, gRPC oder Messaging-Systeme) erfolgt.
-                        Dies fördert die lose Kopplung und ermöglicht flexible Interaktionen.
-
-                        Fehlertoleranz und Resilienz:
-                        Da Microservices in einer verteilten Umgebung betrieben werden, sind
-                        Konzepte wie Circuit Breaker, Wiederholungsmechanismen und
-                        Service-Discovery essenziell, um Ausfälle einzelner Services
-                        abzufedern und das Gesamtsystem robust zu gestalten.
-
-                        Unabhängige Deployment-Zyklen:
-                        Ein wesentlicher Vorteil von Microservices ist die Möglichkeit,
-                        einzelne Komponenten unabhängig voneinander zu entwickeln, zu testen
-                        und bereitzustellen. Dies erfordert entsprechende Infrastruktur, z. B.
-                        Containerisierung (wie Docker) und Orchestrierung (wie Kubernetes).
-
-                        Technologische Heterogenität:
-                        Teams haben oft die Freiheit, für jeden Microservice die am besten
-                        geeigneten Technologien, Programmiersprachen oder Datenbanksysteme zu
-                        wählen, was zur Optimierung der jeweiligen Funktionalität beiträgt.
-
-                        Domain-Driven Design (DDD) und Business-Fokus:
-                        Häufig werden Microservices um sogenannte „bounded contexts“ herum
-                        entworfen, was bedeutet, dass jeder Service einen klar definierten
-                        Geschäftsbereich abdeckt. Dies fördert ein besseres Verständnis der
-                        Geschäftslogik und erleichtert die Modellierung komplexer Systeme.
-
-                        Betriebsüberwachung und Logging:
-                        In einer verteilten Architektur ist es besonders wichtig, umfassende
-                        Monitoring-, Logging- und Tracing-Lösungen zu implementieren, um den
-                        Überblick über die Interaktionen und den Zustand der einzelnen
-                        Services zu behalten.
-
-                        Zusammengefasst:
-                        Die Definition trifft den Kern von Microservices, könnte aber um
-                        Aspekte wie dezentrale Datenhaltung, spezifische
-                        Kommunikationsmechanismen, Resilienzstrategien, unabhängige
-                        Deployment-Prozesse sowie den geschäftsorientierten Ansatz (bspw.
-                        durch Domain-Driven Design) erweitert werden. Diese Ergänzungen helfen
-                        dabei, das volle Potenzial und die Herausforderungen von Microservices
-                        in der Praxis besser zu verstehen.
-                        -->
-                        <p class="dhbw-text-columns mb-4" detail-content>
-                            Microservices zerlegen eine große, monolithische Anwendung in viele kleine Teilanwendungen. Jeder Microservice hat
-                            ein klar umrissenes Aufgabengebiet, besitzt eine gut dokumentierte und versionierte Schnittstelle und wird in der
-                            Regel von einem eigenen Team entwickelt und betrieben. Entwicklung, Test und Betrieb sind sehr stark automatisiert.
-                            Microservices eignen sich daher oft für große Firmen mit mehreren, unabhängigen Entwicklungsmannschaften.
-                        </p>
-
-                        <div class="form-check form-switch mb-4 fw-bold">
-                            <input class="form-check-input" type="checkbox" role="switch" id="microservices-switch">
-                            <label class="form-check-label microservices-switch-off" for="microservices-switch">Beschreibung</label>
-                            <label class="form-check-label microservices-switch-on hidden" for="microservices-switch">Fallbeispiel</label>
-                        </div>
-
-                        <lsx-grid-fluid class="p-0 microservices-switch-off">
-                            <lsx-row>
-                                <lsx-col size="md" class="d-flex justify-content-center mb-4 mb-md-0">
-                                    <img src="02-architektur/microservices.png" alt="Skizze einer Microservice-Architektur" class="d-block limited-width m-auto" />
-                                </lsx-col>
-                                <lsx-col size="md" class="d-flex justify-content-center align-items-center">
-                                    <lsx-card title="Fallbeispiele" style="flex: 1;">
-                                        <lsx-ul emoji="✅">
-                                            <li>
-                                                Amazon gilt als Erfinder, obwohl sie den Begriff nicht verwenden
-                                            </li>
-                                            <li>
-                                                Große Internetplattformen wie eBay, Netflix, SoundCloud, Spotify, …
-                                            </li>
-                                            <li>
-                                                So gut wie jede größere Cloud-Anwendung
-                                            </li>
-                                        </lsx-ul>
-                                    </lsx-card>
-                                </lsx-col>
-                            </lsx-row>
-                        </lsx-grid-fluid>
-
-                        <img src="02-architektur/microservices-beispiel.png" alt="Fallbeispiel für eine Microservice-Architektur" class="d-block w-100 hidden microservices-switch-on">
-
-                        <script>
-                            window.toggle_microservices_content = function() {
-                                let checkbox = document.querySelector("#microservices-switch");
-
-                                for (let element of document.querySelectorAll(".microservices-switch-off, .microservices-switch-on")) {
-                                    element.classList.add("hidden");
-                                }
-
-                                for (let element of document.querySelectorAll(checkbox.checked ? ".microservices-switch-on" : ".microservices-switch-off")) {
-                                    element.classList.remove("hidden");
-                                }
-                            }
-
-                            window.addEventListener("ls-slide-changed", () => {
-                                window.setTimeout(function() {
-                                    let checkbox = document.querySelector("#microservices-switch");
-                                    if (!checkbox) return;
-
-                                    checkbox.addEventListener("change", toggle_microservices_content);
-                                }, 1000);
-                            });
-                        </script>
-                    </lsx-tab-page>
-
-                    <lsx-tab-page title="Reverse Proxy / API-Gateway">
-                        <p class="dhbw-text-columns mb-4" detail-content>
-                            Serverseitig kann ein Reverse Proxy als API-Gateway eingesetzt werden, um die eingehenden Anfragen
-                            zu bündeln. Dadurch wird es möglich, zusätzliche Sicherheitsprüfungen zu implementieren, häufig
-                            angefragte Inhalte zu cachen oder eine transparente Lastverteilung vorzunehmen.
-                        </p>
-
-                        <lsx-grid-fluid class="p-0">
-                            <lsx-row>
-                                <lsx-col size="md" class="d-flex justify-content-center mb-4 mb-md-0">
-                                    <img src="02-architektur/proxy-serverseitig.png" alt="Architekturskizze mit serverseitigem Proxy" style="max-height: 16em; max-width: 100%;" />
-                                </lsx-col>
-                                <lsx-col size="md" class="d-flex justify-content-center align-items-center">
-                                    <lsx-card title="Fallbeispiele" style="flex: 1;">
-                                        <lsx-ul emoji="✅">
-                                            <li>
-                                                Steigerung der Performance durch Caching häufig angefragter Daten
-                                            </li>
-                                            <li>
-                                                Implementierung von Zugangsbeschränkungen und Upload Filtern
-                                            </li>
-                                            <li>
-                                                Realisierung von Paywalls zum Ausfiltern kostenpflichtiger Inhalte
-                                            </li>
-                                            <li>
-                                                Sicherstellen einer vorgelagerten, zentralen Authentifizierung
-                                            </li>
-                                            <li>
-                                                Überlöastung vermeiden durch Rate Limiting / Throttling
-                                            </li>
-                                            <li>
-                                                Monitoring und statistische Aufzeichnung der Nutzung
-                                            </li>
-                                            <li>
-                                                <u>Serverseitige</u> Lastverteilung
-                                            </li>
-                                        </lsx-ul>
-                                    </lsx-card>
-                                </lsx-col>
-                            </lsx-row>
-                        </lsx-grid-fluid>
-                    </lsx-tab-page>
-
-                    <lsx-tab-page title="Proxy">
-                        <p class="dhbw-text-columns mb-4" detail-content>
-                            Ein clientseitiger Proxy bildet die Schnittstelle eines entfernten Servers innerhalb
-                            des lokalen Netzwerks ab. Die Anfragen der Clients werden nicht direkt an den Server
-                            sondern an den lokalen Proxy gesendet, der daraufhin entscheiden kann, ob er die
-                            Anfragen weiterleitet oder selbst beantwortet.
-                        </p>
-
-                        <lsx-grid-fluid class="p-0">
-                            <lsx-row>
-                                <lsx-col size="md" class="d-flex justify-content-center mb-4 mb-md-0">
-                                    <img src="02-architektur/proxy-clientseitig.png" alt="Architekturskizze mit clientseitigem Proxy" style="max-height: 16em; max-width: 100%;" />
-                                </lsx-col>
-                                <lsx-col size="md" class="d-flex justify-content-center align-items-center">
-                                    <lsx-card title="Fallbeispiele" style="flex: 1;">
-                                        <lsx-ul emoji="✅">
-                                            <li>
-                                                Steigerung der Performance durch Caching häufig angefragter Daten
-                                            </li>
-                                            <li>
-                                                Implementierung von Zugangsbeschränkungen und Content Filtern
-                                            </li>
-                                            <li>
-                                                <u>Clientseitige</u> Lastverteilung
-                                            </li>
-                                        </lsx-ul>
-                                    </lsx-card>
-                                </lsx-col>
-                            </lsx-row>
-                        </lsx-grid-fluid>
-                    </lsx-tab-page>
-                </lsx-tab-pages>
-            </div>
-        </article>
-    </section>
-</section>
+<!-- ======================= -->
+<!-- Microservices und Cloud -->
+<!-- ======================= -->
+<section data-use-template="teilkapitel" data-titel="Microservices und Cloud"></section>
 
 <section data-title="Monolith vs. Microservices">
     <section data-title="Anwendungsarchitektur früher">
@@ -4514,7 +4404,7 @@
                     </li>
                 </lsx-ul>
             </lsx-accordion-page>
-            
+
             <lsx-accordion-page title="<b>Thema 3:</b>&nbsp;Aufgaben und Funktionen eines API-Gateways">
                 <lsx-ul>
                     <li>
@@ -4537,7 +4427,7 @@
                     </li>
                 </lsx-ul>
             </lsx-accordion-page>
-            
+
             <lsx-accordion-page title="<b>Thema 4:</b>&nbsp;Horizontale und vertikale Skalierung">
                 <lsx-ul>
                     <li>
@@ -4562,7 +4452,7 @@
                     </li>
                 </lsx-ul>
             </lsx-accordion-page>
-            
+
             <lsx-accordion-page title="<b>Thema 5:</b>&nbsp;Sicherheitsanforderungen in verteilten Systemen">
                 <lsx-ul>
                     <li>
@@ -4586,7 +4476,7 @@
                     </li>
                 </lsx-ul>
             </lsx-accordion-page>
-            
+
             <lsx-accordion-page title="<b>Thema 6:</b>&nbsp;Transparenz in verteilten Anwendungen">
                 <lsx-ul>
                     <li>
@@ -4609,7 +4499,7 @@
                     </li>
                 </lsx-ul>
             </lsx-accordion-page>
-            
+
             <lsx-accordion-page title="<b>Thema 7:</b>&nbsp;Praktische Beispiele für das CAP-Theorem">
                 <lsx-ul>
                     <li>
@@ -4675,7 +4565,7 @@
                             Besucht euren Lieblings-Chatbot und lasst euch mit einem Prompt wie dem folgenden die gängigen
                             Strategien zum Umgang mit Fehlern in verteilten Anwendungen erklären.
                         </p>
-        
+
                         <p class="fst-italic text-muted">
                             In der Vorlesung "Verteilte Systeme" haben wir gelernt, dass es mehrere Strategien gibt, wie eine
                             verteilte Anwendung mit Fehlersituationen umgehen kann: Fehler vermeiden, Fehler erkennen, Fehler
@@ -4691,7 +4581,7 @@
                             die folgende, um die Strategien auf eine reale Alltagssituation zu übertragen. Das Ergebnis
                             besprechen wir gleich zusammen in der Vorlesung. 🥳
                         </p>
-        
+
                         <p class="fst-italic text-muted">
                             Wow super. Stell dir folgende Situation als Metapher aus dem realen Leben vor: Eine Person fährt
                             mit dem Auto in den Drive In bei McDonalds und versucht eine große Bestellung vorzunehmen. Das will
