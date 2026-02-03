@@ -416,12 +416,12 @@
 <section data-title="Was bedeutet Nachrichtenaustausch?">
     <section data-title="Klassische Programmierung früher" class="centered-content">
         <div class="limited-width2">
-            <p class="mb-4">
+            <div class="markdown mb-4">
                 Die ersten Betriebssysteme konnten nur eine Anwendung gleichzeitig ausführen.
                 Die laufende Anwendung hatte somit die volle Kontrolle über die Hardware und das System.
                 Programme konnten daher **rein imperativ mit einem festen Programmfluss** geschrieben werden,
                 so wie Sie es im ersten Semester gelernt haben. 🫡
-            </p>
+            </div>
 
             <lsx-tab-pages class="my-responsive-preview mb-0">
                 <lsx-tab-page title="Beispiel">
@@ -577,12 +577,12 @@
 
             <lsx-tab-pages>
                 <lsx-tab-page title="Low-Level-Datenströme">
-                    <p class="dhbw-text-columns mb-4">
+                    <div class="markdown dhbw-text-columns mb-4">
                         Das folgende Beispiel zeigt einen **einfachen Netzwerkserver in Java**. Auch hier gibt es wieder
                         eine Hauptschleife. Sie hält mit <code>server.accept()</code> den Haupt-Thread so lange an, bis
                         sich ein neuer Client verbindet. Je Client wird dann ein Thread gestartet, der in einer eigenen
                         Schleife die empfangenen Daten einliest und an den Client zurücksendet.
-                    </p>
+                    </div>
                     <source-code language="java">
                         import java.io.*;
                         import java.net.*;
@@ -620,7 +620,7 @@
                 </lsx-tab-page>
 
                 <lsx-tab-page title="Interpretation als Nachrichten">
-                    <p class="dhbw-text-columns mb-4">
+                    <div class="markdown dhbw-text-columns mb-4">
                         In der Regel tauschen Client und Server nicht einfach kontinuierliche Byteströme aus. Wobei es
                         dafür aus Anwendungsfälle gibt, z.B. beim Streaming von Audio- oder Videodaten. Meistens besitzen
                         die Bytes in Struktur, die es möglich macht, Nachrichten gezielt zu erkennen.
@@ -628,7 +628,7 @@
                         In diesem Beispiel bestehen die Nachrichten einfach aus einer Textzeile, die mit dem Zeilenumbruchzeichen
                         <code>\n</code> endet. Innerhalb der <code>while</code>-Schleife wird die empfangene Nachrichten ausgewertet
                         und eine entsprechende Antwort zurück geschickt.
-                    </p>
+                    </div>
                     <source-code language="java">
                         static void handle(Socket socket) {
                             try (
@@ -651,12 +651,12 @@
                 </lsx-tab-page>
 
                 <lsx-tab-page title="High-Level-Programmierung">
-                    <p class="mb-4 dhbw-text-columns">
+                    <div class="markdown mb-4 dhbw-text-columns">
                         Später werden wir natürlich nicht auf dieser niedrigen Ebene programmieren. Im Hintergrund passiert
                         aber genau das, was hier gezeigt wird, z.B. wenn eine Single Page App eine HTTP-Nachricht an ihr
                         Backend schickt. Nur, dass die Laufzeitumgebung und Bibliotheken uns die meiste Arbeit abnehmen,
                         so dass wir nur die Nachrichten ganz einfach senden auf der Serverseite nur noch darauf reagieren müssen.
-                    </p>
+                    </div>
 
                     <img src="02-architektur/programmierung-high-level.jpg" class="d-block w-100"/>
 
