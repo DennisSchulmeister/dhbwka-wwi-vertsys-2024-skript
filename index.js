@@ -47,6 +47,8 @@ import LsPluginHighlightJs from "@dschulmeis/ls-plugin-highlight.js";
 import HLJS_Language_XML from 'highlight.js/lib/languages/xml';
 import HLJS_Language_CSS from 'highlight.js/lib/languages/css';
 import HLJS_Language_JS from "highlight.js/lib/languages/javascript";
+import HLJS_Language_JAVA from "highlight.js/lib/languages/java";
+import HLJS_Language_CPP from "highlight.js/lib/languages/cpp";
 import HLJS_Language_JSON from "highlight.js/lib/languages/json";
 import HLJS_Language_Docker from "highlight.js/lib/languages/dockerfile";
 import HLJS_Language_YAML from "highlight.js/lib/languages/yaml";
@@ -89,7 +91,7 @@ window.addEventListener("load", async () => {
                         let options = {
                             fit:     "both",
                             theme:   "asciinema",
-                            preload: true, 
+                            preload: true,
                             cols:    parseInt(element.getAttribute("cols")) || 200,
                             rows:    parseInt(element.getAttribute("rows")) || 30,
                             poster:  element.getAttribute("poster")         || "",
@@ -125,6 +127,8 @@ window.addEventListener("load", async () => {
                     html: HLJS_Language_XML,
                     css: HLJS_Language_CSS,
                     javascript: HLJS_Language_JS,
+                    java: HLJS_Language_JAVA,
+                    cpp: HLJS_Language_CPP,
                     json: HLJS_Language_JSON,
                     docker: HLJS_Language_Docker,
                     yaml: HLJS_Language_YAML,

@@ -1,4 +1,5 @@
 <section data-chapter="h1" data-title="Architektur verteilter Systeme" data-background-color="rgb(210,190,210)">
+<section data-chapter="h1" data-title="Architektur verteilter Systeme" data-background-color="rgb(210,190,210)">
     <article class="markdown">
         #### Grundlagen verteilter Systeme {.dhbw-lightblue}
 
@@ -403,15 +404,273 @@
 
 <!--
 <section data-title="Ein Computer kommt selten alleine">
-    TODO
+    TODO: Karussel/Animation:
+     - Früher waren Personal Computer ohne Netzzugang (z.B. Classic Mac)
+     - In den 1990er-Jahren wurden LANs erschwinglich
+     - Typische Firmennetze besitzen viele Firewalls, Switches, Router, ...
+     - Diese bilden die Infrastruktur für viele heutige, verteilte Anwendungen
+
+    Braucht es diese Folie wirklich?
 </section>
 -->
 
-<!--
 <section data-title="Was bedeutet Nachrichtenaustausch?">
-    TODO
+    <section data-title="Klassische Programmierung früher" class="centered-content">
+        <div class="limited-width2">
+            <p class="mb-4">
+                Die ersten Betriebssysteme konnten nur eine Anwendung gleichzeitig ausführen.
+                Die laufende Anwendung hatte somit die volle Kontrolle über die Hardware und das System.
+                Programme konnten daher **rein imperativ mit einem festen Programmfluss** geschrieben werden,
+                so wie Sie es im ersten Semester gelernt haben. 🫡
+            </p>
+
+            <lsx-tab-pages class="my-responsive-preview mb-0">
+                <lsx-tab-page title="Beispiel">
+                    <p class="mb-4">
+                        Das folgende Bild zeigt die Hauptschleife des Spiels <tt>Nibbles</tt> von Microsoft,
+                        das Anfang der 1990er-Jahre auf jedem Computer mit Microsoft-Betriebssystem vorhanden war. 🐛
+                    </p>
+
+                    <img src="02-architektur/qbasic-nibbles.png" alt="QBasic mit Hauptschleife des Spiels NIBBLES" class="d-block w-100"/>
+
+                    <p class="mt-4">
+                        In der Mitte befindet sich die mit <code>DO … LOOP WHILE</code> gekennzeichnete Hauptschleife
+                        des Programms. Im darin aufgerufenen Unterprogramm wird zunächst die Tastatur abgefragt, dann
+                        die Spiellogik ausgeführt und anschließend die Grafik auf den Bildschirm gezeichnet. Schön,
+                        ein Schritt nach dem anderen … Im Pseudo-Code:
+                    </p>
+
+                    <source-code language="javascript">
+                            function PlayNibbles(numPlayers, speed, difficulty) {
+                                let key = readKeyboard();
+
+                                if (key == "ArrowUp") {
+                                    …
+                                } else if (key == "ArrowDown") {
+                                    …
+                                } …
+
+                                moveSnake(1);
+                                moveSnake(2);
+
+                                drawScreen();
+                            }
+                    </source-code>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Ausführen">
+                    <p class="mb-4">
+                        Starten mit einer beliebigen Taste. <kbd>ESC</kbd> zum Neustarten.
+                    </p>
+                    <div class="my-rp-background">
+                        <div class="my-rp-content">
+                            <iframe class="my-rp-size-screen" src="02-architektur/nibbles.bas/index.html"></iframe>
+                        </div>
+                    </div>
+                </lsx-tab-page>
+            </lsx-tab-pages>
+        </div>
+    </section>
+
+    <section data-title="Nachrichtenbasierte Programmierung" class="centered-content">
+        <div class="limited-width2">
+            <div class="markdown dhbw-text-columns mb-4">
+                Moderne Betriebssysteme führen mehrere Programme gleichzeitig aus und teilen die Systemressourcen
+                zwischen ihnen auf. Beispielsweise den Bildschirm, indem den Programmen nur ein Teilbereich –
+                ein Fester – zugewiesen wird. Damit dies funktioniert, können die Programme nicht mehr direkt
+                auf die Hardware zugreifen, sondern müssen **auf Nachrichten reagieren**, die ihnen das System
+                oder ein anderes Programm schickt. Das nachfolgende Beispiel zeigt, wie dies unter Microsoft
+                Windows funktioniert.
+            </div>
+
+            <lsx-tab-pages>
+                <lsx-tab-page title="Beispiel">
+                    <p class="mb-4">
+                        Das Geheimnis ist die Hauptschleife ganz am Ende des Programms. Die Funktion
+                        <src-code class="cpp">GetMessage()</src-code> hält den Thread so lange an, bis
+                        eine neue Nachricht empfangen wurde. Mit <src-code class="cpp">DispatchMessage()</src-code>
+                        wird sie an die Rückruf-Funktion des Fensters übergeben und verarbeitet.
+                    </p>
+
+                    <source-code language="cpp">
+                        #include &lt;windows.h&gt;
+
+                        /**
+                         * Empfangene Nachricht verarbeiten
+                         *
+                         * hwnd: Fenster, an das die Nachricht geschickt wurde
+                         * msg: Nachrichten-Code
+                         * w: Erster Parameter
+                         * l: Zweiter Parameter
+                         */
+                        LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM w, LPARAM l) {
+                            switch (msg) {
+                                case WM_PAINT: {
+                                    // WM_PAINT: Fenster soll neugezeichnet werden
+                                    PAINTSTRUCT ps;
+                                    RECT r;
+                                    HDC dc = BeginPaint(hwnd, &amp;ps);
+                                    GetClientRect(hwnd, &amp;r);
+                                    DrawTextA(dc, "Hallo Welt", -1, &amp;r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+                                    EndPaint(hwnd, &amp;ps);
+                                    return 0;
+                                }
+                                case WM_DESTROY:
+                                    // WM_DESTROY: Fenster soll geschlossen werden
+                                    PostQuitMessage(0);
+                                    return 0;
+                            }
+
+                            // Nicht verarbeitete Nachrichten an die Elternklasse weiterreichen
+                            return DefWindowProc(hwnd, msg, w, l);
+                        }
+
+                        /**
+                         * Hauptprogramm. Hier wird eine neue Fensterklasse für das Hauptfenster registriert,
+                         * um anschließend ein neues Fenster erzeugen zu können. Die Fensterklasse ist dabei
+                         * eine einfache Datenstruktur mit einer Rückruf-Funktion für Nachrichten, die Windows
+                         * oder ein anderes Programm dem Fenster schicken.
+                         */
+                        int WINAPI WinMain(HINSTANCE i, HINSTANCE, LPSTR, int n) {
+                            // Neue Fensterklasse registrieren
+                            WNDCLASSA wc     = {0};
+                            wc.lpfnWndProc   = WndProc;     // Rückruf-Funktion
+                            wc.hInstance     = i;
+                            wc.lpszClassName = "hw";
+                            RegisterClassA(&amp;wc);
+
+                            // Neues Fenster öffnen
+                            HWND h = CreateWindowA(
+                                "hw", "Hallo Welt",
+                                WS_OVERLAPPEDWINDOW,
+                                CW_USEDEFAULT, CW_USEDEFAULT, 400, 300,
+                                0, 0, i, 0
+                            );
+
+                            ShowWindow(h, n);
+
+                            // Hauptschleife: Wartet auf eine neue Nachricht und verarbeitet diese
+                            MSG msg;
+                            while (GetMessage(&amp;msg, 0, 0, 0)) {         // Auf Nachricht warten
+                                TranslateMessage(&amp;msg);
+                                DispatchMessage(&amp;msg);                  // Nachricht verarbeiten
+                            }
+                            return msg.wParam;
+                        }
+                    </source-code>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Ergebnis">
+                    <img src="02-architektur/win32-hello.png" alt="Screenshot des Windows-Beispiels" class="d-block w-100"/>
+                </lsx-tab-page>
+            </lsx-tab-pages>
+        </div>
+    </section>
+
+    <section data-title="Nachrichten über das Netzwerk" class="centered-content">
+        <div class="limited-width">
+            <div class="markdown mb-4">
+                Nachrichten können natürlich auch **über das Netzwerk** geschickt werden. Auf der untersten Ebene
+                handelt es sich dabei aber nur im Datenpakete, die als kontinuierlicher Bytestrom gesendet
+                und empfangen werden. Oft **codieren** diese jedoch **Nachrichten in einem bestimmten Format**
+                (z.B. HTTP-Nachrichten, entfernte Methodenaufrufe, …)
+            </div>
+
+            <lsx-tab-pages>
+                <lsx-tab-page title="Low-Level-Datenströme">
+                    <p class="dhbw-text-columns mb-4">
+                        Das folgende Beispiel zeigt einen **einfachen Netzwerkserver in Java**. Auch hier gibt es wieder
+                        eine Hauptschleife. Sie hält mit <code>server.accept()</code> den Haupt-Thread so lange an, bis
+                        sich ein neuer Client verbindet. Je Client wird dann ein Thread gestartet, der in einer eigenen
+                        Schleife die empfangenen Daten einliest und an den Client zurücksendet.
+                    </p>
+                    <source-code language="java">
+                        import java.io.*;
+                        import java.net.*;
+
+                        public class EchoServer {
+                            public static void main(String[] args) throws IOException {
+                                ServerSocket server = new ServerSocket(12345);
+
+                                // Hauptschleife
+                                while (true) {
+                                    // Auf neue Client-Verbindung warten
+                                    Socket client = server.accept();
+                                    new Thread(() -> handle(client)).start();
+                                }
+                            }
+
+                            static void handle(Socket socket) {
+                                try (
+                                    InputStream in = socket.getInputStream();
+                                    OutputStream out = socket.getOutputStream()
+                                ) {
+                                    byte[] buf = new byte[1024];
+                                    int n;
+
+                                    // Bytestrom mit empfangenen Daten lesen
+                                    while ((n = in.read(buf)) != -1) {
+                                        // Empfangene Bytes an den Client zurück schicken
+                                        out.write(buf, 0, n);
+                                    }
+                                } catch (IOException ignored) {
+                                }
+                            }
+                        }
+                    </source-code>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="Interpretation als Nachrichten">
+                    <p class="dhbw-text-columns mb-4">
+                        In der Regel tauschen Client und Server nicht einfach kontinuierliche Byteströme aus. Wobei es
+                        dafür aus Anwendungsfälle gibt, z.B. beim Streaming von Audio- oder Videodaten. Meistens besitzen
+                        die Bytes in Struktur, die es möglich macht, Nachrichten gezielt zu erkennen.
+
+                        In diesem Beispiel bestehen die Nachrichten einfach aus einer Textzeile, die mit dem Zeilenumbruchzeichen
+                        <code>\n</code> endet. Innerhalb der <code>while</code>-Schleife wird die empfangene Nachrichten ausgewertet
+                        und eine entsprechende Antwort zurück geschickt.
+                    </p>
+                    <source-code language="java">
+                        static void handle(Socket socket) {
+                            try (
+                                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                                PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true)
+                            ) {
+                                String message;
+                                while ((message = in.readLine()) != null) {
+                                    if ("HELLO".equals(message)) {
+                                        out.println("CONFIRM");
+                                    } else if ("BYE".equals(message)) {
+                                        out.println("BYE-BYE");
+                                        break;
+                                    }
+                                }
+                            } catch (IOException ignored) {
+                            }
+                        }
+                    </source-code>
+                </lsx-tab-page>
+
+                <lsx-tab-page title="High-Level-Programmierung">
+                    <p class="mb-4 dhbw-text-columns">
+                        Später werden wir natürlich nicht auf dieser niedrigen Ebene programmieren. Im Hintergrund passiert
+                        aber genau das, was hier gezeigt wird, z.B. wenn eine Single Page App eine HTTP-Nachricht an ihr
+                        Backend schickt. Nur, dass die Laufzeitumgebung und Bibliotheken uns die meiste Arbeit abnehmen,
+                        so dass wir nur die Nachrichten ganz einfach senden auf der Serverseite nur noch darauf reagieren müssen.
+                    </p>
+
+                    <img src="02-architektur/programmierung-high-level.jpg" class="d-block w-100"/>
+
+                    <p class="dhbw-fontsize-tiny">
+                        <small>
+                            Bildnachweis: <a href="https://pixabay.com/photos/fantasy-girl-rock-space-earth-4832570/" target="_blank">Pixabay: Willgard</a>
+                        </small>
+                    </p>
+                </lsx-tab-page>
+            </lsx-tab-pages>
+        </div>
+    </section>
 </section>
--->
 
 <section data-title="Kommunikation über das Internet">
     <section data-title="Beteiligte Komponenten">
