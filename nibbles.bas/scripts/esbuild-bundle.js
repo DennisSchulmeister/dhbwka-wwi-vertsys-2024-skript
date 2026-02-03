@@ -11,7 +11,7 @@ esbuild.build({
     entryPoints: [path.join(__dirname, "..", "index.js")],
     bundle: true,
     minify: true,
-    outfile: path.join(__dirname, "..", "static", "_bundle.js"),
+    outfile: path.join(__dirname, "..", "static", "bundle.js"),
     treeShaking: true,
     sourcemap: true,
 });

@@ -10,7 +10,7 @@ import path from "path";
 let ctx = await esbuild.context({
     entryPoints: [path.join(__dirname, "..", "index.js")],
     bundle: true,
-    outfile: path.join(__dirname, "..", "static", "_bundle.js"),
+    outfile: path.join(__dirname, "..", "static", "bundle.js"),
     treeShaking: true,
     sourcemap: true,
 });
