@@ -1526,526 +1526,528 @@
     </section>
 
     <section data-title="Die neun Arten der Transparenz" class="centered-content">
-        <lsx-grid-fluid class="limited-width2">
-            <p class="mb-4" detail-content>
-                Moderne Bibliotheken und Middlewares abstrahieren nicht nur die Netzwerkprogrammierung,
-                sondern sorgen auch darüber hinaus für eine hohe „Transparenz” beim Programmieren.
-                Gemeint ist, dass viele Dinge aus Anwendungssicht im Hintergrund automatisch passieren
-                und deshalb für den Anwendungscode nicht sichtbar sind. Dies ist eine etwas andere
-                Auslegung des Transparenzbegriffs, als sonst üblich.
-            </p>
+        <article class="centered-content">
+            <lsx-grid-fluid class="limited-width2">
+                <p class="mb-4" detail-content>
+                    Moderne Bibliotheken und Middlewares abstrahieren nicht nur die Netzwerkprogrammierung,
+                    sondern sorgen auch darüber hinaus für eine hohe „Transparenz” beim Programmieren.
+                    Gemeint ist, dass viele Dinge aus Anwendungssicht im Hintergrund automatisch passieren
+                    und deshalb für den Anwendungscode nicht sichtbar sind. Dies ist eine etwas andere
+                    Auslegung des Transparenzbegriffs, als sonst üblich.
+                </p>
 
-            <!-- Vergleich Wirtschaft vs. Informatik -->
-            <lsx-row style="margin-bottom: 0;">
-                <lsx-col size="md">
-                    <h3 class="dhbw-lightblue">Transparenz üblicherweise</h3>
-                    <img src="02-architektur/transparenz1.jpg" alt="" class="img-thumbnail" style="width: 100%" />
-                    Alle Informationen liegen offen.
-                </lsx-col>
-                <lsx-col size="md">
-                    <h3 class="dhbw-lightblue">Transparenz in der Informatik</h3>
-                    <img src="02-architektur/transparenz2.jpg" alt="" class="img-thumbnail" style="width: 100%" />
-                    Ich muss nichts tun. Es läuft einfach.
-                </lsx-col>
-            </lsx-row>
-            <lsx-row style="margin-bottom: 2.5em;">
-                <lsx-col size="md">
-                    <small>
+                <!-- Vergleich Wirtschaft vs. Informatik -->
+                <lsx-row style="margin-bottom: 0;">
+                    <lsx-col size="md">
+                        <h3 class="dhbw-lightblue">Transparenz üblicherweise</h3>
+                        <img src="02-architektur/transparenz1.jpg" alt="" class="img-thumbnail" style="width: 100%" />
+                        Alle Informationen liegen offen.
+                    </lsx-col>
+                    <lsx-col size="md">
+                        <h3 class="dhbw-lightblue">Transparenz in der Informatik</h3>
+                        <img src="02-architektur/transparenz2.jpg" alt="" class="img-thumbnail" style="width: 100%" />
+                        Ich muss nichts tun. Es läuft einfach.
+                    </lsx-col>
+                </lsx-row>
+                <lsx-row style="margin-bottom: 2.5em;">
+                    <lsx-col size="md">
                         <small>
-                            Bildnachweise:
-                            <a href="https://pixabay.com/en/tax-paperwork-accounting-business-739107/" target="_blank">Pixabay: stevepb</a>,
-                            <a href="https://pixabay.com/en/dogs-carnival-humor-pet-ernst-1190015/" target="_blank">Pixabay: Chiemsee2016</a>,
-                            <a href="https://pixabay.com/en/background-christmas-3009949/" target="_blank">Pixabay: monicore</a>
+                            <small>
+                                Bildnachweise:
+                                <a href="https://pixabay.com/en/tax-paperwork-accounting-business-739107/" target="_blank">Pixabay: stevepb</a>,
+                                <a href="https://pixabay.com/en/dogs-carnival-humor-pet-ernst-1190015/" target="_blank">Pixabay: Chiemsee2016</a>,
+                                <a href="https://pixabay.com/en/background-christmas-3009949/" target="_blank">Pixabay: monicore</a>
+                            </small>
                         </small>
-                    </small>
-                </lsx-col>
-            </lsx-row>
+                    </lsx-col>
+                </lsx-row>
 
-            <!-- Die neun Arten der Transparenz -->
-            <lsx-row>
-                <lsx-col size="md">
-                    <lsx-accordion>
-                        <lsx-accordion-page title="Zugriffstransparenz" bold>
-                            <lsx-grid-fluid class="p-0">
-                                <lsx-row>
-                                    <lsx-col size="md">
-                                        Falls eine Anwendung zwischen lokalen (auf dem eigenen Rechner befindlichen) und
-                                        entfernten Ressourcen unterscheidet, müssen beide auf dieselbe Art und Weise
-                                        nutzbar sein.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md-2">
-                                        <img src="02-architektur/transparenz-foto.jpg" class="img-thumbnail" style="width: 100%;" />
-                                    </lsx-col>
-                                    <lsx-col size="md">
-                                        <b>Beispiel:</b>
-                                        Eine Fotoverwaltung ermöglicht den Zugriff auf lokal gespeicherte Fotoalben.
-                                        Einzelne Bilder oder ganze Alben können aber auch auf einem entfernten Server
-                                        abgelegt sein, ohne dass sich die Bedienung hierdurch verändert.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md-2">
-                                        <img src="02-architektur/transparenz-video.jpg" class="img-thumbnail" style="width: 100%;" />
-                                    </lsx-col>
-                                    <lsx-col size="md">
-                                        <b>Beispiel:</b>
-                                        Eine Video-Streaming-App ermöglicht es, einzelne Videos vor dem Anschauen herunterzuladen,
-                                        damit diese auch bei langsamer Internetverbindung ruckelfrei abgespielt werden können.
-                                        Suche und Wiedergabe der Videos verändern sich aus Benutzersicht dadurch aber nicht, da
-                                        die Videos wie gewohnt aufgerufen und abgespielt werden können.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md-2">
-                                        <img src="02-architektur/transparenz-pwa.jpg" class="img-thumbnail" style="width: 100%;" />
-                                    </lsx-col>
-                                    <lsx-col size="md">
-                                        <b>Beispiel:</b>
-                                        Progressive Web Apps sind Webanwendungen, die nach dem ersten Aufruf im Browser auch lokal installiert
-                                        werden können. Sämtliche Dateien werden hierfür in einen lokalen Anwendungscache geladen, der auch offline
-                                        funktioniert. Die Entscheidung, ob eine Datei vom Server oder aus dem Cache geladen werden kann, erfolgt
-                                        dabei automatisch, ohne dass dies im Quellcode berücksichtigt werden muss.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md">
-                                        <small>
+                <!-- Die neun Arten der Transparenz -->
+                <lsx-row>
+                    <lsx-col size="md">
+                        <lsx-accordion>
+                            <lsx-accordion-page title="Zugriffstransparenz" bold>
+                                <lsx-grid-fluid class="p-0">
+                                    <lsx-row>
+                                        <lsx-col size="md">
+                                            Falls eine Anwendung zwischen lokalen (auf dem eigenen Rechner befindlichen) und
+                                            entfernten Ressourcen unterscheidet, müssen beide auf dieselbe Art und Weise
+                                            nutzbar sein.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md-2">
+                                            <img src="02-architektur/transparenz-foto.jpg" class="img-thumbnail" style="width: 100%;" />
+                                        </lsx-col>
+                                        <lsx-col size="md">
+                                            <b>Beispiel:</b>
+                                            Eine Fotoverwaltung ermöglicht den Zugriff auf lokal gespeicherte Fotoalben.
+                                            Einzelne Bilder oder ganze Alben können aber auch auf einem entfernten Server
+                                            abgelegt sein, ohne dass sich die Bedienung hierdurch verändert.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md-2">
+                                            <img src="02-architektur/transparenz-video.jpg" class="img-thumbnail" style="width: 100%;" />
+                                        </lsx-col>
+                                        <lsx-col size="md">
+                                            <b>Beispiel:</b>
+                                            Eine Video-Streaming-App ermöglicht es, einzelne Videos vor dem Anschauen herunterzuladen,
+                                            damit diese auch bei langsamer Internetverbindung ruckelfrei abgespielt werden können.
+                                            Suche und Wiedergabe der Videos verändern sich aus Benutzersicht dadurch aber nicht, da
+                                            die Videos wie gewohnt aufgerufen und abgespielt werden können.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md-2">
+                                            <img src="02-architektur/transparenz-pwa.jpg" class="img-thumbnail" style="width: 100%;" />
+                                        </lsx-col>
+                                        <lsx-col size="md">
+                                            <b>Beispiel:</b>
+                                            Progressive Web Apps sind Webanwendungen, die nach dem ersten Aufruf im Browser auch lokal installiert
+                                            werden können. Sämtliche Dateien werden hierfür in einen lokalen Anwendungscache geladen, der auch offline
+                                            funktioniert. Die Entscheidung, ob eine Datei vom Server oder aus dem Cache geladen werden kann, erfolgt
+                                            dabei automatisch, ohne dass dies im Quellcode berücksichtigt werden muss.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md">
                                             <small>
-                                                Bildnachweise:
-                                                <a href="https://pixabay.com/photos/retro-photo-album-memory-family-1483781/" target="_blank">Pixabay: klimkin</a>,
-                                                <a href="https://pixabay.com/photos/camera-video-tv-video-realization-1598620/" target="_blank">Pixabay: JosepMonter</a>,
-                                                <a href="https://pixabay.com/photos/laptop-workstation-browsing-tablet-1483974/" target="_blank">Pixabay: Monoar</a>
+                                                <small>
+                                                    Bildnachweise:
+                                                    <a href="https://pixabay.com/photos/retro-photo-album-memory-family-1483781/" target="_blank">Pixabay: klimkin</a>,
+                                                    <a href="https://pixabay.com/photos/camera-video-tv-video-realization-1598620/" target="_blank">Pixabay: JosepMonter</a>,
+                                                    <a href="https://pixabay.com/photos/laptop-workstation-browsing-tablet-1483974/" target="_blank">Pixabay: Monoar</a>
+                                                </small>
                                             </small>
-                                        </small>
-                                    </lsx-col>
-                                </lsx-row>
-                            </lsx-grid-fluid>
-                        </lsx-accordion-page>
+                                        </lsx-col>
+                                    </lsx-row>
+                                </lsx-grid-fluid>
+                            </lsx-accordion-page>
 
-                        <lsx-accordion-page title="Ortstransparenz" bold>
-                            <lsx-grid-fluid class="p-0">
-                                <lsx-row>
-                                    <lsx-col size="md">
-                                        Dienste und Ressourcen einer Anwendung können aufgerufen werden, ohne wissen zu müssen,
-                                        auf welchem Rechner sie sich befinden.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md-2">
-                                        <img src="02-architektur/transparenz-cdn.jpg" class="img-thumbnail" style="width: 100%;" />
-                                    </lsx-col>
-                                    <lsx-col size="md">
-                                        <b>Beispiel:</b>
-                                        Um die Ladezeit einer Webseite zu optimieren, werden häufig benötigte Dateien durch
-                                        Content Delivery Networks ausgeliefert. Hierfür betreiben die Content Delivery Networks
-                                        weltweit gespiegelte Rechenzentren, von denen automatisch das mit der kürzesten Zugriffszeit
-                                        ausgewählt wird. Auf dieselbe Weise spielen nebenbei auch Video-Streaming-Portale und andere
-                                        Onlinedienste ihre Inhalte aus.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md-2">
-                                        <img src="02-architektur/transparenz-dns.jpg" class="img-thumbnail" style="width: 100%;" />
-                                    </lsx-col>
-                                    <lsx-col size="md">
-                                        <b>Beispiel:</b>
-                                        Die Webseite der DHBW Karlsruhe ist immer unter der Domain
-                                        <a href="https://karlsruhe.dhbw.de" target="_blank">karlsruhe.dhbw.de</a> erreichbar.
-                                        Zwar muss die Domain zum Aufruf der Seite bekannt sein, diese enthält jedoch keine Informationen
-                                        darüber, auf welchen Rechner hierfür zugegriffen werden muss. Diese Information besorgt sich der
-                                        Browser stattdessen durch ein DNS-Lookup.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md-2">
-                                        <img src="02-architektur/transparenz-drucker.jpg" class="img-thumbnail" style="width: 100%;" />
-                                    </lsx-col>
-                                    <lsx-col size="md">
-                                        <b>Beispiel:</b>
-                                        <a href="https://en.wikipedia.org/wiki/Zero-configuration_networking" target="_blank">Zeroconf</a> ermöglicht die
-                                        automatische Konfiguration von Netzwerkgeräten, wodurch unter anderem auch netzwerkfähige Drucker und Scanner
-                                        vom Betriebssystem erkannt und eingerichtet werden können. Selbst wenn ein Gerät komplett ausgetauscht wird,
-                                        muss die Konfiguration auf dem Anwender-PC nicht angepasst werden.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md">
-                                        <small>
+                            <lsx-accordion-page title="Ortstransparenz" bold>
+                                <lsx-grid-fluid class="p-0">
+                                    <lsx-row>
+                                        <lsx-col size="md">
+                                            Dienste und Ressourcen einer Anwendung können aufgerufen werden, ohne wissen zu müssen,
+                                            auf welchem Rechner sie sich befinden.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md-2">
+                                            <img src="02-architektur/transparenz-cdn.jpg" class="img-thumbnail" style="width: 100%;" />
+                                        </lsx-col>
+                                        <lsx-col size="md">
+                                            <b>Beispiel:</b>
+                                            Um die Ladezeit einer Webseite zu optimieren, werden häufig benötigte Dateien durch
+                                            Content Delivery Networks ausgeliefert. Hierfür betreiben die Content Delivery Networks
+                                            weltweit gespiegelte Rechenzentren, von denen automatisch das mit der kürzesten Zugriffszeit
+                                            ausgewählt wird. Auf dieselbe Weise spielen nebenbei auch Video-Streaming-Portale und andere
+                                            Onlinedienste ihre Inhalte aus.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md-2">
+                                            <img src="02-architektur/transparenz-dns.jpg" class="img-thumbnail" style="width: 100%;" />
+                                        </lsx-col>
+                                        <lsx-col size="md">
+                                            <b>Beispiel:</b>
+                                            Die Webseite der DHBW Karlsruhe ist immer unter der Domain
+                                            <a href="https://karlsruhe.dhbw.de" target="_blank">karlsruhe.dhbw.de</a> erreichbar.
+                                            Zwar muss die Domain zum Aufruf der Seite bekannt sein, diese enthält jedoch keine Informationen
+                                            darüber, auf welchen Rechner hierfür zugegriffen werden muss. Diese Information besorgt sich der
+                                            Browser stattdessen durch ein DNS-Lookup.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md-2">
+                                            <img src="02-architektur/transparenz-drucker.jpg" class="img-thumbnail" style="width: 100%;" />
+                                        </lsx-col>
+                                        <lsx-col size="md">
+                                            <b>Beispiel:</b>
+                                            <a href="https://en.wikipedia.org/wiki/Zero-configuration_networking" target="_blank">Zeroconf</a> ermöglicht die
+                                            automatische Konfiguration von Netzwerkgeräten, wodurch unter anderem auch netzwerkfähige Drucker und Scanner
+                                            vom Betriebssystem erkannt und eingerichtet werden können. Selbst wenn ein Gerät komplett ausgetauscht wird,
+                                            muss die Konfiguration auf dem Anwender-PC nicht angepasst werden.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md">
                                             <small>
-                                                Bildnachweise:
-                                                <a href="https://pixabay.com/photos/earth-planet-front-side-back-11593/" target="_blank">Pixabay: WikiImages</a>,
-                                                <a href="https://pixabay.com/illustrations/webdesign-design-web-website-3411373/" target="_blank">Pixabay: kreatikar</a>,
-                                                <a href="https://pixabay.com/photos/printer-desk-office-fax-scanner-790396/" target="_blank">Pixabay: stevepb</a>
+                                                <small>
+                                                    Bildnachweise:
+                                                    <a href="https://pixabay.com/photos/earth-planet-front-side-back-11593/" target="_blank">Pixabay: WikiImages</a>,
+                                                    <a href="https://pixabay.com/illustrations/webdesign-design-web-website-3411373/" target="_blank">Pixabay: kreatikar</a>,
+                                                    <a href="https://pixabay.com/photos/printer-desk-office-fax-scanner-790396/" target="_blank">Pixabay: stevepb</a>
+                                                </small>
                                             </small>
-                                        </small>
-                                    </lsx-col>
-                                </lsx-row>
-                            </lsx-grid-fluid>
-                        </lsx-accordion-page>
+                                        </lsx-col>
+                                    </lsx-row>
+                                </lsx-grid-fluid>
+                            </lsx-accordion-page>
 
-                        <lsx-accordion-page title="Mobilitätstransparenz" bold>
-                            <lsx-grid-fluid class="p-0">
-                                <lsx-row>
-                                    <lsx-col size="md">
-                                        Die Ressourcen einer verteilten Anwendung können jederzeit auf andere Maschinen
-                                        umziehen, ohne dass sich dies auf die Anwendung auswirkt.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md-2">
-                                        <img src="02-architektur/transparenz-namensdienst.jpg" class="img-thumbnail" style="width: 100%;" />
-                                    </lsx-col>
-                                    <lsx-col size="md">
-                                        <b>Beispiel:</b>
-                                        Namensdienste wie das Domain Name System ermöglichen es, die damit verwalteten
-                                        Ressourcen jederzeit umzuziehen, da die exakte Adresse einer Ressource vor jedem
-                                        Zugriff darin nachgeschlagen werden muss. Aus diesem Grund kann sich zum Beispiel
-                                        die IP-Adresse einer Webseite jederzeit ändern, ohne dass die meisten Besucher*innen
-                                        dies merken.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md-2">
-                                        <img src="02-architektur/transparenz-backend.jpg" class="img-thumbnail" style="width: 100%;" />
-                                    </lsx-col>
-                                    <lsx-col size="md">
-                                        <b>Beispiel:</b>
-                                        Die Datenbank einer Webanwendung wurde bisher auf derselben Maschine wie der Webserver betrieben,
-                                        soll nun aber auf eigene Hardware umziehen. Die Anwendung läuft nach dem Umzug wie gewohnt weiter,
-                                        da lediglich ein Eintrag in einer Konfigurationsdatei geändert werden musste. Die Entscheidung
-                                        der Programmierer, die Adresse des Datenbankservers nicht hart-codiert im Quellcode zu hinterlegen,
-                                        hat sich an diesem Tag als sehr weitsichtig herausgestellt.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md-2">
-                                        <img src="02-architektur/transparenz-vm.jpg" class="img-thumbnail" style="width: 100%;" />
-                                    </lsx-col>
-                                    <lsx-col size="md">
-                                        <b>Beispiel:</b>
-                                        Der <a href="https://de.wikipedia.org/wiki/Hypervisor" target="_blank">Hypervisor</a> einer
-                                        Virtualisierungslösung entscheidet, eine virtuelle Maschine auf einen leistungsfähigeren
-                                        Rechenknoten umzuziehen. Hierfür wird die VM ohne Unterbrechung des laufenden Betriebs auf
-                                        den neuen Host kopiert und dort weiter ausgeführt.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md">
-                                        <small>
+                            <lsx-accordion-page title="Mobilitätstransparenz" bold>
+                                <lsx-grid-fluid class="p-0">
+                                    <lsx-row>
+                                        <lsx-col size="md">
+                                            Die Ressourcen einer verteilten Anwendung können jederzeit auf andere Maschinen
+                                            umziehen, ohne dass sich dies auf die Anwendung auswirkt.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md-2">
+                                            <img src="02-architektur/transparenz-namensdienst.jpg" class="img-thumbnail" style="width: 100%;" />
+                                        </lsx-col>
+                                        <lsx-col size="md">
+                                            <b>Beispiel:</b>
+                                            Namensdienste wie das Domain Name System ermöglichen es, die damit verwalteten
+                                            Ressourcen jederzeit umzuziehen, da die exakte Adresse einer Ressource vor jedem
+                                            Zugriff darin nachgeschlagen werden muss. Aus diesem Grund kann sich zum Beispiel
+                                            die IP-Adresse einer Webseite jederzeit ändern, ohne dass die meisten Besucher*innen
+                                            dies merken.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md-2">
+                                            <img src="02-architektur/transparenz-backend.jpg" class="img-thumbnail" style="width: 100%;" />
+                                        </lsx-col>
+                                        <lsx-col size="md">
+                                            <b>Beispiel:</b>
+                                            Die Datenbank einer Webanwendung wurde bisher auf derselben Maschine wie der Webserver betrieben,
+                                            soll nun aber auf eigene Hardware umziehen. Die Anwendung läuft nach dem Umzug wie gewohnt weiter,
+                                            da lediglich ein Eintrag in einer Konfigurationsdatei geändert werden musste. Die Entscheidung
+                                            der Programmierer, die Adresse des Datenbankservers nicht hart-codiert im Quellcode zu hinterlegen,
+                                            hat sich an diesem Tag als sehr weitsichtig herausgestellt.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md-2">
+                                            <img src="02-architektur/transparenz-vm.jpg" class="img-thumbnail" style="width: 100%;" />
+                                        </lsx-col>
+                                        <lsx-col size="md">
+                                            <b>Beispiel:</b>
+                                            Der <a href="https://de.wikipedia.org/wiki/Hypervisor" target="_blank">Hypervisor</a> einer
+                                            Virtualisierungslösung entscheidet, eine virtuelle Maschine auf einen leistungsfähigeren
+                                            Rechenknoten umzuziehen. Hierfür wird die VM ohne Unterbrechung des laufenden Betriebs auf
+                                            den neuen Host kopiert und dort weiter ausgeführt.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md">
                                             <small>
-                                                Bildnachweise:
-                                                <a href="https://pixabay.com/photos/diary-appointment-address-pen-2080422/" target="_blank">Pixabay: jackmac34</a>,
-                                                <a href="https://pixabay.com/photos/server-cloud-development-business-1235959/" target="_blank">Pixabay: ColossusCloud</a>,
-                                                <a href="https://pixabay.com/illustrations/cloud-computing-network-internet-2001090/" target="_blank">Pixabay: wynpnt</a>
+                                                <small>
+                                                    Bildnachweise:
+                                                    <a href="https://pixabay.com/photos/diary-appointment-address-pen-2080422/" target="_blank">Pixabay: jackmac34</a>,
+                                                    <a href="https://pixabay.com/photos/server-cloud-development-business-1235959/" target="_blank">Pixabay: ColossusCloud</a>,
+                                                    <a href="https://pixabay.com/illustrations/cloud-computing-network-internet-2001090/" target="_blank">Pixabay: wynpnt</a>
+                                                </small>
                                             </small>
-                                        </small>
-                                    </lsx-col>
-                                </lsx-row>
-                            </lsx-grid-fluid>
-                        </lsx-accordion-page>
+                                        </lsx-col>
+                                    </lsx-row>
+                                </lsx-grid-fluid>
+                            </lsx-accordion-page>
 
-                        <lsx-accordion-page title="Persistenztransparenz" bold>
-                            <lsx-grid-fluid class="p-0">
-                                <lsx-row>
-                                    <lsx-col size="md">
-                                        Besonders benutzerfreundliche Anwendungen unterscheiden nicht zwischen gespeicherten und
-                                        und nicht gespeicherten Daten. Die Speicherung erfolgt automatisch im Hintergrund.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md-2">
-                                        <img src="02-architektur/transparenz-google.jpg" class="img-thumbnail" style="width: 100%;" />
-                                    </lsx-col>
-                                    <lsx-col size="md">
-                                        <b>Beispiel:</b>
-                                        Cloud-basierte Officepakete wie Google Docs besitzen keinen Menüeintrag zum Speichern
-                                        eines Dokuments. Jede Änderung wird mit einem kleinen Zeitversatz automatisch gespeichert,
-                                        so dass man nie wieder etwas verlieren kann, wenn man Abends zu schnell aus dem Büro flieht.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md">
-                                        <small>
+                            <lsx-accordion-page title="Persistenztransparenz" bold>
+                                <lsx-grid-fluid class="p-0">
+                                    <lsx-row>
+                                        <lsx-col size="md">
+                                            Besonders benutzerfreundliche Anwendungen unterscheiden nicht zwischen gespeicherten und
+                                            und nicht gespeicherten Daten. Die Speicherung erfolgt automatisch im Hintergrund.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md-2">
+                                            <img src="02-architektur/transparenz-google.jpg" class="img-thumbnail" style="width: 100%;" />
+                                        </lsx-col>
+                                        <lsx-col size="md">
+                                            <b>Beispiel:</b>
+                                            Cloud-basierte Officepakete wie Google Docs besitzen keinen Menüeintrag zum Speichern
+                                            eines Dokuments. Jede Änderung wird mit einem kleinen Zeitversatz automatisch gespeichert,
+                                            so dass man nie wieder etwas verlieren kann, wenn man Abends zu schnell aus dem Büro flieht.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md">
                                             <small>
-                                                Bildnachweis:
-                                                <a href="https://pixabay.com/illustrations/google-search-engine-browser-search-76517/" target="_blank">Pixabay: Simon</a>
+                                                <small>
+                                                    Bildnachweis:
+                                                    <a href="https://pixabay.com/illustrations/google-search-engine-browser-search-76517/" target="_blank">Pixabay: Simon</a>
+                                                </small>
                                             </small>
-                                        </small>
-                                    </lsx-col>
-                                </lsx-row>
-                            </lsx-grid-fluid>
-                        </lsx-accordion-page>
+                                        </lsx-col>
+                                    </lsx-row>
+                                </lsx-grid-fluid>
+                            </lsx-accordion-page>
 
-                        <lsx-accordion-page title="Replikationstransparenz" bold>
-                            <lsx-grid-fluid class="p-0">
-                                <lsx-row>
-                                    <lsx-col size="md">
-                                        Aus Performance-Gründen oder zur Erhöhung der Ausfallsicherheit werden wichtige Daten auf
-                                        mehrere Rechenknoten repliziert. Die Datenreplikation erfolgt vollautomatisch im Hintergrund,
-                                        wobei das System bei jeder Änderung die Aktualisierung aller Kopien sicherstellt.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md-2">
-                                        <img src="02-architektur/transparenz-weltkarte.jpg" class="img-thumbnail" style="width: 100%;" />
-                                    </lsx-col>
-                                    <lsx-col size="md">
-                                        <b>Beispiel:</b>
-                                        Weltweit genutzte Anwendungen wie die Google-Suche, Facebook oder Instagram werden in global
-                                        verteilten Rechenzentren betrieben, um die Ladezeiten zu verkürzen. Die innerhalb der Anwendung
-                                        anfallenden Daten werden deshalb automatisch zwischen den Rechenzentren repliziert, damit jede*r
-                                        Anwender*in möglichst dieselben Daten sieht.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md-2">
-                                        <img src="02-architektur/transparenz-datenbank.jpg" class="img-thumbnail" style="width: 100%;" />
-                                    </lsx-col>
-                                    <lsx-col size="md">
-                                        <b>Beispiel:</b>
-                                        Die meisten Datenbanken erlauben einen automatischen Cluster-Betrieb, wodurch alle Daten auf mehrere
-                                        Rechenknoten gespiegelt werden. Lesende Anfragen werden dann von irgend einem gerade verfügbaren Knoten
-                                        beantwortet, während ändernde Anfragen an alle Knoten weitergereicht werden.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md">
-                                        <small>
+                            <lsx-accordion-page title="Replikationstransparenz" bold>
+                                <lsx-grid-fluid class="p-0">
+                                    <lsx-row>
+                                        <lsx-col size="md">
+                                            Aus Performance-Gründen oder zur Erhöhung der Ausfallsicherheit werden wichtige Daten auf
+                                            mehrere Rechenknoten repliziert. Die Datenreplikation erfolgt vollautomatisch im Hintergrund,
+                                            wobei das System bei jeder Änderung die Aktualisierung aller Kopien sicherstellt.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md-2">
+                                            <img src="02-architektur/transparenz-weltkarte.jpg" class="img-thumbnail" style="width: 100%;" />
+                                        </lsx-col>
+                                        <lsx-col size="md">
+                                            <b>Beispiel:</b>
+                                            Weltweit genutzte Anwendungen wie die Google-Suche, Facebook oder Instagram werden in global
+                                            verteilten Rechenzentren betrieben, um die Ladezeiten zu verkürzen. Die innerhalb der Anwendung
+                                            anfallenden Daten werden deshalb automatisch zwischen den Rechenzentren repliziert, damit jede*r
+                                            Anwender*in möglichst dieselben Daten sieht.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md-2">
+                                            <img src="02-architektur/transparenz-datenbank.jpg" class="img-thumbnail" style="width: 100%;" />
+                                        </lsx-col>
+                                        <lsx-col size="md">
+                                            <b>Beispiel:</b>
+                                            Die meisten Datenbanken erlauben einen automatischen Cluster-Betrieb, wodurch alle Daten auf mehrere
+                                            Rechenknoten gespiegelt werden. Lesende Anfragen werden dann von irgend einem gerade verfügbaren Knoten
+                                            beantwortet, während ändernde Anfragen an alle Knoten weitergereicht werden.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md">
                                             <small>
-                                                Bildnachweise:
-                                                <a href="https://www.openstreetmap.org/#map=2/18.1/-20.7&layers=C" target="_blank">OpenStreetMap</a>,
-                                                <a href="https://pixabay.com/photos/info-data-disk-server-database-1641937/" target="_blank">pixabay: FreePhotosART</a>,
+                                                <small>
+                                                    Bildnachweise:
+                                                    <a href="https://www.openstreetmap.org/#map=2/18.1/-20.7&layers=C" target="_blank">OpenStreetMap</a>,
+                                                    <a href="https://pixabay.com/photos/info-data-disk-server-database-1641937/" target="_blank">pixabay: FreePhotosART</a>,
+                                                </small>
                                             </small>
-                                        </small>
-                                    </lsx-col>
-                                </lsx-row>
-                            </lsx-grid-fluid>
-                        </lsx-accordion-page>
+                                        </lsx-col>
+                                    </lsx-row>
+                                </lsx-grid-fluid>
+                            </lsx-accordion-page>
 
-                        <lsx-accordion-page title="Fehlertransparenz" bold>
-                            <lsx-grid-fluid class="p-0">
-                                <lsx-row>
-                                    <lsx-col size="md">
-                                        Fehlersituationen werden nicht als Ausnahme sondern als Normalfall betrachtet.
-                                        Eine Anwendung sollte daher immer so entworfen werden, dass sie möglichst viele
-                                        Fehlersituationen abfangen und automatisch korrigieren kann. Keinesfalls darf
-                                        eine Anwendung einfach abstürzen, wenn ein Weiterbetrieb prinzipiell möglich ist.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md-2">
-                                        <img src="02-architektur/transparenz-email.jpg" class="img-thumbnail" style="width: 100%;" />
-                                    </lsx-col>
-                                    <lsx-col size="md">
-                                        <b>Beispiel:</b>
-                                        Eine E-Mail kann nicht sofort zugestellt werden, da das Postfach des Empfängers
-                                        voll ist. Der Mailserver des Senders teilt deshalb mit, die Zustellung innerhalb
-                                        der nächsten Tage zu wiederholen. Nur, wenn die Nachricht nach fünf Tagen immer
-                                        noch nicht zugestellt wurde, wird der Absender über das endgültige Scheitern
-                                        informiert.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md-2">
-                                        <img src="02-architektur/transparenz-wetterstation.jpg" class="img-thumbnail" style="width: 100%;" />
-                                    </lsx-col>
-                                    <lsx-col size="md">
-                                        <b>Beispiel:</b>
-                                        Eine Wetterstation sammelt kontinuierlich Daten und sendet diese via UMTS an einen zentralen
-                                        Server. Bei schlechtem Wetter besteht allerdings nur eine unzuverlässige Internetverbindung,
-                                        so dass die Daten nicht immer sofort verschickt werden können. Sämtliche Daten werden daher
-                                        in einem internen Ringpuffer gesammelt und so lange an den Server geschickt, bis dieser den
-                                        Empfang bestätigt.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md-2">
-                                        <img src="02-architektur/transparenz-apollo11.jpg" class="img-thumbnail" style="width: 100%;" />
-                                    </lsx-col>
-                                    <lsx-col size="md">
-                                        <b>Beispiel:</b>
-                                        Bereits bei den Apollo-Mondmissionen waren alle Computersysteme mehrfach redundant ausgelegt,
-                                        so dass bei Versagen eines Teilsystems dieses vollautomatisch ersetzt werden konnte. Der
-                                        <a href="https://en.wikipedia.org/wiki/Saturn_Launch_Vehicle_Digital_Computer" target="_blank">Saturn
-                                        Launch Vehicle Digital Computer</a> führte sogar jede Berechnung dreifach redundant aus und
-                                        arbeitete stets mit dem Mehrheitsergebnis weiter, um katastrophale Folgen aufgrund von
-                                        Hardwarefehlern zu vermeiden.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md">
-                                        <small>
+                            <lsx-accordion-page title="Fehlertransparenz" bold>
+                                <lsx-grid-fluid class="p-0">
+                                    <lsx-row>
+                                        <lsx-col size="md">
+                                            Fehlersituationen werden nicht als Ausnahme sondern als Normalfall betrachtet.
+                                            Eine Anwendung sollte daher immer so entworfen werden, dass sie möglichst viele
+                                            Fehlersituationen abfangen und automatisch korrigieren kann. Keinesfalls darf
+                                            eine Anwendung einfach abstürzen, wenn ein Weiterbetrieb prinzipiell möglich ist.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md-2">
+                                            <img src="02-architektur/transparenz-email.jpg" class="img-thumbnail" style="width: 100%;" />
+                                        </lsx-col>
+                                        <lsx-col size="md">
+                                            <b>Beispiel:</b>
+                                            Eine E-Mail kann nicht sofort zugestellt werden, da das Postfach des Empfängers
+                                            voll ist. Der Mailserver des Senders teilt deshalb mit, die Zustellung innerhalb
+                                            der nächsten Tage zu wiederholen. Nur, wenn die Nachricht nach fünf Tagen immer
+                                            noch nicht zugestellt wurde, wird der Absender über das endgültige Scheitern
+                                            informiert.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md-2">
+                                            <img src="02-architektur/transparenz-wetterstation.jpg" class="img-thumbnail" style="width: 100%;" />
+                                        </lsx-col>
+                                        <lsx-col size="md">
+                                            <b>Beispiel:</b>
+                                            Eine Wetterstation sammelt kontinuierlich Daten und sendet diese via UMTS an einen zentralen
+                                            Server. Bei schlechtem Wetter besteht allerdings nur eine unzuverlässige Internetverbindung,
+                                            so dass die Daten nicht immer sofort verschickt werden können. Sämtliche Daten werden daher
+                                            in einem internen Ringpuffer gesammelt und so lange an den Server geschickt, bis dieser den
+                                            Empfang bestätigt.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md-2">
+                                            <img src="02-architektur/transparenz-apollo11.jpg" class="img-thumbnail" style="width: 100%;" />
+                                        </lsx-col>
+                                        <lsx-col size="md">
+                                            <b>Beispiel:</b>
+                                            Bereits bei den Apollo-Mondmissionen waren alle Computersysteme mehrfach redundant ausgelegt,
+                                            so dass bei Versagen eines Teilsystems dieses vollautomatisch ersetzt werden konnte. Der
+                                            <a href="https://en.wikipedia.org/wiki/Saturn_Launch_Vehicle_Digital_Computer" target="_blank">Saturn
+                                            Launch Vehicle Digital Computer</a> führte sogar jede Berechnung dreifach redundant aus und
+                                            arbeitete stets mit dem Mehrheitsergebnis weiter, um katastrophale Folgen aufgrund von
+                                            Hardwarefehlern zu vermeiden.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md">
                                             <small>
-                                                Bildnachweise:
-                                                <a href="https://unsplash.com/photos/oeDH20DVb2A" target="_blank">Unsplash: Liam Truong</a>,
-                                                <a href="https://pixabay.com/photos/anemometer-weather-station-3977718/" target="_blank">Pixabay: RitaE</a>,
-                                                <a href="https://de.wikipedia.org/wiki/Datei:Apollo_11_rollout.jpg" target="_blank">Wikipedia: NASA</a>
+                                                <small>
+                                                    Bildnachweise:
+                                                    <a href="https://unsplash.com/photos/oeDH20DVb2A" target="_blank">Unsplash: Liam Truong</a>,
+                                                    <a href="https://pixabay.com/photos/anemometer-weather-station-3977718/" target="_blank">Pixabay: RitaE</a>,
+                                                    <a href="https://de.wikipedia.org/wiki/Datei:Apollo_11_rollout.jpg" target="_blank">Wikipedia: NASA</a>
+                                                </small>
                                             </small>
-                                        </small>
-                                    </lsx-col>
-                                </lsx-row>
-                            </lsx-grid-fluid>
-                        </lsx-accordion-page>
+                                        </lsx-col>
+                                    </lsx-row>
+                                </lsx-grid-fluid>
+                            </lsx-accordion-page>
 
-                        <lsx-accordion-page title="Nebenläufigkeitstransparenz" bold>
-                            <lsx-grid-fluid class="p-0">
-                                <lsx-row>
-                                    <lsx-col size="md">
-                                        Eine verteilte Anwendung sollte immer so entworfen werden, dass sie von vielen Benutzern
-                                        gleichzeitig genutzt werden kann. Hierfür notwendige Sperren und Synchronisationsmechanismen
-                                        sollten dabei vor den Anwender*innen verborgen im Hintergrund ablaufen.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md-2">
-                                        <img src="02-architektur/transparenz-wikipedia.svg" class="img-thumbnail" style="width: 100%;" />
-                                    </lsx-col>
-                                    <lsx-col size="md">
-                                        <b>Beispiel:</b>
-                                        Wikipedia verarbeitet pro Sekunde zwischen 25.000 und 60.000 Seitenzugriffe. Da die meisten
-                                        Zugriffe nur lesend erfolgen, kann jeder Artikel auch dann gelesen werden, wenn er gerade von
-                                        jemand anderem bearbeitet wird. Bearbeiten zwei Personen gleichzeitig denselben Artikel, wird
-                                        beim Speichern ein Bearbeitungskonflikt angezeigt, der manuell aufgelöst werden muss.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md-2">
-                                        <img src="02-architektur/transparenz-etherpad.png" class="img-thumbnail" style="width: 100%;" />
-                                    </lsx-col>
-                                    <lsx-col size="md">
-                                        <b>Beispiel:</b>
-                                        Kollaborative Anwendungen wie Etherpad erlauben es mehreren Personen, gleichzeitig am selben
-                                        Dokument zu arbeiten. Jede Person sieht dabei in Echtzeit die von den anderen vorgenommenen
-                                        Änderungen, weshalb auch niemand ein Dokument exklusiv sperren kann.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md-2">
-                                        <img src="02-architektur/transparenz-couchdb.svg" class="img-thumbnail" style="width: 100%;" />
-                                    </lsx-col>
-                                    <lsx-col size="md">
-                                        <b>Beispiel:</b>
-                                        CouchDB kennt keine Datenbanksperren, um gleichzeitige Änderungen an einem Datensatz zu vermeiden.
-                                        Tritt ein Konflikt auf, legt die Datenbank einfach zwei Versionen desselben Datensatzes an. Es obliegt
-                                        dem Anwendungscode die Versionen bei Bedarf wieder zusammenzuführen.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md">
-                                        <small>
+                            <lsx-accordion-page title="Nebenläufigkeitstransparenz" bold>
+                                <lsx-grid-fluid class="p-0">
+                                    <lsx-row>
+                                        <lsx-col size="md">
+                                            Eine verteilte Anwendung sollte immer so entworfen werden, dass sie von vielen Benutzern
+                                            gleichzeitig genutzt werden kann. Hierfür notwendige Sperren und Synchronisationsmechanismen
+                                            sollten dabei vor den Anwender*innen verborgen im Hintergrund ablaufen.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md-2">
+                                            <img src="02-architektur/transparenz-wikipedia.svg" class="img-thumbnail" style="width: 100%;" />
+                                        </lsx-col>
+                                        <lsx-col size="md">
+                                            <b>Beispiel:</b>
+                                            Wikipedia verarbeitet pro Sekunde zwischen 25.000 und 60.000 Seitenzugriffe. Da die meisten
+                                            Zugriffe nur lesend erfolgen, kann jeder Artikel auch dann gelesen werden, wenn er gerade von
+                                            jemand anderem bearbeitet wird. Bearbeiten zwei Personen gleichzeitig denselben Artikel, wird
+                                            beim Speichern ein Bearbeitungskonflikt angezeigt, der manuell aufgelöst werden muss.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md-2">
+                                            <img src="02-architektur/transparenz-etherpad.png" class="img-thumbnail" style="width: 100%;" />
+                                        </lsx-col>
+                                        <lsx-col size="md">
+                                            <b>Beispiel:</b>
+                                            Kollaborative Anwendungen wie Etherpad erlauben es mehreren Personen, gleichzeitig am selben
+                                            Dokument zu arbeiten. Jede Person sieht dabei in Echtzeit die von den anderen vorgenommenen
+                                            Änderungen, weshalb auch niemand ein Dokument exklusiv sperren kann.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md-2">
+                                            <img src="02-architektur/transparenz-couchdb.svg" class="img-thumbnail" style="width: 100%;" />
+                                        </lsx-col>
+                                        <lsx-col size="md">
+                                            <b>Beispiel:</b>
+                                            CouchDB kennt keine Datenbanksperren, um gleichzeitige Änderungen an einem Datensatz zu vermeiden.
+                                            Tritt ein Konflikt auf, legt die Datenbank einfach zwei Versionen desselben Datensatzes an. Es obliegt
+                                            dem Anwendungscode die Versionen bei Bedarf wieder zusammenzuführen.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md">
                                             <small>
-                                                Bildnachweise:
-                                                <a href="https://commons.wikimedia.org/wiki/File:Wikipedia-logo-v2.svg" target="_blank">Wikimedia: Nohat</a>,
-                                                <a href="https://etherpad.org/" target="_blank">etherpad.org</a>,
-                                                <a href="https://commons.wikimedia.org/wiki/File:CouchDB.svg" target="_blank">Wikimedia: Apache Software Foundation</a>
+                                                <small>
+                                                    Bildnachweise:
+                                                    <a href="https://commons.wikimedia.org/wiki/File:Wikipedia-logo-v2.svg" target="_blank">Wikimedia: Nohat</a>,
+                                                    <a href="https://etherpad.org/" target="_blank">etherpad.org</a>,
+                                                    <a href="https://commons.wikimedia.org/wiki/File:CouchDB.svg" target="_blank">Wikimedia: Apache Software Foundation</a>
+                                                </small>
                                             </small>
-                                        </small>
-                                    </lsx-col>
-                                </lsx-row>
-                            </lsx-grid-fluid>
-                        </lsx-accordion-page>
+                                        </lsx-col>
+                                    </lsx-row>
+                                </lsx-grid-fluid>
+                            </lsx-accordion-page>
 
-                        <lsx-accordion-page title="Skalierbarkeitstransparenz" bold>
-                            <lsx-grid-fluid class="p-0">
-                                <lsx-row>
-                                    <lsx-col size="md">
-                                        Verteilte Systeme und Anwendungen sollten immer skalierbar sein. Im Idealfall können im
-                                        laufenden Betrieb Ressourcen hinzugefügt oder entfernt werden, um die Leistung anzupassen.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md-2">
-                                        <img src="02-architektur/transparenz-linux.svg" class="img-thumbnail" style="width: 100%;" />
-                                    </lsx-col>
-                                    <lsx-col size="md">
-                                        <b>Beispiel:</b>
-                                        Unter Linux bildet der
-                                        <a href="https://de.wikipedia.org/wiki/Logical_Volume_Manager" target="_blank">Logical Volume Manager</a>
-                                        eine Abstraktionsschicht zwischen den tatsächlich auf einem Datenträger vorhandenen Partitionen und den
-                                        für das Betriebssystem sichtbaren Dateisystemen. Dadurch wird es möglich, ein Dateisystem jederzeit durch
-                                        Hinzufügen weiterer Datenträger zu vergrößern.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md-2">
-                                        <img src="02-architektur/transparenz-lastverteilung.jpg" class="img-thumbnail" style="width: 100%;" />
-                                    </lsx-col>
-                                    <lsx-col size="md">
-                                        <b>Beispiel:</b>
-                                        Im einfachsten Fall befinden sich die Dateien einer Webseite auf einem zentralen Webserver, von
-                                        dem sie abgerufen werden können. Sollen jedoch sehr viele Anfragen gleichzeitig behandelt werden,
-                                        können diese über eine vorgeschaltete Lastverteilung auf mehrere Server verteilt werden. Die
-                                        Leistungsfähigkeit kann dabei jederzeit durch Starten und Stoppen weiterer Server angepasst werden.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md">
-                                        <small>
+                            <lsx-accordion-page title="Skalierbarkeitstransparenz" bold>
+                                <lsx-grid-fluid class="p-0">
+                                    <lsx-row>
+                                        <lsx-col size="md">
+                                            Verteilte Systeme und Anwendungen sollten immer skalierbar sein. Im Idealfall können im
+                                            laufenden Betrieb Ressourcen hinzugefügt oder entfernt werden, um die Leistung anzupassen.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md-2">
+                                            <img src="02-architektur/transparenz-linux.svg" class="img-thumbnail" style="width: 100%;" />
+                                        </lsx-col>
+                                        <lsx-col size="md">
+                                            <b>Beispiel:</b>
+                                            Unter Linux bildet der
+                                            <a href="https://de.wikipedia.org/wiki/Logical_Volume_Manager" target="_blank">Logical Volume Manager</a>
+                                            eine Abstraktionsschicht zwischen den tatsächlich auf einem Datenträger vorhandenen Partitionen und den
+                                            für das Betriebssystem sichtbaren Dateisystemen. Dadurch wird es möglich, ein Dateisystem jederzeit durch
+                                            Hinzufügen weiterer Datenträger zu vergrößern.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md-2">
+                                            <img src="02-architektur/transparenz-lastverteilung.jpg" class="img-thumbnail" style="width: 100%;" />
+                                        </lsx-col>
+                                        <lsx-col size="md">
+                                            <b>Beispiel:</b>
+                                            Im einfachsten Fall befinden sich die Dateien einer Webseite auf einem zentralen Webserver, von
+                                            dem sie abgerufen werden können. Sollen jedoch sehr viele Anfragen gleichzeitig behandelt werden,
+                                            können diese über eine vorgeschaltete Lastverteilung auf mehrere Server verteilt werden. Die
+                                            Leistungsfähigkeit kann dabei jederzeit durch Starten und Stoppen weiterer Server angepasst werden.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md">
                                             <small>
-                                                Bildnachweise:
-                                                <a href="https://pixabay.com/vectors/avatar-beak-black-cute-emotion-1295404/" target="_blank">Pixabay: OpenClipart-Vectors</a>,
-                                                <a href="https://pixabay.com/illustrations/vpn-server-router-virtual-firewall-3406770/" target="_blank">Pixabay: kreatikar</a>
+                                                <small>
+                                                    Bildnachweise:
+                                                    <a href="https://pixabay.com/vectors/avatar-beak-black-cute-emotion-1295404/" target="_blank">Pixabay: OpenClipart-Vectors</a>,
+                                                    <a href="https://pixabay.com/illustrations/vpn-server-router-virtual-firewall-3406770/" target="_blank">Pixabay: kreatikar</a>
+                                                </small>
                                             </small>
-                                        </small>
-                                    </lsx-col>
-                                </lsx-row>
-                            </lsx-grid-fluid>
-                        </lsx-accordion-page>
+                                        </lsx-col>
+                                    </lsx-row>
+                                </lsx-grid-fluid>
+                            </lsx-accordion-page>
 
-                        <lsx-accordion-page title="Leistungstransparenz" bold>
-                            <lsx-grid-fluid class="p-0">
-                                <lsx-row>
-                                    <lsx-col size="md">
-                                        Die Leistung eines verteilten Systems sollte nur von den verfügbaren Ressourcen begrenzt
-                                        sein. Innerhalb der gegebenen Grenzen sorgt das System dann selbstständig und ohne manuelle
-                                        Eingriffe dafür, die vorhandene Kapazität bedarfsgerecht anzupassen.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md-2">
-                                        <img src="02-architektur/transparenz-cloud.jpg" class="img-thumbnail" style="width: 100%;" />
-                                    </lsx-col>
-                                    <lsx-col size="md">
-                                        <b>Beispiel:</b>
-                                        Cloud-Angebote unterscheiden sich vom traditionellen Hosting insbesondere durch die automatische
-                                        Skalierbarkeit und nutzungsabhängige Abrechnung aller Dienste. Die meisten Anbieter erlauben daher,
-                                        Regeln zu definieren, bei welcher Auslastung weitere Kapazitäten hinzugefügt oder wieder entfernt
-                                        werden sollen. Einrichtung, Start und Stopp der notwendigen Rechenknoten laufen hierfür komplett
-                                        automatisiert.
-                                    </lsx-col>
-                                </lsx-row>
-                                <lsx-row>
-                                    <lsx-col size="md-2">
-                                        <img src="02-architektur/transparenz-3dfilm.jpg" class="img-thumbnail" style="width: 100%;" />
-                                    </lsx-col>
-                                    <lsx-col size="md">
-                                        <b>Beispiel:</b>
-                                        Nicht nur in Forschung und Wissenschaft sondern auch in der Filmwirtschaft werden Cluster-Systeme
-                                        zur Bewerkstelligung der anfallenden Rechenaufgaben eingesetzt. Diese besitzen einen Job Scheduler
-                                        zum Einspeisen abzuarbeitender Aufgaben. Die zur Verfügung stehende Rechenleistung teilt der Scheduler
-                                        automatisch auf alle aktiven Jobs auf. Sind zu einem Zeitpunkt nur wenige Jobs aktiv, laufen diese daher
-                                        schneller durch, als wenn viele Jobs gleichzeitig laufen sollen.
-                                    </lsx-col>
-                                </lsx-row>
-                                <div class="row">
-                                    <div class="col">
-                                        <small>
+                            <lsx-accordion-page title="Leistungstransparenz" bold>
+                                <lsx-grid-fluid class="p-0">
+                                    <lsx-row>
+                                        <lsx-col size="md">
+                                            Die Leistung eines verteilten Systems sollte nur von den verfügbaren Ressourcen begrenzt
+                                            sein. Innerhalb der gegebenen Grenzen sorgt das System dann selbstständig und ohne manuelle
+                                            Eingriffe dafür, die vorhandene Kapazität bedarfsgerecht anzupassen.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md-2">
+                                            <img src="02-architektur/transparenz-cloud.jpg" class="img-thumbnail" style="width: 100%;" />
+                                        </lsx-col>
+                                        <lsx-col size="md">
+                                            <b>Beispiel:</b>
+                                            Cloud-Angebote unterscheiden sich vom traditionellen Hosting insbesondere durch die automatische
+                                            Skalierbarkeit und nutzungsabhängige Abrechnung aller Dienste. Die meisten Anbieter erlauben daher,
+                                            Regeln zu definieren, bei welcher Auslastung weitere Kapazitäten hinzugefügt oder wieder entfernt
+                                            werden sollen. Einrichtung, Start und Stopp der notwendigen Rechenknoten laufen hierfür komplett
+                                            automatisiert.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <lsx-row>
+                                        <lsx-col size="md-2">
+                                            <img src="02-architektur/transparenz-3dfilm.jpg" class="img-thumbnail" style="width: 100%;" />
+                                        </lsx-col>
+                                        <lsx-col size="md">
+                                            <b>Beispiel:</b>
+                                            Nicht nur in Forschung und Wissenschaft sondern auch in der Filmwirtschaft werden Cluster-Systeme
+                                            zur Bewerkstelligung der anfallenden Rechenaufgaben eingesetzt. Diese besitzen einen Job Scheduler
+                                            zum Einspeisen abzuarbeitender Aufgaben. Die zur Verfügung stehende Rechenleistung teilt der Scheduler
+                                            automatisch auf alle aktiven Jobs auf. Sind zu einem Zeitpunkt nur wenige Jobs aktiv, laufen diese daher
+                                            schneller durch, als wenn viele Jobs gleichzeitig laufen sollen.
+                                        </lsx-col>
+                                    </lsx-row>
+                                    <div class="row">
+                                        <div class="col">
                                             <small>
-                                                Bildnachweise:
-                                                <a href="https://pixabay.com/photos/field-clouds-sky-agriculture-533541/" target="_blank">Pixabay: pcdazero</a>,
-                                                <a href="https://pixabay.com/illustrations/super-woman-flying-3d-figure-female-1885016/" target="_blank">Pixabay: perianjs</a>
+                                                <small>
+                                                    Bildnachweise:
+                                                    <a href="https://pixabay.com/photos/field-clouds-sky-agriculture-533541/" target="_blank">Pixabay: pcdazero</a>,
+                                                    <a href="https://pixabay.com/illustrations/super-woman-flying-3d-figure-female-1885016/" target="_blank">Pixabay: perianjs</a>
+                                                </small>
                                             </small>
-                                        </small>
+                                        </div>
                                     </div>
-                                </div>
-                            </lsx-grid-fluid>
-                        </lsx-accordion-page>
-                    </lsx-accordion>
-                </lsx-col>
-            </lsx-row>
-        </lsx-grid-fluid>
+                                </lsx-grid-fluid>
+                            </lsx-accordion-page>
+                        </lsx-accordion>
+                    </lsx-col>
+                </lsx-row>
+            </lsx-grid-fluid>
+        </article>
     </section>
 
     <section data-title="Kommunikation ohne das Internet" class="centered-content">
@@ -3483,62 +3485,60 @@
 <section data-title="Monolith vs. Microservices">
     <section data-title="Anwendungsarchitektur früher">
         <article class="centered-content">
-            <div class="limited-width2">
-                <div>
-                    <p detail-content>
-                        Frühere Anwendungsarchitekturen, bei denen sämtliche Funktionen in einer großen Codebasis
-                        untergebracht waren, werden heute als Monolith bezeichnet. Zwar kann der Quellcode
-                        durchaus modular aufgebaut und somit leicht um neue Funktionen erweiterbar sein. Jedoch
-                        kann die Anwendung nur als Ganzes deployed und in Betrieb genommen werden.
-                    </p>
+            <lsx-grid-fluid class="limited-width2">
+                <p class="mb-4" detail-content>
+                    Frühere Anwendungsarchitekturen, bei denen sämtliche Funktionen in einer großen Codebasis
+                    untergebracht waren, werden heute als Monolith bezeichnet. Zwar kann der Quellcode
+                    durchaus modular aufgebaut und somit leicht um neue Funktionen erweiterbar sein. Jedoch
+                    kann die Anwendung nur als Ganzes deployed und in Betrieb genommen werden.
+                </p>
 
-                    <img src="02-architektur/monolith.png" class="d-block limited-width m-auto mb-3" />
+                <img src="02-architektur/monolith.png" class="d-block limited-width m-auto mb-4" />
 
-                    <p detail-content>
-                        Verteilte Anwendungen werden daher häufig mit einer Microservice-Architektur gestaltet.
-                        Für kleine Entwicklerteams kann ein Monolith dennoch die bessere Wahl sein, da nicht
-                        jedes Unternehmen organisatorisch auf Microservices vorbereitet ist. Vor allem, wenn
-                        die Entwicklung nicht auf mehrere Teams verteilt werden kann, sind die Voraussetzungen
-                        meist nicht gegeben.
-                    </p>
-                </div>
-
-                <lsx-grid-fluid class="p-0">
-                    <lsx-row>
-                        <lsx-col size="md">
-                            <div class="card h-100">
-                                <div class="card-header fw-bold">
-                                    Vorteile von Monolithen
-                                </div>
-                                <div class="card-body markdown">
-                                    * Einfache Anwendungsarchitektur mit wenigen Komponenten.
-                                    * Insbesondere für kleine Entwicklerteams leicht handlebar.
-                                    * Eine Programmiersprache für alle Teile der Anwendung.
-                                    * Direkter Datenaustausch zwischen den Anwendungskomponenten.
-                                    * Anwendungskomponenten können sich gegenseitig direkt aufrufen.
-                                </div>
-                            </div>
-                        </lsx-col>
-
-                        <lsx-col size="md">
-                            <div class="card h-100">
-                                <div class="card-header fw-bold">
-                                    Nachteile von Monolithen
-                                </div>
-                                <div class="card-body markdown">
-                                    * Unpraktisch für sehr große Anwendungen mit vielen Funktionen.
-                                    * Die Auswirkungen einer Änderung sind oft schwer nachvollziehbar.
-                                    * In großen Entwicklerteams kommt es oft zu gegenseitigen Störungen.
-                                    * Kein getrenntes Deployment einzelner Anwendungsfunktionen möglich.
-                                    * Vor jedem Deployment muss die ganze Anwendung getestet werden.
-                                    * Fehlerkorrekturen brauchen daher lange, bis sie produktiv gehen.
-                                    * Die Anwendung kann nur als Ganzes skaliert werden.
-                                </div>
-                            </div>
-                        </lsx-col>
-                    </lsx-row>
-                </lsx-grid-fluid>
-            </div>
+                <p class="mb-4" detail-content>
+                    Verteilte Anwendungen werden daher häufig mit einer Microservice-Architektur gestaltet.
+                    Für kleine Entwicklerteams kann ein Monolith dennoch die bessere Wahl sein, da nicht
+                    jedes Unternehmen organisatorisch auf Microservices vorbereitet ist. Vor allem, wenn
+                    die Entwicklung nicht auf mehrere Teams verteilt werden kann, sind die Voraussetzungen
+                    meist nicht gegeben.
+                </p>
+                
+                <lsx-row class="mb-0">
+                    <lsx-col size="md">
+                        <h3 class="dhbw-lightblue mb-4">
+                            <img src="02-architektur/thumb-up.png" alt="" style="width: 2em; vertical-align: middle; margin-right: 0.25em;" />
+                            <span>Vorteile von Monolithen</span>
+                        </h3>
+                        <lsx-ul>
+                            <li>Einfache Anwendungsarchitektur mit wenigen Komponenten.</li>
+                            <li>Insbesondere für kleine Entwicklerteams leicht handhabbar.</li>
+                            <li>Eine Programmiersprache für alle Teile der Anwendung.</li>
+                            <li>Keine verteilte Kommunikation zwischen den Komponenten.</li>
+                        </lsx-ul>
+                    </lsx-col>
+                    <lsx-col size="md">
+                        <h3 class="dhbw-lightblue mb-4">
+                            <img src="02-architektur/thumb-down.png" alt="" style="width: 2em; vertical-align: middle; margin-right: 0.25em;" />
+                            <span>Nachteile von Monolithen</span>
+                        </h3>
+                        <lsx-ul>
+                            <li>In großen Entwicklerteams kommt es oft zu gegenseitigen Störungen.</li>
+                            <li>Kein getrenntes Deployment einzelner Anwendungsfunktionen möglich.</li>
+                            <li>Vor jedem Deployment muss die ganze Anwendung getestet werden.</li>
+                            <li>Die Anwendung kann nur als Ganzes skaliert werden.</li>
+                        </lsx-ul>
+                    </lsx-col>
+                </lsx-row>
+                
+                <p>
+                    <small>
+                        <small>
+                            Bildnachweis:
+                            <a href="https://pixabay.com/en/symbol-gui-internet-internet-page-2480163/" target="_blank">Pixabay: janf93</a>
+                        </small>
+                    </small>
+                </p>
+            </lsx-grid>
         </article>
     </section>
 
@@ -3561,106 +3561,102 @@
         </article>
     </section>
 
-    <section data-title="Anwendungsarchitektur heute">
+    <section data-title="Moderne Microservice-Architektur">
         <article class="centered-content">
-            <div class="limited-width2">
-                <lsx-accordion>
-                    <lsx-accordion-page title="Definition: Microservices" class="markdown" bold active>
-                        Moderne Anwendungen werden heute oft als Microservice-Architektur ausgeführt, in welcher die
-                        Teilfunktionen einer Anwendung in einzelne Serverdienste ausgelagert werden. Microservice-basierte
-                        Anwendungen sind daher immer verteilte Anwendungen. Dabei bildet jeder Microservice eine getrennte
-                        Einheit, die weitgehend unabhängig entwickelt, deployed und betrieben wird. Meistens besitzt jeder
-                        Microservice deshalb eine eigene Datenbank, auf deren Inhalte nur über die öffentliche Schnittstelle
-                        des Microservices entfernt zugegriffen werden kann. Martin Fowler definiert Microservices
-                        [auf seiner Webseite](https://martinfowler.com/microservices/){target=_blank} daher wie folgt:
-
-                        * Entfernte Serverdienste als Teilkomponenten einer Anwendung
-                        * Dezentralisierte Verwaltung und dezentrales Datenmanagement
-                        * Entsprechen oft organisatorischer Unternehmenseinheiten
-                        * Deshalb meist langfristig durch eigenständige Teams betreut
-                        * Über eine öffentliche Schnittstelle entfernt aufrufbar
-                        * Fehlertoleranter Entwurf mit evolutionärem Design
-                        * Hoher Automatisierungsgrad für Betrieb und Weiterentwicklung
-                    </lsx-accordion-page>
-
-                    <lsx-accordion-page title="Beispiele" bold>
-                        <lsx-tab-pages>
-                           <lsx-tab-page title="Single Page App mit API-Gateway">
-                               <div class="markdown">
-                                   Heutige Webanwendungen trennen sehr strickt zwischen der Frontend genannten Benutzeroberfläche
-                                   und der zentralen Anwendungsfunktionen im Backend. Oft handelt es sich beim Frontend um eine
-                                   als Single Page App ausgeführte Webanwendung, die vollständig im Browser des Clientgeräts läuft.
-                                   Aber auch mobile Anwendungen, native Desktopanwendungen oder eine Kombination aus allem sind
-                                   weit verbreitet.
-
-                                   Frontend und Backend kommunizieren daher über das Netzwerk, wobei die Verteilung des Backends
-                                   hinter einem API-Gateway verborgen wird. Das API-Gateway bietet hierfür einen zentralen
-                                   Zugriffspunkt, über den alle Backendservices einheitlich angebsprochen werden können, ohne
-                                   die eigentlichen Backendstrukturen kennen zu müssen (oder dürfen).
-                               </div>
-                               <img id="microservices-bilder-1" src="02-architektur/microservices-gateway.png" class="d-block w-100 mt-4" />
-                           </lsx-tab-page>
-                           <lsx-tab-page title="Webanwendung mit Composite UI">
-                               <div class="markdown">
-                                   Ein früherer Ansatz, wie er heute unter Anderem von Amazon genutzt wird, konzentriert
-                                   sich ausschließlich auf Webanwendungen. Meist handelt es sich dabei um serverseitig
-                                   gerenderte Multi Page Apps ohne die eben besprochene Trennung von Frontend und Backend.
-
-                                   Als Besonderheit setzt sich die Benutzeroberfläche allerdings wie bei einem Puzzle aus
-                                   unterschiedlichen Teilen zusammen, die jeweils von einem anderen Microservice bereitgestellt
-                                   werden. Praktisch bedeutet dies, dass es ein vorgelagerter Webserver eine mehr oder weniger
-                                   leere HTML-Seite mit nur allgemeinen Dingen wie dem Seitenkopf oder einem einfachen
-                                   Navigationsmenü zur Verfügung stellt. In diese werden dann von den Microservices gelieferte
-                                   HTML-Fragemente (sog. Microfrontends) eingebettet, um die Ansicht zu vervollständigen.
-                               </div>
-                               <img id="microservices-bilder-2" src="02-architektur/microservices-compositeui.png" class="d-block w-100 mt-4" />
-                           </lsx-tab-page>
-                       </lsx-tab-pages>
-                    </lsx-accordion-page>
-
-                    <lsx-accordion-page title="Vor- und Nachteile" bold>
+            <lsx-grid-fluid class="limited-width2">
+                <p class="mb-4" detail-content>
+                    Moderne Anwendungen werden heute oft als Microservice-Architektur ausgeführt, in welcher die
+                    Teilfunktionen einer Anwendung in einzelne Serverdienste ausgelagert werden. Die Summe aller
+                    Microservices bildet die Anwendung, wobei jeder Microservice getrennt von den anderen entwickelt,
+                    deployt und betrieben wird. Innerhalb eines Unternehmens wird jeder Microservice meist von einer
+                    eigenen Abteilung betreut.
+                </p>
+                
+                <lsx-carousel class="mb-5">
+                    <lsx-carousel-page>
+                        <img src="02-architektur/microservices.png" class="d-block limited-width m-auto mb-3" />
+                    </lsx-carousel-page>
+                    <lsx-carousel-page>
+                        <div class="mb-4" detail-content>
+                            Heutige Anwendungen trennen strickt zwischen der Frontend genannten Benutzeroberfläche
+                            und der zentralen Anwendungsfunktionen im Backend. Das Frontend läuft auf dem Clientgerät.
+                            In der Regel dient ein API-Gateway als zentraler Zugriffspunkt, um die Backendstruktur vor
+                            dem Frontend zu verbergen.
+                        </div>
+                        <img src="02-architektur/microservices-gateway.png" class="d-block mw-100 m-auto mt-4" style="width: 55em;" />
+                    </lsx-carousel-page>
+                    <lsx-carousel-page>
+                        <p detail-content>
+                            Oft handelt es sich bei der Benutzeroberfläche um eine im Browser laufende Single Page App.
+                            Seltener kommt aber auch ein <i>Composite UI</i> zum Einsatz, bei dem jeder Microservice
+                            auf der Serverseite einen Teil der Benutzeroberfläche rendert.
+                        </p>
+                        <img src="02-architektur/microservices-compositeui.png" class="d-block mw-100 m-auto mt-4" style="width: 55em;" />
+                    </lsx-carousel-page>
+                    <lsx-carousel-page>
                         <lsx-grid-fluid class="p-0">
-                             <lsx-row>
-                                 <lsx-col size="md">
-                                     <div class="card h-100">
-                                         <div class="card-header fw-bold">
-                                             Vorteile von Microservices
-                                         </div>
-                                         <div class="card-body markdown">
-                                             * Die Services sind durch ihre Schnittstellen klar gekapselt.
-                                             * Jeder Service kann einzeln deployed und skaliert werden.
-                                             * Sprachen, Bibliotheken, … können passend zum Service ausgewählt werden.
-                                             * Schwergewichtige Appliktionsserver und Frameworks können oft vermieden werden.
-                                             * Microservices lassen sich meist leicht als Docker-Container o.ä. verpacken.
-                                         </div>
-                                     </div>
-                                 </lsx-col>
+                            <lsx-row>
+                                <lsx-col size="lg-2" class="d-flex flex-column justify-content-center">
+                                    <img src="shared/finish.svg" class="active d-block w-100" />
+                                </lsx-col>
+                                <lsx-col size="lg" class="d-flex flex-column justify-content-center">
+                                    <p>
+                                        Martin Fowler definiert Microservices
+                                        <a href="https://martinfowler.com/microservices/" target="_blank">auf seiner Webseite</a>
+                                        wie folgt:
+                                    </p>
+                                    <lsx-ul emoji="🌍">
+                                        <li>Entfernte Serverdienste als Teilkomponenten einer Anwendung.</li>
+                                        <li>Dezentralisierte Verwaltung und dezentrales Datenmanagement.</li>
+                                        <li>Entsprechen oft organisatorischer Unternehmenseinheiten.</li>
+                                        <li>Deshalb meist langfristig durch eigenständige Teams betreut.</li>
+                                        <li>Über eine öffentliche Schnittstelle entfernt aufrufbar.</li>
+                                        <li>Fehlertoleranter Entwurf mit evolutionärem Design.</li>
+                                        <li>Hoher Automatisierungsgrad für Betrieb und Weiterentwicklung.</li>
+                                    </lsx-ul>
+                                </lsx-col>
+                            </lsx-row>
+                        </lsx-grid-fluid>
+                    </lsx-carousel-page>
+                </lsx-carousel>
 
-                                 <lsx-col size="md">
-                                     <div class="card h-100">
-                                         <div class="card-header fw-bold">
-                                             Nachteile von Microservices
-                                         </div>
-                                         <div class="card-body markdown">
-                                             * Verteilte Systeme mit vielen Komponenten sind schwer zu programmieren.
-                                             * Microservices müssen eventuellkonsistent und fehlertolerant programmiert werden.
-                                             * Deployment, Betrieb und Überwachung bringen zusätzliche Komplexität.
-                                             * Die Kommunikation zwischen Microservices ist grundsätzlich latenzbehaftet.
-                                             * Kleinere und unerfahrene Teams können mit der Komplexität überfordert sein.
-                                         </div>
-                                     </div>
-                                 </lsx-col>
-                             </lsx-row>
-                         </lsx-grid-fluid>
-
-                         <div class="markdown">
-                             Laut Martin Fowler lohnt sich eine Microservice-Architektur daher nur, wenn eine Anwendung hinreichend
-                             groß ist und von mehreren Entwicklerteams betreut werden kann. Vgl.
-                             [Martin Fowler: Microservice Guide](https://martinfowler.com/microservices/){target=_blank}
-                         </div>
-                    </lsx-accordion-page>
-                </lsx-accordion>
-            </div>
+                <lsx-row class="mb-0">
+                    <lsx-col size="md">
+                        <h3 class="dhbw-lightblue mb-4">
+                            <img src="02-architektur/thumb-up.png" alt="" style="width: 2em; vertical-align: middle; margin-right: 0.25em;" />
+                            <span>Vorteile von Microservices</span>
+                        </h3>
+                        <lsx-ul>
+                             <li>Die Services sind durch ihre Schnittstellen klar gekapselt.</li>
+                             <li>Jeder Service kann einzeln deployed und skaliert werden.</li>
+                             <li>Jeder Service kann die am besten passende Technologie nutzen.</li>
+                             <li>Microservices lassen sich meist leicht containerisieren.</li>
+                        </lsx-ul>
+                    </lsx-col>
+                    <lsx-col size="md">
+                        <h3 class="dhbw-lightblue mb-4">
+                            <img src="02-architektur/thumb-down.png" alt="" style="width: 2em; vertical-align: middle; margin-right: 0.25em;" />
+                            <span>Nachteile von Microservices</span>
+                        </h3>
+                        <lsx-ul>
+                             <li>Microservices müssen fehlertolerant programmiert werden.</li>
+                             <li>Deployment und Betrieb bringen zusätzliche Komplexität.</li>
+                             <li>Die Kommunikation ist grundsätzlich latenzbehaftet.</li>
+                             <li>Kleinere und unerfahrene Teams können überfordert sein.</li>
+                        </lsx-ul>
+                    </lsx-col>
+                </lsx-row>
+                
+                <p>
+                    <small>
+                        <small>
+                            Bildnachweise:
+                            <a href="https://pixabay.com/illustrations/arm-finger-fist-gesture-graphic-9520265/" target="_blank">Pixabay: izhar-ahamed</a>,
+                            <a href="https://pixabay.com/en/symbol-gui-internet-internet-page-2480163/" target="_blank">Pixabay: janf93</a>
+                        </small>
+                    </small>
+                </p>
+            </lsx-grid>
         </article>
     </section>
 
@@ -3680,6 +3676,58 @@
                     </small>
                 </small>
             </div>
+        </article>
+    </section>
+    
+    <section data-title="Leitfragen zum Zuschnitt der Microservices">
+        <article class="centered-content">
+            <lsx-grid-fluid class="p-0">
+                <lsx-row>
+                    <lsx-col size="lg">
+                        <lsx-card title="Welche fachlichen Teilbereiche besitzt die Anwendung?" bold class="h-100">
+                            Zum Beispiel in einem Webshop: Produktkatalog, Bestellabwicklung, Lagerhaltung,
+                            Versand und Reetournabwicklung etc. Man spricht hier auch von der Domänengrenze
+                            (Domain Boundary). In einem Unternehmen handelt es sich oft um getrennte Bereiche.
+                        </lsx-card>
+                    </lsx-col>
+                    
+                    <lsx-col size="lg">
+                        <lsx-card title="Welche Teile der Anwendung werden wie stark beansprucht?" bold class="h-100">
+                            Nicht alle Teile einer Anwendung werden gleich häufig genutzt. In einem Webshop
+                            werden zum Beispiel viel mehr Artikel angeschaut als tatsächlich bestellt. Trennt
+                            man diese Teile in eigene Microservices, können sie unabhängig voneinander deployt
+                            und skaliert werden.
+                        </lsx-card>
+                    </lsx-col>
+                    
+                    <lsx-col size="lg">
+                        <lsx-card title="Gibt es Teile mit besonderen, technischen Anforderungen?" bold class="h-100">
+                            Manche Teile einer Anwendung setzen eine bestimmte Laufzeitumgebung oder Bibliotheken voraus.
+                            Machine-Learning-Anwendungen werden zum Beispiel häufig in Python geschrieben. Microservices
+                            bieten die notwendige Flexibilität, um für jeden Teil der Anwendung die beste Technologie
+                            nutzen zu können (sofern man sie beherrscht).
+                        </lsx-card>
+                    </lsx-col>
+                </lsx-row>
+                <lsx-row class="mb-0">
+                    <lsx-col size="md">
+                        <img src="02-architektur/microservices-leitfragen1.jpg" class="img-thumbnail d-block w-100" />
+                    </lsx-col>
+                    <lsx-col size="md">
+                        <img src="02-architektur/microservices-leitfragen2.jpg" class="img-thumbnail d-block w-100" />
+                    </lsx-col>
+                </lsx-row>
+                
+                <p>
+                    <small>
+                        <small>
+                            Bildnachweise:
+                            <a href="https://pixabay.com/illustrations/ai-generated-programming-programmer-9008726/" target="_blank">Pixabay: geralt</a>,
+                            <a href="https://pixabay.com/illustrations/keyboard-help-support-information-824317/" target="_blank">Pixabay: geralt</a>
+                        </small>
+                    </small>
+                </p>
+            </lsx-grid-fluid>
         </article>
     </section>
 
@@ -3820,7 +3868,7 @@
                     Typische Services in der **Kontrollebene** sind jene zur Überwachung des laufenden
                     Betriebs einer verteilten Anwendung. Diese unterteilen sich typischerweise in:
 
-                    * **Metriken:**: Kennzahlen wie Speicherverbrauch, Anzahl Requests je Sekunde, CPU-Auslastung, ...
+                    * **Metriken:** Kennzahlen wie Speicherverbrauch, Anzahl Requests je Sekunde, CPU-Auslastung, ...
                     * **Logging:** Protokollausgaben der einzelnen Services, um Fehler nachvollziehen zu können
                     * **Tracing:** Nachverfolgung von Aufrufketten, um komplexe Fehlersituationen analysieren zu können
                 </div>
