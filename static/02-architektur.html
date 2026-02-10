@@ -472,22 +472,58 @@
     </section>
 
     <section data-title="Nachrichtenbasierte Programmierung" class="centered-content">
-        <div class="limited-width2">
-            <div class="markdown dhbw-text-columns mb-4">
-                Moderne Betriebssysteme führen mehrere Programme gleichzeitig aus und teilen die Systemressourcen
-                zwischen ihnen auf. Beispielsweise den Bildschirm, indem den Programmen nur ein Teilbereich –
-                ein Fester – zugewiesen wird. Damit dies funktioniert, können die Programme nicht mehr direkt
-                auf die Hardware zugreifen, sondern müssen **auf Nachrichten reagieren**, die ihnen das System
-                oder ein anderes Programm schickt. Das nachfolgende Beispiel zeigt, wie dies unter Microsoft
-                Windows funktioniert.
+        <div class="limited-width2 d-flex flex-column gap-4">
+            <div class="markdown dhbw-text-columns" detail-content>
+                Nachrichtenbasierte Programmierung ist ein Konzept zur Strukturierung von Programmen,
+                deren Aufgabe überwiegend darin besteht, auf externe Ereignisse zu reagieren. Beispiele
+                hierfür sind **grafische Programme** mit einer interaktiven Benutzeroberfläche oder
+                **Serverprogramme**, die auf entfernte Anfragen reagieren.
+
+                Das Grundprinzip besteht darin, das ein oder mehrere Sender Nachrichten an das Programm
+                schicken, die üblicherweise in einer Message Queue (Warteschlange) gesammelt und innerhalb
+                das Programms ein einer großen Endlosschleife abgeholt und verarbeitet werden.
             </div>
 
+            <img
+                src="02-architektur/nachrichtenaustausch-1.svg"
+                alt="Ein Sender sendet eine Nachricht an eine Wartschlange, die dort gesammelt und später an einen Empfänger weitergeleitet wird"
+                class="d-block w-100"
+            />
+
             <lsx-tab-pages>
+                <lsx-tab-page title="Prinzip">
+                    <lsx-ul>
+                        <li>Ein Sender sendet in unregelmäßigen Abständen Nachrichten.</li>
+                        <li>Die Nachrichten werden in einer Warteschlange gesammelt.</li>
+                        <li>Der Empfänger wartet in einer Endlosschleife auf neue Nachrichten.</li>
+                        <li>Sobland neue Nachrichten vorliegen, werden sie abgerufen und verarbeitet.</li>
+                    </lsx-ul>
+                    <lsx-info-box class="mb-4" detail-content>
+                                Da die Aktionen des Programms wesentlich durch die Nachrichten beeinflusst werden (z.B. ein Button
+                                wurde angeklickt), steuert das Programm dadurch nicht mehr vollständig selbst, sondern wird durch
+                                die Nachrichten quasi „ferngesteuert”. In grafischen Umgebungen wird dasselbe Prinzip häufig durch
+                                Ereignisse anstelle von Nachrichten umgesetzt. Die Grundidee ist dabei dieselbe.
+                    </lsx-info-box>
+                    <img
+                        src="02-architektur/nachrichtenaustausch-2.svg"
+                        alt="Sequenzdiagramm mit einem Sender, der in unregelmäßigen Abständen Nachrichten an eine Warteschlange sendet. Der Empfänger wartet in einer Endlosschleife auf neue Nachrichten, holt diese ab und verarbeitet sie."
+                        class="d-block w-100"
+                    />
+                </lsx-tab-page>
+
                 <lsx-tab-page title="Beispiel">
-                    <p class="mb-4">
-                        Das Geheimnis ist die Hauptschleife ganz am Ende des Programms. Die Funktion
-                        <src-code class="cpp">GetMessage()</src-code> hält den Thread so lange an, bis
-                        eine neue Nachricht empfangen wurde. Mit <src-code class="cpp">DispatchMessage()</src-code>
+                    <p class="markdown dhbw-text-columns mb-4" detail-content>
+                        Moderne Betriebssysteme führen mehrere Programme gleichzeitig aus und teilen die Systemressourcen
+                        zwischen ihnen auf. Beispielsweise den Bildschirm, indem den Programmen nur ein Teilbereich –
+                        ein Fester – zugewiesen wird. Damit dies funktioniert, können die Programme nicht mehr direkt
+                        auf die Hardware zugreifen, sondern müssen **auf Nachrichten reagieren**, die ihnen das System
+                        oder ein anderes Programm schickt.
+
+                        Das folgende Beispiel zeigt, wie dies unter Microsoft Windows mit der
+                        [nativen WIN32 API](https://de.wikipedia.org/wiki/Windows_Application_Programming_Interface){target=_blank}
+                        in der Programmiersprache C funktioniert. Das Geheimnis ist die **Hauptschleife am Ende des
+                        Programms**: Die Funktion <src-code class="cpp">GetMessage()</src-code> hält den Thread so lange
+                        an, bis eine neue Nachricht empfangen wurde. Mit <src-code class="cpp">DispatchMessage()</src-code>
                         wird sie an die Rückruf-Funktion des Fensters übergeben und verarbeitet.
                     </p>
 
@@ -520,7 +556,8 @@
                                     return 0;
                             }
 
-                            // Nicht verarbeitete Nachrichten an die Elternklasse weiterreichen
+                            // Nicht verarbeitete Nachrichten an die Elternklasse weiterreichen.
+                            // z.B. WM_ERASEBKGND zum Löschen des Fesnterinhalts vor WM_PAINT.
                             return DefWindowProc(hwnd, msg, w, l);
                         }
 
@@ -560,6 +597,13 @@
                 </lsx-tab-page>
 
                 <lsx-tab-page title="Ergebnis">
+                    <p class="mb-4" detail-content>
+                        Durch den Code zur Behandlung der <code>WM_PAINT</code>-Nachricht wird der Text
+                        „Hallo Welt“ in die Mitte des Fensters geschrieben. Wird die Größe des Fensters
+                        verändert oder das Fesnter in den Vordergrund geholt, löscht Windows den Inhalt
+                        des Fensters (Nachricht <code>WM_ERASEBKGND</code>) und fordert das Programm
+                        mit <code>WM_PAINT</code> dazu auf, das Fenster neuzuzeichnen.
+                    </p>
                     <img src="02-architektur/win32-hello.png" alt="Screenshot des Windows-Beispiels" class="d-block w-100"/>
                 </lsx-tab-page>
             </lsx-tab-pages>
@@ -568,7 +612,7 @@
 
     <section data-title="Nachrichten über das Netzwerk" class="centered-content">
         <div class="limited-width">
-            <div class="markdown mb-4">
+            <div class="markdown mb-4" detail-content>
                 Nachrichten können natürlich auch **über das Netzwerk** geschickt werden. Auf der untersten Ebene
                 handelt es sich dabei aber nur im Datenpakete, die als kontinuierlicher Bytestrom gesendet
                 und empfangen werden. Oft **codieren** diese jedoch **Nachrichten in einem bestimmten Format**
@@ -577,7 +621,7 @@
 
             <lsx-tab-pages>
                 <lsx-tab-page title="Low-Level-Datenströme">
-                    <div class="markdown dhbw-text-columns mb-4">
+                    <div class="markdown dhbw-text-columns mb-4" detail-content>
                         Das folgende Beispiel zeigt einen **einfachen Netzwerkserver in Java**. Auch hier gibt es wieder
                         eine Hauptschleife. Sie hält mit <code>server.accept()</code> den Haupt-Thread so lange an, bis
                         sich ein neuer Client verbindet. Je Client wird dann ein Thread gestartet, der in einer eigenen
@@ -620,7 +664,7 @@
                 </lsx-tab-page>
 
                 <lsx-tab-page title="Interpretation als Nachrichten">
-                    <div class="markdown dhbw-text-columns mb-4">
+                    <div class="markdown dhbw-text-columns mb-4" detail-content>
                         In der Regel tauschen Client und Server nicht einfach kontinuierliche Byteströme aus. Wobei es
                         dafür aus Anwendungsfälle gibt, z.B. beim Streaming von Audio- oder Videodaten. Meistens besitzen
                         die Bytes in Struktur, die es möglich macht, Nachrichten gezielt zu erkennen.
