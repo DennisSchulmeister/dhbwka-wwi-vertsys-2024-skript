@@ -1,0 +1,49 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0" version="29.3.8">
+  <diagram id="AGkJ-uygRjLxNPfaEYds" name="1">
+    <mxGraphModel dx="2338" dy="658" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Npj1RIk7hzAoQx4Rc2l_-1" parent="1" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.laptop_2;connectable=0;" value="" vertex="1">
+          <mxGeometry height="86.5" width="116" x="-280" y="656.75" as="geometry" />
+        </mxCell>
+        <mxCell id="Fpmgz4HlXZRAwPJYGiLi-2" parent="1" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.chassis;" value="" vertex="1">
+          <mxGeometry height="47.5" width="36.8" x="40" y="679" as="geometry" />
+        </mxCell>
+        <mxCell id="Fpmgz4HlXZRAwPJYGiLi-3" edge="1" parent="1" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;">
+          <mxGeometry x="60" y="650" as="geometry">
+            <mxPoint x="130" y="719.5" as="sourcePoint" />
+            <mxPoint x="240" y="719.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Fpmgz4HlXZRAwPJYGiLi-4" parent="1" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.web_server;connectable=0;" value="" vertex="1">
+          <mxGeometry height="90" width="76.5" x="60" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="Fpmgz4HlXZRAwPJYGiLi-6" parent="1" style="verticalLabelPosition=bottom;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.database;connectable=0;" value="" vertex="1">
+          <mxGeometry height="50" width="42.5" x="230" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="crtbvk3Y3OEvUFmtp8PF-1" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontStyle=1" value="Webserver" vertex="1">
+          <mxGeometry height="30" width="60" x="60" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="crtbvk3Y3OEvUFmtp8PF-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontStyle=1" value="Datenbank" vertex="1">
+          <mxGeometry height="30" width="60" x="221.25" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="crtbvk3Y3OEvUFmtp8PF-3" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontStyle=1" value="Webbrowser" vertex="1">
+          <mxGeometry height="30" width="60" x="-240" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="crtbvk3Y3OEvUFmtp8PF-4" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="-150" y="720" as="sourcePoint" />
+            <mxPoint x="30" y="720" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="crtbvk3Y3OEvUFmtp8PF-5" parent="1" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;verticalAlign=bottom;size=17;" value="&lt;div&gt;HTML&lt;/div&gt;&lt;div&gt;CSS&lt;/div&gt;&lt;div&gt;JS&lt;/div&gt;&lt;div&gt;…&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="60" x="33.25" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="crtbvk3Y3OEvUFmtp8PF-11" parent="1" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;verticalAlign=middle;size=19;" value="Code" vertex="1">
+          <mxGeometry height="80" width="60" x="103.25" y="560" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
