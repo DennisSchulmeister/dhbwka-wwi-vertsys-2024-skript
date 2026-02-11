@@ -53,7 +53,7 @@ import HLJS_Language_JSON from "highlight.js/lib/languages/json";
 import HLJS_Language_Docker from "highlight.js/lib/languages/dockerfile";
 import HLJS_Language_YAML from "highlight.js/lib/languages/yaml";
 import HLJS_Language_HTTP from "highlight.js/lib/languages/http";
-import HLJS_Language_SHELL from "highlight.js/lib/languages/shell";
+import HLJS_Language_SHELL from "highlight.js/lib/languages/bash";
 import "highlight.js/styles/atom-one-light.css";
 
 import * as AsciinemaPlayer from "asciinema-player";
