@@ -2871,17 +2871,10 @@
                         Folgender Befehl fügt Express einem Projekt hinzu:
                     </p>
                     <p class="cmd">
-                        npm add express@next
+                        npm add express
                     </p>
 
                     <img src="04-nodejs/express-installation.png" alt="" class="img-thumbnail w-100 mb-4">
-
-                    <lsx-info-box>
-                        Achte bei der Installation darauf, <span class="cmd">express@next</span> und
-                        nicht <span class="cmd">express</span> zu installieren. Denn sonst wird derzeit
-                        noch die alte Version 4 installiert, die nicht gut mit <code>async</code> und
-                        <code>await</code> bzw. mit <code>Promise</code>-Objekten umgehen kann.
-                    </lsx-info-box>
                 </lsx-accordion-page>
 
                 <lsx-accordion-page title="Ein minimaler Webserver">
@@ -2950,7 +2943,7 @@
                             };
 
                             // Hilfsobjekt für formatierte Log-Ausgaben
-                            const logger = logging.default("main");
+                            const logger = logging("main");
 
                             // Zentrales App-Objekt der Express-Anwendung.
                             // Dies ist der eigentliche Webserver.
@@ -3085,7 +3078,7 @@
                     };
 
                     // Hilfsobjekt für formatierte Log-Ausgaben
-                    const logger = logging.default("main");
+                    const logger = logging("main");
 
                     // Zentrales App-Objekt der Express-Anwendung.
                     // Dies ist der eigentliche Webserver.
@@ -3616,7 +3609,7 @@
                                 import logging from "logging";
 
                                 // Hilfsobjekt für formatierte Log-Ausgaben
-                                const logger = logging.default("main");
+                                const logger = logging("main");
 
                                 // Protokollierung aller Anfragen
                                 app.use((req, res, next) => {
@@ -3650,7 +3643,7 @@
                                 import logging from "logging";
 
                                 // Hilfsobjekt für formatierte Log-Ausgaben
-                                const logger = logging.default("main");
+                                const logger = logging("main");
 
                                 // Protokollierung aller Anfragen
                                 app.use((req, res, next) => {
@@ -4128,7 +4121,7 @@
                         const app = express();
                         
                         // Hilfsobjekt für schönere Log-Ausgaben
-                        const logger = logging.default("main");
+                        const logger = logging("main");
 
                         // Middleware-Funktion, die alle eingehenden HTTP-Anfragen auf der Konsole protokolliert.
                         app.use((req, res, next) => {
@@ -4532,7 +4525,7 @@
                             const app = express();
                             
                             // Hilfsobjekt für schönere Log-Ausgaben
-                            const logger = logging.default("main");
+                            const logger = logging("main");
     
                             // Middleware-Funktion, die alle eingehenden HTTP-Anfragen auf der Konsole protokolliert.
                             app.use((req, res, next) => {
@@ -4665,7 +4658,7 @@
                             const app = express();
                             
                             // Hilfsobjekt für schönere Log-Ausgaben
-                            const logger = logging.default("main");
+                            const logger = logging("main");
     
                             // Middleware-Funktion, die alle eingehenden HTTP-Anfragen auf der Konsole protokolliert.
                             app.use((req, res, next) => {
